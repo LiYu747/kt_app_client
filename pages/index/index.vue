@@ -82,15 +82,18 @@
 					},
 					{
 						image: require('@/image/home/bf.png'),
-						titel: '拜访申请'
+						titel: '拜访申请',
+						url:'/pages/auth/visit/visit'
 					},
 					{
 						image: require('@/image/home/lf.png'),
-						titel: '来访记录'
+						titel: '来访记录',
+						url:'/pages/auth/visitRecord/visitRecord'
 					},
 					{
 						image: require('@/image/home/code.png'),
-						titel: '回家二维码'
+						titel: '回家二维码',
+						url:'/pages/auth/qrCode/qrCode'
 					},
 				],
 				list: [{

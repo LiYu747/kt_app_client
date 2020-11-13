@@ -1,6 +1,6 @@
 <template>
 	<view class="whole flex-d al-center">
-		<subunit titel="个人信息"></subunit>
+		<subunit titel="个人信息" @goback='goback' :retur='true'></subunit>
 		<view class="activ flex al-center ju-center">
 		<!-- 	<u-upload ref="uUpload" :action="action" :auto-upload="false" ></u-upload> -->
 			<image src="../../../image/user/headportrait.png" class="img" mode=""></image>
@@ -74,6 +74,12 @@
 				uni.switchTab({
 					url:'/pages/auth/userCenter/userCenter'
 				})
+			  },
+			  // 返回
+			  goback(){
+				  uni.navigateBack({
+				  	delta:1
+				  })
 			  }
 		},
 		mounted() {

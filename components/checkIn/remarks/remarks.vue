@@ -2,7 +2,7 @@
   <view class="">
   	<view class="pos-rel message">
   		<view class="text flex al-center" >
-  		备注
+  	{{titel}}
   		</view>
 		<view class="">
 			<textarea class="tar" maxlength="1000" v-model="value"></textarea>
@@ -17,7 +17,12 @@ name: "",
 components: {
 
 },
-props: {},
+props: {
+	titel:{
+		type:String,
+		default:'备注'
+	}
+},
 data () {
   return {
 	  value:''

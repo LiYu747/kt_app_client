@@ -105,6 +105,88 @@
             }
             
         }
+		// 申请拜访
+        ,{
+            "path" : "pages/auth/visit/visit",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				  "navigationStyle":"custom"
+				
+            }
+            
+        }
+        ,
+			// 来访记录
+		{
+            "path" : "pages/auth/visitRecord/visitRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				 "navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		  //来访记录详情
+		{
+            "path" : "pages/auth/details/details",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				 "navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		// 拜访记录
+		{
+            "path" : "pages/auth/goRecord/goRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				 "navigationStyle":"custom"
+            }
+        }
+		// 拜访详情
+        ,{
+            "path" : "pages/auth/goDetails/goDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		// 二维码
+		{
+            "path" : "pages/auth/qrCode/qrCode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		// 未开发的
+		{
+            "path" : "pages/auth/uncultivated/uncultivated",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
