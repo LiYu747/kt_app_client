@@ -18,7 +18,8 @@
 			<view class="syntext">
 				<view class="">
 					交通方式
-					
+					 
+					 
 				</view>
 				<view class="synback flex al-center">
 					<view class="aa">
