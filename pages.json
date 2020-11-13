@@ -1,0 +1,138 @@
+{
+	    "easycom": {
+	        "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	    },
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		// 主页
+		{
+			"path": "pages/index/index",
+			"style": {
+				 "navigationStyle":"custom"
+			}
+		},
+		// 登录
+		{
+			"path":"pages/auth/login/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#F07535",
+				 "navigationStyle":"custom"
+			}
+		},
+		// 地址
+		{
+			"path":"pages/auth/address/address",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#F07535",
+				 "navigationStyle":"custom"
+			}
+			
+		},
+		// 用户 
+		{
+			"path":"pages/auth/userCenter/userCenter",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#F07535",
+				 "navigationStyle":"custom"
+			}
+		}
+	   // 注册
+        ,{
+            "path" : "pages/auth/register/register",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "",
+               "navigationBarBackgroundColor": "#F07535",
+                "navigationStyle":"custom"
+            }
+            
+        }
+		// 预览
+        ,{
+            "path" : "pages/auth/preview/preview",
+            "style" :
+            {
+               "navigationBarTitleText": "",
+               "navigationBarBackgroundColor": "#F07535",
+                "navigationStyle":"custom"
+            }
+            
+        },
+		// 头像选中
+		{
+		    "path" : "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+		    "style" :
+		    {
+		       "navigationBarTitleText": "",
+		       "navigationBarBackgroundColor": "#F07535",
+		        "navigationStyle":"custom"
+		    }
+		    
+		},
+		// 个人信息
+		{
+            "path" : "pages/auth/personal/personal",
+            "style" :                                                                                    
+            {
+              "navigationBarTitleText": "个人信息",
+              "navigationBarBackgroundColor": "#F07535",
+			  "navigationStyle":"custom"
+            }
+        }
+        ,
+		// 地址编辑
+		{
+            "path" : "pages/auth/addediting/ADDediting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				 "navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		//入住申请
+		{
+            "path" : "pages/auth/checkIn/checkIn",
+            "style" :                                                                                    
+            {
+               "navigationBarTitleText": "",
+               "enablePullDownRefresh": false,
+                "navigationStyle":"custom"
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+	    "color": "#7A7E83",
+	    "selectedColor": "#F95454",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [{
+	        "pagePath": "pages/index/index",
+	        "iconPath": "static/tabbar/home1.png",
+	        "selectedIconPath": "static/tabbar/home2.png",
+	        "text": "首页"
+	    }, {
+	        "pagePath": "pages/auth/address/address",
+	        "iconPath": "static/tabbar/location1.png",
+	        "selectedIconPath": "static/tabbar/location2.png",
+	        "text": "地址"
+	    },
+		 {
+		    "pagePath": "pages/auth/userCenter/userCenter",
+		    "iconPath": "static/tabbar/user1.png",
+		    "selectedIconPath": "static/tabbar/user2.png",
+		    "text": "个人中心"
+		}]
+	}
+}
