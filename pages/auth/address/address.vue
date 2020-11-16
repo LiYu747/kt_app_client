@@ -30,7 +30,9 @@ data () {
 	  this.flag = val
   },
   getto(){
-	  console.log(111);
+	 uni.navigateTo({
+	 	url:'/pages/auth/addediting/ADDediting?titel=新增地址'
+	 })
   }
   },
   mounted () {

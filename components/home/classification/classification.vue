@@ -1,7 +1,7 @@
 <template>
     <div>
         <view class="box flex flex-w">
-        	<view class="flex-d al-center loyout ju-around" v-for="(item,index) in locdata" :key='index'>
+        	<view class="flex-d al-center loyout ju-around" v-for="(item,index) in locdata" :key='index' @click="goclass(item)">
         		   <image :src="item.image" class="itemimg" mode=""></image>
 				   <view class=" fz-12 text">
 				   	{{item.titel}}
@@ -66,7 +66,13 @@ data () {
     }
   },
   methods: {
-
+      // 去详情
+	  goclass(item){
+		  console.log(item.titel);
+		  uni.navigateTo({
+		  	url:`/pages/auth/uncultivated/uncultivated?titel=${item.titel}`
+		  })
+	  }
   },
   mounted () {
 

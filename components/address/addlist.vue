@@ -1,19 +1,19 @@
 <template>
 	<view class="box pos-abs">
-		<view class="content pos-rel" v-for="(item,index) in locdata" :key='item.id' @click="Select(index)">
-			<view class="location pos-abs">
+		<view class="content pos-rel" v-for="(item,index) in locdata" :key='item.id' >
+			<view class="location pos-abs" @click="Select(index)">
 				<image v-if="idx===index" class="zrimg" src="../../image/address/yes.png" mode=""></image>
 				<image v-else  class="zrimg" src="../../image/address/zro.png" mode=""></image>
 			</view>
 			<view class="addres">
 				<view class=" flex al-center pos-rel">
 					{{item.name}}
-					<view class="pos-abs  right">
-						<image class="reimg" @click="edit(item)" src="../../image/address/retrue.png" mode=""></image>
+					<view class="pos-abs  right" @click="forum">
+						<image class="reimg"  src="../../image/address/retrue.png" mode=""></image>
 					</view>
 				</view>
 				<view class="line"></view>
-				<view class="text">
+				<view class="text" @click="edit(item)">
 					{{item.address}}
 				</view>
 			</view>
@@ -69,6 +69,12 @@
 			 	url:'/pages/auth/addediting/ADDediting'
 			 })
 		 },
+		 // 进入论坛
+		 forum(){
+			 uni.navigateTo({
+			 	url:'/pages/auth/forum/forum'
+			 })
+			 }
 		},
 		mounted() {
 

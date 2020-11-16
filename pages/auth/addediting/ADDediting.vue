@@ -1,6 +1,6 @@
 <template>
     <view class="flex-d al-center">
-    	<subunit titel="编辑地址"> </subunit>
+    	<subunit :titel="titel"> </subunit>
 		<image @click="goback" class="pos-abs reimg" src="../../../image/login/1729908969cd5d7d911e096d6db3c70.png" mode=""></image>
 		<view class="content">
 				<view class="postop">
@@ -35,9 +35,12 @@ name: "",
 components: {
  subunit
 },
-props: {},
+props: {
+
+},
 data () {
   return {
+	  titel:'编辑地址',
 	  parameter: [{
 	  		value: '一棵树',
 	  		label: '姓名',
@@ -72,8 +75,11 @@ data () {
   mounted () {
 
   },
-  onLoad () {
-
+  onLoad (val) {
+console.log(val);
+if(val.titel){
+	this.titel = val.titel
+}
   },
   filters: {
 

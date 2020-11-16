@@ -187,6 +187,28 @@
             }
             
         }
+        ,
+		// 小区论坛
+		{
+            "path" : "pages/auth/forum/forum",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+					"navigationStyle":"custom"
+				
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/ssss/ssss",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
