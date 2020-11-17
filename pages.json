@@ -200,12 +200,14 @@
             }
             
         }
+		//论坛搜索
         ,{
-            "path" : "pages/index/ssss/ssss",
+            "path" : "components/forum/forumSearch/forumSearch",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+					"navigationStyle":"custom"
             }
             
         }

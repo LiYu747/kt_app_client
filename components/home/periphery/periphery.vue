@@ -75,6 +75,7 @@ data () {
 
 <style scoped lang="scss">
 	.box{
+		
 		margin-top: 30rpx;
 		width: 690rpx;
 	}

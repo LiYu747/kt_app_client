@@ -3,7 +3,7 @@
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="../../image/home/ss.png" mode=""></image>
-				<input class="input" type="text" value="" @keydown.enter ='enter' placeholder="请输入小区名称关键词" />
+				<input class="input" type="text" value="" @confirm ='enter' placeholder="请输入小区名称关键词" />
 				<view @click="remove" v-if="flag === false" class=" pos-abs rig">
 					取消
 				</view>

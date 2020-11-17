@@ -191,12 +191,10 @@
 <style scoped lang="scss">
 	.back {
 		position: relative;
-		top: -5rpx;
-		left: -5rpx;
-		background-image: url(../../../image/login/02ff0a460004c9dd612bd0f8eb308d0.png);
+		background-image: url(../../../image/login/back.png);
 		height: 100vh;
 		background-repeat: no-repeat; //不重复
-		background-size: 105% 105%; // 满屏
+		background-size: 100% 100%; // 满屏
 	}
 
 	.nav {
@@ -239,7 +237,10 @@
 			// background: red;
 			width: 304rpx;
 		}
-
+      /deep/
+      .uni-input-placeholder{
+        color: #FFFFFF!important;
+      }
 	}
 
 	.top {

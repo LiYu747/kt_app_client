@@ -97,6 +97,7 @@ data () {
 
 <style scoped lang="scss">
 .box{
+	margin-top: 0rpx;
 	width: 700rpx;
 	height: 253rpx;
 	padding: 20rpx;

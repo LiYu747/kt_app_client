@@ -39,7 +39,7 @@
 		
 		<!-- 登录按钮 -->
 	<view class="flex-d al-center">
-		<view class="btn pos-rel flex ju-center al-center">
+		<view @click="login" class="btn pos-rel flex ju-center al-center">
 			<image src="../../../image/login/jbs.png" class="jbsimg" mode=""></image>
 			<view class="lgtext pos-abs">
 				登录
@@ -147,6 +147,18 @@
 			  	url:'/pages/auth/register/register'
 			  })
 			  },
+			// 登录
+			 login(){
+					this.$refs.uForm.validate(valid => {
+						console.log(valid);
+								if (valid) {
+									uni.setStorageSync('user',this.form.phone)
+									console.log('验证通过');
+								} else {
+									console.log('验证失败');
+								}
+							});
+			 }
 		},
 		mounted() {
 
@@ -175,12 +187,10 @@
 <style scoped lang="scss">
 	.back {
 		position: relative;
-		top: -5rpx;
-		left: -5rpx;
-		background-image: url(../../../image/login/02ff0a460004c9dd612bd0f8eb308d0.png);
+		background-image: url(../../../image/login/back.png);
 		height: 100vh;
 		background-repeat: no-repeat; //不重复
-		background-size: 105% 105%; // 满屏
+		background-size: 100% 100%; // 满屏
 	}
 
 	.nav {
@@ -222,8 +232,12 @@
 			// background: red;
 			width: 304rpx;
 		}
-
+		/deep/
+		.uni-input-placeholder{
+		  color: #FFFFFF!important;
+		}
 	}
+	
 
 	.top {
 		margin-top: 75rpx;
