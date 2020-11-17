@@ -16,8 +16,11 @@
 	   	<view class="portrait flex  ju-center pos-rel">
 			<image src="../../image/user/headportrait.png" class="headimg pos-abs" mode=""></image>
 	   	</view>
-		<view class="text" @click="gologin">
+		<view v-if="!user" class="text" @click="gologin">
 			{{text}}
+		</view>
+		<view v-else class="text" @click="gologin">
+			{{user}}
 		</view>
 	   </view>
     </view>
@@ -29,10 +32,15 @@ name: "",
 components: {
 
 },
-props: {},
+props: {
+	 user:{
+		 type:String||Object,
+		 required:false
+	 }
+},
 data () {
   return {
-	  text:'未登录'
+	  text:'未登录',
     }
   },
   methods: {
@@ -50,11 +58,14 @@ data () {
 		})
 		}
   },
-  mounted () {
+  onLoad() {
+  
+  },
+  onShow(){
 
   },
-  onLoad () {
-
+  mounted () {
+  
   },
   filters: {
 

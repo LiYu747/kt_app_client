@@ -1,6 +1,6 @@
 <template>
 <view class="box">
-	<view  class="item flex al-center" v-for="(item,index) in locdata" :key='item.id' :class="{'dv':index<3,'top':index>3}">
+	<view  class="item flex al-center" v-for="(item,index) in locdata" @click="add(index)" :key='item.id' :class="{'dv':index<3,'top':index>3}">
 		   <image :src="item.image" class="itemimg" mode=""></image>
 		   <view class="itemtext">
 		   	{{item.titel}}
@@ -41,7 +41,9 @@ data () {
     }
   },
   methods: {
-
+   add(index){
+	  this.$emit('add',index)
+   }
   },
   mounted () {
 

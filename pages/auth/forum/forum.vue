@@ -42,10 +42,10 @@ data () {
   methods: {
 	  // 返回
    goback(){
-	   uni.navigateBack({
-	   	delta:1
+	   uni.switchTab({
+	   	url:'/pages/auth/address/address'
 	   })
-   },
+	   },
    add(val){
 	   this.flag = val
 	this.$refs.change.idx = 0

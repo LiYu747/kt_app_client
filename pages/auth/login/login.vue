@@ -152,7 +152,10 @@
 					this.$refs.uForm.validate(valid => {
 						console.log(valid);
 								if (valid) {
-									uni.setStorageSync('user',this.form.phone)
+									uni.setStorageSync('user',JSON.stringify(this.form.phone))
+									uni.switchTab({
+										url:'/pages/auth/userCenter/userCenter'
+									})
 									console.log('验证通过');
 								} else {
 									console.log('验证失败');

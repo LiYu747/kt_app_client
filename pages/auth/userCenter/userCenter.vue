@@ -2,9 +2,9 @@
 	<!-- 个人中心 -->
 	<div class="whole">
 		<!-- 头部 -->
-	<headContent></headContent>
+	<headContent :user='user'></headContent>
 	 <!-- 操作栏 -->
-	 <actionBar></actionBar>
+	 <actionBar @add='add'></actionBar>
 	</div>
 </template>
 
@@ -20,17 +20,25 @@ actionBar
 		props: {},
 		data() {
 			return {
-	
+	     user:''
 			}
 		},
 		methods: {
-
+       add(index){
+		   console.log(index);
+		   if(index===5){
+			   uni.clearStorageSync('user')
+			   this.user = uni.getStorageSync('user')&&JSON.parse(uni.getStorageSync('user'))
+		   }
+	   }
 		},
 		mounted() {
 
 		},
-		onLoad() {
-
+		onLoad(val) {
+		},
+		onShow() {
+			this.user = uni.getStorageSync('user')&&JSON.parse(uni.getStorageSync('user'))
 		},
 		filters: {
 

@@ -111,8 +111,8 @@
 				],
 			}
 		},
-		onLoad() {
-
+		onLoad(val) {
+     console.log(val);
 		},
 		methods: {
 			// 回车搜索
