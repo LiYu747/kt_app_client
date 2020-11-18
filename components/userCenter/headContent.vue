@@ -20,7 +20,7 @@
 			{{text}}
 		</view>
 		<view v-else class="text" @click="gologin">
-			{{user}}
+			已登录
 		</view>
 	   </view>
     </view>
@@ -34,7 +34,7 @@ components: {
 },
 props: {
 	 user:{
-		 type:String||Object,
+		 type:Object,
 		 required:false
 	 }
 },

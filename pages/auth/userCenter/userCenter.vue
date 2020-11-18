@@ -10,35 +10,55 @@
 
 <script>
 	import headContent from '../../../components/userCenter/headContent.vue';
-	import actionBar from '../../../components/userCenter/actionBar.vue'
+	import actionBar from '../../../components/userCenter/actionBar.vue';
+	import userDetails from '../../../vendor/user/userDetails.js';
+	import jwt from '../../../vendor/auth/jwt.js';
+	
 	export default {
 		name: "",
 		components: {
-headContent,
-actionBar
+			headContent,
+			actionBar
 		},
 		props: {},
 		data() {
 			return {
-	     user:''
+				user:null
 			}
 		},
 		methods: {
-       add(index){
-		   console.log(index);
-		   if(index===5){
-			   uni.clearStorageSync('user')
-			   this.user = uni.getStorageSync('user')&&JSON.parse(uni.getStorageSync('user'))
+		   add(index){
+			   console.log(index);
+			   if(index===5){
+				   uni.clearStorageSync('cache:jwt')
+				   this.user = null
+			   }
 		   }
-	   }
 		},
 		mounted() {
-
+		 
 		},
 		onLoad(val) {
 		},
 		onShow() {
-			this.user = uni.getStorageSync('user')&&JSON.parse(uni.getStorageSync('user'))
+			
+			jwt.doOnlyTokenValid({
+				showModal : true,
+				success : ()=>{
+					userDetails.userDeta({
+						  
+						  success: (res) => {
+							  console.log('success',res);
+						  },
+						  fail: (err) => {
+							  console.log(err);
+						  }
+					})
+				}
+			})
+			
+		
+			
 		},
 		filters: {
 

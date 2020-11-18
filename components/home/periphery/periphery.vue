@@ -11,12 +11,12 @@
 			<!-- 资讯 -->
 			<view class="conten flex ju-between flex-w">
 			   	 <view class="item flex pos-rel" v-for="(item,index) in locdata" :key='index'>
-			   	 	   <image :src="item.image" mode="" class="itemimg"></image>
+			   	 	   <image :src="item.faceimg" mode="" class="itemimg"></image>
 					   <view class="font fz-12">
-					   	{{item.content}}
+					   	{{item.title}}
 					   </view>
-					   <view class="time pos-abs location ">
-					   	  {{item.time}}
+					   <view class="time  pos-abs location ">
+					   	  {{item.created_at.slice(0,10)}}
 					   </view>
 			   	 </view>
 			</view>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+	import home from '../../../vendor/home/home.js'
 export default {
 name: "",
 components: {
@@ -33,27 +34,27 @@ components: {
 props: {},
 data () {
   return {
-	  locdata:[
-		  {image:require('@/image/home/zu221.png'),
-		  content:'油价迎年内第四降!95号汽油重回6.9的价格快进详细看一下把',
-		  time:'2020-9-17'},
-		  {image:require('@/image/home/zu222.png'),
-		  content:'一印尼进口冻带鱼外包装阳性海关总署紧急行动dsds',
-		   time:'2020-9-18'},
-		  {image:require('@/image/home/zu221.png'),
-		  content:'油价迎年内第四降!95号汽油重回6.9的价格快进详细看一下把',
-		   time:'2020-9-17'},
-		  {image:require('@/image/home/zu222.png'),
-		  content:'一印尼进口冻带鱼外包装阳性海关总署紧急行动dsds',
-		   time:'2020-9-18'}
-	  ]
+	  locdata:[]
     }
   },
   methods: {
-
+   
   },
   mounted () {
-
+     home.news({
+     		 data:{
+				 page:1,
+				 pageSize:15
+			 },
+     		 success: (res) => {
+     			 console.log(res.data.data.data);
+				 
+				 this.locdata = res.data.data.data
+     		 },
+     		 fail: (err) => {
+     			 console.log(err);
+     		 }
+     })
   },
   onLoad () {
 

@@ -1,6 +1,6 @@
 import utils from '../common/utils.js';
 import arr from '../common/arr.js';
-
+import dater from '../date/dater.js';
 class Cache{
 	
 	cachePrefix = 'cache:';
@@ -9,7 +9,7 @@ class Cache{
 		if( exp === undefined ) exp = null;
 		
 		uni.setStorageSync(this.cachePrefix+key ,{
-			exp : null,
+			exp : exp,
 			value : value,
 		});
 	}

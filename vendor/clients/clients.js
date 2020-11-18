@@ -186,17 +186,17 @@ class Clients{
 				
 				let d = str.diffVersion( this.version,androidVersion);
 				
-				if( d == -1 ){
-					uni.showModal({
-						content:'有版本更新',
-						confirmText:'更新',
-						success(res2) {
-							if( res2.confirm == true ){
-								console.log('do update action');
-							}
-						}
-					})
-				}
+				// if( d == -1 ){
+				// 	uni.showModal({
+				// 		content:'有版本更新',
+				// 		confirmText:'更新',
+				// 		success(res2) {
+				// 			if( res2.confirm == true ){
+				// 				console.log('do update action');
+				// 			}
+				// 		}
+				// 	})
+				// }
 			}
 		})
 	}

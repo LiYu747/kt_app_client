@@ -9,8 +9,8 @@
         	</view>
 			<view class="overtxt flex al-center">
 				<view class="context ">	
-						<view class="ltst">
-							{{loctext}}
+						<view class="ltst ">
+							{{loctext.title}}
 						</view>
 				</view>
 				<view class="btn flex al-center ju-center">
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+	import home from '../../../vendor/home/home.js'
 export default {
 name: "",
 components: {
@@ -30,14 +31,25 @@ components: {
 props: {},
 data () {
   return {
-	  loctext:' 桂溪街道联治街区综合党委广泛发动基层力量助力区域中小企业桂溪街道联治街区综合党委广泛发动基层力量助力区域中小企业桂溪街道联治街区综合党委广泛发动基层力量 '
+	  loctext:{}
     }
   },
   methods: {
 
   },
   mounted () {
-
+    home.infortion({
+		data:{
+		page:1,
+		},
+		success: (res) => {
+			console.log(res.data.data.data);
+			this.loctext = res.data.data.data[0]
+ 		},
+		fail: (err) => {
+			console.log(err);
+		}
+	})
   },
   onLoad () {
 

@@ -18,7 +18,7 @@
 				<u-form-item label="" prop="phone">
 					<view class="uiput flex al-center pos-rel">
 						<image class="iptimg pos-abs" src="../../../image/login/phone.png" mode=""></image>
-						<u-input class="ipt" type="number" :clearable='flag' v-model="form.phone" placeholder="输入手机号" />
+						<u-input class="ipt" type="number" :clearable='flag' v-model="form.phone" placeholder="输入手机号" value=""/>
 					</view>
 				</u-form-item>
 				<!-- 验证码 -->
@@ -36,34 +36,40 @@
 				</u-form-item>
 			</u-form>
 		</view>
-		
+
 		<!-- 登录按钮 -->
-	<view class="flex-d al-center">
-		<view @click="login" class="btn pos-rel flex ju-center al-center">
-			<image src="../../../image/login/jbs.png" class="jbsimg" mode=""></image>
-			<view class="lgtext pos-abs">
-				登录
+		<view class="flex-d al-center">
+			<view @click="Login" class="btn pos-rel flex ju-center al-center">
+				<image src="../../../image/login/jbs.png" class="jbsimg" mode=""></image>
+				<view class="lgtext pos-abs">
+					登录
+				</view>
 			</view>
+
+			<!-- 找回密码 -->
+			<view class="flex al-center retrieve">
+				<view class="">
+					找回密码
+				</view>
+				<view class="line">
+
+				</view>
+				<view @click="register" class="">
+					注册账号
+				</view>
+			</view>
+
 		</view>
-		
-		<!-- 找回密码 -->
-		<view class="flex al-center retrieve">
-			<view class="">
-				找回密码
-			</view>
-			<view class="line">
-				
-			</view>
-			<view @click="register" class="">
-				注册账号
-			</view>
-		</view>
-	</view>
-	
+
 	</view>
 </template>
 
 <script>
+	import sms from '../../../vendor/sms/sms.js';
+	import userinfo from '../../../vendor/user/userinfo.js'
+	import jwt from '../../../vendor/auth/jwt.js';
+	
+	
 	export default {
 		name: "",
 		components: {
@@ -85,7 +91,7 @@
 						// 对name字段进行长度验证
 						{
 							min: 11,
-							max:11,
+							max: 11,
 							message: '手机号码格式不正确',
 							trigger: 'blur'
 						},
@@ -93,21 +99,6 @@
 						{
 							required: true,
 							message: '请输入手机号码',
-						    trigger: 'blur'
-						},
-					],
-					Verification: [
-						// 对name字段进行长度验证
-						{
-							min: 4,
-							max:4,
-							message: '验证码格式不正确',
-							trigger: 'blur'
-						},
-						// 对name字段进行必填验证
-						{
-							required: true,
-							message: '请输入验证码',
 							trigger: 'blur'
 						},
 					],
@@ -117,51 +108,110 @@
 		methods: {
 			// 获取验证码
 			addvercode() {
-				if (this.code === true) {
-					this.$refs.uToast.show({
-						title: '发送成功',
-					})
-					const authtime = setInterval(() => {
-						this.code = false
-						this.timer--
-						this.text = '验证码'+'('+this.timer +'s'+')' 
-						if (this.timer <= 0) {
 
-							this.timer = 60
-							this.text = '重新发送'
-							this.code = true
-							clearInterval(authtime)
-						}
-					}, 1000)
+				if (this.code === true) {
+					sms.userLoginCode({
+						data: {
+							tel: this.form.phone,
+						},
+						success: (res) => {
+							console.log(res);
+							// 发送成功
+							if (res.data.code === 200) {
+								this.$refs.uToast.show({
+									title: res.data.msg,
+								})
+								this.form.Verification = res.data.data.code
+								const authtime = setInterval(() => {
+									this.code = false
+									this.timer--
+									this.text = '验证码' + '(' + this.timer + 's' + ')'
+									if (this.timer <= 0) {
+
+										this.timer = 60
+										this.text = '重新发送'
+										this.code = true
+										clearInterval(authtime)
+									}
+								}, 1000)
+							} else {
+								this.$refs.uToast.show({
+									title: res.data.msg,
+								})
+							}
+						},
+						fail: (err) => {
+							console.log(err);
+							this.isGetingSmsCode = false;
+						},
+
+					})
 				}
+
 			},
 			// 返回按钮
-			goback(){
+			goback() {
 				uni.navigateBack({
-					delta:1
+					delta: 1
 				})
-				},
+			},
 			// 去注册
-		  register(){
-			  uni.navigateTo({
-			  	url:'/pages/auth/register/register'
-			  })
-			  },
+			register() {
+				uni.navigateTo({
+					url: '/pages/auth/register/register'
+				})
+			},
 			// 登录
-			 login(){
-					this.$refs.uForm.validate(valid => {
-						console.log(valid);
-								if (valid) {
-									uni.setStorageSync('user',JSON.stringify(this.form.phone))
-									uni.switchTab({
-										url:'/pages/auth/userCenter/userCenter'
-									})
-									console.log('验证通过');
-								} else {
-									console.log('验证失败');
-								}
-							});
-			 }
+			Login() {
+				userinfo.Signin({
+					data: {
+						tel: this.form.phone,
+						smsCode: this.form.Verification
+					},
+					success: (res) => {
+						console.log(res);
+						
+						if( res.statusCode != 200 ){
+							
+							return;
+						}
+						
+						if( res.data.code != 200 ){
+							
+							uni.showToast({
+								title : res.data.msg,
+								icon : 'none'
+							})
+							return;
+						
+						}
+						
+						let info = jwt.parseToken(res.data.data.jwt_token);
+						
+						if( !info ) return;
+						
+						console.log('login data',info);
+						
+						jwt.setToken(res.data.data.jwt_token,info.exp*1000 - 10000,()=>{
+							jwt.execTask();
+						})
+						
+						// 
+						
+						this.$refs.uToast.show({
+							title: res.data.msg,
+							type: 'success',
+							url: '/pages/auth/userCenter/userCenter',
+							isTab: true
+						})
+						
+						
+					},
+					fail: (err) => {
+						console.log(err);
+					},
+				})
+			}
 		},
 		mounted() {
 
@@ -235,12 +285,12 @@
 			// background: red;
 			width: 304rpx;
 		}
-		/deep/
-		.uni-input-placeholder{
-		  color: #FFFFFF!important;
+
+		/deep/ .uni-input-placeholder {
+			color: #FFFFFF !important;
 		}
 	}
-	
+
 
 	.top {
 		margin-top: 75rpx;
@@ -274,37 +324,39 @@
 		-webkit-transform: scale(0.9);
 		-webkit-transform-origin: left top 2
 	}
-	
-	.dv{
+
+	.dv {
 		background: #FF934E;
 		border: none;
 		-webkit-transform: scale(0.9);
 		-webkit-transform-origin: left top 2
 	}
-	
-	.btn{
+
+	.btn {
 		margin-top: 20rpx;
 		width: 576rpx;
 		height: 68rpx;
 	}
-	.jbsimg{
+
+	.jbsimg {
 		width: 576rpx;
 		height: 68rpx;
 		border-radius: 34rpx;
 	}
-	
-	.lgtext{
+
+	.lgtext {
 		font-size: 30rpx;
 		color: #FFFFFF;
-		}
-	
-	.line{
+	}
+
+	.line {
 		width: 1rpx;
 		height: 26rpx;
 		background: #E6E6E6;
 		margin: 0 28rpx;
 	}
-	.retrieve{
+
+	.retrieve {
 		color: #E6E6E6;
 		margin-top: 57rpx;
 	}

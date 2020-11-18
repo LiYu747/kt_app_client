@@ -14,6 +14,13 @@
 		<!-- 输入框 -->
 		<view class="top flex-d al-center">
 			<u-form :model="form" ref="uForm">
+				<!-- 昵称-->
+				<u-form-item label="" class="postop" prop="nickname">
+					<view class="uiput flex al-center pos-rel">
+						<image class="nameimg pos-abs" src="../../../image/register/my.png" mode=""></image>
+						<u-input class="ipt"  :clearable='flag' v-model="form.nickname" placeholder="昵称" />
+					</view>
+				</u-form-item>
 				<!-- 姓名-->
 				<u-form-item label="" class="postop" prop="name">
 					<view class="uiput flex al-center pos-rel">
@@ -61,9 +68,9 @@
 			</u-form>
 		</view>
 		
-		<!-- 登录按钮 -->
+		<!-- 注册按钮 -->
 	<view class="flex-d al-center">
-		<view class="btn pos-rel flex ju-center al-center">
+		<view @click="register" class="btn pos-rel flex ju-center al-center">
 			<image src="../../../image/login/jbs.png" class="jbsimg" mode=""></image>
 			<view class="lgtext pos-abs">
 				注册
@@ -75,6 +82,8 @@
 </template>
 
 <script>
+	import userinfo from '../../../vendor/user/userinfo.js'
+	import sms from '../../../vendor/sms/sms.js'
 	export default {
 		name: "",
 		components: {
@@ -88,69 +97,84 @@
 				code: true,
 				timer: 60,
 				form: {
+					nickname:'',
+					name:'',
 					phone: '',
-					Verification: ''
+					Verification: '',
+					idcard:''
 				},
-				rules: {
-					phone: [
-						// 对name字段进行长度验证
-						{
-							min: 11,
-							max:11,
-							message: '手机号码格式不正确',
-							trigger: 'blur'
-						},
-						// 对name字段进行必填验证
-						{
-							required: true,
-							message: '请输入手机号码',
-						    trigger: 'blur'
-						},
-					],
-					Verification: [
-						// 对name字段进行长度验证
-						{
-							min: 4,
-							max:4,
-							message: '验证码格式不正确',
-							trigger: 'blur'
-						},
-						// 对name字段进行必填验证
-						{
-							required: true,
-							message: '请输入验证码',
-							trigger: 'blur'
-						},
-					],
-				}
 			}
 		},
 		methods: {
 			// 获取验证码
 			addvercode() {
-				if (this.code === true&&this.form.phone.length===11) {
-					this.$refs.uToast.show({
-						title: '发送成功',
-					})
-					const authtime = setInterval(() => {
-						this.code = false
-						this.timer--
-						this.text = '验证码'+'('+this.timer +'s'+')' 
-						if (this.timer <= 0) {
-
-							this.timer = 60
-							this.text = '重新发送'
-							this.code = true
-							clearInterval(authtime)
-						}
-					}, 1000)
-				}
-				else{
-					this.$refs.uToast.show({
-						title: '请输入手机号码',
+				if (this.code === true) {
+					sms.userRegCode({
+						data:{tel:this.form.phone},
+						success: (res) => {
+							console.log(res);
+							if(res.data.code===200){
+								this.$refs.uToast.show({
+									title: res.data.msg,
+								})
+								this.form.Verification = res.data.data.code
+								const authtime = setInterval(() => {
+									this.code = false
+									this.timer--
+									this.text = '验证码'+'('+this.timer +'s'+')' 
+									if (this.timer <= 0) {
+								
+										this.timer = 60
+										this.text = '重新发送'
+										this.code = true
+										clearInterval(authtime)
+									}
+								}, 1000)
+							}
+							else{
+								this.$refs.uToast.show({
+									title: res.data.msg,
+								})
+							}
+						},
+						fail: (err) => {
+							console.log(err);
+							}
 					})
 				}
 			},
+			// 注册
+			register(){
+			userinfo.register({
+				data:{
+					tel:this.form.phone,
+					smsCode:this.form.Verification,
+					nickname: this.form.nickname,
+					username:this.form.name,
+					idCardNo:this.form.idcard
+				},
+		      success: (res) => {
+				  if(res.data.code===200){
+					  this.$refs.uToast.show({
+					  					title: res.data.msg,
+					  					type: 'success',
+										url:'/pages/auth/login/login'
+					  				})
+				  }
+				  else{
+					  this.$refs.uToast.show({
+					  					title: res.data.msg,
+					  					type: 'error',
+										icon:false
+					  				})
+				  }
+				  console.log(res);
+			  },
+			 fail: (err) => {
+				 console.log(err);
+			 }
+				})	
+	},
 			// 返回按钮
 			goback(){
 				uni.navigateBack({
