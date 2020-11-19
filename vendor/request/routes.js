@@ -36,6 +36,10 @@ module.exports = {
 		// 个人信息
 		userdeta:{
 			userdetails : apiPath + 'user/user/profile'
+		},
+		// 修改个人信息
+		userupdate: {
+			update : apiPath + 'user/user/update'
 		}
 	},
 	
@@ -55,5 +59,16 @@ module.exports = {
 		},
 	},
 	
-	
+	// 小区
+	village : {
+		// 小区列表
+		vagelist : {
+			list : apiPath + 'village/village',
+			selectLists : apiPath + 'village/village/selectLists',
+		},
+		// 获取某小区内的住址信息
+		vageshow : {
+			show : apiPath + 'village/village/show'
+		}
+	}
 }

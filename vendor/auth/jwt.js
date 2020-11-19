@@ -21,7 +21,6 @@ class JWT{
 	reload(){
 		let tokenInfo = cache.getWithExp(this.cacheTokenKey);
 		
-		console.log('jwt reload:tokenInfo:',tokenInfo)
 		if ( tokenInfo == null ) return;
 		
 		this.token = tokenInfo.value;
@@ -32,7 +31,6 @@ class JWT{
 		
 		//避免极限失效时间
 		if( this.tokenExp <= (dater.now().getCurrMSeconds() - 10 ) ) return '';
-		console.log('getToken',this.token)
 		return this.token;
 	}
 	
@@ -44,7 +42,6 @@ class JWT{
 		
 		this.token = token;
 		this.tokenExp = exp;
-		console.log(token)
 		cache.set(this.cacheTokenKey,token,exp);
 		
 		utils.doIfIsFunc(callback);

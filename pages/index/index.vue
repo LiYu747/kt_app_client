@@ -79,22 +79,22 @@
 				localdata: [{
 						image: require('@/image/home/rz.png'),
 						titel: '入驻申请',
-						url:'/pages/auth/checkIn/checkIn'
+						url:'/pages/residence/checkIn/checkIn'
 					},
 					{
 						image: require('@/image/home/bf.png'),
 						titel: '拜访申请',
-						url:'/pages/auth/visit/visit'
+						url:'/pages/visitapplication/visit/visit'
 					},
 					{
 						image: require('@/image/home/lf.png'),
 						titel: '来访记录',
-						url:'/pages/auth/visitRecord/visitRecord'
+						url:'/pages/visitRecord/visitRecord/visitRecord'
 					},
 					{
 						image: require('@/image/home/code.png'),
 						titel: '回家二维码',
-						url:'/pages/auth/qrCode/qrCode'
+						url:'/pages/qrcode/qrCode/qrCode'
 					},
 				],
 				list: [],

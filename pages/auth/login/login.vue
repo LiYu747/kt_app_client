@@ -201,7 +201,7 @@
 						this.$refs.uToast.show({
 							title: res.data.msg,
 							type: 'success',
-							url: '/pages/auth/userCenter/userCenter',
+							url: '/pages/user/userCenter/userCenter',
 							isTab: true
 						})
 						

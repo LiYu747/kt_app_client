@@ -20,7 +20,7 @@
 			{{text}}
 		</view>
 		<view v-else class="text" @click="gologin">
-			已登录
+			{{user.nickname}}
 		</view>
 	   </view>
     </view>
@@ -54,7 +54,7 @@ data () {
 	// 去设置
 	install(){
 		uni.navigateTo({
-			url:'/pages/auth/personal/personal'
+			url:`/pages/user/personal/personal`
 		})
 		}
   },

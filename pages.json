@@ -21,7 +21,7 @@
 		},
 		// 地址
 		{
-			"path":"pages/auth/address/address",
+			"path":"pages/address/address/address",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#F07535",
@@ -31,7 +31,7 @@
 		},
 		// 用户 
 		{
-			"path":"pages/auth/userCenter/userCenter",
+			"path":"pages/user/userCenter/userCenter",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#F07535",
@@ -40,7 +40,7 @@
 		}
 	   // 注册
         ,{
-            "path" : "pages/auth/register/register",
+            "path" : "pages/user/register/register",
             "style" :                                                                                    
             {
                "navigationBarTitleText": "",
@@ -50,16 +50,7 @@
             
         }
 		// 预览
-        ,{
-            "path" : "pages/auth/preview/preview",
-            "style" :
-            {
-               "navigationBarTitleText": "",
-               "navigationBarBackgroundColor": "#F07535",
-                "navigationStyle":"custom"
-            }
-            
-        },
+        ,
 		// 头像选中
 		{
 		    "path" : "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
@@ -73,7 +64,7 @@
 		},
 		// 个人信息
 		{
-            "path" : "pages/auth/personal/personal",
+            "path" : "pages/user/personal/personal",
             "style" :                                                                                    
             {
               "navigationBarTitleText": "个人信息",
@@ -84,7 +75,7 @@
         ,
 		// 地址编辑
 		{
-            "path" : "pages/auth/addediting/ADDediting",
+            "path" : "pages/address/addediting/ADDediting",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -96,7 +87,7 @@
         ,
 		//入住申请
 		{
-            "path" : "pages/auth/checkIn/checkIn",
+            "path" : "pages/residence/checkIn/checkIn",
             "style" :                                                                                    
             {
                "navigationBarTitleText": "",
@@ -107,7 +98,7 @@
         }
 		// 申请拜访
         ,{
-            "path" : "pages/auth/visit/visit",
+            "path" : "pages/visitapplication/visit/visit",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -120,7 +111,7 @@
         ,
 			// 来访记录
 		{
-            "path" : "pages/auth/visitRecord/visitRecord",
+            "path" : "pages/operation/visitRecord/visitRecord",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -132,7 +123,7 @@
         ,
 		  //来访记录详情
 		{
-            "path" : "pages/auth/details/details",
+            "path" : "pages/residence/details/details",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -144,7 +135,7 @@
         ,
 		// 拜访记录
 		{
-            "path" : "pages/auth/goRecord/goRecord",
+            "path" : "pages/visitapplication/goRecord/goRecord",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -154,7 +145,7 @@
         }
 		// 拜访详情
         ,{
-            "path" : "pages/auth/goDetails/goDetails",
+            "path" : "pages/visitapplication/goDetails/goDetails",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -166,7 +157,7 @@
         ,
 		// 二维码
 		{
-            "path" : "pages/auth/qrCode/qrCode",
+            "path" : "pages/qrcode/qrCode/qrCode",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -178,7 +169,7 @@
         ,
 		// 未开发的
 		{
-            "path" : "pages/auth/uncultivated/uncultivated",
+            "path" : "pages/not/uncultivated/uncultivated",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -190,7 +181,7 @@
         ,
 		// 小区论坛
 		{
-            "path" : "pages/auth/forum/forum",
+            "path" : "pages/communityForum/forum/forum",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -229,13 +220,13 @@
 	        "selectedIconPath": "static/tabbar/home2.png",
 	        "text": "首页"
 	    }, {
-	        "pagePath": "pages/auth/address/address",
+	        "pagePath": "pages/address/address/address",
 	        "iconPath": "static/tabbar/location1.png",
 	        "selectedIconPath": "static/tabbar/location2.png",
 	        "text": "地址"
 	    },
 		 {
-		    "pagePath": "pages/auth/userCenter/userCenter",
+		    "pagePath": "pages/user/userCenter/userCenter",
 		    "iconPath": "static/tabbar/user1.png",
 		    "selectedIconPath": "static/tabbar/user2.png",
 		    "text": "个人中心"

@@ -29,9 +29,9 @@ class req{
 	}
 	
 	patch(params){
-		this.appendHeader(params);
-		params.method = 'PUT';
-		uni.request(params);
+		if( !params.data ) params.data = {};	
+		params.data._method = 'PATCH';
+		this.post(params);
 	}
 	
 	delete(params){
