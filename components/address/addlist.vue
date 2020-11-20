@@ -8,14 +8,14 @@
 			</view>
 			<view class="addres">
 				<view class=" flex al-center pos-rel">
-					{{item.name}}
-					<view class="pos-abs  right" @click="forum">
+					{{item.village_name}}
+					<view class="pos-abs  right" @click="forum(item)">
 						<image class="reimg"  src="../../image/address/retrue.png" mode=""></image>
 					</view>
 				</view>
 				<view class="line"></view>
 				<view class="text" @click="edit(item)">
-					{{item.address}}
+					{{item.village_name + item.building_name + item.apartment_name + item.floor_name + item.room_name}}
 				</view>
 			</view>
 			
@@ -24,16 +24,19 @@
 			</view>
 		</view>
 	</view>
-	<view v-if='flag===true' @mousewheel.prevent  class="show pos-abs flex al-center ju-center">
+	<view v-if='flag===true && msg' @mousewheel.prevent  class="show pos-abs flex al-center ju-center">
 		<view class="showbox flex-d al-center">
-			<view v-if="message==='false'" class="flex-d al-center">
+			<view v-show="message==true" class="flex-d al-center">
+				<image src="../../image/address/scrcc.png" class="scrimg" mode=""></image>
+				 <view class="msg">
+				 	{{msg}}
+				 </view>
+			</view>
+			<view v-show="message==false" class="flex-d al-center">
 				<image src="../../image/address/no.png" class="noimg" mode=""></image>
 				<image src="../../image/address/no1.png" class="ntimg" mode=""></image>
 			</view>
-			<view v-if="message==='true'" class="flex-d al-center">
-				<image src="../../image/address/scrcc.png" class="scrimg" mode=""></image>
-				<image src="../../image/address/scrcc1.png" class="scrtimg" mode=""></image>
-			</view>
+		
 			<view @click="sure" class="flex loca al-center ju-center">
 						<view class="pos-abs sowtext bai">
 							  知道了
@@ -46,6 +49,7 @@
 </template>
 
 <script>
+	import address from '../../vendor/address/address.js'
 	export default {
 		name: "",
 		components: {
@@ -54,35 +58,11 @@
 		props: {},
 		data() {
 			return {
-				locdata: [{
-						name: '怡心湖小区',
-						address: '四川省成都市华府大道怡心湖小区1单元2020',
-						message:'true'
-					},
-					{
-						name: '怡心湖小区',
-						address: '四川省成都市华府大道怡心湖小区1单元2020dadadaSKDJA凯撒大帝澳大利的啊大家案例',
-						message:'false'
-					},
-					{
-						name: '怡心湖小区',
-						address: '四川省成都市华府大道怡心湖小区1单元2020dadadaSKDJA凯撒大帝澳大利的啊大家案例',
-						message:'true'
-					},
-					{
-						name: '怡心湖小区',
-						address: '四川省成都市华府大道怡心湖小区1单元2020dadadaSKDJA凯撒大帝澳大利的啊大家案例',
-						message:'false'
-					},
-					{
-						name: '怡心湖小区',
-						address: '四川省成都市华府大道怡心湖小区1单元2020dadadaSKDJA凯撒大帝澳大利的啊大家案例',
-						message:'true'
-					}
-				],
+				locdata: [],
 				idx:0,
 				flag:false,
-				 message:''
+			  message:true,
+			  msg:''
 			}
 		},
 		methods: {
@@ -97,25 +77,55 @@
 			 })
 		 },
 		 // 进入论坛
-		 forum(){
+		 forum(item){
 			 uni.navigateTo({
-			 	url:'/pages/auth/forum/forum'
+			 	url:`/pages/communityForum/forum/forum?id=${item.village_id}`
 			 })
 			 },
 		// 预约电梯
 		order(item){
-			this.message = item.message
+	    console.log(item.id);
+		address.bookingElevator({
+			data:{id:item.id},
+			success: (res => {
+					if (res.statusCode != 200) return;
+					
+					if(res.data.code==200){
+						this.message = true
+						this.msg = res.data.msg
+					}
+					else{
+						this.msg = res.data.msg
+						this.message = false
+					}
+		      console.log(res.data.code);
+			})
+		})
 			this.flag = true
 			
 		},
 		// 确定关闭遮罩
 		sure(){
 			this.flag = false
-			}
+			},
+		 // 用户所有地址
+			 data(){
+				 address.alladd({
+					 data: {},
+					 success: (res => {
+						 if (res.statusCode != 200) return;
+						 
+						 if (res.data.code != 200) return;
+						 console.log(res.data.data.data);
+						 let data = res.data.data.data
+						 this.locdata = data
+					 })
+				 })
+			 }
 		
 		},
 		mounted() {
-
+         this.data()
 		},
 		onLoad() {
 
@@ -250,4 +260,12 @@
 	width: 220rpx;
 	height: 37rpx;
 }
+.msg{
+	color: rgb(254,134,72);
+	width: 90%;
+	height: 200rpx;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	}
 </style>

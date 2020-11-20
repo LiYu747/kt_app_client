@@ -48,6 +48,7 @@ module.exports = {
 		adPos : {
 			rotationChart : apiPath + 'ad/adPos/show'
 		},
+		
 		// 社区资讯
 		infortion: {
 			infor : apiPath + 'village/news'
@@ -57,6 +58,38 @@ module.exports = {
 		news : { 
 			peripheralNews : apiPath  + 'article/news'
 		},
+		
+		// 申请入住
+		applecheckin : {
+			apple : apiPath + 'user/moveInApply'
+		},
+		
+		//拜访申请Visit record
+		visitLog : {
+				// 拜访记录 && 申请拜访
+			apply : apiPath + 'user/visitLog',
+			
+			// 拜访记录详情
+			details : apiPath + 'user/visitLog/show'
+	
+		},
+		
+		//来访记录
+		Visitrecord : {
+			visitors : apiPath + 'user/visitLog/visitors',
+			
+			// 来访详情
+			details : apiPath + 'user/visitLog/visitorShow',
+			
+			// 处理来访申请
+			handlevisit : apiPath + 'user/visitLog/deal'
+		},
+		
+		// 二维码
+		qrcode : {
+			obtaincode : apiPath + 'user/backHome/makeQr'
+		}
+		
 	},
 	
 	// 小区
@@ -65,10 +98,22 @@ module.exports = {
 		vagelist : {
 			list : apiPath + 'village/village',
 			selectLists : apiPath + 'village/village/selectLists',
+			// 小区公告
+			Notice :    apiPath + 'village/notice',
+			// 小区展示信息
+			displayInformation : apiPath + 'village/village/info'
 		},
-		// 获取某小区内的住址信息
-		vageshow : {
-			show : apiPath + 'village/village/show'
-		}
+	},
+	
+	// 地址
+	address : {
+		// 用户的所有住址
+		alladd : {
+			list : apiPath +'user/house'
+			},
+	  //预约电梯
+	  bookingElevator : {
+		   booking : apiPath + 'user/house/subElevator'
+	  }
 	}
 }

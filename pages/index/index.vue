@@ -89,7 +89,7 @@
 					{
 						image: require('@/image/home/lf.png'),
 						titel: '来访记录',
-						url:'/pages/visitRecord/visitRecord/visitRecord'
+						url:'/pages/operation/visitRecord/visitRecord'
 					},
 					{
 						image: require('@/image/home/code.png'),
