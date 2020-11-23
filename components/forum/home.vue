@@ -6,7 +6,7 @@
 		<view class="flex-d al-center">
 			<view class="nav flex-d al-center pos-rel">
 				<view class="tex1">
-					怡心湖小区
+				    {{arr.name}}
 				</view>
 				<view class="tex2 flex al-center ju-center" :class="{te2:idx===0}">
 					<view class="item" v-for="(item,index) in titel" :key='item.id' @click="add(index)" :class="{'dv':index===1,'colr':idx===index}">
@@ -14,31 +14,23 @@
 					</view>
 				</view>
 				<view v-show="idx===0" class="content">
-					{{value}}
+					{{arr.brief}}
 				</view>
+				<!-- 小区公告 -->
 				<view v-show="idx === 1" class="twbx m-t2">
-                            <view class="" v-for="item in Notice" :key='item.id'>
-                            	      {{item.title}}
-                            </view>
+                          <view v-if="Notice.length>0" class="">
+                          	<view  class="" v-for="item in Notice" :key='item.id'>
+                          		      {{item.title}}
+                          	</view>
+                          </view>
+						  <view v-else class="">
+						  	暂无公告
+						  </view>
 				</view>
 			</view>
-
+      
 			<view v-show="idx===0" class="foot">
-				<view class="fotex1">
-					怡心湖，超宽楼间距，下沉中庭，给你不一样的湖居生活
-				</view>
-				<view class="">
-					<image src="../../image/forum/1.png" class="img1" mode=""></image>
-				</view>
-				<view class="m-t4">
-					怡心湖岸位于华府大道与牧华路交汇处。项目是由万科、新希望、中铁建地产、广东中天4大品牌联袂打造的项目。项目边上有万科投资打造的万科梦想城商业体，商业氛围很不错。项目整体占地约156亩，分两期呈现，目前销售项目的二期，且房源实现了南向面湖，视野很不错。项目目前在售：面积为105-136㎡，单价2-2.1万，总价220-260万项目总占地156亩（地块一占地87亩），分东西两地块，容积率2.5。
-				</view>
-				<view class="">
-					<image src="../../image/forum/2.png" mode="" class="img1"></image>
-				</view>
-				<view class="m-t4">
-					项目由“四横六纵、四地铁、双机场”构成完善的立体交通网络。“四横”：三环路、四环路（绕城高速）、华府大道、五环路（牧华路）；“六纵”：红星路南延线、天府大道、益州大道、剑南大道、华府大道、成雅高速。4地铁：已经开通的1号线，贯穿成都南北（升仙湖-科学城）；5号线（城北商贸城—城南回龙路）2019年底通车，怡心湖站距离项目约1公里；地铁6号线三期（观东路站—兰家沟站），预计2020年底开通，兰家沟站距离项目约5公里；成都轨道交通第四期建设规划已于2019年6月获国家发改委正式批复，其中“怡心湖北站”（物联大道和牧华路交界处）成为TOD建设首批次特色站点；规划有地铁19号线距离项目约600米.
-				</view>
+			<u-parse :html="arr.desc"></u-parse>
 			</view>
 		</view>
 	</view>
@@ -58,19 +50,8 @@
 		},
 		data() {
 			return {
-				list: [{
-						image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605502842195&di=f8c59619c4b0253397e41b1511d2dc74&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170731%2Fec5327043cda4f31a3c4c1df7baac2d2_th.jpg',
-						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
-					},
-					{
-						image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605502873384&di=d8f562ebc0df07da6af0cb8bad6a51cc&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20190610%2Fb1c5bc66a4e847518008daa94232f5a9.jpeg',
-						title: '身无彩凤双飞翼，心有灵犀一点通'
-					},
-					{
-						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
-						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-					}
-				],
+				list: [], //轮播图
+				arr:{},   //小区展示信息
 				titel: [
 					'简介', '公告', '论坛'
 				],
@@ -103,7 +84,13 @@
 				village.displayInformation({
 					data:{id:this.id},
 					success: (res => {
-						console.log(res);
+						console.log('小区公告',res.data.data);
+						let data = res.data.data
+						 data.album.map( item => {
+							this.list.push(item.url)
+						})
+						this.arr = data
+						
 					})
 				})
 			}

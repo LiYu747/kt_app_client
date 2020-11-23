@@ -7,7 +7,7 @@
 			</view>
 			<view v-else class="back flex al-center">
 				<view class="" v-for="(item,index) in image" :key='item.id'>
-					<image class="itemimg" :src="item" mode=""></image>
+					<image v-if="index<3" class="itemimg" :src="item" mode=""></image>
 				</view>
 			</view>
 			<view @click="add" class="btn flex al-center ju-center">
@@ -20,7 +20,7 @@
 			<view class="tex1">
 				标题 ：
 			</view>
-		     <input class="ipt" type="text" value="" />
+		     <input class="ipt" v-model="title" type="text" value="" />
 		</view>
 		
 		 <!-- 内容 -->
@@ -28,11 +28,11 @@
 		 	<view class="tex1">
 		 		内容 :
 		 	</view>
-			<textarea class="are" maxlength='1000'></textarea>
+			<textarea class="are" v-model="content" maxlength='1000'></textarea>
 		 </view>
 		 
 		 <!-- 提交 -->
-		 <view class="matop flex al-center ju-center">
+		 <view @click="Submit" class="matop flex al-center ju-center">
 		 	<image class="Submit" src="../../image/login/ccuc.png" mode=""></image>
 			<view class="bai pos-abs">
 				确认提交
@@ -42,40 +42,45 @@
 </template>
 
 <script>
+	import village from '../../vendor/village/village.js';
+	import route from '../../vendor/request/routes.js';
+	
 	export default {
 		name: "",
 		components: {
 
 		},
-		props: {},
+		props: {
+			id:{
+				type:String
+			}
+		},
 		data() {
 			return {
 				image: [],
+				title:''  ,// 标题
+				content: '' , //内容
 			}
 		},
 		methods: {
 			add() {
 				uni.chooseImage({
 					success: (chooseImageRes) => {
-						const tempFilePaths = chooseImageRes.tempFilePaths;
-
-						tempFilePaths.map((item, index) => {
-							if (index < 3) {
-								this.image.push(item)
-							}
-						})
-						console.log(this.image);
-						// uni.uploadFile({
-						//     url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
-						//     filePath: tempFilePaths[0],
-						//     name: 'file',
-						//     formData: {
-						//         'user': 'test'
-						//     },
-						//     success: (uploadFileRes) => {
-						//         console.log(uploadFileRes.data);
-						//     }
-						// });
+						let tempFilePaths = chooseImageRes.tempFilePaths;
+						// console.log(tempFilePaths);
+						if( tempFilePaths.length > 0 ){
+							tempFilePaths.forEach((item)=>{
+								uni.uploadFile({
+								    url: route.services.file.upload, //仅为示例，非真实的接口地址
+								    filePath: item,
+								    name: 'file',
+								    success: (val) => {
+								      this.image.push(JSON.parse(val.data).data.url)   
+									  console.log(JSON.parse(val.data).data.url);
+								    }
+								});
+							})
+						}
 					}
 				});
 			},
@@ -83,6 +88,35 @@
 				console.log(e)
 				this.old.scrollTop = e.detail.scrollTop
 			},
+			
+			// 发布
+			Submit(){
+				village.releasePost({
+					data:{village_id:this.id,
+					       title:this.title,
+						   content: this.content,
+						   albums:this.image
+					},
+					success: (res => {
+						if(res.statusCode != 200) return
+						if(res.data.code==200){
+							this.$emit('Submit')
+							uni.showToast({
+								title:res.data.msg,
+								duration:2000,
+							})
+						}
+						else{
+							uni.showToast({
+								title:res.data.msg,
+								duration:2000,
+								icon:'none'
+							})
+						}
+						console.log('发布帖子',res);
+					})
+				})
+			}
 		},
 		mounted() {
 
@@ -138,8 +172,8 @@
 	}
 
 	.itemimg {
-		width: 150rpx;
-		height: 200rpx;
+		width: 180rpx;
+		height: 180rpx;
 		margin-right: 10rpx;
 	}
 

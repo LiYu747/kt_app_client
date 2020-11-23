@@ -2,40 +2,28 @@
     <view class="">
     	<view  class="release">
     		<view class="">
-    			  <view class="item" v-for="item in data" :key='item.id'>
+    			  <view class="item" @click="gotoD(item)" v-for="item in arr" :key='item.id'>
     			  	  <view class="flex">
-    			  	  	<image src="../../image/forum/portrait.png" class="itemimg" mode=""></image>
+						  <!-- 头像 -->
+    			  	  	<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
     			  	  	<view class="name">
-    			  	  		{{item.name}}
+    			  	  		{{item.own_user.nickname}}
     						<view class="time">
-    							{{item.time}}
+    							{{item.created_at.slice(0,10)}}
     						</view>
     			  	  	</view>
     			  	  </view>
-    				  <view class="titel">
-    				  	{{item.titel}}
-    				  </view>
     				  <view class="content">
     				  	<view class="show">
-    				  		{{item.content}}
+    				  		{{item.title}}
     				  	</view>
     				  </view>
-    				  <!-- 照片 -->
+    				  <!-- 图片 -->
     				  <view class="flex al-center m-t4">
-    				  	<view  v-for="items in item.Photo" :key='items.id'>
-    				  		 <image :src="items" class="items" mode=""></image>
+    				  	<view  v-for="items in item.album.slice(0,3)" :key='items.id'>
+    				  		 <image :src="items.url" class="items" mode=""></image>
     				  	</view>
     				  </view>
-    				  <!-- 评论 -->
-    				<view v-if="item.comment" class="">
-    					<view  class="comment flex al-center m-t2 ">
-    						<image class="comimg" src="../../image/forum/plun.png" mode=""></image>
-    									全部评论
-    					</view>
-    					<view class="comtext">
-    						{{item.comment}}
-    					</view>
-    				</view>
     			  </view>
     		</view>
     	</view>
@@ -43,42 +31,44 @@
 </template>
 
 <script>
+	import village from '../../vendor/village/village.js'
 export default {
 name: "",
 components: {
 
 },
-props: {},
+props: {
+	id:{
+		type:String
+	}
+},
 data () {
   return {
-	  data:[
-	  		  {
-	  			 portrait:require('@/image/forum/portrait.png'),
-	  			 name:'李海峰',
-	  			 time:'2020年10月29日  16:21',
-	  			 titel:'小区绿化好',
-	  			 content:'小区绿化带里有一小丛一小丛紫色的小花儿萨达撒旦卡死很多空间和打卡时间和端口阿达是可见的哈克摇小丛紫色的小花儿摆着轻柔的腰肢，头上金黄金黄的花心一摇一摆',
-	  			 Photo:[require('@/image/forum/zu13.jpg'),require('@/image/forum/zu14.jpg')],
-	  
-	  		  },
-	  		  {
-	  		  			 portrait:require('@/image/forum/portrait.png'),
-	  		  			 name:'李海峰',
-	  		  			 time:'2020年10月29日  16:21',
-	  		  			 titel:'小区绿化好',
-	  		  			 content:'小区绿化带里有一小丛一小丛紫色的小花儿萨达撒旦卡死很多空间和打卡时间和端口阿达是可见的哈克摇小丛紫色的小花儿摆着轻柔的腰肢，头上金黄金黄的花心一摇一摆',
-	  		  			 Photo:[require('@/image/forum/zu13.jpg'),require('@/image/forum/zu14.jpg')],
-	  		  			 comment:'李海峰: 绿化好绿化好绿化好绿化好绿化好'
-	  		  
-	  		  },	  
-	  ],
+	  arr:[]
     }
   },
   methods: {
-
+	  // 所有帖子
+    Data(){
+		village.communityPost({
+			data:{villageId:this.id},
+			success: (res => {
+				console.log('论坛帖子',res.data.data.data);
+				let data = res.data.data.data
+				this.arr =  data.reverse()
+			})
+		})
+	},
+	// 去详情
+	gotoD(item){
+		console.log(item.id);
+		uni.navigateTo({
+			url:`/components/forum/forumdils?id=${item.id}`
+		})
+		}
   },
   mounted () {
-
+      this.Data()
   },
   onLoad () {
 
@@ -122,10 +112,10 @@ data () {
 	-webkit-transform-origin: left top
 }
 .content{
-	margin-top: 22rpx;
 	width: 650rpx;
 	background: rgb(230,230,230);
 	padding: 30rpx 20rpx;
+	font-size: 28rpx;
 }
 .show{
 	overflow: hidden;
@@ -135,7 +125,7 @@ data () {
 	-webkit-line-clamp:2;
 }
 .items{
-	width: 140rpx;
+	width: 90rpx;
 	height: 140rpx;
 	margin-right: 20rpx;
 }

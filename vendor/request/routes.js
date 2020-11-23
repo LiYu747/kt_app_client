@@ -21,6 +21,10 @@ module.exports = {
 		// 注册验证码
 		regsms : {
 			userRegCode : host + 'services/sms/regCode'
+		},
+		// 上传文件
+		file : {
+			upload : host + 'services/file/upload',
 		}
 	},
 	
@@ -101,8 +105,20 @@ module.exports = {
 			// 小区公告
 			Notice :    apiPath + 'village/notice',
 			// 小区展示信息
-			displayInformation : apiPath + 'village/village/info'
+			displayInformation : apiPath + 'village/village/info',
+			// 小区内的帖子
+			communityPost : apiPath + 'village/tribune',
+			//发布帖子
+			releasePost : apiPath + 'user/villageTribune',
+			// 帖子详情
+			postDetails : apiPath + 'village/tribune/show',
+			// 帖子的评论
+			postComments : apiPath + 'village/tribuneComment',
+			// 发布评论
+			relComments : apiPath + 'village/tribuneComment'
 		},
+		
+		
 	},
 	
 	// 地址
