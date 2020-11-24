@@ -49,7 +49,6 @@
             }
             
         }
-		// 预览
         ,
 		// 头像选中
 		{
@@ -191,17 +190,6 @@
             }
             
         }
-		//论坛搜索
-        ,{
-            "path" : "components/forum/forumSearch/forumSearch",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-					"navigationStyle":"custom"
-            }
-            
-        }
         ,
 		//帖子详情
 		{
@@ -211,6 +199,42 @@
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false,
 					"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		  // 证件照片
+		{
+            "path" : "components/idPhoto/idPhoto/idPhoto",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+					"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		  // 资讯详情
+		{
+            "path" : "pages/InformationDetails/InformationDetails/InformationDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		  //入住申请记录
+		{
+            "path" : "pages/residence/checkRecord/checkRecord/checkRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }

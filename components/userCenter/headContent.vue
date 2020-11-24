@@ -12,14 +12,14 @@
     	 <image src="../../image/home/jx.png" mode="" class="jximg"></image>
     </view>
 	   <!-- 头像 -->
-	   <view class="flex-d al-center">
+	   <view @click="gologin" class="flex-d al-center">
 	   	<view class="portrait flex  ju-center pos-rel">
-			<image src="../../image/user/headportrait.png" class="headimg pos-abs" mode=""></image>
+			<image  :src="user.avatar" class="headimg pos-abs" mode=""></image>
 	   	</view>
 		<view v-if="!user" class="text" @click="gologin">
 			{{text}}
 		</view>
-		<view v-else class="text" @click="gologin">
+		<view v-else class="text" >
 			{{user.nickname}}
 		</view>
 	   </view>
@@ -35,7 +35,7 @@ components: {
 props: {
 	 user:{
 		 type:Object,
-		 required:false
+		 required:true
 	 }
 },
 data () {
@@ -115,8 +115,8 @@ data () {
 		top: -82rpx;
 	}
 	.headimg{
-		width: 120rpx;
-		height: 120rpx;
+		width: 148rpx;
+		height: 148rpx;
 		border-radius: 50%;
 		bottom: 0;
 	}

@@ -158,7 +158,7 @@
 			// 去注册
 			register() {
 				uni.navigateTo({
-					url: '/pages/auth/register/register'
+					url: '/pages/user/register/register'
 				})
 			},
 			// 登录

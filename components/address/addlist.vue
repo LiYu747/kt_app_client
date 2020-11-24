@@ -1,6 +1,6 @@
 <template>
 <view class="">
-	<view class="box pos-abs" ref='fied' >
+	<view v-if="locdata.length>0" class="box pos-abs" ref='fied' >
 		<view class="content pos-rel" v-for="(item,index) in locdata" :key='item.id' >
 			<view class="location pos-abs" @click="Select(index)">
 				<image v-if="idx===index" class="zrimg" src="../../image/address/yes.png" mode=""></image>
@@ -45,6 +45,9 @@
 			</view>
 		</view>
 	</view>
+	<view v-else class="nono flex al-center ju-center">
+		暂无地址,快去添加吧~
+	</view>
 </view>
 </template>
 
@@ -55,10 +58,13 @@
 		components: {
 
 		},
-		props: {},
+		props: {
+			locdata:{
+				type:Array
+			}
+		},
 		data() {
 			return {
-				locdata: [],
 				idx:0,
 				flag:false,
 			  message:true,
@@ -71,9 +77,9 @@
 		 },
 		 // 编辑
 		 edit(item){
-			 console.log(item);
+			 console.log(item);	 
 			 uni.navigateTo({
-			 	url:'/pages/auth/addediting/ADDediting'
+			 	url:`/pages/address/addediting/ADDediting?item=${JSON.stringify(item)}`
 			 })
 		 },
 		 // 进入论坛
@@ -108,24 +114,13 @@
 		sure(){
 			this.flag = false
 			},
-		 // 用户所有地址
-			 data(){
-				 address.alladd({
-					 data: {},
-					 success: (res => {
-						 if (res.statusCode != 200) return;
-						 
-						 if (res.data.code != 200) return;
-						 console.log(res.data.data.data);
-						 let data = res.data.data.data
-						 this.locdata = data
-					 })
-				 })
-			 }
-		
 		},
 		mounted() {
-         this.data()
+        
+		},
+		onShow() {
+		
+			 
 		},
 		onLoad() {
 
@@ -268,4 +263,9 @@
 	align-items: center;
 	justify-content: center;
 	}
+	.nono{
+		width: 100%;
+		height: 300rpx;
+	}
+	
 </style>

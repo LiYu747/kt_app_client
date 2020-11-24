@@ -3,7 +3,7 @@
 		<view class="item" v-for="item in locdata" :key="item.id">
 			<view class="name flex al-center ju-between">
 				{{item.name}}
-				<image src="../../../image/address/retrue.png" class="nameimg" mode=""></image>
+				<image @click="gotoo(item)" src="../../../image/address/retrue.png" class="nameimg" mode=""></image>
 			</view>
 			<view class="syntext">
 				<view class="">
@@ -11,19 +11,17 @@
 				</view>
 				<view class="synback flex al-center">
 					<view class="aa">
-						{{item.synopsis}}
+						{{item.brief}}
 					</view>
 				</view>
 			</view>
 			<view class="syntext">
 				<view class="">
-					交通方式
-					 
-					 
+					交通方式 
 				</view>
 				<view class="synback flex al-center">
 					<view class="aa">
-						{{item.transport}}
+						暂无
 					</view>
 				</view>
 			</view>
@@ -32,42 +30,44 @@
 </template>
 
 <script>
+	import village from '../../../vendor/village/village.js'
 	export default {
 		name: "",
 		components: {
 
 		},
-		props: {},
+		props: {
+			value:{
+				type:String
+			}
+		},
 		data() {
 			return {
-				locdata: [{
-						name: '怡心湖',
-						synopsis: '怡心湖岸项目是万科、新希望、中铁建、中天4大品牌联手打造的项目，是怡心湖区临湖的纯住宅项目四横六纵、多地铁、双机场”：“四横”是：三环路、四环路（绕城高速）',
-						transport: '“四横六纵、多地铁、双机场”：“四横”是：三环路、四环路（绕城高速）、华府大道、五环路（牧华路）... ...'
-					},
-					{
-						name: '怡心湖',
-						synopsis: '怡心湖岸项目是万科、新希望、中铁建、中天4大品牌联手打造的项目，是怡心湖区临湖的纯住宅项目',
-						transport: '“四横六纵、多地铁、双机场”：“四横”是：三环路、四环路（绕城高速）、华府大道、五环路（牧华路）... ...'
-					},
-					{
-						name: '怡心湖',
-						synopsis: '怡心湖岸项目是万科、新希望、中铁建、中天4大品牌联手打造的项目，是怡心湖区临湖的纯住宅项目',
-						transport: '“四横六纵、多地铁、双机场”：“四横”是：三环路、四环路（绕城高速）、华府大道、五环路（牧华路）... ...'
-					},
-					{
-						name: '怡心湖',
-						synopsis: '怡心湖岸项目是万科、新希望、中铁建、中天4大品牌联手打造的项目，是怡心湖区临湖的纯住宅项目',
-						transport: '“四横六纵、多地铁、双机场”：“四横”是：三环路、四环路（绕城高速）、华府大道、五环路（牧华路）... ...'
-					},
-				]
+				locdata: []
 			}
 		},
 		methods: {
-
+			  // 搜索数据
+              Data(){
+				  village.allvillage({
+					  data:{kw:this.value},
+					  success: (res => {
+						  console.log(res.data.data.data);
+						  let data = res.data.data.data
+						  this.locdata = data	
+				  })
+				  })
+			  },
+			  // 去详情页
+			  gotoo(item){
+				  console.log(item.id);
+				uni.navigateTo({
+					url:`/pages/communityForum/forum/forum?id=${item.id}`
+				})
+				  }
 		},
 		mounted() {
-
+           this.Data()
 		},
 		onLoad() {
 
@@ -120,8 +120,9 @@
 	}
 
 	.synback {
+		padding: 0 20rpx;
 		margin-top: 25rpx;
-		width: 609rpx;
+		width: 569rpx;
 		height: 98rpx;
 		background: #E6E6E6;
 		padding-right: 20rpx;

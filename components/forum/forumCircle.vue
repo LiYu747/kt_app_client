@@ -2,7 +2,7 @@
     <view class="">
     	<view  class="release">
     		<view class="">
-    			  <view class="item" @click="gotoD(item)" v-for="item in arr" :key='item.id'>
+    			  <view class="item" @click="gotoD(item)" v-for="(item,index) in arr" :key='item.id'>
     			  	  <view class="flex">
 						  <!-- 头像 -->
     			  	  	<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
@@ -25,7 +25,10 @@
     				  	</view>
     				  </view>
     			  </view>
+    		<view class="btom">
+    			
     		</view>
+			</view>
     	</view>
     </view>
 </template>
@@ -53,6 +56,8 @@ data () {
 		village.communityPost({
 			data:{villageId:this.id},
 			success: (res => {
+				if (res.statusCode != 200) return
+				if(res.data.code != 200) return
 				console.log('论坛帖子',res.data.data.data);
 				let data = res.data.data.data
 				this.arr =  data.reverse()
@@ -125,8 +130,8 @@ data () {
 	-webkit-line-clamp:2;
 }
 .items{
-	width: 90rpx;
-	height: 140rpx;
+	width: 120rpx;
+	height: 120rpx;
 	margin-right: 20rpx;
 }
 .comimg{
@@ -148,5 +153,8 @@ data () {
 }	
 .release{
 	margin-bottom: 100rpx;
+}
+.btom{
+	height: 100rpx;
 }
 </style>

@@ -43,8 +43,12 @@ module.exports = {
 		},
 		// 修改个人信息
 		userupdate: {
-			update : apiPath + 'user/user/update'
-		}
+			update : apiPath + 'user/user/update',
+			//修改证件照
+			updataphoto: apiPath + 'user/user/setFaceimg'
+		},
+		
+		
 	},
 	
 	home : {
@@ -55,17 +59,23 @@ module.exports = {
 		
 		// 社区资讯
 		infortion: {
-			infor : apiPath + 'village/news'
+			infor : apiPath + 'village/news',
+			// 资讯详情
+			infordils : apiPath + 'village/news/show'
 		},
 		
 		// 周边
 		news : { 
-			peripheralNews : apiPath  + 'article/news'
+			peripheralNews : apiPath  + 'article/news',
+			// 周边详情
+			surroundingDetails : apiPath + 'article/news/show'
 		},
 		
 		// 申请入住
 		applecheckin : {
-			apple : apiPath + 'user/moveInApply'
+			apple : apiPath + 'user/moveInApply',
+			// 申请记录
+			applerecord : apiPath + 'user/moveInApply'
 		},
 		
 		//拜访申请Visit record
@@ -98,8 +108,8 @@ module.exports = {
 	
 	// 小区
 	village : {
-		// 小区列表
 		vagelist : {
+			// 小区列表
 			list : apiPath + 'village/village',
 			selectLists : apiPath + 'village/village/selectLists',
 			// 小区公告
@@ -115,7 +125,11 @@ module.exports = {
 			// 帖子的评论
 			postComments : apiPath + 'village/tribuneComment',
 			// 发布评论
-			relComments : apiPath + 'village/tribuneComment'
+			relComments : apiPath + 'village/tribuneComment',
+			//自己发布的帖子
+			 SelfComments : apiPath + 'user/villageTribune',
+			 // 自己发布的帖子评论
+			 SelfPost : apiPath + 'user/villageTribuneComments'
 		},
 		
 		

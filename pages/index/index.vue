@@ -3,7 +3,7 @@
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="../../image/home/ss.png" mode=""></image>
-				<input class="input" type="text" value="" @confirm ='enter' placeholder="请输入小区名称关键词" />
+				<input class="input" type="text" v-model="value" @confirm ='enter' @input="change" placeholder="请输入小区名称关键词" />
 				<view @click="remove" v-if="flag === false" class=" pos-abs rig">
 					取消
 				</view>
@@ -46,7 +46,7 @@
 		</view>
 		<!-- 搜索页 -->
 		<view v-else-if="flag === false" class="">
-		     <search></search>
+		     <search :value='value'></search>
 		</view>
 		<!-- <image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
@@ -98,6 +98,7 @@
 					},
 				],
 				list: [],
+				value:''
 			}
 		},
 		onLoad(val) {
@@ -106,12 +107,20 @@
 		methods: {
 			// 回车搜索
 			enter(){
-				console.log(111);
-				this.flag = false
+				if(this.value!=''){
+					this.flag = false		
+					}
+			},
+			change(val){
+			  let msg = val.detail.value
+				if(msg==''){
+					this.flag = true
+				}
 			},
 			// 取消
 			remove(){
 				this.flag = true
+				this.value = ''
 			},
 			// 跳转
 			checkin(item){
@@ -120,35 +129,27 @@
 					url:item.url
 				})
 			},
-			add() {
-				uni.request({
-					url: '/host/api/ad/adPos/show',
-					method: 'GET',
-					data: {},
-					success: res => {
-						console.log(res);
+			 // 轮播图
+			Chart() {
+				home.chart({
+					data:{code:'home_index_banner'},
+					success:(res) => {
+						if (res.statusCode != 200) return
+						if(res.data.code != 200) return
+						this.list = res.data.data.ads
 					},
-					fail: () => {
-
-					},
-					complete: () => {
-
+					fail: (err) => {
+						console.log(err);
 					}
-				})
+				})	  
 			}
 		},
     mounted() {
-           // 轮播图
-		home.chart({
-			data:{code:'home_index_banner'},
-			success:(res) => {
-				this.list = res.data.data.ads
-			},
-			fail: (err) => {
-				console.log(err);
-			}
-		})	   
-    }
+         this.Chart()
+    },
+	onShow(){
+		 this.flag = true
+		}
 	}
 </script>
 

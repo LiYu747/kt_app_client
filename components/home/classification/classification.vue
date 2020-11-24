@@ -70,7 +70,7 @@ data () {
 	  goclass(item){
 		  console.log(item.titel);
 		  uni.navigateTo({
-		  	url:`/pages/auth/uncultivated/uncultivated?titel=${item.titel}`
+		  	url:`/pages/not/uncultivated/uncultivated?titel=${item.titel}`
 		  })
 	  }
   },

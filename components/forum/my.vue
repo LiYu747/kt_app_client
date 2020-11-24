@@ -15,150 +15,124 @@
 	<!-- 我发布的 -->
    <view v-show='idx===0' class="release">
    	<view class="">
-   		  <view class="item" v-for="item in data" :key='item.id'>
-   		  	  <view class="flex">
-   		  	  	<image src="../../image/forum/portrait.png" class="itemimg" mode=""></image>
-   		  	  	<view class="name">
-   		  	  		{{item.name}}
-					<view class="time">
-						{{item.time}}
-					</view>
-   		  	  	</view>
-   		  	  </view>
-			  <view class="titel">
-			  	{{item.titel}}
-			  </view>
-			  <view class="content">
-			  	<view class="show">
-			  		{{item.content}}
-			  	</view>
-			  </view>
-			  <!-- 照片 -->
-			  <view class="flex al-center m-t4">
-			  	<view  v-for="items in item.Photo" :key='items.id'>
-			  		 <image :src="items" class="items" mode=""></image>
-			  	</view>
-			  </view>
-			  <!-- 评论 -->
-			<view v-if="item.comment" class="">
-				<view  class="comment flex al-center m-t2 ">
-					<image class="comimg" src="../../image/forum/plun.png" mode=""></image>
-								全部评论
-				</view>
-				<view class="comtext">
-					{{item.comment}}
-				</view>
-			</view>
-   		  </view>
+   		 <view class="item" @click="gotoD(item)" v-for="(item,index) in arr" :key='item.id'>
+   		 	  	  <view class="time">
+   	                   {{item.created_at.slice(0,16)}}
+   		 		  </view>
+				  <view class="titel">
+				  	{{item.title}}
+				  </view>
+				  <view class="content">
+				  	{{item.content}}
+				  </view>
+   		 		  <!-- 图片 -->
+   		 		 <view class="flex al-center m-t4">
+   		 		  	<view  v-for="items in item.album.slice(0,3)" :key='items.id'>
+   		 		  		 <image :src="items.url" class="items" mode=""></image>
+   		 		  	</view>
+   		 		  </view>
+   		 	  </view>
+   		 <view class="btom">
+   		 	
+   		 </view>
    	</view>
    </view>
    
      <!-- 我参与的 -->
-	 <view v-show="idx===1" class="release">
-	 	<view class="">
-	 		  <view class="item" v-for="item in data1" :key='item.id'>
-	 		  	  <view class="flex">
-	 		  	  	<image src="../../image/forum/portrait.png" class="itemimg" mode=""></image>
-	 		  	  	<view class="name">
-	 		  	  		{{item.name}}
-	 					<view class="time">
-	 						{{item.time}}
-	 					</view>
-	 		  	  	</view>
-	 		  	  </view>
-	 			  <view class="titel">
-	 			  	{{item.titel}}
-	 			  </view>
-	 			  <view class="content">
-	 			  	<view class="show">
-	 			  		{{item.content}}
-	 			  	</view>
-	 			  </view>
-	 			  <!-- 照片 -->
-	 			  <view class="flex al-center m-t4">
-	 			  	<view  v-for="items in item.Photo" :key='items.id'>
-	 			  		 <image :src="items" class="items" mode=""></image>
-	 			  	</view>
-	 			  </view>
-	 			  <!-- 评论 -->
-	 			<view v-if="item.comment" class="">
-	 				<view  class="comment flex al-center m-t2 ">
-	 					<image class="comimg" src="../../image/forum/plun.png" mode=""></image>
-	 								全部评论
-	 				</view>
-	 				<view class="comtext">
-	 					{{item.comment}}
-	 				</view>
-	 			</view>
-	 		  </view>
+	<view v-show="idx===1" class="release">
+	 	<view class="itemtext" v-for="item in data1" :key='item.id'>
+	 		 <view class="flex color ju-between">
+	 		 	<view class="">
+	 		 		{{name}}:
+	 		 	</view>
+				<view class="name ">
+					{{item.content}}
+				</view>
+	 		 </view>
+			 
+			 <view class=" flex m-t1 ju-between">
+			 	<view class="">
+			 		回复的主题：
+			 	</view>
+				<view class="conten">
+					{{item.own_village_tribune.title}}
+				</view>
+			 </view>
 	 	</view>
+		<view class="btom">
+			
+		</view>
 	 </view>
  </view>
 </template>
 
 <script>
+	import village from '../../vendor/village/village.js'
 export default {
 name: "",
 components: {
 
 },
-props: {},
+props: {
+	id:{
+		type: String
+	}
+},
 data () {
   return {
 	  til:['我发布的','我参与的'],
 	  idx:0,
-	  data:[
-	  		  {
-	  			 portrait:require('@/image/forum/portrait.png'),
-	  			 name:'李海峰',
-	  			 time:'2020年10月29日  16:21',
-	  			 titel:'小区绿化好',
-	  			 content:'小区绿化带里有一小丛一小丛紫色的小花儿萨达撒旦卡死很多空间和打卡时间和端口阿达是可见的哈克摇小丛紫色的小花儿摆着轻柔的腰肢，头上金黄金黄的花心一摇一摆',
-	  			 Photo:[require('@/image/forum/zu13.jpg'),require('@/image/forum/zu14.jpg')],
-	  
-	  		  },
-	  		  {
-	  		  			 portrait:require('@/image/forum/portrait.png'),
-	  		  			 name:'李海峰',
-	  		  			 time:'2020年10月29日  16:21',
-	  		  			 titel:'小区绿化好',
-	  		  			 content:'小区绿化带里有一小丛一小丛紫色的小花儿萨达撒旦卡死很多空间和打卡时间和端口阿达是可见的哈克摇小丛紫色的小花儿摆着轻柔的腰肢，头上金黄金黄的花心一摇一摆',
-	  		  			 Photo:[require('@/image/forum/zu13.jpg'),require('@/image/forum/zu14.jpg')],
-	  		  			 comment:'李海峰: 绿化好绿化好绿化好绿化好绿化好'
-	  		  
-	  		  },	  
-	  ],
-	  data1:[
-		  {
-			 portrait:require('@/image/forum/portrait.png'),
-			 name:'jscfmm',
-			 time:'2020年10月29日  16:21',
-			 titel:'小区绿化好',
-			 content:'小区绿化带里有一小丛一小丛紫色的小花儿萨达撒旦卡死很多空间和打卡时间和端口阿达是可见的哈克摇小丛紫色的小花儿摆着轻柔的腰肢，头上金黄金黄的花心一摇一摆',
-			 Photo:[require('@/image/forum/zu13.jpg'),require('@/image/forum/zu14.jpg')],
-
-		  },
-		  {
-		  			 portrait:require('@/image/forum/portrait.png'),
-		  			 name:'你先吃克嘛',
-		  			 time:'2020年10月29日  16:21',
-		  			 titel:'小区绿化好',
-		  			 content:'小区绿化带里有一小丛一小丛紫色的小花儿萨达撒旦卡死很多空间和打卡时间和端口阿达是可见的哈克摇小丛紫色的小花儿摆着轻柔的腰肢，头上金黄金黄的花心一摇一摆',
-		  			 Photo:[require('@/image/forum/zu13.jpg'),require('@/image/forum/zu14.jpg')],
-		  			 comment:'李海峰: 绿化好绿化好绿化好绿化好绿化好'
-		  
-		  },	  
-	  ]
+	  arr:[],
+	  data1:[],
+	  name:''
     }
   },
   methods: {
   add(index){
 	 this.idx = index 
+  },
+  // 自己发布的帖子
+  Data(){
+  		village.SelfComments({
+  			data:{villageId:this.id},
+  			success: (res => {
+  				if (res.statusCode != 200) return
+  				if(res.data.code != 200) return
+  				console.log('我发布帖子',res.data.data.data);
+  				let data = res.data.data.data
+  				this.arr =  data
+  			})
+  		})
+  	},
+	// 自己评论的帖子
+	SelfPost(){
+		village.SelfPost({
+			data:{},
+			success: (res => {
+				console.log('评论', res.data.data.data);
+				let data = res.data.data.data
+				this.data1 = data
+			})
+		})
+	},
+  // 去详情
+  gotoD(item){
+  	console.log(item.id);
+  	uni.navigateTo({
+  		url:`/components/forum/forumdils?id=${item.id}`
+  	})
+  	},
+  
+  user(){
+	  let user = uni.getStorageSync('user')
+	  this.name = user.username
   }
   },
   mounted () {
-
-  },
+      this.Data()
+	  this.SelfPost()
+	  this.user()
+	  },
   onLoad () {
 
   },
@@ -211,23 +185,7 @@ data () {
 	border-bottom: 1rpx solid #BFBFBF;
 	color: #666666;
 	} 
-.name{
-	font-size: 26rpx;
-	color: #F07535;
-}
-.time{
-	color: #B3B3B3;
-	font-size: 24rpx;
-	margin-top: 10rpx;
-	-webkit-transform: scale(0.8);
-	-webkit-transform-origin: left top
-}
-.content{
-	margin-top: 22rpx;
-	width: 650rpx;
-	background: rgb(230,230,230);
-	padding: 30rpx 20rpx;
-}
+
 .show{
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -257,7 +215,38 @@ data () {
 	background:  rgb(230,230,230);
 	padding: 14rpx 24rpx;
 }	
-.release{
-	margin-bottom: 100rpx;
+
+.time{
+	font-weight: 800;
+	font-size: 36rpx;
+}
+.titel{
+	margin-left: 20rpx;
+	margin-top: 20rpx;
+}
+.content{
+	font-size: 26rpx;
+	margin-left: 30rpx;
+	margin-top: 10rpx;
+	background: rgba(204,204,204,0.5);
+	padding: 10rpx;
+	width: 89%;
+}
+.btom{
+	height: 100rpx;
+}
+.itemtext{
+	font-size: 24rpx;
+	padding: 44rpx;
+	border-bottom: 1rpx solid rgba(83,83,83,0.3);
+}
+.name{
+	width: 580rpx;
+}
+.color{
+	color: #2D64B3;
+}
+.conten{
+	width: 510rpx;
 }
 </style>

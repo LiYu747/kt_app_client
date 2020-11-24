@@ -20,46 +20,46 @@
 			<view class="tex1">
 				标题 ：
 			</view>
-		     <input class="ipt" v-model="title" type="text" value="" />
+			<input class="ipt" v-model="title" type="text" value="" />
 		</view>
-		
-		 <!-- 内容 -->
-		 <view class="content flex">
-		 	<view class="tex1">
-		 		内容 :
-		 	</view>
+
+		<!-- 内容 -->
+		<view class="content flex">
+			<view class="tex1">
+				内容 :
+			</view>
 			<textarea class="are" v-model="content" maxlength='1000'></textarea>
-		 </view>
-		 
-		 <!-- 提交 -->
-		 <view @click="Submit" class="matop flex al-center ju-center">
-		 	<image class="Submit" src="../../image/login/ccuc.png" mode=""></image>
+		</view>
+
+		<!-- 提交 -->
+		<view @click="Submit" class="matop flex al-center ju-center">
+			<image class="Submit" src="../../image/login/ccuc.png" mode=""></image>
 			<view class="bai pos-abs">
 				确认提交
 			</view>
-		 </view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import village from '../../vendor/village/village.js';
 	import route from '../../vendor/request/routes.js';
-	
+
 	export default {
 		name: "",
 		components: {
 
 		},
 		props: {
-			id:{
-				type:String
+			id: {
+				type: String
 			}
 		},
 		data() {
 			return {
 				image: [],
-				title:''  ,// 标题
-				content: '' , //内容
+				title: '', // 标题
+				content: '', //内容
 			}
 		},
 		methods: {
@@ -68,16 +68,16 @@
 					success: (chooseImageRes) => {
 						let tempFilePaths = chooseImageRes.tempFilePaths;
 						// console.log(tempFilePaths);
-						if( tempFilePaths.length > 0 ){
-							tempFilePaths.forEach((item)=>{
+						if (tempFilePaths.length > 0) {
+							tempFilePaths.forEach((item) => {
 								uni.uploadFile({
-								    url: route.services.file.upload, //仅为示例，非真实的接口地址
-								    filePath: item,
-								    name: 'file',
-								    success: (val) => {
-								      this.image.push(JSON.parse(val.data).data.url)   
-									  console.log(JSON.parse(val.data).data.url);
-								    }
+									url: route.services.file.upload, //仅为示例，非真实的接口地址
+									filePath: item,
+									name: 'file',
+									success: (val) => {
+										this.image.push(JSON.parse(val.data).data.url)
+										console.log(JSON.parse(val.data).data.url);
+									}
 								});
 							})
 						}
@@ -88,32 +88,32 @@
 				console.log(e)
 				this.old.scrollTop = e.detail.scrollTop
 			},
-			
+
 			// 发布
-			Submit(){
+			Submit() {
 				village.releasePost({
-					data:{village_id:this.id,
-					       title:this.title,
-						   content: this.content,
-						   albums:this.image
+					data: {
+						village_id: this.id,
+						title: this.title,
+						content: this.content,
+						albums: this.image
 					},
 					success: (res => {
-						if(res.statusCode != 200) return
-						if(res.data.code==200){
+						if (res.statusCode != 200) return
+						if (res.data.code == 200) {
 							this.$emit('Submit')
 							uni.showToast({
-								title:res.data.msg,
-								duration:2000,
+								title: res.data.msg,
+								duration: 2000,
 							})
-						}
-						else{
+						} else {
 							uni.showToast({
-								title:res.data.msg,
-								duration:2000,
-								icon:'none'
+								title: res.data.msg,
+								duration: 2000,
+								icon: 'none'
 							})
 						}
-						console.log('发布帖子',res);
+						console.log('发布帖子', res);
 					})
 				})
 			}
@@ -140,9 +140,10 @@
 </script>
 
 <style scoped lang="scss">
-	.color{
+	.color {
 		color: #666666;
-		}
+	}
+
 	.img {
 		width: 100%;
 		height: 156rpx;
@@ -190,13 +191,14 @@
 		background: #F07535;
 		color: #FFFFFF;
 	}
+
 	.btnimg {
 		width: 29rpx;
 		height: 29rpx;
 		margin-right: 20rpx;
 	}
-	
-	.titel{
+
+	.titel {
 		margin-top: -100rpx;
 		width: 649rpx;
 		height: 80rpx;
@@ -205,39 +207,44 @@
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
 		padding: 0 20rpx;
 		color: #666666;
-		}
-.tex1{
-	font-size: 28rpx;
-}		
-.ipt{
-	font-size: 24rpx;
-	width: 550rpx;
-}
-.content{
-	margin-top: 30rpx;
-width: 649rpx;
-	height: 250rpx;
-	padding: 20rpx;
-	background: #FFFFFF;
+	}
+
+	.tex1 {
+		font-size: 28rpx;
+	}
+
+	.ipt {
+		font-size: 24rpx;
+		width: 550rpx;
+	}
+
+	.content {
+		margin-top: 30rpx;
+		width: 649rpx;
+		height: 250rpx;
+		padding: 20rpx;
+		background: #FFFFFF;
 		border-radius: 10rpx;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
-}
-		
-.are{
-	margin-top: 4rpx;
-	margin-left: 10rpx;
-	height: 240rpx;
-	width: 550rpx;
-	font-size: 24rpx;
-       align-content: center;
-}
-.matop{
-	margin-top: 100rpx;
-	font-size: 30rpx;
-}
-.Submit{
-	width: 400rpx;
-	height: 70rpx;
-	
-}
+	}
+
+	.are {
+		margin-top: 4rpx;
+		margin-left: 10rpx;
+		height: 240rpx;
+		width: 550rpx;
+		font-size: 24rpx;
+		align-content: center;
+	}
+
+	.matop {
+		margin-top: 100rpx;
+		font-size: 30rpx;
+	}
+
+	.Submit {
+		width: 400rpx;
+		height: 70rpx;
+
+	}
 </style>

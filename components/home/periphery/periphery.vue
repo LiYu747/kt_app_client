@@ -10,7 +10,7 @@
 			
 			<!-- 资讯 -->
 			<view class="conten flex ju-between flex-w">
-			   	 <view class="item flex pos-rel" v-for="(item,index) in locdata" :key='index'>
+			   	 <view class="item flex pos-rel" @click="godils(item)" v-for="(item,index) in locdata" :key='index'>
 			   	 	   <image :src="item.faceimg" mode="" class="itemimg"></image>
 					   <view class="font fz-12">
 					   	{{item.title}}
@@ -26,6 +26,7 @@
 
 <script>
 	import home from '../../../vendor/home/home.js'
+	
 export default {
 name: "",
 components: {
@@ -38,23 +39,39 @@ data () {
     }
   },
   methods: {
-   
+   // 去详情页面
+   godils(item){
+	   // console.log(item.id);
+	   	 home.surroundingDetails({
+	   		 data:{id:item.id},
+	   		 success: (res => {
+	   			 console.log(res.data.data);
+	   		  let content = res.data.data
+			  uni.navigateTo({
+			  	url:`/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=0`
+			  })
+	   		 })
+	   	 })
+   },
+   Data(){
+	 home.news({
+	 		 data:{
+	 				 page:1,
+	 				 pageSize:15
+	 			 },
+	 		 success: (res) => {
+	 			 console.log(res.data.data.data);
+	 				 
+	 				 this.locdata = res.data.data.data
+	 		 },
+	 		 fail: (err) => {
+	 			 console.log(err);
+	 		 }
+	 })  
+   }
   },
   mounted () {
-     home.news({
-     		 data:{
-				 page:1,
-				 pageSize:15
-			 },
-     		 success: (res) => {
-     			 console.log(res.data.data.data);
-				 
-				 this.locdata = res.data.data.data
-     		 },
-     		 fail: (err) => {
-     			 console.log(err);
-     		 }
-     })
+    this.Data()
   },
   onLoad () {
 

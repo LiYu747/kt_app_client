@@ -57,7 +57,6 @@
 				],
 			   Notice:[],	// 公告数据
 				idx: 0,
-				value: '怡心湖岸项目是万科、新希望、中铁建、中天4大品牌联手打造的项目，是怡心湖区临湖的纯住宅项目， 将打造低密度、百亩湖居大盘。项目在景观打造方面以“云中山水，都市桃源”为主题打造出业主归家的“度假之旅”。在景观上借鉴了上海星河湾的立体式园林景观设计，以及美国纽约泪珠公园的地形处理，打造约3600㎡下沉立体式园林景观，形成“一环三轴六组团的多层次自然山水景观'
 			}
 		},
 		methods: {
@@ -73,6 +72,8 @@
 				village.Notice({
 					data:{village_id:this.id},
 					success: (res => {
+						if (res.statusCode != 200) return
+						if(res.data.code != 200) return
 						console.log(res.data.data.data);
 						let data = res.data.data.data
 						this.Notice = data
@@ -84,6 +85,8 @@
 				village.displayInformation({
 					data:{id:this.id},
 					success: (res => {
+						if (res.statusCode != 200) return
+						if(res.data.code != 200) return
 						console.log('小区公告',res.data.data);
 						let data = res.data.data
 						 data.album.map( item => {
@@ -178,7 +181,7 @@
 		background: #FFFFFF;
 		border-radius: 20rpx;
 		margin-bottom: 140rpx;
-		padding: 0 38rpx;
+		padding: 20rpx 38rpx;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
 		font-size: 24rpx;
 		color: #666666;
