@@ -58,7 +58,7 @@ data () {
 			success: (res => {
 				if (res.statusCode != 200) return
 				if(res.data.code != 200) return
-				console.log('论坛帖子',res.data.data.data);
+				// console.log('论坛帖子',res.data.data.data);
 				let data = res.data.data.data
 				this.arr =  data.reverse()
 			})
@@ -66,7 +66,7 @@ data () {
 	},
 	// 去详情
 	gotoD(item){
-		console.log(item.id);
+		// console.log(item.id);
 		uni.navigateTo({
 			url:`/components/forum/forumdils?id=${item.id}`
 		})

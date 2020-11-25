@@ -5,7 +5,7 @@
 				<image class="img pos-abs" src="../../image/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" @confirm ='enter' @input="change" placeholder="请输入小区名称关键词" />
 				<view @click="remove" v-if="flag === false" class=" pos-abs rig">
-					取消
+					取消 
 				</view>
 			</view>
 		</view>
@@ -18,15 +18,6 @@
 			<view class=" pos-abs pos">
 				<u-swiper :list="list" bg-color='rgba(255, 255, 255, 0)' height="304" effect3d-previous-margin='60' indicator-pos='none'
 				 :effect3d="true"></u-swiper>
-			</view>
-			<!-- 公告 -->
-			<view class="Notice flex al-center">
-				<view class="m-l2 m-r1">
-					<image class="imgnb" src="../../image/home/laba.png" mode=""></image>
-				</view>
-				<view class="fz-12 text">
-					成都当前新房三居室TOP10出炉，第一名是这个楼盘！
-				</view>
 			</view>
 			<!-- 操作 -->
 			<view class="flex operation ju-between">
@@ -41,6 +32,8 @@
 			  <classification></classification>
 			 <!-- 资讯 -->
 			 <information></information>
+			  <!-- 社区新闻 -->
+			  <CommunityNews v-if='user'></CommunityNews>
 			 <!-- 周边 -->
 			 <periphery></periphery>
 		</view>
@@ -66,12 +59,14 @@
 	  import information from '../../components/home/information/information.vue';
 	   import periphery from '../../components/home/periphery/periphery.vue';
 	    import search from '../../components/home/search/search.vue';
+		import CommunityNews from '../../components/home/CommunityNews/CommunityNews.vue'
 	export default {
 		components:{
 			classification,
 			information,
 			periphery,
-			search
+			search,
+			CommunityNews
 		},
 		data() {
 			return {
@@ -98,11 +93,12 @@
 					},
 				],
 				list: [],
-				value:''
+				value:'',
+				user:{}
 			}
 		},
 		onLoad(val) {
-     console.log(val);
+     // console.log(val);
 		},
 		methods: {
 			// 回车搜索
@@ -121,10 +117,11 @@
 			remove(){
 				this.flag = true
 				this.value = ''
+				
 			},
 			// 跳转
 			checkin(item){
-				console.log(item.url);
+				// console.log(item.url);
 				uni.navigateTo({
 					url:item.url
 				})
@@ -139,7 +136,7 @@
 						this.list = res.data.data.ads
 					},
 					fail: (err) => {
-						console.log(err);
+						// console.log(err);
 					}
 				})	  
 			}
@@ -149,6 +146,8 @@
     },
 	onShow(){
 		 this.flag = true
+		 this.user = uni.getStorageSync('user')
+         this.value = ''
 		}
 	}
 </script>
@@ -244,21 +243,7 @@
 		top: 150rpx;
 	}
 
-	.Notice {
-		width: 690rpx;
-		height: 66rpx;
-		background: #FFFFFF;
-		margin-top: 182rpx;
-	}
-
-	.imgnb {
-		width: 23rpx;
-		height: 20rpx;
-	}
-
-	.text {
-		color: #FFAD4C;
-	}
+	
 
 	.itemimg {
 		width: 100rpx;
@@ -266,7 +251,7 @@
 	}
 
 	.operation {
-		margin-top: 46rpx;
+		margin-top: 226rpx;
 		width: 650rpx;
 		height: 130rpx;
 		background: #FFFFFF;

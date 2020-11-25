@@ -76,7 +76,7 @@
 									name: 'file',
 									success: (val) => {
 										this.image.push(JSON.parse(val.data).data.url)
-										console.log(JSON.parse(val.data).data.url);
+										// console.log(JSON.parse(val.data).data.url);
 									}
 								});
 							})
@@ -85,7 +85,7 @@
 				});
 			},
 			scroll: function(e) {
-				console.log(e)
+				// console.log(e)
 				this.old.scrollTop = e.detail.scrollTop
 			},
 
@@ -113,7 +113,7 @@
 								icon: 'none'
 							})
 						}
-						console.log('发布帖子', res);
+						// console.log('发布帖子', res);
 					})
 				})
 			}

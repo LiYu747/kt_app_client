@@ -68,7 +68,7 @@ data () {
   methods: {
       // 去详情
 	  goclass(item){
-		  console.log(item.titel);
+		  // console.log(item.titel);
 		  uni.navigateTo({
 		  	url:`/pages/not/uncultivated/uncultivated?titel=${item.titel}`
 		  })
@@ -97,10 +97,10 @@ data () {
 
 <style scoped lang="scss">
 .box{
-	margin-top: 0rpx;
+	margin-top: 20rpx;
 	width: 700rpx;
 	height: 253rpx;
-	padding: 20rpx;
+	padding:  20rpx;
 	padding-left: 25rpx;
 	padding-right: 25rpx;
 }

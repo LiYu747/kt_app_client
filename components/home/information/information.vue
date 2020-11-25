@@ -40,7 +40,9 @@
 				home.infordils({
 					   		 data:{id:this.loctext.id},
 					   		 success: (res => {
-					   			 console.log(res.data.data);
+					   			 // console.log(res.data.data);
+								 if (res.statusCode != 200) return
+								 if (res.data.code != 200) return
 					   		  let content = res.data.data
 							  uni.navigateTo({
 							  	url:`/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
@@ -57,11 +59,11 @@
 					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						console.log(res.data.data.data);
+						// console.log(res.data.data.data);
 						this.loctext = res.data.data.data[0]
 					},
 					fail: (err) => {
-						console.log(err);
+						// console.log(err);
 					}
 				})
 			}
@@ -89,7 +91,7 @@
 
 <style scoped lang="scss">
 	.box {
-		margin-top: 0;
+		margin-top: 20rpx;
 		width: 690rpx;
 		height: auto;
 	}

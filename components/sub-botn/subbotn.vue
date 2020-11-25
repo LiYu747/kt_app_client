@@ -84,7 +84,7 @@ data () {
 <style scoped lang="scss">
 .booy{
 	width: 100%;
-	height: 98rpx;
+	height: 110rpx;
 	position: fixed;
 	background: #FFFFFF;
 	bottom: 0;

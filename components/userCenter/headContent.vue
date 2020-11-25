@@ -14,13 +14,14 @@
 	   <!-- 头像 -->
 	   <view @click="gologin" class="flex-d al-center">
 	   	<view class="portrait flex  ju-center pos-rel">
-			<image  :src="user.avatar" class="headimg pos-abs" mode=""></image>
+			<image v-if="user.nickname"  :src="user.avatar" mode="scaleToFill"  class="headimg pos-abs" ></image>
+			<image v-else src="../../image/user/headportrait.png" class="headimg pos-abs"  mode=""></image>
 	   	</view>
-		<view v-if="!user" class="text" @click="gologin">
-			{{text}}
+		<view v-if="user.nickname" class="text" @click="gologin">
+		{{user.nickname}}
 		</view>
 		<view v-else class="text" >
-			{{user.nickname}}
+			{{text}}
 		</view>
 	   </view>
     </view>
@@ -46,7 +47,6 @@ data () {
   methods: {
 	  // 去登陆
     gologin(){
-		console.log(11);
 		uni.navigateTo({
 			url:'/pages/auth/login/login'
 		})
@@ -56,7 +56,7 @@ data () {
 		uni.navigateTo({
 			url:`/pages/user/personal/personal`
 		})
-		}
+		},
   },
   onLoad() {
   

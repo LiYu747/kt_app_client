@@ -52,7 +52,7 @@
 				  village.allvillage({
 					  data:{kw:this.value},
 					  success: (res => {
-						  console.log(res.data.data.data);
+						  // console.log(res.data.data.data);
 						  let data = res.data.data.data
 						  this.locdata = data	
 				  })
@@ -60,7 +60,7 @@
 			  },
 			  // 去详情页
 			  gotoo(item){
-				  console.log(item.id);
+				  // console.log(item.id);
 				uni.navigateTo({
 					url:`/pages/communityForum/forum/forum?id=${item.id}`
 				})

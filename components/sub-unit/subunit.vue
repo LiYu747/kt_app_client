@@ -47,6 +47,9 @@ data () {
   mounted () {
 
   },
+  onShow() {
+  	
+  },
   onLoad () {
 
   },

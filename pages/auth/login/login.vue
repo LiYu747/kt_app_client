@@ -48,7 +48,7 @@
 
 			<!-- 找回密码 -->
 			<view class="flex al-center retrieve">
-				<view class="">
+				<view @click="find" class="">
 					找回密码
 				</view>
 				<view class="line">
@@ -115,11 +115,12 @@
 							tel: this.form.phone,
 						},
 						success: (res) => {
-							console.log(res);
+							// console.log(res);
 							// 发送成功
 							if (res.data.code === 200) {
-								this.$refs.uToast.show({
-									title: res.data.msg,
+								uni.showToast({
+									title:res.data.msg,
+									duration:2000
 								})
 								this.form.Verification = res.data.data.code
 								const authtime = setInterval(() => {
@@ -141,7 +142,7 @@
 							}
 						},
 						fail: (err) => {
-							console.log(err);
+							// console.log(err);
 							this.isGetingSmsCode = false;
 						},
 
@@ -161,6 +162,14 @@
 					url: '/pages/user/register/register'
 				})
 			},
+			// 找回密码
+			find(){
+			uni.showToast({
+				title:'功能还未开发',
+				duration:2000,
+				icon:"none"
+			})	
+				},
 			// 登录
 			Login() {
 				userinfo.Signin({
@@ -169,7 +178,7 @@
 						smsCode: this.form.Verification
 					},
 					success: (res) => {
-						console.log(res);
+						// console.log(res);
 						
 						if( res.statusCode != 200 ){
 							
@@ -190,7 +199,7 @@
 						
 						if( !info ) return;
 						
-						console.log('login data',info);
+						// console.log('login data',info);
 						
 						jwt.setToken(res.data.data.jwt_token,info.exp*1000 - 10000,()=>{
 							jwt.execTask();
@@ -208,7 +217,7 @@
 						
 					},
 					fail: (err) => {
-						console.log(err);
+						// console.log(err);
 					},
 				})
 			}

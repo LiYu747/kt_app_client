@@ -1,6 +1,6 @@
 <template>
  <view class="">
- 	<view class="nav flex al-center">
+ 	<view  class="nav flex al-center posd">
  		<view class="left flex al-center ju-center" 
 		v-for="(item,index) in til" 
 		@click="add(index)"
@@ -11,7 +11,9 @@
                   </view>		          
  		</view>
  	</view>
-	
+	<view class="line">
+		
+	</view>
 	<!-- 我发布的 -->
    <view v-show='idx===0' class="release">
    	<view class="">
@@ -40,7 +42,7 @@
    
      <!-- 我参与的 -->
 	<view v-show="idx===1" class="release">
-	 	<view class="itemtext" v-for="item in data1" :key='item.id'>
+	 	<view class="itemtext" @click="reply(item)" v-for="item in data1" :key='item.id'>
 	 		 <view class="flex color ju-between">
 	 		 	<view class="">
 	 		 		{{name}}:
@@ -98,7 +100,7 @@ data () {
   			success: (res => {
   				if (res.statusCode != 200) return
   				if(res.data.code != 200) return
-  				console.log('我发布帖子',res.data.data.data);
+  				// console.log('我发布帖子',res.data.data.data);
   				let data = res.data.data.data
   				this.arr =  data
   			})
@@ -109,7 +111,7 @@ data () {
 		village.SelfPost({
 			data:{},
 			success: (res => {
-				console.log('评论', res.data.data.data);
+				// console.log('评论', res.data.data.data);
 				let data = res.data.data.data
 				this.data1 = data
 			})
@@ -117,12 +119,18 @@ data () {
 	},
   // 去详情
   gotoD(item){
-  	console.log(item.id);
+  	// console.log(item.id);
   	uni.navigateTo({
   		url:`/components/forum/forumdils?id=${item.id}`
   	})
   	},
-  
+   // 跳转回复的页面
+  reply(item){
+	 // console.log(item);  
+	 uni.navigateTo({
+	 	url:`/components/forum/forumdils?id=${item.tribune_id}`
+	 })
+  },
   user(){
 	  let user = uni.getStorageSync('user')
 	  this.name = user.username
@@ -248,5 +256,12 @@ data () {
 }
 .conten{
 	width: 510rpx;
+}
+.posd{
+	position: fixed;
+	z-index: 99;
+}
+.line{
+	height: 74rpx;
 }
 </style>

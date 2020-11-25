@@ -21,11 +21,11 @@ data () {
 	  locdata:[
 		  {image:require('@/image/user/Checkin.png'),
 		  titel:'入驻申请',
-		  url:'/pages/residence/checkIn/checkIn'
+		  url:'/pages/residence/checkRecord/checkRecord/checkRecord'
 		  },
 		  {image:require('@/image/user/visit.png'),
 		   titel:'拜访申请',
-		   url:'/pages/visitapplication/visit/visit'
+		   url:'/pages/visitapplication/goRecord/goRecord'
 		  },
 		  {image:require('@/image/user/record.png'),
 		   titel:'来访记录',
@@ -36,7 +36,8 @@ data () {
 		   	url:'/pages/qrcode/qrCode/qrCode'
 		  },
 		  {image:require('@/image/user/Trecords.png'),
-		   titel:'出行记录'
+		   titel:'出行记录',
+		   url:'/pages/user/travelRecords/travelRecords'
 		  },
 		  {image:require('@/image/user/Logout.png'),
 		   titel:'退出登录'

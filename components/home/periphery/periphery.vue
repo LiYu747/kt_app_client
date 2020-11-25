@@ -45,7 +45,7 @@ data () {
 	   	 home.surroundingDetails({
 	   		 data:{id:item.id},
 	   		 success: (res => {
-	   			 console.log(res.data.data);
+	   			 // console.log(res.data.data);
 	   		  let content = res.data.data
 			  uni.navigateTo({
 			  	url:`/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=0`
@@ -60,12 +60,12 @@ data () {
 	 				 pageSize:15
 	 			 },
 	 		 success: (res) => {
-	 			 console.log(res.data.data.data);
+	 			 // console.log(res.data.data.data);
 	 				 
 	 				 this.locdata = res.data.data.data
 	 		 },
 	 		 fail: (err) => {
-	 			 console.log(err);
+	 			 // console.log(err);
 	 		 }
 	 })  
    }
@@ -94,7 +94,7 @@ data () {
 <style scoped lang="scss">
 	.box{
 		
-		margin-top: 30rpx;
+		margin-top: 40rpx;
 		width: 690rpx;
 	}
 .img{

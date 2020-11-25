@@ -61,7 +61,11 @@ module.exports = {
 		infortion: {
 			infor : apiPath + 'village/news',
 			// 资讯详情
-			infordils : apiPath + 'village/news/show'
+			infordils : apiPath + 'village/news/show',
+			// 小区新闻
+			CommunityNews : apiPath + 'community/news',
+			// 小区新闻详情
+			NewsDils : apiPath + 'community/news/show'
 		},
 		
 		// 周边
@@ -75,7 +79,9 @@ module.exports = {
 		applecheckin : {
 			apple : apiPath + 'user/moveInApply',
 			// 申请记录
-			applerecord : apiPath + 'user/moveInApply'
+			applerecord : apiPath + 'user/moveInApply',
+			// 记录详情
+			recordDils : apiPath + 'user/moveInApply/show'
 		},
 		
 		//拜访申请Visit record
@@ -84,7 +90,10 @@ module.exports = {
 			apply : apiPath + 'user/visitLog',
 			
 			// 拜访记录详情
-			details : apiPath + 'user/visitLog/show'
+			details : apiPath + 'user/visitLog/show',
+			
+			// 出行记录
+			travelRecords : apiPath + 'user/backHome'
 	
 		},
 		
@@ -98,6 +107,7 @@ module.exports = {
 			// 处理来访申请
 			handlevisit : apiPath + 'user/visitLog/deal'
 		},
+		
 		
 		// 二维码
 		qrcode : {

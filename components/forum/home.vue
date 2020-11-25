@@ -28,8 +28,8 @@
 						  </view>
 				</view>
 			</view>
-      
-			<view v-show="idx===0" class="foot">
+        
+			<view v-show="idx===0&&arr.desc" class="foot">
 			<u-parse :html="arr.desc"></u-parse>
 			</view>
 		</view>
@@ -74,7 +74,7 @@
 					success: (res => {
 						if (res.statusCode != 200) return
 						if(res.data.code != 200) return
-						console.log(res.data.data.data);
+						// console.log(res.data.data.data);
 						let data = res.data.data.data
 						this.Notice = data
 					})
@@ -87,7 +87,7 @@
 					success: (res => {
 						if (res.statusCode != 200) return
 						if(res.data.code != 200) return
-						console.log('小区公告',res.data.data);
+						// console.log('小区公告',res.data.data);
 						let data = res.data.data
 						 data.album.map( item => {
 							this.list.push(item.url)

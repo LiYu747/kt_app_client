@@ -25,7 +25,8 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#F07535",
-				 "navigationStyle":"custom"
+				 "navigationStyle":"custom",
+				    "enablePullDownRefresh": true
 			}
 			
 		},
@@ -230,6 +231,30 @@
 		  //入住申请记录
 		{
             "path" : "pages/residence/checkRecord/checkRecord/checkRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		//入住申请记录详情
+		{
+            "path" : "pages/residence/checkdetails/checkdetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		// 出行记录
+		{
+            "path" : "pages/user/travelRecords/travelRecords",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

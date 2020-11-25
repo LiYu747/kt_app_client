@@ -2,14 +2,14 @@
 <view class="">
 	<view v-if="locdata.length>0" class="box pos-abs" ref='fied' >
 		<view class="content pos-rel" v-for="(item,index) in locdata" :key='item.id' >
-			<view class="location pos-abs" @click="Select(index)">
+			<view class="location pos-abs" @click="Select(item,index)">
 				<image v-if="idx===index" class="zrimg" src="../../image/address/yes.png" mode=""></image>
 				<image v-else  class="zrimg" src="../../image/address/zro.png" mode=""></image>
 			</view>
 			<view class="addres">
-				<view class=" flex al-center pos-rel">
+				<view  @click="Select(item,index)" class=" flex al-center pos-rel">
 					{{item.village_name}}
-					<view class="pos-abs  right" @click="forum(item)">
+					<view class="pos-abs  right">
 						<image class="reimg"  src="../../image/address/retrue.png" mode=""></image>
 					</view>
 				</view>
@@ -72,25 +72,23 @@
 			}
 		},
 		methods: {
-         Select(index){
+			// 进入论坛
+         Select(item,index){
 			 this.idx = index
+			 uni.navigateTo({
+			 	url:`/pages/communityForum/forum/forum?id=${item.village_id}`
+			 })
 		 },
 		 // 编辑
 		 edit(item){
-			 console.log(item);	 
+			 // console.log(item);	 
 			 uni.navigateTo({
 			 	url:`/pages/address/addediting/ADDediting?item=${JSON.stringify(item)}`
 			 })
 		 },
-		 // 进入论坛
-		 forum(item){
-			 uni.navigateTo({
-			 	url:`/pages/communityForum/forum/forum?id=${item.village_id}`
-			 })
-			 },
 		// 预约电梯
 		order(item){
-	    console.log(item.id);
+	    // console.log(item.id);
 		address.bookingElevator({
 			data:{id:item.id},
 			success: (res => {
@@ -104,7 +102,7 @@
 						this.msg = res.data.msg
 						this.message = false
 					}
-		      console.log(res.data.code);
+		      // console.log(res.data.code);
 			})
 		})
 			this.flag = true
