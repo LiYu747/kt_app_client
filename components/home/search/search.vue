@@ -1,9 +1,9 @@
 <template>
 	<view class="top">
-		<view class="item" v-for="item in locdata" :key="item.id">
+		<view @click="gotoo(item)" class="item" v-for="item in locdata" :key="item.id">
 			<view class="name flex al-center ju-between">
 				{{item.name}}
-				<image @click="gotoo(item)" src="../../../image/address/retrue.png" class="nameimg" mode=""></image>
+				<image  src="../../../image/address/retrue.png" class="nameimg" mode=""></image>
 			</view>
 			<view class="syntext">
 				<view class="">

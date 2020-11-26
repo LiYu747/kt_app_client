@@ -29,7 +29,9 @@ class Clients{
 		this.createOrUpdate();
 		
 		//是否需要更新客户端
-		this.askUpdateClient();
+		// #ifdef APP-PLUS 
+		this.askUpdateClient()
+		// #endif 
 	}
 	
 	//判断当前的客户端类型
@@ -179,28 +181,65 @@ class Clients{
 	}
 	
 	askUpdateClient(){
+		
+		let _this = this;
+		
 		this.getLatestVersion({
 			success : (res)=>{
-				// console.log(res);
-				let androidVersion = res.data.data.app_android_latest_version;
-				
-				let d = str.diffVersion( this.version,androidVersion);
-				
-				// if( d == -1 ){
-				// 	uni.showModal({
-				// 		content:'有版本更新',
-				// 		confirmText:'更新',
-				// 		success(res2) {
-				// 			if( res2.confirm == true ){
-				// 				console.log('do update action');
-				// 			}
-				// 		}
-				// 	})
-				// }
+				console.log('ios',res);
+				switch(uni.getSystemInfoSync().platform ){
+					case 'android':
+						_this.updateAndr(res.data);
+						break;
+					case 'ios':
+						_this.updateIos(res.data);
+						break;
+				}
 			}
 		})
 	}
 	
+	
+	updateIos(data){
+		let androidVersion = data.data.app_android_latest_version;
+		
+		if( androidVersion ){
+			let d = str.diffVersion( this.version,androidVersion);
+			
+			if( d == -1 ){
+				uni.showModal({
+					content:'有版本更新',
+					confirmText:'更新',
+					success(res2) {
+						if( res2.confirm == true ){
+							console.log('do update action');
+						}
+					}
+				})
+			}
+		}
+	}
+	
+	updateAndr(data)
+	{
+		let androidVersion = data.data.app_android_latest_version;
+		
+		if( androidVersion ){
+			let d = str.diffVersion( this.version,androidVersion);
+			
+			if( d == -1 ){
+				uni.showModal({
+					content:'有版本更新',
+					confirmText:'更新',
+					success(res2) {
+						if( res2.confirm == true ){
+							console.log('do update action');
+						}
+					}
+				})
+			}
+		}
+	}
 }
 
 module.exports = new Clients;

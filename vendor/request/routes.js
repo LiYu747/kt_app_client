@@ -1,5 +1,6 @@
 //本地开发域名
-let host = 'http://local.kt.cn/';
+// let host = 'http://local.kt.cn/';
+let host = 'https://api.kuaitongkeji.com/';
 let apiPath = host + 'api/';
 module.exports = {
 	
@@ -124,6 +125,8 @@ module.exports = {
 			selectLists : apiPath + 'village/village/selectLists',
 			// 小区公告
 			Notice :    apiPath + 'village/notice',
+			// 公告详情
+			Noticeshow : apiPath + 'village/notice/show',
 			// 小区展示信息
 			displayInformation : apiPath + 'village/village/info',
 			// 小区内的帖子

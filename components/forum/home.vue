@@ -1,7 +1,8 @@
 <template>
 	<view class="fz-12">
 		<view class="">
-			<u-swiper :list="list" border-radius='0' height="350"></u-swiper>
+			<u-swiper v-if="list.length>0" :list="list" border-radius='0' height="350"></u-swiper>
+			<u-swiper v-if="list.length==0" :list="localist" border-radius='0' height="350"></u-swiper>
 		</view>
 		<view class="flex-d al-center">
 			<view class="nav flex-d al-center pos-rel">
@@ -19,8 +20,10 @@
 				<!-- 小区公告 -->
 				<view v-show="idx === 1" class="twbx m-t2">
                           <view v-if="Notice.length>0" class="">
-                          	<view  class="" v-for="item in Notice" :key='item.id'>
-                          		      {{item.title}}
+                          	<view   class="" v-for="(item,index) in Notice" :key='item.id'>
+                          		    <view @click="godils(item)" class="wid">
+                          		    	{{index+1}} . {{item.title}}
+                          		    </view>
                           	</view>
                           </view>
 						  <view v-else class="">
@@ -50,6 +53,7 @@
 		},
 		data() {
 			return {
+				localist:[require('@/image/forum/timg.jpg')],
 				list: [], //轮播图
 				arr:{},   //小区展示信息
 				titel: [
@@ -96,6 +100,22 @@
 						
 					})
 				})
+			},
+			// 查看详情
+			godils(item){
+				console.log(item.id);
+				village.Noticeshow({
+					data:{id:item.id},
+					success: (res => {
+						if (res.statusCode != 200) return
+						if(res.data.code != 200) return
+						let content = res.data.data
+							console.log(content);
+							uni.navigateTo({
+							 	url:`/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
+							 })
+					})
+				})
 			}
 		},
 		mounted() {
@@ -128,7 +148,6 @@
 	.nav {
 		top: -42rpx;
 		width: 690rpx;
-		height: 502rpx;
 		background: #FFFFFF;
 		border-radius: 20rpx;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
@@ -171,9 +190,9 @@
 	.content {
 		margin-top: 31rpx;
 		width: 608rpx;
-		height: 275rpx;
 		color: #666666;
 		font-size: 24rpx;
+		margin-bottom: 60rpx;
 	}
 
 	.foot {
@@ -200,9 +219,17 @@
 
 	.twbx {
 		width: 622rpx;
-		height: 135rpx;
 		background: #E6E6E6;
 		padding: 20rpx 14rpx;
 		color: #666666;
+			margin-bottom: 60rpx;
+	}
+	.wid{
+		width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
 	}
 </style>

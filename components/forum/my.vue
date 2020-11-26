@@ -18,9 +18,6 @@
    <view v-show='idx===0' class="release">
    	<view class="">
    		 <view class="item" @click="gotoD(item)" v-for="(item,index) in arr" :key='item.id'>
-   		 	  	  <view class="time">
-   	                   {{item.created_at.slice(0,16)}}
-   		 		  </view>
 				  <view class="titel">
 				  	{{item.title}}
 				  </view>
@@ -33,6 +30,9 @@
    		 		  		 <image :src="items.url" class="items" mode=""></image>
    		 		  	</view>
    		 		  </view>
+				  <view class="time">
+				       {{item.created_at.slice(0,16)}}
+				  </view>
    		 	  </view>
    		 <view class="btom">
    		 	
@@ -225,8 +225,9 @@ data () {
 }	
 
 .time{
-	font-weight: 800;
-	font-size: 36rpx;
+	display: flex;
+	justify-content: flex-end;
+	font-size: 24rpx;
 }
 .titel{
 	margin-left: 20rpx;
@@ -235,7 +236,7 @@ data () {
 .content{
 	font-size: 26rpx;
 	margin-left: 30rpx;
-	margin-top: 10rpx;
+	margin-top: 20rpx;
 	background: rgba(204,204,204,0.5);
 	padding: 10rpx;
 	width: 89%;
