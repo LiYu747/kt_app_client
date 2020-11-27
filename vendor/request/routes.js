@@ -150,13 +150,17 @@ module.exports = {
 	
 	// 地址
 	address : {
-		// 用户的所有住址
 		alladd : {
-			list : apiPath +'user/house'
+			// 用户的所有住址
+			list : apiPath +'user/house',
+			  // 某一个住址的详细信息
+			  listdetails : apiPath + 'user/house/show'
 			},
 	  //预约电梯
 	  bookingElevator : {
 		   booking : apiPath + 'user/house/subElevator'
-	  }
+	  },
+	
+	  
 	}
 }

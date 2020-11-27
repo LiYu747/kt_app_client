@@ -49,6 +49,11 @@ class Cache{
 		
 		return null;
 	}
+	
+	forget(key){
+		let k = this.cachePrefix + key;
+		uni.removeStorageSync(k);
+	}
 }
 
 module.exports = new Cache;

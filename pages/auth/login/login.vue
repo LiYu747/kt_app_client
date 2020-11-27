@@ -291,8 +291,8 @@
 	.ipt {
 		/deep/ .uni-input-input {
 			color: #FFFFFF;
-			// background: red;
-			width: 304rpx;
+			// background: red; 
+			width: 350rpx;
 		}
 
 		/deep/ .uni-input-placeholder {

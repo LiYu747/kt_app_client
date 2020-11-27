@@ -103,14 +103,14 @@
 			},
 			// 查看详情
 			godils(item){
-				console.log(item.id);
+				// console.log(item.id);
 				village.Noticeshow({
 					data:{id:item.id},
 					success: (res => {
 						if (res.statusCode != 200) return
 						if(res.data.code != 200) return
 						let content = res.data.data
-							console.log(content);
+							// console.log(content);
 							uni.navigateTo({
 							 	url:`/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
 							 })

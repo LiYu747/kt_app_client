@@ -201,7 +201,7 @@ class Clients{
 	
 	
 	updateIos(data){
-		let androidVersion = data.data.app_android_latest_version;
+		let androidVersion = data.data.app_ios_latest_version;
 		
 		if( androidVersion ){
 			let d = str.diffVersion( this.version,androidVersion);

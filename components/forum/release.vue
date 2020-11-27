@@ -106,6 +106,10 @@
 								title: res.data.msg,
 								duration: 2000,
 							})
+							// 清空
+							this.image = []
+							this.title = ''
+							this.content = ''
 						} else {
 							uni.showToast({
 								title: res.data.msg,

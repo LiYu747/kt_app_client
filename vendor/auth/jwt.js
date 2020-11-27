@@ -17,6 +17,13 @@ class JWT{
 		this.reload();
 	}
 	
+	flush(params){
+		this.token = '';
+		this.tokenExp = 0;
+		cache.forget(this.cacheTokenKey);
+		utils.doIfIsFunc(params.success);
+	}
+	
 	//从本地获取token
 	reload(){
 		let tokenInfo = cache.getWithExp(this.cacheTokenKey);
@@ -87,7 +94,10 @@ class JWT{
 		
 		let showModal = arr.get(params,'showModal',false);
 		
-		if( showModal === false ) return;
+		if( showModal === false ) {
+			utils.doIfIsFunc(params.fail)
+			return;
+		}
 		
 		if( this.isAskLogin == true ) return;
 		
@@ -98,12 +108,15 @@ class JWT{
 		uni.showModal({
 			title : arr.get(params,'modalTitle','登录提示'),
 			content: arr.get(params,'modalContent','请登录后在继续操作'),
+			showCancel : arr.get(params,'showCancel',true),
 			success(res) {
 				that.isAskLogin = false;
 				if( res.confirm == true){
 					uni.navigateTo({
 						url : '/pages/auth/login/login',
 					})
+				}else{
+					utils.doIfIsFunc(params.fail)
 				}
 			}
 		})
@@ -127,6 +140,16 @@ class JWT{
 	flushAllTask(){
 		this.loginCallbackTask = [];
 	}
+	
+	//判断是否登录再执行
+	// doWithAuth(params){
+	// 	if( !params ) return;
+		
+	// 	//token过期
+	// 	if( !this.tokenExp || this.tokenExp <= dater.now().getCurrMSeconds()  ){
+			
+	// 	}
+	// }
 	
 }
 

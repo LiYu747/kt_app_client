@@ -14,7 +14,7 @@
 					</view>
 				</view>
 				<view class="line"></view>
-				<view class="text" @click="edit(item)">
+				<view class="text" @click="look(item)">
 					{{item.village_name + item.building_name + item.apartment_name + item.floor_name + item.room_name}}
 				</view>
 			</view>
@@ -80,10 +80,10 @@
 			 })
 		 },
 		 // 编辑
-		 edit(item){
+		 look(item){
 			 // console.log(item);	 
 			 uni.navigateTo({
-			 	url:`/pages/address/addediting/ADDediting?item=${JSON.stringify(item)}`
+			 	url:`/pages/address/addediting/ADDediting?id=${item.id}`
 			 })
 		 },
 		// 预约电梯

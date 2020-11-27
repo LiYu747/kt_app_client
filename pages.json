@@ -10,6 +10,13 @@
 				 "navigationStyle":"custom"
 			}
 		},
+		// 搜索
+		{
+			"path": "pages/index/search/search",
+			"style": {
+				 "navigationStyle":"custom"
+			}
+		},
 		// 登录
 		{
 			"path":"pages/auth/login/login",
@@ -25,8 +32,8 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#F07535",
-				 "navigationStyle":"custom",
-				    "enablePullDownRefresh": true
+				"navigationStyle":"custom",
+				"enablePullDownRefresh": true
 			}
 			
 		},
@@ -116,7 +123,8 @@
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false,
-				 "navigationStyle":"custom"
+				"navigationStyle":"custom"
+				// "enablePullDownRefresh": true
             }
             
         }
@@ -255,6 +263,18 @@
 		// 出行记录
 		{
             "path" : "pages/user/travelRecords/travelRecords",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		// 注册头像预览
+		{
+            "path" : "pages/user/register/headSculpture",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

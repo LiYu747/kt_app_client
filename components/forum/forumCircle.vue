@@ -66,7 +66,7 @@
 						if (res.data.code != 200) return
 						// console.log('论坛帖子',res.data.data.data);
 						let data = res.data.data.data
-						this.arr = data
+						this.arr = data.reverse()
 					})
 				})
 			},

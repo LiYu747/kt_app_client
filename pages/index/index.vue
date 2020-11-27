@@ -3,10 +3,7 @@
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="../../image/home/ss.png" mode=""></image>
-				<input class="input" type="text" v-model="value" @confirm ='enter' @input="change" placeholder="请输入小区名称关键词" />
-				<view @click="remove" v-if="flag === false" class=" pos-abs rig">
-					取消 
-				</view>
+				<input class="input" type="text" v-model="value" @confirm ='enter'  placeholder="请输入小区名称关键词" />
 			</view>
 		</view>
 		<!-- 主页 -->
@@ -37,10 +34,6 @@
 			 <!-- 周边 -->
 			 <periphery></periphery>
 		</view>
-		<!-- 搜索页 -->
-		<view v-else-if="flag === false" class="">
-		     <search :value='value'></search>
-		</view>
 		<!-- <image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
 			<text class="title">{{title}}</text>
@@ -51,26 +44,23 @@
 </template>
 
 <script>
-	// import cache from '../../vendor/cache/cache.js';
 	// import dater from '../../vendor/date/dater.js';
 	// import req from '../../vendor/request/req.js';
 	import home from '../../vendor/home/home.js'
        import classification from '../../components/home/classification/classification.vue';
 	  import information from '../../components/home/information/information.vue';
 	   import periphery from '../../components/home/periphery/periphery.vue';
-	    import search from '../../components/home/search/search.vue';
 		import CommunityNews from '../../components/home/CommunityNews/CommunityNews.vue'
+		import cache from '../../vendor/cache/cache.js'
 	export default {
 		components:{
 			classification,
 			information,
 			periphery,
-			search,
 			CommunityNews
 		},
 		data() {
 			return {
-			     flag:true,
 				localdata: [{
 						image: require('@/image/home/rz.png'),
 						titel: '入驻申请',
@@ -103,21 +93,11 @@
 		methods: {
 			// 回车搜索
 			enter(){
-				if(this.value!=''){
-					this.flag = false		
-					}
-			},
-			change(val){
-			  let msg = val.detail.value
-				if(msg==''){
-					this.flag = true
-				}
-			},
-			// 取消
-			remove(){
-				this.flag = true
-				this.value = ''
-				
+			 if(this.value != ''){
+				 uni.navigateTo({
+				 	url:`/pages/index/search/search?value=${this.value}`
+				 })
+			 }
 			},
 			// 跳转
 			checkin(item){
@@ -146,7 +126,7 @@
     },
 	onShow(){
 		 this.flag = true
-		 this.user = uni.getStorageSync('user')
+		 this.user = cache.get('user')
          this.value = ''
 		}
 	}

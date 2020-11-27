@@ -70,6 +70,7 @@
 
 <script>
 	import village from '../../vendor/village/village.js'
+	import cache from '../../vendor/cache/cache.js'
 export default {
 name: "",
 components: {
@@ -132,7 +133,7 @@ data () {
 	 })
   },
   user(){
-	  let user = uni.getStorageSync('user')
+	  let user = cache.get('user')
 	  this.name = user.username
   }
   },
@@ -203,7 +204,7 @@ data () {
 }
 .items{
 	width: 140rpx;
-	height: 140rpx;
+	height: 150rpx;
 	margin-right: 20rpx;
 }
 .comimg{

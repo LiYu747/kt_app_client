@@ -1,6 +1,6 @@
 {
     "name" : "kt_app_client",
-    "appid" : "__UNI__97F3E70",
+    "appid" : "__UNI__B8CB42C",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -10,6 +10,10 @@
         "usingComponents" : true,
         "nvueCompiler" : "uni-app",
         "compilerVersion" : 3,
+        "compatible" : {
+            // true表示忽略版本检查提示框，HBuilderX1.9.0及以上版本支持
+            "ignoreVersion" : true
+        },
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
             "waiting" : true,
@@ -52,6 +56,12 @@
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {}
+            },
+            "splashscreen" : {
+                "androidStyle" : "common",
+                "android" : {
+                    "hdpi" : ""
+                }
             }
         }
     },
