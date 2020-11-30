@@ -68,6 +68,10 @@
 			add(index) {
 				if (index === 2) {
 					this.$emit("goto", 6)
+					uni.pageScrollTo({
+						scrollTop: 0,
+						duration:0
+					});
 				}
 				this.idx = index
 			},

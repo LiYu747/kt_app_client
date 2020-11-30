@@ -1,112 +1,116 @@
 <template>
-    <view >
-    <view class="nav ">
-    	<view class="title flex al-center ju-center pos-rel">
-    	   个人中心
-      <view class="pos-abs location">
-      	 <image @click="install" src="../../image/user/Settings.png" class="setimg" mode=""></image>
-      </view>
-    	</view>
-    </view>
-    <view class="">
-    	 <image src="../../image/home/jx.png" mode="" class="jximg"></image>
-    </view>
-	   <!-- 头像 -->
-	   <view @click="gologin" class="flex-d al-center">
-	   	<view class="portrait flex  ju-center pos-rel">
-			<image v-if="user.nickname"  :src="user.avatar" mode="scaleToFill"  class="headimg pos-abs" ></image>
-			<image v-else src="../../image/user/headportrait.png" class="headimg pos-abs"  mode=""></image>
-	   	</view>
-		<view v-if="user.nickname" class="text" @click="gologin">
-		{{user.nickname}}
+	<view>
+		<view class="nav ">
+			<view class="title flex al-center ju-center pos-rel">
+				个人中心
+				<view class="pos-abs location">
+					<image @click="install" src="../../image/user/Settings.png" class="setimg" mode=""></image>
+				</view>
+			</view>
 		</view>
-		<view v-else class="text" >
-			{{text}}
+		<view class="">
+			<image src="../../image/home/jx.png" mode="" class="jximg"></image>
 		</view>
-	   </view>
-    </view>
+		<!-- 头像 -->
+		<view  class="flex-d al-center">
+			<view @click="install" class="portrait flex  ju-center pos-rel">
+				<image v-if="user.nickname" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
+				<image v-else src="../../image/user/headportrait.png" class="headimg pos-abs" mode=""></image>
+			</view>
+			<view @click="install"  v-if="user.nickname" class="text">
+				{{user.nickname}}
+			</view>
+			<view @click="gologin" v-else class="text">
+				{{text}}
+			</view>
+		</view>
+	</view>
 </template>
 
 <script>
-export default {
-name: "",
-components: {
+	export default {
+		name: "",
+		components: {
 
-},
-props: {
-	 user:{
-		 type:Object,
-		 required:true
-	 }
-},
-data () {
-  return {
-	  text:'未登录',
-    }
-  },
-  methods: {
-	  // 去登陆
-    gologin(){
-		uni.navigateTo({
-			url:'/pages/auth/login/login'
-		})
-	},
-	// 去设置
-	install(){
-		uni.navigateTo({
-			url:`/pages/user/personal/personal`
-		})
 		},
-  },
-  onLoad() {
-  
-  },
-  onShow(){
+		props: {
+			user: {
+				type: Object,
+				required: true
+			}
+		},
+		data() {
+			return {
+				text: '未登录',
+			}
+		},
+		methods: {
+			// 去登陆
+			gologin() {
+				uni.navigateTo({
+					url: '/pages/auth/login/login'
+				})
+			},
+			// 去设置
+			install() {
+				uni.navigateTo({
+					url: `/pages/user/personal/personal`
+				})
+			},
+		},
+		onLoad() {
 
-  },
-  mounted () {
-  
-  },
-  filters: {
+		},
+		onShow() {
 
-  },
-  computed: {
+		},
+		mounted() {
 
-  },
-  watch: {
+		},
+		filters: {
 
-  },
-  directives: {
+		},
+		computed: {
 
-  }
-}
+		},
+		watch: {
+
+		},
+		directives: {
+
+		}
+	}
 </script>
 
 <style scoped lang="scss">
-
-.nav{
+	.nav {
 		width: 100%;
 		height: 128rpx;
 		background: #F07535;
 	}
-	.setimg{
+
+	.setimg {
 		width: 40rpx;
 		height: 40rpx;
 	}
-	.title{
+
+	.title {
 		top: 40rpx;
 		font-size: 36rpx;
 		color: #FFFFFF;
 		height: 88rpx;
 	}
-	.location{
+
+	.location {
 		right: 50rpx;
 	}
-	.jximg{
+
+	.jximg {
 		width: 100%;
 		height: 156rpx;
 	}
-	.portrait{
+
+	.portrait {
 		width: 148rpx;
 		height: 148rpx;
 		background: #FFFFFF;
@@ -114,17 +118,19 @@ data () {
 		position: relative;
 		top: -82rpx;
 	}
-	.headimg{
+
+	.headimg {
 		width: 148rpx;
 		height: 148rpx;
 		border-radius: 50%;
 		bottom: 0;
 	}
-	.text{
+
+	.text {
 		margin-top: -62rpx;
-		font-size: 36rpx;	
-font-weight: 400;
-font-family: Microsoft YaHei;
-       color: #666666;
-}
+		font-size: 36rpx;
+		font-weight: 400;
+		font-family: Microsoft YaHei;
+		color: #666666;
+	}
 </style>

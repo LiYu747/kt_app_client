@@ -1,8 +1,8 @@
 <template>
 	<view class="">
 		<view class="release">
-			<view v-if="arr.length>0" class="">
-				<view class="item" @click="gotoD(item)" v-for="(item,index) in arr" :key='item.id'>
+			<view v-if="lists.length>0" class="">
+				<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='item.id'>
 					<view class="flex">
 						<!-- 头像 -->
 						<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
@@ -26,6 +26,13 @@
 						</view>
 					</view>
 				</view>
+				<view v-show="isLoding == true" class="m-t2 flex ju-center al-center lodbox">
+					 <image  class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+					 加载中...
+				</view>
+				<view class="flex ju-center m-t3 m-b2 fz-14" v-if="hasMore == false">
+					{{text}}
+				</view>
 				<view class="btom">
 
 				</view>
@@ -39,6 +46,7 @@
 
 <script>
 	import village from '../../vendor/village/village.js'
+	import jwt from '../../vendor/auth/jwt.js'
 	export default {
 		name: "",
 		components: {
@@ -47,28 +55,63 @@
 		props: {
 			id: {
 				type: String
-			}
+			},
 		},
 		data() {
 			return {
-				arr: []
+				lists: [],
+				page: 1,
+				ps: 15,
+				isLoding: false,
+				hasMore: true,
+				text:'',
 			}
 		},
 		methods: {
-			// 所有帖子
-			Dataall() {
-				village.communityPost({
-					data: {
-						villageId: this.id
+			// 获取数据
+			loadPageData() {
+              console.log(111);
+				if (this.isLoding == true || this.hasMore == false) return;
+
+				this.isLoding = true;
+
+				jwt.doOnlyTokenValid({
+					keepSuccess: false,
+					showModal: true,
+					fail: () => {
+						this.isLoding = false;
 					},
-					success: (res => {
-						if (res.statusCode != 200) return
-						if (res.data.code != 200) return
-						// console.log('论坛帖子',res.data.data.data);
-						let data = res.data.data.data
-						this.arr = data.reverse()
-					})
+					success: () => {
+						village.communityPost({
+							data: {
+								villageId: this.id,
+								page: this.page,
+								pageSize: this.ps
+							},
+							success: (res) => {
+
+								this.isLoding = false;
+
+								if (res.statusCode != 200) return;
+
+								if (res.data.code != 200) return;
+
+								let data = res.data.data;
+
+								this.page = data.current_page + 1;
+								this.hasMore = data.next_page_url ? true : false;
+
+								this.lists = this.lists.concat(data.data);
+							},
+							fail: () => {
+								this.isLoding = false;
+								// console.log(err);
+							}
+						})
+					}
 				})
+
+
 			},
 			// 去详情
 			gotoD(item) {
@@ -79,13 +122,10 @@
 			}
 		},
 		mounted() {
-			this.Dataall()
-		},
-		onLoad() {
-
+			    this.loadPageData()
 		},
 		onShow() {
-			
+    
 		},
 		filters: {
 
@@ -176,10 +216,20 @@
 	}
 
 	.btom {
-		height: 100rpx;
+		height: 140rpx;
+	}
+
+	.nono {
+		height: 300rpx;
 	}
 	
-	.nono{
-		height: 300rpx;
+	.lodimg{
+		width: 30rpx;
+		height: 30rpx;
+		margin-right: 20rpx;
+	}
+	
+	.lodbox{
+		font-size: 24rpx;
 	}
 </style>

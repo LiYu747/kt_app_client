@@ -3,7 +3,7 @@
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="../../image/home/ss.png" mode=""></image>
-				<input class="input" type="text" v-model="value" @confirm ='enter'  placeholder="请输入小区名称关键词" />
+				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
 			</view>
 		</view>
 		<!-- 主页 -->
@@ -26,34 +26,27 @@
 				</view>
 			</view>
 			<!-- 分类 -->
-			  <classification></classification>
-			 <!-- 资讯 -->
-			 <information></information>
-			  <!-- 社区新闻 -->
-			  <CommunityNews v-if='user'></CommunityNews>
-			 <!-- 周边 -->
-			 <periphery></periphery>
+			<classification></classification>
+			<!-- 资讯 -->
+			<information></information>
+			<!-- 社区新闻 -->
+			<CommunityNews v-if='user'></CommunityNews>
+			<!-- 周边 -->
+			<periphery></periphery>
 		</view>
-		<!-- <image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-			<text @click="sayHello">{{nickname}}</text>
-		</view>
-		<navigator url="/pages/auth/login/login" open-type="navigate">去登陆</navigator> -->
 	</view>
 </template>
 
 <script>
-	// import dater from '../../vendor/date/dater.js';
-	// import req from '../../vendor/request/req.js';
 	import home from '../../vendor/home/home.js'
-       import classification from '../../components/home/classification/classification.vue';
-	  import information from '../../components/home/information/information.vue';
-	   import periphery from '../../components/home/periphery/periphery.vue';
-		import CommunityNews from '../../components/home/CommunityNews/CommunityNews.vue'
-		import cache from '../../vendor/cache/cache.js'
+	import classification from '../../components/home/classification/classification.vue';
+	import information from '../../components/home/information/information.vue';
+	import periphery from '../../components/home/periphery/periphery.vue';
+	import CommunityNews from '../../components/home/CommunityNews/CommunityNews.vue'
+	import cache from '../../vendor/cache/cache.js'
+	import user from '../../vendor/user/userDetails.js'
 	export default {
-		components:{
+		components: {
 			classification,
 			information,
 			periphery,
@@ -64,70 +57,79 @@
 				localdata: [{
 						image: require('@/image/home/rz.png'),
 						titel: '入驻申请',
-						url:'/pages/residence/checkIn/checkIn'
+						url: '/pages/residence/checkIn/checkIn'
 					},
 					{
 						image: require('@/image/home/bf.png'),
 						titel: '拜访申请',
-						url:'/pages/visitapplication/visit/visit'
+						url: '/pages/visitapplication/visit/visit'
 					},
 					{
 						image: require('@/image/home/lf.png'),
 						titel: '来访记录',
-						url:'/pages/operation/visitRecord/visitRecord'
+						url: '/pages/operation/visitRecord/visitRecord'
 					},
 					{
 						image: require('@/image/home/code.png'),
 						titel: '回家二维码',
-						url:'/pages/qrcode/qrCode/qrCode'
+						url: '/pages/qrcode/qrCode/qrCode'
 					},
 				],
 				list: [],
-				value:'',
-				user:{}
+				value: '',
+				user: {}
 			}
 		},
 		onLoad(val) {
-     // console.log(val);
+			// console.log(val);
 		},
 		methods: {
 			// 回车搜索
-			enter(){
-			 if(this.value != ''){
-				 uni.navigateTo({
-				 	url:`/pages/index/search/search?value=${this.value}`
-				 })
-			 }
+			confirm () {
+				if (this.value != '') {
+					uni.navigateTo({
+						url: `/pages/index/search/search?value=${this.value}`
+					})
+				}
 			},
 			// 跳转
-			checkin(item){
+			checkin(item) {
 				// console.log(item.url);
 				uni.navigateTo({
-					url:item.url
+					url: item.url
 				})
 			},
-			 // 轮播图
+			// 轮播图
 			Chart() {
 				home.chart({
-					data:{code:'home_index_banner'},
-					success:(res) => {
+					data: {
+						code: 'home_index_banner'
+					},
+					success: (res) => {
 						if (res.statusCode != 200) return
-						if(res.data.code != 200) return
+						if (res.data.code != 200) return
 						this.list = res.data.data.ads
 					},
 					fail: (err) => {
 						// console.log(err);
 					}
-				})	  
-			}
+				})
+			},
+
 		},
-    mounted() {
-         this.Chart()
-    },
-	onShow(){
-		 this.flag = true
-		 this.user = cache.get('user')
-         this.value = ''
+		mounted() {
+			this.Chart()
+		},
+		onShow() {
+			this.flag = true
+		   let a =	cache.get('jwt')
+		   if(a) {
+			  this.user = {} 
+		   }
+		   else{
+			   this.user = null
+		   }
+			this.value = ''
 		}
 	}
 </script>
@@ -223,7 +225,7 @@
 		top: 150rpx;
 	}
 
-	
+
 
 	.itemimg {
 		width: 100rpx;
@@ -237,13 +239,15 @@
 		background: #FFFFFF;
 		border-radius: 20rpx 20rpx 0px 0px;
 		padding: 20rpx;
-		padding-top:14rpx ;
+		padding-top: 14rpx;
 		padding-bottom: 22rpx;
 	}
-	.itemtext{
+
+	.itemtext {
 		margin-top: 5rpx;
 	}
-	.rig{
+
+	.rig {
 		right: 49rpx;
 		font-size: 30rpx;
 		color: #FFFFFF;
