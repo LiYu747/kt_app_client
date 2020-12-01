@@ -18,7 +18,7 @@
 				<u-form-item label="" prop="phone">
 					<view class="uiput flex al-center pos-rel">
 						<image class="iptimg pos-abs" src="../../../image/login/phone.png" mode=""></image>
-						<u-input class="ipt" type="number" :clearable='flag' v-model="form.phone" placeholder="输入手机号" value=""/>
+						<u-input class="ipt" type="number" :clearable='flag' v-model="form.phone" placeholder="输入手机号" value="" />
 					</view>
 				</u-form-item>
 				<!-- 验证码 -->
@@ -68,8 +68,8 @@
 	import sms from '../../../vendor/sms/sms.js';
 	import userinfo from '../../../vendor/user/userinfo.js'
 	import jwt from '../../../vendor/auth/jwt.js';
-	
-	
+
+
 	export default {
 		name: "",
 		components: {
@@ -119,8 +119,8 @@
 							// 发送成功
 							if (res.data.code === 200) {
 								uni.showToast({
-									title:res.data.msg,
-									duration:2000
+									title: res.data.msg,
+									duration: 2000
 								})
 								this.form.Verification = res.data.data.code
 								const authtime = setInterval(() => {
@@ -143,6 +143,9 @@
 						},
 						fail: (err) => {
 							// console.log(err);
+							uni.showToast({
+								title: err.data.msg
+							})
 							this.isGetingSmsCode = false;
 						},
 
@@ -163,13 +166,13 @@
 				})
 			},
 			// 找回密码
-			find(){
-			uni.showToast({
-				title:'功能还未开发',
-				duration:2000,
-				icon:"none"
-			})	
-				},
+			find() {
+				uni.showToast({
+					title: '功能还未开发',
+					duration: 2000,
+					icon: "none"
+				})
+			},
 			// 登录
 			Login() {
 				userinfo.Signin({
@@ -179,44 +182,38 @@
 					},
 					success: (res) => {
 						// console.log(res);
-						
-						if( res.statusCode != 200 ){
-							
+						if (res.statusCode != 200) {
 							return;
 						}
-						
-						if( res.data.code != 200 ){
-							
+						if (res.data.code != 200) {
 							uni.showToast({
-								title : res.data.msg,
-								icon : 'none'
+								title: res.data.msg,
+								icon: 'none'
 							})
 							return;
-						
 						}
-						
+
 						let info = jwt.parseToken(res.data.data.jwt_token);
-						
-						if( !info ) return;
-						
+
+						if (!info) return;
+
 						// console.log('login data',info);
-						
-						jwt.setToken(res.data.data.jwt_token,info.exp*1000 - 10000,()=>{
+
+						jwt.setToken(res.data.data.jwt_token, info.exp * 1000 - 10000, () => {
 							jwt.execTask();
 						})
-						
 						// 
-						
 						this.$refs.uToast.show({
 							title: res.data.msg,
 							type: 'success',
 							url: '/pages/user/userCenter/userCenter',
 							isTab: true
 						})
-						
-						
 					},
 					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
 						// console.log(err);
 					},
 				})

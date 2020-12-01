@@ -7,7 +7,7 @@
 		<view class="flex-d al-center">
 			<view class="nav flex-d al-center pos-rel">
 				<view class="tex1">
-				    {{arr.name}}
+					{{arr.name}}
 				</view>
 				<view class="tex2 flex al-center ju-center" :class="{te2:idx===0}">
 					<view class="item" v-for="(item,index) in titel" :key='item.id' @click="add(index)" :class="{'dv':index===1,'colr':idx===index}">
@@ -19,21 +19,21 @@
 				</view>
 				<!-- 小区公告 -->
 				<view v-show="idx === 1" class="twbx m-t2">
-                          <view v-if="Notice.length>0" class="">
-                          	<view   class="" v-for="(item,index) in Notice" :key='item.id'>
-                          		    <view @click="godils(item)" class="wid">
-                          		    	{{index+1}} . {{item.title}}
-                          		    </view>
-                          	</view>
-                          </view>
-						  <view v-else class="">
-						  	暂无公告
-						  </view>
+					<view v-if="Notice.length>0" class="">
+						<view class="" v-for="(item,index) in Notice" :key='item.id'>
+							<view @click="godils(item)" class="wid">
+								{{index+1}} . {{item.title}}
+							</view>
+						</view>
+					</view>
+					<view v-else class="">
+						暂无公告
+					</view>
 				</view>
 			</view>
-        
+
 			<view v-show="idx===0&&arr.desc" class="foot">
-			<u-parse :html="arr.desc"></u-parse>
+				<u-parse :html="arr.desc"></u-parse>
 			</view>
 		</view>
 	</view>
@@ -47,19 +47,19 @@
 
 		},
 		props: {
-			id:{
-				type:String
+			id: {
+				type: String
 			}
 		},
 		data() {
 			return {
-				localist:[require('@/image/forum/timg.jpg')],
+				localist: [require('@/image/forum/timg.jpg')],
 				list: [], //轮播图
-				arr:{},   //小区展示信息
+				arr: {}, //小区展示信息
 				titel: [
 					'简介', '公告', '论坛'
 				],
-			   Notice:[],	// 公告数据
+				Notice: [], // 公告数据
 				idx: 0,
 			}
 		},
@@ -67,67 +67,85 @@
 			// 点击
 			add(index) {
 				if (index === 2) {
-					this.$emit("goto", 6)
-					uni.pageScrollTo({
-						scrollTop: 0,
-						duration:0
-					});
+					uni.navigateTo({
+						url:`/pages/communityForum/forumlists/forumlists?id=${this.id}`
+					})
 				}
 				this.idx = index
 			},
 			// 小区公告
-			noticeData(){
+			noticeData() {
 				village.Notice({
-					data:{village_id:this.id},
-					success: (res => {
+					data: {
+						village_id: this.id
+					},
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
+					success: (res) => {
 						if (res.statusCode != 200) return
-						if(res.data.code != 200) return
+						if (res.data.code != 200) return
 						// console.log(res.data.data.data);
 						let data = res.data.data.data
 						this.Notice = data
-					})
+					}
 				})
 			},
 			// 小区展示信息
-			Information(){
+			Information() {
 				village.displayInformation({
-					data:{id:this.id},
-					success: (res => {
+					data: {
+						id: this.id
+					},
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
+					success: (res) => {
 						if (res.statusCode != 200) return
-						if(res.data.code != 200) return
+						if (res.data.code != 200) return
 						// console.log('小区公告',res.data.data);
 						let data = res.data.data
-						 data.album.map( item => {
+						data.album.map(item => {
 							this.list.push(item.url)
 						})
 						this.arr = data
-						
-					})
+					}
 				})
 			},
 			// 查看详情
-			godils(item){
+			godils(item) {
 				// console.log(item.id);
 				village.Noticeshow({
-					data:{id:item.id},
-					success: (res => {
+					data: {
+						id: item.id
+					},
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
+					success: (res) => {
 						if (res.statusCode != 200) return
-						if(res.data.code != 200) return
+						if (res.data.code != 200) return
 						let content = res.data.data
-							// console.log(content);
-							uni.navigateTo({
-							 	url:`/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
-							 })
-					})
+						// console.log(content);
+						uni.navigateTo({
+							url: `/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
+						})
+					}
 				})
 			}
 		},
 		mounted() {
-        this.noticeData()
-		this.Information()
+			this.noticeData()
+			this.Information()
 		},
 		onLoad(val) {
-      
+
 		},
 		filters: {
 
@@ -226,9 +244,10 @@
 		background: #E6E6E6;
 		padding: 20rpx 14rpx;
 		color: #666666;
-			margin-bottom: 60rpx;
+		margin-bottom: 60rpx;
 	}
-	.wid{
+
+	.wid {
 		width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;

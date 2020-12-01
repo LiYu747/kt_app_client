@@ -24,12 +24,15 @@
 				</view>
 			</view>
 			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
-				 <image  class="lodimg" src="../../image/address/loading.gif" mode=""></image>
-				 加载中...
+				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+				加载中...
 			</view>
 			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
 				{{text}}
 			</view>
+		</view>
+		<view v-else class="nono flex al-center ju-center">
+			暂无地址,快去添加吧~
 		</view>
 		<view v-if='flag===true && msg' @mousewheel.prevent class="show pos-abs flex al-center ju-center">
 			<view class="showbox flex-d al-center">
@@ -52,9 +55,7 @@
 				</view>
 			</view>
 		</view>
-		<view v-else class="nono flex al-center ju-center">
-			暂无地址,快去添加吧~
-		</view>
+
 	</view>
 </template>
 
@@ -72,11 +73,11 @@
 			text: {
 				type: String
 			},
-			hasMore:{
-				type:Boolean
+			hasMore: {
+				type: Boolean
 			},
 			isLoding: {
-				type:Boolean
+				type: Boolean
 			}
 		},
 		data() {
@@ -109,7 +110,12 @@
 					data: {
 						id: item.id
 					},
-					success: (res => {
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
+					success: (res) => {
 						if (res.statusCode != 200) return;
 
 						if (res.data.code == 200) {
@@ -120,7 +126,7 @@
 							this.message = false
 						}
 						// console.log(res.data.code);
-					})
+					}
 				})
 				this.flag = true
 
@@ -293,14 +299,14 @@
 		width: 100%;
 		height: 300rpx;
 	}
-	
-	.lodimg{
+
+	.lodimg {
 		width: 30rpx;
 		height: 30rpx;
 		margin-right: 20rpx;
 	}
-	
-	.lodbox{
+
+	.lodbox {
 		font-size: 24rpx;
 	}
 </style>

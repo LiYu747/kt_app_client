@@ -1,61 +1,60 @@
 <template>
-  <view class="">
-  	<view class="pos-rel message">
-  		<view class="text flex al-center" >
-  	{{titel}}
-  		</view>
-		<view class="">
-			<textarea class="tar" maxlength="1000" v-model="value"></textarea>
+	<view class="">
+		<view class="pos-rel message">
+			<view class="text flex al-center">
+				{{titel}}
+			</view>
+			<view class="">
+				<textarea class="tar" maxlength="1000" v-model="value"></textarea>
+			</view>
 		</view>
-		</view>
-  </view>
+	</view>
 </template>
 
 <script>
-export default {
-name: "",
-components: {
+	export default {
+		name: "",
+		components: {
 
-},
-props: {
-	titel:{
-		type:String,
-		default:'备注'
+		},
+		props: {
+			titel: {
+				type: String,
+				default: '备注'
+			}
+		},
+		data() {
+			return {
+				value: ''
+			}
+		},
+		methods: {
+
+		},
+		mounted() {
+
+		},
+		onLoad() {
+
+		},
+		filters: {
+
+		},
+		computed: {
+
+		},
+		watch: {},
+		directives: {
+
+		}
 	}
-},
-data () {
-  return {
-	  value:''
-    }
-  },
-  methods: {
-
-  },
-  mounted () {
-
-  },
-  onLoad () {
-
-  },
-  filters: {
-
-  },
-  computed: {
-
-  },
-  watch: {
-  },
-  directives: {
-
-  }
-}
 </script>
 
 <style scoped lang="scss">
 	.message {
 		margin-top: 22rpx;
 		width: 644rpx;
-	    padding-bottom: 20rpx;
+		padding-bottom: 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
 		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
@@ -69,14 +68,15 @@ data () {
 		color: #666666;
 		border-bottom: 1rpx solid #BFBFBF;
 	}
-	.tar{
+
+	.tar {
 		margin-top: 20rpx;
 		padding: 10rpx;
 		padding-bottom: 0;
-		width:623rpx;
-		height:130rpx;
-		resize:none;
-		overflow:auto;
+		width: 623rpx;
+		height: 130rpx;
+		resize: none;
+		overflow: auto;
 		font-size: 24rpx;
 	}
 </style>

@@ -105,14 +105,16 @@
 					data: {
 						code: 'home_index_banner'
 					},
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
 					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						this.list = res.data.data.ads
 					},
-					fail: (err) => {
-						// console.log(err);
-					}
 				})
 			},
 

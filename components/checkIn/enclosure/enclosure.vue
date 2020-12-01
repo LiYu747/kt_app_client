@@ -5,7 +5,8 @@
 				请添加附件
 			</view>
 			<view class="">
-				<u-upload ref="uUpload" class="uplod" @on-choose-complete='succ' width='120' max-count="3" height='120' :custom-btn=true :auto-upload="false">
+				<u-upload ref="uUpload" class="uplod " :deletable='false' @on-choose-complete='succ' width='120' max-count="3"
+				 height='120' :custom-btn=true :auto-upload="false">
 					<template v-slot:addBtn>
 						<view class="pos-abs move">
 							请添加附件
@@ -31,26 +32,27 @@
 			}
 		},
 		methods: {
-			succ(files){
+			succ(files) {
 				// console.log(files);
-					if (files.length > 0) {
-						files.forEach((item) => {
-							uni.uploadFile({
-								url: route.services.file.upload, //仅为示例，非真实的接口地址
-								filePath: item.url,
-								name: 'file',
-								success: (val) => {
-									this.image.push(JSON.parse(val.data).data.url)
-									this.$emit('abb', this.image)
-								}
-							});
-						})
-					}
+				this.image = []
+				if (files.length > 0) {
+					files.forEach((item) => {
+						uni.uploadFile({
+							url: route.services.file.upload,
+							filePath: item.url,
+							name: 'file',
+							success: (val) => {
+								this.image.push(JSON.parse(val.data).data.url)
+								this.$emit('abb', this.image)
+							}
+						});
+					})
+				}
 			}
-		
+
 		},
 		mounted() {
-   
+
 		},
 		onLoad() {
 

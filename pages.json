@@ -34,8 +34,7 @@
 				"navigationBarBackgroundColor": "#F07535",
 				"navigationStyle":"custom",
 				"enablePullDownRefresh": true
-			}
-			
+			}	
 		},
 		// 用户 
 		{
@@ -54,8 +53,7 @@
                "navigationBarTitleText": "",
                "navigationBarBackgroundColor": "#F07535",
                 "navigationStyle":"custom"
-            }
-            
+            }     
         }
         ,
 		// 头像选中
@@ -66,8 +64,7 @@
 		       "navigationBarTitleText": "",
 		       "navigationBarBackgroundColor": "#F07535",
 		        "navigationStyle":"custom"
-		    }
-		    
+		    }    
 		},
 		// 个人信息
 		{
@@ -88,8 +85,7 @@
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false,
 				 "navigationStyle":"custom"
-            }
-            
+            }    
         }
         ,
 		//入住申请
@@ -100,8 +96,7 @@
                "navigationBarTitleText": "",
                "enablePullDownRefresh": false,
                 "navigationStyle":"custom"
-            }
-            
+            }    
         }
 		// 申请拜访
         ,{
@@ -111,9 +106,7 @@
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false,
 				  "navigationStyle":"custom"
-				
-            }
-            
+            }   
         }
         ,
 			// 来访记录
@@ -194,8 +187,7 @@
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false,
-					"navigationStyle":"custom"
-				
+					"navigationStyle":"custom"	
             }
             
         }
@@ -283,12 +275,26 @@
             }
             
         }
-        ,{
+        ,
+		  // 更新
+		{
             "path" : "pages/update/update",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
+            }
+            
+        }
+        ,
+		  // 论坛列表
+		{
+            "path" : "pages/communityForum/forumlists/forumlists",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }

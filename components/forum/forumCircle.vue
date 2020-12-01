@@ -21,14 +21,14 @@
 					</view>
 					<!-- 图片 -->
 					<view class="flex al-center m-t4">
-						<view v-for="items in item.album.slice(0,3)" :key='items.id'>
+						<view v-for="(items,indexs) in item.album.slice(0,3)" :key='indexs'>
 							<image :src="items.url" class="items" mode=""></image>
 						</view>
 					</view>
 				</view>
 				<view v-show="isLoding == true" class="m-t2 flex ju-center al-center lodbox">
-					 <image  class="lodimg" src="../../image/address/loading.gif" mode=""></image>
-					 加载中...
+					<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+					加载中...
 				</view>
 				<view class="flex ju-center m-t3 m-b2 fz-14" v-if="hasMore == false">
 					{{text}}
@@ -64,13 +64,12 @@
 				ps: 15,
 				isLoding: false,
 				hasMore: true,
-				text:'',
+				text: '',
 			}
 		},
 		methods: {
 			// 获取数据
 			loadPageData() {
-              console.log(111);
 				if (this.isLoding == true || this.hasMore == false) return;
 
 				this.isLoding = true;
@@ -103,15 +102,16 @@
 
 								this.lists = this.lists.concat(data.data);
 							},
-							fail: () => {
+							fail: (err) => {
 								this.isLoding = false;
 								// console.log(err);
+								uni.showToast({
+									title: err.data.msg
+								})
 							}
 						})
 					}
 				})
-
-
 			},
 			// 去详情
 			gotoD(item) {
@@ -122,10 +122,10 @@
 			}
 		},
 		mounted() {
-			    this.loadPageData()
+			this.loadPageData()
 		},
 		onShow() {
-    
+
 		},
 		filters: {
 
@@ -222,14 +222,14 @@
 	.nono {
 		height: 300rpx;
 	}
-	
-	.lodimg{
+
+	.lodimg {
 		width: 30rpx;
 		height: 30rpx;
 		margin-right: 20rpx;
 	}
-	
-	.lodbox{
+
+	.lodbox {
 		font-size: 24rpx;
 	}
 </style>

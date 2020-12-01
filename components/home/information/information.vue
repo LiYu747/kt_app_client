@@ -2,7 +2,7 @@
 	<div>
 		<view class="box">
 			<view class="flex al-center">
-				<image class="img" src="../../../image/home/sq(1)@2x.png" mode=""></image>
+				<image class="imgss" src="../../../image/home/sq(1)@2x.png" mode=""></image>
 				<view class="text">
 					社区资讯
 				</view>
@@ -38,16 +38,23 @@
 			// 查看详情
 			lookup() {
 				home.infordils({
-					   		 data:{id:this.loctext.id},
-					   		 success: (res => {
-					   			 // console.log(res.data.data);
-								 if (res.statusCode != 200) return
-								 if (res.data.code != 200) return
-					   		  let content = res.data.data
-							  uni.navigateTo({
-							  	url:`/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
-							  })
-					   		 })
+					data: {
+						id: this.loctext.id
+					},
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
+					success: (res) => {
+						// console.log(res.data.data);
+						if (res.statusCode != 200) return
+						if (res.data.code != 200) return
+						let content = res.data.data
+						uni.navigateTo({
+							url: `/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
+						})
+					}
 				})
 			},
 			// 数据
@@ -56,15 +63,17 @@
 					data: {
 						page: 1,
 					},
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
 					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						// console.log(res.data.data.data);
 						this.loctext = res.data.data.data[0]
 					},
-					fail: (err) => {
-						// console.log(err);
-					}
 				})
 			}
 		},
@@ -96,7 +105,7 @@
 		height: auto;
 	}
 
-	.img {
+	.imgss {
 		width: 23rpx;
 		height: 27rpx;
 		margin-right: 10rpx;

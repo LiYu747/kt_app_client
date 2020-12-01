@@ -32,8 +32,8 @@
 					</view>
 				</view>
 				<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
-					 <image  class="lodimg" src="../../image/address/loading.gif" mode=""></image>
-					 加载中...
+					<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+					加载中...
 				</view>
 				<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore == false">
 					{{text}}
@@ -59,7 +59,7 @@
 							{{item.content}}
 						</view>
 					</view>
-				
+
 					<view class=" flex m-t1 ju-between">
 						<view class="">
 							回复的主题：
@@ -74,8 +74,8 @@
 				您还没有发表评论
 			</view>
 			<view v-show="isLoding1 == true" class=" flex ju-center al-center lodbox">
-				 <image  class="lodimg" src="../../image/address/loading.gif" mode=""></image>
-				 加载中...
+				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+				加载中...
 			</view>
 			<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore1 == false">
 				{{text1}}
@@ -125,14 +125,13 @@
 				this.idx = index
 				uni.pageScrollTo({
 					scrollTop: 0,
-					duration:0
+					duration: 0
 				});
 			},
 			// 自己发布的帖子 获取数据
 			loadPageData() {
 
 				if (this.isLoding == true || this.hasMore == false) return;
-
 				this.isLoding = true;
 
 				jwt.doOnlyTokenValid({
@@ -149,7 +148,7 @@
 
 							},
 							success: (res) => {
-  
+
 								this.isLoding = false;
 
 								if (res.statusCode != 200) return;
@@ -162,10 +161,10 @@
 
 								this.lists = this.lists.concat(data.data);
 							},
-							fail: () => {
+							fail: (err) => {
 								this.isLoding = false;
 								uni.showToast({
-									title: err.msg
+									title: err.data.msg
 								})
 								// console.log(err);
 							}
@@ -203,17 +202,17 @@
 
 								this.data1 = this.data1.concat(data.data);
 							},
-							fail: () => {
+							fail: (err) => {
 								this.isLoding1 = false;
 								uni.showToast({
-									title: err.msg
+									title: err.data.msg
 								})
 								// console.log(err);
 							}
 						})
 					}
 				})
-			},	
+			},
 			// 去详情
 			gotoD(item) {
 				// console.log(item.id);
@@ -234,7 +233,7 @@
 					data: {},
 					fail: (err => {
 						uni.showToast({
-							title: err.msg
+							title: err.data.msg
 						})
 					}),
 					success: (res => {
@@ -397,18 +396,18 @@
 	.line {
 		height: 74rpx;
 	}
-	
-	.nono{
+
+	.nono {
 		margin-top: 50rpx;
 	}
-	
-	.lodimg{
+
+	.lodimg {
 		width: 30rpx;
 		height: 30rpx;
 		margin-right: 20rpx;
 	}
-	
-	.lodbox{
+
+	.lodbox {
 		font-size: 24rpx;
 	}
 </style>

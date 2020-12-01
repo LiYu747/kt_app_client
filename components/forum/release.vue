@@ -98,7 +98,12 @@
 						content: this.content,
 						albums: this.image
 					},
-					success: (res => {
+					fail: (err) => {
+						uni.showToast({
+							title: err.data.msg
+						})
+					},
+					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code == 200) {
 							this.$emit('Submit')
@@ -118,7 +123,7 @@
 							})
 						}
 						// console.log('发布帖子', res);
-					})
+					}
 				})
 			}
 		},

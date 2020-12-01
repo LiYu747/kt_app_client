@@ -29,9 +29,9 @@ class Clients {
 		this.createOrUpdate();
 
 		//是否需要更新客户端
-		// # ifdef APP-PLUS 
+		//#ifdef APP-PLUS 
 		this.askUpdateClient()
-		// # endif 
+		//#endif 
 	}
 
 	//判断当前的客户端类型
@@ -251,7 +251,7 @@ class Clients {
 									url: `/pages/update/update?url=${androiddata.app_android_download_url}`
 								})
 							} else {
-								console.log(1);
+								// console.log(1);
 							}
 
 
@@ -275,13 +275,8 @@ class Clients {
 					success(res2) {
 						if (res2.confirm == true) {
 							if (Iosdata.app_android_download_url) {
-								uni.downloadFile({
-									url: Iosdata.app_android_download_url,
-									success: (res) => {
-										if (res.statusCode === 200) {
-											console.log('下载成功');
-										}
-									}
+								uni.navigateTo({
+									url: `/pages/update/update?url=${Iosdata.app_android_download_url}`
 								})
 							} else {
 

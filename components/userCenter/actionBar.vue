@@ -40,14 +40,15 @@ data () {
 		   url:'/pages/user/travelRecords/travelRecords'
 		  },
 		  {image:require('@/image/user/Logout.png'),
-		   titel:'退出登录'
+		   titel:'退出登录',
+		   signout:'signout'
 		  }
 	  ]
     }
   },
   methods: {
    add(item,index){
-	  this.$emit('add',index)
+	  this.$emit('add',item)
 	  uni.navigateTo({
 	  	url: item.url
 	  })
