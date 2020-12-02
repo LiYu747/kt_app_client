@@ -63,6 +63,7 @@
 			}
 		},
 		methods: {
+			// 选择文件
 			add() {
 				uni.chooseImage({
 					success: (chooseImageRes) => {
@@ -84,6 +85,7 @@
 					}
 				});
 			},
+			
 			scroll: function(e) {
 				// console.log(e)
 				this.old.scrollTop = e.detail.scrollTop

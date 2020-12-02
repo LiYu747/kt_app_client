@@ -7,7 +7,7 @@
 			</view>
 		</view>
 		<!-- 主页 -->
-		<view v-if="flag === true" class="flex-d al-center">
+		<view  class="flex-d al-center">
 			<view class="box">
 				<image class="imgjx" src="../../image/home/jx.png" mode=""></image>
 			</view>
@@ -75,9 +75,9 @@
 						url: '/pages/qrcode/qrCode/qrCode'
 					},
 				],
-				list: [],
-				value: '',
-				user: {}
+				list: [], //轮播图
+				value: '', //搜索绑定v-model
+				user: {}  //用户资料
 			}
 		},
 		onLoad(val) {
@@ -123,7 +123,6 @@
 			this.Chart()
 		},
 		onShow() {
-			this.flag = true
 		   let a =	cache.get('jwt')
 		   if(a) {
 			  this.user = {} 

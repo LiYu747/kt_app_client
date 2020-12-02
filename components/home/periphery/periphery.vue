@@ -7,7 +7,7 @@
 					周边消息
 				</view>
 				
-				<view class="andMore pos-abs">
+				<view @click="lookmore" class="andMore pos-abs">
 					查看更多
 				</view>
 			</view>
@@ -39,7 +39,7 @@
 		props: {},
 		data() {
 			return {
-				locdata: []
+				locdata: []  //数据
 			}
 		},
 		methods: {
@@ -64,6 +64,11 @@
 					}
 				})
 			},
+			//查看更多
+			lookmore(){
+				
+			},
+			// 数据
 			getData() {
 				home.news({
 					data: {

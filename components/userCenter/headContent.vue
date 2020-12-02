@@ -34,10 +34,11 @@
 
 		},
 		props: {
+			//用户资料
 			user: {
 				type: Object,
 				required: true
-			}
+			}  
 		},
 		data() {
 			return {

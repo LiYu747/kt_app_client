@@ -53,7 +53,7 @@
 				<view class="itemtext" @click="reply(item)" v-for="item in data1" :key='item.id'>
 					<view class="flex color ju-between">
 						<view class="">
-							{{name}}:
+							{{username}}:
 						</view>
 						<view class="name ">
 							{{item.content}}
@@ -107,13 +107,13 @@
 				til: ['我发布的', '我参与的'],
 				scrollTop: 0,
 				idx: 0,
-				name: '',
-				lists: [],
+				username: '', //姓名
+				lists: [], //我发布的
 				page: 1,
 				text: '',
 				isLoding: false, //是否显示loding
 				hasMore: true, //是否还有更多
-				data1: [],
+				data1: [], //我参与的
 				page1: 1,
 				text1: '',
 				isLoding1: false, //是否显示loding
@@ -240,7 +240,7 @@
 						if (res.statusCode != 200) return;
 						if (res.data.code != 200) return;
 						let Users = res.data.data
-						this.name = Users.username
+						this.username = Users.username
 					}),
 
 				})

@@ -31,7 +31,7 @@
 		props: {},
 		data() {
 			return {
-				loctext: {}
+				loctext: {} //数据
 			}
 		},
 		methods: {

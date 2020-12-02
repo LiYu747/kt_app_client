@@ -47,6 +47,7 @@ data () {
     }
   },
   methods: {
+	  // 点击每一栏事件
    add(item,index){
 	  this.$emit('add',item)
 	  uni.navigateTo({
