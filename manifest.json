@@ -60,9 +60,9 @@
             "splashscreen" : {
                 "androidStyle" : "default",
                 "android" : {
-                    "hdpi" : "image/deploy/ktready.png",
-                    "xhdpi" : "image/deploy/ktready.png",
-                    "xxhdpi" : "image/deploy/ktready.png"
+                    "hdpi" : "image/deploy/kt.9.png",
+                    "xhdpi" : "image/deploy/kt.9.png",
+                    "xxhdpi" : "image/deploy/kt.9.png"
                 }
             },
             "icons" : {

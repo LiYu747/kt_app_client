@@ -6,7 +6,7 @@
 				<image class="timg" src="../../image/forum/tuceng.png" mode=""></image>
 			</view>
 			<view v-else class="back flex al-center">
-				<view class="" v-for="(item,index) in image" :key='item.id'>
+				<view class="" v-for="(item,index) in locimg" :key='item.id'>
 					<image v-if="index<3" class="itemimg" :src="item" mode=""></image>
 				</view>
 			</view>
@@ -38,6 +38,7 @@
 				确认提交
 			</view>
 		</view>
+		
 	</view>
 </template>
 
@@ -60,6 +61,7 @@
 				image: [],
 				title: '', // 标题
 				content: '', //内容
+				locimg:[]
 			}
 		},
 		methods: {
@@ -67,8 +69,8 @@
 			add() {
 				uni.chooseImage({
 					success: (chooseImageRes) => {
-						let tempFilePaths = chooseImageRes.tempFilePaths;
-						// console.log(tempFilePaths);
+						 let tempFilePaths = chooseImageRes.tempFilePaths;
+						 this.locimg = tempFilePaths
 						if (tempFilePaths.length > 0) {
 							tempFilePaths.forEach((item) => {
 								uni.uploadFile({
@@ -76,8 +78,9 @@
 									filePath: item,
 									name: 'file',
 									success: (val) => {
+										if(val.statusCode != 200)  return
+										if(JSON.parse(val.data).code != 200) return
 										this.image.push(JSON.parse(val.data).data.url)
-										// console.log(JSON.parse(val.data).data.url);
 									}
 								});
 							})
@@ -258,4 +261,5 @@
 		height: 70rpx;
 
 	}
+	
 </style>

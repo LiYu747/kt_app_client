@@ -108,7 +108,8 @@
 				// console.log(item.id);
 				address.bookingElevator({
 					data: {
-						id: item.id
+						id: item.id,
+						toFloor:1
 					},
 					fail: (err) => {
 						uni.showToast({

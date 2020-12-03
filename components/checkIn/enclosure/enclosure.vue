@@ -28,7 +28,7 @@
 		props: {},
 		data() {
 			return {
-				image: []
+				image: [],
 			}
 		},
 		methods: {
@@ -42,6 +42,9 @@
 							filePath: item.url,
 							name: 'file',
 							success: (val) => {
+								// console.log(val.statusCode);
+								if(val.statusCode != 200) return
+								if(JSON.parse(val.data).code != 200) return
 								this.image.push(JSON.parse(val.data).data.url)
 								this.$emit('abb', this.image)
 							}
@@ -100,5 +103,24 @@
 		margin-top: 20rpx;
 		font-size: 30rpx;
 		opacity: 0;
+	}
+	
+	.showloding{
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+	   color: #FFFFFF;
+	}
+	
+	.loimg{
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding{
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88,88,88,0.8);
 	}
 </style>

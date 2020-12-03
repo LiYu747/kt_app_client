@@ -1,5 +1,5 @@
 <template>
-	<view class="">
+	<view @touchstart="start" @touchend="end" class="">
 		<view class="nav flex al-center posd">
 			<view class="left flex al-center ju-center" v-for="(item,index) in til" @click="add(index)" :class="{dv:index===0}"
 			 :key='item.id'>
@@ -31,20 +31,21 @@
 						{{item.created_at.slice(0,16)}}
 					</view>
 				</view>
-				<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
-					<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
-					加载中...
-				</view>
-				<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore == false">
-					{{text}}
-				</view>
-				<view class="btom">
-
-				</view>
 			</view>
-			<view class="nono flex ju-center" v-else>
+			<view v-if=" isLoding == true"  class=" flex ju-center m-t2 al-center lodbox">
+				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+				加载中...
+			</view>
+		
+			<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore == false">
+				{{text}}
+			</view>
+			<view class="nono flex ju-center" v-if="lists.length == 0 && isLoding==false">
 				您还没有任何发布
 			</view>
+		<view class="btom">
+		
+		</view>
 		</view>
 
 		<!-- 我参与的 -->
@@ -70,10 +71,11 @@
 					</view>
 				</view>
 			</view>
-			<view class="nono flex ju-center" v-else>
+
+			<view class="nono flex ju-center" v-if="data1.length==0 && isLoding1==false">
 				您还没有发表评论
 			</view>
-			<view v-show="isLoding1 == true" class=" flex ju-center al-center lodbox">
+			<view v-show="isLoding1 == true" class="m-t2 flex ju-center al-center lodbox">
 				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
@@ -113,11 +115,15 @@
 				text: '',
 				isLoding: false, //是否显示loding
 				hasMore: true, //是否还有更多
+				code: 1,
 				data1: [], //我参与的
 				page1: 1,
 				text1: '',
 				isLoding1: false, //是否显示loding
 				hasMore1: true, //是否还有更多
+				code1: 1,
+				clientX: '',
+
 			}
 		},
 		methods: {
@@ -127,6 +133,34 @@
 					scrollTop: 0,
 					duration: 0
 				});
+			},
+			start(e) {
+
+				this.clientX = e.changedTouches[0].clientX;
+
+			},
+			end(e) {
+				// console.log(e)
+				const subX = e.changedTouches[0].clientX - this.clientX;
+				if (subX > 100) {
+					// console.log('右滑')
+					if (this.idx == 0) return
+					this.idx = 0
+					uni.pageScrollTo({
+						scrollTop: 0,
+						duration: 0
+					});
+				} else if (subX < -100) {
+					// console.log('左滑')
+					if (this.idx == 1) return
+					this.idx = 1
+					uni.pageScrollTo({
+						scrollTop: 0,
+						duration: 0
+					});
+				} else {
+					// console.log('无效')
+				}
 			},
 			// 自己发布的帖子 获取数据
 			loadPageData() {
@@ -144,7 +178,7 @@
 						village.SelfComments({
 							data: {
 								villageId: this.id,
-								page: this.page,
+								page: this.page, 
 
 							},
 							success: (res) => {
@@ -154,7 +188,7 @@
 								if (res.statusCode != 200) return;
 
 								if (res.data.code != 200) return;
-
+								this.code = res.data.code
 								let data = res.data.data;
 								this.page = data.current_page + 1;
 								this.hasMore = data.next_page_url ? true : false;
@@ -195,7 +229,6 @@
 								if (res.statusCode != 200) return;
 
 								if (res.data.code != 200) return;
-
 								let data = res.data.data;
 								this.page1 = data.from + 1;
 								this.hasMore1 = data.next_page_url ? true : false;
