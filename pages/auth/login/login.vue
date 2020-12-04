@@ -109,15 +109,44 @@
 			// 获取验证码
 			addvercode() {
 
-				if (this.code === true) {
-					sms.userLoginCode({
+				if (this.code != true )  return;
+				if( this.form.phone == ''){
+					uni.showToast({
+						title:'请输入手机号',
+						icon:'none'
+					})
+					return;
+				}
+				uni.showLoading({
+					title: '发送中...'
+				})
+				sms.userLoginCode({
 						data: {
 							tel: this.form.phone,
+						},
+						fail: () => {
+							uni.hideLoading()
+							uni.showToast({
+								title: '网络错误',
+							})
 						},
 						success: (res) => {
 							// console.log(res);
 							// 发送成功
-							if (res.data.code === 200) {
+							uni.hideLoading()
+							if (res.statusCode != 200) {
+								uni.showToast({
+									title: '网络请求出错',
+								});
+								return;
+							}
+						     if (res.data.code != 200) {
+						     	uni.showToast({
+						     		title: res.data.msg,
+						     		icon: 'none'
+						     	});
+						     	return;
+						     }
 								uni.showToast({
 									title: res.data.msg,
 									duration: 2000
@@ -135,22 +164,8 @@
 										clearInterval(authtime)
 									}
 								}, 1000)
-							} else {
-								this.$refs.uToast.show({
-									title: res.data.msg,
-								})
-							}
 						},
-						fail: (err) => {
-							// console.log(err);
-							uni.showToast({
-								title: err.data.msg
-							})
-							this.isGetingSmsCode = false;
-						},
-
 					})
-				}
 
 			},
 			// 返回按钮
@@ -175,12 +190,22 @@
 			},
 			// 登录
 			Login() {
+				uni.showLoading({
+					title: '加载中...'
+				})
 				userinfo.Signin({
 					data: {
 						tel: this.form.phone,
 						smsCode: this.form.Verification
 					},
+					fail: () => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+						})
+					},
 					success: (res) => {
+						uni.hideLoading()
 						// console.log(res);
 						if (res.statusCode != 200) {
 							return;
@@ -209,12 +234,6 @@
 							url: '/pages/user/userCenter/userCenter',
 							isTab: true
 						})
-					},
-					fail: (err) => {
-						uni.showToast({
-							title: err.data.msg
-						})
-						// console.log(err);
 					},
 				})
 			}
@@ -246,7 +265,7 @@
 <style scoped lang="scss">
 	.back {
 		position: relative;
-		background-image: url(../../../image/login/back.png);
+		background-image: url(../../../image/login/backg.png);
 		height: 100vh;
 		background-repeat: no-repeat; //不重复
 		background-size: 100% 100%; // 满屏
@@ -263,8 +282,7 @@
 	}
 
 	.text {
-		font-size: 36rpx;
-		color: #FFFFFF;
+		font-size: 18px;
 	}
 
 	.logo {
@@ -280,20 +298,22 @@
 	.uiput {
 		width: 432rpx;
 		height: 68rpx;
-		background: rgba(191, 191, 191, 0.3);
+		background: rgba(255, 255, 255, 0.7);
 		border-radius: 34rpx;
 		padding: 0 72rpx;
 	}
 
 	.ipt {
 		/deep/ .uni-input-input {
-			color: #FFFFFF;
+			color: #FF773C;
 			// background: red; 
+			font-size: 12px;
 			width: 350rpx;
 		}
 
 		/deep/ .uni-input-placeholder {
-			color: #FFFFFF !important;
+			color: #FF773C !important;
+			font-size: 12px;
 		}
 	}
 
@@ -303,13 +323,13 @@
 	}
 
 	.iptimg {
-		width: 19rpx;
+		width: 30rpx;
 		height: 30rpx;
 		left: 37rpx;
 	}
 
 	.iptimg2 {
-		width: 24rpx;
+		width: 30rpx;
 		height: 30rpx;
 		left: 37rpx;
 	}
@@ -318,11 +338,9 @@
 		padding: 0 10rpx;
 		height: 40rpx;
 		border-radius: 22rpx;
-		border: 1rpx solid #E6E6E6;
+		border: 1rpx solid #FF773C;
 		right: 27rpx;
-		color: #E6E6E6;
-
-
+		color: #FF773C;
 	}
 
 	.tetxs {
@@ -334,6 +352,7 @@
 	.dv {
 		background: #FF934E;
 		border: none;
+		color: #FFFFFF;
 		-webkit-transform: scale(0.9);
 		-webkit-transform-origin: left top 2
 	}
@@ -358,12 +377,13 @@
 	.line {
 		width: 1rpx;
 		height: 26rpx;
-		background: #E6E6E6;
+		background: #FF773C;
 		margin: 0 28rpx;
 	}
 
 	.retrieve {
-		color: #E6E6E6;
+		color: #FF773C;
+		font-size: 12px;
 		margin-top: 57rpx;
 	}
 </style>

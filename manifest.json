@@ -1,5 +1,5 @@
 {
-    "name" : "快通",
+    "name" : "快通信息",
     "appid" : "__UNI__B8CB42C",
     "description" : "",
     "versionName" : "1.0.0",
@@ -16,7 +16,7 @@
         },
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
-            "waiting" : true,
+            "waiting" : false,
             "autoclose" : true,
             "delay" : 0
         },
@@ -60,10 +60,11 @@
             "splashscreen" : {
                 "androidStyle" : "default",
                 "android" : {
-                    "hdpi" : "image/deploy/kt.9.png",
-                    "xhdpi" : "image/deploy/kt.9.png",
-                    "xxhdpi" : "image/deploy/kt.9.png"
-                }
+                    "hdpi" : "unpackage/deploy/480.png",
+                    "xhdpi" : "unpackage/deploy/720.png",
+                    "xxhdpi" : "unpackage/deploy/1080.png"
+                },
+                "iosStyle" : "storyboard"
             },
             "icons" : {
                 "android" : {

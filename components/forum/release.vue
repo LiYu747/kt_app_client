@@ -2,7 +2,7 @@
 	<view class="flex-d color al-center">
 		<image src="../../image/home/jx.png" class="img" mode=""></image>
 		<view class="nav flex-d al-center">
-			<view v-if="image.length===0" class="top flex al-center ju-center">
+			<view v-if="locimg.length===0" class="top flex al-center ju-center">
 				<image class="timg" src="../../image/forum/tuceng.png" mode=""></image>
 			</view>
 			<view v-else class="back flex al-center">
@@ -38,7 +38,15 @@
 				确认提交
 			</view>
 		</view>
-		
+
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="../../image/address/loading.gif" mode=""></image>
+				</view>
+				上传中
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -61,7 +69,8 @@
 				image: [],
 				title: '', // 标题
 				content: '', //内容
-				locimg:[]
+				locimg: [],
+				isLoding: false
 			}
 		},
 		methods: {
@@ -69,26 +78,46 @@
 			add() {
 				uni.chooseImage({
 					success: (chooseImageRes) => {
-						 let tempFilePaths = chooseImageRes.tempFilePaths;
-						 this.locimg = tempFilePaths
-						if (tempFilePaths.length > 0) {
-							tempFilePaths.forEach((item) => {
-								uni.uploadFile({
-									url: route.services.file.upload, //仅为示例，非真实的接口地址
-									filePath: item,
-									name: 'file',
-									success: (val) => {
-										if(val.statusCode != 200)  return
-										if(JSON.parse(val.data).code != 200) return
-										this.image.push(JSON.parse(val.data).data.url)
+						this.isLoding = true
+						let tempFilePaths = chooseImageRes.tempFilePaths;
+						this.locimg = tempFilePaths
+						let num = tempFilePaths.length
+						console.log(this.locimg);
+						if (tempFilePaths.length == 0) return;
+						tempFilePaths.forEach((item) => {
+							uni.uploadFile({
+								url: route.services.file.upload, //仅为示例，非真实的接口地址
+								filePath: item,
+								name: 'file',
+								success: (val) => {
+									if (val.statusCode != 200) {
+										uni.showToast({
+											title: '网络请求出错',
+											icon: 'none'
+										});
+										return;
 									}
-								});
-							})
-						}
+									if (JSON.parse(val.data).code != 200) {
+										uni.showToast({
+											title: JSON.parse(val.data).msg,
+											icon: 'none'
+										});
+										return;
+									}
+									this.image.push(JSON.parse(val.data).data.url)
+									if (this.image.length == num) {
+										this.isLoding = false
+										uni.showToast({
+											title: '上传成功'
+										})
+									}
+								}
+							});
+						})
 					}
 				});
 			},
-			
+
 			scroll: function(e) {
 				// console.log(e)
 				this.old.scrollTop = e.detail.scrollTop
@@ -96,6 +125,10 @@
 
 			// 发布
 			Submit() {
+				if (this.isLoding == true) return;
+				uni.showLoading({
+					title:'提交中...'
+				})
 				village.releasePost({
 					data: {
 						village_id: this.id,
@@ -104,29 +137,37 @@
 						albums: this.image
 					},
 					fail: (err) => {
+						uni.hideLoading()
 						uni.showToast({
-							title: err.data.msg
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {
-						if (res.statusCode != 200) return
-						if (res.data.code == 200) {
-							this.$emit('Submit')
+						uni.hideLoading()
+						if (res.statusCode != 200) {
 							uni.showToast({
-								title: res.data.msg,
-								duration: 2000,
-							})
-							// 清空
-							this.image = []
-							this.title = ''
-							this.content = ''
-						} else {
-							uni.showToast({
-								title: res.data.msg,
-								duration: 2000,
+								title: '网络请求出错',
 								icon: 'none'
-							})
+							});
+							return;
 						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							});
+							return;
+						}
+						this.$emit('Submit')
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000,
+						})
+						// 清空
+						this.image = []
+						this.title = ''
+						this.content = ''
 						// console.log('发布帖子', res);
 					}
 				})
@@ -261,5 +302,23 @@
 		height: 70rpx;
 
 	}
-	
+
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
+	}
 </style>
