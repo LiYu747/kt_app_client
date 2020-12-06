@@ -86,6 +86,15 @@
 
 			</view>
 		</view>
+		
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="../../image/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -173,6 +182,9 @@
 					showModal: true,
 					fail: () => {
 						this.isLoding = false;
+						uni.navigateBack({
+							delta:1
+						})
 					},
 					success: () => {
 						village.SelfComments({
@@ -265,9 +277,7 @@
 				user.userDeta({
 					data: {},
 					fail: (err => {
-						uni.showToast({
-							title: err.data.msg
-						})
+					
 					}),
 					success: (res => {
 						if (res.statusCode != 200) return;
@@ -280,12 +290,14 @@
 			}
 		},
 		mounted() {
-			this.loadPageData()
-			this.SelfPost()
-			this.Userdata()
+		
 		},
 
-
+       onShow() {
+       	this.loadPageData()
+       	this.SelfPost()
+       	this.Userdata()
+       },
 		onLoad() {
 
 		},
@@ -442,5 +454,24 @@
 
 	.lodbox {
 		font-size: 24rpx;
+	}
+	
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

@@ -13,6 +13,9 @@
 					<view class="item" v-for="(item,index) in titel" :key='item.id' @click="add(index)" :class="{'dv':index===1,'colr':idx===index}">
 						{{item}}
 					</view>
+					<view @click="goforum" class="">
+						论坛
+					</view>
 				</view>
 				<view v-show="idx===0" class="content">
 					{{arr.brief}}
@@ -36,6 +39,15 @@
 				<u-parse :html="arr.desc"></u-parse>
 			</view>
 		</view>
+		
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="../../image/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -57,21 +69,23 @@
 				list: [], //轮播图
 				arr: {}, //小区展示信息
 				titel: [
-					'简介', '公告', '论坛'
+					'简介', '公告'
 				],
 				Notice: [], // 公告数据
 				idx: 0,
+				isLoding: false
 			}
 		},
 		methods: {
 			// 点击
 			add(index) {
-				if (index === 2) {
-					uni.navigateTo({
-						url:`/pages/communityForum/forumlists/forumlists?id=${this.id}`
-					})
-				}
 				this.idx = index
+			},
+			// 去论坛
+			goforum() {
+				uni.navigateTo({
+					url: `/pages/communityForum/forumlists/forumlists?id=${this.id}`
+				})
 			},
 			// 小区公告
 			noticeData() {
@@ -95,16 +109,19 @@
 			},
 			// 小区展示信息
 			Information() {
+				this.isLoding = true
 				village.displayInformation({
 					data: {
 						id: this.id
 					},
 					fail: (err) => {
+						this.isLoding = false
 						uni.showToast({
 							title: err.data.msg
 						})
 					},
 					success: (res) => {
+						this.isLoding = false
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						// console.log('小区公告',res.data.data);
@@ -209,6 +226,12 @@
 		border-bottom: 4rpx solid #F07535;
 	}
 
+	.nono {
+		// color: #FFFFFF;
+		border-top: 4rpx solid #FFFFFF;
+		border-bottom: 4rpx solid #FFFFFF;
+	}
+
 	.content {
 		margin-top: 31rpx;
 		width: 608rpx;
@@ -254,5 +277,24 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
+	}
+	
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

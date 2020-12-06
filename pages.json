@@ -298,6 +298,18 @@
             }
             
         }
+        ,
+		 // 最新拜访申请消息
+		{
+            "path" : "pages/visitapplication/newDetalis/newDetalis",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

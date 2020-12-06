@@ -112,8 +112,11 @@ class JWT{
 			success(res) {
 				that.isAskLogin = false;
 				if( res.confirm == true){
+					
+					// let routes = getCurrentPages(); // 获取当前打开过的页面路由数组
+					// let curRoute = routes[routes.length - 1].route  //获取当前路由
 					uni.navigateTo({
-						url : '/pages/auth/login/login',
+						url : `/pages/auth/login/login`,
 					})
 				}else{
 					utils.doIfIsFunc(params.fail)

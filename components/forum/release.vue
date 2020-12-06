@@ -82,7 +82,7 @@
 						let tempFilePaths = chooseImageRes.tempFilePaths;
 						this.locimg = tempFilePaths
 						let num = tempFilePaths.length
-						console.log(this.locimg);
+						// console.log(this.locimg);
 						if (tempFilePaths.length == 0) return;
 						tempFilePaths.forEach((item) => {
 							uni.uploadFile({
@@ -166,6 +166,7 @@
 						})
 						// 清空
 						this.image = []
+						this.locimg = []
 						this.title = ''
 						this.content = ''
 						// console.log('发布帖子', res);

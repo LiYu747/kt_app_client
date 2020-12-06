@@ -1,6 +1,6 @@
 //本地开发域名
 // let host = 'http://local.kt.cn/';
-let host = 'https://api.kuaitongkeji.com/';
+let host = 'https://api.kuaitongkeji.com/'; 
 let apiPath = host + 'api/';
 module.exports = {
 	
@@ -89,6 +89,9 @@ module.exports = {
 		visitLog : {
 				// 拜访记录 && 申请拜访
 			apply : apiPath + 'user/visitLog',
+			
+			// 最新拜访申请
+			newapply : apiPath + 'user/visitLog/latestValid',
 			
 			// 拜访记录详情
 			details : apiPath + 'user/visitLog/show',

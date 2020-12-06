@@ -13,7 +13,7 @@
 			</view>
 			<!-- 轮播图 -->
 			<view class=" pos-abs pos">
-				<u-swiper :list="list" bg-color='rgba(255, 255, 255, 0)' height="304" effect3d-previous-margin='60' indicator-pos='none'
+				<u-swiper @click="addswiper" :list="list" bg-color='rgba(255, 255, 255, 0)' height="304" effect3d-previous-margin='60' indicator-pos='none'
 				 :effect3d="true"></u-swiper>
 			</view>
 			<!-- 操作 -->
@@ -33,6 +33,11 @@
 			<CommunityNews v-if='user'></CommunityNews>
 			<!-- 周边 -->
 			<periphery></periphery>
+		</view>
+		
+		<view v-if="paly == true" class=" pos-abs moive flex al-center ju-center">
+			<video  src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+			 ></video>
 		</view>
 	</view>
 </template>
@@ -62,7 +67,7 @@
 					{
 						image: require('@/image/home/bf.png'),
 						titel: '拜访申请',
-						url: '/pages/visitapplication/visit/visit'
+						url: '/pages/visitapplication/newDetalis/newDetalis'
 					},
 					{
 						image: require('@/image/home/lf.png'),
@@ -71,13 +76,14 @@
 					},
 					{
 						image: require('@/image/home/code.png'),
-						titel: '回家二维码',
+						titel: '我的二维码',
 						url: '/pages/qrcode/qrCode/qrCode'
 					},
 				],
 				list: [], //轮播图
 				value: '', //搜索绑定v-model
-				user: {}  //用户资料
+				user: {}  ,//用户资料
+				paly: false,
 			}
 		},
 		onLoad(val) {
@@ -91,6 +97,15 @@
 						url: `/pages/index/search/search?value=${this.value}`
 					})
 				}
+			},
+			// 点击轮播图
+			addswiper(val){
+			   let arr = this.list[val]
+			  
+			   if(arr.video){
+				   this.paly = true
+			   }
+
 			},
 			// 跳转
 			checkin(item) {
@@ -114,6 +129,7 @@
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						this.list = res.data.data.ads
+						// console.log(this.list);
 					},
 				})
 			},
@@ -252,5 +268,12 @@
 		right: 49rpx;
 		font-size: 30rpx;
 		color: #FFFFFF;
+	}
+	.moive{
+		top: 0;
+		z-index: 9;
+		width: 100%;
+		height: 100vh;
+		background: rgba(0,0,0,0.3);
 	}
 </style>

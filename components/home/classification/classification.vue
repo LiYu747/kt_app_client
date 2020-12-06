@@ -47,7 +47,7 @@ data () {
 			},
 			{
 				image: require('@/image/home/cz/neighbor.png'),
-				titel: '远亲近邻'
+				titel: '友邻'
 			},
 			{
 				image: require('@/image/home/cz/car.png'),

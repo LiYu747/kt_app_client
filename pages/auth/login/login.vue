@@ -102,7 +102,8 @@
 							trigger: 'blur'
 						},
 					],
-				}
+				},
+				isRegister: 'false'
 			}
 		},
 		methods: {
@@ -202,6 +203,7 @@
 						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {
@@ -228,12 +230,23 @@
 							jwt.execTask();
 						})
 						// 
-						this.$refs.uToast.show({
-							title: res.data.msg,
-							type: 'success',
-							url: '/pages/user/userCenter/userCenter',
-							isTab: true
-						})
+						 this.$refs.uToast.show({
+						 	title: res.data.msg,
+						 	type: 'success',
+						 });
+						const time = setTimeout(() => {
+							if(this.isRegister == 'true'){
+								uni.navigateBack({
+									delta:3
+								})
+							}
+							else{
+								uni.navigateBack({
+									delta:1
+								})
+							}
+							clearTimeout(time)
+						}, 2000)	 
 					},
 				})
 			}
@@ -244,8 +257,10 @@
 		onReady() {
 			this.$refs.uForm.setRules(this.rules);
 		},
-		onLoad() {
-
+		onLoad(val) {
+			if(!val.register) return;
+			// console.log(val);
+			this.isRegister = val.register		 
 		},
 		filters: {
 
