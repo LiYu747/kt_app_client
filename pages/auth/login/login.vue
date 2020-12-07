@@ -1,7 +1,7 @@
 <template>
 	<view class="back">
 		<view class="nav pos-rel flex al-center ju-center">
-			<image @click="goback" class="img pos-abs" src="../../../image/login/1729908969cd5d7d911e096d6db3c70.png" mode=""></image>
+			<image @click="goback" class="img pos-abs" src="../../../image/login/fanhui.png" mode=""></image>
 			<view class="text">
 				登录
 			</view>

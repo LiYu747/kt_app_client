@@ -34,10 +34,12 @@
 			<!-- 周边 -->
 			<periphery></periphery>
 		</view>
-		
-		<view v-if="paly == true" class=" pos-abs moive flex al-center ju-center">
-			<video  src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
-			 ></video>
+		     <!-- 视频播放 -->
+		<view v-if="paly == true"  @mousewheel.prevent  class=" pos-abs moive flex-d al-center ju-center">
+			<view @click="close" class="showback pos-abs">
+			</view>
+			<video :src="videoUrl"></video>
+				<image @click="close" src="../../image/home/close.png" class="closeimg" mode=""></image>
 		</view>
 	</view>
 </template>
@@ -84,6 +86,7 @@
 				value: '', //搜索绑定v-model
 				user: {}  ,//用户资料
 				paly: false,
+				videoUrl:'', //视频地址
 			}
 		},
 		onLoad(val) {
@@ -100,12 +103,17 @@
 			},
 			// 点击轮播图
 			addswiper(val){
-			   let arr = this.list[val]
-			  
-			   if(arr.video){
+			   let movie = this.list[val]
+			   if(movie.video){
+				   this.videoUrl = movie.video
 				   this.paly = true
+				   return;
 			   }
-
+			},
+			
+			// 关闭视频
+			close(){
+				this.paly = false
 			},
 			// 跳转
 			checkin(item) {
@@ -114,7 +122,8 @@
 					url: item.url
 				})
 			},
-			// 轮播图
+			
+			// 轮播图数据
 			Chart() {
 				home.chart({
 					data: {
@@ -271,9 +280,26 @@
 	}
 	.moive{
 		top: 0;
-		z-index: 9;
+		position: fixed;
+		z-index: 999;
 		width: 100%;
 		height: 100vh;
-		background: rgba(0,0,0,0.3);
+		background: #000000;
+	}
+	
+	.showback{
+		width: 100%;
+		height: 100vh;
+		background: #000000;
+	}
+	
+	.closeimg{
+		margin-top: 80rpx;
+		width: 60rpx;
+		height:60rpx;
+	}
+
+	uni-video{
+		width: 100%;
 	}
 </style>

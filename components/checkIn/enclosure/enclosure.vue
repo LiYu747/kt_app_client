@@ -64,11 +64,10 @@
 							}
 							if (JSON.parse(val.data).code != 200) {
 								this.isLoding = false
-								this.$refs.uToast.show({
-									title: '上传失败',
-									type: 'error',
-									icon: false
-								});
+								uni.showToast({
+									title:'上传失败',
+									icon:'none'
+								})
 								return;
 							}
 							this.image.push(JSON.parse(val.data).data.url)

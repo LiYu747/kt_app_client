@@ -64,7 +64,7 @@
                     "xhdpi" : "unpackage/deploy/720.png",
                     "xxhdpi" : "unpackage/deploy/1080.png"
                 },
-                "iosStyle" : "storyboard"
+                "iosStyle" : "common"
             },
             "icons" : {
                 "android" : {

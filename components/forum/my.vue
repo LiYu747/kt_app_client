@@ -32,20 +32,20 @@
 					</view>
 				</view>
 			</view>
-			<view v-if=" isLoding == true"  class=" flex ju-center m-t2 al-center lodbox">
+			<view v-if=" isLoding == true" class=" flex ju-center m-t2 al-center lodbox">
 				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-		
+
 			<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore == false">
 				{{text}}
 			</view>
 			<view class="nono flex ju-center" v-if="lists.length == 0 && isLoding==false">
 				您还没有任何发布
 			</view>
-		<view class="btom">
-		
-		</view>
+			<view class="btom">
+
+			</view>
 		</view>
 
 		<!-- 我参与的 -->
@@ -86,7 +86,7 @@
 
 			</view>
 		</view>
-		
+
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -142,6 +142,7 @@
 					scrollTop: 0,
 					duration: 0
 				});
+				
 			},
 			start(e) {
 
@@ -183,15 +184,23 @@
 					fail: () => {
 						this.isLoding = false;
 						uni.navigateBack({
-							delta:1
+							delta: 1
 						})
 					},
 					success: () => {
 						village.SelfComments({
 							data: {
 								villageId: this.id,
-								page: this.page, 
+								page: this.page,
 
+							},
+							fail: (err) => {
+								this.isLoding = false;
+								uni.showToast({
+									title: '网络错误',
+									icon: 'none'
+								})
+								// console.log(err);
 							},
 							success: (res) => {
 
@@ -207,13 +216,7 @@
 
 								this.lists = this.lists.concat(data.data);
 							},
-							fail: (err) => {
-								this.isLoding = false;
-								uni.showToast({
-									title: err.data.msg
-								})
-								// console.log(err);
-							}
+
 						})
 					}
 				})
@@ -234,6 +237,14 @@
 							data: {
 								page: this.page1,
 							},
+							fail: (err) => {
+								this.isLoding1 = false;
+								uni.showToast({
+									title: '网络错误',
+									icon: 'none'
+								})
+								// console.log(err);
+							},
 							success: (res) => {
 								// console.log(res);
 								this.isLoding1 = false;
@@ -247,13 +258,7 @@
 
 								this.data1 = this.data1.concat(data.data);
 							},
-							fail: (err) => {
-								this.isLoding1 = false;
-								uni.showToast({
-									title: err.data.msg
-								})
-								// console.log(err);
-							}
+
 						})
 					}
 				})
@@ -277,11 +282,15 @@
 				user.userDeta({
 					data: {},
 					fail: (err => {
-					
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
 					}),
 					success: (res => {
 						if (res.statusCode != 200) return;
 						if (res.data.code != 200) return;
+						console.log(res);
 						let Users = res.data.data
 						this.username = Users.username
 					}),
@@ -290,14 +299,14 @@
 			}
 		},
 		mounted() {
-		
+
 		},
 
-       onShow() {
-       	this.loadPageData()
-       	this.SelfPost()
-       	this.Userdata()
-       },
+		onShow() {
+			this.loadPageData()
+			this.SelfPost()
+			this.Userdata()
+		},
 		onLoad() {
 
 		},
@@ -455,7 +464,7 @@
 	.lodbox {
 		font-size: 24rpx;
 	}
-	
+
 	.showloding {
 		position: absolute;
 		width: 100%;
@@ -463,12 +472,12 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-	
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-	
+
 	.loding {
 		width: 260rpx;
 		height: 200rpx;

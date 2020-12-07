@@ -246,14 +246,12 @@ class Clients {
 										}
 									}
 								});
+								return;
 							} else if (androiddata.app_android_download_url) {
 								uni.navigateTo({
 									url: `/pages/update/update?url=${androiddata.app_android_download_url}`
 								})
-							} else {
-								// console.log(1);
-							}
-
+							} 
 
 						}
 					}
@@ -278,10 +276,7 @@ class Clients {
 								uni.navigateTo({
 									url: `/pages/update/update?url=${Iosdata.app_android_download_url}`
 								})
-							} else {
-
 							}
-
 						}
 					}
 				})

@@ -21,7 +21,7 @@ data () {
 	  locdata:[
 		  {image:require('@/image/user/Checkin.png'),
 		  titel:'入驻申请',
-		  url:'/pages/residence/checkRecord/checkRecord/checkRecord'
+		  url:'/pages/residence/checkRecord/checkRecord'
 		  },
 		  {image:require('@/image/user/visit.png'),
 		   titel:'拜访申请',

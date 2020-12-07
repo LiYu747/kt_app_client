@@ -52,10 +52,13 @@
 					},
 					fail: (err) => {
 						uni.showToast({
-							title: err.data.msg
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {
+						if (res.statusCode != 200) return
+						if (res.data.code != 200) return
 						// console.log(res.data.data);
 						let content = res.data.data
 						uni.navigateTo({
@@ -77,10 +80,13 @@
 					},
 					fail: (err) => {
 						uni.showToast({
-							title: err.data.msg
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {
+						if (res.statusCode != 200) return
+						if (res.data.code != 200) return
 						// console.log(res.data.data.data);
 						let data = res.data.data.data
 						this.locdata = data.slice(0,4)

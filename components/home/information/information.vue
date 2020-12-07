@@ -43,7 +43,8 @@
 					},
 					fail: (err) => {
 						uni.showToast({
-							title: err.data.msg
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {
@@ -65,7 +66,8 @@
 					},
 					fail: (err) => {
 						uni.showToast({
-							title: err.data.msg
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {

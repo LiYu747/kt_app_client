@@ -55,8 +55,8 @@
 				</view>
 			</view>
 		</view>
-         
-		 
+
+
 	</view>
 </template>
 
@@ -110,11 +110,12 @@
 				address.bookingElevator({
 					data: {
 						id: item.id,
-						toFloor:1
+						toFloor: 1
 					},
 					fail: (err) => {
 						uni.showToast({
-							title: err.data.msg
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {

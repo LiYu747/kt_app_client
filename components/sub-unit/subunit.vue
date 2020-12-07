@@ -20,7 +20,7 @@ components: {
 props: {
 	retur:{
 		type:Boolean,
-		default:false
+		default:true
 	},
 	titel:{
 		type:String,
@@ -41,7 +41,9 @@ data () {
 	  this.rotateTimes++
 	  },
 	 goback(){
-		 this.$emit('goback')
+		 uni.navigateBack({
+		 	delta:1
+		 })
 	 }
   },
   mounted () {

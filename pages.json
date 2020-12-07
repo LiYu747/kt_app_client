@@ -230,7 +230,7 @@
         ,
 		  //入住申请记录
 		{
-            "path" : "pages/residence/checkRecord/checkRecord/checkRecord",
+            "path" : "pages/residence/checkRecord/checkRecord",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -302,6 +302,18 @@
 		 // 最新拜访申请消息
 		{
             "path" : "pages/visitapplication/newDetalis/newDetalis",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		//APP版本号
+		{
+            "path" : "pages/user/versionNumber/versionNumber",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

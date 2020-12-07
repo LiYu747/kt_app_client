@@ -87,6 +87,14 @@
 								page: this.page,
 								pageSize: this.ps
 							},
+							fail: (err) => {
+								this.isLoding = false;
+								// console.log(err);
+								uni.showToast({
+									title: '网络错误',
+									icon:'none'
+								})
+							}
 							success: (res) => {
 
 								this.isLoding = false;
@@ -102,13 +110,6 @@
 
 								this.lists = this.lists.concat(data.data);
 							},
-							fail: (err) => {
-								this.isLoding = false;
-								// console.log(err);
-								uni.showToast({
-									title: err.data.msg
-								})
-							}
 						})
 					}
 				})
