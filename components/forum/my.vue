@@ -290,7 +290,7 @@
 					success: (res => {
 						if (res.statusCode != 200) return;
 						if (res.data.code != 200) return;
-						console.log(res);
+						// console.log(res);
 						let Users = res.data.data
 						this.username = Users.username
 					}),
@@ -299,13 +299,13 @@
 			}
 		},
 		mounted() {
-
+             this.loadPageData()
+			this.SelfPost()
+			this.Userdata()
 		},
 
 		onShow() {
-			this.loadPageData()
-			this.SelfPost()
-			this.Userdata()
+			
 		},
 		onLoad() {
 
@@ -376,7 +376,7 @@
 
 	.items {
 		width: 140rpx;
-		height: 150rpx;
+		height: 170rpx;
 		margin-right: 20rpx;
 	}
 

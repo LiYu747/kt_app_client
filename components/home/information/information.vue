@@ -11,6 +11,8 @@
 				<view class="context ">
 					<view class="ltst ">
 						{{loctext.title}}
+					<!-- 	的圣诞节喀什年代开始就豆瓣喀山举办的凯撒举办的喀山举办的卡世界杯打开时间吧刷卡
+						说的暗示肯德基那块缴纳喀什觉得那可就是那可是加拿大昆山声卡的呢说的 -->
 					</view>
 				</view>
 				<view @click="lookup" class="btn flex al-center ju-center">
@@ -108,13 +110,13 @@
 	}
 
 	.imgss {
-		width: 23rpx;
-		height: 27rpx;
+		width: 28rpx;
+		height: 35rpx;
 		margin-right: 10rpx;
 	}
 
 	.text {
-		font-size: 30rpx;
+		font-size: 36rpx;
 		color: #666666;
 	}
 
@@ -123,13 +125,12 @@
 		width: 650rpx;
 		background: #FFFFFF;
 		box-shadow: 2rpx 4rpx 6rpx 0 #C0C4CC;
-		padding: 20rpx;
-		padding-bottom: 15rpx;
+		padding: 20rpx ;
 	}
 
 	.context {
-		width: 512rpx;
-		height: 58rpx;
+		width: 400rpx;
+		height: 78rpx;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
@@ -138,20 +139,17 @@
 	}
 
 	.ltst {
-		font-size: 26rpx;
+		font-size: 24rpx;
 		color: #666666;
-		-webkit-transform: scale(0.8);
-		-webkit-transform-origin: left top
 	}
 
 	.btn {
-		width: 172rpx;
+		width: 150rpx;
 		height: 48rpx;
 		background: #F79D46;
-		border-radius: 22rpx;
+		border-radius: 30rpx;
 		color: #FFFFFF;
-		font-size: 20rpx;
-		-webkit-transform: scale(0.9);
-		-webkit-transform-origin: left top
+		font-size: 24rpx;
+		margin-left: 60rpx;
 	}
 </style>

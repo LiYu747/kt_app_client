@@ -7,7 +7,7 @@
 					<image v-else class="zrimg" src="../../image/address/zro.png" mode=""></image>
 				</view>
 				<view class="addres">
-					<view @click="Select(item,index)" class=" flex al-center pos-rel">
+					<view @click="Select(item,index)" class=" name flex al-center pos-rel">
 						{{item.village_name}}
 						<view class="pos-abs  right">
 							<image class="reimg" src="../../image/address/retrue.png" mode=""></image>
@@ -94,7 +94,7 @@
 			Select(item, index) {
 				this.idx = index
 				uni.navigateTo({
-					url: `/pages/communityForum/forum/forum?id=${item.village_id}`
+					url: `/pages/communityForum/introduction/introduction?id=${item.village_id}`
 				})
 			},
 			// 编辑
@@ -184,7 +184,11 @@
 		padding-right: 33rpx;
 		padding-bottom: 37rpx;
 	}
-
+    
+	.name{
+		font-size: 34rpx;
+	}
+	
 	.zrimg {
 		width: 24rpx;
 		height: 24rpx;
@@ -192,7 +196,7 @@
 
 	.location {
 		left: 20rpx;
-		top: 24rpx;
+		top: 30rpx; 
 	}
 
 	.addres {
@@ -203,12 +207,14 @@
 	}
 
 	.reimg {
-		width: 17rpx;
-		height: 32rpx;
+		width: 24rpx;
+		height: 34rpx; 
 	}
 
 	.right {
 		right: 0;
+		color: #F07535;
+		font-size: 30rpx;
 	}
 
 	.line {
@@ -224,8 +230,9 @@
 	}
 
 	.botto {
-		right: 23rpx;
+		right: 32rpx;
 		bottom: 32rpx;
+		font-size: 30rpx;
 		color: #F07535;
 	}
 

@@ -180,9 +180,9 @@
             
         }
         ,
-		// 小区论坛
+		// 我的论坛
 		{
-            "path" : "pages/communityForum/forum/forum",
+            "path" : "pages/communityForum/myforum/forum",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -314,6 +314,30 @@
 		//APP版本号
 		{
             "path" : "pages/user/versionNumber/versionNumber",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		//小区简介
+		{
+            "path" : "pages/communityForum/introduction/introduction",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,
+		//发布帖子
+		{
+            "path" : "pages/communityForum/release/release",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

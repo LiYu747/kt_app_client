@@ -3,7 +3,7 @@
         <view class="box flex flex-w">
         	<view class="flex-d al-center loyout ju-around" v-for="(item,index) in locdata" :key='index' @click="goclass(item)">
         		   <image :src="item.image" class="itemimg" mode=""></image>
-				   <view class=" fz-12 text">
+				   <view class="  text">
 				   	{{item.titel}}
 				   </view>
         	</view>
@@ -115,8 +115,7 @@ data () {
 .text{
 	margin-top: 10rpx;
 	font-size: 28rpx;
-	color: #000000;
-	-webkit-transform-origin-x: 2;
-	-webkit-transform: scale(0.8);
+	color: #666666;
+	font-size: 26rpx ;
 }
 </style>

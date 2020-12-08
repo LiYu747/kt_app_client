@@ -129,7 +129,7 @@
 	}
 
 	.text {
-		font-size: 30rpx;
+		font-size: 36rpx;
 		color: #666666;
 	}
 
@@ -154,19 +154,21 @@
 
 	.font {
 		margin-left: 24rpx;
-		width: 134rpx;
-		height: 130rpx;
+		width: 144rpx;
+		height: 116rpx;
+		word-break:break-all;
 		overflow: hidden;
+		line-height: 1.3;
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 4;
+		-webkit-line-clamp: 4; 
 		-webkit-transform: scale(0.9);
 		-webkit-transform-origin: left top
 	}
 
 	.location {
-		right: 20rpx;
+		right: 22rpx;
 		bottom: 18rpx;
 		color: #808080;
 		font-size: 24rpx;
@@ -176,7 +178,7 @@
 	
 	.andMore{
 		right: 10rpx;
-		font-size: 20rpx;
+		font-size: 24rpx;
 		color: rgb(247,157,70);
 	}
 </style>

@@ -1,11 +1,10 @@
 <template>
   <view class="booy flex al-center ju-center">
-  	<view class="" v-for="(item,index) in icondata"  :key='item.id' >
-  	<view  class="flex-d al-center" v-show="index===one||index===two||index===three">
-  			<image @click="add(index)" :class="{'oic1':index===0||index===1,'oic2':index===2||index===3,'oic3':index===4||index==5}" :src="item.icon" mode=""></image>
-			<view @click="add(index)" class="sff" :class="{'top':index===2||index===3,'calor':index===1||index===5}">
-				{{item.titel}}
-			</view>
+  	<view class=" flex-d al-center" @click="add(item)" v-for="(item,index) in icondata"  :key='item.id' >
+  	        <image :class="{'oic2':index==1}" :src="item.icon" class="oic1" mode=""></image>
+			 <view :class="{'calor':index==0}" class="itemtext">
+			 	{{item.titel}}
+			 </view>
   	</view>
 	
   	</view>
@@ -18,46 +17,38 @@ name: "",
 components: {
   
 },
-props: {},
+props: {
+	id:{
+		type:String
+	}
+}, 
 data () {
   return {
-	  icondata:[
-		  {icon:require('@/image/forum/home1.png'),
-		  titel:'主页'},
-		  {icon:require('@/image/forum/home2.png'),
-		  titel:'主页'},
-		  {icon:require('@/image/forum/photo1.png'),
+	  icondata:[ 
+		  {
+		  icon:require('@/image/forum/home2.png'),
+		  titel:'论坛主页',
 		  },
-		  {icon:require('@/image/forum/photo2.png'),
-		},
-		  {icon:require('@/image/forum/my1.png'),
-		  titel:'我的'},
-		  {icon:require('@/image/forum/my2.png'),
-		  titel:'我的'},
+		  {
+			 icon:require('@/image/forum/photo1.png'),
+		    url:`/pages/communityForum/release/release?id=${this.id}`
+		  },
+		  {
+		  icon:require('@/image/forum/my1.png'),
+		  titel:'我的',
+		  url:`/pages/communityForum/myforum/forum?id=${this.id}`
+		  },
 		  ],
-		  one:1,
-		  two:2,
-		  three:4
+
     }
   },
   methods: {
-  add(index){
+  add(item,index){
 	  this.$emit('add',index)
-	  if(index===0){
-		  this.one = 1
-		  this.two = 2
-		  this.three = 4
-	  }
-	  if(index===2){
-		  this.one = 0
-		  this.two = 3
-		  this.three =4
-	  }
-	  if(index===4){
-		  this.one = 0
-		  this.two = 2
-		  this.three =5
-	  }
+	  uni.redirectTo({
+	  	url:item.url
+	  })
+	  console.log(item.url);
   }
   },
   mounted () {
@@ -86,6 +77,7 @@ data () {
 	width: 100%;
 	height: 110rpx;
 	position: fixed;
+	color: #a6a6a6;
 	background: #FFFFFF;
 	bottom: 0;
 	box-shadow: -4rpx 0  4rpx #cccccc;
@@ -97,10 +89,13 @@ data () {
 .oic2{
 	position: relative;
 	top: -28rpx;
-	width: 140rpx;
-	height: 140rpx;
-	margin-left: 159rpx;
-	margin-right: 148rpx;
+	width: 150rpx;
+	height: 150rpx;
+	margin-left: 100rpx;
+	margin-right: 130rpx;
+}
+.itemtext{
+	font-size: 26rpx;
 }
 .oic3{
 	width: 41rpx;
@@ -111,11 +106,7 @@ data () {
 	top: -90rpx;
 	font-size: 18rpx;
 }
-.sff{
-	margin-top: 5rpx;
-	-webkit-transform: scale(0.9);
-	-webkit-transform-origin: 2
-}
+
 .calor{
 		color: #F95454;
 }

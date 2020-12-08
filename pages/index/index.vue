@@ -13,14 +13,14 @@
 			</view>
 			<!-- 轮播图 -->
 			<view class=" pos-abs pos">
-				<u-swiper @click="addswiper" :list="list" bg-color='rgba(255, 255, 255, 0)' height="304" effect3d-previous-margin='60' indicator-pos='none'
+				<u-swiper @click="addswiper" :list="list" border-radius='20' bg-color='rgba(255, 255, 255, 0)' height="340" effect3d-previous-margin='60' indicator-pos='none'
 				 :effect3d="true"></u-swiper>
 			</view>
 			<!-- 操作 -->
 			<view class="flex operation ju-between">
 				<view class="flex-d al-center" v-for="(item,index) in localdata" @click="checkin(item)" :key='item.id'>
 					<image :src="item.image" class="itemimg" mode=""></image>
-					<view class="fz-12 itemtext">
+					<view class="itemtext">
 						{{item.titel}}
 					</view>
 				</view>
@@ -37,8 +37,8 @@
 		     <!-- 视频播放 -->
 		<view v-if="paly == true"  @mousewheel.prevent  class=" pos-abs moive flex-d al-center ju-center">
 			<view @click="close" class="showback pos-abs">
-			</view>
-			<video :src="videoUrl"></video>
+			</view> 
+			<video :src="videoUrl"  :poster='cover'></video> 
 				<image @click="close" src="../../image/home/close.png" class="closeimg" mode=""></image>
 		</view>
 	</view>
@@ -87,6 +87,7 @@
 				user: {}  ,//用户资料
 				paly: false,
 				videoUrl:'', //视频地址
+				cover:'',//视频封面
 			}
 		},
 		onLoad(val) {
@@ -104,8 +105,10 @@
 			// 点击轮播图
 			addswiper(val){
 			   let movie = this.list[val]
+			   // console.log(movie);
 			   if(movie.video){
 				   this.videoUrl = movie.video
+				   this.cover = movie.image
 				   this.paly = true
 				   return;
 			   }
@@ -261,7 +264,7 @@
 	.operation {
 		margin-top: 226rpx;
 		width: 650rpx;
-		height: 130rpx;
+		height: 150rpx;
 		background: #FFFFFF;
 		border-radius: 20rpx 20rpx 0px 0px;
 		padding: 20rpx;
@@ -271,6 +274,8 @@
 
 	.itemtext {
 		margin-top: 5rpx;
+		font-size: 30rpx;
+		color: #666666;
 	}
 
 	.rig {
@@ -290,7 +295,6 @@
 	.showback{
 		width: 100%;
 		height: 100vh;
-		background: #000000;
 	}
 	
 	.closeimg{

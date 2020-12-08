@@ -39,10 +39,14 @@ data () {
 		   titel:'出行记录',
 		   url:'/pages/user/travelRecords/travelRecords'
 		  },
+		  {image:require('@/image/user/about.png'), 
+		   titel:'关于快通',
+		   url:'/pages/user/versionNumber/versionNumber'
+		  },
 		  {image:require('@/image/user/Logout.png'),
 		   titel:'退出登录',
 		   signout:'signout'
-		  }
+		  },
 	  ]
     }
   },
@@ -90,11 +94,11 @@ data () {
 }
 .item{
 	width: 690rpx;
-	height: 80rpx;
+	height: 90rpx;
 	background: #FFFFFF;
 }
 .itemtext{
-	font-size: 30rpx;
+	font-size: 32rpx;
 }
 .dv{
 	border-bottom: 1rpx solid rgb(231,231,231);
