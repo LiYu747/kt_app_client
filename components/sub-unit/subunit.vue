@@ -73,11 +73,11 @@ data () {
 <style scoped lang="scss">
 .box{
 	width: 100%;
-	height: 128rpx;
+	height: 148rpx;
 	background: #F07535;
 }
 .nav{
-	top: 40rpx;
+	top: 60rpx;
 	height: 88rpx;
 font-size: 36rpx;
 		color: #FFFFFF;

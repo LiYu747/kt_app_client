@@ -23,43 +23,53 @@ data () {
 	  locdata:
 		  [{
 		  		image: require('@/image/home/cz/jkcode.png'),
-		  		titel: '健康码'
+		  		titel: '健康码',
+				url:'/pages/classification/healthCode/healthCode'
 		  	},
 		  	{
 		  		image: require('@/image/home/cz/yl.png'),
-		  		titel: '医疗健康'
+		  		titel: '医疗健康',
+				url:'/pages/classification/healthCare/healthCare'
 		  	},
 		  	{
 		  		image: require('@/image/home/cz/supermarket.png'),
-		  		titel: '便利超市'
+		  		titel: '便利超市',
+				url:'/pages/classification/supermarket/supermarket'
 		  	},
 		  	{
 		  		image: require('@/image/home/cz/motion.png'),
-		  		titel: '运动'
+		  		titel: '运动',
+				url:'/pages/classification/motion/motion'
 		  	},
 			{
 				image: require('@/image/home/cz/food.png'),
-				titel: '美食'
+				titel: '美食',
+				url:'/pages/classification/deliciousFood/deliciousFood'
 			},
 			{
 				image: require('@/image/home/cz/traffic.png'),
-				titel: '交通出行'
+				titel: '交通出行',
+				url:'/pages/classification/travel/travel'
 			},
 			{
 				image: require('@/image/home/cz/neighbor.png'),
-				titel: '友邻'
+				titel: '友邻',
+				url:`/pages/communityForum/forumlists/forumlists?id`
 			},
 			{
 				image: require('@/image/home/cz/car.png'),
-				titel: '车辆'
+				titel: '车辆',
+				url:'/pages/classification/vehicle/vehicle'
 			},
 			{
 				image: require('@/image/home/cz/home.png'),
-				titel: '社区服务'
+				titel: '社区政务',
+				url:'/pages/classification/community/community'
 			},
 			{
 				image: require('@/image/home/cz/service.png'),
-				titel: '上门服务'
+				titel: '上门服务',
+				url:'/pages/classification/service/service'
 			},
 		  ],
 	  
@@ -70,7 +80,7 @@ data () {
 	  goclass(item){
 		  // console.log(item.titel);
 		  uni.navigateTo({
-		  	url:`/pages/not/uncultivated/uncultivated?titel=${item.titel}`
+		  	url: item.url
 		  })
 	  }
   },

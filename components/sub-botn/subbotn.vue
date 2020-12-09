@@ -44,7 +44,7 @@ data () {
   },
   methods: {
   add(item,index){
-	  this.$emit('add',index)
+	   if(!item.url) return;
 	  uni.redirectTo({
 	  	url:item.url
 	  })
