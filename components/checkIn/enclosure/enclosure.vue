@@ -3,19 +3,22 @@
 		<view class="pos-rel message">
 			<view class="text flex al-center">
 				请添加附件
+				<view class="fz-12 m-l2 c-red">
+					(房产证或租房合同照片,仅用于审核) 
+				</view>
 			</view>
 			<view class="">
 				<u-upload ref="uUpload" class="uplod " :deletable='false' @on-choose-complete='succ' width='120' max-count="3"
 				 height='120' :custom-btn=true :auto-upload="false">
 					<template v-slot:addBtn>
-						<view class="pos-abs move">
+						<view class="pos-abs move ">
 							请添加附件
 						</view>
 					</template>
 				</u-upload>
 			</view>
 		</view>
-		
+
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -44,7 +47,7 @@
 		methods: {
 			succ(files) {
 				// console.log(files);
-			this.isLoding = true
+				this.isLoding = true
 				this.image = []
 				if (files.length == 0) return;
 				let num = files.length
@@ -55,25 +58,23 @@
 						name: 'file',
 						success: (val) => {
 							// console.log(val);
+					     this.isLoding = false
 							if (val.statusCode != 200) {
-								this.isLoding = false
 								uni.showToast({
 									title: '网络请求出错',
 								});
 								return;
 							}
 							if (JSON.parse(val.data).code != 200) {
-								this.isLoding = false
 								uni.showToast({
-									title:'上传失败',
-									icon:'none'
+									title: '上传失败',
+									icon: 'none'
 								})
 								return;
 							}
 							this.image.push(JSON.parse(val.data).data.url)
 							this.$emit('abb', this.image)
 							if (num == this.image.length) {
-								this.isLoding = false
 								uni.showToast({
 									title: '上传成功'
 								})

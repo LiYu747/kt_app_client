@@ -11,8 +11,6 @@
 				<view class="context ">
 					<view class="ltst ">
 						{{loctext.title}}
-					<!-- 	的圣诞节喀什年代开始就豆瓣喀山举办的凯撒举办的喀山举办的卡世界杯打开时间吧刷卡
-						说的暗示肯德基那块缴纳喀什觉得那可就是那可是加拿大昆山声卡的呢说的 -->
 					</view>
 				</view>
 				<view @click="lookup" class="btn flex al-center ju-center">

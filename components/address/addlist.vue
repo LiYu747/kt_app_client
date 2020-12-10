@@ -107,18 +107,23 @@
 			// 预约电梯
 			order(item) {
 				// console.log(item.id);
+				uni.showLoading({
+					title:'预约中...'
+				})
 				address.bookingElevator({
 					data: {
 						id: item.id,
 						toFloor: 1
 					},
 					fail: (err) => {
+						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
+							uni.hideLoading()
 						if (res.statusCode != 200) return;
 
 						if (res.data.code == 200) {

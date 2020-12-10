@@ -3,7 +3,7 @@
 		<view class="nav pos-rel flex al-center ju-center">
 			<image @click="goback" class="img pos-abs" src="../../../image/login/fanhui.png" mode=""></image>
 			<view class="text">
-				登录
+				<!-- 登录 -->
 			</view>
 		</view>
 
@@ -88,14 +88,13 @@
 				},
 				rules: {
 					phone: [
-						// 对name字段进行长度验证
+						// 对电话字段格式验证
 						{
-							min: 11,
-							max: 11,
+							pattern:/^1[3|4|5|7|8][0-9]{9}$/,
 							message: '手机号码格式不正确',
 							trigger: 'blur'
 						},
-						// 对name字段进行必填验证
+						// 对电话字段进行必填验证
 						{
 							required: true,
 							message: '请输入手机号码',
@@ -297,7 +296,7 @@
 	}
 
 	.text {
-		font-size: 18px;
+		height: 40rpx;
 	}
 
 	.logo {

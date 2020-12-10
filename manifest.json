@@ -2,7 +2,7 @@
     "name" : "快通信息",
     "appid" : "__UNI__B8CB42C",
     "description" : "",
-    "versionName" : "1.0.1",
+    "versionName" : "1.0.2",
     "versionCode" : "100",
     "transformPx" : false,
     /* 5+App特有相关 */
@@ -66,7 +66,10 @@
                     "xhdpi" : "unpackage/deploy/720.png",
                     "xxhdpi" : "unpackage/deploy/1080.png"
                 },
-                "iosStyle" : "common"
+                "iosStyle" : "storyboard",
+                "ios" : {
+                    "storyboard" : "unpackage/CustomStoryboard.zip"
+                }
             },
             "icons" : {
                 "android" : {

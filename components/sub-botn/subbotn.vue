@@ -48,7 +48,7 @@ data () {
 	  uni.redirectTo({
 	  	url:item.url
 	  })
-	  console.log(item.url);
+	  // console.log(item.url);
   }
   },
   mounted () {

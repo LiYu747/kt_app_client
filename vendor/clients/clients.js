@@ -15,7 +15,7 @@ class Clients {
 
 	cacheKey = 'clientInfo';
 
-	version = '1.0.0';
+	version = '';
 
 	//与后端的客户端类型对应
 	CLIENT_TYPE_UNKNOWN = 0;
@@ -24,15 +24,23 @@ class Clients {
 	CLIENT_TYPE_H5 = 3;
 
 	constructor() {
+		
+		//#ifdef APP-PLUS
+		this.version = plus.runtime.version
+		   // console.log('version',this.version);
+		//#endif 
+		
 		this.fixCurrClientType();
 
 		this.createOrUpdate();
 
 		//是否需要更新客户端
 		//#ifdef APP-PLUS 
-		this.askUpdateClient()
+		this.askUpdateClient();
 		//#endif 
+		
 	}
+
 
 	//判断当前的客户端类型
 	fixCurrClientType() {
@@ -186,7 +194,7 @@ class Clients {
 
 		this.getLatestVersion({
 			success: (res) => {
-				console.log('ios', res);
+				// console.log('ios', res);
 				switch (uni.getSystemInfoSync().platform) {
 					case 'android':
 						_this.updateAndr(res.data);

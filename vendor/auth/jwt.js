@@ -118,6 +118,7 @@ class JWT{
 					uni.navigateTo({
 						url : `/pages/auth/login/login`,
 					})
+					uni.hideLoading()
 				}else{
 					utils.doIfIsFunc(params.fail)
 				}
