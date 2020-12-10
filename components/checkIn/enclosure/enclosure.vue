@@ -4,18 +4,17 @@
 			<view class="text flex al-center">
 				请添加附件
 				<view class="fz-12 m-l2 c-red">
-					(房产证或租房合同照片,仅用于审核) 
+					(房产证或租房合同照片,仅用于审核)
 				</view>
 			</view>
-			<view class="">
-				<u-upload ref="uUpload" class="uplod " :deletable='false' @on-choose-complete='succ' width='120' max-count="3"
-				 height='120' :custom-btn=true :auto-upload="false">
-					<template v-slot:addBtn>
-						<view class="pos-abs move ">
-							请添加附件
-						</view>
-					</template>
-				</u-upload>
+			<view class="flex al-center fujbox">
+				<view class="" v-for="item in image" :key='item.id'>
+					<image :src="item" class="itemimg" mode=""></image>
+				</view>
+				<view @click="succ" class="puls flex-d al-center ju-center">
+					<image src="../../../image/home/push.png" class="pushimg" mode=""></image>
+					添加
+				</view>
 			</view>
 		</view>
 
@@ -45,45 +44,66 @@
 			}
 		},
 		methods: {
-			succ(files) {
-				// console.log(files);
-				this.isLoding = true
-				this.image = []
-				if (files.length == 0) return;
-				let num = files.length
-				files.forEach((item) => {
-					uni.uploadFile({
-						url: route.services.file.upload,
-						filePath: item.url,
-						name: 'file',
-						success: (val) => {
-							// console.log(val);
-					     this.isLoding = false
-							if (val.statusCode != 200) {
-								uni.showToast({
-									title: '网络请求出错',
-								});
-								return;
-							}
-							if (JSON.parse(val.data).code != 200) {
-								uni.showToast({
-									title: '上传失败',
-									icon: 'none'
-								})
-								return;
-							}
-							this.image.push(JSON.parse(val.data).data.url)
-							this.$emit('abb', this.image)
-							if (num == this.image.length) {
-								uni.showToast({
-									title: '上传成功'
-								})
-							}
-						}
-					});
+			succ() {
+				uni.chooseImage({
+					extension: ['jpg', 'jpeg', 'png', 'gif'],
+					success: (chooseImageRes) => {
+						const files = chooseImageRes.tempFilePaths;
+						this.isLoding = true;
+						let that = this;
+
+						if (files.length == 0) return;
+
+						let func = [];
+						files.forEach((item) => {
+							func.push(that.upload(item));
+						});
+
+						Promise.all(func).then((res) => {
+							that.isLoding = false;
+						}).catch((err) => {
+							that.isLoding = false;
+							uni.showModal({
+								title: "上传文件出错:" + err,
+							})
+						})
+					}
 				})
 			}
 
+			,
+			upload(fileItem) {
+				let that = this;
+				return new Promise((res, rej) => {
+					uni.uploadFile({
+						url: route.services.file.upload,
+						filePath: fileItem,
+						name: 'file',
+						fail: (err) => {
+							// that.isLoding = false;
+							rej('网络出错');
+						},
+						success: (val) => {
+							// that.isLoding = false;
+							if (val.statusCode != 200) {
+								rej(val.statusCode);
+								return;
+							}
+
+							let jres = JSON.parse(val.data);
+
+							if (jres.code != 200) {
+								rej(jres.msg);
+								return;
+							}
+							// console.log(jres.data.url);
+							that.image.push(jres.data.url)
+							that.$emit('abb', this.image)
+							res(jres);
+						}
+					})
+				})
+			}
 		},
 		mounted() {
 
@@ -110,7 +130,7 @@
 	.message {
 		margin-top: 20rpx;
 		width: 644rpx;
-		height: 280rpx;
+		padding-bottom: 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
 		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
@@ -153,5 +173,31 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+	}
+
+	.itemimg {
+		width: 140rpx;
+		height: 140rpx;
+		margin-right: 20rpx;
+		margin-bottom: 10rpx;
+	}
+
+	.puls {
+		width: 140rpx;
+		height: 140rpx;
+		background: rgb(244, 245, 246);
+		border-radius: 10rpx;
+		font-size: 26rpx;
+		color: #8a8a8a;
+		margin-bottom: 10rpx;
+	}
+
+	.pushimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+
+	.fujbox {
+		flex-wrap: wrap;
 	}
 </style>

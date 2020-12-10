@@ -11,6 +11,16 @@
 				</view>
 			</view>
 		</view>
+		<!-- tag标签 -->
+		<!-- 	 <scroll-view >
+				 	<view class="tagbox flex al-center">
+				 <view class="" v-for="item in tagdata" :key='item.id'>
+				 	{{item}}
+				 </view>
+				 	</view>
+			 </scroll-view> -->
+	
+		
 		<view class="release">
 			<view v-if="lists.length>0" class="">
 				<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
@@ -95,7 +105,8 @@
 				text: '', //没有更多的提示
 				value: '',
 				keyword: '',
-				flag: false  //判断有没有搜索结果
+				flag: false  ,//判断有没有搜索结果
+				tagdata:['新鲜事','热榜','好人好事','家有喜事','宠物圈','互帮互助','组团运动','物品流转','工具借用','其他']
 			}
 		},
 		methods: {
@@ -120,7 +131,6 @@
 			// 获取数据
 			loadPageData() {
 			
-
 				this.isLoding = true;
 
 				jwt.doOnlyTokenValid({
@@ -383,5 +393,11 @@
 		position: absolute;
 		right: 170rpx;
 		position: fixed;
+	}
+	
+	.tagbox{
+		width: 100%;
+		height: 100rpx;
+		background: #ffffff;
 	}
 </style>

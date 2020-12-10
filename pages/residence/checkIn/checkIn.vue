@@ -351,9 +351,6 @@
 			// 获取用户资料
 			// 判断是否登录
 			loadUserData() {
-				uni.showLoading({
-					title: '加载中...'
-				})
 				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
@@ -361,14 +358,12 @@
 						user.userDeta({
 							data: {},
 							fail: () => {
-								uni.hideLoading()
 								uni.showToast({
 									title: '网络错误',
 									icon:'none'
 								})
 							},
 							success: (res) => {
-								uni.hideLoading()
 								if (res.statusCode != 200) return;
 								if (res.data.code != 200) return;
 								let Users = res.data.data
@@ -380,7 +375,6 @@
 						})
 					},
 					fail: () => {
-						uni.hideLoading()
 						uni.switchTab({
 							url: '/pages/index/index'
 						})

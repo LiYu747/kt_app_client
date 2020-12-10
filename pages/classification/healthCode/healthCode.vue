@@ -5,7 +5,7 @@
 		<view class=" flex ju-center">
 			<view class="content flex-d al-center">
 				<view class="time">
-					2020.12.07  10:42:36
+					{{timer}}
 				</view>
 				<view class="boxs">
 					<view class="qrimg">
@@ -57,10 +57,24 @@ data () {
 	  onval: true, // val值变化时自动重新生成二维码
 	  loadMake: true, // 组件加载完成后自动生成二维码
 	  username:'',
-	  IDcard:''
+	  IDcard:'',
+	  timer:''
     }
   },
   methods: {
+	  // 获取当前时间
+	  getTime(){
+		  var date = new Date(),
+		  year = date.getFullYear(),
+		  month = date.getMonth() + 1,
+		  day = date.getDate(),
+		  hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours(),
+		  minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes(),
+		  second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+		  month >= 1 && month <= 9 ? (month = "0" + month) : "";
+		  day >= 0 && day <= 9 ? (day = "0" + day) : "";
+		   this.timer = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
+		  },
      // 获取用户资料
      // 判断是否登录
      loadUserData() {
@@ -106,6 +120,7 @@ data () {
   },
   onShow() {
   	this.loadUserData()
+	this.getTime()
   },
   onLoad () {
 

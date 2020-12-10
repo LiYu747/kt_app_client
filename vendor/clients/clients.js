@@ -24,12 +24,12 @@ class Clients {
 	CLIENT_TYPE_H5 = 3;
 
 	constructor() {
-		
+
 		//#ifdef APP-PLUS
 		this.version = plus.runtime.version
-		   // console.log('version',this.version);
+		// console.log('version',this.version);
 		//#endif 
-		
+
 		this.fixCurrClientType();
 
 		this.createOrUpdate();
@@ -38,7 +38,7 @@ class Clients {
 		//#ifdef APP-PLUS 
 		this.askUpdateClient();
 		//#endif 
-		
+
 	}
 
 
@@ -222,46 +222,45 @@ class Clients {
 					content: '有版本更新',
 					confirmText: '更新',
 					success(res2) {
-						if (res2.confirm == true) {
-							if (androiddata.app_android_download_apk) {
-								uni.showLoading({
-									title: '更新中……'
-								})
-								uni.downloadFile({ //执行下载
-									url: androiddata.app_android_download_apk, //下载地址
-									success: downloadResult => { //下载成功
-										uni.hideLoading();
-										if (downloadResult.statusCode == 200) {
-											uni.showModal({
-												title: '',
-												content: '更新成功，确定现在重启吗？',
-												confirmText: '重启',
-												confirmColor: '#EE8F57',
-												success: function(res) {
-													if (res.confirm == true) {
-														plus.runtime.install( //安装
-															downloadResult.tempFilePath, {
-																force: true
-															},
-															function(res) {
-																utils.showToast('更新成功，重启中');
-																plus.runtime.restart();
-															}
-														);
-													}
+						if (res2.confirm != true) return;
+						if (androiddata.app_android_download_apk) {
+							uni.showLoading({
+								title: '正在下载'
+							})
+							uni.downloadFile({ //执行下载
+								url: androiddata.app_android_download_apk, //下载地址
+								success: downloadResult => { //下载成功
+									uni.hideLoading();
+									if (downloadResult.statusCode != 200) return;
+									uni.showModal({
+										title: '',
+										content: '立即安装',
+										confirmText: '安装',
+										confirmColor: '#EE8F57',
+										success: function(res) {
+											if (res.confirm != true) return;
+											plus.runtime.install( //安装
+												downloadResult.tempFilePath, {
+													force: true
+												},
+												function(res) {
+													utils.showToast('更新成功');
+													plus.runtime.restart();
 												}
-											});
-										}
-									}
-								});
-								return;
-							} else if (androiddata.app_android_download_url) {
-								uni.navigateTo({
-									url: `/pages/update/update?url=${androiddata.app_android_download_url}`
-								})
-							} 
+											);
 
+										}
+									});
+								}
+							});
+							return;
+						} else if (androiddata.app_android_download_url) {
+							uni.navigateTo({
+								url: `/pages/update/update?url=${androiddata.app_android_download_url}`
+							})
 						}
+
+
 					}
 				})
 			}

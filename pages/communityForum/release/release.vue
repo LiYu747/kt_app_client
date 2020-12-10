@@ -4,11 +4,11 @@
 		<view class="flex-d color al-center">
 			<image src="../../../image/home/jx.png" class="img" mode=""></image>
 			<view class="nav flex-d al-center">
-				<view v-if="locimg.length===0" class="top flex al-center ju-center">
+				<view v-if="image.length===0" class="top flex al-center ju-center">
 					<image class="timg" src="../../../image/forum/tuceng.png" mode=""></image>
 				</view>
 				<view v-else class="back flex al-center">
-					<view class="" v-for="(item,index) in locimg" :key='item.id'>
+					<view class="" v-for="(item,index) in image" :key='item.id'>
 						<image v-if="index<3" class="itemimg" :src="item" mode=""></image>
 					</view>
 				</view>
@@ -72,7 +72,6 @@
 				image: [],
 				title: '', // 标题
 				content: '', //内容
-				locimg: [],
 				isLoding: false
 			}
 		},
@@ -83,7 +82,6 @@
 					success: (chooseImageRes) => {
 						this.isLoding = true
 						let tempFilePaths = chooseImageRes.tempFilePaths;
-						this.locimg = tempFilePaths
 						let num = tempFilePaths.length
 						// console.log(this.locimg);
 						if (tempFilePaths.length == 0) return;
@@ -164,7 +162,6 @@
 						})
 						// 清空
 						this.image = []
-						this.locimg = []
 						this.title = ''
 						this.content = ''
 						// console.log('发布帖子', res);
