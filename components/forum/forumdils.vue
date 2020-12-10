@@ -1,0 +1,525 @@
+<template>
+	<view class="">
+		<subunit class="pos" titel="小区论坛" :retur="true" @goback='goback'></subunit>
+		<view class="ged"></view>
+		<view class="woer ">
+			<view class="nav flex">
+				<image class="img" :src="user.avatar" mode=""></image>
+				<view class="m-l2 text">
+					<view class="">
+						{{user.nickname}}
+					</view>
+					<view class="small">
+						{{arr.created_at}}
+					</view>
+				</view>
+			</view>
+			<!-- 标题 -->
+			<view class="title">
+				{{arr.title}}
+			</view>
+			<!-- 内容 -->
+			<view class=" flex ju-center">
+				<view class="content">
+					{{arr.content}}
+				</view>
+			</view>
+			<!-- 图片 -->
+			<view class="flex al-center imgbx">
+				<view class="" v-for="item in arr.album" @click="look(item)" :key='item.id'>
+					<image class="itemimg" :src="item.url" mode=""></image>
+				</view>
+			</view>
+			<view class="layou">
+				<view class=" move pos-abs">
+					<image @click="open" src="../../image/forum/pinlun.png" class="plimg" mode=""></image>
+				</view>
+			</view>
+		</view>
+		<!-- 评论 -->
+		<view v-if="comments.length>0" class="">
+			<view class="line flex pos-rel" v-for="(item,index) in comments" :key='item.id'>
+				<view class="flex-d al-center marg">
+					<image v-if="item.own_user" class="img" :src="item.own_user.avatar" mode=""></image>
+					<view v-if="item.own_user" class="nickname ">
+						{{item.own_user.nickname}}
+					</view>
+				</view>
+				<view class="">
+					<view class="texbox">
+						{{item.content}}
+					</view>
+					<!-- 时间 -->
+					<view class="postime m-t1">
+						{{item.created_at}}
+					</view>
+				</view>
+			</view>
+			<view v-show="isLoding == true" class="m-t2 flex ju-center al-center lodbox">
+				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+				加载中...
+			</view>
+			<view class="flex btom ju-center m-t3  fz-14" v-if="hasMore == false">
+				{{text}}
+			</view>
+		</view>
+		<view class="nono flex al-center ju-center" v-else>
+			还没有任何评论哦~
+		</view>
+		<view v-show="flag===true" class="btom">
+
+		</view>
+		<view v-show="flag===true" class="posbot flex al-center pos-rel">
+			<textarea autoHeight="true" placeholder='评论' v-model="context" class="ch flex al-center"></textarea>
+			<view @click="send" class="btn flex pos-abs al-center ju-center">
+				发送
+			</view>
+		</view>
+		<!-- 查看图片 -->
+		<view v-show="see == true" @click="off" class="look flex al-center ju-center">
+			<image :src="src" class="srcimg" mode=""></image>
+		</view>
+
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="../../image/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import subunit from '../sub-unit/subunit.vue'
+	import village from '../../vendor/village/village.js'
+	import jwt from '../../vendor/auth/jwt.js'
+	export default {
+		name: "",
+		components: {
+			subunit
+		},
+		props: {},
+		data() {
+			return {
+				id: "",
+				arr: {}, //数据
+				user: {},
+				comments: [], //获取评论
+				flag: false,
+				context: '',
+				src: '', //查看图片路径
+				see: false, //图片遮罩层
+				page: 1,
+				isLoding: false,
+				hasMore: true,
+				text: '',
+			}
+		},
+		methods: {
+			// 返回
+			goback() {
+				uni.navigateBack({
+					delta: 1
+				})
+			},
+			// 详情数据 
+			Data() {
+				uni.showLoading({
+					title: '加载中...'
+				})
+				village.postDetails({
+					data: {
+						id: this.id
+					},
+					fail: (err) => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						uni.hideLoading()
+						// console.log(res.data.data);
+						if (res.statusCode != 200) return
+						if (res.data.code == 200) {
+							let data = res.data.data
+							data.created_at = data.created_at.slice(0, 16)
+							this.arr = data
+							this.user = data.own_user
+						} else {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none',
+								duration: 2000
+							})
+							const time = setTimeout(() => {
+								uni.navigateBack({
+									delta: 1
+								})
+								clearTimeout(time)
+							}, 2000)
+						}
+					}
+				})
+			},
+			// 评论获取数据
+			loadPageData() {
+				this.isLoding = true;
+				village.postComments({
+					data: {
+						tribune_id: this.id,
+						page: this.page,
+					},
+					fail: (err) => {
+						this.isLoding = false;
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+						// console.log(err);
+					},
+					success: (res) => {
+						this.isLoding = false;
+						if (res.statusCode != 200) return;
+
+						if (res.data.code != 200) return;
+
+						let data = res.data.data;
+						// console.log(data.data);
+						data.data.map(item => {
+							item.created_at = item.created_at.slice(0, 16)
+						})
+						this.hasMore = data.next_page_url ? true : false;
+						this.comments = data.data
+					},
+				})
+			},
+			// 打开评论
+			open() {
+				this.flag = !this.flag
+			},
+			// 查看图片
+			look(item) {
+				this.see = true
+				this.src = item.url
+			},
+			// 关闭
+			off() {
+				this.see = false
+			},
+			// 发送评论
+			send() {
+				uni.showLoading({
+					title: '发送中...'
+				})
+				village.relComments({
+					data: {
+						tribune_id: this.id,
+						content: this.context
+					},
+					fail: (err) => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						// console.log(res);
+						uni.hideLoading()
+						if (res.statusCode != 200) return
+						if (res.data.code == 200) {
+							this.page = 1
+							this.context = ''
+							this.loadPageData()
+							uni.showToast({
+								title: res.data.msg,
+								duration: 2000
+							})
+						} else {
+							uni.showToast({
+								title: res.data.msg,
+								duration: 2000,
+								icon: 'none'
+							})
+						}
+					}
+				})
+			},
+
+		},
+		mounted() {
+			this.Data()
+			this.loadPageData()
+		},
+		// 下拉加载更多
+		onReachBottom() {
+			// console.log(this.hasMore);
+			if (this.hasMore == true) {
+				this.isLoding = true;
+				this.page = this.page + 1
+				village.postComments({
+					data: {
+						tribune_id: this.id,
+						page: this.page,
+					},
+					fail: (err) => {
+						this.isLoding = false;
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+						// console.log(err);
+					},
+					success: (res) => {
+						this.isLoding = false;
+						// console.log(res);
+						if (res.statusCode != 200) return;
+
+						if (res.data.code != 200) return;
+
+						let data = res.data.data;
+						data.data.map(item => {
+							item.created_at = item.created_at.slice(0, 16)
+						})
+						this.hasMore = data.next_page_url ? true : false;
+						this.comments = this.comments.concat(data.data)
+					},
+
+				})
+			}
+			this.text = '没有更多了~'
+		},
+		onLoad(val) {
+			// console.log('详情', val.id);
+			this.id = val.id
+		},
+
+		filters: {
+
+		},
+		computed: {
+
+		},
+		watch: {
+
+		},
+		directives: {
+
+		}
+	}
+</script>
+
+<style scoped lang="scss">
+	.pos {
+		position: fixed;
+		z-index: 66;
+	}
+
+	.ged {
+		height: 160rpx;
+	}
+
+	.woer {
+		width: 94%;
+		padding: 0 3%;
+		color: #666666;
+	}
+
+	.nav {
+		width: 100%;
+		height: 60rpx;
+	}
+
+	.img {
+		width: 74rpx;
+		height: 74rpx;
+		border-radius: 50%;
+	}
+
+	.text {
+		font-size: 28rpx;
+		color: #F07535;
+	}
+
+	.small {
+		font-size: 24rpx;
+		color: #B3B3B3;
+	}
+
+	.layou {
+		width: 100%;
+		height: 100rpx;
+	}
+
+	.title {
+		margin-top: 30rpx;
+		font-size: 28rpx;
+	}
+
+	.content {
+		margin-top: 20rpx;
+		width: 680rpx;
+		font-size: 24rpx;
+	}
+
+	.imgbx {
+		margin-top: 60rpx;
+		flex-wrap: wrap;
+	}
+
+	.itemimg {
+		width: 140rpx;
+		height: 180rpx;
+		margin-right: 20rpx;
+	}
+
+	.move {
+		margin-top: 30rpx;
+		right: 40rpx;
+	}
+
+	.plimg {
+
+		width: 30rpx;
+		height: 27rpx;
+	}
+
+	.line {
+		width: 100%;
+		padding: 30rpx 0;
+		border-top: 1px solid #BFBFBF;
+	}
+
+	.nickname {
+		width: 100rpx;
+		// background: red;
+		margin-top: 10rpx;
+		text-align: center;
+		color: #F07535;
+		font-size: 24rpx;
+		word-break: break-all
+	}
+
+	.marg {
+		width: 100rpx;
+	}
+
+	.texbox {
+		margin-top: 22rpx;
+		width: 470rpx;
+		margin-left: 20rpx;
+		font-size: 24rpx;
+		// overflow: hidden;
+		// text-overflow: ellipsis;
+		// display: -webkit-box;
+		// -webkit-box-orient: vertical;
+		// -webkit-line-clamp:2;
+
+	}
+
+	.postime {
+		right: 30rpx;
+		bottom: 40rpx;
+		font-size: 24rpx;
+		color: #B3B3B3;
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		margin-left: 100rpx;
+	}
+
+	.ch {
+		margin-left: 20rpx;
+		border-radius: 5rpx;
+		padding: 10rpx;
+		width: 500rpx;
+		background: #FFFFFF;
+		height: 40rpx;
+		word-wrap: break-word;
+	}
+
+	.ch:empty::before {
+		color: lightgrey;
+		content: attr(placeholder);
+	}
+
+	.posbot {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		background: rgb(239, 239, 239);
+		font-size: 28rpx;
+		padding: 30rpx 20rpx;
+		border-top: 1px solid rgba(204, 204, 204, 0.6);
+	}
+
+	.btn {
+		margin-left: 50rpx;
+		width: 90rpx;
+		height: 50rpx;
+		font-size: 26rpx;
+		background: rgba(204, 204, 204, 0.8);
+		color: #FFFFFF;
+		right: 90rpx;
+		bottom: 35rpx;
+	}
+
+	.btom {
+		height: 100rpx;
+	}
+
+	.nono {
+		border-top: 1rpx solid #B3B3B3;
+		width: 100%;
+		font-size: 28rpx;
+		color: #666666;
+		height: 200rpx;
+	}
+
+	.look {
+		top: 0;
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		z-index: 99;
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	.srcimg {
+		width: 100%;
+		height: 100vh;
+	}
+
+	.lodimg {
+		width: 30rpx;
+		height: 30rpx;
+		margin-right: 20rpx;
+	}
+
+	.lodbox {
+		font-size: 24rpx;
+	}
+
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
+	}
+</style>

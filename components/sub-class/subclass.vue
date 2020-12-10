@@ -1,0 +1,105 @@
+
+<template>
+   <view class="">
+   		<view class="topbox pos-rel">
+   			<view class="content pos-abs flex al-center">
+   				<image @click="remove" src="../../image/login/1729908969cd5d7d911e096d6db3c70.png" class="remove" mode=""></image>
+   				<view class="m-l2">
+   					{{titel}}
+   				</view>
+   			</view>
+			<!-- <view v-if="showmap == true" class="map pos-abs flex al-center">
+				复地.御香山3悦
+				<image src="../../image/classification/map.png" class="mapimg" mode=""></image>
+			</view> -->
+   		</view>
+		<view class="line">
+			
+		</view>
+
+   </view>
+</template>
+
+<script>
+export default {
+name: "",
+components: {
+
+},
+props: {
+	titel:{
+		type:String,
+		default:'标题'
+	},
+	showmap:{
+		type:Boolean,
+		default:true
+	}
+},
+data () {
+  return {
+    }
+  },
+  methods: {
+    // 返回
+	remove(){
+		uni.navigateBack({
+			delta:1
+		})
+	}
+  },
+  mounted () {
+
+  },
+  onLoad () {
+
+  },
+  filters: {
+
+  },
+  computed: { 
+
+  },
+  watch: {
+
+  },
+  directives: {
+
+  }
+}
+</script>
+
+<style scoped lang="scss">
+.topbox{
+	position: fixed;
+	width: 100%;
+	height: 148rpx;
+	background: #F07535;
+	z-index: 9;
+}
+.content{
+	width: 100%;
+	height: 100rpx;
+	bottom: 0;  
+	color: #FFFFFF;
+	font-size: 36rpx;
+}
+.remove{
+	width: 22rpx;
+	height: 41rpx;
+	margin-left: 50rpx;
+}
+.line{
+	height: 148rpx;
+}
+.map{
+	right: 50rpx;
+	bottom: 30rpx;
+	font-size: 26rpx;
+	color: #FFFFFF;
+}
+.mapimg{
+	width: 36rpx;
+	height: 36rpx;
+}
+</style>
