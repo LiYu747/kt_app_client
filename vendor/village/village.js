@@ -73,5 +73,11 @@ class Allvillage{
 	 	params.url = routes.village.vagelist.SelfPost;
 	 	req.get(params)
 	 }
+	 
+	 //默认栏目列表
+	 DefaultColumnList (params){
+	 	params.url = routes.village.vagelist.DefaultColumnList;
+	 	req.get(params)
+	 }
 }
 module.exports = new Allvillage;

@@ -189,7 +189,7 @@
 		border-radius: 10rpx;
 		font-size: 26rpx;
 		color: #8a8a8a;
-		margin-bottom: 10rpx;
+		margin-bottom: 15rpx;
 	}
 
 	.pushimg {

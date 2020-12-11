@@ -1,6 +1,6 @@
 //本地开发域名
-// let host = 'http://local.kt.cn/';
-let host = 'https://api.kuaitongkeji.com/';   
+let host = 'http://local.kt.cn/';
+// let host = 'https://api.kuaitongkeji.com/';   
 let apiPath = host + 'api/';
 module.exports = {
 	
@@ -126,26 +126,39 @@ module.exports = {
 			// 小区列表
 			list : apiPath + 'village/village',
 			selectLists : apiPath + 'village/village/selectLists',
+			
 			// 小区公告
 			Notice :    apiPath + 'village/notice',
+			
 			// 公告详情
 			Noticeshow : apiPath + 'village/notice/show',
+			
 			// 小区展示信息
 			displayInformation : apiPath + 'village/village/info',
+			
 			// 小区内的帖子
 			communityPost : apiPath + 'village/tribune',
+			
 			//发布帖子
 			releasePost : apiPath + 'user/villageTribune',
+			
 			// 帖子详情
 			postDetails : apiPath + 'village/tribune/show',
+			
 			// 帖子的评论
 			postComments : apiPath + 'village/tribuneComment',
+			
 			// 发布评论
 			relComments : apiPath + 'village/tribuneComment',
+			
 			//自己发布的帖子
 			 SelfComments : apiPath + 'user/villageTribune',
+			 
 			 // 自己发布的帖子评论
-			 SelfPost : apiPath + 'user/villageTribuneComments'
+			 SelfPost : apiPath + 'user/villageTribuneComments',
+			 
+			 //默认的栏目列表
+			 DefaultColumnList : apiPath + 'village/tribuneCat'
 		},
 		
 		

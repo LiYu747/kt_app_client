@@ -70,7 +70,7 @@
 	}
 
 	.titel {
-		margin-top: 40rpx;
+		margin-top: 60rpx;
 		width: 612rpx;
 		height: 66rpx;
 		font-size: 36rpx;

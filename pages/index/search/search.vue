@@ -197,7 +197,7 @@
 	}
 
 	.top {
-		margin-top: 20rpx;
+		margin-top: 40rpx;
 	}
 
 	.item {

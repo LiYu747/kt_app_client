@@ -1,6 +1,9 @@
 <template>
 	<view class="">
-		<subunit titel='发布' :retur='false'></subunit>
+		<subunit titel='发布' class="fidex" :retur='false'></subunit>
+		<view class="line">
+			
+		</view>
 		<view class="flex-d color al-center">
 			<image src="../../../image/home/jx.png" class="img" mode=""></image>
 			<view class="nav flex-d al-center">
@@ -24,7 +27,35 @@
 				</view>
 				<input class="ipt" v-model="title" type="text" value="" />
 			</view>
-
+			<!-- 标签 -->
+			<view @click="show = true" class="tagbox flex pos-rel">
+				<view class="tex1">
+					选择类别 :
+				</view>
+				<view class="optbox flex">
+					<view class="choiceitem" v-for="item in choiceData" :key='item.id'>
+						 {{item.name}}
+					</view>
+				</view>
+				<view class="pushtagpos pos-abs">
+					<image src="../../../image/forum/pushtag.png" class="pushtagimg" mode=""></image>
+				</view>
+			</view>
+			<u-popup mode='bottom' height="600rpx" v-model="show">
+				<view class="operation flex al-center pos-rel">
+                         <view @click=" show = false" class="m-t1 m-l1">
+                         	取消
+                         </view>
+						 <view @click="ok" class="affirm pos-abs">
+						 	确认
+						 </view>
+				</view>
+				<view class="flex showbox">
+					<view class="tagitem" @click="choice(item)" v-for="item in tagdata" :class="{'pitchon':item.type==true}" :key='item.id'>
+						{{item.name}}
+					</view>
+				</view>
+			</u-popup>
 			<!-- 内容 -->
 			<view class="content flex">
 				<view class="tex1">
@@ -39,6 +70,9 @@
 				<view class="bai pos-abs">
 					确认提交
 				</view>
+			</view>
+			<view class="boot">
+				
 			</view>
 
 			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
@@ -70,12 +104,45 @@
 			return {
 				id: '',
 				image: [],
+				show: false, //弹出层的显示与隐藏
+				tagdata: [
+					{
+					 name:'推荐',
+					 type:true,
+					 default: true
+					},
+					{
+					 name:'热榜',
+					 type:true,
+					  default: true
+					}
+				],
+				choiceData:[] ,//选中标签的数组
 				title: '', // 标题
 				content: '', //内容
-				isLoding: false
+				isLoding: false,
+				choiceID:''  , //标签选中的id
 			}
 		},
 		methods: {
+
+			// 选中
+			choice(item) {
+				if (item.default) return
+				item.type = !item.type
+			},
+            // 确定选择
+			ok(){
+			   this.choiceData  =  this.tagdata.filter( item => {
+					return item.type == true
+				})
+				this.choiceData.map( item => {
+					if (item.default) return
+					this.choiceID += item.id + ','
+				})
+				this.choiceID = this.choiceID.slice(0,this.choiceID.length-1)
+                this.show = false
+			},
 			// 选择文件
 			add() {
 				uni.chooseImage({
@@ -119,7 +186,6 @@
 				});
 			},
 
-
 			// 发布
 			Submit() {
 				if (this.isLoding == true) return;
@@ -131,7 +197,8 @@
 						village_id: this.id,
 						title: this.title,
 						content: this.content,
-						albums: this.image
+						albums: this.image,
+						tribune_cat:this.choiceID
 					},
 					fail: (err) => {
 						uni.hideLoading()
@@ -164,10 +231,36 @@
 						this.image = []
 						this.title = ''
 						this.content = ''
+						this.choiceData = []
 						// console.log('发布帖子', res);
 					}
 				})
+			},
+			
+			//获取默认栏目列表
+			grtColumn(){
+				village.DefaultColumnList({
+					data:{},
+					fail: () => {
+						uni.showToast({
+							title:'网络错误',
+							icon:'none'
+						})
+					},
+					success: (res) => {
+						if(res.statusCode != 200) return;
+						if(res.data.code != 200) return;
+						res.data.data.map( item => {
+							item.type = false
+						})
+						this.tagdata = this.tagdata.concat(res.data.data) 
+						// console.log(this.tagdata );
+					}
+				})
 			}
+		},
+		onShow() {
+			this.grtColumn()
 		},
 		mounted() {
 
@@ -191,6 +284,13 @@
 </script>
 
 <style scoped lang="scss">
+	.fidex{
+		position: fixed;
+		z-index: 9;
+	}
+	.line{
+		height: 148rpx;
+	}
 	.color {
 		color: #666666;
 	}
@@ -289,7 +389,7 @@
 	}
 
 	.matop {
-		margin-top: 100rpx;
+		margin-top: 40rpx;
 		font-size: 30rpx;
 	}
 
@@ -316,5 +416,71 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+	}
+
+	.tagbox {
+		margin-top: 20rpx;
+		padding: 20rpx;
+		width: 649rpx;
+		background: #FFFFFF;
+		border-radius: 10rpx;
+		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+	}
+
+	.pushtagimg {
+		width: 40rpx;
+		height: 40rpx;
+	}
+
+	.pushtagpos {
+		right: 20rpx;
+	}
+
+	.showbox {
+		flex-wrap: wrap;
+		color: #666666;
+	}
+
+	.tagitem {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 148rpx;
+		height: 70rpx;
+		font-size: 13rpx;
+		border-radius: 10rpx;
+		background: #EEEEEE;
+		margin-left: 30rpx;
+		margin-top: 30rpx;
+	}
+
+	.pitchon {
+		background: #F07535;
+		color: #fff;
+	}
+	
+	.affirm{
+		top: 10rpx;
+		right: 10rpx;
+	}
+	
+	.optbox{
+		width: 480rpx;
+		flex-wrap: wrap;
+	}
+	
+	.choiceitem{
+		display: flex;
+		justify-content: center;
+		margin-left: 10rpx;
+		margin-bottom: 10rpx;
+		align-items: center;
+		border: 1px solid #CCCCCC;
+		font-size: 24rpx;
+		width: 140rpx;
+		height: 40rpx;		
+	}
+	.boot{
+		height: 150rpx;
 	}
 </style>

@@ -1,6 +1,9 @@
 <template>
    <view class="">
    	     <subclass titel="交通出行" :showmap='false'></subclass> 
+		 <view class="simulation">
+		 	以下均为模拟数据
+		 </view>
 		 <view class="topbox flex al-center ju-center">
 		 	 <view class="inbox flex">
 		 	 	 <view class="left flex-d al-center pos-rel">
@@ -213,4 +216,14 @@ input{
 	width: 423rpx;
 	height: 64rpx;
 }
+
+.simulation{
+		display: flex;
+		justify-content: center;
+	    height: 80rpx;
+		align-items: center;
+		font-size: 30rpx;
+		color: #b3b3b3;
+		// background: #FFFFFF;
+	}
 </style>

@@ -4,7 +4,7 @@
 		<view class="line pos-rel">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="../../../image/home/ss.png" mode=""></image>
-				<input class="input" type="text" v-model.trim="value"  @confirm='confirm' placeholder="请输入帖子关键词" />
+				<input class="input" type="text" v-model.trim="value" @confirm='confirm' placeholder="请输入帖子关键词" />
 				<image @click="empty" src="../../../image/forum/clier.png" class="clierimg" mode=""></image>
 				<view v-show="value !=''" @click="remove" class=" pos-abs rig">
 					取消
@@ -12,15 +12,27 @@
 			</view>
 		</view>
 		<!-- tag标签 -->
-		<!-- 	 <scroll-view >
-				 	<view class="tagbox flex al-center">
-				 <view class="" v-for="item in tagdata" :key='item.id'>
-				 	{{item}}
-				 </view>
-				 	</view>
-			 </scroll-view> -->
-	
-		
+	  <view class="pos-rel tagpos">
+	  	<scroll-view  scroll-x="true" class="scroll-view_H" >
+	  		<view class="tagbox flex al-center">
+	  			<view class="itemtag" 
+	  			v-for="(item,index) in tagdata" 
+	  			:key='item.id'  
+	  			:class="{'dv':index==idx,'rightbox':index==tagdata.length-1}"
+	  			@click="select(item,index)"
+	  			>
+	  				{{item.name}}
+	  			</view>
+	  		</view>
+	  	</scroll-view>
+		<view class="posclassfiy flex al-center ju-center">
+			<image src="../../../image/forum/classfiy.png" class="classfiyimg" mode=""></image>
+		</view>
+	  </view>
+
+       <view class="lines">
+       	
+       </view>
 		<view class="release">
 			<view v-if="lists.length>0" class="">
 				<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
@@ -105,11 +117,22 @@
 				text: '', //没有更多的提示
 				value: '',
 				keyword: '',
-				flag: false  ,//判断有没有搜索结果
-				tagdata:['新鲜事','热榜','好人好事','家有喜事','宠物圈','互帮互助','组团运动','物品流转','工具借用','其他']
+				flag: false, //判断有没有搜索结果
+				tagdata: [],
+				idx:0,//选择类型
+				selectID:'', //选择的id
+				
 			}
 		},
 		methods: {
+			 // 选择类型
+			 select(item,index){
+				 this.idx = index
+				 this.selectID = item.id
+				 this.page = 1
+				 this.lists = []
+				 this.loadPageData()
+			 },
 			//搜索
 			confirm() {
 				this.keyword = this.value
@@ -130,7 +153,7 @@
 
 			// 获取数据
 			loadPageData() {
-			
+
 				this.isLoding = true;
 
 				jwt.doOnlyTokenValid({
@@ -146,6 +169,7 @@
 						village.communityPost({
 							data: {
 								villageId: this.id,
+								tribune_cat:this.selectID,
 								kw: this.keyword,
 								page: this.page,
 								pageSize: this.ps
@@ -178,35 +202,50 @@
 					}
 				})
 			},
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+
 			// 去详情
 			gotoD(item) {
 				// console.log(item.id);
 				uni.navigateTo({
 					url: `/components/forum/forumdils?id=${item.id}`
 				})
+			},
+			
+			//获取默认栏目列表
+			grtColumn(){
+				village.DefaultColumnList({
+					data:{},
+					fail: () => {
+						uni.showToast({
+							title:'网络错误',
+							icon:'none'
+						})
+					},
+					success: (res) => {
+						if(res.statusCode != 200) return;
+						if(res.data.code != 200) return;
+
+						this.tagdata = res.data.data
+						// console.log(this.tagdata );
+					}
+				})
 			}
 		},
 		mounted() {
-			
+         this.grtColumn()
 		},
 		onLoad(val) {
 			this.id = val.id
 		},
 		// 下拉刷新
 		onReachBottom() {
-				this.text = '没有更多了~'
-	    if (this.isLoding == true || this.hasMore == false) return;
+			this.text = '没有更多了~'
+			if (this.isLoding == true || this.hasMore == false) return;
 			this.loadPageData()
-		
+
 		},
 		onShow() {
-           this.loadPageData()
+			this.loadPageData()
 		},
 		filters: {
 
@@ -224,6 +263,14 @@
 </script>
 
 <style scoped lang="scss">
+	.tagpos{
+		width: 100%;
+		position: fixed;
+		z-index: 9;
+	}
+	.lines{
+		height: 100rpx;
+	}
 	.itemimg {
 		width: 100rpx;
 		height: 100rpx;
@@ -394,10 +441,59 @@
 		right: 170rpx;
 		position: fixed;
 	}
-	
-	.tagbox{
+
+	.tagbox {
+		// width: 100%;
+		height: 80rpx;
+	}
+
+	.itemtag {
+		height: 76rpx;
+		display: flex;
+		align-items: center;
+		 margin-left: 40rpx;
+		font-size: 30rpx;
+		color: #666666;
+	}
+
+
+	.scroll-view_H {
+		white-space: nowrap;
 		width: 100%;
-		height: 100rpx;
 		background: #ffffff;
+		border-bottom: 1px solid #eeeeee;
+		/deep/.uni-scroll-view::-webkit-scrollbar {
+				/* 隐藏滚动条，但依旧具备可以滚动的功能 */
+				display: none
+			}
+	}
+
+    .dv{
+		height: 76rpx;
+		display: flex;
+		align-items: center;
+		color: #F07535;
+		border-bottom: 1px solid #F07535;
+		border-top: 1px solid #FFFFFF;
+	}
+      
+	.posclassfiy{
+		width: 100rpx;
+		height: 74rpx;
+		position: absolute;
+		top: 0rpx;
+		right: 0rpx;
+		background: #FFFFFF;
+		 // box-shadow: -2px 0  20px 10px #FFFFFF;  
+	}  
+	 
+	.classfiyimg{
+		width: 40rpx;
+		height: 40rpx;
+	}
+	
+	.rightbox{
+		// width: 100rpx;
+		// background: red;
 	}
 </style>

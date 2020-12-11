@@ -160,7 +160,7 @@
 	}
 
 	.content {
-		margin-top: 20rpx;
+		margin-top: 40rpx;
 		width: 690rpx;
 		border-radius: 10rpx;
 		padding: 10rpx 0;

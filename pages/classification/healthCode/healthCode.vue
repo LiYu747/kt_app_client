@@ -1,8 +1,11 @@
 <template>
     <view class="">
     	<subclass titel="健康码" :showmap='false'></subclass>
-		 
-		<view class=" flex ju-center">
+		  
+		<view class=" flex-d al-center">
+			 <view class="simulation">
+			 	以下均为模拟数据
+			 </view>
 			<view class="content flex-d al-center">
 				<view class="time">
 					{{timer}}
@@ -22,7 +25,7 @@
 			  		身份证号：{{IDcard}}
 			  	</view>
 			  	<view class="address m-t1">
-			  		<!-- 居住地址：四川省成都市双流区井泉街4号 -->
+			  		
 			  	</view>
 			  </view>
 			</view>
@@ -142,7 +145,7 @@ data () {
 
 <style scoped lang="scss">
 .content{
-	margin-top: 50rpx;
+	margin-top: 30rpx;
 	width: 690rpx;
 	height: 852rpx;
 	background: #FFFFFF;
@@ -164,5 +167,9 @@ data () {
 	color: #333333;
 	font-size: 24rpx;
 }
-
+.simulation{
+	margin-top: 20rpx;
+	font-size: 30rpx;
+	color: #b3b3b3;
+}
 </style>

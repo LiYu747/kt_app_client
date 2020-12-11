@@ -165,7 +165,7 @@
 
 	.pack {
 		position: relative;
-		top: -55rpx;
+		top: -75rpx;
 		width: 690rpx;
 		height: 800rpx;
 		background: #FFFFFF;

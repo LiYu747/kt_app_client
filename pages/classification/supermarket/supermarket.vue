@@ -6,7 +6,9 @@
 				{{item}}
 			</view>
 		</view>
-
+         <view class="simulation">
+         	以下均为模拟数据
+         </view>
 		<view class="flex-d top al-center">
 			<view class="flex itembox pos-rel" v-for="item in getData" :key='item.id'>
 				<image :src="item.image" class="itemimg" mode=""></image>
@@ -272,7 +274,7 @@
 	}
 
 	.top {
-		margin-top: 88rpx;
+		// margin-top: 88rpx;
 	}
 
 	.item {
@@ -371,5 +373,13 @@
 		height: 130rpx;
 		margin-top: 10rpx;
 		margin-right: 10rpx;
+	}
+	
+	.simulation{
+		display: flex;
+		justify-content: center;
+		margin-top: 108rpx;
+		font-size: 30rpx;
+		color: #b3b3b3;
 	}
 </style>

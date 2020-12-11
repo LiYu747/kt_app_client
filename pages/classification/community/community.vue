@@ -2,6 +2,9 @@
     <view class="">
     	<subclass titel='社区政务'></subclass>
 		<view class="flex-d al-center">
+			<view class="simulation">
+				以下均为模拟数据
+			</view>
 			<image src="../../../image/classification/community/logo1.png" class="topback" mode=""></image>
 			<view class="conbox flex">
 					<view class="content">
@@ -169,5 +172,13 @@ data () {
 	height: 89rpx;
 	margin-right: 30rpx;
 	margin-left: 38rpx;
+}
+
+.simulation{
+		display: flex;
+		justify-content: center;
+		margin-top: 20rpx;
+		font-size: 30rpx;
+		color: #b3b3b3;
 }
 </style>

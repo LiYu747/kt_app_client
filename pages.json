@@ -454,6 +454,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/communityForum/forumlists/lianx/lianx",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -379,7 +379,7 @@
 <style scoped lang="scss">
 	.message {
 
-		margin-top: 150rpx;
+		margin-top: 170rpx;
 		width: 644rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
