@@ -1,12 +1,17 @@
 //本地开发域名
-let host = 'http://local.kt.cn/';
-// let host = 'https://api.kuaitongkeji.com/';   
+// let host = 'http://local.kt.cn/';
+let host = 'https://api.kuaitongkeji.com/';   
 let apiPath = host + 'api/';
+
+
 module.exports = {
 	
 	host : host,
-	
+
 	client : {
+		
+		config:apiPath + 'app/config',
+		
 		reg : apiPath + 'app/client',
 		
 		version : {
@@ -178,5 +183,9 @@ module.exports = {
 	  },
 	
 	  
-	}
+	},
+	// 导航
+	Navigation : {
+		Navmap : apiPath + 'app/config'
+		}
 }

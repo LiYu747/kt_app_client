@@ -19,5 +19,11 @@ class userd{
 		params.url = routes.user.userupdate.updataphoto
 		req.patch(params)
 	}
+	
+	//获取地图导航key
+	Navigation(params){
+		params.url = routes.Navigation.Navmap;
+		req.get(params)
+	}
 }
 module.exports = new userd;
