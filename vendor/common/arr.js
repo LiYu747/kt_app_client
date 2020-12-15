@@ -7,6 +7,6 @@ module.exports = {
 		
 		if( undefined === a[key] ) return dft;
 		
-		return a[key];
+		return a[key]; 
 	}
 }

@@ -10,15 +10,17 @@
 			@touchstart="touchstart"
 			@touchmove.stop="touchmove"
 			@touchend="touchend"
-			@click="close(index)"
 			:y="item.y"
 			:direction="direction"
 			disabled
 			damping="40"
 			:animation="item.animation"
-			class="drag-sort-item"
-			:style="styleObject"
+			class="drag-sort-item pos-rel"
+			:style="{background:item.background}"
 			:class="{'active': active == index, 'vh-1px-t': item.index > 0}">
+			<view v-show="reveal == true" class="pos-abs move">
+				<image @click="close(index)" src="../../image/forum/delete.png" class="delimg" mode=""></image>
+			</view>
 			  <view class="item">
 				  <text>{{item[props.label]}}</text>
 			  </view>
@@ -35,10 +37,11 @@ export default {
   components: {},
   data () {
     return {
-	  styleObject: {
-		color: 'red',
-		fontSize: '13px'
-	  },
+	 //  styleObject: {
+		// color: 'red',
+		// fontSize: '13px',
+	 //  },
+	   reveal:false,
 		style:{
 			background:'red'
 		},
@@ -85,7 +88,7 @@ export default {
   watch: {
     list:{
 		handler(){
-			debugger
+			// debugger
 			this.onUpdateCurrentList()
 		},
 		deep:true
@@ -220,6 +223,9 @@ export default {
 	   this.moveUpdateCurrentList(-1)
       this.active = -1
     },
+	reveals(){
+		this.reveal = !this.reveal
+	},
 	// 关闭按钮
 	close(index){
 		// debugger
@@ -229,7 +235,7 @@ export default {
 		
 		console.log("我是删除的index 的SortNumber")
 		console.log(this.currentList[index].SortNumber)
-		return
+		// return
 		this.currentList.forEach( (item, i) => {
 			if(this.currentList[i].SortNumber > this.currentList[index].SortNumber){
 				item.SortNumber--
@@ -254,11 +260,12 @@ export default {
   display: flex;
   height: 70rpx;
   align-items: center;
-  width: 148rpx;
+  width: 135rpx;
   text-align: center;
   background-color: #F0F0F0;
   color: #333333 !important;
-  /* border-radius: 5px; */
+  margin-left: -22rpx;
+  border-radius: 5px;
   box-sizing: border-box;
   .item {
 	position: relative;
@@ -291,5 +298,15 @@ export default {
 .active {
   box-shadow: 0 0 40rpx #DDDDDD;
   z-index: 99;
+}
+
+.move{
+	top: -10rpx;
+	right: -5rpx;
+}
+
+.delimg{
+	width: 25rpx;
+	height: 25rpx;
 }
 </style>

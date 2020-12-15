@@ -7,7 +7,8 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				 "navigationStyle":"custom"
+				 "navigationStyle":"custom",
+				 "enablePullDownRefresh": true
 			}
 		},
 		// 搜索
@@ -454,24 +455,19 @@
             }
             
         }
-        ,{
-            "path" : "pages/communityForum/forumlists/lianx/lianx",
+        ,
+		// 自定义customTarbar
+		{
+            "path" : "pages/communityForum/forumlists/customTarbar/customTarbar",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }
-        ,{
-            "path" : "pages/classification/travel/peoDetails",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+		 // 地图导航
         ,{
             "path" : "pages/web/index/index",
             "style" :                                                                                    

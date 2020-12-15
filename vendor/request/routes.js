@@ -1,6 +1,6 @@
 //本地开发域名
-// let host = 'http://local.kt.cn/';
-let host = 'https://api.kuaitongkeji.com/';   
+let host = 'http://local.kt.cn/';
+// let host = 'https://api.kuaitongkeji.com/';   
 let apiPath = host + 'api/';
 
 
@@ -163,7 +163,10 @@ module.exports = {
 			 SelfPost : apiPath + 'user/villageTribuneComments',
 			 
 			 //默认的栏目列表
-			 DefaultColumnList : apiPath + 'village/tribuneCat'
+			 DefaultColumnList : apiPath + 'village/tribuneCat',
+			 
+			 //自定义的栏目列表
+			 customLists : apiPath+ 'user/customTribuneCat'
 		},
 		
 		

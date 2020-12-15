@@ -3,7 +3,7 @@
 		<subclass titel="交通出行" :showmap='false'></subclass>
 		<!-- <view class="simulation">
 			以下均为模拟数据
-		</view> --> 
+		</view> -->
 		<view class="topbox flex al-center ju-center">
 			<view class="inbox flex">
 				<view class="left flex-d al-center pos-rel">
@@ -16,44 +16,38 @@
 				</view>
 
 				<view class="rigth">
-					<input v-model="myPosition" placeholder="请输入起点" />
+					<input v-model="myPosition" placeholder="我的位置" />
 					<view class="line">
 						<input v-model="goPosition" placeholder="请输入终点" />
 					</view>
 				</view>
 
 				<view class="">
-					<image src="../../../image/classification/Travel/jiah.png" class="jiaoimg" mode=""></image>
+					<image  src="../../../image/classification/Travel/jiah.png" class="jiaoimg" mode=""></image>
 				</view>
 			</view>
 		</view>
 
 
-		<view class="page-body">
-			<view class="page-section page-section-gap">
-				<map style="width: 100%; height: 300px;" :latitude="latitude" :longitude="longitude" :markers="covers">
-				</map>
-			</view>
-		</view>
+		<map style="width: 100%; height: 600rpx;" :latitude="latitude" :longitude="longitude" :markers="covers">
+		</map> 
 
 		<view class=" flex ju-center">
 			<view class="botombox flex al-center ju-center">
 				<view class="flex ju-center ">
-					<image @click="srta" src="../../../image/classification/Travel/start.png" class="startimg" mode=""></image>
+					<image @click="start" src="../../../image/classification/Travel/start.png" class="startimg" mode=""></image>
 				</view>
 			</view>
 		</view>
 
-
-
+    
 	</view>
 </template>
 
 <script>
 	import subclass from '../../../components/sub-class/subclass.vue'
 	import userDetails from '../../../vendor/user/userDetails.js'
-	import cfg from '../../../vendor/config/config.js';
-
+	import cfg from '../../../vendor/config/config.js'
 	export default {
 		name: "",
 		components: {
@@ -62,74 +56,61 @@
 		props: {},
 		data() {
 			return {
+				// arr:'',
 				myPosition: '',
 				goPosition: '',
-				idx: '',
-				num: 0,
-				// 经纪人id
-				latitude: 30.471306,
-				longitude: 104.071657,
+				latitude: '',
+				longitude: '',
 				covers: [{
 					id: 1,
 					width: 10, //宽
 					height: 10, //高
 					title: '我的位置', //地图标题 
-					latitude: 30.471306,
-					longitude: 104.071657,
+					latitude: '',
+					longitude: '',
 					iconPath: '../../../static/pos.png'
 				}],
+				city:''
 			}
 		},
-		methods: {
-			add(index) {
-				this.idx = index
-			},
-			choice(index) {
-				this.num = index
-			},
-			// 导航
-			Navigation() {
-				userDetails.Navigation({
-					data: {},
-					fail: () => {
-						uni.showToast({
-							title: "网络错误",
-							icon: 'none'
-						})
-					},
-					success: (res) => {
-						// console.log(res.data.data);
-						this.Map = res.data.data
-					}
-				})
-			},
-			// 定位
-			location() {
 
+		methods: {
+		
+			location() {
+                 uni.showLoading({
+                 	title:'获取定位中'
+                 })
 				// console.log('location')
 				uni.getLocation({
 					type: 'gcj02',
 					altitude: true,
 					geocode: true, //设置该参数为true可直接获取经纬度及城市信息
-					success: function(res) {
+					success: (res) => {
+						// this.arr = JSON.stringify(res)
+						uni.hideLoading()
 						this.latitude = res.latitude
 						this.longitude = res.longitude
-						this.addrDel = res;
+						this.covers[0].latitude = res.latitude
+						this.covers[0].longitude = res.longitude
+						this.city = res.address.city
 						// console.log(res);
 					},
-					fail: function(err) {
+					fail: (err) => {
+						uni.hideLoading()
 						// console.log('err', err)
 						uni.showToast({
-							title: '获取地址失败，将导致部分功能不可用',
+							title: '获取地址失败,请稍后再试',
 							icon: 'none'
 						});
 					}
-				});
+				});	 
 			},
-			srta() {
+  
+
+			start() {
 
 				let that = this;
- 
+
 				if (that.goPosition.length === 0) {
 					uni.showToast({
 						title: '请输入终点',
@@ -137,27 +118,43 @@
 					})
 					return
 				};
-
-				cfg.ready((data) => {
-
-					if (!data.map) return;
-					let navUrl = 'https://apis.map.qq.com/tools/routeplan/eword=' + that.goPosition;
-
-					navUrl += '?key=' + data.map.key + '&referer=' + data.map.name;
-
-					plus.runtime.openURL(navUrl);
-
+				let baiduUrl = 'http://api.map.baidu.com/direction'
+				if(that.myPosition == ''){
+					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' +'name:' + that.myPosition + '&destination=' + that.goPosition +
+					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo' 
+				}
+				if(that.myPosition != ''){
+					baiduUrl += '?origin=' + that.myPosition + '&destination=' + that.goPosition +
+					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo' 
+				}  
+				    
+					// console.log(baiduUrl); 
+				uni.navigateTo({ 
+					url: '/pages/web/index/index?url=' + encodeURIComponent(baiduUrl) 
 				})
+				
+				// cfg.ready((data) => {
+					// console.log(data);
+					// if (!data.map) return;
+					
+					// let navUrl = 'https://apis.map.qq.com/tools/routeplan/eword=' + that.goPosition + '&sword=' + that.myPosition + 
+					// 	'&spointx=' + that.latitude + '&spointy=' + that.longitude;
 
-			}
+					// navUrl += '?key=' + data.map.key + '&referer=' + data.map.name 
+					 
+					
+
+				// }) 
+
+			},
+
 
 		},
 		onShow() {
-			this.Navigation()
 			this.location()
 		},
 		mounted() {
-
+		
 		},
 		onLoad() {
 

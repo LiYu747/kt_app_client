@@ -12,8 +12,8 @@
 			}
 		},
 		onLoad(options) {
-			this.url = options.url;
-			console.log(options)
+			this.url = options.url ? decodeURIComponent(options.url) : '';
+			// console.log(options)
 		},
 		methods: {
 			

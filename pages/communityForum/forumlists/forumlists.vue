@@ -8,7 +8,7 @@
 				<image @click="empty" src="../../../image/forum/clier.png" class="clierimg" mode=""></image>
 				<view v-show="value !=''" @click="remove" class=" pos-abs rig">
 					取消
-				</view>
+				</view> 
 			</view>
 		</view>
 		<!-- tag标签 -->
@@ -18,15 +18,16 @@
 	  			<view class="itemtag" 
 	  			v-for="(item,index) in tagdata" 
 	  			:key='item.id'  
-	  			:class="{'dv':index==idx,'rightbox':index==tagdata.length-1}"
 	  			@click="select(item,index)"
 	  			>
-	  				{{item.name}}
+	  				<view :class="{'itemwidth':index==tagdata.length-1,'dv':index==idx}">
+	  					{{item.name}}
+	  				</view>
 	  			</view>
 	  		</view>
 	  	</scroll-view>
 		<view class="posclassfiy flex al-center ju-center">
-			<image src="../../../image/forum/classfiy.png" class="classfiyimg" mode=""></image>
+			<image @click="custom" src="../../../image/forum/classfiy.png" class="classfiyimg" mode=""></image>
 		</view>
 	  </view>
 
@@ -60,21 +61,24 @@
 					</view>
 				</view>
 			</view>
-			<view v-show="isLoding == true" class="m-t2 flex ju-center al-center lodbox">
+			<view v-show="isLoding == true && lists.length!=0" class="m-t2 flex ju-center al-center lodbox">
 				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex ju-center m-t3 m-b2 fz-14" v-if="hasMore == false">
+			<view class="flex ju-center m-t3 m-b2 fz-14" v-if="hasMore == false && lists.length!=0">
 				{{text}}
 			</view>
 
 		</view>
 
-		<view class="nono flex al-center ju-center" v-if="lists.length == 0 && hasMore==false && flag==false">
+		<view class="nono flex al-center ju-center" v-if="lists.length == 0 && hasMore==false && flag==false && selectID==''">
 			小区还没有发布帖子哦~
 		</view>
-		<view class="nono flex al-center ju-center" v-if="flag==true&&lists.length==0">
-			没有你搜索的帖子哦~
+		<view class="nono flex al-center ju-center" v-if="flag==true&&lists.length==0&&isLoding==false">
+			没有您搜索的帖子哦~
+		</view>
+		<view class="nono flex al-center ju-center" v-if="selectID!='' && lists.length==0 && isLoding==false && flag==false">
+			没有您想看类型的帖子,试试其他的吧
 		</view>
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
@@ -129,6 +133,7 @@
 			 select(item,index){
 				 this.idx = index
 				 this.selectID = item.id
+				 this.text = ''
 				 this.page = 1
 				 this.lists = []
 				 this.loadPageData()
@@ -149,6 +154,13 @@
 			// 取消
 			remove() {
 				uni.hideKeyboard()
+			},
+			
+			// 自定义tabar标签
+			custom(){
+				uni.navigateTo({
+					url:'/pages/communityForum/forumlists/customTarbar/customTarbar'
+				})
 			},
 
 			// 获取数据
@@ -195,7 +207,7 @@
 								this.page = data.current_page + 1;
 								this.hasMore = data.next_page_url ? true : false;
 
-								this.lists = this.lists.concat(data.data);
+								this.lists = this.lists.concat(data.data); 
 							},
 
 						})
@@ -479,21 +491,19 @@
       
 	.posclassfiy{
 		width: 100rpx;
-		height: 74rpx;
+		height: 70rpx;
 		position: absolute;
-		top: 0rpx;
+		top: 10rpx;
 		right: 0rpx;
 		background: #FFFFFF;
-		 // box-shadow: -2px 0  20px 10px #FFFFFF;  
+		 box-shadow: -5px 0  10px 4px#FFFFFF;  
 	}  
 	 
 	.classfiyimg{
 		width: 40rpx;
 		height: 40rpx;
 	}
-	
-	.rightbox{
-		// width: 100rpx;
-		// background: red;
+	.itemwidth{
+	   margin-right: 120rpx;
 	}
 </style>

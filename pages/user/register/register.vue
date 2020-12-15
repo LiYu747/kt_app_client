@@ -185,6 +185,41 @@
 			// 注册
 			register() {
 				if (this.isLoding == true) return;
+				if( this.form.nickname == ''){
+					uni.showToast({
+					title:'请输入昵称',
+					icon:'none'
+					})
+					return;
+				}
+				if( this.form.name == ''){
+					uni.showToast({
+					title:'请输入姓名',
+					icon:'none'
+					})
+					return;
+				}
+				if( this.form.idcard == ''){
+					uni.showToast({
+					title:'请输入身份证',
+					icon:'none'
+					})
+					return;
+				}
+				if( this.form.phone == ''){
+					uni.showToast({
+					title:'请输入手机号',
+					icon:'none'
+					})
+					return;
+				}
+				if( this.form.Verification == ''){
+					uni.showToast({
+					title:'请输入验证码',
+					icon:'none'
+					})
+					return;
+				}
 				uni.showLoading({
 					title: '加载中...'
 				})

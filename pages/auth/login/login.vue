@@ -128,6 +128,7 @@
 							uni.hideLoading()
 							uni.showToast({
 								title: '网络错误',
+								icon:'none'
 							})
 						},
 						success: (res) => {
@@ -137,6 +138,7 @@
 							if (res.statusCode != 200) {
 								uni.showToast({
 									title: '网络请求出错',
+									icon:'none'
 								});
 								return;
 							}

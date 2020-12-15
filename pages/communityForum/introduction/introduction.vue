@@ -1,9 +1,9 @@
 <template>
 	<view class="fz-12">
-		   <subunit class="fixed" titel='小区简介'></subunit>
-		   <view class="line">
-		   	
-		   </view>
+		<subunit class="fixed" titel='小区简介'></subunit>
+		<view class="line">
+
+		</view>
 		<view class="">
 			<u-swiper v-if="list.length>0" :list="list" border-radius='0' height="350"></u-swiper>
 			<u-swiper v-if="list.length==0" :list="localist" border-radius='0' height="350"></u-swiper>
@@ -21,8 +21,19 @@
 						论坛
 					</view>
 				</view>
+				<!-- 小区简介 -->
 				<view v-show="idx===0" class="content">
-					{{arr.brief}}
+					<view class="">
+						{{arr.brief}}
+					</view>
+					<view class="addressBox">
+						<view class="">
+							小区地址
+						</view>
+						<view class=" fz-14 m-t2">
+							{{arr.address}}{{arr.address_name}}
+						</view>
+					</view>
 				</view>
 				<!-- 小区公告 -->
 				<view v-show="idx === 1" class="twbx m-t2">
@@ -38,12 +49,11 @@
 					</view>
 				</view>
 			</view>
-
-			<view v-show="idx===0&&arr.desc" class="foot">
+			<view v-if="idx===0&&arr.desc" class="foot">
 				<u-parse :html="arr.desc"></u-parse>
 			</view>
 		</view>
-		
+
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -61,14 +71,14 @@
 	export default {
 		name: "",
 		components: {
-          subunit
+			subunit
 		},
 		props: {
 
 		},
 		data() {
 			return {
-				id:'', //传的id
+				id: '', //传的id
 				localist: [require('@/image/forum/timg.jpg')],
 				list: [], //轮播图
 				arr: {}, //小区展示信息
@@ -100,7 +110,7 @@
 					fail: (err) => {
 						uni.showToast({
 							title: '网络错误',
-							icon:'none'
+							icon: 'none'
 						})
 					},
 					success: (res) => {
@@ -123,14 +133,14 @@
 						this.isLoding = false
 						uni.showToast({
 							title: '网络错误',
-							icon:'none'
+							icon: 'none'
 						})
 					},
 					success: (res) => {
 						this.isLoding = false
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						// console.log('小区公告',res.data.data);
+						console.log('小区展示', res);
 						let data = res.data.data
 						data.album.map(item => {
 							this.list.push(item.url)
@@ -149,16 +159,16 @@
 					fail: (err) => {
 						uni.showToast({
 							title: '网络错误',
-							icon:'none'
+							icon: 'none'
 						})
 					},
 					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						let content = res.data.data
-						// console.log(content);
+						let content = res.data.data.content
+						let title = res.data.data.title
 						uni.navigateTo({
-							url: `/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
+							url: `/pages/InformationDetails/InformationDetails/InformationDetails?content=${content}&&title=${title}`
 						})
 					}
 				})
@@ -169,7 +179,7 @@
 			this.Information()
 		},
 		onLoad(val) {
-             this.id = val.id
+			this.id = val.id
 		},
 		filters: {
 
@@ -187,13 +197,15 @@
 </script>
 
 <style scoped lang="scss">
-	.fixed{
+	.fixed {
 		position: fixed;
 		z-index: 9;
 	}
-	.line{
+
+	.line {
 		height: 148rpx;
 	}
+
 	/deep/ .u-swiper-indicator[data-v-a5b2d580] {
 		bottom: 60rpx !important;
 	}
@@ -253,6 +265,12 @@
 		font-size: 24rpx;
 		margin-bottom: 60rpx;
 	}
+	
+	.addressBox{
+		margin-top: 20rpx;
+		font-size: 30rpx;
+	}
+
 
 	.foot {
 		width: 614rpx;
@@ -292,7 +310,7 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
 	}
-	
+
 	.showloding {
 		position: absolute;
 		width: 100%;
@@ -300,12 +318,12 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-	
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-	
+
 	.loding {
 		width: 260rpx;
 		height: 200rpx;

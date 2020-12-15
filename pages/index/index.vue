@@ -7,39 +7,48 @@
 			</view>
 		</view>
 		<!-- 主页 -->
-		<view  class="flex-d al-center">
+		<view class="flex-d al-center">
 			<view class="box">
 				<image class="imgjx" src="../../image/home/jx.png" mode=""></image>
 			</view>
 			<!-- 轮播图 -->
 			<view class=" pos-abs pos">
-				<u-swiper @click="addswiper" :list="list" border-radius='20' bg-color='rgba(255, 255, 255, 0)' height="340" effect3d-previous-margin='60' indicator-pos='none'
-				 :effect3d="true"></u-swiper>
+				<u-swiper @click="addswiper" :list="list" border-radius='20' bg-color='rgba(255, 255, 255, 0)' height="340"
+				 effect3d-previous-margin='60' indicator-pos='none' :effect3d="true"></u-swiper>
 			</view>
 			<!-- 操作 -->
 			<view class="flex operation ju-between">
-				<view class="flex-d al-center" v-for="(item,index) in localdata" @click="checkin(item)" :key='item.id'>
+				<view class="flex-d al-center" v-for="(item,index) in localdata" @click="operation(item)" :key='item.id'>
 					<image :src="item.image" class="itemimg" mode=""></image>
 					<view class="itemtext">
-						{{item.titel}}
+						{{item.name}}
 					</view>
 				</view>
 			</view>
 			<!-- 分类 -->
-			<classification></classification>
+			<classification ref='clas'></classification>
 			<!-- 资讯 -->
-			<information></information>
+			<information ref="infor"></information>
 			<!-- 社区新闻 -->
-			<CommunityNews v-if='user'></CommunityNews>
+			<CommunityNews  ref='news' v-if='user'></CommunityNews>
 			<!-- 周边 -->
-			<periphery></periphery>
+			<periphery ref='peri'></periphery>
 		</view>
-		     <!-- 视频播放 -->
-		<view v-if="paly == true"  @mousewheel.prevent  class=" pos-abs moive flex-d al-center ju-center">
+		<!-- 视频播放 -->
+		<view v-if="paly == true" @mousewheel.prevent class=" pos-abs moive flex-d al-center ju-center">
 			<view @click="close" class="showback pos-abs">
-			</view> 
-			<video :src="videoUrl"  :poster='cover'></video> 
-				<image @click="close" src="../../image/home/close.png" class="closeimg" mode=""></image>
+			</view>
+			<video :src="videoUrl" :poster='cover'></video>
+			<image @click="close" src="../../image/home/close.png" class="closeimg" mode=""></image>
+		</view>
+		
+		<view v-show="showPullDownRefreshIcon == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="../../image/address/loading.gif" mode=""></image>
+				</view>
+				刷新中
+			</view>
 		</view>
 	</view>
 </template>
@@ -51,7 +60,9 @@
 	import periphery from '../../components/home/periphery/periphery.vue';
 	import CommunityNews from '../../components/home/CommunityNews/CommunityNews.vue'
 	import cache from '../../vendor/cache/cache.js'
-	import user from '../../vendor/user/userDetails.js'
+	import user from '../../vendor/user/userDetails.js';
+	import urlUtil from '../../vendor/common/url.js';
+
 	export default {
 		components: {
 			classification,
@@ -61,33 +72,14 @@
 		},
 		data() {
 			return {
-				localdata: [{
-						image: require('@/image/home/rz.png'),
-						titel: '入驻申请',
-						url: '/pages/residence/checkIn/checkIn'
-					},
-					{
-						image: require('@/image/home/bf.png'),
-						titel: '拜访申请',
-						url: '/pages/visitapplication/newDetalis/newDetalis'
-					},
-					{
-						image: require('@/image/home/lf.png'),
-						titel: '来访记录',
-						url: '/pages/operation/visitRecord/visitRecord'
-					},
-					{
-						image: require('@/image/home/code.png'),
-						titel: '我的二维码',
-						url: '/pages/qrcode/qrCode/qrCode'
-					},
-				],
+				localdata: [],
 				list: [], //轮播图
 				value: '', //搜索绑定v-model
-				user: {}  ,//用户资料
+				user: {}, //用户资料
 				paly: false,
-				videoUrl:'', //视频地址
-				cover:'',//视频封面
+				videoUrl: '', //视频地址
+				cover: '', //视频封面
+				showPullDownRefreshIcon:false
 			}
 		},
 		onLoad(val) {
@@ -95,7 +87,7 @@
 		},
 		methods: {
 			// 回车搜索
-			confirm () {
+			confirm() {
 				if (this.value != '') {
 					uni.navigateTo({
 						url: `/pages/index/search/search?value=${this.value}`
@@ -103,29 +95,42 @@
 				}
 			},
 			// 点击轮播图
-			addswiper(val){
-			   let movie = this.list[val]
-			   // console.log(movie);
-			   if(movie.video){
-				   this.videoUrl = movie.video
-				   this.cover = movie.image
-				   this.paly = true
-				   return;
-			   }
+			addswiper(val) {
+				let movie = this.list[val]
+				// console.log(movie);
+				if (movie.video) {
+					this.videoUrl = movie.video
+					this.cover = movie.image
+					this.paly = true
+					return;
+				} else {
+					urlUtil.to({
+						pageAlias: movie.page,
+						options: movie.params,
+					})
+				}
 			},
-			
+
 			// 关闭视频
-			close(){
+			close() {
 				this.paly = false
 			},
 			// 跳转
-			checkin(item) {
-				// console.log(item.url);
-				uni.navigateTo({
-					url: item.url
-				})
+			operation(item) {
+				if (item.page) {
+					urlUtil.to({
+						pageAlias: item.page,
+						options: item.params,
+					})
+					return;
+				}
+				if (item.web_url) {
+					uni.navigateTo({
+						url: '/pages/web/index/index?url=' + encodeURIComponent(item.web_url),
+					})
+				}
 			},
-			
+
 			// 轮播图数据
 			Chart() {
 				home.chart({
@@ -133,33 +138,75 @@
 						code: 'home_index_banner'
 					},
 					fail: (err) => {
+					  this.stopRefreshIcon()
 						uni.showToast({
-							title: err.data.msg
+							title: '网络出错',
+							icon:'none'
 						})
 					},
 					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
+						  this.stopRefreshIcon()
 						this.list = res.data.data.ads
 						// console.log(this.list);
 					},
 				})
 			},
+			// 操作数据
+			operationData() {
+				home.chart({
+					data: {
+						code: 'home_quick_nav_1'
+					},
+					fail: (err) => {
+						this.stopRefreshIcon()
+						uni.showToast({
+							title: '网络出错',
+							icon:'none'
+						})
+					},
+					success: (res) => {
+						if (res.statusCode != 200) return
+						if (res.data.code != 200) return
+						this.stopRefreshIcon()
+						this.localdata = res.data.data.ads
+						// console.log(this.localdata);
+					},
+				})
+			},
+            // 下拉刷新
+            stopRefreshIcon() {
+            	if (this.showPullDownRefreshIcon == true) {
+            		uni.stopPullDownRefresh();
+            		this.showPullDownRefreshIcon = false;
+            	}
+            },
+
 
 		},
 		mounted() {
 			this.Chart()
+			this.operationData()
 		},
 		onShow() {
-		   let a =	cache.get('jwt')
-		   if(a) {
-			  this.user = {} 
-		   }
-		   else{
-			   this.user = null
-		   }
+			let a = cache.get('jwt')
+			if (a) {
+				this.user = {}
+			} else {
+				this.user = null
+			}
 			this.value = ''
-		}
+		},
+		// 下拉刷新
+		onPullDownRefresh() {
+			this.showPullDownRefreshIcon = true;
+			this.$refs.clas.Calss()
+			this.$refs.infor.Data()
+			this.$refs.peri.getData()
+			this.operationData()
+			this.Chart()	
+		},
 	}
 </script>
 
@@ -283,7 +330,8 @@
 		font-size: 30rpx;
 		color: #FFFFFF;
 	}
-	.moive{
+
+	.moive {
 		top: 0;
 		position: fixed;
 		z-index: 999;
@@ -291,19 +339,38 @@
 		height: 100vh;
 		background: #000000;
 	}
-	
-	.showback{
+
+	.showback {
 		width: 100%;
 		height: 100vh;
 	}
-	
-	.closeimg{
+
+	.closeimg {
 		margin-top: 80rpx;
 		width: 60rpx;
-		height:60rpx;
+		height: 60rpx;
 	}
 
-	uni-video{
+	uni-video {
 		width: 100%;
+	}
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		border-radius: 10rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

@@ -149,6 +149,20 @@
 			},
 			// 提交
 			Submit() {
+				if(this.record[3].value == ''){
+					uni.showToast({
+						title:'请输入被拜访人姓名',
+						icon:'none'
+					})
+					return;
+				}
+				if(this.id.length == 0 ){
+					uni.showToast({
+						title:'请选择地址',
+						icon:'none'
+					})
+					return;
+				}
 				uni.showLoading({
 					title: '提交中...'
 				})

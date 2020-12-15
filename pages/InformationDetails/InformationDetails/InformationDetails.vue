@@ -1,18 +1,14 @@
 <template>
-	<!-- id为0 是desc  id为1 是content -->
 	<view class="flex-d al-center ovov">
 		<subunit class="pos " :retur="true"  titel="详情"></subunit>
 		<view class="line">
 
 		</view>
 		<view class="titel">
-			{{content.title}}
+			{{title}}
 		</view>
-		<view v-if="id==0" class="desc">
-			<u-parse :html="content.desc"></u-parse>
-		</view>
-		<view v-if="id==1" class="desc">
-			<u-parse :html="content.content"></u-parse>
+		<view  class="desc">
+			<u-parse :html="content"></u-parse>
 		</view>
 	</view>
 </template>
@@ -27,8 +23,8 @@
 		props: {},
 		data() {
 			return {
-				content: {}, //显示的内容
-				id: '', //传来的id
+				title:'',
+				content: '', //显示的内容
 			}
 		},
 		methods: {
@@ -36,10 +32,8 @@
 		},
 		mounted() {},
 		onLoad(val) {
-			let arr = JSON.parse(val.content)
-			// console.log(val.id);
-			this.id = val.id
-			this.content = arr
+			this.title = val.title
+			this.content  = val.content
 		},
 		filters: {
 

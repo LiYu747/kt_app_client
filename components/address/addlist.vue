@@ -31,7 +31,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view v-else class="nono flex al-center ju-center">
+		<view v-if="locdata.length==0" class="nono flex al-center ju-center">
 			暂无地址,快去添加吧~
 		</view>
 		<view v-if='flag===true && msg' @mousewheel.prevent class="show pos-abs flex al-center ju-center">

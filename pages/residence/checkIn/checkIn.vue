@@ -188,7 +188,21 @@
 			// 提交
 			Submit() {
 				// 获取备注
-				if (this.$refs.encl.isLoding == true) return
+				if (this.$refs.encl.isLoding == true) return;
+				if( this.household == ''){
+					uni.showToast({
+						title:'请选择住户类型',
+						icon:'none'
+					})
+					return;
+				}
+				if (this.id.length == 0) {
+					uni.showToast({
+						title:'请选择地址',
+						icon:'none'
+					})
+					return;
+				}
 				uni.showLoading({
 					title: '提交中...'
 				})
@@ -394,9 +408,7 @@
 
 		},
 		filters: {
-          hideMiddle(val){
-			    return `${val.substring(0,3)}****${val.substring(val.length-3)}`
-		  }  
+    
 		},
 		computed: {
          

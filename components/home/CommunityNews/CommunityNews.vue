@@ -42,6 +42,8 @@
 						})
 					},
 					success: (res) => {
+						if (res.statusCode != 200) return
+						if (res.data.code != 200) return
 						// console.log('新闻',res.data.data.data);
 						let data = res.data.data.data
 						this.news = data
@@ -74,9 +76,10 @@
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						// console.log(res.data.data);
-						let content = res.data.data
+						let content = res.data.data.content
+						let title = res.data.data.title
 						uni.navigateTo({
-							url: `/pages/InformationDetails/InformationDetails/InformationDetails?content=${JSON.stringify(content)}&&id=1`
+							url: `/pages/InformationDetails/InformationDetails/InformationDetails?content=${content}&&title=${title}`
 						})
 
 					}

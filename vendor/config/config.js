@@ -73,7 +73,7 @@ class Config{
 				}
 				
 				that.data = res.data.data;
-				console.log('data:',that.data);
+				// console.log('data:',that.data);
 				that.execTask();
 			}
 		})
@@ -88,6 +88,8 @@ class Config{
 			func(this.data);
 		}
 	}
-}
+	
+	
+}      
 
 module.exports = new Config;

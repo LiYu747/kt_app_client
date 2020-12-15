@@ -9,7 +9,7 @@
 		<view v-show="showPullDownRefreshIcon == true" class="show pos-abs flex al-center ju-center">
 			<view class="showcentent flex al-center ju-between">
 				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
-				加载中...
+				刷新中
 			</view>
 		</view>
 
