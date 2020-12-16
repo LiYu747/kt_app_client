@@ -48,7 +48,7 @@ data () {
 		})
 	},
 	// 定位
-	pos(){
+	// pos(){
 		// console.log(111);
 		// uni.getLocation({
 		//     type: 'wgs84',
@@ -57,13 +57,13 @@ data () {
 		//         console.log('当前位置的纬度：' + res.latitude);
 		//     }
 		// });
-		},
+		// },
   },
   onShow() {
   	
   },
   mounted () {
-   this.pos()
+   // this.pos()
   },
   onLoad () {
 

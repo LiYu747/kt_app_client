@@ -54,6 +54,7 @@ data () {
 	  // 点击每一栏事件
    add(item,index){
 	  this.$emit('add',item)
+	  if(!item.url) return;
 	  uni.navigateTo({
 	  	url: item.url
 	  })

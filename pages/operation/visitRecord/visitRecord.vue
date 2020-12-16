@@ -42,7 +42,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view v-else class="nono flex al-center ju-center">
+		<view v-if='lists.length == 0 && isLoding == false' class="nono flex al-center ju-center">
 			您还没有来访记录
 		</view>
 		
@@ -117,7 +117,6 @@
 									title: '网络错误',
 									icon: 'none'
 								})
-								// console.log(err);
 							},
 							success: (res) => {
                                 

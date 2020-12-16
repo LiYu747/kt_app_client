@@ -23,15 +23,11 @@
 					预约电梯
 				</view>
 			</view>
-			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
-				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
-				加载中...
-			</view>
 			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
 				{{text}}
 			</view>
 		</view>
-		<view v-if="locdata.length==0" class="nono flex al-center ju-center">
+		<view v-if="locdata.length==0 && isLoding==false" class="nono flex al-center ju-center">
 			暂无地址,快去添加吧~
 		</view>
 		<view v-if='flag===true && msg' @mousewheel.prevent class="show pos-abs flex al-center ju-center">

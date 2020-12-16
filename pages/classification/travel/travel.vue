@@ -16,14 +16,14 @@
 				</view>
 
 				<view class="rigth">
-					<input v-model="myPosition" placeholder="我的位置" />
+					<input v-model="myPosition" :placeholder="myholder" />
 					<view class="line">
-						<input v-model="goPosition" placeholder="请输入终点" />
+						<input v-model="goPosition" :placeholder="goholder" />
 					</view>
 				</view>
 
 				<view class="">
-					<image  src="../../../image/classification/Travel/jiah.png" class="jiaoimg" mode=""></image>
+					<image @click="swap" src="../../../image/classification/Travel/jiah.png" class="jiaoimg" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -56,11 +56,12 @@
 		props: {},
 		data() {
 			return {
-				// arr:'',
-				myPosition: '',
-				goPosition: '',
-				latitude: '',
-				longitude: '',
+				myholder:'我的位置',
+				goholder:'请输入终点', 
+				myPosition: '', //开始的位置
+				goPosition: '', //要去的位置
+				latitude: '',   //自动获取的经度
+				longitude: '',  //自动获取的纬度
 				covers: [{
 					id: 1,
 					width: 10, //宽
@@ -70,11 +71,28 @@
 					longitude: '',
 					iconPath: '../../../static/pos.png'
 				}],
-				city:''
+				city:'',//自动获取的城市
+				golat:'' , //要去地方的经度
+				golng:'' , //要去地方的纬度 
 			}
 		},
 
 		methods: {
+			// 交换出发和到达地址
+			swap(){
+			   if(this.goPosition == '') return;
+			   if(this.myPosition == '') {
+				   uni.showToast({
+				   	title:'请输入开始的位置',
+					icon:"none"
+				   })
+				   return;
+				   };
+			   let myPosition = this.myPosition
+			   let goPosition = this.goPosition
+			   this.myPosition = goPosition
+			   this.goPosition = myPosition 
+			},
 		
 			location() {
                  uni.showLoading({
@@ -95,11 +113,11 @@
 						this.city = res.address.city
 						// console.log(res);
 					},
-					fail: (err) => {
-						uni.hideLoading()
+					fail: (err) => { 
+						uni.hideLoading() 
 						// console.log('err', err)
 						uni.showToast({
-							title: '获取地址失败,请稍后再试',
+							title: '获取定位失败,请稍后再试',
 							icon: 'none'
 						});
 					}
@@ -108,10 +126,9 @@
   
 
 			start() {
-
 				let that = this;
 
-				if (that.goPosition.length === 0) {
+				if (that.goPosition == '') {
 					uni.showToast({
 						title: '请输入终点',
 						icon: "none"
@@ -119,16 +136,22 @@
 					return
 				};
 				let baiduUrl = 'http://api.map.baidu.com/direction'
-				if(that.myPosition == ''){
-					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' +'name:' + that.myPosition + '&destination=' + that.goPosition +
-					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo' 
+				  // 自动定位
+				if(that.myPosition == ''){ 
+					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' +'name:' + that.myPosition + 
+					`&destination=latlng:${that.golat},${that.golng}` + '|' +'name:' + that.goPosition +
+					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02' 
 				}
+				 
+				 //可以自己输入开始的位置
 				if(that.myPosition != ''){
-					baiduUrl += '?origin=' + that.myPosition + '&destination=' + that.goPosition +
-					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo' 
+					that.latitude = ''
+					that.longitude = '' 
+					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' +'name:' + that.myPosition +
+					`&destination=latlng:${that.golat},${that.golng}` + '|' +'name:' + that.goPosition +
+					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02' 
 				}  
-				    
-					// console.log(baiduUrl); 
+				     
 				uni.navigateTo({ 
 					url: '/pages/web/index/index?url=' + encodeURIComponent(baiduUrl) 
 				})
@@ -136,28 +159,25 @@
 				// cfg.ready((data) => {
 					// console.log(data);
 					// if (!data.map) return;
-					
 					// let navUrl = 'https://apis.map.qq.com/tools/routeplan/eword=' + that.goPosition + '&sword=' + that.myPosition + 
 					// 	'&spointx=' + that.latitude + '&spointy=' + that.longitude;
-
-					// navUrl += '?key=' + data.map.key + '&referer=' + data.map.name 
-					 
-					
-
+					// navUrl += '?key=' + data.map.key + '&referer=' + data.map.name 	
 				// }) 
-
 			},
 
 
 		},
 		onShow() {
-			this.location()
+			
 		},
 		mounted() {
-		
+		this.location() 
 		},
-		onLoad() {
-
+		onLoad(option) {
+			if(option.null=='')  return; 
+			this.goPosition = option.addressName
+			// this.golat = option.lat
+			// this.golng = option.lng
 		},
 		filters: {
 

@@ -49,8 +49,17 @@
 
 			</view>
 		</view>
-		<view v-else class="onon flex al-center ju-center">
+		<view v-show='!getmsg.info&&isLoding == false' class="onon flex al-center ju-center">
 			您还没有最新的拜访申请，快去 <view @click="addTo" class="apply">申请</view> 吧~
+		</view>
+		
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
 		</view>
 	</view>
 </template>
@@ -98,6 +107,7 @@
 				lv: 2, // 二维码容错级别 ， 一般不用设置，默认就行
 				onval: true, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
+				isLoding:false
 			}
 		},
 		methods: {
@@ -115,9 +125,7 @@
 			},
 			// 获取数据
 			loadPageData() {
-				uni.showLoading({
-					title: '加载中...'
-				})
+				this.isLoding = true
 				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
@@ -127,14 +135,14 @@
 								id: this.id
 							},
 							fail: (err) => {
-								uni.hideLoading()
+								this.isLoding = false
 								uni.showToast({
 									title: '网络错误',
 									icon: 'none'
 								})
 							},
 							success: (res => {
-								uni.hideLoading()
+								this.isLoding = false
 								if (res.statusCode != 200) return;
 
 								if (res.data.code != 200) return;
@@ -162,7 +170,7 @@
 						})
 					},
 					fail: () => {
-						uni.hideLoading()
+					this.isLoding = false
 						uni.switchTab({
 							url: '/pages/index/index'
 						})
@@ -308,5 +316,24 @@
 	.onon {
 		font-size: 14px;
 		height: 300rpx;
+	}
+	
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

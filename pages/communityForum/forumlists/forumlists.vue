@@ -150,6 +150,7 @@
 			// 清空
 			empty() {
 				this.value = ''
+				this.flag = false 
 			},
 			// 取消
 			remove() {
@@ -244,7 +245,7 @@
 			}
 		},
 		mounted() {
-         this.grtColumn()
+         
 		},
 		onLoad(val) {
 			this.id = val.id
@@ -258,6 +259,7 @@
 		},
 		onShow() {
 			this.loadPageData()
+			this.grtColumn()
 		},
 		filters: {
 

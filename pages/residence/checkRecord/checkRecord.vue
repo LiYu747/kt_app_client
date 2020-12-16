@@ -29,7 +29,7 @@
 				</view>
 
 			</view>
-			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
+			<view v-show="isLoding == true&&lists.length>0" class=" flex ju-center al-center lodbox"> 
 				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
@@ -37,7 +37,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view v-else class="nono flex al-center ju-center">
+		<view v-if="lists.length==0 && isLoding == false" class="nono flex al-center ju-center">
 			您还没有申请记录哦~
 		</view>
 
@@ -93,7 +93,7 @@
 			// 获取数据
 			loadPageData() {
 
-				if (this.isLoding == true || this.hasMore == false) return;
+				
 
 				this.isLoding = true;
 
@@ -167,13 +167,20 @@
 
 		},
 		mounted() {
+			
+		},
+		onShow() {
+			this.lists = []
+			this.page = 1
 			this.loadPageData()
 			this.Userdata()
 		},
 		// 下拉加载更多
 		onReachBottom() {
-			this.loadPageData();
 			this.text = '没有更多了~'
+			if (this.isLoding == true || this.hasMore == false) return;
+			this.loadPageData();
+			
 		},
 		onLoad() {
 

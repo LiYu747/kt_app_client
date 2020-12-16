@@ -258,8 +258,8 @@ export default {
 .drag-sort-item {
   position: absolute !important;
   display: flex;
-  height: 70rpx;
-  align-items: center;
+  height: 60rpx;
+  align-items: center; 
   width: 135rpx;
   text-align: center;
   background-color: #F0F0F0;

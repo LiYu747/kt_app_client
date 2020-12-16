@@ -27,7 +27,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view class="nono flex al-center ju-center" v-else>
+		<view class="nono flex al-center ju-center" v-if='lists.length==0&&isLoding==false'>
 			暂无出行记录
 		</view>
 		

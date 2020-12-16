@@ -477,6 +477,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/classification/motion/lianxi",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

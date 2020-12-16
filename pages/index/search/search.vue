@@ -50,7 +50,7 @@
 
 		</view>
 		<view class="nono flex al-center ju-center" v-if="locdata.length == 0">
-			没有您要找的小区哦~~~
+			没有您搜索的小区哦~~~
 		</view>
 	</view>
 </template>

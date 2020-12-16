@@ -13,14 +13,6 @@
 			</view>
 		</view>
 
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
-			<view class="loding flex-d al-center ju-center">
-				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
-				</view>
-				加载中
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -70,7 +62,7 @@
 			},
 			// 用户所有地址
 			loadPageData() {
-				this.isLoding == true
+				this.isLoding = true
 				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
@@ -108,7 +100,7 @@
 						})
 					},
 					fail: () => {
-						this.isLoding == true
+						this.isLoding = false
 						this.stopRefreshIcon();
 						this.locdata = []
 					}
@@ -118,7 +110,7 @@
 			},
 		},
 		mounted() {
-
+ 
 		},
 		onLoad() {
 

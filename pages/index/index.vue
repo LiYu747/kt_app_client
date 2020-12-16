@@ -190,8 +190,8 @@
 			this.operationData()
 		},
 		onShow() {
-			let a = cache.get('jwt')
-			if (a) {
+			let user = cache.get('jwt')
+			if (user) {
 				this.user = {}
 			} else {
 				this.user = null

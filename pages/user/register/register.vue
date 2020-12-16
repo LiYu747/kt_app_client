@@ -153,6 +153,7 @@
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络请求出错',
+								icon:'none'
 							});
 							return;
 						}
@@ -254,10 +255,9 @@
 						}
 
 						if (res.data.code != 200) {
-							this.$refs.uToast.show({
+							uni.showToast({
 								title: res.data.msg,
-								type: 'error',
-								icon: false
+								icon: 'none'
 							});
 							return;
 						}

@@ -23,16 +23,18 @@
 				</view>
 				<!-- 小区简介 -->
 				<view v-show="idx===0" class="content">
-					<view class="">
-						{{arr.brief}}
+					<view class="addressBox flex pos-rel">
+							<view class="addText">
+								小区地址：
+								{{detailedAddress}}
+							</view>
+							<view class="goHere flex pos-abs">
+								<!-- 去这里 -->
+								<image @click="navigation" src="../../../image/forum/addicon.png" class="addicon" mode=""></image>
+							</view>
 					</view>
-					<view class="addressBox">
-						<view class="">
-							小区地址
-						</view>
-						<view class=" fz-14 m-t2">
-							{{arr.address}}{{arr.address_name}}
-						</view>
+					<view class="m-t2">
+						{{arr.brief}}
 					</view>
 				</view>
 				<!-- 小区公告 -->
@@ -86,6 +88,7 @@
 					'简介', '公告'
 				],
 				Notice: [], // 公告数据
+				detailedAddress: '', //小区详细地址
 				idx: 0,
 				isLoding: false
 			}
@@ -99,6 +102,16 @@
 			goforum() {
 				uni.navigateTo({
 					url: `/pages/communityForum/forumlists/forumlists?id=${this.id}`
+				})
+			},
+			// 去导航页
+			navigation(){
+				// console.log(this.arr);
+				let addressName = this.arr.address_name
+				let lat = this.arr.lat
+				let lng = this.arr.lng
+				uni.navigateTo({
+					url:`/pages/classification/travel/travel?addressName=${addressName}&lat=${lat}&lng=${lng}`
 				})
 			},
 			// 小区公告
@@ -140,12 +153,14 @@
 						this.isLoding = false
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						console.log('小区展示', res);
+						// console.log('小区展示', res);
 						let data = res.data.data
 						data.album.map(item => {
 							this.list.push(item.url)
 						})
 						this.arr = data
+						// 小区详细地址
+						this.detailedAddress = data.address + data.address_name
 					}
 				})
 			},
@@ -265,12 +280,24 @@
 		font-size: 24rpx;
 		margin-bottom: 60rpx;
 	}
-	
-	.addressBox{
-		margin-top: 20rpx;
-		font-size: 30rpx;
+	.addText{
+		width: 500rpx;
+		// background: red;
+		word-break:break-all
 	}
-
+	
+	.addicon{	
+		width: 40rpx;
+		height: 40rpx;
+	}
+	.goHere{
+		margin-top: -40rpx;
+		color: #F07535;
+		width: 140rpx;
+		justify-content: flex-end;
+		margin-top: -6rpx;
+		right: 20rpx;
+	}
 
 	.foot {
 		width: 614rpx;

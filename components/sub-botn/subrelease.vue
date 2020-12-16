@@ -37,9 +37,7 @@ data () {
 		   url:`/pages/communityForum/myforum/forum?id=${this.id}`
 		  },
 		  ],
-		  one:0,
-		  two:2,
-		  three:5
+
     }
   },
   methods: {
