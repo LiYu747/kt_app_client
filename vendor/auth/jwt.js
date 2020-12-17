@@ -106,8 +106,8 @@ class JWT{
 		let that = this;
 		
 		uni.showModal({
-			title : arr.get(params,'modalTitle','登录提示'),
-			content: arr.get(params,'modalContent','请登录后在继续操作'),
+			title : arr.get(params,'modalTitle',''),
+			content: arr.get(params,'modalContent','请登录以便我们为您提供更准确的服务'),
 			showCancel : arr.get(params,'showCancel',true),
 			success(res) {
 				that.isAskLogin = false;

@@ -2,6 +2,18 @@
 	<view class="content">
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
+				<view class="userSelection pos-abs">
+					<image @click="isShowType = !isShowType" src="../../image/home/sjxl.png" class="sjxlIcon" mode=""></image>
+					<view v-show="isShowType == true" class="typeBox flex-d al-center">
+						<image src="../../image/home/xljx.png" class="xljxImg" mode=""></image>
+						<view class="typeLine">
+						</view>
+						<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
+							{{item.name}}
+						</view>
+
+					</view>
+				</view>
 				<image class="img pos-abs" src="../../image/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
 			</view>
@@ -30,7 +42,7 @@
 			<!-- 资讯 -->
 			<information ref="infor"></information>
 			<!-- 社区新闻 -->
-			<CommunityNews  ref='news' v-if='user'></CommunityNews>
+			<CommunityNews ref='news' v-if='user'></CommunityNews>
 			<!-- 周边 -->
 			<periphery ref='peri'></periphery>
 		</view>
@@ -41,7 +53,7 @@
 			<video :src="videoUrl" :poster='cover'></video>
 			<image @click="close" src="../../image/home/close.png" class="closeimg" mode=""></image>
 		</view>
-		
+
 		<view v-show="showPullDownRefreshIcon == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -72,6 +84,23 @@
 		},
 		data() {
 			return {
+				userType: [{
+						name: '用户',
+						type: 'user',
+						url:'/pages/index/index'
+					},
+					{
+						name: '物业',
+						type: 'property',
+						url: '/pages/propertyManagement/propertyhome/propertyhome'
+					},
+					{
+						name: '快递、外卖',
+						type: 'expressage',
+						url: '/pages/userMessenger/userhome/userhome'
+					}
+				],
+				isShowType: false,
 				localdata: [],
 				list: [], //轮播图
 				value: '', //搜索绑定v-model
@@ -79,13 +108,21 @@
 				paly: false,
 				videoUrl: '', //视频地址
 				cover: '', //视频封面
-				showPullDownRefreshIcon:false
+				showPullDownRefreshIcon: false
 			}
 		},
 		onLoad(val) {
 			// console.log(val);
 		},
 		methods: {
+
+			//选择用户类型
+			selecType(item) {
+				if (item.type == 'user') return;
+				uni.reLaunch({
+					url: item.url
+				})
+			},
 			// 回车搜索
 			confirm() {
 				if (this.value != '') {
@@ -138,16 +175,16 @@
 						code: 'home_index_banner'
 					},
 					fail: (err) => {
-					  this.stopRefreshIcon()
+						this.stopRefreshIcon()
 						uni.showToast({
 							title: '网络出错',
-							icon:'none'
+							icon: 'none'
 						})
 					},
 					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						  this.stopRefreshIcon()
+						this.stopRefreshIcon()
 						this.list = res.data.data.ads
 						// console.log(this.list);
 					},
@@ -163,7 +200,7 @@
 						this.stopRefreshIcon()
 						uni.showToast({
 							title: '网络出错',
-							icon:'none'
+							icon: 'none'
 						})
 					},
 					success: (res) => {
@@ -175,13 +212,13 @@
 					},
 				})
 			},
-            // 下拉刷新
-            stopRefreshIcon() {
-            	if (this.showPullDownRefreshIcon == true) {
-            		uni.stopPullDownRefresh();
-            		this.showPullDownRefreshIcon = false;
-            	}
-            },
+			// 下拉刷新
+			stopRefreshIcon() {
+				if (this.showPullDownRefreshIcon == true) {
+					uni.stopPullDownRefresh();
+					this.showPullDownRefreshIcon = false;
+				}
+			},
 
 
 		},
@@ -205,7 +242,7 @@
 			this.$refs.infor.Data()
 			this.$refs.peri.getData()
 			this.operationData()
-			this.Chart()	
+			this.Chart()
 		},
 	}
 </script>
@@ -354,6 +391,7 @@
 	uni-video {
 		width: 100%;
 	}
+
 	.showloding {
 		position: absolute;
 		width: 100%;
@@ -361,16 +399,53 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-	
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-	
+
 	.loding {
 		width: 260rpx;
 		height: 200rpx;
 		border-radius: 10rpx;
 		background: rgba(88, 88, 88, 0.8);
+	}
+
+	.userSelection {
+		top: 20rpx;
+		left: 40rpx;
+	}
+
+	.sjxlIcon {
+		width: 28rpx;
+		height: 16rpx;
+		margin-left: 28rpx;
+	}
+
+	.xljxImg {
+		margin-top: 5rpx;
+		width: 140rpx;
+		height: 200rpx;
+		position: absolute;
+		z-index: -1;
+	}
+
+	.typeLine {
+		height: 20rpx;
+	}
+
+	.typeBox {
+		margin-top: 5rpx;
+		width: 140rpx;
+		height: 200rpx;
+		color: #666666;
+	}
+
+	.itemType {
+		margin-top: 10rpx;
+		width: 100%;
+		height: 40rpx;
+		border-bottom: 1px solid #E6E6E6;
 	}
 </style>

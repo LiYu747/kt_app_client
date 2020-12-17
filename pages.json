@@ -477,12 +477,37 @@
             }
             
         }
+		   // 物业首页
         ,{
-            "path" : "pages/classification/motion/lianxi",
+            "path" : "pages/propertyManagement/propertyhome/propertyhome",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+		 // 外卖首页
+        ,{
+            "path" : "pages/userMessenger/userhome/userhome",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+		
+		 // 物业用户查询
+        ,{
+            "path" : "pages/propertyManagement/userQuery/userQuery",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }

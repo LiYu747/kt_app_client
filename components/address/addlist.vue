@@ -170,7 +170,7 @@
 		width: 697rpx;
 		padding-left: 30rpx;
 		padding-right: 23rpx;
-		top: 200rpx;
+		top: 220rpx;
 		margin-bottom: 160rpx;
 	}
 

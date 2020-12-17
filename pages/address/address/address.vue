@@ -173,14 +173,14 @@
 	}
 
 	.shows {
-		top: 108rpx;
+		top: 128rpx;
 		right: 30rpx;
 		z-index: 3;
 	}
 
 	.showimg {
 		width: 130rpx;
-		height: 66rpx;
+		height: 76rpx;
 	}
 
 	.fled {
