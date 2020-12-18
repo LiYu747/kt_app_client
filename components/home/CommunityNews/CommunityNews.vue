@@ -3,7 +3,7 @@
 		<view class="conten">
 			<view class="flex al-center">
 				<view class="">
-					<image src="../../../image/home/news.png" class="imgss" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/home/news.png" class="imgss" mode=""></image>
 				</view>
 				<view class="textss">
 					社区新闻

@@ -3,14 +3,14 @@
 		<view v-if="locdata.length>0" class="box pos-abs" ref='fied'>
 			<view class="content pos-rel" v-for="(item,index) in locdata" :key='item.id'>
 				<view class="location pos-abs" @click="Select(item,index)">
-					<image v-if="idx===index" class="zrimg" src="../../image/address/yes.png" mode=""></image>
-					<image v-else class="zrimg" src="../../image/address/zro.png" mode=""></image>
+					<image v-if="idx===index" class="zrimg" src="https://oss.kuaitongkeji.com/static/img/app/address/yes.png" mode=""></image>
+					<image v-else class="zrimg" src="https://oss.kuaitongkeji.com/static/img/app/address/zro.png" mode=""></image>
 				</view>
 				<view class="addres">
 					<view @click="Select(item,index)" class=" name flex al-center pos-rel">
 						{{item.village_name}}
 						<view class="pos-abs  right">
-							<image class="reimg" src="../../image/address/retrue.png" mode=""></image>
+							<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
 						</view>
 					</view>
 					<view class="line"></view>
@@ -33,21 +33,21 @@
 		<view v-if='flag===true && msg' @mousewheel.prevent class="show pos-abs flex al-center ju-center">
 			<view class="showbox flex-d al-center">
 				<view v-show="message==true" class="flex-d al-center">
-					<image src="../../image/address/scrcc.png" class="scrimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/scrcc.png" class="scrimg" mode=""></image>
 					<view class="msg">
 						{{msg}}
 					</view>
 				</view>
 				<view v-show="message==false" class="flex-d al-center">
-					<image src="../../image/address/no.png" class="noimg" mode=""></image>
-					<image src="../../image/address/no1.png" class="ntimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/no.png" class="noimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/no1.png" class="ntimg" mode=""></image>
 				</view>
 
 				<view @click="sure" class="flex loca al-center ju-center">
 					<view class="pos-abs sowtext bai">
 						知道了
 					</view>
-					<image src="../../image/address/duan.png" class="showimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/duan.png" class="showimg" mode=""></image>
 				</view>
 			</view>
 		</view>

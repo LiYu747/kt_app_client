@@ -24,15 +24,15 @@ data () {
   return {
 	  icondata:[
 		  {
-		   icon:require('@/image/forum/home1.png'),
+		   icon:'https://oss.kuaitongkeji.com/static/img/app/forum/home1.png',
 		   titel:'论坛主页',
 		   url:`/pages/communityForum/forumlists/forumlists?id=${this.id}`,
 		   },
 		  {
-			icon:require('@/image/forum/photo2.png'),
+			icon:'https://oss.kuaitongkeji.com/static/img/app/forum/photo2.png',
 		  },
 		  {
-		   icon:require('@/image/forum/my1.png'),
+		   icon:'https://oss.kuaitongkeji.com/static/img/app/forum/my1.png',
 		   titel:'我的',
 		   url:`/pages/communityForum/myforum/forum?id=${this.id}`
 		  },

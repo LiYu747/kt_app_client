@@ -32,7 +32,7 @@
 			</view>
 			<view class="layou">
 				<view class=" move pos-abs">
-					<image @click="open" src="../../image/forum/pinlun.png" class="plimg" mode=""></image>
+					<image @click="open" src="https://oss.kuaitongkeji.com/static/img/app/forum/pinlun.png" class="plimg" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -56,7 +56,7 @@
 				</view>
 			</view>
 			<view v-show="isLoding == true" class="m-t2 flex ju-center al-center lodbox">
-				<image class="lodimg" src="../../image/address/loading.gif" mode=""></image>
+				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
 			<view class="flex btom ju-center m-t3  fz-14" v-if="hasMore == false">
@@ -83,7 +83,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				加载中
 			</view>

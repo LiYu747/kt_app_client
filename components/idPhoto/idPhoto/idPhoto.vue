@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<image class="img" @click="goback" src="../../../image/login/retrue.png" mode=""></image>
+		<image class="img" @click="goback" src="https://oss.kuaitongkeji.com/static/img/app/login/retrue.png" mode=""></image>
 		<view class="photo flex-d al-center ju-center">
 			<image :src="img" class="phimg" mode=""></image>
 			<view @tap="chooseAvatar" class="text">
@@ -11,7 +11,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				上传中
 			</view>

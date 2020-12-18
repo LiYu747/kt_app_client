@@ -2,13 +2,13 @@
 	<view class=" pos-rel content">
 		<subunit ref='xcoll' :retur='false' class="fled" titel="入住信息" @add='add' :image='aimg'></subunit>
 		<view v-show="flag%2!==0" class="shows pos-abs fled">
-			<image class="showimg" @click="getto" src="../../../image/address/ads.png" mode=""></image>
+			<image class="showimg" @click="getto" src="https://oss.kuaitongkeji.com/static/img/app/address/ads.png" mode=""></image>
 		</view>
-		<image src="../../../image/home/jx.png" class="img" mode=""></image>
+		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 		<addList :locdata='locdata' :isLoding='isLoding' :text='text' :hasMore='hasMore'></addList>
 		<view v-show="showPullDownRefreshIcon == true" class="show pos-abs flex al-center ju-center">
 			<view class="showcentent flex al-center ju-between">
-				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
+				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				刷新中
 			</view>
 		</view>
@@ -31,7 +31,7 @@
 		props: {},
 		data() {
 			return {
-				aimg: require('@/image/address/plus.png'),
+				aimg: 'https://oss.kuaitongkeji.com/static/img/app/address/plus.png',
 				flag: '', // 判断是否显示申请入驻
 				text: '', //没有更多了
 				locdata: [], //数据列表

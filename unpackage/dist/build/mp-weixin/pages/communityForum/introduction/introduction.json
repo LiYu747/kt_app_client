@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "小区信息",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#F07535",
+  "navigationBarTextStyle": "white",  
+  "usingComponents": {
+    "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
+    "u-parse": "/uview-ui/components/u-parse/u-parse"
+  }
+}

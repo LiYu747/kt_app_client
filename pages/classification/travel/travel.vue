@@ -23,7 +23,7 @@
 				</view>
 
 				<view class="">
-					<image @click="swap" src="../../../image/classification/Travel/jiah.png" class="jiaoimg" mode=""></image>
+					<image @click="swap" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/jiah.png" class="jiaoimg" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -35,7 +35,7 @@
 		<view class=" flex ju-center">
 			<view class="botombox flex al-center ju-center">
 				<view class="flex ju-center ">
-					<image @click="start" src="../../../image/classification/Travel/start.png" class="startimg" mode=""></image>
+					<image @click="start" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/start.png" class="startimg" mode=""></image>
 				</view>
 			</view>
 		</view>

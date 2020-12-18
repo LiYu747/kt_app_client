@@ -17,7 +17,7 @@
 
 		<!-- 提交 -->
 		<view @click="Submit" class="end flex al-center ju-center">
-			<image src="../../../image/login/ccuc.png" class="enimg" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="enimg" mode=""></image>
 			<view class=" pos-abs">
 				提交
 			</view>
@@ -26,7 +26,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				上传中
 			</view>
@@ -88,11 +88,11 @@
 					}
 				],
 				sex: '', //性别id
-				flag: true, //判断用户是否选择了头像
+				flag: false, //判断用户是否选择了头像
 				faceimg: '', //证件照
 				value: [], //默认选择
 				isLoding: false //上传照片
-			}
+			} 
 		},
 		methods: {
 			// 返回
@@ -246,6 +246,9 @@
 						}
 						// console.log(res.data.data);
 						let data = res.data.data
+						if(data.image == 'https://oss.kuaitongkeji.com/static/img/avatar/male_64.png'){
+							this.flag = true
+						}	
 						this.faceimg = data.faceimg
 						this.image = data.avatar
 						this.parameter[0].value = data.nickname

@@ -1,0 +1,16 @@
+<view class="flex-d al-center data-v-d619c67e">
+
+  <view class="content data-v-d619c67e">
+    <view class="postop data-v-d619c67e">
+      <block wx:for="{{parameter}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+        <view class="{{[' fied flex-d  pos-rel ju-center data-v-d619c67e',(index===parameter.length-1)?'dv':'']}}">
+          <u-field bind:input="__e" vue-id="{{'ea66c68a-2-'+index}}" label-width="150" label="{{item.label}}"
+            clearable="{{false}}" disabled="{{item.disabled}}" value="{{item.value}}"
+            data-event-opts="{{[['^input',[['__set_model',['$0','value','$event',[]],[[['parameter','id',item.id]]]]]]]}}"
+            class="data-v-d619c67e" bind:__l="__l"></u-field>
+          <view class="line  pos-abs data-v-d619c67e"></view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

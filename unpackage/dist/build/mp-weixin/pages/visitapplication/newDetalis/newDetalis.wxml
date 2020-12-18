@@ -1,0 +1,44 @@
+<view class="data-v-8c8f3572">
+  <!-- <view data-event-opts="{{[['tap',[['addTo',['$event']]]]]}}" class="pos-abs move data-v-8c8f3572" bindtap="__e">添加申请
+  </view> -->
+  <view class="topline data-v-8c8f3572"></view>
+  <block wx:if="{{getmsg.info}}">
+    <view class="cont data-v-8c8f3572">
+      <view class="nav flex al-center data-v-8c8f3572">
+        <image class="img data-v-8c8f3572" src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" mode></image>
+        <view class="text data-v-8c8f3572">{{''+username+''}}</view>
+      </view>
+      <block wx:for="{{locadata}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+        <view class="flex al-center pos-rel ipt data-v-8c8f3572">
+          <view class="data-v-8c8f3572">{{''+item.titel+''}}</view>
+          <view class="pos-abs rig data-v-8c8f3572">{{''+item.value+''}}</view>
+        </view>
+      </block>
+      <view class="line data-v-8c8f3572"></view>
+      <block wx:if="{{val}}">
+        <view class="qrimg flex ju-center data-v-8c8f3572">
+          <tki-qrcode vue-id="6e0ad088-2" cid="qrcode1" val="{{val}}" size="{{size}}" unit="{{unit}}"
+            background="{{background}}" foreground="{{foreground}}" pdground="{{pdground}}" icon="{{icon}}"
+            iconSize="{{iconsize}}" lv="{{lv}}" showLoading="{{false}}" onval="{{onval}}" loadMake="{{loadMake}}"
+            usingComponents="{{true}}" data-ref="qrcode" class="data-v-8c8f3572 vue-ref" bind:__l="__l"></tki-qrcode>
+        </view>
+      </block>
+      <view class="tex1 data-v-8c8f3572">备注</view>
+      <view class="frame data-v-8c8f3572">{{''+remark+''}}</view>
+      <view class="tex1 data-v-8c8f3572">申请结果</view>
+      <view class="frame data-v-8c8f3572">{{''+result+''}}</view>
+      <view class="linet data-v-8c8f3572"></view>
+    </view>
+  </block>
+  <view hidden="{{!(!getmsg.info&&isLoding==false)}}" class="onon flex al-center ju-center data-v-8c8f3572">
+    您还没有最新的拜访申请，快去<view data-event-opts="{{[['tap',[['addTo',['$event']]]]]}}" class="apply data-v-8c8f3572"
+      bindtap="__e">申请</view>吧~</view>
+  <view hidden="{{!(isLoding==true)}}" class="showloding flex al-center ju-center data-v-8c8f3572">
+    <view class="loding flex-d al-center ju-center data-v-8c8f3572">
+      <view class="  data-v-8c8f3572">
+        <image class="loimg data-v-8c8f3572" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode>
+        </image>
+      </view>加载中
+    </view>
+  </view>
+</view>

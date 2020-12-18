@@ -3,9 +3,9 @@
 		<subunit titel='' class="fiedx" :retur='true'></subunit>
 		<view class="line pos-rel">
 			<view class="ipt  ju-center flex al-center pos-rel">
-				<image class="img pos-abs" src="../../../image/home/ss.png" mode=""></image>
+				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model.trim="value" @confirm='confirm' placeholder="请输入帖子关键词" />
-				<image @click="empty" src="../../../image/forum/clier.png" class="clierimg" mode=""></image>
+				<image @click="empty" src="https://oss.kuaitongkeji.com/static/img/app/forum/clier.png" class="clierimg" mode=""></image>
 				<view v-show="value !=''" @click="remove" class=" pos-abs rig">
 					取消
 				</view> 
@@ -27,7 +27,7 @@
 	  		</view>
 	  	</scroll-view>
 		<view class="posclassfiy flex al-center ju-center">
-			<image @click="custom" src="../../../image/forum/classfiy.png" class="classfiyimg" mode=""></image>
+			<image @click="custom" src="https://oss.kuaitongkeji.com/static/img/app/forum/classfiy.png" class="classfiyimg" mode=""></image>
 		</view>
 	  </view>
 
@@ -62,7 +62,7 @@
 				</view>
 			</view>
 			<view v-show="isLoding == true && lists.length!=0" class="m-t2 flex ju-center al-center lodbox">
-				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
+				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
 			<view class="flex ju-center m-t3 m-b2 fz-14" v-if="hasMore == false && lists.length!=0">
@@ -83,7 +83,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				加载中
 			</view>

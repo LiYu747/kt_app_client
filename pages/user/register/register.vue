@@ -1,7 +1,7 @@
 <template>
 	<view class="back">
 		<view class="nav pos-rel flex al-center ju-center">
-			<image @click="goback" class="img pos-abs" src="../../../image/login/fanhui.png" mode=""></image>
+			<image @click="goback" class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/fanhui.png" mode=""></image>
 			<view class="text">
 				注册
 			</view>
@@ -9,7 +9,7 @@
 
 		<!-- logo -->
 		<view class="logo flex ju-center">
-			<image src="../../../image/login/logo.png" class="logoimg" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/login/logo.png" class="logoimg" mode=""></image>
 		</view>
 		<!-- 输入框 -->
 		<view class="top flex-d al-center">
@@ -17,28 +17,28 @@
 				<!-- 昵称-->
 				<u-form-item label="" class="postop" prop="nickname">
 					<view class="uiput flex al-center pos-rel">
-						<image class="nameimg pos-abs" src="../../../image/register/my.png" mode=""></image>
+						<image class="nameimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/register/my.png" mode=""></image>
 						<u-input class="ipt" :clearable='flag' v-model="form.nickname" placeholder="昵称" />
 					</view>
 				</u-form-item>
 				<!-- 姓名-->
 				<u-form-item label="" class="postop" prop="name">
 					<view class="uiput flex al-center pos-rel">
-						<image class="nameimg pos-abs" src="../../../image/register/my.png" mode=""></image>
+						<image class="nameimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/register/my.png" mode=""></image>
 						<u-input class="ipt" :clearable='flag' v-model="form.name" placeholder="真实姓名" />
 					</view>
 				</u-form-item>
 				<!-- 身份证号 -->
 				<u-form-item label="" class="postop" prop="idcard">
 					<view class="uiput flex al-center pos-rel">
-						<image class="idcardimg pos-abs" src="../../../image/register/card.png" mode=""></image>
+						<image class="idcardimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/register/card.png" mode=""></image>
 						<u-input class="ipt" :clearable='flag' v-model="form.idcard" placeholder="身份证号码" />
 					</view>
 				</u-form-item>
 				<!-- 上传证件照-->
 				<u-form-item label="" class="postop" prop="idphoto">
 					<view class="uiput flex al-center pos-rel">
-						<image class="idptimg pos-abs" src="../../../image/register/photo.png" mode=""></image>
+						<image class="idptimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/register/photo.png" mode=""></image>
 						<u-input class="ipt" :disabled="true" :clearable='flag' v-model="form.idphoto" placeholder="上传人像照片" />
 						<view v-if="toot == false" @click="upload" class="upload pos-abs">
 							上传
@@ -51,14 +51,14 @@
 				<!-- 手机号 -->
 				<u-form-item class="postop" label="" prop="phone">
 					<view class="uiput flex al-center pos-rel">
-						<image class="iptimg pos-abs" src="../../../image/login/phone.png" mode=""></image>
+						<image class="iptimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/phone.png" mode=""></image>
 						<u-input class="ipt" type="number" :clearable='flag' v-model="form.phone" placeholder="手机号" />
 					</view>
 				</u-form-item>
 				<!-- 验证码 -->
 				<u-form-item class="postop" label="" prop="Verification">
 					<view class="uiput flex al-center pos-rel">
-						<image class="iptimg2 pos-abs" src="../../../image/login/security.png" mode=""></image>
+						<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
 						<u-input class="ipt" type="number" :clearable='flag' v-model="form.Verification" placeholder="验证码" />
 						<view @click="addvercode" ref='code' :class="{'dv':code===false}" class="vcode pos-abs flex al-center ju-center">
 							<view class="tetxs">
@@ -74,7 +74,7 @@
 		<!-- 注册按钮 -->
 		<view class="flex-d al-center">
 			<view @click="register" class="btn pos-rel flex ju-center al-center">
-				<image src="../../../image/login/jbs.png" class="jbsimg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/login/jbs.png" class="jbsimg" mode=""></image>
 				<view class="lgtext pos-abs">
 					注册
 				</view>
@@ -84,7 +84,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				上传中
 			</view>
@@ -376,7 +376,7 @@
 <style scoped lang="scss">
 	.back {
 		position: relative;
-		background-image: url(../../../image/login/backg.png);
+		background-image: url(https://oss.kuaitongkeji.com/static/img/app/login/backg.png);
 		height: 100vh;
 		background-repeat: no-repeat; //不重复
 		background-size: 100% 100%; // 满屏

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarBackgroundColor": "#F07535",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "head-content": "/components/userCenter/headContent",
+    "action-bar": "/components/userCenter/actionBar"
+  }
+}

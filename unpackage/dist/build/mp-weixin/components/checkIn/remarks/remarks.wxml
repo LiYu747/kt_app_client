@@ -1,0 +1,1 @@
+<view class="data-v-bf69852a"><view class="pos-rel message data-v-bf69852a"><view class="text flex al-center data-v-bf69852a">{{''+titel+''}}</view><view class="data-v-bf69852a"><textarea class="tar data-v-bf69852a" maxlength="1000" data-event-opts="{{[['input',[['__set_model',['','value','$event',[]]]]]]}}" value="{{value}}" bindinput="__e"></textarea></view></view></view>

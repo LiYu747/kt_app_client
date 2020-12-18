@@ -4,11 +4,11 @@
 		<view class="line">
 			
 		</view>
-		<view class="flex-d color al-center">
-			<image src="../../../image/home/jx.png" class="img" mode=""></image>
+		<view class="flex-d color al-center"> 
+			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 			<view class="nav flex-d al-center">
 				<view v-if="image.length===0" class="top flex al-center ju-center">
-					<image class="timg" src="../../../image/forum/tuceng.png" mode=""></image>
+					<image class="timg" src="https://oss.kuaitongkeji.com/static/img/app/forum/tuceng.png" mode=""></image>
 				</view>
 				<view v-else class="back flex al-center">
 					<view class="" v-for="(item,index) in image" :key='item.id'>
@@ -16,7 +16,7 @@
 					</view>
 				</view>
 				<view @click="add" class="btn flex al-center ju-center">
-					<image class="btnimg" src="../../../image/address/plus.png" mode=""></image>
+					<image class="btnimg" src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" mode=""></image>
 					选择文件
 				</view>
 			</view>
@@ -38,7 +38,7 @@
 					</view>
 				</view>
 				<view class="pushtagpos pos-abs">
-					<image src="../../../image/forum/pushtag.png" class="pushtagimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/forum/pushtag.png" class="pushtagimg" mode=""></image>
 				</view>
 			</view>
 			<u-popup mode='bottom' height="600rpx" v-model="show">
@@ -66,7 +66,7 @@
 
 			<!-- 提交 -->
 			<view @click="Submit" class="matop flex al-center ju-center">
-				<image class="Submit" src="../../../image/login/ccuc.png" mode=""></image>
+				<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
 				<view class="bai pos-abs">
 					确认提交
 				</view>
@@ -78,7 +78,7 @@
 			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 				<view class="loding flex-d al-center ju-center">
 					<view class=" ">
-						<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+						<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 					</view>
 					上传中
 				</view>

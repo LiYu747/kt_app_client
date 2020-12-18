@@ -15,7 +15,7 @@
 				<view class="m-t2 m-l2 name">
 					{{item.name}}
 					<view class="score  flex al-center">
-						<image src="../../../image/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
 						<view class="m-l1">
 							{{item.score}}
 						</view>
@@ -34,7 +34,7 @@
 					<view class=" flex">
 						<view class="Views pos-abs flex al-center">
 							{{item.Views}}
-							<image src="../../../image/classification/Healthcare/next.png" class="nextimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextimg" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -62,7 +62,7 @@
 				idx: 0,
 				getData: [],
 				locadata: [{
-						image: require('@/image/classification/service/logo1.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/service/logo1.png',
 						name: '邻家维修（华阳店）',
 						score: '4.9',
 						Price: '￥183/人',
@@ -71,13 +71,13 @@
 						titel: ' 家电维修  ',
 						address: ' 天府新区  ',
 						tag: [
-							require('@/image/classification/service/1.png'),
-							require('@/image/classification/service/2.png'),
-							require('@/image/classification/service/3.png'),
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/1.png',
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/2.png',
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/3.png',
 						]
 					},
 					{
-						image: require('@/image/classification/service/logo2.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/service/logo2.png',
 						name: '速达到家家电维修（华阳店）',
 						score: '5.0',
 						Price: '暂无均价',
@@ -86,12 +86,12 @@
 						titel: ' 家电维修',
 						address: ' 天府新区 ',
 						tag: [
-							require('@/image/classification/service/2.png'),
-							require('@/image/classification/service/5.png'),
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/2.png',
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/5.png',
 						]
 					},
 					{
-						image: require('@/image/classification/service/logo3.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/service/logo3.png',
 						name: '驰瑞电脑手机维修',
 						score: '4.8',
 						Price: '暂无均价',
@@ -100,12 +100,12 @@
 						titel: ' 电脑维修',
 						address: ' 天府新区 ',
 						tag: [
-							require('@/image/classification/service/6.png'),
-							require('@/image/classification/service/2.png'),
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/6.png',
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/2.png',
 						]
 					},
 					{
-						image: require('@/image/classification/service/logo4.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/service/logo4.png',
 						name: '芯维修手机上门维修（天府三街店）',
 						score: '5.0',
 						Price: '暂无均价',
@@ -114,13 +114,13 @@
 						titel: ' 电脑维修 ',
 						address: ' 天府新区 ',
 						tag: [
-							require('@/image/classification/service/3.png'),
-							require('@/image/classification/service/2.png'),
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/3.png',
+							'https://oss.kuaitongkeji.com/static/img/app/classification/service/2.png',
 						]
 					}
 				],
 				locadata1: [{
-					image: require('@/image/classification/service/logo2.png'),
+					image: 'https://oss.kuaitongkeji.com/static/img/app/classification/service/logo2.png',
 					name: '速达到家家电维修（华阳店）',
 					score: '5.0',
 					Price: '暂无均价',
@@ -129,12 +129,12 @@
 					titel: ' 家电维修',
 					address: ' 天府新区 ',
 					tag: [
-						require('@/image/classification/service/2.png'),
-						require('@/image/classification/service/5.png'),
+						'https://oss.kuaitongkeji.com/static/img/app/classification/service/2.png',
+						'https://oss.kuaitongkeji.com/static/img/app/classification/service/5.png',
 					]
 				}, ],
 				locadata2: [{
-					image: require('@/image/classification/service/logo1.png'),
+					image: 'https://oss.kuaitongkeji.com/static/img/app/classification/service/logo1.png',
 					name: '邻家维修（华阳店）',
 					score: '4.9',
 					Price: '￥183/人',
@@ -143,13 +143,13 @@
 					titel: ' 家电维修  ',
 					address: ' 天府新区  ',
 					tag: [
-						require('@/image/classification/service/1.png'),
-						require('@/image/classification/service/2.png'),
-						require('@/image/classification/service/3.png'),
+						'https://oss.kuaitongkeji.com/static/img/app/classification/service/1.png',
+						'https://oss.kuaitongkeji.com/static/img/app/classification/service/2.png',
+						'https://oss.kuaitongkeji.com/static/img/app/classification/service/3.png',
 					]
 				}, ],
 				locadata3: [{
-					image: require('@/image/classification/service/logo3.png'),
+					image: 'https://oss.kuaitongkeji.com/static/img/app/classification/service/logo3.png',
 					name: '驰瑞电脑手机维修',
 					score: '4.8',
 					Price: '暂无均价',
@@ -158,8 +158,8 @@
 					titel: ' 电脑维修',
 					address: ' 天府新区 ',
 					tag: [
-						require('@/image/classification/service/6.png'),
-						require('@/image/classification/service/2.png'),
+						'https://oss.kuaitongkeji.com/static/img/app/classification/service/6.png',
+						'https://oss.kuaitongkeji.com/static/img/app/classification/service/2.png',
 					]
 				}, ]
 			}

@@ -5,38 +5,38 @@
 			<view class="simulation">
 				以下均为模拟数据
 			</view>
-			<image src="../../../image/classification/community/logo1.png" class="topback" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/classification/community/logo1.png" class="topback" mode=""></image>
 			<view class="conbox flex">
 					<view class="content">
 						<view class="Recharge flex al-center ju-center pos-rel">
 							<view class="rechtext pos-abs">
 								充值中心
 							</view>
-							<image src="../../../image/classification/community/Recharge.png" class="Rechargeimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/community/Recharge.png" class="Rechargeimg" mode=""></image>
 						</view>
 						
 						<view class="police flex al-center ju-center pos-rel">
 							<view class="rechtext pos-abs">
 								公安交管
 							</view>
-							<image src="../../../image/classification/community/police.png" class="policeimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/community/police.png" class="policeimg" mode=""></image>
 						</view>
-					</view>
+					</view> 
 					<view class="rigcontent flex-d">
 						  <view class="fund flex al-center ">
-						  	  <image src="../../../image/classification/community/fund.png" class="fundimg" mode=""></image>
+						  	  <image src="https://oss.kuaitongkeji.com/static/img/app/classification/community/fund.png" class="fundimg" mode=""></image>
 							  <view class="">
 							  	公积金
 							  </view>
 						  </view>
 						  <view class="security flex al-center ">
-						  	<image src="../../../image/classification/community/security.png" class="securityimg" mode=""></image>
+						  	<image src="https://oss.kuaitongkeji.com/static/img/app/classification/community/security.png" class="securityimg" mode=""></image>
 						  	<view class="">
 						  		社保
 						  	</view>
 						  </view>
 						  <view class="service flex al-center "> 
-						  	<image src="../../../image/classification/community/service.png" class="serviceimg" mode=""></image>
+						  	<image src="https://oss.kuaitongkeji.com/static/img/app/classification/community/service.png" class="serviceimg" mode=""></image>
 						  	<view class="">
 						  		社保
 						  	</view>

@@ -1,0 +1,36 @@
+<view class="flex-d al-center data-v-7bcf7010">
+  <view data-event-opts="{{[['tap',[['gorecord',['$event']]]]]}}" class=" location data-v-7bcf7010"
+    bindtap="__e">申请记录</view>
+  <view class=" message data-v-7bcf7010">
+    <view class="text flex al-center data-v-7bcf7010">基本信息</view>
+    <view class="data-v-7bcf7010">
+      <block wx:for="{{record}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+        <view data-event-opts="{{[['tap',[['itemlabel',[index]]]]]}}"
+          class="{{['item flex al-center pos-rel data-v-7bcf7010',(index===record.length-1)?'dv':'']}}" bindtap="__e">
+          <u-field bind:input="__e" vue-id="{{'3094d8a0-2-'+index}}" label="{{item.label}}"
+            placeholder="{{item.placeholder}}" clearable="{{false}}" required="{{item.required}}" input-align="right"
+            disabled="{{item.disabled}}" label-width="170" value="{{item.value}}"
+            data-event-opts="{{[['^input',[['__set_model',['$0','value','$event',[]],[[['record','id',item.id]]]]]]]}}"
+            class="data-v-7bcf7010" bind:__l="__l"></u-field>
+          <block wx:if="{{index===record.length-1}}">
+            <view class="pos-abs righ data-v-7bcf7010">
+              <image class="xiala data-v-7bcf7010" src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" mode
+                data-event-opts="{{[['tap',[['Onshow',[index]]]]]}}" bindtap="__e"></image>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+    <u-select vue-id="3094d8a0-3" mode="mutil-column-auto" default-value="{{value}}" list="{{renderVillageLists}}"
+      value="{{show}}"
+      data-event-opts="{{[['^confirm',[['confirm']]],['^input',[['__set_model',['','show','$event',[]]]]]]}}"
+      bind:confirm="__e" bind:input="__e" class="data-v-7bcf7010" bind:__l="__l"></u-select>
+  </view>
+  <remarks class="top data-v-7bcf7010 vue-ref" vue-id="3094d8a0-4" titel="申请备注" data-ref="marks" bind:__l="__l">
+  </remarks>
+  <view data-event-opts="{{[['tap',[['Submit',['$event']]]]]}}"
+    class="pos-rel m-t4 bot flex al-center ju-center data-v-7bcf7010" bindtap="__e">
+    <image class="Submit data-v-7bcf7010" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode></image>
+    <view class="pos-abs subtext data-v-7bcf7010">提交</view>
+  </view>
+</view>

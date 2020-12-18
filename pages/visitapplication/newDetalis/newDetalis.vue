@@ -10,7 +10,7 @@
 		</view>
 		<view v-if="getmsg.info" class="cont">
 			<view class="nav flex al-center">
-				<image src="../../../image/visit/gnt.png" class="img" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
 				<view class="text">
 					{{username}}
 				</view>
@@ -56,7 +56,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				加载中
 			</view>

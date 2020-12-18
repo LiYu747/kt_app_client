@@ -2,10 +2,10 @@
 	<view class="content">
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
-				<view class="userSelection pos-abs">
-					<image @click="isShowType = !isShowType" src="../../image/home/sjxl.png" class="sjxlIcon" mode=""></image>
+				<!-- <view class="userSelection pos-abs">
+					<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
 					<view v-show="isShowType == true" class="typeBox flex-d al-center">
-						<image src="../../image/home/xljx.png" class="xljxImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
 						<view class="typeLine">
 						</view>
 						<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
@@ -13,15 +13,15 @@
 						</view>
 
 					</view>
-				</view>
-				<image class="img pos-abs" src="../../image/home/ss.png" mode=""></image>
+				</view> -->
+				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
 			</view>
 		</view>
 		<!-- 主页 -->
 		<view class="flex-d al-center">
 			<view class="box">
-				<image class="imgjx" src="../../image/home/jx.png" mode=""></image>
+				<image class="imgjx" src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode=""></image>
 			</view>
 			<!-- 轮播图 -->
 			<view class=" pos-abs pos">
@@ -51,13 +51,13 @@
 			<view @click="close" class="showback pos-abs">
 			</view>
 			<video :src="videoUrl" :poster='cover'></video>
-			<image @click="close" src="../../image/home/close.png" class="closeimg" mode=""></image>
+			<image @click="close" src="https://oss.kuaitongkeji.com/static/img/app/home/close.png" class="closeimg" mode=""></image>
 		</view>
 
 		<view v-show="showPullDownRefreshIcon == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				刷新中
 			</view>
@@ -241,6 +241,9 @@
 			this.$refs.clas.Calss()
 			this.$refs.infor.Data()
 			this.$refs.peri.getData()
+			if(this.user){
+				this.$refs.news.getData()
+			}
 			this.operationData()
 			this.Chart()
 		},

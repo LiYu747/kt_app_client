@@ -2,7 +2,7 @@
     "name" : "快通信息",
     "appid" : "__UNI__B8CB42C",
     "description" : "",
-    "versionName" : "1.0.7",
+    "versionName" : "1.0.8",
     "versionCode" : "100",
     "transformPx" : false,
     /* 5+App特有相关 */
@@ -133,7 +133,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxc7e2e247d7594448",
         "setting" : {
             "urlCheck" : false
         },

@@ -30,7 +30,7 @@
 							</view>
 							<view class="goHere flex pos-abs">
 								<!-- 去这里 -->
-								<image @click="navigation" src="../../../image/forum/addicon.png" class="addicon" mode=""></image>
+								<image @click="navigation" src="https://oss.kuaitongkeji.com/static/img/app/forum/addicon.png" class="addicon" mode=""></image>
 							</view>
 					</view>
 					<view class="m-t2">
@@ -59,7 +59,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				加载中
 			</view>
@@ -81,7 +81,7 @@
 		data() {
 			return {
 				id: '', //传的id
-				localist: [require('@/image/forum/timg.jpg')],
+				localist: ['https://oss.kuaitongkeji.com/static/img/app/forum/timg.jpg'],
 				list: [], //轮播图
 				arr: {}, //小区展示信息
 				titel: [

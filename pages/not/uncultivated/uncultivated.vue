@@ -5,7 +5,6 @@
 		 <view class="text">
 		 	正在开发中... ...
 		 </view>
-		 <image src="../../../image/visit/wkf.png" class="wkfimg" mode=""></image>
 	</view>
   </view>
 </template>

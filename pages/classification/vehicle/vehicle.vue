@@ -16,7 +16,7 @@
 					{{item.name}}
 					<view class="score  flex al-center">
 						<view v-if='item.score' class="flex al-center">
-							<image src="../../../image/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
 							<view class="m-l1">
 								{{item.score}}
 							</view>
@@ -51,7 +51,7 @@
 					<view class="m-t1 flex">
 						<view class="Views pos-abs flex al-center">
 							{{item.Views}}
-							<image src="../../../image/classification/Healthcare/next.png" class="nextimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextimg" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -79,14 +79,14 @@
 				idx: 0,
 				getData: [],
 				locadata: [{
-						image: require('@/image/classification/vehicle/logo1.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/logo1.png',
 						name: '新希望国际B座汇泊停车场',
 						Views: '5842人浏览',
 						xxadd: '地址：四川省成都市武侯区桂溪街道萃华路新希望国际B座',
 						Monthly: '月租：700-1500 '
 					},
 					{
-						image: require('@/image/classification/vehicle/logo2.png'),
+						image: ('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/logo2.png'),
 						name: '天府华星锦业奔驰4s店',
 						score: '5.0',
 						Price: '暂无均价',
@@ -94,12 +94,12 @@
 						titel: ' 4s店',
 						address: ' 华阳',
 						tag: [
-							require('@/image/classification/vehicle/1.png'),
-							require('@/image/classification/vehicle/3.png'),
+							('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/1.png'),
+							('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/3.png'),
 						]
 					},
 					{
-						image: require('@/image/classification/vehicle/logo3.png'),
+						image: ('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/logo3.png'),
 						name: '新元素奥迪（麓山大道店）',
 						score: '4.5',
 						Price: '暂无均价',
@@ -109,7 +109,7 @@
 						label: '“服务专业，环境没得说，高端大气上档次”',
 					},
 					{
-						image: require('@/image/classification/vehicle/logo4.png'),
+						image: ('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/logo4.png'),
 						name: '华阳天山加油站',
 						score: '4.5',
 						Price: '暂无均价',
@@ -119,7 +119,7 @@
 					},
 				],
 				locadata1: [{
-					image: require('@/image/classification/vehicle/logo2.png'),
+					image: ('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/logo2.png'),
 					name: '天府华星锦业奔驰4s店',
 					score: '5.0',
 					Price: '暂无均价',
@@ -127,19 +127,19 @@
 					titel: ' 4s店',
 					address: ' 华阳',
 					tag: [
-						require('@/image/classification/vehicle/1.png'),
-						require('@/image/classification/vehicle/3.png'),
+						('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/1.png'),
+						('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/3.png'),
 					]
 				}, ],
 				locadata2: [{
-					image: require('@/image/classification/vehicle/logo1.png'),
+					image: ('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/logo1.png'),
 					name: '新希望国际B座汇泊停车场',
 					Views: '5842人浏览',
 					xxadd: '地址：四川省成都市武侯区桂溪街道萃华路新希望国际B座',
 					Monthly: '月租：700-1500 '
 				}, ],
 				locadata3: [{
-					image: require('@/image/classification/vehicle/logo4.png'),
+					image: ('https://oss.kuaitongkeji.com/static/img/app/classification/vehicle/logo4.png'),
 					name: '华阳天山加油站',
 					score: '4.5',
 					Price: '暂无均价',

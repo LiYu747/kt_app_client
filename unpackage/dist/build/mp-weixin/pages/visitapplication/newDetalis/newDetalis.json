@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "最新拜访信息",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#F07535",
+  "navigationBarTextStyle": "white",  
+  "usingComponents": {
+    "subunit": "/components/sub-unit/subunit",
+    "tki-qrcode": "/components/qrcode/tki-qrcode/tki-qrcode"
+  }
+}

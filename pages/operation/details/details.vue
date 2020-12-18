@@ -3,7 +3,7 @@
 		<subunit titel="详情" :retur="true" @goback='goback'></subunit>
 		<view class="cont">
 			<view class="nav flex al-center">
-				<image src="../../../image/visit/gnt.png" class="img" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
 				<view class="text">
 					{{text}}
 				</view>
@@ -25,7 +25,7 @@
 					 <view class="timer">
 					 	{{valuetime}}
 					 </view>
-					<image src="../../../image/home/xiala.png" class="xialaimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xialaimg" mode=""></image>
 				</view>
 			</view>
 			<u-picker :default-time='invalid_at' @confirm="ok" mode="time" v-model="show" :params="params"></u-picker>
@@ -44,7 +44,7 @@
 			<!-- 按钮 -->
 			<view v-if="text==='待处理'" class="flex al-center ju-around m-t4">
 				<view @click="pass" class="btnr flex al-center ju-center">
-					<image src="../../../image/login/ccuc.png" class="btnimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="btnimg" mode=""></image>
 					<view class=" pos-abs">
 						通过
 					</view>

@@ -1,7 +1,7 @@
 <template>
 	<view class="flex-d al-center">
 		<subunit titel="我的二维码" :retur="true" @goback='goback'></subunit>
-		<image src="../../../image/home/jx.png" class="img" mode=""></image>
+		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 		<view class="pack flex-d al-center">
 			<view class="nav flex al-center">
 				请将二维码对准扫码口
@@ -14,12 +14,12 @@
 				</view>
 			</view>
 			<view class="cortt flex al-center" @click="add">
-				<image v-show="flag===1" src="../../../image/qrcode/1.png" class="img1" mode=""></image>
-				<image v-show="flag===0" src="../../../image/qrcode/3.png" class="img2" mode=""></image>
+				<image v-show="flag===1" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/1.png" class="img1" mode=""></image>
+				<image v-show="flag===0" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/3.png" class="img2" mode=""></image>
 				{{text}}
 			</view>
 			<view v-show="show===1" class="m-t2 flex al-center ju-center">
-				<image src="../../../image/qrcode/2.png" class="time" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/qrcode/2.png" class="time" mode=""></image>
 				<view class="pos-abs texts bai">
 					{{timetext}}
 				</view>

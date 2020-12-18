@@ -15,7 +15,7 @@
 				<view class="m-t2 m-l2 name">
 					{{item.name}}
 					<view class="score  flex al-center">
-						<image src="../../../image/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
 						<view class="m-l1">
 							{{item.score}}
 						</view>
@@ -24,7 +24,7 @@
 						</view>
 					</view>
 					<view v-if="item.time" class="Hours flex al-center ju-center">
-						<image src="../../../image/classification/Healthcare/jianb.png" class="jianbimg " mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/jianb.png" class="jianbimg " mode=""></image>
 						<view class="pos-abs">
 							{{item.time}}
 						</view>
@@ -38,7 +38,7 @@
 					<view class="m-t2 flex">
 						<view class="Views pos-abs flex al-center">
 							{{item.Views}}
-							<image src="../../../image/classification/Healthcare/next.png" class="nextimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextimg" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -66,16 +66,16 @@
 				idx: 0,
 				getData:[],
 				locadata: [{
-						image: require('@/image/classification/supermarket/92.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/92.png',
 						name: '鲜果汇（广福地铁站店）',
 						score: '4.9',
 						images: [
 							{
-								img:require('@/image/classification/supermarket/banlala.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/banlala.png',
 								titel:'香甜香蕉'
 							},
 							{
-								img:require('@/image/classification/supermarket/mang.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/mang.png',
 								titel:'鲜切芒果'
 							},
 						],
@@ -83,16 +83,16 @@
 						Views: '5624人浏览'
 					},
 					{
-						image: require('@/image/classification/supermarket/hongq.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/hongq.png',
 						name: '红旗连锁（华阳海昌路店）',
 						score: '暂无评分',
 						images: [
 							{
-								img:require('@/image/classification/supermarket/coco.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/coco.png',
 								titel:'可口可乐'
 							},
 							{
-								img:require('@/image/classification/supermarket/kamgsf.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/kamgsf.png',
 								titel:'藤椒牛肉面'
 							},			
 						],
@@ -100,16 +100,16 @@
 						Views: '5587人浏览'
 					},
 					{
-						image: require('@/image/classification/supermarket/rongc.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/rongc.png',
 						name: '蓉城万家（天府新区店）',
 						score: '5.0',
 						images: [
 							{
-								img:require('@/image/classification/supermarket/wahaha.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/wahaha.png',
 								titel:'AD钙奶' 
 							},
 							{
-								img:require('@/image/classification/supermarket/zhi.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/zhi.png',
 								titel:'本色纸浆抽纸'
 							},	
 						],
@@ -118,32 +118,32 @@
 					},
 				],
 			    locadata1: [{
-			    		image: require('@/image/classification/supermarket/logo1.png'),
+			    		image: 'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo1.png',
 			    		name: '鲜果汇（广福地铁站店）',
 			    		score: '4.5',
 			    		images: [
 							{
-								img:require('@/image/classification/supermarket/logo1.1.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo1.1.png',
 								titel:'金桔'
 							},
 							{
-								img:require('@/image/classification/supermarket/logo1.2.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo1.2.png',
 								titel:'菠萝蜜'
 							},
 			    		],
 			    		Views: '5004人浏览'
 			    	},
 					{
-							image: require('@/image/classification/supermarket/92.png'),
+							image:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/92.png',
 							name: '鲜果汇（广福地铁站店）',
 							score: '4.9',
 							images: [
 								{
-									img:require('@/image/classification/supermarket/banlala.png'),
+									img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/banlala.png',
 									titel:'香甜香蕉'
 								},
 								{
-									img:require('@/image/classification/supermarket/mang.png'),
+									img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/mang.png',
 									titel:'鲜切芒果'
 								},
 							],
@@ -151,16 +151,16 @@
 						},
 			    ],
 			    locadata2: [{
-						image: require('@/image/classification/supermarket/92.png'),
+						image:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/92.png',
 						name: '鲜果汇（广福地铁站店）',
 						score: '4.9',
 						images: [
 							{
-								img:require('@/image/classification/supermarket/banlala.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/banlala.png',
 								titel:'香甜香蕉'
 							},
 							{
-								img:require('@/image/classification/supermarket/mang.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/mang.png',
 								titel:'鲜切芒果'
 							},
 						],
@@ -168,16 +168,16 @@
 						Views: '5624人浏览'
 					},
 					{
-						image: require('@/image/classification/supermarket/hongq.png'),
+						image:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/hongq.png',
 						name: '红旗连锁（华阳海昌路店）',
 						score: '暂无评分',
 						images: [
 							{
-								img:require('@/image/classification/supermarket/coco.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/coco.png',
 								titel:'可口可乐'
 							},
 							{
-								img:require('@/image/classification/supermarket/kamgsf.png'),
+								img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/kamgsf.png',
 								titel:'藤椒牛肉面'
 							},			
 						],
@@ -186,32 +186,32 @@
 					},
 			    ],
 			    locadata3: [{
-			    		image: require('@/image/classification/supermarket/logo2.png'),
+			    		image:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo2.png',
 			    		name: '鲜果汇（广福地铁站店）',
 			    		score: '4.5',
 			    		images: [
 			    			{
-			    				img:require('@/image/classification/supermarket/logo2.1.png'),
+			    				img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo2.1.png',
 			    				titel:'低盐猫粮'
 			    			},
 			    			{
-			    				img:require('@/image/classification/supermarket/logo2.2.png'),
+			    				img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo2.2.png',
 			    				titel:'逗猫棒'
 			    			},
 			    		],
 			    		Views: '5624人浏览'
 			    	},
 			    	{
-			    			image: require('@/image/classification/supermarket/logo3.png'),
+			    			image:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo3.png',
 			    			name: '萌宠宠物店',
 			    			score: '4.1',
 			    			images: [
 			    			{
-			    				img:require('@/image/classification/supermarket/logo3.1.png'),
+			    				img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo3.1.png',
 			    				titel:'不锈钢猫盆'
 			    			},
 			    			{
-			    				img:require('@/image/classification/supermarket/logo3.2.png'),
+			    				img:'https://oss.kuaitongkeji.com/static/img/app/classification/supermarket/logo3.2.png',
 			    				titel:'猫砂'
 			    			},
 			    			],

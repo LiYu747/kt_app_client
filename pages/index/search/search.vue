@@ -3,7 +3,7 @@
 		<view class=" posfidex">
 			<subunit titel='' :retur='false'></subunit>
 			<view class="ipt  ju-center flex al-center pos-rel">
-				<image class="img pos-abs" src="../../../image/home/ss.png" mode=""></image>
+				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" @input="change" placeholder="请输入小区名称关键词" />
 				<view @click="remove" class=" pos-abs rig">
 					取消
@@ -17,7 +17,7 @@
 			<view @click="gotoo(item)" class="item" v-for="item in locdata" :key="item.id">
 				<view class="name flex al-center ju-between">
 					{{item.name}}
-					<image src="../../../image/address/retrue.png" class="nameimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" class="nameimg" mode=""></image>
 				</view>
 				<view class="syntext">
 					<view class="">
@@ -41,15 +41,15 @@
 				</view>
 			</view>
 			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
-				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
-				加载中...
+				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				搜索中...
 			</view>
 			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
 				{{text}}
 			</view>
 
 		</view>
-		<view class="nono flex al-center ju-center" v-if="locdata.length == 0">
+		<view class="nono flex al-center ju-center" v-if="locdata.length == 0&&isLoding == false">
 			没有您搜索的小区哦~~~
 		</view>
 	</view>
@@ -92,11 +92,12 @@
 						})
 					},
 					success: (res) => {
+							this.isLoding = false
 						//console.log(res.data.data);
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;
-						this.isLoding = false
+					
 						let data = res.data.data
 						this.page = data.current_page + 1
 						this.hasMore = data.next_page_url ? true : false;
@@ -258,5 +259,24 @@
 
 	.lodbox {
 		font-size: 24rpx;
+	}
+	
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

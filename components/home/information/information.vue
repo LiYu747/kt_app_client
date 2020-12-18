@@ -2,14 +2,14 @@
 	<div>
 		<view class="box">
 			<view class="flex al-center">
-				<image class="imgss" src="../../../image/home/sq(1)@2x.png" mode=""></image>
+				<image class="imgss" src="https://oss.kuaitongkeji.com/static/img/app/home/sq(1)@2x.png" mode=""></image>
 				<view class="text">
 					社区资讯
 				</view>
 			</view>
 			<view class="overtxt flex al-center">
 				<view class="context ">
-					<view class="ltst ">
+					<view v-if="loctext" class="ltst ">
 						{{loctext.title}}
 					</view>
 				</view>
@@ -37,6 +37,7 @@
 		methods: {
 			// 查看详情
 			lookup() {
+				if(!this.loctext) return;
 				home.infordils({
 					data: {
 						id: this.loctext.id

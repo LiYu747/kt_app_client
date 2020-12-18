@@ -1,0 +1,87 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/search/search",
+    "pages/auth/login/login",
+    "pages/address/address/address",
+    "pages/user/userCenter/userCenter",
+    "pages/user/register/register",
+    "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+    "pages/user/personal/personal",
+    "pages/address/addediting/ADDediting",
+    "pages/residence/checkIn/checkIn",
+    "pages/visitapplication/visit/visit",
+    "pages/operation/visitRecord/visitRecord",
+    "pages/operation/details/details",
+    "pages/visitapplication/goRecord/goRecord",
+    "pages/visitapplication/goDetails/goDetails",
+    "pages/qrcode/qrCode/qrCode",
+    "pages/not/uncultivated/uncultivated",
+    "pages/communityForum/myforum/forum",
+    "components/forum/forumdils",
+    "components/idPhoto/idPhoto/idPhoto",
+    "pages/InformationDetails/InformationDetails/InformationDetails",
+    "pages/residence/checkRecord/checkRecord",
+    "pages/residence/checkdetails/checkdetails",
+    "pages/user/travelRecords/travelRecords",
+    "pages/user/register/headSculpture",
+    "pages/update/update",
+    "pages/communityForum/forumlists/forumlists",
+    "pages/visitapplication/newDetalis/newDetalis",
+    "pages/user/versionNumber/versionNumber",
+    "pages/communityForum/introduction/introduction",
+    "pages/communityForum/release/release",
+    "pages/classification/healthCode/healthCode",
+    "pages/classification/healthCare/healthCare",
+    "pages/classification/supermarket/supermarket",
+    "pages/classification/motion/motion",
+    "pages/classification/deliciousFood/deliciousFood",
+    "pages/classification/vehicle/vehicle",
+    "pages/classification/community/community",
+    "pages/classification/service/service",
+    "pages/classification/travel/travel",
+    "pages/communityForum/forumlists/customTarbar/customTarbar",
+    "pages/web/index/index",
+    "pages/propertyManagement/propertyhome/propertyhome",
+    "pages/userMessenger/userhome/userhome",
+    "pages/propertyManagement/userQuery/userQuery",
+    "pages/propertyManagement/theUserDetails/theUserDetails",
+    "pages/propertyManagement/CheckToSee/CheckToSee",
+    "pages/propertyManagement/accessToInformation/accessToInformation"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#F95454",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/home1.png",
+        "selectedIconPath": "static/tabbar/home2.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/address/address/address",
+        "iconPath": "static/tabbar/location1.png",
+        "selectedIconPath": "static/tabbar/location2.png",
+        "text": "地址"
+      },
+      {
+        "pagePath": "pages/user/userCenter/userCenter",
+        "iconPath": "static/tabbar/user1.png",
+        "selectedIconPath": "static/tabbar/user2.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

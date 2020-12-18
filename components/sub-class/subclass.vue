@@ -3,14 +3,14 @@
    <view class="">
    		<view class="topbox pos-rel">
    			<view class="content pos-abs flex al-center">
-   				<image @click="remove" src="../../image/login/1729908969cd5d7d911e096d6db3c70.png" class="remove" mode=""></image>
+   				<image @click="remove" src="https://oss.kuaitongkeji.com/static/img/app/login/1729908969cd5d7d911e096d6db3c70.png" class="remove" mode=""></image>
    				<view class="m-l2">
    					{{titel}}
    				</view>
    			</view>
 			<!-- <view v-if="showmap == true" class="map pos-abs flex al-center">
 				复地.御香山3悦
-				<image src="../../image/classification/map.png" class="mapimg" mode=""></image>
+				<image src="../../images.kuaitongkeji.com/static/img/app/classification/map.png" class="mapimg" mode=""></image>
 			</view> -->
    		</view>
 		<view class="line">

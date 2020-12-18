@@ -19,31 +19,31 @@ props: {},
 data () {
   return {
 	  locdata:[
-		  {image:require('@/image/user/Checkin.png'),
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/Checkin.png',
 		  titel:'入驻申请',
 		  url:'/pages/residence/checkRecord/checkRecord'
 		  },
-		  {image:require('@/image/user/visit.png'),
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/visit.png',
 		   titel:'拜访申请',
 		   url:'/pages/visitapplication/goRecord/goRecord'
 		  },
-		  {image:require('@/image/user/record.png'),
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/record.png',
 		   titel:'来访记录',
 		   	url:'/pages/operation/visitRecord/visitRecord'
 		  },
-		  {image:require('@/image/user/scan.png'),
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/scan.png',
 		   titel:'回家二维码',
 		   	url:'/pages/qrcode/qrCode/qrCode'
 		  },
-		  {image:require('@/image/user/Trecords.png'),
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/Trecords.png',
 		   titel:'出行记录',
 		   url:'/pages/user/travelRecords/travelRecords'
 		  },
-		  {image:require('@/image/user/about.png'), 
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/about.png', 
 		   titel:'关于快通',
 		   url:'/pages/user/versionNumber/versionNumber'
 		  },
-		  {image:require('@/image/user/Logout.png'),
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/Logout.png',
 		   titel:'退出登录',
 		   signout:'signout'
 		  },

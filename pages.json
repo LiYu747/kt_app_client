@@ -511,6 +511,38 @@
             }
             
         }
+		      // 物业查看用户详情
+        ,{
+            "path" : "pages/propertyManagement/theUserDetails/theUserDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+		//物业入住查看
+        ,{
+            "path" : "pages/propertyManagement/CheckToSee/CheckToSee",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/propertyManagement/accessToInformation/accessToInformation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

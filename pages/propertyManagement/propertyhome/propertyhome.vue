@@ -2,9 +2,9 @@
 	<view class="">
 		<subunit :retur='false' titel='物业'></subunit>
 		<view class="userSelection pos-abs">
-			<image @click="isShowType = !isShowType" src="../../../image/home/sjxl.png" class="sjxlIcon" mode=""></image>
+			<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
 			<view v-show="isShowType == true" class="typeBox flex-d al-center">
-				<image src="../../../image/home/xljx.png" class="xljxImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
 				<view class="typeLine">
 				</view>
 				<view class="fz-12 itemType flex ju-center al-center"
@@ -18,7 +18,7 @@
 		</view>
 		<view class="contenBox flex">
 			<view @click="goQuery" class="userQuery pos-rel">
-				<image src="../../../image/propertyManagement/userBack.png" class="userBack pos-abs" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/userBack.png" class="userBack pos-abs" mode=""></image>
 				<view class="zidx">
 					用户查询
 				</view>
@@ -26,15 +26,15 @@
 					查询用户信息
 				</view>
 				<view class="">
-					<image src="../../../image/propertyManagement/userlook.png" class="userlookImg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/userlook.png" class="userlookImg" mode=""></image>
 				</view>
 			</view>
 
 			<view class=" m-l2">
-				<view class="CheckToSee flex fz-12 pos-rel">
-					<image src="../../../image/propertyManagement/checkBack.png" class="checkBack pos-abs" mode=""></image>
+				<view @click="CheckTo" class="CheckToSee flex fz-12 pos-rel">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/checkBack.png" class="checkBack pos-abs" mode=""></image>
 					<view class="">
-						<image src="../../../image/propertyManagement/Checklook.png" class="ChecklookImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/Checklook.png" class="ChecklookImg" mode=""></image>
 					</view>
 					<view class="">
 						<view class="checktex1">
@@ -45,10 +45,10 @@
 						</view>
 					</view>
 				</view>
-				<view class="recordOfAccess flex pos-rel">
-					<image src="../../../image/propertyManagement/accessBack.png" class="checkBack pos-abs" mode=""></image>
+				<view @click="comeAndGo" class="recordOfAccess flex pos-rel">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/accessBack.png" class="checkBack pos-abs" mode=""></image>
 					<view class="">
-						<image src="../../../image/propertyManagement/contract.png" class="contractImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/contract.png" class="contractImg" mode=""></image>
 					</view>
 					<view class="">
 						<view class="checktex1">
@@ -104,6 +104,18 @@
 		 goQuery(){
 			 uni.navigateTo({
 			 	url:"/pages/propertyManagement/userQuery/userQuery"
+			 })
+		 },
+		 //入住查看
+		 CheckTo(){
+			 uni.navigateTo({
+			 	url:'/pages/propertyManagement/CheckToSee/CheckToSee'
+			 })
+		 },
+		 //出入记录
+		 comeAndGo(){
+			 uni.navigateTo({
+			 	url:'/pages/propertyManagement/accessToInformation/accessToInformation'
 			 })
 		 }
 		},

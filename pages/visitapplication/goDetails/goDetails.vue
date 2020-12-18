@@ -6,7 +6,7 @@
 		</view>
 		<view class="cont">
 			<view class="nav flex al-center">
-				<image src="../../../image/visit/gnt.png" class="img" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
 				<view class="text">
 					{{username}}
 				</view>

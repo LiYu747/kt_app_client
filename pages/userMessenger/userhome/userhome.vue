@@ -2,9 +2,9 @@
 	<view class="">
 		<subunit :retur='false' titel='快递 外卖'></subunit>
 		<view class="userSelection pos-abs">
-			<image @click="isShowType = !isShowType" src="../../../image/home/sjxl.png" class="sjxlIcon" mode=""></image>
+			<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
 			<view v-show="isShowType == true" class="typeBox flex-d al-center">
-				<image src="../../../image/home/xljx.png" class="xljxImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
 				<view class="typeLine">
 				</view>
 				<view class="fz-12 itemType flex ju-center al-center"
@@ -20,50 +20,50 @@
 			 <!-- 左边 -->
 		 	<view class="">
 		 		<view class="passQrCode">
-		 				<image src="../../../image/userMessenger/back1.png" class="back1Img pos-abs" mode=""></image>
+		 				<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back1.png" class="back1Img pos-abs" mode=""></image>
 						<view class="prcline"></view>
 					<view class="prctext">
 						通行二维码
 					</view>
 					<view class="">
-						<image src="../../../image/userMessenger/qecode.png" class="qecodeImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/qecode.png" class="qecodeImg" mode=""></image>
 					</view>
 		 		</view>
 				<view class="VisitToApply">
-						<image src="../../../image/userMessenger/back2.png" class="back1Img pos-abs" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back2.png" class="back1Img pos-abs" mode=""></image>
 						<view class="prcline"></view>
 					<view class="prctext">
 						拜访申请
 					</view>
 					<view class="">
-						<image src="../../../image/userMessenger/Visitthecircle.png" class="VisitthecircleImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/Visitthecircle.png" class="VisitthecircleImg" mode=""></image>
 					</view>
 				</view>
 		 	</view>
 			<!-- 右边 -->
 			<view class="m-l2">
 				<view class="ApplyingTo flex">
-					<image src="../../../image/userMessenger/back3.png" class="back3Img pos-abs" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back3.png" class="back3Img pos-abs" mode=""></image>
 					<view class="">
-						<image src="../../../image/userMessenger/Goout.png" class="GooutImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/Goout.png" class="GooutImg" mode=""></image>
 					</view>
 					<view class="attext">
 						申请进入
 					</view>
 				</view>
 				<view class="ApplyingTo flex m-t3">
-					<image src="../../../image/userMessenger/back4.png" class="back3Img pos-abs" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back4.png" class="back3Img pos-abs" mode=""></image>
 					<view class="">
-						<image src="../../../image/userMessenger/service.png" class="serviceImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/service.png" class="serviceImg" mode=""></image>
 					</view>
 					<view class="attext">
 						送货申请
 					</view>
 				</view>
 				<view class="ApplyingTo flex m-t3">
-					<image src="../../../image/userMessenger/back5.png" class="back3Img pos-abs" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back5.png" class="back3Img pos-abs" mode=""></image>
 					<view class="">
-						<image src="../../../image/userMessenger/RecordSigning.png" class="RecordSigning" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/RecordSigning.png" class="RecordSigning" mode=""></image>
 					</view>
 					<view class="attext">
 						路线导航

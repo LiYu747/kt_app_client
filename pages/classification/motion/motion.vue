@@ -15,7 +15,7 @@
 				<view class="m-t2 m-l2 name">
 					{{item.name}}
 					<view class="score  flex al-center">
-						<image src="../../../image/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
 						<view class="m-l1">
 							{{item.score}}
 						</view>
@@ -41,7 +41,7 @@
 					<view class=" flex">
 						<view class="Views pos-abs flex al-center">
 							{{item.Views}}
-							<image src="../../../image/classification/Healthcare/next.png" class="nextimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextimg" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -69,7 +69,7 @@
 				idx: 0,
 				getData: [],
 				locadata: [{
-						image: require('@/image/classification/motion/logo1.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo1.png',
 						name: 'VIGOR LIFE健身训练中心（复地御香...）',
 						score: '5.0',
 						Price: '￥1035/人',
@@ -77,10 +77,10 @@
 						titel: ' 私教工作室   ',
 						address: ' 华阳',
 						label: '健身爱好者，力量训练爱好者的天堂',
-						tag: require('@/image/classification/motion/tag1.png')
+						tag: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/tag1.png'
 					},
 					{
-						image: require('@/image/classification/motion/logo2.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo2.png',
 						name: '泳力健身游泳中心',
 						score: '4.0',
 						Price: '￥60/人',
@@ -90,7 +90,7 @@
 						label: '去过恒温泳池数一数二的了',
 					},
 					{
-						image: require('@/image/classification/motion/logo3.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo3.png',
 						name: '99PARK篮球公园',
 						score: '3.5',
 						Price: '￥20/人',
@@ -100,7 +100,7 @@
 						label: '免费停车',
 					},
 					{
-						image: require('@/image/classification/motion/logo4.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo4.png',
 						name: '弘羽羽毛球馆',
 						score: '4.0',
 						Price: '暂无均价',
@@ -108,11 +108,11 @@
 						titel: ' 羽毛球  ',
 						address: ' 高新区',
 						label: '健身爱好者，力量训练爱好者的天堂',
-						tag: require('@/image/classification/motion/tag2.png')
+						tag: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/tag2.png'
 					}
 				],
 				locadata1: [{
-						image: require('@/image/classification/motion/logo5.png'),
+						image:'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo5.png',
 						name: '原始 Fitness',
 						score: '4.0',
 						Price: '￥60/人',
@@ -122,7 +122,7 @@
 						label: '是周围数个健身房数一数二的质量了',
 					},
 					{
-						image: require('@/image/classification/motion/logo1.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo1.png',
 						name: 'VIGOR LIFE健身训练中心（复地御香...）',
 						score: '5.0',
 						Price: '￥1035/人',
@@ -130,11 +130,11 @@
 						titel: ' 私教工作室   ',
 						address: ' 华阳',
 						label: '健身爱好者，力量训练爱好者的天堂',
-						tag: require('@/image/classification/motion/tag1.png')
+						tag: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/tag1.png'
 					},
 				],
 				locadata2: [{
-					image: require('@/image/classification/motion/logo3.png'),
+					image: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo3.png',
 					name: '99PARK篮球公园',
 					score: '3.5',
 					Price: '￥20/人',
@@ -144,7 +144,7 @@
 					label: '免费停车',
 				}, ],
 				locadata3: [{
-					image: require('@/image/classification/motion/logo4.png'),
+					image: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/logo4.png',
 					name: '弘羽羽毛球馆',
 					score: '4.0',
 					Price: '暂无均价',
@@ -152,7 +152,7 @@
 					titel: ' 羽毛球  ',
 					address: ' 高新区',
 					label: '健身爱好者，力量训练爱好者的天堂',
-					tag: require('@/image/classification/motion/tag2.png')
+					tag: 'https://oss.kuaitongkeji.com/static/img/app/classification/motion/tag2.png'
 				}]
 			}
 		},

@@ -7,7 +7,7 @@
 				 <view class="">
 				 	版本号 {{version}} 
 				 </view>
-				<image src="../../../image/address/retrue.png"  class="abimg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png"  class="abimg" mode=""></image>
 			</view>
 		</view>
     </view>

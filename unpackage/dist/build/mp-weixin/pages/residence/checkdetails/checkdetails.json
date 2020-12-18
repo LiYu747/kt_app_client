@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "记录详情",
+  "navigationBarBackgroundColor": "#F07535",
+  "enablePullDownRefresh": false,
+  "navigationBarTextStyle": "white",  
+  "usingComponents": {
+    "subunit": "/components/sub-unit/subunit"
+  }
+}

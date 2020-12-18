@@ -1,0 +1,120 @@
+.easy-select{
+  width: 180rpx !important;
+  height: 60rpx !important;
+  font-size: 26rpx !important;
+  border: none !important;
+  direction: rtl !important
+}
+
+.easy.data-v-4769195c .uni-input-placeholder {
+  font-size: 24rpx
+}
+
+.message.data-v-4769195c {
+  margin-top: 40rpx;
+  width: 644rpx;
+  height: 491rpx;
+  background: #fff;
+  -webkit-border-radius: 10rpx;
+  border-radius: 10rpx;
+  -webkit-box-shadow: 1rpx 2rpx 10rpx 0 #dcdcdc;
+  box-shadow: 1rpx 2rpx 10rpx 0 #dcdcdc;
+  padding-left: 20rpx;
+  padding-right: 26rpx
+}
+
+.text.data-v-4769195c {
+  height: 69rpx;
+  font-size: 30rpx;
+  color: #666;
+  border-bottom: 1rpx solid #bfbfbf
+}
+
+.item.data-v-4769195c {
+  width: 100%;
+  height: 69rpx;
+  font-size: 24rpx;
+  color: #666;
+  border-bottom: 1rpx solid #bfbfbf
+}
+
+.item.data-v-4769195c .u-field {
+  padding-left: 20rpx
+}
+
+.item.data-v-4769195c .uni-input-input {
+  width: 425rpx;
+  font-size: 24rpx
+}
+
+.item.data-v-4769195c .uni-input-placeholder {
+  font-size: 24rpx
+}
+
+.dv.data-v-4769195c .uni-input-input {
+  width: 425rpx
+}
+
+.righ.data-v-4769195c {
+  right: 0
+}
+
+.xiala.data-v-4769195c {
+  width: 16rpx;
+  height: 16rpx;
+  margin-right: 15rpx
+}
+
+.Submit.data-v-4769195c {
+  width: 358rpx;
+  height: 68rpx
+}
+
+.subtext.data-v-4769195c {
+  font-size: 30rpx;
+  color: #fff
+}
+
+.posp.data-v-4769195c {
+  position: fixed
+}
+
+.bot.data-v-4769195c {
+  margin-bottom: 80rpx
+}
+
+.a.data-v-4769195c {
+  font-size: 24rpx
+}
+
+.a.data-v-4769195c .uni-picker-view-indicator {
+  height: 100rpx !important
+}
+
+.a.data-v-4769195c .lb-picker-content {
+  height: 500rpx !important
+}
+
+.move.data-v-4769195c {
+  position: relative;
+  top: 20rpx;
+  left: 270rpx;
+  color:#F07535;
+  font-size: 30rpx;
+}
+
+.data-v-4769195c .u-select__body__picker-view__item[data-v-a577ac80] {
+  font-size: 24rpx !important;
+  text-align: center !important
+}
+
+.data-v-4769195c .uni-picker-view-indicator {
+  height: 88rpx !important
+}
+
+.easy-select input.data-v-78b7c946{
+  height: 60px;
+}
+.u-flex{
+  width: 220px;
+}

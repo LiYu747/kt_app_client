@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "来访记录",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#F07535",
+  "navigationBarTextStyle": "white",  
+  "usingComponents": {
+    "subunit": "/components/sub-unit/subunit"
+  }
+}

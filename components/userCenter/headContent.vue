@@ -4,18 +4,18 @@
 			<view class="title flex al-center ju-center pos-rel">
 				个人中心
 				<view class="pos-abs location">
-					<image @click="install" src="../../image/user/Settings.png" class="setimg" mode=""></image>
+					<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
 				</view>
 			</view>
 		</view>
 		<view class="">
-			<image src="../../image/home/jx.png" mode="" class="jximg"></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode="" class="jximg"></image>
 		</view>
 		<!-- 头像 -->
 		<view class="flex-d al-center">
 			<view @click="install" class="portrait flex  ju-center pos-rel">
 				<image v-if="user.nickname" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
-				<image v-else src="../../image/user/headportrait.png" class="headimg pos-abs" mode=""></image>
+				<image v-else src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs" mode=""></image>
 			</view>
 			<view @click="install" v-if="user.nickname" class="text">
 				{{user.nickname}}

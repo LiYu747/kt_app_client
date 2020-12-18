@@ -2,7 +2,7 @@
 	<div>
 		<view class="box">
 			<view class="flex al-center  m-b1 pos-rel">
-				<image class="imgss" src="../../../image/home/zx@2x.png" mode=""></image>
+				<image class="imgss" src="https://oss.kuaitongkeji.com/static/img/app/home/zx@2x.png" mode=""></image>
 				<view class="text">
 					周边消息
 				</view>

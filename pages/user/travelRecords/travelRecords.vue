@@ -6,12 +6,12 @@
 			<view class="item" v-for="item in lists" :key='item.id'>
 				<!-- 时间 -->
 				<view class="bx1 flex al-center">
-					<image src="../../../image/visit/time.png" class="dv3" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/time.png" class="dv3" mode=""></image>
 					{{item.open_gate_at.slice(0,16)}}
 				</view>
 				<!-- 地点 -->
 				<view class="bx1 flex al-center">
-					<image src="../../../image/visit/pos.png" class="dv3" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/pos.png" class="dv3" mode=""></image>
 					{{item.village_name}}
 				</view>
 				<!-- 提示 -->
@@ -20,7 +20,7 @@
 				</view>
 			</view>
 			<view v-show="isLoding == true" class=" flex ju-center m-t2 al-center lodbox">
-				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
+				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
 			<view class="flex ju-center m-b2 fz-14 m-t2" v-if="hasMore == false">
@@ -34,7 +34,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				加载中
 			</view>

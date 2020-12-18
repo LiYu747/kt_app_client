@@ -1,7 +1,7 @@
 <template>
   <view class="box">
   	<view class="nav pos-rel flex ju-center al-center">
-		 	<image v-if="retur === true" @click="goback" src="../../image/login/1729908969cd5d7d911e096d6db3c70.png" class="reimg pos-abs" mode=""></image>
+		 	<image v-if="retur === true" @click="goback" src="https://oss.kuaitongkeji.com/static/img/app/login/1729908969cd5d7d911e096d6db3c70.png" class="reimg pos-abs" mode=""></image>
   		{{titel}}
 		<view ref='lll' class="pos-abs location">
 			<image  :class="{'dv':rotateTimes%2===0}"  :src="image" @click="push" class="setimg" mode=""></image>

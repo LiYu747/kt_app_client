@@ -12,7 +12,7 @@
 					<image :src="item" class="itemimg" mode=""></image>
 				</view>
 				<view @click="succ" class="puls flex-d al-center ju-center">
-					<image src="../../../image/home/push.png" class="pushimg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>
 					添加
 				</view>
 			</view>
@@ -21,7 +21,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				上传中
 			</view>

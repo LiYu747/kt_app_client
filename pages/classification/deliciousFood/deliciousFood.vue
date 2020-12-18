@@ -15,7 +15,7 @@
 				<view class="m-t2 m-l2 name">
 					{{item.name}}
 					<view class="score  flex al-center">
-						<image src="../../../image/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/wujiao.png" class="wujiaoimg" mode=""></image>
 						<view class="m-l1">
 							{{item.score}}
 						</view>
@@ -41,7 +41,7 @@
 					<view class="m-t1 flex">
 						<view class="Views pos-abs flex al-center">
 							{{item.Views}}
-							<image src="../../../image/classification/Healthcare/next.png" class="nextimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextimg" mode=""></image>
 						</view>
 					</view>
 				</view>
@@ -69,7 +69,7 @@
 				idx: 0,
 				getData:[],
 				locadata: [{
-						image: require('@/image/classification/deliciousFood/logo1.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo1.png',
 						name: '大鱼海塘纸包烤鱼（海昌路店）',
 						score: '4.2',
 						Price: '￥49/人',
@@ -79,17 +79,17 @@
 						label:'掌柜说：全家都能吃的“经典蒜香”烤鱼。',
 					},
 					{
-						image: require('@/image/classification/deliciousFood/logo2.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo2.png',
 						name: '乡村基（华阳家乐福店）',
 						score: '3.2',
 						Price: '￥60/人',
                         Views: '5587人浏览',
 						titel:' 快餐简餐   ',
 						address:' 华阳',
-					    tag:require('@/image/classification/deliciousFood/tag1.png') 
+					    tag:'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/tag1.png' 
 					},
 					{
-						image: require('@/image/classification/deliciousFood/logo3.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo3.png',
 						name: '安德鲁森（复地御香山店）',
 						score: '3.0',
 						Price: '￥20/人',
@@ -99,7 +99,7 @@
 						label:'从这边出去比较方便',
 					},
 					{
-						image: require('@/image/classification/deliciousFood/logo4.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo4.png',
 						name: '锅首老火锅（华阳店）',
 						score: '5.0',
 						Price: '暂无均价',
@@ -110,7 +110,7 @@
 					},
 				],
 				locadata1: [{
-						image: require('@/image/classification/deliciousFood/logo5.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo5.png',
 						name: '稳拈市井老灶火锅',
 						score: '4.0',
 						Price: '￥49/人',
@@ -120,7 +120,7 @@
 						label:'“餐厅环境优美，每处细节都特别用心”',
 					},
 					{
-						image: require('@/image/classification/deliciousFood/logo6.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo6.png',
 						name: '牛杂火锅',
 						score: '3.2',
 						Price: '￥60/人',
@@ -130,7 +130,7 @@
 						label:'“只能用软嫩耙糯来形容，安逸得板”'
 					},
 					{
-						image: require('@/image/classification/deliciousFood/logo4.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo4.png',
 						name: '锅首老火锅（华阳店）',
 						score: '5.0',
 						Price: '暂无均价',
@@ -141,7 +141,7 @@
 					},
 				],
 			    locadata2: [{
-			    		image: require('@/image/classification/deliciousFood/logo7.png'),
+			    		image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo7.png',
 			    		name: '宜宾把把烧',
 			    		score: '4.0',
 			    		Price: '￥19/人',
@@ -151,7 +151,7 @@
 			    		label:'“只能用软嫩耙糯来形容，安逸得板”',
 			    	},
 			    	{
-			    		image: require('@/image/classification/deliciousFood/logo8.png'),
+			    		image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo8.png',
 			    		name: '乐山刘记烧烤（华阳店）',
 			    		score: '3.2',
 			    		Price: '￥26/人',
@@ -162,7 +162,7 @@
 			    	},
 			    ],
 				locadata3: [{
-						image: require('@/image/classification/deliciousFood/logo9.png'),
+						image: 'https://oss.kuaitongkeji.com/static/img/app/classification/deliciousFood/logo9.png',
 						name: '炸小明',
 						score: '4.0',
 						Price: '￥39/人',

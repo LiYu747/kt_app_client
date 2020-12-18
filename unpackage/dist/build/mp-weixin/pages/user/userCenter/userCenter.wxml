@@ -1,0 +1,1 @@
+<view class="whole _div data-v-c622c3c6"><head-content vue-id="0c8124bc-1" user="{{user}}" class="data-v-c622c3c6" bind:__l="__l"></head-content><action-bar bind:add="__e" vue-id="0c8124bc-2" data-event-opts="{{[['^add',[['add']]]]}}" class="data-v-c622c3c6" bind:__l="__l"></action-bar></view>

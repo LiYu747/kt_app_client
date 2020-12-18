@@ -19,9 +19,9 @@
 			:style="{background:item.background}"
 			:class="{'active': active == index, 'vh-1px-t': item.index > 0}">
 			<view v-show="reveal == true" class="pos-abs move">
-				<image @click="close(index)" src="../../image/forum/delete.png" class="delimg" mode=""></image>
+				<image @click="close(index)" src=" https://oss.kuaitongkeji.com/static/img/app/forum/delete.png" class="delimg" mode=""></image>
 			</view>
-			  <view class="item">
+			  <view class="item"> 
 				  <text>{{item[props.label]}}</text>
 			  </view>
 			</movable-view>

@@ -6,7 +6,7 @@
 		<view v-if="lists.length > 0" class="">
 			<view class="card" v-for="(items,indexs) in lists" @click="godetails(items)" :key='items.id' :class="{'bottom':indexs===lists.length-1}">
 				<view class="bx1 flex al-center pos-rel">
-					<image src="../../../image/visit/user.png" class="dv3" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/user.png" class="dv3" mode=""></image>
 					<view class="">
 						{{items.own_visitor.username}}
 					</view>
@@ -16,26 +16,26 @@
 					</view>
 				</view>
 				<view class="bx1 flex al-center">
-					<image src="../../../image/visit/phone.png" class="dv1" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/phone.png" class="dv1" mode=""></image>
 					<view class="">
 						{{items.own_visitor.tel}}
 					</view>
 				</view>
 				<view class="bx1 flex al-center">
-					<image src="../../../image/visit/time.png" class="dv3" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/time.png" class="dv3" mode=""></image>
 					<view class="">
 						{{items.created_at.slice(0,16)}}
 					</view>
 				</view>
 				<view class="bx2 flex al-center">
-					<image src="../../../image/visit/pos.png" class="dv3" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/pos.png" class="dv3" mode=""></image>
 					<view class="">
 						{{items.village_name}}
 					</view>
 				</view>
 			</view>
 			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
-				<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
+				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
 			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
@@ -49,7 +49,7 @@
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
-					<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				加载中
 			</view>

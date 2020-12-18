@@ -6,7 +6,7 @@
 				<view class=" fied flex-d  pos-rel ju-center" v-for="(item,index) in parameter" :key='item.id' :class="{'dv':index===parameter.length-1}">
 					<u-field label-width="150" v-model="item.value" :label="item.label" :clearable=false :disabled="item.disabled">
 					</u-field>
-					<view class="line  pos-abs">
+					<view class="line  pos-abs"> 
 					</view>
 				</view>
 			</view>

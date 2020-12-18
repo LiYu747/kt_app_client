@@ -37,7 +37,7 @@
 					</view>
 				</view>
 				<view v-if=" isLoding == true&&lists.length >0" class=" flex ju-center m-t2 al-center lodbox">
-					<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 					加载中...
 				</view>
 
@@ -80,7 +80,7 @@
 					您还没有发表评论
 				</view>
 				<view v-show="isLoding1 == true&&data1.length>0" class="m-t2 flex ju-center al-center lodbox">
-					<image class="lodimg" src="../../../image/address/loading.gif" mode=""></image>
+					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 					加载中...
 				</view>
 				<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore1 == false">
@@ -94,7 +94,7 @@
 			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 				<view class="loding flex-d al-center ju-center">
 					<view class=" ">
-						<image class="loimg" src="../../../image/address/loading.gif" mode=""></image>
+						<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 					</view>
 					加载中
 				</view>
@@ -209,7 +209,7 @@
 								// console.log(err);
 							},
 							success: (res) => {
-
+                                // console.log(res);
 								this.isLoding = false;
 
 								if (res.statusCode != 200) return;

@@ -1,7 +1,7 @@
 <template>
 	<view class="back">
 		<view class="nav pos-rel flex al-center ju-center">
-			<image @click="goback" class="img pos-abs" src="../../../image/login/fanhui.png" mode=""></image>
+			<image @click="goback" class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/fanhui.png" mode=""></image>
 			<view class="text">
 				<!-- 登录 -->
 			</view>
@@ -9,7 +9,7 @@
 
 		<!-- logo -->
 		<view class="logo flex ju-center">
-			<image src="../../../image/login/logo.png" class="logoimg" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/login/logo.png" class="logoimg" mode=""></image>
 		</view>
 		<!-- 输入框 -->
 		<view class="top flex-d al-center">
@@ -17,14 +17,14 @@
 				<!-- 手机号 -->
 				<u-form-item label="" prop="phone">
 					<view class="uiput flex al-center pos-rel">
-						<image class="iptimg pos-abs" src="../../../image/login/phone.png" mode=""></image>
+						<image class="iptimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/phone.png" mode=""></image>
 						<u-input class="ipt" type="number" :clearable='flag' v-model="form.phone" placeholder="输入手机号" value="" />
 					</view>
 				</u-form-item>
 				<!-- 验证码 -->
 				<u-form-item label="" prop="Verification">
 					<view class="uiput flex al-center pos-rel">
-						<image class="iptimg2 pos-abs" src="../../../image/login/security.png" mode=""></image>
+						<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
 						<u-input class="ipt" type="number" :clearable='flag' v-model="form.Verification" placeholder="输入验证码" />
 						<view @click="addvercode" ref='code' :class="{'dv':code===false}" class="vcode pos-abs flex al-center ju-center">
 							<view class="tetxs">
@@ -40,7 +40,7 @@
 		<!-- 登录按钮 -->
 		<view class="flex-d al-center">
 			<view @click="Login" class="btn pos-rel flex ju-center al-center">
-				<image src="../../../image/login/jbs.png" class="jbsimg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/login/jbs.png" class="jbsimg" mode=""></image>
 				<view class="lgtext pos-abs">
 					登录
 				</view>
@@ -281,7 +281,7 @@
 <style scoped lang="scss">
 	.back {
 		position: relative;
-		background-image: url(../../../image/login/backg.png);
+		background-image: url( https://oss.kuaitongkeji.com/static/img/app/login/backg.png);
 		height: 100vh;
 		background-repeat: no-repeat; //不重复
 		background-size: 100% 100%; // 满屏

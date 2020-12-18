@@ -20,7 +20,7 @@
 						</view>
 					</view>
 					<view v-if="index===record.length-1" class="pos-abs righ">
-						<image src="../../../image/home/xiala.png" class="xiala" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
 					</view>
 				</view>
 			</view>
@@ -34,7 +34,7 @@
 		<remarks ref='marks'></remarks>
 		<!-- 提交 -->
 		<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
-			<image class="Submit" src="../../../image/login/ccuc.png" mode=""></image>
+			<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
 			<view class="pos-abs subtext">
 				提交
 			</view>
