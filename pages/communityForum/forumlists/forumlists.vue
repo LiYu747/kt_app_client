@@ -136,7 +136,7 @@
 				 this.text = ''
 				 this.page = 1
 				 this.lists = []
-				 this.loadPageData()
+				 this.loadPageData()	
 			 },
 			//搜索
 			confirm() {
@@ -150,7 +150,6 @@
 			// 清空
 			empty() {
 				this.value = ''
-				this.flag = false 
 			},
 			// 取消
 			remove() {

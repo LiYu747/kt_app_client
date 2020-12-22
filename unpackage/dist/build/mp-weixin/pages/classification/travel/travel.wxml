@@ -1,1 +1,33 @@
-<view class="data-v-47ebef51"><subclass vue-id="6d610ba7-1" titel="交通出行" showmap="{{false}}" class="data-v-47ebef51" bind:__l="__l"></subclass><view class="topbox flex al-center ju-center data-v-47ebef51"><view class="inbox flex data-v-47ebef51"><view class="left flex-d al-center pos-rel data-v-47ebef51"><view class="come data-v-47ebef51">从</view><view class="go pos-abs data-v-47ebef51">到</view></view><view class="rigth data-v-47ebef51"><input placeholder="{{myholder}}" data-event-opts="{{[['input',[['__set_model',['','myPosition','$event',[]]]]]]}}" value="{{myPosition}}" bindinput="__e" class="data-v-47ebef51"/><view class="line data-v-47ebef51"><input placeholder="{{goholder}}" data-event-opts="{{[['input',[['__set_model',['','goPosition','$event',[]]]]]]}}" value="{{goPosition}}" bindinput="__e" class="data-v-47ebef51"/></view></view><view class="data-v-47ebef51"><image class="jiaoimg data-v-47ebef51" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/jiah.png" mode data-event-opts="{{[['tap',[['swap',['$event']]]]]}}" bindtap="__e"></image></view></view></view><map style="width:100%;height:600rpx;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{covers}}" class="data-v-47ebef51"></map><view class=" flex ju-center data-v-47ebef51"><view class="botombox flex al-center ju-center data-v-47ebef51"><view class="flex ju-center  data-v-47ebef51"><image class="startimg data-v-47ebef51" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/start.png" mode data-event-opts="{{[['tap',[['start',['$event']]]]]}}" bindtap="__e"></image></view></view></view></view>
+<view class="data-v-47ebef51">
+  <subclass vue-id="6d610ba7-1" titel="交通出行" showmap="{{false}}" class="data-v-47ebef51" bind:__l="__l"></subclass>
+  <view class="topbox flex al-center ju-center data-v-47ebef51">
+    <view class="inbox flex data-v-47ebef51">
+      <view class="left flex-d al-center pos-rel data-v-47ebef51">
+        <view class="come data-v-47ebef51">从</view>
+        <view class="go pos-abs data-v-47ebef51">到</view>
+      </view>
+      <view class="rigth data-v-47ebef51"><input placeholder="{{myholder}}"
+          data-event-opts="{{[['input',[['__set_model',['','myPosition','$event',[]]]]]]}}" value="{{myPosition}}"
+          bindinput="__e" class="data-v-47ebef51" />
+        <view class="line data-v-47ebef51"><input placeholder="{{goholder}}"
+            data-event-opts="{{[['input',[['__set_model',['','goPosition','$event',[]]]]]]}}" value="{{goPosition}}"
+            bindinput="__e" class="data-v-47ebef51" /></view>
+      </view>
+      <view class="data-v-47ebef51">
+        <image class="jiaoimg data-v-47ebef51"
+          src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/jiah.png" mode
+          data-event-opts="{{[['tap',[['swap',['$event']]]]]}}" bindtap="__e"></image>
+      </view>
+    </view>
+  </view><map style="width:100%;height:600rpx;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{covers}}"
+    class="data-v-47ebef51"></map>
+  <view class=" flex ju-center data-v-47ebef51">
+    <view class="botombox flex al-center ju-center data-v-47ebef51">
+      <view class="flex ju-center  data-v-47ebef51">
+        <image class="startimg data-v-47ebef51"
+          src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/start.png" mode
+          data-event-opts="{{[['tap',[['start',['$event']]]]]}}" bindtap="__e"></image>
+      </view>
+    </view>
+  </view>
+</view>

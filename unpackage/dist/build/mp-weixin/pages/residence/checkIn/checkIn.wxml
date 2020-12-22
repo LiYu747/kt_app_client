@@ -1,8 +1,10 @@
 <view class="flex-d al-center data-v-4769195c">
-  <view data-event-opts="{{[['tap',[['Application',['$event']]]]]}}" class="  move data-v-4769195c"
-    bindtap="__e">申请记录</view>
+  <subunit class="pos" vue-id="91b7c912-1" retur="{{true}}" titel="入住申请" bind:__l="__l"></subunit>
+ <view class="line"></view>
   <view class=" message data-v-4769195c">
-    <view class="text flex al-center data-v-4769195c">基本信息</view>
+    <view data-event-opts="{{[['tap',[['Application',['$event']]]]]}}" class=" move data-v-4769195c"
+    bindtap="__e">申请记录</view>
+    <view class="text flex   al-center data-v-4769195c">基本信息</view>
     <view class="data-v-4769195c">
       <block wx:for="{{record}}" wx:for-item="item" wx:for-index="index" wx:key="id">
         <view data-event-opts="{{[['tap',[['Onshow',[index]]]]]}}"

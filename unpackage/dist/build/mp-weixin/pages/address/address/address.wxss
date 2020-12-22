@@ -4,7 +4,7 @@
 }
 
 .img.data-v-aaab6b3c {
-  margin-top: 0rpx;
+  margin-top: 148rpx;
   width: 100%;
   height: 156rpx
 }
@@ -20,7 +20,7 @@
 
 .shows.data-v-aaab6b3c {
   top: 128rpx;
-  right: 30rpx;
+  left: 30rpx;
   z-index: 3
 }
 

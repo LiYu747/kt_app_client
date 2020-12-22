@@ -260,10 +260,10 @@
 			}
 		},
 		onShow() {
-			this.grtColumn()
+			
 		},
 		mounted() {
-
+this.grtColumn()
 		},
 		onLoad(val) {
 			this.id = val.id
@@ -447,7 +447,7 @@
 		align-items: center;
 		width: 148rpx;
 		height: 70rpx;
-		font-size: 13rpx;
+		font-size: 13px;
 		border-radius: 10rpx;
 		background: #EEEEEE;
 		margin-left: 30rpx;

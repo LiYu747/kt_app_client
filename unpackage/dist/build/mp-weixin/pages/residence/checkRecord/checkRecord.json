@@ -1,8 +1,7 @@
 {
   "navigationBarTitleText": "申请记录",
   "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#F07535",
-  "navigationBarTextStyle": "white", 
+  "navigationStyle": "custom",
   "usingComponents": {
     "subunit": "/components/sub-unit/subunit"
   }

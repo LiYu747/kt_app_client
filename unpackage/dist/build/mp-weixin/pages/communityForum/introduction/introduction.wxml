@@ -1,5 +1,5 @@
 <view class="fz-12 data-v-26556e90">
-  <!-- <subunit class="fixed data-v-26556e90" vue-id="0a812356-1" titel="小区简介" bind:__l="__l"></subunit> -->
+  <subunit class="fixed data-v-26556e90" vue-id="0a812356-1" titel="小区简介" bind:__l="__l"></subunit>
   <view class="line data-v-26556e90"></view>
   <view class="data-v-26556e90">
     <block wx:if="{{list.length>0}}">
@@ -13,7 +13,7 @@
   </view>
   <view class="flex-d al-center data-v-26556e90">
     <view class="nav flex-d al-center pos-rel data-v-26556e90">
-      <view class="tex1 data-v-26556e90">{{''+arr.name+''}}</view>
+      <view class="tex1 data-v-26556e90">{{arr.name}}</view>
       <view class="{{['tex2 flex al-center ju-center data-v-26556e90',(idx===0)?'te2':'']}}">
         <block wx:for="{{titel}}" wx:for-item="item" wx:for-index="index" wx:key="id">
           <view data-event-opts="{{[['tap',[['add',[index]]]]]}}"
@@ -24,13 +24,13 @@
       </view>
       <view hidden="{{!(idx===0)}}" class="content data-v-26556e90">
         <view class="addressBox flex pos-rel data-v-26556e90">
-          <view class="addText data-v-26556e90">{{'小区地址：\n\t\t\t\t\t\t\t'+detailedAddress+''}}</view>
+          <view class="addText data-v-26556e90">小区地址：{{detailedAddress}}</view>
           <view class="goHere flex pos-abs data-v-26556e90">
             <image class="addicon data-v-26556e90" src="https://oss.kuaitongkeji.com/static/img/app/forum/addicon.png"
               mode data-event-opts="{{[['tap',[['navigation',['$event']]]]]}}" bindtap="__e"></image>
           </view>
         </view>
-        <view class="m-t2 data-v-26556e90">{{''+arr.brief+''}}</view>
+        <view class="m-t2 data-v-26556e90">{{arr.brief}}</view>
       </view>
       <view hidden="{{!(idx===1)}}" class="twbx m-t2 data-v-26556e90">
         <block wx:if="{{Notice.length>0}}">

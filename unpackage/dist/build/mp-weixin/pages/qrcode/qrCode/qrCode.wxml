@@ -1,4 +1,6 @@
 <view class="flex-d al-center data-v-5fe6a42d">
+  <subunit class="fled data-v-15a16a58" vue-id="c78937b0-1" titel="我的二维码" retur="{{true}}"
+    data-event-opts="{{[['^goback',[['goback']]]]}}" bind:goback="__e" bind:__l="__l"></subunit>
   <image class="img data-v-5fe6a42d" src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode></image>
   <view class="pack flex-d al-center data-v-5fe6a42d">
     <view class="nav flex al-center data-v-5fe6a42d">请将二维码对准扫码口</view>

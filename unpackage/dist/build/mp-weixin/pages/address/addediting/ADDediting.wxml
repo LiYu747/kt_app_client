@@ -1,5 +1,6 @@
 <view class="flex-d al-center data-v-d619c67e">
-
+  <subunit class="fled data-v-15a16a58" vue-id="c78937b0-1" titel="地址详情" retur="{{true}}"
+    data-event-opts="{{[['^goback',[['goback']]]]}}" bind:goback="__e" bind:__l="__l"></subunit>
   <view class="content data-v-d619c67e">
     <view class="postop data-v-d619c67e">
       <block wx:for="{{parameter}}" wx:for-item="item" wx:for-index="index" wx:key="id">

@@ -1,7 +1,8 @@
 <view class="flex-d al-center data-v-7bcf7010">
-  <view data-event-opts="{{[['tap',[['gorecord',['$event']]]]]}}" class=" location data-v-7bcf7010"
-    bindtap="__e">申请记录</view>
+  <subunit class="pos " vue-id="91b7c912-1" retur="{{true}}" titel="拜访申请" bind:__l="__l"></subunit>
   <view class=" message data-v-7bcf7010">
+    <view data-event-opts="{{[['tap',[['gorecord',['$event']]]]]}}" class=" location data-v-7bcf7010"
+    bindtap="__e">申请记录</view>
     <view class="text flex al-center data-v-7bcf7010">基本信息</view>
     <view class="data-v-7bcf7010">
       <block wx:for="{{record}}" wx:for-item="item" wx:for-index="index" wx:key="id">

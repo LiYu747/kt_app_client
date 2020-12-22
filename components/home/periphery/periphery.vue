@@ -13,7 +13,7 @@
 			</view>
 
 			<!-- 资讯 -->
-			<view class="conten flex ju-between flex-w">
+			<view v-if="locdata.length>0" class="conten flex ju-between flex-w">
 				<view class="item flex pos-rel" @click="godils(item)" v-for="(item,index) in locdata" :key='index'>
 					<image :src="item.faceimg" mode="" class="itemimg"></image>
 					<view class="font fz-12">
@@ -23,6 +23,9 @@
 						{{item.created_at.slice(0,10)}}
 					</view>
 				</view>
+			</view>
+			<view class="nomsg" v-else>
+				还没有任何周边资讯哦~
 			</view>
 		</view>
 	</div>
@@ -76,7 +79,7 @@
 				home.news({
 					data: {
 						page: 1,
-						pageSize: 15
+						pageSize:4
 					},
 					fail: (err) => {
 						uni.showToast({
@@ -89,7 +92,7 @@
 						if (res.data.code != 200) return
 						// console.log(res.data.data.data);
 						let data = res.data.data.data
-						this.locdata = data.slice(0,4)
+						this.locdata = data
 					},
 				})
 			}
@@ -181,4 +184,10 @@
 		font-size: 24rpx;
 		color: rgb(247,157,70);
 	}
+	
+	.nomsg{
+	    font-size: 12px;
+		color: #999999;
+		margin: 20rpx ;
+		}
 </style>

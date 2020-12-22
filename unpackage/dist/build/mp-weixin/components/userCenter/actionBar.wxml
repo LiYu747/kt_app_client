@@ -1,1 +1,9 @@
-<view class="box data-v-d4ef947e"><block wx:for="{{locdata}}" wx:for-item="item" wx:for-index="index" wx:key="id"><view data-event-opts="{{[['tap',[['add',['$0',index],[[['locdata','id',item.id]]]]]]]}}" class="{{['item flex al-center data-v-d4ef947e',(index<3)?'dv':'',(index>3)?'top':'']}}" bindtap="__e"><image class="itemimg data-v-d4ef947e" src="{{item.image}}" mode></image><view class="itemtext data-v-d4ef947e">{{''+item.titel+''}}</view></view></block></view>
+<view class="box data-v-d4ef947e">
+  <block wx:for="{{locdata}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+    <view data-event-opts="{{[['tap',[['operation',[item,index],[[['locdata','id',item.id]]]]]]]}}"
+      class="{{['item flex al-center data-v-d4ef947e',(index<3)?'dv':'',(index>3)?'top':'']}}" bindtap="__e">
+      <image class="itemimg data-v-d4ef947e" src="{{item.image}}" mode></image>
+      <view class="itemtext data-v-d4ef947e">{{''+item.titel+''}}</view>
+    </view>
+  </block>
+</view>

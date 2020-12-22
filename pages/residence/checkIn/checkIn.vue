@@ -247,8 +247,8 @@
 							duration: 2000
 						});
 						const time = setTimeout(() => {
-							uni.redirectTo({
-								url: '/pages/residence/checkRecord/checkRecord/checkRecord'
+							uni.redirectTo({ 
+								url: '/pages/residence/checkRecord/checkRecord'
 							})
 							clearTimeout(time)
 						}, 2000)
@@ -269,7 +269,7 @@
 						})
 					}),
 					success: (res) => {
-
+                          // console.log(res);
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;

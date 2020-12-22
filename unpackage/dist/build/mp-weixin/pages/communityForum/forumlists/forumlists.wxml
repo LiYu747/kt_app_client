@@ -1,1 +1,87 @@
-<view class="data-v-6ae53536"><subunit class="fiedx data-v-6ae53536" vue-id="cf27ef56-1" titel retur="{{true}}" bind:__l="__l"></subunit><view class="line pos-rel data-v-6ae53536"><view class="ipt  ju-center flex al-center pos-rel data-v-6ae53536"><image class="img pos-abs data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode></image><input class="input data-v-6ae53536" type="text" placeholder="请输入帖子关键词" data-event-opts="{{[['confirm',[['confirm',['$event']]]],['input',[['__set_model',['','value','$event',['trim']]]]],['blur',[['$forceUpdate']]]]}}" value="{{value}}" bindconfirm="__e" bindinput="__e" bindblur="__e"/><image class="clierimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/forum/clier.png" mode data-event-opts="{{[['tap',[['empty',['$event']]]]]}}" bindtap="__e"></image><view data-event-opts="{{[['tap',[['remove',['$event']]]]]}}" hidden="{{!(value!='')}}" class=" pos-abs rig data-v-6ae53536" bindtap="__e">取消</view></view></view><view class="pos-rel tagpos data-v-6ae53536"><scroll-view class="scroll-view_H data-v-6ae53536" scroll-x="true"><view class="tagbox flex al-center data-v-6ae53536"><block wx:for="{{tagdata}}" wx:for-item="item" wx:for-index="index" wx:key="id"><view data-event-opts="{{[['tap',[['select',['$0',index],[[['tagdata','id',item.id]]]]]]]}}" class="itemtag data-v-6ae53536" bindtap="__e"><view class="{{['data-v-6ae53536',(index==tagdata.length-1)?'itemwidth':'',(index==idx)?'dv':'']}}">{{''+item.name+''}}</view></view></block></view></scroll-view><view class="posclassfiy flex al-center ju-center data-v-6ae53536"><image class="classfiyimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/forum/classfiy.png" mode data-event-opts="{{[['tap',[['custom',['$event']]]]]}}" bindtap="__e"></image></view></view><view class="lines data-v-6ae53536"></view><view class="release data-v-6ae53536"><block wx:if="{{lists.length>0}}"><view class="data-v-6ae53536"><block wx:for="{{$root.l1}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['gotoD',['$0'],[[['lists','',index]]]]]]]}}" class="item data-v-6ae53536" bindtap="__e"><view class="flex data-v-6ae53536"><image class="itemimg data-v-6ae53536" src="{{item.$orig.own_user.avatar}}" mode></image><view class="name m-l1 m-t1 data-v-6ae53536">{{''+item.$orig.own_user.nickname+''}}<view class="time data-v-6ae53536">{{''+item.g0+''}}</view></view></view><view class="content data-v-6ae53536"><view class="show data-v-6ae53536">{{''+item.$orig.title+''}}</view></view><view class="flex al-center m-t4 data-v-6ae53536"><block wx:for="{{item.l0}}" wx:for-item="items" wx:for-index="indexs" wx:key="indexs"><view class="data-v-6ae53536"><image class="items data-v-6ae53536" src="{{items.url}}" mode></image></view></block></view></view></block></view></block><view hidden="{{!(isLoding==true&&lists.length!=0)}}" class="m-t2 flex ju-center al-center lodbox data-v-6ae53536"><image class="lodimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode></image>加载中...</view><block wx:if="{{hasMore==false&&lists.length!=0}}"><view class="flex ju-center m-t3 m-b2 fz-14 data-v-6ae53536">{{''+text+''}}</view></block></view><block wx:if="{{lists.length==0&&hasMore==false&&flag==false&&selectID==''}}"><view class="nono flex al-center ju-center data-v-6ae53536">小区还没有发布帖子哦~</view></block><block wx:if="{{flag==true&&lists.length==0&&isLoding==false}}"><view class="nono flex al-center ju-center data-v-6ae53536">没有您搜索的帖子哦~</view></block><block wx:if="{{selectID!=''&&lists.length==0&&isLoding==false&&flag==false}}"><view class="nono flex al-center ju-center data-v-6ae53536">没有您想看类型的帖子,试试其他的吧</view></block><view hidden="{{!(isLoding==true)}}" class="showloding flex al-center ju-center data-v-6ae53536"><view class="loding flex-d al-center ju-center data-v-6ae53536"><view class="  data-v-6ae53536"><image class="loimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode></image></view>加载中</view></view><view class="btom data-v-6ae53536"></view><subbotn vue-id="cf27ef56-2" id="{{id}}" class="data-v-6ae53536" bind:__l="__l"></subbotn></view>
+<view class="data-v-6ae53536">
+  <subunit class="fiedx data-v-6ae53536" vue-id="cf27ef56-1" bind:__l="__l"></subunit>
+  <view class="line pos-rel data-v-6ae53536">
+    <view class="ipt  ju-center flex al-center pos-rel data-v-6ae53536">
+      <image class="img pos-abs data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode>
+      </image><input class="input data-v-6ae53536" type="text" placeholder="请输入帖子关键词"
+        data-event-opts="{{[['confirm',[['confirm',['$event']]]],['input',[['__set_model',['','value','$event',['trim']]]]],['blur',[['$forceUpdate']]]]}}"
+        value="{{value}}" bindconfirm="__e" bindinput="__e" bindblur="__e" />
+      <image class="clierimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/forum/clier.png" mode
+        data-event-opts="{{[['tap',[['empty',['$event']]]]]}}" bindtap="__e"></image>
+      <view data-event-opts="{{[['tap',[['remove',['$event']]]]]}}" hidden="{{!(value!='')}}"
+        class=" pos-abs rig data-v-6ae53536" bindtap="__e">取消</view>
+    </view>
+    <view class="supplement"></view>
+  </view>
+  <view class="pos-rel tagpos data-v-6ae53536">
+    <scroll-view class="scroll-view_H data-v-6ae53536" scroll-x="true">
+      <view class="tagbox flex al-center data-v-6ae53536">
+        <block wx:for="{{tagdata}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+          <view data-event-opts="{{[['tap',[['select',['$0',index],[[['tagdata','id',item.id]]]]]]]}}"
+            class="itemtag data-v-6ae53536" bindtap="__e">
+            <view class="{{['data-v-6ae53536',(index==tagdata.length-1)?'itemwidth':'',(index==idx)?'dv':'']}}">
+              {{''+item.name+''}}</view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+    <view class="posclassfiy flex al-center ju-center data-v-6ae53536">
+      <image class="classfiyimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/forum/classfiy.png"
+        mode data-event-opts="{{[['tap',[['custom',['$event']]]]]}}" bindtap="__e"></image>
+    </view>
+  </view>
+  <view class="lines data-v-6ae53536"></view>
+  <view class="release data-v-6ae53536">
+    <block wx:if="{{lists.length>0}}">
+      <view class="data-v-6ae53536">
+        <block wx:for="{{$root.l1}}" wx:for-item="item" wx:for-index="index" wx:key="index">
+          <view data-event-opts="{{[['tap',[['gotoD',['$0'],[[['lists','',index]]]]]]]}}" class="item data-v-6ae53536"
+            bindtap="__e">
+            <view class="flex data-v-6ae53536">
+              <image class="itemimg data-v-6ae53536" src="{{item.$orig.own_user.avatar}}" mode></image>
+              <view class="name m-l1 m-t1 data-v-6ae53536">{{''+item.$orig.own_user.nickname+''}}<view
+                  class="time data-v-6ae53536">{{''+item.g0+''}}</view>
+              </view>
+            </view>
+            <view class="content data-v-6ae53536">
+              <view class="show data-v-6ae53536">{{''+item.$orig.title+''}}</view>
+            </view>
+            <view class="flex al-center m-t4 data-v-6ae53536">
+              <block wx:for="{{item.l0}}" wx:for-item="items" wx:for-index="indexs" wx:key="indexs">
+                <view class="data-v-6ae53536">
+                  <image class="items data-v-6ae53536" src="{{items.url}}" mode></image>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+    </block>
+    <view hidden="{{!(isLoding==true&&lists.length!=0)}}" class="m-t2 flex ju-center al-center lodbox data-v-6ae53536">
+      <image class="lodimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode>
+      </image>加载中...
+    </view>
+    <block wx:if="{{hasMore==false&&lists.length!=0}}">
+      <view class="flex ju-center m-t3 m-b2 fz-14 data-v-6ae53536">{{''+text+''}}</view>
+    </block>
+  </view>
+  <block wx:if="{{lists.length==0&&hasMore==false&&flag==false&&selectID==''}}">
+    <view class="nono flex al-center ju-center data-v-6ae53536">小区还没有发布帖子哦~</view>
+  </block>
+  <block wx:if="{{flag==true&&lists.length==0&&isLoding==false}}">
+    <view class="nono flex al-center ju-center data-v-6ae53536">没有您搜索的帖子哦~</view>
+  </block>
+  <block wx:if="{{selectID!=''&&lists.length==0&&isLoding==false&&flag==false}}">
+    <view class="nono flex al-center ju-center data-v-6ae53536">没有您想看类型的帖子,试试其他的吧</view>
+  </block>
+  <view hidden="{{!(isLoding==true)}}" class="showloding flex al-center ju-center data-v-6ae53536">
+    <view class="loding flex-d al-center ju-center data-v-6ae53536">
+      <view class="  data-v-6ae53536">
+        <image class="loimg data-v-6ae53536" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode>
+        </image>
+      </view>加载中
+    </view>
+  </view>
+  <view class="btom data-v-6ae53536"></view>
+  <subbotn vue-id="cf27ef56-2" id="{{id}}" class="data-v-6ae53536" bind:__l="__l"></subbotn>
+</view>

@@ -1,6 +1,6 @@
 <view class=" pos-rel content data-v-aaab6b3c">
-  <!-- <subunit class="fled data-v-aaab6b3c vue-ref" vue-id="635d9051-1" retur="{{false}}" titel="入住信息" image="{{aimg}}" -->
-    <!-- data-ref="xcoll" data-event-opts="{{[['^add',[['add']]]]}}" bind:add="__e" bind:__l="__l"></subunit> -->
+  <subunit class="fled data-v-aaab6b3c vue-ref" vue-id="635d9051-1" retur="{{false}}" titel="入住信息" image="{{aimg}}"
+    data-ref="xcoll" data-event-opts="{{[['^add',[['add']]]]}}" bind:add="__e" bind:__l="__l"></subunit>
   <view hidden="{{!(flag%2!==0)}}" class="shows pos-abs fled data-v-aaab6b3c">
     <image class="showimg data-v-aaab6b3c" src="https://oss.kuaitongkeji.com/static/img/app/address/ads.png" mode
       data-event-opts="{{[['tap',[['getto',['$event']]]]]}}" bindtap="__e"></image>

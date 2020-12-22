@@ -3,7 +3,9 @@
   z-index: 9
 }
 
-
+.line{
+  height: 148rpx;
+}
 
 .data-v-26556e90 .u-swiper-indicator[data-v-a5b2d580] {
   bottom: 60rpx !important

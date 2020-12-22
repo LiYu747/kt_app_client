@@ -7,13 +7,16 @@
 					社区资讯
 				</view>
 			</view>
-			<view class="overtxt flex al-center">
-				<view class="context ">
-					<view v-if="loctext" class="ltst ">
-						{{loctext.title}}
+			<view  class="overtxt flex al-center">
+				<view v-if="loctext.length > 0" class="context">
+					<view v-for="item in loctext" :key='item.id' class="ltst ">
+						{{item.title}}
 					</view>
 				</view>
-				<view @click="lookup" class="btn flex al-center ju-center">
+				<view class="onmsg" v-else>
+					暂无社区资讯...
+				</view>
+				<view v-if="loctext.length > 0" @click="lookup" class="btn flex al-center ju-center">
 					查看详情 >
 				</view>
 			</view>
@@ -31,16 +34,16 @@
 		props: {},
 		data() {
 			return {
-				loctext: {} //数据
+				loctext: [] //数据
 			}
 		},
 		methods: {
 			// 查看详情
 			lookup() {
-				if(!this.loctext) return;
+
 				home.infordils({
 					data: {
-						id: this.loctext.id
+						id: this.loctext[0].id
 					},
 					fail: (err) => {
 						uni.showToast({
@@ -65,6 +68,7 @@
 				home.infortion({
 					data: {
 						page: 1,
+						pageSize:1
 					},
 					fail: (err) => {
 						uni.showToast({
@@ -76,7 +80,7 @@
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						// console.log(res.data.data.data);
-						this.loctext = res.data.data.data[0]
+						this.loctext = res.data.data.data
 					},
 				})
 			}
@@ -131,11 +135,13 @@
 	.context {
 		width: 400rpx;
 		height: 78rpx;
+		display: -webkit-box;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
+		word-wrap: break-word;
+		white-space: normal !important;
 		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
 	}
 
 	.ltst {
@@ -151,5 +157,10 @@
 		color: #FFFFFF;
 		font-size: 24rpx;
 		margin-left: 60rpx;
+	}
+	
+	.onmsg{
+		font-size: 12px;
+		color: #999999;
 	}
 </style>

@@ -1,6 +1,6 @@
 <view class="whole flex-d al-center data-v-b4d4c940">
-  <!-- <subunit vue-id="27924762-1" titel="个人信息" retur="{{true}}" data-event-opts="{{[['^goback',[['goback']]]]}}" -->
-    <!-- bind:goback="__e" class="data-v-b4d4c940" bind:__l="__l"></subunit> -->
+  <subunit vue-id="27924762-1" titel="个人信息" retur="{{true}}" data-event-opts="{{[['^goback',[['goback']]]]}}"
+    bind:goback="__e" class="data-v-b4d4c940" bind:__l="__l"></subunit>
   <view data-event-opts="{{[['tap',[['UploadAvatar',['$event']]]]]}}"
     class="activ flex al-center ju-center data-v-b4d4c940" bindtap="__e">
     <image class="img data-v-b4d4c940" src="{{image}}" mode></image>

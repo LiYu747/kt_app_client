@@ -455,7 +455,41 @@
             }
             
         }
+		,
+		// 茶饮
+		{
+		    "path" : "pages/classification/teaBasedDrink/teaDrink", 
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+		    }
+		    
+		}
         ,
+		//旅游景点
+		{
+		    "path" : "pages/classification/scenicArea/scenicArea",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+		    }
+		    
+		},
+		// 购物
+		{
+		    "path" : "pages/classification/shopping/shopping",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+		    }
+		    
+		},
 		// 自定义customTarbar
 		{
             "path" : "pages/communityForum/forumlists/customTarbar/customTarbar",
@@ -543,6 +577,8 @@
             }
             
         }
+        
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -18,11 +18,11 @@ class url {
 		// 用户的回家二维码页面
 		back_home_qr : '/pages/qrcode/qrCode/qrCode',
 		
-		// 健康码页面
-		health_qrcode : '/pages/classification/healthCode/healthCode',
+		// 旅行
+		travel : '/pages/classification/scenicArea/scenicArea',
 		
-		// 医疗健康
-		health : '/pages/classification/healthCare/healthCare',
+		// 购物
+		shopping : '/pages/classification/shopping/shopping',
 		
 		// 便利超市
 		market : '/pages/classification/supermarket/supermarket',
@@ -42,8 +42,8 @@ class url {
 		// 车辆
 		car : '/pages/classification/vehicle/vehicle',
 		
-		// 社区
-		affairs : '/pages/classification/community/community',
+		// 茶饮 
+		tea : '/pages/classification/teaBasedDrink/teaDrink',
 		
 		// 上门服务
 		door_to_door_service : '/pages/classification/service/service'

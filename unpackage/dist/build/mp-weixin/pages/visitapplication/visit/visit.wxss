@@ -38,7 +38,7 @@
 }
 
 .righ.data-v-7bcf7010 {
-  right: 0
+  right: 10rpx
 }
 
 .xiala.data-v-7bcf7010 {
@@ -70,7 +70,8 @@
 
 .location.data-v-7bcf7010 {
   position: relative;
-  left: 260rpx;
+  display: flex;
+  justify-content: flex-end;
   top: 20rpx;
   font-size: 30rpx;
   color: #F07535;
@@ -98,5 +99,8 @@
   height: 88rpx !important
 }
 .u-flex{
-  width: 200px;
+  width: 220px;
+}
+.data-v-690e2e06{
+  font-size: 14px !important;
 }

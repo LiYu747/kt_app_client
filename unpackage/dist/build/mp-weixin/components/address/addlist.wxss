@@ -18,7 +18,7 @@
   padding-top: 27rpx;
   padding-right: 33rpx;
   padding-bottom: 37rpx;
-  top:-130rpx;
+  top:0rpx;
 }
 
 .name.data-v-55a179c0 {

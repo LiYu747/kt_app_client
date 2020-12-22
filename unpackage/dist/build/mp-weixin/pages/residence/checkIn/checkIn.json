@@ -1,8 +1,7 @@
 {
   "navigationBarTitleText": "入住申请",
   "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#F07535",
-  "navigationBarTextStyle": "white",  
+  "navigationStyle": "custom",
   "usingComponents": {
     "u-field": "/uview-ui/components/u-field/u-field",
     "easy-select": "/components/easy-select/easy-select",

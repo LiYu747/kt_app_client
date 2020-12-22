@@ -1,1 +1,33 @@
-<view class="data-v-08fad494"><view class="nav  data-v-08fad494"><view class="title flex al-center ju-center pos-rel data-v-08fad494">个人中心<view class="pos-abs location data-v-08fad494"><image class="setimg data-v-08fad494" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" mode data-event-opts="{{[['tap',[['install',['$event']]]]]}}" bindtap="__e"></image></view></view></view><view class="data-v-08fad494"><image class="jximg data-v-08fad494" src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode></image></view><view class="flex-d al-center data-v-08fad494"><view data-event-opts="{{[['tap',[['install',['$event']]]]]}}" class="portrait flex  ju-center pos-rel data-v-08fad494" bindtap="__e"><block wx:if="{{user.nickname}}"><image class="headimg pos-abs data-v-08fad494" src="{{user.avatar}}" mode="scaleToFill"></image></block><block wx:else><image class="headimg pos-abs data-v-08fad494" src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" mode></image></block></view><block wx:if="{{user.nickname}}"><view data-event-opts="{{[['tap',[['install',['$event']]]]]}}" class="text data-v-08fad494" bindtap="__e">{{''+user.nickname+''}}</view></block><block wx:else><view data-event-opts="{{[['tap',[['gologin',['$event']]]]]}}" class="text data-v-08fad494" bindtap="__e">{{''+text+''}}</view></block></view></view>
+<view class="data-v-08fad494">
+  <view class="nav  data-v-08fad494">
+    <view class="title flex al-center ju-center pos-rel data-v-08fad494">个人中心<view
+        class="pos-abs location data-v-08fad494">
+        <image class="setimg data-v-08fad494" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" mode
+          data-event-opts="{{[['tap',[['install',['$event']]]]]}}" bindtap="__e"></image>
+      </view>
+    </view>
+  </view>
+  <view class="data-v-08fad494">
+    <image class="jximg data-v-08fad494" src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode></image>
+  </view>
+  <view class="flex-d al-center data-v-08fad494">
+    <view data-event-opts="{{[['tap',[['install',['$event']]]]]}}"
+      class="portrait flex  ju-center pos-rel data-v-08fad494" bindtap="__e">
+      <block wx:if="{{user.nickname}}">
+        <image class="headimg pos-abs data-v-08fad494" src="{{user.avatar}}" mode="scaleToFill"></image>
+      </block>
+      <block wx:else>
+        <image class="headimg pos-abs data-v-08fad494"
+          src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" mode></image>
+      </block>
+    </view>
+    <block wx:if="{{user.nickname}}">
+      <view data-event-opts="{{[['tap',[['install',['$event']]]]]}}" class="text data-v-08fad494" bindtap="__e">
+        {{''+user.nickname+''}}</view>
+    </block>
+    <block wx:else>
+      <view data-event-opts="{{[['tap',[['gologin',['$event']]]]]}}" class="text data-v-08fad494" bindtap="__e">
+        {{''+text+''}}</view>
+    </block>
+  </view>
+</view>

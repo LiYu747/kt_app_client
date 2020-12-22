@@ -1,7 +1,9 @@
 <view class="data-v-8c8f3572">
-  <!-- <view data-event-opts="{{[['tap',[['addTo',['$event']]]]]}}" class="pos-abs move data-v-8c8f3572" bindtap="__e">添加申请
-  </view> -->
+  <subunit class="fidex " vue-id="91b7c912-1" retur="{{true}}" titel="最新拜访信息" bind:__l="__l"></subunit>
+  <view data-event-opts="{{[['tap',[['addTo',['$event']]]]]}}" class="pos-abs move data-v-8c8f3572" bindtap="__e">添加申请
+  </view>
   <view class="topline data-v-8c8f3572"></view>
+  <view class="addto"></view>
   <block wx:if="{{getmsg.info}}">
     <view class="cont data-v-8c8f3572">
       <view class="nav flex al-center data-v-8c8f3572">

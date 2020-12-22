@@ -1,8 +1,7 @@
 {
   "navigationBarTitleText": "小区详情",
   "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#F07535",
-  "navigationBarTextStyle": "white",  
+  "navigationStyle": "custom",
   "usingComponents": {
     "u-field": "/uview-ui/components/u-field/u-field",
     "subunit": "/components/sub-unit/subunit"

@@ -1,5 +1,7 @@
 <view class="flex-d al-center data-v-6b38b2ce">
-
+  <subunit class="fled " vue-id="c78937b0-1" titel="来访记录" retur="{{true}}"
+    data-event-opts="{{[['^goback',[['goback']]]]}}" bind:goback="__e" bind:__l="__l"></subunit>
+    <view class="line"></view>
   <block wx:if="{{lists.length>0}}">
     <view class="data-v-6b38b2ce"> 
       <block wx:for="{{$root.l0}}" wx:for-item="items" wx:for-index="indexs" wx:key="id">

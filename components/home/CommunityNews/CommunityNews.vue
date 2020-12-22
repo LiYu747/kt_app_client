@@ -11,7 +11,10 @@
 			</view>
 			<!-- 新闻 -->
 			<view class="Notice flex al-center">
-					<u-notice-bar mode="vertical" font-size='24'  :is-circular='false' @click="godils" type="warning" class="notice"  :list="list"></u-notice-bar>
+					<u-notice-bar v-if="list.length>0" mode="vertical" font-size='24'  :is-circular='false' @click="godils" type="warning" class="notice"  :list="list"></u-notice-bar>
+					<view class="nonews" v-else>
+						暂无社区新闻...
+					</view>
 			</view>
 		</view>
 	</view>
@@ -159,5 +162,11 @@
 		width: 28rpx;
 		height: 28rpx;
 		margin-right: 10rpx;
+	}
+	
+	.nonews{
+		font-size: 12px;
+		color: #999999;
+		margin-left: 20rpx;
 	}
 </style>

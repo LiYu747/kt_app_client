@@ -18,7 +18,7 @@
     "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
-    "checkSiteMap": true,
+    "checkSiteMap": false,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "useMultiFrameRuntime": false,
@@ -83,6 +83,96 @@
           "name": "pages/address/addediting/ADDediting",
           "pathName": "pages/address/addediting/ADDediting",
           "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/user/personal/personal",
+          "pathName": "pages/user/personal/personal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/InformationDetails/InformationDetails/InformationDetails",
+          "pathName": "pages/InformationDetails/InformationDetails/InformationDetails",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/visitapplication/newDetalis/newDetalis",
+          "pathName": "pages/visitapplication/newDetalis/newDetalis",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/operation/visitRecord/visitRecord",
+          "pathName": "pages/operation/visitRecord/visitRecord",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/communityForum/introduction/introduction",
+          "pathName": "pages/communityForum/introduction/introduction",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/communityForum/introduction/introduction",
+          "pathName": "pages/communityForum/introduction/introduction",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/communityForum/forumlists/forumlists",
+          "pathName": "pages/communityForum/forumlists/forumlists",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/auth/login/login",
+          "pathName": "pages/auth/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/communityForum/release/release",
+          "pathName": "pages/communityForum/release/release",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/residence/checkRecord/checkRecord",
+          "pathName": "pages/residence/checkRecord/checkRecord",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/visitapplication/goRecord/goRecord",
+          "pathName": "pages/visitapplication/goRecord/goRecord",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/user/personal/personal",
+          "pathName": "pages/user/personal/personal",
           "scene": null
         }
       ]

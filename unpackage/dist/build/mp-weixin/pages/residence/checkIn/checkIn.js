@@ -165,7 +165,7 @@
                                 e.redirectTo({
                                   url: "/pages/residence/checkRecord/checkRecord/checkRecord"
                                 }), clearTimeout(t)
-                              }), 2e3)
+                              }), 2000)
                             } else e.showToast({
                               title: n.data.msg,
                               icon: "none"

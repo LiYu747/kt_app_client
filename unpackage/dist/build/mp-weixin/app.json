@@ -49,6 +49,11 @@
     "pages/propertyManagement/CheckToSee/CheckToSee",
     "pages/propertyManagement/accessToInformation/accessToInformation"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置定位"
+    }
+  },
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
