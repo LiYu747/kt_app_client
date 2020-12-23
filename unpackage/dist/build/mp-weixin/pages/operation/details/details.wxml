@@ -17,7 +17,7 @@
     <view class="textime flex al-center data-v-0be98c7d">二维码有效时间 ：<view
         data-event-opts="{{[['tap',[['opentime',['$event']]]]]}}" class="timebox flex al-center data-v-0be98c7d"
         bindtap="__e">
-        <view class="timer data-v-0be98c7d">{{''+valuetime+''}}</view>
+        <view class="timer data-v-0be98c7d">{{valuetime}}</view>
         <image class="xialaimg data-v-0be98c7d" src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" mode>
         </image>
       </view>
@@ -26,7 +26,11 @@
       data-event-opts="{{[['^confirm',[['ok']]],['^input',[['__set_model',['','show','$event',[]]]]]]}}"
       bind:confirm="__e" bind:input="__e" class="data-v-0be98c7d" bind:__l="__l"></u-picker>
     <view class="tex1 data-v-0be98c7d">备注</view>
-    <view class="frame data-v-0be98c7d">{{''+remarks+''}}</view>
+    <view class="frame data-v-0be98c7d" >
+      <view wx:if="{{remarks!=null}}">
+        {{remarks}}
+      </view>
+    </view>
     <view class="tex1 data-v-0be98c7d">申请结果</view><textarea
       data-event-opts="{{[['input',[['__set_model',['','textvalue','$event',[]]]]]]}}" class="frame data-v-0be98c7d"
       value="{{textvalue}}" bindinput="__e"></textarea>

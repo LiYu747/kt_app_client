@@ -45,9 +45,13 @@
   width: 350rpx
 }
 
-.ipt.data-v-13cc7f0f .uni-input-placeholder {
+.input-placeholder {
   color: #ff773c !important;
   font-size: 12px
+}
+
+.u-input__input.data-v-a2ae0614{
+  color: #ff773c !important;
 }
 
 .top.data-v-13cc7f0f {

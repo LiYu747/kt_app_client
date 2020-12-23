@@ -35,8 +35,8 @@
   <block wx:if="{{paly==true}}">
     <view data-event-opts="{{[['mousewheel',[['',['$event']]]]]}}" class=" pos-abs moive flex-d al-center ju-center"
       bindmousewheel="__e">
-      <view data-event-opts="{{[['tap',[['close',['$event']]]]]}}" class="showback pos-abs" bindtap="__e"></view><video
-        src="{{videoUrl}}" poster="{{cover}}"></video>
+      <view data-event-opts="{{[['tap',[['close',['$event']]]]]}}" class="showback pos-abs" bindtap="__e"></view>
+      <video  src="{{videoUrl}}" poster="{{cover}}"></video>
       <image class="closeimg" src="https://oss.kuaitongkeji.com/static/img/app/home/close.png" mode
         data-event-opts="{{[['tap',[['close',['$event']]]]]}}" bindtap="__e"></image>
     </view>

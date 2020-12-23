@@ -48,6 +48,7 @@
     "pages/propertyManagement/theUserDetails/theUserDetails",
     "pages/propertyManagement/CheckToSee/CheckToSee",
     "pages/propertyManagement/accessToInformation/accessToInformation"
+
   ],
   "permission": {
     "scope.userLocation": {

@@ -208,6 +208,7 @@
 <style scoped lang="scss">
 	.fidex {
 		position: fixed;
+		z-index: 9;
 	}
 
 	.topline {
@@ -307,6 +308,7 @@
 		font-size: 14px;
 		color: #FFFFFF;
 		position: fixed;
+		z-index: 11;
 	}
 
 	.apply {

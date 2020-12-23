@@ -1,5 +1,6 @@
 .fidex.data-v-0aec7855 {
-  position: fixed
+  position: fixed;
+  z-index: 9;
 }
 
 .topline.data-v-0aec7855 {

@@ -15,8 +15,12 @@
     </block>
     <view class="line data-v-7ceece46"></view>
     <view class="tex1 data-v-7ceece46">备注</view>
-    <view class="frame data-v-7ceece46">{{''+remark+''}}</view>
+    <view class="frame data-v-7ceece46">
+      <view wx:if="{{remark!=null}}">{{remark}}</view>
+      </view>
     <view class="tex1 data-v-7ceece46">申请结果</view>
-    <view class="frame data-v-7ceece46">{{''+result+''}}</view>
+    <view class="frame data-v-7ceece46">
+      <view wx:if="{{result!=null}}">{{result}}</view>
+    </view>
   </view>
 </view>

@@ -42,7 +42,7 @@
 		 	</view>
 			<!-- 右边 -->
 			<view class="m-l2">
-				<view class="ApplyingTo flex">
+				<view @click="ApplyingTo" class="ApplyingTo flex">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back3.png" class="back3Img pos-abs" mode=""></image>
 					<view class="">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/Goout.png" class="GooutImg" mode=""></image>
@@ -51,7 +51,7 @@
 						申请进入
 					</view>
 				</view>
-				<view class="ApplyingTo flex m-t3">
+				<view @click="ApplyingTo" class="ApplyingTo flex m-t3">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back4.png" class="back3Img pos-abs" mode=""></image>
 					<view class="">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/service.png" class="serviceImg" mode=""></image>
@@ -108,6 +108,18 @@
 			 if(item.type == 'expressage') return;
 			 uni.reLaunch({
 			 	url: item.url
+			 })
+		 },
+		 // 申请进入
+		 ApplyingTo(){
+			 uni.navigateTo({
+			 	url:'/pages/userMessenger/applyingTo/applyingTo'
+			 })
+		 },
+		 // 送货申请
+		 ApplyingTo(){
+			 uni.navigateTo({
+			 	url:'/pages/userMessenger/applyDelivery/applyDelivery'
 			 })
 		 }
 		},

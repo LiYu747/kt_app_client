@@ -1,5 +1,6 @@
 .fidex {
-  position: fixed
+  position: fixed;
+  z-index: 9;
 }
 
 .topline.data-v-8c8f3572 {
@@ -11,6 +12,7 @@
   height: 30rpx;
   background:#f07535 ;
   position: fixed;
+  z-index: 9;
 }
 .cont.data-v-8c8f3572 {
   width: 710rpx;
@@ -109,7 +111,7 @@
   font-size: 14px;
   color: #fff;
   position: fixed;
-  z-index: 9;
+  z-index: 11;
 }
 
 .apply.data-v-8c8f3572 {

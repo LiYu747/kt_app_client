@@ -83,5 +83,5 @@
     </view>
   </view>
   <view class="btom data-v-6ae53536"></view>
-  <subbotn vue-id="cf27ef56-2" id="{{id}}" class="data-v-6ae53536" bind:__l="__l"></subbotn>
+  <subbotn vue-id="cf27ef56-2" ids="{{id}}" class="data-v-6ae53536" bind:__l="__l"></subbotn>
 </view>

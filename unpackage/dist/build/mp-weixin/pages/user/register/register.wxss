@@ -11,7 +11,14 @@
 .nav.data-v-903ccc08 {
   top: 67rpx
 }
+.input-placeholder {
+  color: #ff773c !important;
+  font-size: 12px
+}
 
+.u-input__input.data-v-a2ae0614{
+  color: #ff773c !important;
+}
 .img.data-v-903ccc08 {
   width: 22rpx;
   height: 41rpx;

@@ -160,6 +160,7 @@
 <style scoped lang="scss">
 	.fidex {
 		position: fixed;
+		z-index: 9;
 	}
 
 	.topline {

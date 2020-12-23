@@ -173,6 +173,27 @@
           "id": -1,
           "name": "pages/user/personal/personal",
           "pathName": "pages/user/personal/personal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/communityForum/forumlists/forumlists",
+          "pathName": "pages/communityForum/forumlists/forumlists",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "components/forum/forumdils",
+          "pathName": "components/forum/forumdils",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/visitapplication/visit/visit",
+          "pathName": "pages/visitapplication/visit/visit",
           "scene": null
         }
       ]

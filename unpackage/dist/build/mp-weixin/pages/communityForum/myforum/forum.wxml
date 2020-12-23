@@ -86,5 +86,5 @@
       </view>
     </view>
   </view>
-  <submy vue-id="23c7ae86-2" id="{{id}}" class="data-v-17efac54" bind:__l="__l"></submy>
+  <submy vue-id="23c7ae86-2" ids="{{id}}" class="data-v-17efac54" bind:__l="__l"></submy>
 </view>

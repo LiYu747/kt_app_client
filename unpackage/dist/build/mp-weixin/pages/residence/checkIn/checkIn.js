@@ -163,7 +163,7 @@
                               });
                               var t = setTimeout((function () {
                                 e.redirectTo({
-                                  url: "/pages/residence/checkRecord/checkRecord/checkRecord"
+                                  url: "/pages/residence/checkRecord/checkRecord"
                                 }), clearTimeout(t)
                               }), 2000)
                             } else e.showToast({

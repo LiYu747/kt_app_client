@@ -24,7 +24,7 @@ props: {
 	},
 	titel:{
 		type:String,
-	    default:'标题'
+	    default:''
 	},
 	image:{
 	type:String,

@@ -8,11 +8,11 @@
       <block wx:for="{{record}}" wx:for-item="item" wx:for-index="index" wx:key="id">
         <view data-event-opts="{{[['tap',[['itemlabel',[index]]]]]}}"
           class="{{['item flex al-center pos-rel data-v-7bcf7010',(index===record.length-1)?'dv':'']}}" bindtap="__e">
-          <u-field bind:input="__e" vue-id="{{'3094d8a0-2-'+index}}" label="{{item.label}}"
+          <u-field bind:input="__e" vue-id="{{'3094d8a0-2-'+index0}}" label="{{item.label}}"
             placeholder="{{item.placeholder}}" clearable="{{false}}" required="{{item.required}}" input-align="right"
             disabled="{{item.disabled}}" label-width="170" value="{{item.value}}"
             data-event-opts="{{[['^input',[['__set_model',['$0','value','$event',[]],[[['record','id',item.id]]]]]]]}}"
-            class="data-v-7bcf7010" bind:__l="__l"></u-field>
+            class="data-v-7bcf7010" bind:__l="__l" ></u-field>
           <block wx:if="{{index===record.length-1}}">
             <view class="pos-abs righ data-v-7bcf7010">
               <image class="xiala data-v-7bcf7010" src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" mode
@@ -26,6 +26,10 @@
       value="{{show}}"
       data-event-opts="{{[['^confirm',[['confirm']]],['^input',[['__set_model',['','show','$event',[]]]]]]}}"
       bind:confirm="__e" bind:input="__e" class="data-v-7bcf7010" bind:__l="__l"></u-select>
+  </view>
+  <view>
+    <input type="text"  placeholder='请输入被访人姓名'  class="beif"  data-event-opts="{{[['input',[['__set_model',['','valuename','$event',[]]]]]]}}" value="{{valuename}}"
+        bindinput="__e" />
   </view>
   <remarks class="top data-v-7bcf7010 vue-ref" vue-id="3094d8a0-4" titel="申请备注" data-ref="marks" bind:__l="__l">
   </remarks>

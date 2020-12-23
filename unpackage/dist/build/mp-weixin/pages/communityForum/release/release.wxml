@@ -81,5 +81,5 @@
       </view>
     </view>
   </view>
-  <subrelease vue-id="5bbbec76-3" id="{{id}}" class="data-v-cfdcbcaa" bind:__l="__l"></subrelease>
+  <subrelease vue-id="5bbbec76-3" ids="{{id}}" class="data-v-cfdcbcaa" bind:__l="__l"></subrelease>
 </view>

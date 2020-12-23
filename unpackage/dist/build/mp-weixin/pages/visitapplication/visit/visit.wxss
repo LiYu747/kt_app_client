@@ -104,3 +104,11 @@
 .data-v-690e2e06{
   font-size: 14px !important;
 }
+.beif{
+  position: relative;
+  top: -170rpx;
+  left: 130rpx;
+  height: 60rpx;
+  text-align: right;
+  font-size: 14px;
+}

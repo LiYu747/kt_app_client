@@ -8,7 +8,7 @@
     <view class="cont data-v-8c8f3572">
       <view class="nav flex al-center data-v-8c8f3572">
         <image class="img data-v-8c8f3572" src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" mode></image>
-        <view class="text data-v-8c8f3572">{{''+username+''}}</view>
+        <view class="text data-v-8c8f3572">{{username}}</view>
       </view>
       <block wx:for="{{locadata}}" wx:for-item="item" wx:for-index="index" wx:key="id">
         <view class="flex al-center pos-rel ipt data-v-8c8f3572">
@@ -26,9 +26,17 @@
         </view>
       </block>
       <view class="tex1 data-v-8c8f3572">备注</view>
-      <view class="frame data-v-8c8f3572">{{''+remark+''}}</view>
+      <view class="frame data-v-8c8f3572">
+        <view wx:if="{{remark!=null}}">
+          {{remark}}
+        </view>
+        </view>
       <view class="tex1 data-v-8c8f3572">申请结果</view>
-      <view class="frame data-v-8c8f3572">{{''+result+''}}</view>
+      <view class="frame data-v-8c8f3572">
+        <view wx:if="result!=null">
+          {{result}}
+        </view>
+       </view>
       <view class="linet data-v-8c8f3572"></view>
     </view>
   </block>
