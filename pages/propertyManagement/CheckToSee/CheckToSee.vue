@@ -1,7 +1,7 @@
 <template>
 	<view class="">
 		<view class="fiedx">
-			<subunit titel='用户查询'></subunit>
+			<subunit titel='入住查看'></subunit>
 			<view class="searchBox flex al-center ju-center pos-rel">
 				<view class="allTxt pos-abs flex al-center">
 					全部
@@ -18,13 +18,13 @@
 		</view>
 		
 		 <view class="flex-d m-t1 al-center">
-		 	<view class="itemBox" v-for="item in locdata" :key='item.id'>
-				<view class="itemName flex al-center">
+		 	<view class="itemBox" @click="goDetails(item)" v-for="item in locdata" :key='item.id'>
+				<view class="itemName flex al-center ju-between">
 					<view class="">
-						姓名：
+						姓名：{{item.name}}
 					</view>
-					<view class="">
-						{{item.name}}
+					<view :class="item.state=='已通过'?'dv':'nodv'">
+						{{item.state}}>
 					</view>
 				</view>
 				<view class="itemName flex al-center">
@@ -49,11 +49,21 @@
 		<view class="bomLine flex ju-center al-center">
 			{{noText}}
 		</view>
+		
+		<view v-show="isLoading == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import subunit from '../../../components/sub-unit/subunit.vue'
+	import home from '../../../vendor/home/home.js'
 	export default {
 		name: "",
 		components: {
@@ -63,29 +73,95 @@
 		data() {
 			return {
 				noText: '',
+				page: 1,
+				pageSize: 15,
+				status:'',
+				isLoading: false,
+				hasMore: true,
 				locdata: [{
 						name: '李海峰',
 						time: '2020-12-09 16：03',
 						address: '复地御香山',
+						state:'待处理'
 					},
 					{
 						name: '张心如',
 						time: '2020-12-09 16：03',
 						address: '复地御香山',
+						state:'已通过'
+					},
+					{
+						name: '张心如',
+						time: '2020-12-09 16：03',
+						address: '复地御香山',
+						state:'已通过'
+					},
+					{
+						name: '张心如',
+						time: '2020-12-09 16：03',
+						address: '复地御香山',
+						state:'已通过'
+					},
+					{
+						name: '张心如',
+						time: '2020-12-09 16：03',
+						address: '复地御香山',
+						state:'已通过'
 					},
 				]
 			}
 		},
 		methods: {
 			// 用户详情
-			goUserDetails() {
+			goDetails(item) {
 				uni.navigateTo({
-					url: '/pages/propertyManagement/theUserDetails/theUserDetails'
+					url: '/pages/propertyManagement/CheckToSee/seeDetails/seeDetails'
+				})
+			},
+			getData(){
+				this.isLoading = true
+				home.checkinDetails({
+					data:{
+						page:this.page,
+						pageSize:this.pageSize,
+						verify_status:this.status
+					},
+					fail: () => {
+						this.isLoading = false
+						uni.showToast({
+							title: '网络错误',
+							icon: "none"
+						})
+					},
+					success: (res) => {
+						this.isLoading = false
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: "none"
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							this.locdata = []
+							uni.showModal({
+								content: res.data.msg + '访问',
+								success: (res) => {
+									uni.navigateBack({
+										delta: 1
+									})
+								}
+							})
+							return;
+						}
+						
+						console.log(res);
+					}
 				})
 			}
 		},
 		mounted() {
-
+         this.getData()
 		},
 		onReachBottom() {
 			this.noText = '没有更多了'
@@ -180,5 +256,36 @@
 		width: 100%;
 		height: 80rpx;
 		border-bottom: 1px solid #CCCCCC;
+	}
+	.bomLine{
+		font-size: 12px;
+		padding: 20rpx 0;
+	}
+	
+	.dv{
+		color: #23D400;
+	}
+	.nodv{
+		color: #F07535;
+	}
+	
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		border-radius: 10rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

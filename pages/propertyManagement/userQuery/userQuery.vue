@@ -86,6 +86,27 @@
 						idcard: '211381********3547',
 						checkdate: '2020-3-14'
 					},
+					{
+						name: '李海峰',
+						tel: '19954852365',
+						sex: '男',
+						idcard: '211381********3547',
+						checkdate: '2020-3-14'
+					},
+					{
+						name: '李海峰',
+						tel: '19954852365',
+						sex: '男',
+						idcard: '211381********3547',
+						checkdate: '2020-3-14'
+					},
+					{
+						name: '李海峰',
+						tel: '19954852365',
+						sex: '男',
+						idcard: '211381********3547',
+						checkdate: '2020-3-14'
+					},
 				]
 			}
 		},
@@ -93,7 +114,7 @@
          // 用户详情
 		 goUserDetails(){
 			 uni.navigateTo({
-			 	url:'/pages/propertyManagement/theUserDetails/theUserDetails'
+			 	url:'/pages/propertyManagement/userQuery/theUserDetails/theUserDetails'
 			 })
 		 }
 		},

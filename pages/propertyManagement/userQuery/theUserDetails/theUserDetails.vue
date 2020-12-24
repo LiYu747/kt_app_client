@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<subunit titel=''></subunit>
+		<subunit titel='详情'></subunit>
 		<view class="flex-d al-center">
 			<view class="informationBar">
 				<view class="message">
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-	import subunit from '../../../components/sub-unit/subunit.vue'
+	import subunit from '../../../../components/sub-unit/subunit.vue'
 	export default {
 		name: "",
 		components: {

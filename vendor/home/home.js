@@ -114,5 +114,17 @@ class Home {
 		params.url = routes.home.qrcode.obtaincode
 		req.post(params)
 	}
+	
+	// 物业查看小区进出记录
+	recordOfAccess (params) {
+		params.url = routes.propertyManagement.recordOfAccess
+		req.get(params)
+	}
+	
+	//物业入住申请所有记录
+	checkinDetails (params) {
+		params.url = routes.propertyManagement.checkinDetails
+		req.get(params)
+	}
 }
 module.exports = new Home

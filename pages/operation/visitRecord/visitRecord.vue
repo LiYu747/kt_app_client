@@ -46,7 +46,7 @@
 			您还没有来访记录
 		</view>
 		
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+		<view v-show="isLoding == true&&lists.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
 					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>

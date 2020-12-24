@@ -194,6 +194,27 @@
           "id": -1,
           "name": "pages/visitapplication/visit/visit",
           "pathName": "pages/visitapplication/visit/visit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/classification/scenicSpot/scenicSpot",
+          "pathName": "pages/classification/scenicSpot/scenicSpot",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/classification/shopping/shopping",
+          "pathName": "pages/classification/shopping/shopping",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/web/index/index",
+          "pathName": "pages/web/index/index",
           "scene": null
         }
       ]

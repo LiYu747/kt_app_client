@@ -92,16 +92,14 @@
             props: {},
             data: function () {
               return {
-                myholder: "我的位置",
-                goholder: "请输入终点",
                 myPosition: "",
                 goPosition: "",
                 latitude: "",
                 longitude: "",
                 covers: [{
-                  id: 1,
-                  width: 10,
-                  height: 10,
+                  id: 0,
+                  width: 30,
+                  height: 30,
                   title: "我的位置",
                   latitude: "",
                   longitude: "",
@@ -113,17 +111,17 @@
               }
             },
             methods: {
-              swap: function () {
-                if ("" != this.goPosition)
-                  if ("" != this.myPosition) {
-                    var o = this.myPosition,
-                      n = this.goPosition;
-                    this.myPosition = n, this.goPosition = o
-                  } else t.showToast({
-                    title: "请输入开始的位置",
-                    icon: "none"
-                  })
-              },
+              // swap: function () {
+              //   if ("" != this.goPosition)
+              //     if ("" != this.myPosition) {
+              //       var o = this.myPosition,
+              //         n = this.goPosition;
+              //       this.myPosition = n, this.goPosition = o
+              //     } else t.showToast({
+              //       title: "请输入开始的位置",
+              //       icon: "none"
+              //     })
+              // },
               location: function () {
                 var o = this;
                 t.showLoading({
@@ -151,16 +149,29 @@
                 })
               },
               start: function () {
-                var o = this;
-                if ("" != o.goPosition) {
-                  var n = "http://api.map.baidu.com/direction";
-                  "" == o.myPosition && (n += "?origin=latlng:".concat(o.latitude, ",").concat(o.longitude) + "|name:" + o.myPosition + "&destination=latlng:".concat(o.golat, ",").concat(o.golng) + "|name:" + o.goPosition + "&mode=driving&region=" + o.city + "&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02"), "" != o.myPosition && (o.latitude = "", o.longitude = "", n += "?origin=latlng:".concat(o.latitude, ",").concat(o.longitude) + "|name:" + o.myPosition + "&destination=latlng:".concat(o.golat, ",").concat(o.golng) + "|name:" + o.goPosition + "&mode=driving&region=" + o.city + "&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02"), t.navigateTo({
-                    url: "/pages/web/index/index?url=" + encodeURIComponent(n)
-                  })
-                } else t.showToast({
-                  title: "请输入终点",
-                  icon: "none"
-                })
+                let plugin = requirePlugin('routePlan');
+                let key = 'V24BZ-ZZSCI-A6RGT-5MBOB-EQLJH-NPB6T';  //使用在腾讯位置服务申请的key
+                let referer = '快通信息';   //调用插件的app的名称
+                let endPoint = JSON.stringify({  //终点
+                  'name': this.goPosition,
+                  'latitude': this.golat,
+                  'longitude': this.golng 
+                });
+                
+                t.navigateTo({
+                  url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint + '&navigation=1'
+                });
+                return
+                // var o = this;
+                // if ("" != o.goPosition) {
+                //   var n = "http://api.map.baidu.com/direction";
+                //   "" == o.myPosition && (n += "?origin=latlng:".concat(o.latitude, ",").concat(o.longitude) + "|name:" + o.myPosition + "&destination=latlng:".concat(o.golat, ",").concat(o.golng) + "|name:" + o.goPosition + "&mode=driving&region=" + o.city + "&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02"), "" != o.myPosition && (o.latitude = "", o.longitude = "", n += "?origin=latlng:".concat(o.latitude, ",").concat(o.longitude) + "|name:" + o.myPosition + "&destination=latlng:".concat(o.golat, ",").concat(o.golng) + "|name:" + o.goPosition + "&mode=driving&region=" + o.city + "&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02"), t.navigateTo({
+                //     url: "/pages/web/index/index?url=" + encodeURIComponent(n)
+                //   })
+                // } else t.showToast({
+                //   title: "请输入终点",
+                //   icon: "none"
+                // })
               }
             },
             onShow: function () {},
@@ -168,7 +179,7 @@
               this.location()
             },
             onLoad: function (t) {
-              "" != t.null && (this.goPosition = t.addressName)
+              "" != t.null && (this.goPosition = t.addressName,this.golat = t.lat , this.golng = t.lng)
             },
             filters: {},
             computed: {},

@@ -22,15 +22,13 @@
 			<view class="tex1">
 				备注
 			</view>
-			<view class="frame">
-				{{remark}}
-			</view>
+			<textarea v-model="remark" disabled='true' class="frame">
+			</textarea>
 			<view class="tex1">
 				申请结果
 			</view>
-			<view class="frame">
-				{{result}}
-			</view>
+			<textarea v-model="result" disabled='true' class="frame">
+			</textarea>
 		</view>
 	</view>
 </template>

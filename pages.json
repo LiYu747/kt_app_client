@@ -535,7 +535,7 @@
         }
 		      // 物业查看用户详情
         ,{
-            "path" : "pages/propertyManagement/theUserDetails/theUserDetails",
+            "path" : "pages/propertyManagement/userQuery/theUserDetails/theUserDetails",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -555,6 +555,17 @@
             }
             
         }
+		// 查看详情
+		,{
+		    "path" : "pages/propertyManagement/CheckToSee/seeDetails/seeDetails",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+		    }
+		    
+		}
         ,
 		//出入记录
 		{
@@ -567,6 +578,17 @@
             }
             
         }
+		//出入记录详情
+		,{
+		    "path" : "pages/propertyManagement/accessToInformation/accessDetails/accessDetails",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+		    }
+		    
+		}
         
         // 外卖首页
         ,{
@@ -602,6 +624,8 @@
             }
             
         }
+       
+        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

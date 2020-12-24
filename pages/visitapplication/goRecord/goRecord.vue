@@ -29,7 +29,7 @@
 				</view>
 
 			</view>
-			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
+			<view v-show="isLoding == true&&lists.length>0" class=" flex ju-center al-center lodbox">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
@@ -41,7 +41,7 @@
 			您还没有申请记录哦~
 		</view>
 
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+		<view v-show="isLoding == true&&lists.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
 					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>

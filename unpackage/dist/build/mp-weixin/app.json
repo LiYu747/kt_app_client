@@ -47,9 +47,17 @@
     "pages/propertyManagement/userQuery/userQuery",
     "pages/propertyManagement/theUserDetails/theUserDetails",
     "pages/propertyManagement/CheckToSee/CheckToSee",
-    "pages/propertyManagement/accessToInformation/accessToInformation"
-
+    "pages/propertyManagement/accessToInformation/accessToInformation",
+    "pages/classification/scenicSpot/scenicSpot",
+    "pages/classification/shopping/shopping",
+    "pages/classification/teaBasedDrink/teaBasedDrink"
   ],
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.11",
+      "provider": "wx50b5593e81dd937a"
+    }
+  },
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置定位"
@@ -67,8 +75,7 @@
     "selectedColor": "#F95454",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "iconPath": "static/tabbar/home1.png",
         "selectedIconPath": "static/tabbar/home2.png",
