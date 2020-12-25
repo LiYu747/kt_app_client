@@ -247,6 +247,9 @@
 			this.operationData()
 			this.Chart()
 		},
+		onHide() {
+			this.isShowType = false
+		}
 	}
 </script>
 

@@ -1,6 +1,9 @@
 <template>
 	<view>
-		<subunit titel='申请进入'></subunit>
+		<subunit titel='申请进入' class="fixed"></subunit>
+		<view class="lineTop">
+			
+		</view>
 		<view class="flex-d al-center">
 			<view class="msgBox">
 				<view class="msgTil">
@@ -32,6 +35,13 @@
 							</view>
 						</view>
 					</view>
+				</view>
+			</view>
+
+			<view class="Submit mar-t  flex al-center ju-center">
+				<image class="Submit pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
+				<view class="subText">
+					提交
 				</view>
 			</view>
 		</view>
@@ -101,6 +111,13 @@
 </script>
 
 <style scoped lang="scss">
+	.fixed{
+		position: fixed;
+		z-index: 9;
+	}
+	.lineTop{
+		height: 148rpx;
+	}
 	.msgBox {
 		margin-top: 30rpx;
 		width: 650rpx;
@@ -144,27 +161,46 @@
 		color: #666;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
 	}
-	.accTitle{
-			font-size: 16px;
-			height: 60rpx;
-			border-bottom: 1px solid  #BFBFBF;
+
+	.accTitle {
+		font-size: 16px;
+		height: 60rpx;
+		border-bottom: 1px solid #BFBFBF;
 	}
-	.annotation{
+
+	.annotation {
 		font-size: 12px;
 		color: red;
 	}
-	.fileBox{
+
+	.fileBox {
 		margin-top: 20rpx;
 		width: 600rpx;
 		flex-wrap: wrap;
 	}
-	.pushBtn{
+
+	.pushBtn {
 		width: 130rpx;
 		height: 150rpx;
-		background: rgb(244,245,246);
+		background: rgb(244, 245, 246);
 	}
+
 	.pushimg {
 		width: 50rpx;
 		height: 50rpx;
+	}
+
+	.Submit {
+		width: 358rpx;
+		height: 68rpx;
+	}
+
+	.subText {
+		color: #FFFFFF;
+		z-index: 9;
+	}
+	.mar-t{
+		margin-top: 80rpx;
+		margin-bottom: 20rpx;
 	}
 </style>

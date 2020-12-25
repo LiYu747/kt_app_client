@@ -101,7 +101,7 @@
 						home.gorecord({
 							data: {
 								page: this.page,
-
+                                pageSize:this.ps
 							},
 							fail: (err) => {
 								this.isLoding = false;

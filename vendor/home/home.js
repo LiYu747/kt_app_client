@@ -122,8 +122,26 @@ class Home {
 	}
 	
 	//物业入住申请所有记录
+	checkinRecord (params) {
+		params.url = routes.propertyManagement.checkinRecord
+		req.get(params)
+	}
+	
+	//入住申请记录详情
 	checkinDetails (params) {
 		params.url = routes.propertyManagement.checkinDetails
+		req.get(params)
+	}
+	
+	// 审核某条记录
+	auditRecord (params) {
+		params.url = routes.propertyManagement.auditRecord
+		req.patch(params)
+	}
+	
+	//获取所有帖子
+	allPost (params) {
+		params.url = routes.propertyManagement.allPost
 		req.get(params)
 	}
 }

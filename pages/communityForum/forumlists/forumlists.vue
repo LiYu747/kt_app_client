@@ -203,10 +203,10 @@
 								if (res.data.code != 200) return;
 
 								let data = res.data.data;
-
+                                   
 								this.page = data.current_page + 1;
 								this.hasMore = data.next_page_url ? true : false;
-
+                                  
 								this.lists = this.lists.concat(data.data); 
 							},
 
@@ -249,7 +249,7 @@
 		onLoad(val) {
 			this.id = val.id
 		},
-		// 下拉刷新
+		// 下拉更多
 		onReachBottom() {
 			this.text = '没有更多了~'
 			if (this.isLoding == true || this.hasMore == false) return;
@@ -257,6 +257,8 @@
 
 		},
 		onShow() {
+			this.lists = []
+			this.page = 1
 			this.loadPageData()
 			this.grtColumn()
 		},

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<subunit titel='送货申请'></subunit>
-		<view class="applicationRecord pos-abs">
+		<view @click="goRecord"  class="applicationRecord pos-abs">
 			申请记录
 		</view>
 		<view class="flex-d al-center">
@@ -62,7 +62,12 @@
 			}
 		},
 		methods: {
-
+            // 申请记录
+			goRecord(){
+				uni.navigateTo({
+					url:"/pages/userMessenger/applyDelivery/aplyRecord/aplyRecord"
+				})
+			}
 		},
 		mounted() {
 
@@ -87,7 +92,7 @@
 
 <style scoped lang="scss">
 	.applicationRecord {
-		font-size: 14px;
+		font-size: 15px;
 		color: #FFFFFF;
 		right: 50rpx;
 		margin-top: -60rpx;

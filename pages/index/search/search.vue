@@ -42,13 +42,21 @@
 			</view>
 			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-				搜索中...
+				加载中...
 			</view>
 			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
 				{{text}}
 			</view>
 
 		</view>
+		 <view v-show="isLoding == true&&locdata.length==0" class="showloding flex al-center ju-center">
+		 	<view class="loding flex-d al-center ju-center">
+		 		<view class=" ">
+		 			<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+		 		</view>
+		 		搜索中
+		 	</view>
+		 </view>
 		<view class="nono flex al-center ju-center" v-if="locdata.length == 0&&isLoding == false">
 			没有您搜索的小区哦~~~
 		</view>
@@ -279,4 +287,23 @@
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
 	}
+	
+	.showloding {
+			position: absolute;
+			width: 100%;
+			height: 100vh;
+			top: 0;
+			color: #FFFFFF;
+		}
+	
+		.loimg {
+			width: 50rpx;
+			height: 50rpx;
+		}
+	
+		.loding {
+			width: 260rpx;
+			height: 200rpx;
+			background: rgba(88, 88, 88, 0.8);
+		}
 </style>

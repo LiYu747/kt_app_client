@@ -63,7 +63,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view class="nono flex al-center ju-center" v-else>
+		<view class="nono flex al-center ju-center" v-if="comments.length==0&&this.isLoding==false">
 			还没有任何评论哦~
 		</view>
 		<view v-show="flag===true" class="btom">
@@ -80,7 +80,7 @@
 			<image :src="src" class="srcimg" mode=""></image>
 		</view>
 
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+		<view v-show="isLoding == true&&comments.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
 					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
@@ -258,7 +258,7 @@
 		// 下拉加载更多
 		onReachBottom() {
 			// console.log(this.hasMore);
-			if (this.hasMore == true) {
+			if (this.hasMore == true&&this.isLoding == false) {
 				this.isLoding = true;
 				this.page = this.page + 1
 				village.postComments({

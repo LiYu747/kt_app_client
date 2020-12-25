@@ -81,7 +81,7 @@
 								})
 							},
 							success: (res) => {
-
+                                     
 								this.stopRefreshIcon();
 
 								this.isLoding = false;
@@ -92,7 +92,7 @@
 
 								let data = res.data.data;
 								this.hasMore = data.next_page_url ? true : false;
-								// console.log(res.data.data.data); 
+								console.log(res.data.data.data); 
 								// let data = res.data.data.data
 								this.locdata = data.data
 								// console.log(this.locdata);

@@ -1,631 +1,597 @@
 {
-	    "easycom": {
-	        "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
-	    },
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		// 主页
 		{
 			"path": "pages/index/index",
 			"style": {
-				 "navigationStyle":"custom",
-				 "enablePullDownRefresh": true
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
 			}
 		},
 		// 搜索
 		{
 			"path": "pages/index/search/search",
 			"style": {
-				 "navigationStyle":"custom"
+				"navigationStyle": "custom"
 			}
 		},
 		// 登录
 		{
-			"path":"pages/auth/login/login",
+			"path": "pages/auth/login/login",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#F07535",
-				 "navigationStyle":"custom"
+				"navigationStyle": "custom"
 			}
 		},
 		// 地址
 		{
-			"path":"pages/address/address/address",
+			"path": "pages/address/address/address",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#F07535",
-				"navigationStyle":"custom",
+				"navigationStyle": "custom",
 				"enablePullDownRefresh": true
-			}	
+			}
 		},
 		// 用户 
 		{
-			"path":"pages/user/userCenter/userCenter",
+			"path": "pages/user/userCenter/userCenter",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#F07535",
-				 "navigationStyle":"custom"
+				"navigationStyle": "custom"
 			}
 		}
-	   // 注册
-        ,{
-            "path" : "pages/user/register/register",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "",
-               "navigationBarBackgroundColor": "#F07535",
-                "navigationStyle":"custom"
-            }     
-        }
-        ,
+		// 注册
+		, {
+			"path": "pages/user/register/register",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#F07535",
+				"navigationStyle": "custom"
+			}
+		},
 		// 头像选中
 		{
-		    "path" : "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
-		    "style" :
-		    {
-		       "navigationBarTitleText": "",
-		       "navigationBarBackgroundColor": "#F07535",
-		        "navigationStyle":"custom"
-		    }    
+			"path": "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#F07535",
+				"navigationStyle": "custom"
+			}
 		},
 		// 个人信息
 		{
-            "path" : "pages/user/personal/personal",
-            "style" :                                                                                    
-            {
-              "navigationBarTitleText": "个人信息",
-              "navigationBarBackgroundColor": "#F07535",
-			  "navigationStyle":"custom"
-            }
-        }
-        ,
+			"path": "pages/user/personal/personal",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"navigationBarBackgroundColor": "#F07535",
+				"navigationStyle": "custom"
+			}
+		},
 		// 地址编辑
 		{
-            "path" : "pages/address/addediting/ADDediting",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				 "navigationStyle":"custom"
-            }    
-        }
-        ,
+			"path": "pages/address/addediting/ADDediting",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		},
 		//入住申请
 		{
-            "path" : "pages/residence/checkIn/checkIn",
-            "style" :                                                                                    
-            {
-               "navigationBarTitleText": "",
-               "enablePullDownRefresh": false,
-                "navigationStyle":"custom"
-            }    
-        }
+			"path": "pages/residence/checkIn/checkIn",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		}
 		// 申请拜访
-        ,{
-            "path" : "pages/visitapplication/visit/visit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				  "navigationStyle":"custom"
-            }   
-        }
-        ,
-			// 来访记录
+		, {
+			"path": "pages/visitapplication/visit/visit",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		},
+		// 来访记录
 		{
-            "path" : "pages/operation/visitRecord/visitRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
+			"path": "pages/operation/visitRecord/visitRecord",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 				// "enablePullDownRefresh": true
-            }
-            
-        }
-        ,
-		  //来访记录详情
+			}
+
+		},
+		//来访记录详情
 		{
-            "path" : "pages/operation/details/details",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				 "navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/operation/details/details",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 拜访记录
 		{
-            "path" : "pages/visitapplication/goRecord/goRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				 "navigationStyle":"custom"
-            }
-        }
+			"path": "pages/visitapplication/goRecord/goRecord",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+		}
 		// 拜访详情
-        ,{
-            "path" : "pages/visitapplication/goDetails/goDetails",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+		, {
+			"path": "pages/visitapplication/goDetails/goDetails",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 二维码
 		{
-            "path" : "pages/qrcode/qrCode/qrCode",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/qrcode/qrCode/qrCode",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 未开发的
 		{
-            "path" : "pages/not/uncultivated/uncultivated",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/not/uncultivated/uncultivated",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 我的论坛
 		{
-            "path" : "pages/communityForum/myforum/forum",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-					"navigationStyle":"custom"	
-            }
-            
-        }
-        ,
+			"path": "pages/communityForum/myforum/forum",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//帖子详情
 		{
-            "path" : "components/forum/forumdils",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-					"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		  // 证件照片
+			"path": "components/forum/forumdils",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 证件照片
 		{
-            "path" : "components/idPhoto/idPhoto/idPhoto",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-					"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		  // 资讯详情
+			"path": "components/idPhoto/idPhoto/idPhoto",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 资讯详情
 		{
-            "path" : "pages/InformationDetails/InformationDetails/InformationDetails",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		  //入住申请记录
+			"path": "pages/InformationDetails/InformationDetails/InformationDetails",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		//入住申请记录
 		{
-            "path" : "pages/residence/checkRecord/checkRecord",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/residence/checkRecord/checkRecord",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//入住申请记录详情
 		{
-            "path" : "pages/residence/checkdetails/checkdetails",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/residence/checkdetails/checkdetails",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 出行记录
 		{
-            "path" : "pages/user/travelRecords/travelRecords",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/user/travelRecords/travelRecords",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 注册头像预览
 		{
-            "path" : "pages/user/register/headSculpture",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		  // 更新
+			"path": "pages/user/register/headSculpture",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 更新
 		{
-            "path" : "pages/update/update",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,
-		  // 论坛列表
+			"path": "pages/update/update",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		// 论坛列表
 		{
-            "path" : "pages/communityForum/forumlists/forumlists",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		 // 最新拜访申请消息
+			"path": "pages/communityForum/forumlists/forumlists",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 最新拜访申请消息
 		{
-            "path" : "pages/visitapplication/newDetalis/newDetalis",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/visitapplication/newDetalis/newDetalis",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//APP版本号
 		{
-            "path" : "pages/user/versionNumber/versionNumber",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/user/versionNumber/versionNumber",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//小区简介
 		{
-            "path" : "pages/communityForum/introduction/introduction",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/communityForum/introduction/introduction",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//发布帖子
 		{
-            "path" : "pages/communityForum/release/release",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		  // 健康码
+			"path": "pages/communityForum/release/release",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 健康码
 		{
-            "path" : "pages/classification/healthCode/healthCode",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/classification/healthCode/healthCode",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//医疗健康
 		{
-            "path" : "pages/classification/healthCare/healthCare",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/classification/healthCare/healthCare",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//超市
 		{
-            "path" : "pages/classification/supermarket/supermarket",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/classification/supermarket/supermarket",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 运动
 		{
-            "path" : "pages/classification/motion/motion",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/classification/motion/motion",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//美食
 		{
-            "path" : "pages/classification/deliciousFood/deliciousFood",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/classification/deliciousFood/deliciousFood",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//车辆
 		{
-            "path" : "pages/classification/vehicle/vehicle",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/classification/vehicle/vehicle",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//社区政务
 		{
-            "path" : "pages/classification/community/community",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
+			"path": "pages/classification/community/community",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//上门服务
 		{
-            "path" : "pages/classification/service/service",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		 // 交通出行
+			"path": "pages/classification/service/service",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 交通出行
 		{
-            "path" : "pages/classification/travel/travel",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-		,
+			"path": "pages/classification/travel/travel",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		// 茶饮
 		{
-		    "path" : "pages/classification/teaBasedDrink/teaDrink", 
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-		    }
-		    
-		}
-        ,
+			"path": "pages/classification/teaBasedDrink/teaDrink",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//旅游景点
 		{
-		    "path" : "pages/classification/scenicArea/scenicArea",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-		    }
-		    
+			"path": "pages/classification/scenicArea/scenicArea",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
 		},
 		// 购物
 		{
-		    "path" : "pages/classification/shopping/shopping",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-		    }
-		    
+			"path": "pages/classification/shopping/shopping",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
 		},
 		// 自定义customTarbar
 		{
-            "path" : "pages/communityForum/forumlists/customTarbar/customTarbar",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-		 // 地图导航
-        ,{
-            "path" : "pages/web/index/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-		   // 物业首页
-        ,{
-            "path" : "pages/propertyManagement/propertyhome/propertyhome",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-		 // 物业用户查询
-        ,{
-            "path" : "pages/propertyManagement/userQuery/userQuery",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-		      // 物业查看用户详情
-        ,{
-            "path" : "pages/propertyManagement/userQuery/theUserDetails/theUserDetails",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-		//物业入住查看
-        ,{
-            "path" : "pages/propertyManagement/CheckToSee/CheckToSee",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-		// 查看详情
-		,{
-		    "path" : "pages/propertyManagement/CheckToSee/seeDetails/seeDetails",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-		    }
-		    
+			"path": "pages/communityForum/forumlists/customTarbar/customTarbar",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
 		}
-        ,
+		// 地图导航
+		, {
+			"path": "pages/web/index/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+		// 物业首页
+		, {
+			"path": "pages/propertyManagement/propertyhome/propertyhome",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+		// 物业用户查询
+		, {
+			"path": "pages/propertyManagement/userQuery/userQuery",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+		// 物业查看用户详情
+		, {
+			"path": "pages/propertyManagement/userQuery/theUserDetails/theUserDetails",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+		//物业入住查看
+		, {
+			"path": "pages/propertyManagement/CheckToSee/CheckToSee",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+		// 查看详情
+		, {
+			"path": "pages/propertyManagement/CheckToSee/seeDetails/seeDetails",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
 		//出入记录
 		{
-            "path" : "pages/propertyManagement/accessToInformation/accessToInformation",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-		//出入记录详情
-		,{
-		    "path" : "pages/propertyManagement/accessToInformation/accessDetails/accessDetails",
+			"path": "pages/propertyManagement/accessToInformation/accessToInformation",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+		// 外卖、快递首页
+		, {
+			"path": "pages/userMessenger/userhome/userhome",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+		// 外卖、快递申请进入
+		, {
+			"path": "pages/userMessenger/applyingTo/applyingTo",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 送货申请
+		{
+			"path": "pages/userMessenger/applyDelivery/applyDelivery",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 送货申请记录
+		{
+		    "path" : "pages/userMessenger/applyDelivery/aplyRecord/aplyRecord",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
 		        "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
+				"navigationStyle": "custom"
 		    }
 		    
-		}
-        
-        // 外卖首页
-        ,{
-            "path" : "pages/userMessenger/userhome/userhome",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-        		"navigationStyle":"custom"
-            }
-            
-        }
-		// 外卖、快递申请进入
-        ,{
-            "path" : "pages/userMessenger/applyingTo/applyingTo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-					"navigationStyle":"custom"
-            }
-            
-        }
-        ,
-		// 送货申请
+		},
+		// 快递、外卖拜访申请
 		{
-            "path" : "pages/userMessenger/applyDelivery/applyDelivery",
+			"path": "pages/userMessenger/visitToApply/visitToApply",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 快递、外卖申请记录
+		{
+			"path": "pages/userMessenger/visitToApply/applicationRecord/applicationRecord",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 快递、外卖申请记录详情
+		{
+			"path": "pages/userMessenger/visitToApply/visitDetails/visitDetails",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+		// 快递、外卖通行二维码
+		, {
+			"path": "pages/userMessenger/goQrCode/goQrCode",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+	   
+        ,
+		//帖子管理
+		{
+            "path" : "pages/propertyManagement/postManagement/postManagement",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
+				"navigationStyle": "custom"
             }
             
         }
-       
-        
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -634,26 +600,27 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
-	    "color": "#7A7E83",
-	    "selectedColor": "#F95454",
-	    "borderStyle": "black",
-	    "backgroundColor": "#ffffff",
-	    "list": [{
-	        "pagePath": "pages/index/index",
-	        "iconPath": "static/tabbar/home1.png",
-	        "selectedIconPath": "static/tabbar/home2.png",
-	        "text": "首页"
-	    }, {
-	        "pagePath": "pages/address/address/address",
-	        "iconPath": "static/tabbar/location1.png",
-	        "selectedIconPath": "static/tabbar/location2.png",
-	        "text": "地址"
-	    },
-		 {
-		    "pagePath": "pages/user/userCenter/userCenter",
-		    "iconPath": "static/tabbar/user1.png",
-		    "selectedIconPath": "static/tabbar/user2.png",
-		    "text": "个人中心"
-		}]
+		"color": "#7A7E83",
+		"selectedColor": "#F95454",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/home1.png",
+				"selectedIconPath": "static/tabbar/home2.png",
+				"text": "首页"
+			}, {
+				"pagePath": "pages/address/address/address",
+				"iconPath": "static/tabbar/location1.png",
+				"selectedIconPath": "static/tabbar/location2.png",
+				"text": "地址"
+			},
+			{
+				"pagePath": "pages/user/userCenter/userCenter",
+				"iconPath": "static/tabbar/user1.png",
+				"selectedIconPath": "static/tabbar/user2.png",
+				"text": "个人中心"
+			}
+		]
 	}
 }

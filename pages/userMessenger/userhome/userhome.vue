@@ -19,7 +19,7 @@
 		 <view class="contenBox flex">
 			 <!-- 左边 -->
 		 	<view class="">
-		 		<view class="passQrCode">
+		 		<view @click="passQrCode" class="passQrCode">
 		 				<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back1.png" class="back1Img pos-abs" mode=""></image>
 						<view class="prcline"></view>
 					<view class="prctext">
@@ -29,7 +29,7 @@
 						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/qecode.png" class="qecodeImg" mode=""></image>
 					</view>
 		 		</view>
-				<view class="VisitToApply">
+				<view @click="VisitToApply" class="VisitToApply">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back2.png" class="back1Img pos-abs" mode=""></image>
 						<view class="prcline"></view>
 					<view class="prctext">
@@ -51,7 +51,7 @@
 						申请进入
 					</view>
 				</view>
-				<view @click="ApplyingTo" class="ApplyingTo flex m-t3">
+				<view @click="ApplyDelivery" class="ApplyingTo flex m-t3">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/back4.png" class="back3Img pos-abs" mode=""></image>
 					<view class="">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/service.png" class="serviceImg" mode=""></image>
@@ -110,14 +110,26 @@
 			 	url: item.url
 			 })
 		 },
+		 // 通行二维码
+		 passQrCode(){
+			uni.navigateTo({
+				url:'/pages/userMessenger/goQrCode/goQrCode'
+			}) 
+		 },
 		 // 申请进入
 		 ApplyingTo(){
 			 uni.navigateTo({
 			 	url:'/pages/userMessenger/applyingTo/applyingTo'
 			 })
 		 },
+		 // 拜访申请
+		 VisitToApply(){
+			 uni.navigateTo({
+			 	url:'/pages/userMessenger/visitToApply/visitToApply'
+			 })
+		 },
 		 // 送货申请
-		 ApplyingTo(){
+		 ApplyDelivery(){
 			 uni.navigateTo({
 			 	url:'/pages/userMessenger/applyDelivery/applyDelivery'
 			 })
@@ -128,6 +140,9 @@
 		},
 		onLoad() {
 
+		},
+		onHide() {
+			this.isShowType = false
 		},
 		filters: {
 

@@ -59,7 +59,12 @@
 						</view>
 					</view>
 				</view>
+				
 			</view>
+		</view>
+		
+		<view @click="PostManagement" class=" flex ju-center">
+			<image src="../../../image/propertyManagement/postManagement.png" class="postManagement" mode=""></image>
 		</view>
 	</view>
 </template>
@@ -117,6 +122,12 @@
 			 uni.navigateTo({
 			 	url:'/pages/propertyManagement/accessToInformation/accessToInformation'
 			 })
+		 },
+		 // 帖子管理
+		 PostManagement() {
+			 uni.navigateTo({
+			 	url:'/pages/propertyManagement/postManagement/postManagement'
+			 })
 		 }
 		},
 		mounted() {
@@ -124,6 +135,9 @@
 		},
 		onLoad() {
 
+		},
+		onHide() {
+			this.isShowType = false
 		},
 		filters: {
 
@@ -268,5 +282,10 @@
 		width: 100%;
 		height: 40rpx;
 		border-bottom: 1px solid #E6E6E6;
+	}
+	
+	.postManagement{
+		width: 690rpx;
+		height: 200rpx;
 	}
 </style>

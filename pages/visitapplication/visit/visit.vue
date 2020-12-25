@@ -324,7 +324,7 @@
 
 
 				this.renderVillageLists = tmp;
-				// console.log(tmp);
+				console.log(tmp);
 			},
 
 			// 获取用户资料
@@ -434,7 +434,7 @@
 	}
 
 	.xiala {
-		width: 22rpx;
+		width: 16rpx;
 		height: 12rpx;
 	}
 

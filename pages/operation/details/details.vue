@@ -38,7 +38,7 @@
 			<view class="tex1">
 				申请结果
 			</view>
-			<textarea v-model="textvalue" class="frame">
+			<textarea v-model="textvalue" placeholder="您可以在这里填写您不同意的原因哦" class="frame">
              </textarea>
 
 			<!-- 按钮 -->
@@ -382,5 +382,8 @@
 		margin: 0 20rpx;
 		width: 34rpx;
 		height: 18rpx;
+	}
+	.textarea-placeholder{
+		color: #999999;
 	}
 </style>

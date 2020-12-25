@@ -199,6 +199,15 @@ module.exports = {
 		recordOfAccess : host + 'village_staff/village/inOutRecord',
 		
 		//入住申请所有记录
-		checkinDetails : host + 'village_staff/village/moveInApply'
+		checkinRecord : host + 'village_staff/village/moveInApply',
+		
+		//入住申请记录详情
+	    checkinDetails : host + 'village_staff/village/moveInApply/show',
+		
+		// 审核某条记录
+		 auditRecord : host + 'village_staff/village/moveInApply/verify',
+		 
+		 //获取所有帖子
+		 allPost : host + 'village_staff/village/tribune'
 	}
 }

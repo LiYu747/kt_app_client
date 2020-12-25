@@ -323,9 +323,11 @@
 			this.id = val.id
 		},
 		onShow() {
-			this.loadPageData()
+			this.lists = []
+			this.page = 1
 			this.data1 = []
 			this.page1 = 1
+			this.loadPageData()
 			this.SelfPost()
 			this.Userdata()
 		},
