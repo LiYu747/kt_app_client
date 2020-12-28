@@ -208,6 +208,18 @@ module.exports = {
 		 auditRecord : host + 'village_staff/village/moveInApply/verify',
 		 
 		 //获取所有帖子
-		 allPost : host + 'village_staff/village/tribune'
+		 allPost : host + 'village_staff/village/tribune',
+		 
+		 //帖子详情
+		 postDetails : host + 'village_staff/village/tribune/show',
+		 
+		 // 审核帖子
+		 ReviewPosts : host + 'village_staff/village/tribune/verify',
+		 
+		 // 小区内的住户
+		 allResident : host + 'village_staff/user/user',
+		 
+		 //查看申请记录的进度
+		 applicationProgress : apiPath + 'courier/apply'
 	}
 }

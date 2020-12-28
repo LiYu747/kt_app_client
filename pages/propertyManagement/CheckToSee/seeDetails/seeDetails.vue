@@ -20,6 +20,16 @@
 				</view>
 			</view>
 			<view class="line"></view>
+			<view class="accessoryBox">
+				<view class="remarkTil">
+					附件
+				</view>
+				<view class="accessoryCtn flex">
+					<view class="" v-for="item in files" :key="item.id">
+						<image :src="item.url" class="itemUrl" mode=""></image>
+					</view>
+				</view>
+			</view>
 			<view class="remarkBox">
 				<view class="remarkTil">
 					备注
@@ -34,7 +44,7 @@
 			</view>
 
 			<!-- 按钮 -->
-			<view v-if="state == '待处理'" class="flex al-center ju-around m-t4">
+			<view v-if="stateCode == 1" class="flex al-center ju-around m-t4">
 				<view @click="pass" class="btnr flex al-center ju-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="btnimg" mode=""></image>
 					<view class=" pos-abs">
@@ -45,6 +55,9 @@
 					不通过
 				</view>
 			</view>
+		</view>
+		<view class="btmLine">
+			
 		</view>
 	</view>
 </template>
@@ -62,11 +75,21 @@
 			return {
 				id: '',
 				state: '', //处理状态
+				stateCode:'',//处理状态码
 				remark: '', //备注
 				result: '', //结果
-				verify_status:'',//选择结果
+				files:[],//附件
+				verify_status: '', //选择结果
 				locdata: [{
 						label: '姓名',
+						value: ''
+					},
+					{
+						label: '电话',
+						value: ''
+					},
+					{
+						label: '身份证号',
 						value: ''
 					},
 					{
@@ -84,54 +107,60 @@
 			// 获取数据
 			getData() {
 				uni.showLoading({
-					title:'加载中'
+					title: '加载中'
 				})
 				home.checkinDetails({
 					data: {
 						id: this.id
 					},
 					fail: () => {
-				      uni.hideLoading()
+						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
 							icon: "none"
 						})
 					},
 					success: (res) => {
-						  uni.hideLoading()
-                     if (res.statusCode != 200) {
-                     	uni.showToast({
-                     		title: '网络出错了',
-                     		icon: "none"
-                     	})
-                     	return;
-                     }
-					 if(res.data.code != 200){
-						 uni.showToast({
-						 	title: res.data.msg,
-						 	icon: "none"
-						 })
-						 return;
-					 }
+						uni.hideLoading()
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: "none"
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							return;
+						}
 						let data = res.data.data
+						console.log(data);
 						this.state = data.verify_status_text
+						this.stateCode = data.verify_status
 						this.remark = data.user_remark
-						this.locdata[1].value = data.own_village.name + data.own_building.name + data.own_apartment.name + data.own_floor
+						this.files = data.files
+						this.locdata[0].value = data.own_user.username
+						this.locdata[1].value = data.own_user.tel.slice(0,3) + '****' + data.own_user.tel.slice(7,11)
+						this.locdata[2].value = data.own_user.id_card_no.slice(0,3) + '***********' + data.own_user.id_card_no.slice(14,18)
+						this.locdata[3].value = data.own_village.name + data.own_building.name + data.own_apartment.name + data.own_floor
 							.name + data.own_room.room_number
-						this.locdata[2].value = data.created_at.slice(0, 16)
+						this.locdata[4].value = data.created_at.slice(0, 16)
 					}
 				})
 			},
-			
-			auditreq(){
+
+			auditreq() {
 				uni.showLoading({
-					title:'加载中'
+					title: '加载中'
 				})
 				home.auditRecord({
-					data:{
-						id:this.id,
-						verify_status:this.verify_status,
-						verify_msg:this.result
+					data: {
+						id: this.id,
+						verify_status: this.verify_status,
+						verify_msg: this.result
 					},
 					fail: () => {
 						uni.hideLoading()
@@ -142,22 +171,22 @@
 					},
 					success: (res) => {
 						uni.hideLoading()
-						if(res.statusCode != 200){
+						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络出错了',
 								icon: "none"
 							})
 							return;
 						}
-						if(res.data.code != 200) {
+						if (res.data.code != 200) {
 							uni.showToast({
-								title:res.data.msg,
-								icon:'none'
+								title: res.data.msg,
+								icon: 'none'
 							})
 							return;
 						}
 						uni.showToast({
-							title:res.data.msg
+							title: res.data.msg
 						})
 						const time = setTimeout(() => {
 							this.getData()
@@ -167,14 +196,14 @@
 				})
 			},
 			// 通过
-			pass(){
+			pass() {
 				this.verify_status = '2'
 				this.auditreq()
 			},
 			//不通过
-			nopass(){
-			this.verify_status = '3'
-			this.auditreq()	
+			nopass() {
+				this.verify_status = '3'
+				this.auditreq()
 			}
 		},
 		mounted() {
@@ -247,7 +276,7 @@
 	.remarkCen {
 		width: 94%;
 		padding: 3%;
-		height: 140rpx;
+		height: 100rpx;
 		background: #ffff;
 		border-radius: 10rpx;
 		font-size: 12px;
@@ -277,5 +306,24 @@
 		border: 1rpx solid rgb(240, 117, 53);
 		font-size: 28rpx;
 		color: rgb(240, 117, 53);
+	}
+	
+	.accessoryCtn{
+		width: 94%;
+		padding: 20rpx 3%;
+		background:#FFFFFF;
+		border-radius: 10rpx;
+		flex-wrap: wrap;
+	}
+	
+	.itemUrl{
+		margin-right: 20rpx;
+		margin-bottom: 10rpx;
+		width: 120rpx;
+		height: 160rpx;
+	}
+	
+	.btmLine{
+		height: 60rpx;
 	}
 </style>

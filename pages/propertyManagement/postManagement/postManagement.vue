@@ -1,9 +1,20 @@
 <template>
 	<view>
 		<subunit titel='帖子管理' class="fixed"></subunit>
+		<view @click="xlshow = !xlshow" class="searchBox ">
+			<view class="allTx flex al-center">
+				筛选
+				<image src="../../../image/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
+			</view>
+		</view>
+		<view v-show="xlshow==true" class="xlshow ">
+			<view class="itemLabel flex al-center ju-center" @click="select(item,index)" :class="{'back':index==idx}" v-for="(item,index) in condition" :key='item.id'>
+				{{item.label}}
+			</view>
+		</view>
 		<view class="topLine"></view>
-		<view class="flex-d al-center">
-			<view class="itemBox" v-for="item in lists" :key='item.id'>
+		<view v-if="lists.length>0" class="flex-d al-center">
+			<view class="itemBox" @click="goDetails(item)" v-for="item in lists" :key='item.id'>
                    <view class="layoutBox flex al-center ju-between">
                    	标题 : {{item.title}}
 					<view :class="item.verify_status_text=='通过审核'?'dv':'nodv'">
@@ -14,6 +25,13 @@
 				   	发布时间 : {{item.created_at}}
 				   </view>
 			</view>
+		</view>
+		
+		<view v-if="lists.length==0&&isLoading==false&&falg==false" class="noPost flex ju-center">
+			暂时还没有发布的帖子
+		</view>
+		<view v-if="lists.length==0&&isLoading==false&&falg == true" class="noPost flex ju-center">
+			没有您要看的帖子
 		</view>
 		
 		<view v-if="hasMore==false" class="bomLine flex ju-center al-center">
@@ -46,21 +64,62 @@
 		props: {},
 		data() {
 			return {
+				xlshow:false,
+				falg:false, //判断筛选结果
+				idx:0,
 				noText:'',
 				page: 1,
 				pageSize: 15,
+				status:'',//筛选条件
 				isLoading: false,
 				hasMore: true,
-				lists: []
+				lists: [],
+				condition:[{
+					label:'全部',
+					status:''
+				},
+				{
+					label:'待审核',
+					status:'0'
+				},
+				{
+					label:'已通过',
+					status:'1'
+				},
+				{
+					label:'未通过',
+					status:'2'
+				},
+				]
 			}
 		},
 		methods: {
+			// 筛选
+			select(item,index){
+				this.idx = index
+				this.xlshow = false
+				this.falg = true
+				this.status = item.status
+				this.page = 1
+				this.noText = ''
+				this.lists = []
+				this.getData()
+			},
+			// 去帖子详情
+			goDetails(item){
+				uni.navigateTo({
+					url:'/pages/propertyManagement/postManagement/postDetails/postDetails?id=' + item.id
+				})
+				
+			},
+			// 获取数据
 			getData() {
 				this.isLoading = true
 				home.allPost({
 					data: {
 						page: this.page,
-						pageSize: this.pageSize
+						pageSize: this.pageSize,
+						verify_status:this.status
 					},
 					fail: () => {
 						this.isLoading = false
@@ -94,6 +153,9 @@
 							console.log(data.data);
 							this.page = data.current_page + 1;
 							this.hasMore = data.next_page_url ? true : false;
+							data.data.map(item => {
+								item.created_at = item.created_at.slice(0,16)
+							})
 							this.lists = this.lists.concat(data.data)
 						} else {
 							uni.showToast({
@@ -106,6 +168,11 @@
 			}
 		},
 		mounted() {
+		},
+		onShow() {
+			this.page = 1
+			this.lists = []
+			this.noText=''
 			this.getData()
 		},
 		onLoad() {
@@ -141,6 +208,45 @@
 	.topLine {
 		height: 148rpx;
 	}
+	.searchBox {
+		position: fixed;
+		top: 84rpx;
+		right: 50rpx;
+		color: #FFFFFF;
+		font-size: 16px;
+		z-index: 9;
+	}
+	
+	.xlshow{
+		position: fixed;
+		width: 160rpx;
+		background: #FFFFFF;
+		top: 140rpx;
+		right: 30rpx;
+		border-radius: 10rpx;
+		z-index: 9;
+		padding-bottom: 30rpx;
+		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+	}
+	
+	.itemLabel{
+		font-size: 14px;
+		color: #666666;
+		margin-top: 20rpx;
+	}
+	
+	.back{
+		width: 100%;
+		background: #F07535;
+		color: #FFFFFF;
+	}
+	
+	.pullDown {
+		width: 20rpx;
+		height: 12rpx;
+		margin-left: 10rpx;
+	}
+	
 	
 	.itemBox{
 		margin-top: 30rpx;
@@ -168,6 +274,12 @@
 	
 	.nodv{
 		color: #F07535;
+	}
+	
+	.noPost{
+		font-size: 14px;
+		color: #666666;
+		margin-top: 100rpx;
 	}
 	
 	.bomLine {

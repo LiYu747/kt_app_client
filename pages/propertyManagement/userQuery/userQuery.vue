@@ -3,24 +3,23 @@
 		<view class="fiedx">
 			<subunit titel='用户查询'></subunit>
 			<view class="searchBox flex al-center ju-center pos-rel">
-				<view class="allTxt pos-abs flex al-center">
-					全部
-					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
-				</view>
 				<view class="searchBack flex al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/serach.png" class="serachImg" mode=""></image>
-					<input type="text" class="ipt" value="" placeholder="请输入关键词" />
+					<input type="text" class="ipt" v-model="username" @confirm="search" placeholder="请输入关键词" />
+				</view>
+				<view @click="cancel" v-show="falg==true" class="cancel pos-abs">
+					取消
 				</view>
 			</view>
 		</view>
 		<view class="topLine">
-			
+
 		</view>
-		<view class="flex-d al-center m-t1">
-			<view class="itemBox" @click="goUserDetails" v-for=" item in locdata" :key='item.id'>
+		<view v-if="lists.length>0" class="flex-d al-center m-t1">
+			<view class="itemBox" @click="goUserDetails" v-for=" item in lists" :key='item.id'>
 				<view class="flex al-center">
 					<view class="itemName">
-						{{item.name}}
+						{{item.username}}
 					</view>
 					<view class="itemTel">
 						{{item.tel}}
@@ -34,14 +33,14 @@
 						<view class="flex al-center">
 							<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/idcard.png" class="idcardIcon" mode=""></image>
 							<view class="m-l1">
-								身份证
+								身份证号
 							</view>
 						</view>
 						<view class="m-t1">
-							{{item.idcard}}
+							{{item.id_card_no}}
 						</view>
 					</view>
-					<view class="itemTime m-l3">
+					<!-- <view class="itemTime m-l3">
 						<view class="flex al-center">
 							<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/time.png" class="timeIcon" mode=""></image>
 							<view class="m-l1">
@@ -51,18 +50,35 @@
 						<view class="m-t1">
 							{{item.checkdate}}
 						</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
-		<view class="bomLine flex ju-center al-center">
+		<view v-if="isLoading==false&&lists.length==0" class="noQuery flex ju-center">
+			暂无用户可查询
+		</view>
+		<view v-if="hasMore==false&&lists.length>0" class="bomLine flex ju-center">
 			{{noText}}
 		</view>
+		<view v-show="isLoading == true && lists.length>0" class=" flex ju-center al-center lodbox">
+			<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+			加载中...
+		</view>
+		<view v-show="isLoading == true && lists.length == 0" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
+		</view>
+
 	</view>
 </template>
 
 <script>
 	import subunit from '../../../components/sub-unit/subunit.vue'
+	import home from '../../../vendor/home/home.js'
 	export default {
 		name: "",
 		components: {
@@ -71,58 +87,115 @@
 		props: {},
 		data() {
 			return {
-				noText:'',
-				locdata: [{
-						name: '张欣如',
-						tel: '19954852365',
-						sex: '女',
-						idcard: '255124********3921',
-						checkdate: '2020-3-14'
-					},
-					{
-						name: '李海峰',
-						tel: '19954852365',
-						sex: '男',
-						idcard: '211381********3547',
-						checkdate: '2020-3-14'
-					},
-					{
-						name: '李海峰',
-						tel: '19954852365',
-						sex: '男',
-						idcard: '211381********3547',
-						checkdate: '2020-3-14'
-					},
-					{
-						name: '李海峰',
-						tel: '19954852365',
-						sex: '男',
-						idcard: '211381********3547',
-						checkdate: '2020-3-14'
-					},
-					{
-						name: '李海峰',
-						tel: '19954852365',
-						sex: '男',
-						idcard: '211381********3547',
-						checkdate: '2020-3-14'
-					},
-				]
+				falg:false,
+				noText: '',
+				page: 1,
+				pageSize: 15,
+				username: '',
+				isLoading: false,
+				hasMore: true,
+				locdata: [],
+				lists: []
 			}
 		},
 		methods: {
-         // 用户详情
-		 goUserDetails(){
-			 uni.navigateTo({
-			 	url:'/pages/propertyManagement/userQuery/theUserDetails/theUserDetails'
-			 })
-		 }
+			// 用户详情
+			goUserDetails() {
+				return;
+				uni.navigateTo({
+					url: '/pages/propertyManagement/userQuery/theUserDetails/theUserDetails'
+				})
+			},
+			// 搜索
+			search(){
+				this.falg = true
+				this.lists = []
+				this.page = 1
+				this.getData()
+				
+			},
+			// 取消
+			cancel(){
+				this.falg = false
+				this.username = ''
+				this.page = 1
+				this.lists = []
+				this.getData()
+			},
+            //获取数据
+			getData() {
+				this.isLoading = true
+				home.allResident({
+					data: {
+						username: this.username,
+						page: this.page,
+						pageSize: this.pageSize
+					},
+					fail: () => {
+						this.isLoading = false
+						uni.showToast({
+							title: '网络错误',
+							icon: "none"
+						})
+					},
+					success: (res) => {
+						this.isLoading = false
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: "none"
+							})
+							return;
+						}
+						if (res.data.code == 403) {
+							uni.showModal({
+								content: res.data.msg + '访问',
+								success: (res) => {
+									uni.navigateBack({
+										delta: 1
+									})
+								}
+							})
+							return;
+						}
+						if(res.data.code == 200) {
+							let data = res.data.data
+							data.data.map(item => {
+								item.tel = item.tel.slice(0, 3) + '****' + item.tel.slice(7, 11)
+								item.id_card_no = item.id_card_no.slice(0, 3) + '*************' + item.id_card_no.slice(item.id_card_no.length -
+									4, item.id_card_no.length)
+								if (item.sex == 1) {
+									item.sex = '男'
+								}
+								if (item.sex == 2) {
+									item.sex = '女'
+								}
+							})
+							this.page = data.current_page + 1;
+							this.hasMore = data.next_page_url ? true : false;
+							this.lists = this.lists.concat(data.data)
+							console.log(data.data);
+						}
+						else{
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+						}
+					}
+				})
+			}
 		},
 		mounted() {
-
+			this.getData()
 		},
 		onReachBottom() {
 			this.noText = '没有更多了'
+			if (this.isLoding == true || this.hasMore == false) return;
+			this.getData()
+		},
+		onShow() {
+
 		},
 		onLoad() {
 
@@ -143,15 +216,18 @@
 </script>
 
 <style scoped lang="scss">
+
 	.fiedx {
 		top: 0;
 		width: 100%;
 		position: fixed;
 		z-index: 9;
 	}
-    .topLine{
+
+	.topLine {
 		height: 236rpx;
 	}
+
 	.searchBox {
 		width: 100%;
 		height: 88rpx;
@@ -163,26 +239,23 @@
 		width: 494rpx;
 		height: 54rpx;
 		background: rgba(204, 204, 204, 0.35);
-		border-radius: 27rpx;
-		margin-left: 30rpx;
+		border-radius: 27rpx;	
 	}
-    
-	.allTxt{
-		font-size: 13px;
-		left: 40rpx;
-		color: #666666;
-	}
-	 
-	.pullDown{
-		width: 20rpx;
-		height: 12rpx;
-		margin-left: 10rpx;
-	} 
-	.serachImg{
+
+  
+   .cancel{
+	   font-size: 14px;
+	   color: #666666;
+	   margin-left: 30rpx;
+	   right: 50rpx;
+   }
+
+	.serachImg {
 		width: 34rpx;
 		height: 34rpx;
 		margin-left: 20rpx;
 	}
+
 	.ipt {
 		margin-left: 20rpx;
 		width: 400rpx;
@@ -225,7 +298,7 @@
 		margin-left: 94rpx;
 		width: 260rpx;
 		height: 70rpx;
-		border-right: 2px solid #cccccc;
+		// border-right: 2px solid #cccccc;
 		border-left: 2px solid #CCCCCC;
 		color: #999999;
 		font-size: 12px;
@@ -246,13 +319,51 @@
 		width: 25rpx;
 		height: 23rpx;
 	}
-	
-	.bomLine{
+
+	.bomLine {
+		margin-top: 20rpx;
 		width: 100%;
-		height: 100rpx;
 		font-size: 12px;
 	}
-	.dv{
-		background: rgb(0,178,255);
+
+	.dv {
+		background: rgb(0, 178, 255);
 	}
+	
+	.noQuery {
+		margin-top: 100rpx;
+		font-size: 14px;
+		color: #666666;
+	}
+	
+	.lodimg {
+		width: 30rpx;
+		height: 30rpx;
+		margin-right: 20rpx;
+	}
+	
+	.lodbox {
+		font-size: 24rpx;
+	}
+	
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		border-radius: 10rpx;
+		background: rgba(88, 88, 88, 0.8);
+	}
+	
 </style>

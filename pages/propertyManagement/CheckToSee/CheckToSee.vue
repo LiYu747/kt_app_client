@@ -2,14 +2,16 @@
 	<view class="">
 		<view class="fiedx">
 			<subunit titel='入住查看'></subunit>
-			<view class="searchBox flex al-center ju-center pos-rel">
-				<view class="allTxt pos-abs flex al-center">
-					全部
-					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
+			<view @click="xlshow = !xlshow" class="searchBox ">
+				<view class="allTx flex al-center">
+					筛选
+					<image src="../../../image/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
 				</view>
-				<view class="searchBack flex al-center">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/serach.png" class="serachImg" mode=""></image>
-					<input type="text" class="ipt" value="" placeholder="请输入关键词" />
+			</view>
+			<view v-show="xlshow==true" class="xlshow ">
+				<view class="itemLabel flex al-center ju-center" @click="select(item,index)" :class="{'back':index==idx}" v-for="(item,index) in condition"
+				 :key='item.id'>
+					{{item.label}}
 				</view>
 			</view>
 		</view>
@@ -21,10 +23,18 @@
 			<view class="itemBox" @click="goDetails(item)" v-for="item in lists" :key='item.id'>
 				<view class="itemName flex al-center ju-between">
 					<view class="">
-						姓名：{{item.name}}
+						姓名：{{item.own_user.username}}
 					</view>
 					<view :class="item.verify_status_text=='已通过'?'dv':'nodv'">
 						{{item.verify_status_text}}>
+					</view>
+				</view>
+				<view class="itemName flex al-center">
+					<view class="">
+						电话：
+					</view>
+					<view class="">
+						{{item.own_user.tel}}
 					</view>
 				</view>
 				<view class="itemName flex al-center">
@@ -45,11 +55,14 @@
 				</view>
 			</view>
 		</view>
-		<view v-if="lists.length==0&&isLoading == false" class="nocheckin flex ju-center">
-			     暂时没有用户申请
+		<view v-if="lists.length==0&&isLoading == false&&falg == false" class="nocheckin flex ju-center">
+			暂时没有用户申请
+		</view>
+		<view v-if="lists.length==0&&isLoading == false&&falg == true" class="nocheckin flex ju-center">
+			没有筛选条件的用户申请
 		</view>
 
-		<view v-if="hasMore==false" class="bomLine flex ju-center al-center">
+		<view v-if="hasMore==false&&lists.length>0" class="bomLine flex ju-center al-center">
 			{{noText}}
 		</view>
 		<view v-show="isLoading == true && lists.length>0" class=" flex ju-center al-center lodbox">
@@ -78,16 +91,47 @@
 		props: {},
 		data() {
 			return {
+				xlshow: false, //是否显示筛选框
+				falg: false, //判断是否有筛选内容
+				idx: 0,
 				noText: '',
 				page: 1,
 				pageSize: 15,
-				status: '',
+				status: '', //筛选的条件
 				isLoading: false,
 				hasMore: true,
-				lists: []
+				lists: [],
+				condition: [{
+						label: '全部',
+						status: ''
+					},
+					{
+						label: '待审核',
+						status: '1'
+					},
+					{
+						label: '已通过',
+						status: '2'
+					},
+					{
+						label: '未通过',
+						status: '3'
+					},
+				]
 			}
 		},
 		methods: {
+			// 筛选
+			select(item, index) {
+				this.idx = index
+				this.xlshow = false
+				this.falg = true
+				this.status = item.status
+				this.page = 1
+				this.noText = ''
+				this.lists = []
+				this.getData()
+			},
 			// 用户详情
 			goDetails(item) {
 				// console.log(item);
@@ -132,11 +176,12 @@
 						}
 						if (res.data.code == 200) {
 							let data = res.data.data
-							console.log(data);
+							// console.log(data);
 							data.data.map(item => {
 								item.address = item.own_village.name + item.own_building.name + item.own_apartment.name + item.own_floor.name +
 									item.own_room.room_number
 								item.created_at = item.created_at.slice(0, 16)
+								item.own_user.tel = item.own_user.tel.slice(0, 3) + '****' + item.own_user.tel.slice(7, 11)
 							})
 							this.page = data.current_page + 1;
 							this.hasMore = data.next_page_url ? true : false;
@@ -159,6 +204,7 @@
 		onShow() {
 			this.page = 1
 			this.lists = []
+			this.noText = ''
 			this.getData()
 		},
 		onReachBottom() {
@@ -194,14 +240,40 @@
 	}
 
 	.topLine {
-		height: 236rpx;
+		height: 148rpx;
 	}
 
 	.searchBox {
-		width: 100%;
-		height: 88rpx;
+		position: fixed;
+		top: 84rpx;
+		right: 50rpx;
+		color: #FFFFFF;
+		font-size: 16px;
+		z-index: 9;
+	}
+
+	.xlshow {
+		position: fixed;
+		width: 160rpx;
 		background: #FFFFFF;
-		border-bottom: 1px solid #eeeeee;
+		top: 140rpx;
+		right: 30rpx;
+		border-radius: 10rpx;
+		z-index: 9;
+		padding-bottom: 30rpx;
+		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+	}
+
+	.itemLabel {
+		font-size: 14px;
+		color: #666666;
+		margin-top: 20rpx;
+	}
+
+	.back {
+		width: 100%;
+		background: #F07535;
+		color: #FFFFFF;
 	}
 
 	.searchBack {
@@ -211,6 +283,7 @@
 		border-radius: 27rpx;
 		margin-left: 30rpx;
 	}
+
 
 	.allTxt {
 		font-size: 13px;
@@ -244,10 +317,10 @@
 	.itemBox {
 		margin-top: 30rpx;
 		width: 650rpx;
-		height: 300rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
 		padding: 0 20rpx;
+		padding-bottom: 40rpx;
 		font-size: 14px;
 		color: #666666;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
@@ -301,8 +374,8 @@
 		border-radius: 10rpx;
 		background: rgba(88, 88, 88, 0.8);
 	}
-	
-	.nocheckin{
+
+	.nocheckin {
 		margin-top: 100rpx;
 		font-size: 14px;
 		color: #666666;

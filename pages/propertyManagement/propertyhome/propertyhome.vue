@@ -285,6 +285,7 @@
 	}
 	
 	.postManagement{
+		margin-top: -10rpx;
 		width: 690rpx;
 		height: 200rpx;
 	}

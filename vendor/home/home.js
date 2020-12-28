@@ -144,5 +144,29 @@ class Home {
 		params.url = routes.propertyManagement.allPost
 		req.get(params)
 	}
+	
+	//帖子详情
+	postDetails (params) {
+		params.url = routes.propertyManagement.postDetails
+		req.get(params)
+	}
+	
+	// 审核帖子
+	ReviewPosts (params) {
+		params.url = routes.propertyManagement.ReviewPosts
+		req.patch(params)
+	}
+	
+	// 小区内的住户
+	allResident (params) {
+		params.url = routes.propertyManagement.allResident
+		req.get(params)
+	}
+	
+	//查看申请记录的进度
+	applicationProgress (params) {
+		params.url = routes.propertyManagement.applicationProgress
+		req.get(params)
+	}
 }
 module.exports = new Home

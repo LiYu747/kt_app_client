@@ -498,6 +498,30 @@
 			}
 
 		}
+		,
+		//帖子管理
+		{
+		    "path" : "pages/propertyManagement/postManagement/postManagement",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		}
+		,
+		//帖子详情
+		{
+		    "path" : "pages/propertyManagement/postManagement/postDetails/postDetails",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		}
 		// 外卖、快递首页
 		, {
 			"path": "pages/userMessenger/userhome/userhome",
@@ -518,19 +542,10 @@
 			}
 
 		},
-		// 送货申请
+		
+		//申请进入记录
 		{
-			"path": "pages/userMessenger/applyDelivery/applyDelivery",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-
-		},
-		// 送货申请记录
-		{
-		    "path" : "pages/userMessenger/applyDelivery/aplyRecord/aplyRecord",
+		    "path" : "pages/userMessenger/applyingTo/applyingRecord/applyingRecord",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
@@ -549,7 +564,7 @@
 			}
 
 		},
-		// 快递、外卖申请记录
+		// 快递、外卖拜访申请记录
 		{
 			"path": "pages/userMessenger/visitToApply/applicationRecord/applicationRecord",
 			"style": {
@@ -559,7 +574,7 @@
 			}
 
 		},
-		// 快递、外卖申请记录详情
+		// 快递、外卖拜访申请记录详情
 		{
 			"path": "pages/userMessenger/visitToApply/visitDetails/visitDetails",
 			"style": {
@@ -580,18 +595,8 @@
 
 		}
 	   
-        ,
-		//帖子管理
-		{
-            "path" : "pages/propertyManagement/postManagement/postManagement",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-            }
-            
-        }
+       
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

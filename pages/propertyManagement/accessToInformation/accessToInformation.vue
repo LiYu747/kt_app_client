@@ -17,7 +17,7 @@
 
 		</view>
 
-		<view class="flex-d al-center ">
+		<view v-if="lists.length>0" class="flex-d al-center ">
 			<view class="itemBox" v-for="item in lists" :key='item.id'>
 				   <view class="layoutBox">
 				   	 地址：{{item.village_name}}
@@ -32,6 +32,9 @@
 				   {{item.desc}}
 				   </view>
 			</view>
+		</view>
+		<view class="noaccess flex ju-center" v-if="lists.length==0&&isLoading==false">
+			  暂无出行记录
 		</view>
 
 		<view v-if="hasMore == false" class="bomLine flex ju-center al-center">
@@ -110,6 +113,10 @@
 							let data = res.data.data
 							this.page = data.current_page + 1;
 							this.hasMore = data.next_page_url ? true : false;
+							data.data.map( item => {
+								item.open_gate_at = item.open_gate_at.slice(0,16)
+								item.created_at = item.created_at.slice(0,16)
+							})
 							this.lists = this.lists.concat(data.data)
 						}
                         else{
@@ -225,6 +232,13 @@
 		align-items: center;
 		border-bottom: 1px solid #CCCCCC;
 	}
+	
+	.noaccess{
+		margin-top: 100rpx;
+		font-size: 14px;
+		color: #666666;
+	}
+	
     .lodimg {
     	width: 30rpx;
     	height: 30rpx;
