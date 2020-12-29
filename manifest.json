@@ -2,7 +2,7 @@
     "name" : "快通信息",
     "appid" : "__UNI__B8CB42C",
     "description" : "",
-    "versionName" : "1.0.10",
+    "versionName" : "1.0.14",
     "versionCode" : "100",
     "transformPx" : false,
     /* 5+App特有相关 */
@@ -78,8 +78,8 @@
                 "ad" : {},
                 "maps" : {
                     "baidu" : {
-                        "appkey_ios" : "5jbnlBnHH0jVmcVGdhUVYuNKd6ZoUDIW",
-                        "appkey_android" : "C0qDxFDsYaofdF9jdkhOlatKMAjdVV6L"
+                        "appkey_ios" : "C0qDxFDsYaofdF9jdkhOlatKMAjdVV6L",
+                        "appkey_android" : "5jbnlBnHH0jVmcVGdhUVYuNKd6ZoUDIW"
                     }
                 }
             },

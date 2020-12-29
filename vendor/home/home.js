@@ -168,5 +168,11 @@ class Home {
 		params.url = routes.propertyManagement.applicationProgress
 		req.get(params)
 	}
+	
+	 //查看自己的信息
+	 lookMymsg (params) {
+	 	params.url = routes.propertyManagement.lookMymsg
+	 	req.get(params)
+	 }
 }
 module.exports = new Home

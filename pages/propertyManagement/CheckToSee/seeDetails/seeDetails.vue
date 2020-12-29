@@ -94,11 +94,11 @@
 					},
 					{
 						label: '地址',
-						value: '复地御香山'
+						value: ''
 					},
 					{
 						label: '时间',
-						value: '2020-12-09 16:03'
+						value: ''
 					}
 				]
 			}
@@ -237,11 +237,6 @@
 		height: 148rpx;
 	}
 
-	.stateimg {
-		width: 40rpx;
-		height: 40rpx;
-	}
-
 	.contentBox {
 		padding: 0 20rpx;
 	}
@@ -252,6 +247,11 @@
 		border-bottom: 1px solid #CCCCCC;
 		font-size: 15px;
 		color: #F07535;
+	}
+	
+	.stateimg {
+		width: 40rpx;
+		height: 40rpx;
 	}
 
 	.itemBox {

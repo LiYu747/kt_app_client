@@ -1,6 +1,6 @@
 //本地开发域名
-let host = 'http://local.kt.cn/';
-// let host = 'https://api.kuaitongkeji.com/';   
+// let host = 'http://local.kt.cn/';
+let host = 'https://api.kuaitongkeji.com/';   
 let apiPath = host + 'api/';
 
 
@@ -220,6 +220,9 @@ module.exports = {
 		 allResident : host + 'village_staff/user/user',
 		 
 		 //查看申请记录的进度
-		 applicationProgress : apiPath + 'courier/apply'
+		 applicationProgress : apiPath + 'courier/apply',
+		 
+		 //查看自己的信息
+		 lookMymsg : apiPath + 'courier/info'
 	}
 }

@@ -221,8 +221,8 @@
 	.line {
 		margin-top: 23rpx;
 		width: 604rpx;
-		height: 0.5rpx;
-		background: #BFBFBF;
+		height: 2rpx;
+		background: #CCCCCC;
 	}
 
 	.text {

@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
-				<view class="userSelection pos-abs">
+				<!-- <view class="userSelection pos-abs">
 					<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
 					<view v-show="isShowType == true" class="typeBox flex-d al-center">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
@@ -13,14 +13,14 @@
 						</view>
 
 					</view>
-				</view>
+				</view> -->
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
 			</view>
 		</view>
 		<!-- 主页 -->
 		<view class="flex-d al-center">
-			<view class="box">
+			<view class="boxss">
 				<image class="imgjx" src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode=""></image>
 			</view>
 			<!-- 轮播图 -->
@@ -320,16 +320,15 @@
 		color: #FFFFFF;
 	}
 
-	.box {
+	.boxss {
 		width: 750rpx;
 		height: 156rpx;
-		margin-top: 132rpx;
+		margin-top: 130rpx;
 	}
 
-	.imgjx {
-		margin-top: -2rpx;
+	.imgjx { 
 		width: 100%;
-		height: 100%;
+	 height: 156rpx;
 	}
 
 	.imglb {

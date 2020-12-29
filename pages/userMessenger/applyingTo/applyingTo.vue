@@ -2,7 +2,7 @@
 	<view>
 		<subunit titel='申请进入' class="fixed"></subunit>
 		<view @click="goRecord" class="record">
-			申请记录
+			申请进度
 		</view>
 		<view class="lineTop">
 			

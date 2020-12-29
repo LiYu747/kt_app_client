@@ -213,6 +213,9 @@
 			this.getData()
 
 		},
+		onHide() {
+			this.xlshow = false
+		},
 		onLoad() {
 
 		},

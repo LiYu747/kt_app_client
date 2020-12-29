@@ -23,24 +23,26 @@
 				</view>
 
 				<view class="">
-					<image @click="swap" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/jiah.png" class="jiaoimg" mode=""></image>
+					<image @click="swap" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/jiah.png" class="jiaoimg"
+					 mode=""></image>
 				</view>
 			</view>
 		</view>
 
 
-		<map style="width: 100%; height: 600rpx;" :latitude="latitude" :longitude="longitude" :markers="covers">
-		</map> 
+		<map style="width: 100%; height: 600rpx;"    :latitude="latitude" :longitude="longitude" :markers="markers">
+		</map>
 
 		<view class=" flex ju-center">
 			<view class="botombox flex al-center ju-center">
 				<view class="flex ju-center ">
-					<image @click="start" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/start.png" class="startimg" mode=""></image>
+					<image @click="start" src="https://oss.kuaitongkeji.com/static/img/app/classification/Travel/start.png" class="startimg"
+					 mode=""></image>
 				</view>
 			</view>
 		</view>
 
-    
+
 	</view>
 </template>
 
@@ -56,74 +58,71 @@
 		props: {},
 		data() {
 			return {
-				myholder:'我的位置',
-				goholder:'请输入终点', 
+				myholder: '我的位置',
+				goholder: '请输入终点',
 				myPosition: '', //开始的位置
 				goPosition: '', //要去的位置
-				latitude: '',   //自动获取的经度
-				longitude: '',  //自动获取的纬度
-				covers: [{
-					id: 1,
-					width: 10, //宽
-					height: 10, //高
+				latitude: '', //自动获取的经度
+				longitude: '', //自动获取的纬度
+				markers: [{ 
+					id: 1,              
 					title: '我的位置', //地图标题 
 					latitude: '',
-					longitude: '',
-					iconPath: '../../../static/pos.png'
+					longitude: '', 
+					iconPath: '../../../static/iospos.png'
 				}],
-				city:'',//自动获取的城市
-				golat:'' , //要去地方的经度
-				golng:'' , //要去地方的纬度 
+				city: '', //自动获取的城市
+				golat: '', //要去地方的经度
+				golng: '', //要去地方的纬度 
 			}
 		},
 
 		methods: {
 			// 交换出发和到达地址
-			swap(){
-			   if(this.goPosition == '') return;
-			   if(this.myPosition == '') {
-				   uni.showToast({
-				   	title:'请输入开始的位置',
-					icon:"none"
-				   })
-				   return;
-				   };
-			   let myPosition = this.myPosition
-			   let goPosition = this.goPosition
-			   this.myPosition = goPosition
-			   this.goPosition = myPosition 
+			swap() {
+				if (this.goPosition == '') return;
+				if (this.myPosition == '') {
+					uni.showToast({
+						title: '请输入开始的位置',
+						icon: "none"
+					})
+					return;
+				};
+				let myPosition = this.myPosition
+				let goPosition = this.goPosition
+				this.myPosition = goPosition
+				this.goPosition = myPosition
 			},
-		
+
 			location() {
-                 uni.showLoading({
-                 	title:'获取定位中'
-                 })
+				uni.showLoading({
+					title: '获取定位中'
+				})
 				// console.log('location')
 				uni.getLocation({
 					type: 'gcj02',
 					altitude: true,
 					geocode: true, //设置该参数为true可直接获取经纬度及城市信息
 					success: (res) => {
-						// this.arr = JSON.stringify(res)
 						uni.hideLoading()
-						this.latitude = res.latitude
-						this.longitude = res.longitude
-						this.covers[0].latitude = res.latitude
-						this.covers[0].longitude = res.longitude
+							  this.latitude = res.latitude
+							  this.longitude = res.longitude
+							  this.markers[0].latitude = res.latitude
+							  this.markers[0].longitude = res.longitude 
 						this.city = res.address.city
 						// console.log(res);
-					},
-					fail: (err) => { 
-						uni.hideLoading() 
+					}, 
+					fail: (err) => {
+						uni.hideLoading()
 						// console.log('err', err)
 						uni.showToast({
 							title: '获取定位失败,请稍后再试',
 							icon: 'none'
 						});
 					}
-				});	 
+				});
 			},
-  
+
 
 			start() {
 				let that = this;
@@ -136,45 +135,45 @@
 					return
 				};
 				let baiduUrl = 'http://api.map.baidu.com/direction'
-				  // 自动定位
-				if(that.myPosition == ''){ 
-					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' +'name:' + that.myPosition + 
-					`&destination=latlng:${that.golat},${that.golng}` + '|' +'name:' + that.goPosition +
-					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02' 
+				// 自动定位
+				if (that.myPosition == '') {
+					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' + 'name:' + that.myPosition +
+						`&destination=latlng:${that.golat},${that.golng}` + '|' + 'name:' + that.goPosition +
+						'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02'
 				}
-				 
-				 //可以自己输入开始的位置
-				if(that.myPosition != ''){
+
+				//可以自己输入开始的位置
+				if (that.myPosition != '') {
 					that.latitude = ''
-					that.longitude = '' 
-					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' +'name:' + that.myPosition +
-					`&destination=latlng:${that.golat},${that.golng}` + '|' +'name:' + that.goPosition +
-					'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02' 
-				}  
-				     
-				uni.navigateTo({ 
-					url: '/pages/web/index/index?url=' + encodeURIComponent(baiduUrl) 
+					that.longitude = ''
+					baiduUrl += `?origin=latlng:${that.latitude},${that.longitude}` + '|' + 'name:' + that.myPosition +
+						`&destination=latlng:${that.golat},${that.golng}` + '|' + 'name:' + that.goPosition +
+						'&mode=driving&region=' + this.city + '&output=html&src=webapp.baidu.openAPIdemo&coord_type=gcj02'
+				}
+
+				uni.navigateTo({
+					url: '/pages/web/index/index?url=' + encodeURIComponent(baiduUrl)
 				})
-				
+
 				// cfg.ready((data) => {
-					// console.log(data);
-					// if (!data.map) return;
-					// let navUrl = 'https://apis.map.qq.com/tools/routeplan/eword=' + that.goPosition + '&sword=' + that.myPosition + 
-					// 	'&spointx=' + that.latitude + '&spointy=' + that.longitude;
-					// navUrl += '?key=' + data.map.key + '&referer=' + data.map.name 	
+				// console.log(data);
+				// if (!data.map) return;
+				// let navUrl = 'https://apis.map.qq.com/tools/routeplan/eword=' + that.goPosition + '&sword=' + that.myPosition + 
+				// 	'&spointx=' + that.latitude + '&spointy=' + that.longitude;
+				// navUrl += '?key=' + data.map.key + '&referer=' + data.map.name 	
 				// }) 
 			},
 
 
 		},
 		onShow() {
-			
+
 		},
 		mounted() {
-		this.location() 
+			this.location()
 		},
 		onLoad(option) {
-			if(option.null=='')  return; 
+			if (option.null == '') return;
 			this.goPosition = option.addressName
 			// this.golat = option.lat
 			// this.golng = option.lng

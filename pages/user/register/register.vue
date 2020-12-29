@@ -167,7 +167,7 @@
 						uni.showToast({
 							title: res.data.msg,
 						})
-						this.form.Verification = res.data.data.code
+						// this.form.Verification = res.data.data.code
 						const authtime = setInterval(() => {
 							this.code = false
 							this.timer--

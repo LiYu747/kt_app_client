@@ -543,9 +543,20 @@
 
 		},
 		
-		//申请进入记录
+		//申请进入进度
 		{
 		    "path" : "pages/userMessenger/applyingTo/applyingRecord/applyingRecord",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		//申请信息
+		{
+		    "path" : "pages/userMessenger/applyingTo/myInformation/myInformation",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
@@ -595,8 +606,6 @@
 
 		}
 	   
-       
-       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

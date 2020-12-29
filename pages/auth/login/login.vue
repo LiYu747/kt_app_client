@@ -153,7 +153,7 @@
 									title: res.data.msg,
 									duration: 2000
 								})
-								this.form.Verification = res.data.data.code
+								// console.log(res.data.data.code);
 								const authtime = setInterval(() => {
 									this.code = false
 									this.timer--
@@ -192,6 +192,20 @@
 			},
 			// 登录
 			Login() {
+				if(this.form.phone == ''){
+					uni.showToast({
+						title:'请输入手机号',
+						icon:'none'
+					})
+					return;
+				}
+				if(this.form.Verification == ''){
+					uni.showToast({
+						title:'请输入验证码',
+						icon:'none'
+					})
+					return;
+				}
 				uni.showLoading({
 					title: '加载中...'
 				})
