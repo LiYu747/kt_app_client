@@ -35,7 +35,7 @@
 				flag: '', // 判断是否显示申请入驻
 				text: '', //没有更多了
 				locdata: [], //数据列表
-				page: 0,
+				page: 1,
 				ps: 15,
 				isLoding: false,
 				hasMore: true,
@@ -91,9 +91,16 @@
 								if (res.data.code != 200) return;
 
 								let data = res.data.data;
+								
+								// console.log(data);
 								this.hasMore = data.next_page_url ? true : false;
 								// console.log(res.data.data.data); 
 								// let data = res.data.data.data
+								data.data.map(item => {
+									if(item.own_village){
+										item.address = item.own_village.name + item.own_building.name + item.own_apartment.name + item.own_floor.name + item.own_room.room_number
+									}
+								})
 								this.locdata = data.data
 								// console.log(this.locdata);
 							}

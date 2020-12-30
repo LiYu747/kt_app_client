@@ -73,6 +73,17 @@
 				"navigationStyle": "custom"
 			}
 		},
+		// 更新实名信息
+		{
+		    "path" : "pages/user/realInformation/realInformation",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
 		// 地址编辑
 		{
 			"path": "pages/address/addediting/ADDediting",
@@ -81,6 +92,17 @@
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
 			}
+		},
+		//添加用户
+		{
+		    "path" : "pages/address/addediting/pushMember/pushMember",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
 		},
 		//入住申请
 		{

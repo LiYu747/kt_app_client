@@ -18,7 +18,7 @@
 				<u-form-item label="" class="postop" prop="nickname">
 					<view class="uiput flex al-center pos-rel">
 						<image class="nameimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/register/my.png" mode=""></image>
-						<u-input class="ipt" :clearable='flag' v-model="form.nickname" placeholder="昵称" />
+						<u-input class="ipt" :clearable='flag' v-model="form.nickname" placeholder="昵称(用于给他人展示)" />
 					</view>
 				</u-form-item>
 				<!-- 姓名-->
@@ -29,12 +29,12 @@
 					</view>
 				</u-form-item>
 				<!-- 身份证号 -->
-				<u-form-item label="" class="postop" prop="idcard">
+				<!-- <u-form-item label="" class="postop" prop="idcard">
 					<view class="uiput flex al-center pos-rel">
 						<image class="idcardimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/register/card.png" mode=""></image>
 						<u-input class="ipt" :clearable='flag' v-model="form.idcard" placeholder="身份证号码" />
 					</view>
-				</u-form-item>
+				</u-form-item> -->
 				<!-- 上传证件照-->
 				<u-form-item label="" class="postop" prop="idphoto">
 					<view class="uiput flex al-center pos-rel">
@@ -117,7 +117,7 @@
 					name: '',
 					phone: '',
 					Verification: '',
-					idcard: ''
+					// idcard: ''
 				},
 				isLoding: false //上传照片 
 			}
@@ -166,8 +166,10 @@
 						}
 						uni.showToast({
 							title: res.data.msg,
+							icon:'none'
 						})
 						// this.form.Verification = res.data.data.code
+						// console.log(res.data.data.code);
 						const authtime = setInterval(() => {
 							this.code = false
 							this.timer--
@@ -200,13 +202,13 @@
 					})
 					return;
 				}
-				if( this.form.idcard == ''){
-					uni.showToast({
-					title:'请输入身份证',
-					icon:'none'
-					})
-					return;
-				}
+				// if( this.form.idcard == ''){
+				// 	uni.showToast({
+				// 	title:'请输入身份证',
+				// 	icon:'none'
+				// 	})
+				// 	return;
+				// }
 				if( this.form.phone == ''){
 					uni.showToast({
 					title:'请输入手机号',
@@ -230,7 +232,7 @@
 						smsCode: this.form.Verification,
 						nickname: this.form.nickname,
 						username: this.form.name,
-						idCardNo: this.form.idcard,
+						// idCardNo: this.form.idcard,
 						avatar: this.avatar,
 						faceimg: this.photo,
 						sex: 1

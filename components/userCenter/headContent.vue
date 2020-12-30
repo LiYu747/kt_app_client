@@ -1,29 +1,6 @@
 <template>
 	<view>
-		<view class="nav ">
-			<view class="title flex al-center ju-center pos-rel">
-				个人中心
-				<view class="pos-abs location">
-					<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
-				</view>
-			</view>
-		</view>
-		<view class="">
-			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode="" class="jximg"></image>
-		</view>
-		<!-- 头像 -->
-		<view class="flex-d al-center">
-			<view @click="install" class="portrait flex  ju-center pos-rel">
-				<image v-if="user.nickname" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
-				<image v-else src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs" mode=""></image>
-			</view>
-			<view @click="install" v-if="user.nickname" class="text">
-				{{user.nickname}}
-			</view>
-			<view @click="gologin" v-else class="text">
-				{{text}}
-			</view>
-		</view>
+		
 	</view>
 </template>
 
@@ -55,9 +32,15 @@
 			// 去设置
 			install() {
 				uni.navigateTo({
-					url: `/pages/user/personal/personal`
+					url:'/pages/user/realInformation/realInformation'
 				})
 			},
+			//用户基本信息
+			userinfo(){
+				uni.navigateTo({
+					url:'/pages/user/personal/personal'
+				})
+			}
 		},
 		onLoad() {
 

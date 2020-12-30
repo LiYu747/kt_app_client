@@ -149,17 +149,17 @@
 			},
 			// 提交
 			Submit() {
-				if(this.record[3].value == ''){
+				if (this.record[3].value == '') {
 					uni.showToast({
-						title:'请输入被拜访人姓名',
-						icon:'none'
+						title: '请输入被拜访人姓名',
+						icon: 'none'
 					})
 					return;
 				}
-				if(this.id.length == 0 ){
+				if (this.id.length == 0) {
 					uni.showToast({
-						title:'请选择地址',
-						icon:'none'
+						title: '请选择地址',
+						icon: 'none'
 					})
 					return;
 				}
@@ -352,8 +352,26 @@
 								if (res.data.code != 200) return;
 								let Users = res.data.data
 								this.record[0].value = Users.username
-								this.record[1].value =  Users.tel.slice(0,3) + '****' + Users.tel.slice(7,11)
-								this.record[2].value = Users.id_card_no.slice(0,3) + '**********' + Users.id_card_no.slice(Users.id_card_no.length-4,Users.id_card_no.length)
+								this.record[1].value = Users.tel.slice(0, 3) + '****' + Users.tel.slice(7, 11)
+								if (!Users.id_card_no) {
+									uni.showModal({
+										content: '请完善您的身份信息',
+										success: function(res) {
+											if (res.confirm) {
+												uni.navigateTo({
+													url: '/pages/user/realInformation/realInformation'
+												})
+											} else if (res.cancel) {
+												uni.navigateBack({
+													delta: 1
+												})
+											}
+										}
+									})
+									return;
+								}
+								this.record[2].value = Users.id_card_no.slice(0, 3) + '**********' + Users.id_card_no.slice(Users.id_card_no
+									.length - 4, Users.id_card_no.length)
 							},
 						})
 					},

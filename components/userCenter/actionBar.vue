@@ -43,17 +43,17 @@ data () {
 		   titel:'关于快通',
 		   url:'/pages/user/versionNumber/versionNumber'
 		  },
-		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/Logout.png',
-		   titel:'退出登录',
-		   signout:'signout'
-		  },
+		  // {image:'https://oss.kuaitongkeji.com/static/img/app/user/Logout.png',
+		  //  titel:'退出登录',
+		  //  signout:'signout'
+		  // },
 	  ]
     }
   },
   methods: {
 	  // 点击每一栏事件
    add(item,index){
-	  this.$emit('add',item)
+	  // this.$emit('add',item)
 	  if(!item.url) return;
 	  uni.navigateTo({
 	  	url: item.url

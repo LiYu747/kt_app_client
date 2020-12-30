@@ -3,6 +3,9 @@
 		<image class="img" @click="goback" src="https://oss.kuaitongkeji.com/static/img/app/login/retrue.png" mode=""></image>
 		<view class="photo flex-d al-center ju-center">
 			<image :src="img" class="phimg" mode=""></image>
+			<view class="informTxt">
+				{{inform}}
+			</view>
 			<view @tap="chooseAvatar" class="text">
 				更换照片
 			</view>
@@ -31,7 +34,8 @@
 		data() {
 			return {
 				img: '', //照片
-				isLoding: false //上传照片
+				isLoding: false ,//上传照片
+				inform:''
 			}
 		},
 		methods: {
@@ -69,7 +73,7 @@
 					filePath: path,
 					name: 'file',
 					success: (res) => {
-						this.isLoding = false
+						
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络请求出错',
@@ -92,12 +96,14 @@
 								faceimg: data.data.url
 							},
 							fail: (err) => {
+								this.isLoding = false
 								uni.showToast({
 									title: '网络错误',
 									icon:'none'
 								})
 							},
 							success: (res) => {
+								this.isLoding = false
 								// console.log('updataphoto:',res);
 								if (res.statusCode != 200) {
 									uni.showToast({
@@ -118,6 +124,7 @@
 									title: res.data.msg,
 									duration: 2000,
 								});
+								this.inform = '更新成功'
 								this.img = data.data.url;
 							}
 						})
@@ -191,5 +198,11 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+	}
+	
+	.informTxt{
+		margin-top: 20rpx;
+		font-size: 14px;
+		color: rgb(75,203,139);
 	}
 </style>

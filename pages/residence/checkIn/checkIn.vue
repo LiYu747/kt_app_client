@@ -15,8 +15,11 @@
 					 input-align='right' :disabled="item.disabled">
 					</u-field>
 					<view class="pos-abs righ" v-if="index===record.length-2">
-						<view class="content">
-							<easy-select :options='options' class="easy" ref="easySelect" size="medium" :value="selecValue" @selectOne="selectOne"></easy-select>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
+						<view v-show="iSidentity==true" class="content">
+							<view class="itemBox" @click="selectOne(item)" v-for="item in options" :key='item.id'>
+								{{item.label}}
+							</view>
 						</view>
 					</view>
 					<view v-if="index===record.length-1" class="pos-abs righ">
@@ -66,7 +69,6 @@
 		data() {
 			return {
 				value: [], //地址绑定v-model
-				selecValue: '', //住户类型绑定v-model
 				options: [{
 						value: '1',
 						label: '户主'
@@ -93,13 +95,15 @@
 						disabled: true
 					},
 					{
-						label: '身份证',
+						label: '身份证号',
 						value: '',
 						required: true,
 						disabled: true
 					},
 					{
-						label: '户型',
+						label: '入住身份',
+						value: '',
+						placeholder: '请选择',
 						required: true,
 						disabled: true
 					},
@@ -111,6 +115,7 @@
 						disabled: true
 					},
 				],
+				iSidentity: false, //身份显示与隐藏
 				show: false,
 				//服务端返回的原始数据
 				orgVillageLists: [],
@@ -135,8 +140,9 @@
 			},
 			// 选择住户类型
 			selectOne(options) {
-				this.selecValue = options.label
+				this.record[3].value = options.label
 				this.household = options.value
+				this.iSidentity = true
 			},
 			// 返回
 			goback() {
@@ -146,6 +152,9 @@
 			},
 			// 显示选择小区
 			Onshow(index) {
+				if (index == this.record.length - 2) {
+					this.iSidentity = !this.iSidentity
+				}
 				if (index == this.record.length - 1) {
 					this.show = true
 				}
@@ -189,17 +198,17 @@
 			Submit() {
 				// 获取备注
 				if (this.$refs.encl.isLoding == true) return;
-				if( this.household == ''){
+				if (this.household == '') {
 					uni.showToast({
-						title:'请选择住户类型',
-						icon:'none'
+						title: '请选择住户类型',
+						icon: 'none'
 					})
 					return;
 				}
 				if (this.id.length == 0) {
 					uni.showToast({
-						title:'请选择地址',
-						icon:'none'
+						title: '请选择地址',
+						icon: 'none'
 					})
 					return;
 				}
@@ -219,10 +228,10 @@
 						files: this.files
 					},
 					fail: (err) => {
-						uni.hideLoading() 
+						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
-							icon:'none'
+							icon: 'none'
 						})
 					},
 					success: (res => {
@@ -231,23 +240,23 @@
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络请求出错',
-								icon:'none'
+								icon: 'none'
 							});
 							return;
 						}
 						if (res.data.code != 200) {
 							uni.showToast({
 								title: res.data.msg,
-								icon:'none'
+								icon: 'none'
 							});
-							return; 
+							return;
 						}
 						uni.showToast({
 							title: res.data.msg,
 							duration: 2000
 						});
 						const time = setTimeout(() => {
-							uni.redirectTo({ 
+							uni.redirectTo({
 								url: '/pages/residence/checkRecord/checkRecord'
 							})
 							clearTimeout(time)
@@ -265,11 +274,11 @@
 					fail: (err => {
 						uni.showToast({
 							title: '网络错误',
-							icon:'none'
+							icon: 'none'
 						})
 					}),
 					success: (res) => {
-                          // console.log(res);
+						// console.log(res);
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;
@@ -374,7 +383,7 @@
 							fail: () => {
 								uni.showToast({
 									title: '网络错误',
-									icon:'none'
+									icon: 'none'
 								})
 							},
 							success: (res) => {
@@ -382,8 +391,26 @@
 								if (res.data.code != 200) return;
 								let Users = res.data.data
 								this.record[0].value = Users.username
-								this.record[1].value = Users.tel.slice(0,3) + '****' + Users.tel.slice(7,11)
-								this.record[2].value = Users.id_card_no.slice(0,3) + '**********' + Users.id_card_no.slice(Users.id_card_no.length-4,Users.id_card_no.length)
+								this.record[1].value = Users.tel.slice(0, 3) + '****' + Users.tel.slice(7, 11)
+								if (!Users.id_card_no) {
+									uni.showModal({
+										content: '请完善您的身份信息',
+										success: function(res) {
+											if (res.confirm) {
+												uni.navigateTo({
+													url: '/pages/user/realInformation/realInformation'
+												})
+											} else if (res.cancel) {
+												uni.navigateBack({
+													delta: 1
+												})
+											}
+										}
+									})
+									return;
+								}
+								this.record[2].value = Users.id_card_no.slice(0, 3) + '**********' + Users.id_card_no.slice(Users.id_card_no
+									.length - 4, Users.id_card_no.length)
 							},
 
 						})
@@ -408,10 +435,10 @@
 
 		},
 		filters: {
-    
+
 		},
 		computed: {
-         
+
 		},
 		watch: {
 
@@ -439,12 +466,33 @@
 
 		margin-top: 170rpx;
 		width: 644rpx;
-		height: 491rpx;
+		padding-bottom: 40rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
 		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
 		padding-left: 20rpx;
 		padding-right: 26rpx;
+	}
+
+	.content {
+		position: absolute;
+		right: 0;
+		margin-top: 10rpx;
+		padding: 0 20rpx;
+		width: 120rpx;
+		height: 200rpx;
+		background: #FFFFFF;
+		border-radius: 10rpx;
+		border: 1px solid #EEEEEE;
+		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		z-index: 9;
+	}
+
+	.itemBox {
+		height: 60rpx;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
 	}
 
 	.text {
@@ -455,7 +503,7 @@
 	}
 
 	.item {
-		height: 69rpx;
+		height: 75rpx;
 		font-size: 24rpx;
 		color: #666666;
 		border-bottom: 1rpx solid #BFBFBF;

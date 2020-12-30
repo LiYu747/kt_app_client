@@ -1,6 +1,9 @@
 <template>
 	<view class="flex-d al-center">
-		<subunit :titel="titel"> </subunit>
+		<subunit titel="地址详情" class="fixed"> </subunit>
+		<view class="topLine">
+			
+		</view>
 		<view class="content">
 			<view class="postop">
 				<view class=" fied flex-d  pos-rel ju-center" v-for="(item,index) in parameter" :key='item.id' :class="{'dv':index===parameter.length-1}">
@@ -11,7 +14,42 @@
 				</view>
 			</view>
 		</view>
-
+        
+		<view class="memberBox">
+			<view class="memberTil flex al-center ju-between">
+				成员
+			<image @click="pushMember" src="https://oss.kuaitongkeji.com/static/img/app/forum/pushtag.png" class="pushtagimg" mode=""></image>
+			</view>
+			<view class="">
+				<view class="itemBox flex ju-between al-center" :class="{'itemBtm':index==locdata.length-1}" v-for="(item,index) in locdata" :key='item.id'>
+					<view class="">
+						<view class="flex">
+							姓名
+							<view class="m-l2">
+								{{item.name}}
+							</view>
+						</view>
+						<view class="flex m-t2">
+							手机号码
+							<view class="m-l2">
+								{{item.tel}}
+							</view>
+						</view>
+					</view>
+					<view class="">
+						<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- 提交 -->
+		<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
+			<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
+			<view class="pos-abs subtext">
+				提交
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -30,7 +68,6 @@
 		},
 		data() {
 			return {
-				titel: '地址详情',
 				parameter: [{
 						value: '',
 						label: '姓名',
@@ -43,7 +80,7 @@
 					},
 					{
 						value: '',
-						label: '户型',
+						label: '入住身份',
 						disabled: true
 					},
 					{
@@ -57,14 +94,22 @@
 						disabled: true
 					},
 				],
-				id: ''
+				id: '',
+				locdata:[{
+					name:'张三',
+					tel:'158****5654'
+				},
+				{
+					name:'李四',
+					tel:'154****4526'
+				}]
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
+			// 添加成员
+			pushMember(){
+				uni.navigateTo({
+					url:'/pages/address/addediting/pushMember/pushMember'
 				})
 			},
 			// 用户居住信息
@@ -87,7 +132,7 @@
 							uni.hideLoading()
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						// console.log(res.data.data);
+						console.log(res.data.data);
 						let data = res.data.data
 						if (data.type == 1) {
 							this.parameter[2].value = '户主'
@@ -98,8 +143,8 @@
 						if (data.type == 3) {
 							this.parameter[2].value = '租户'
 						}
-						this.parameter[3].value = data.village_name
-						this.parameter[4].value = data.building_name + data.apartment_name + data.floor_name + data.room_name
+						this.parameter[3].value = data.own_village.name
+						this.parameter[4].value = data.own_building.name + data.own_apartment.name + data.own_floor.name + data.own_room.room_number
 					}
 				})
 			},
@@ -152,29 +197,30 @@
 </script>
 
 <style scoped lang="scss">
-	.reimg {
-		width: 22rpx;
-		height: 41rpx;
-		top: 61rpx;
-		left: 49rpx;
+	.fixed{
+		position: fixed;
+		z-index: 9;
 	}
+	.topLine{
+		height: 148rpx;
+	}
+
 
 	.content {
 		margin-top: 40rpx;
-		width: 690rpx;
+		width: 650rpx;
+		padding: 10rpx 20rpx;
 		border-radius: 10rpx;
-		padding: 10rpx 0;
 		background: #FFFFFF;
 		box-shadow: 2rpx 2rpx 6rpx 1rpx #d9d9d9;
 	}
 
 	.fied {
-		width: 607rpx;
-		height: 81rpx;
-		padding-left: 21rpx;
-		padding-right: 62rpx;
+		width: 100%;
+		height: 80rpx;
 		background: #FFFFFF;
 		font-size: 30rpx;
+		color: #666666;
 
 		/deep/ .u-field {
 			width: 100%;
@@ -183,8 +229,8 @@
 	}
 
 	.line {
-		width: 607rpx;
-		height: 1rpx;
+		width: 100%;
+		height: 1px;
 		background: rgba(191, 191, 191, 0.5);
 		bottom: 0;
 		z-index: 9;
@@ -199,12 +245,59 @@
 		height: 68rpx;
 	}
 
-	.preservation {
-		top: 943rpx;
-	}
 
 	.pretext {
 		font-size: 30rpx;
 		color: #FFFFFF;
+	}
+	
+	.memberBox{
+		margin-top: 40rpx;
+		width: 650rpx;
+		border-radius: 10rpx;
+		padding: 20rpx;
+		background: #FFFFFF;
+		box-shadow: 2rpx 2rpx 6rpx 1rpx #d9d9d9;
+		font-size: 15px;
+			color: #666666;
+		padding-bottom: 30rpx;
+	}
+	.memberTil{
+		height: 80rpx;
+		border-bottom: 1px solid #CCCCCC;
+	}
+	
+	.pushtagimg {
+		width: 40rpx;
+		height: 40rpx;
+	}
+	
+	.itemBox{
+		padding: 20rpx 0;
+		border-bottom: 1px solid #CCCCCC;
+		font-size: 14px;
+	}
+	
+	.reimg {
+		width: 18rpx;
+		height: 28rpx; 
+		margin-right: 10rpx;
+	}
+	
+	.itemBtm{
+		border-bottom: none;
+	}
+	
+	.Submit {
+		width: 358rpx;
+		height: 68rpx;
+	}
+	
+	.subtext {
+		font-size: 30rpx;
+		color: #FFFFFF;
+	}
+	.bot{
+		margin-bottom: 40rpx;
 	}
 </style>

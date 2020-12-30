@@ -7,15 +7,15 @@
 					<image v-else class="zrimg" src="https://oss.kuaitongkeji.com/static/img/app/address/zro.png" mode=""></image>
 				</view>
 				<view class="addres">
-					<view @click="Select(item,index)" class=" name flex al-center pos-rel">
-						{{item.village_name}}
+					<view v-if="item.own_village" @click="Select(item,index)" class=" name flex al-center pos-rel">
+						{{item.own_village.name}}
 						<view class="pos-abs  right">
 							<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
 						</view>
 					</view>
 					<view class="line"></view>
 					<view class="text" @click="look(item)">
-						{{item.village_name + item.building_name + item.apartment_name + item.floor_name + item.room_name}}
+						{{item.address}}
 					</view>
 				</view>
 
@@ -187,6 +187,7 @@
 	}
     
 	.name{
+		height: 48rpx;
 		font-size: 34rpx;
 	}
 	
@@ -226,8 +227,11 @@
 	}
 
 	.text {
-		margin-top: 28rpx;
+		display: flex;
+		align-items: center;
+		height: 80rpx;
 		width: 457rpx;
+		// background: red;
 	}
 
 	.botto {
