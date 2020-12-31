@@ -104,6 +104,17 @@
 		    }
 		    
 		},
+		// 用户详情
+		{
+		    "path" : "pages/address/addediting/memberInfo/memberInfo",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
 		//入住申请
 		{
 			"path": "pages/residence/checkIn/checkIn",
@@ -628,6 +639,17 @@
 
 		}
 	   
+         //用户消息通知
+        ,{
+            "path" : "pages/user/userInform/userInform",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -14,7 +14,7 @@
 						</view>
 					</view>
 					<view class="line"></view>
-					<view class="text" @click="look(item)">
+					<view v-if="item.address" class="text" @click="look(item)">
 						{{item.address}}
 					</view>
 				</view>

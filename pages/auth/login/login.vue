@@ -21,8 +21,15 @@
 						<u-input class="ipt" type="number" :clearable='flag' v-model="form.phone" placeholder="输入手机号" value="" />
 					</view>
 				</u-form-item>
+				<!-- 密码 -->
+				<u-form-item v-show="iSlogin==true" label="" prop="password">
+					<view class="uiput flex al-center pos-rel">
+							<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
+						<u-input class="ipt" type="text" :clearable='flag' v-model="form.password" placeholder="输入密码" value="" />
+					</view>
+				</u-form-item>
 				<!-- 验证码 -->
-				<u-form-item label="" prop="Verification">
+				<u-form-item v-show="iSlogin==false" label="" prop="Verification">
 					<view class="uiput flex al-center pos-rel">
 						<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
 						<u-input class="ipt" type="number" :clearable='flag' v-model="form.Verification" placeholder="输入验证码" />
@@ -36,9 +43,18 @@
 				</u-form-item>
 			</u-form>
 		</view>
+		
+		<view @click="cut" class="">
+			<view v-show="iSlogin==true" class="passlogin flex m-t1">
+				验证码登录
+			</view>
+			<view v-show="iSlogin==false" class="passlogin flex m-t1">
+				密码登录
+			</view>
+		</view>
 
 		<!-- 登录按钮 -->
-		<view class="flex-d al-center">
+		<view class="flex-d al-center m-t4">
 			<view @click="Login" class="btn pos-rel flex ju-center al-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/login/jbs.png" class="jbsimg" mode=""></image>
 				<view class="lgtext pos-abs">
@@ -78,12 +94,14 @@
 		props: {},
 		data() {
 			return {
+				iSlogin:false,
 				flag: false,
 				text: '获取验证码',
 				code: true,
 				timer: 60,
 				form: {
 					phone: '',
+					password:'',
 					Verification: ''
 				},
 				rules: {
@@ -170,6 +188,10 @@
 						},
 					})
 
+			},
+			// 切换登录
+			cut(){
+			this.iSlogin = !this.iSlogin
 			},
 			// 返回按钮
 			goback() {
@@ -416,5 +438,12 @@
 		color: #FF773C;
 		font-size: 12px;
 		margin-top: 57rpx;
+	}
+	
+	.passlogin{
+		font-size: 12px;
+		color: #F07535;
+		margin-right: 100rpx;
+		justify-content: flex-end;
 	}
 </style>

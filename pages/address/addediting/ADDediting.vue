@@ -21,7 +21,10 @@
 			<image @click="pushMember" src="https://oss.kuaitongkeji.com/static/img/app/forum/pushtag.png" class="pushtagimg" mode=""></image>
 			</view>
 			<view class="">
-				<view class="itemBox flex ju-between al-center" :class="{'itemBtm':index==locdata.length-1}" v-for="(item,index) in locdata" :key='item.id'>
+				<view class="itemBox flex ju-between al-center"
+				 @click="memberInfo(item)"
+				  :class="{'itemBtm':index==locdata.length-1}"
+				   v-for="(item,index) in locdata" :key='item.id'>
 					<view class="">
 						<view class="flex">
 							姓名
@@ -112,6 +115,13 @@
 					url:'/pages/address/addediting/pushMember/pushMember'
 				})
 			},
+			// 用户成员详情信息
+			memberInfo(item){
+				console.log(item);
+				uni.navigateTo({
+					url:'/pages/address/addediting/memberInfo/memberInfo'
+				})
+			},
 			// 用户居住信息
 			getData() {
 				uni.showLoading({
@@ -130,8 +140,20 @@
 					},
 					success: (res) => {
 							uni.hideLoading()
-						if (res.statusCode != 200) return
-						if (res.data.code != 200) return
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						}
 						console.log(res.data.data);
 						let data = res.data.data
 						if (data.type == 1) {

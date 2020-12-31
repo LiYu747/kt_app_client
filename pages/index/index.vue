@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
-				<!-- <view class="userSelection pos-abs">
+				<view class="userSelection pos-abs">
 					<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
 					<view v-show="isShowType == true" class="typeBox flex-d al-center">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
@@ -11,11 +11,18 @@
 						<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
 							{{item.name}}
 						</view>
-
 					</view>
-				</view> -->
+				</view>
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
+				
+				<view @click="goInform" class="informBox pos-abs">
+					<view class="munber flex al-center ju-center pos-abs">
+						0
+					</view>
+					<image src="../../image/home/infos.png" class="infosImg" mode=""></image>
+					
+				</view>
 			</view>
 		</view>
 		<!-- 主页 -->
@@ -115,7 +122,12 @@
 			// console.log(val);
 		},
 		methods: {
-
+			// 消息通知
+			goInform(){
+				uni.navigateTo({
+					url:'/pages/user/userInform/userInform'
+				})
+				},
 			//选择用户类型
 			selecType(item) {
 				if (item.type == 'user') return;
@@ -452,5 +464,26 @@
 		width: 100%;
 		height: 40rpx;
 		border-bottom: 1px solid #E6E6E6;
+	}
+	
+	.informBox{
+		right: 50rpx;
+	}
+	
+	.infosImg{
+		width: 34rpx;
+		height: 34rpx;
+	}
+	
+	.munber{
+		width: 30rpx;
+		height: 30rpx;
+		background: red;
+		border-radius: 50%;
+		font-size: 12px;
+		color: #FFFFFF;
+		z-index: 2;
+		margin-top: -12rpx;
+		margin-left: 16rpx;
 	}
 </style>
