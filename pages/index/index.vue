@@ -3,7 +3,8 @@
 		<view class="nav ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<view class="userSelection pos-abs">
-					<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
+					<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon"
+					 mode=""></image>
 					<view v-show="isShowType == true" class="typeBox flex-d al-center">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
 						<view class="typeLine">
@@ -15,13 +16,13 @@
 				</view>
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
-				
+
 				<view @click="goInform" class="informBox pos-abs">
 					<view class="munber flex al-center ju-center pos-abs">
-						0
+						{{informmsg.length}}
 					</view>
 					<image src="../../image/home/infos.png" class="infosImg" mode=""></image>
-					
+
 				</view>
 			</view>
 		</view>
@@ -94,7 +95,7 @@
 				userType: [{
 						name: '用户',
 						type: 'user',
-						url:'/pages/index/index'
+						url: '/pages/index/index'
 					},
 					{
 						name: '物业',
@@ -115,7 +116,8 @@
 				paly: false,
 				videoUrl: '', //视频地址
 				cover: '', //视频封面
-				showPullDownRefreshIcon: false
+				showPullDownRefreshIcon: false,
+				informmsg:[],//用户消息
 			}
 		},
 		onLoad(val) {
@@ -123,11 +125,31 @@
 		},
 		methods: {
 			// 消息通知
-			goInform(){
+			goInform() {
 				uni.navigateTo({
-					url:'/pages/user/userInform/userInform'
+					url: '/pages/user/userInform/userInform'
 				})
-				},
+			},
+			// 获取消息通知
+			getInform() {
+				home.userMessage({
+					data: {},
+					fail: (err) => {
+						this.stopRefreshIcon()
+						uni.showToast({
+							title: '网络出错',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						this.stopRefreshIcon()
+						if (res.statusCode != 200) return
+						if (res.data.code != 200) return
+						let data = res.data.data.data
+						this.informmsg = data
+					}
+				})
+			},
 			//选择用户类型
 			selecType(item) {
 				if (item.type == 'user') return;
@@ -194,9 +216,9 @@
 						})
 					},
 					success: (res) => {
+						this.stopRefreshIcon()
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						this.stopRefreshIcon()
 						this.list = res.data.data.ads
 						// console.log(this.list);
 					},
@@ -216,9 +238,9 @@
 						})
 					},
 					success: (res) => {
+						this.stopRefreshIcon()
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						this.stopRefreshIcon()
 						this.localdata = res.data.data.ads
 						// console.log(this.localdata);
 					},
@@ -237,6 +259,7 @@
 		mounted() {
 			this.Chart()
 			this.operationData()
+			this.getInform()
 		},
 		onShow() {
 			let user = cache.get('jwt')
@@ -253,11 +276,12 @@
 			this.$refs.clas.Calss()
 			this.$refs.infor.Data()
 			this.$refs.peri.getData()
-			if(this.user){
+			if (this.user) {
 				this.$refs.news.getData()
 			}
 			this.operationData()
 			this.Chart()
+			this.getInform()
 		},
 		onHide() {
 			this.isShowType = false
@@ -338,9 +362,9 @@
 		margin-top: 130rpx;
 	}
 
-	.imgjx { 
+	.imgjx {
 		width: 100%;
-	 height: 156rpx;
+		height: 156rpx;
 	}
 
 	.imglb {
@@ -465,17 +489,17 @@
 		height: 40rpx;
 		border-bottom: 1px solid #E6E6E6;
 	}
-	
-	.informBox{
+
+	.informBox {
 		right: 50rpx;
 	}
-	
-	.infosImg{
+
+	.infosImg {
 		width: 34rpx;
 		height: 34rpx;
 	}
-	
-	.munber{
+
+	.munber {
 		width: 30rpx;
 		height: 30rpx;
 		background: red;

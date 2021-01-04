@@ -598,38 +598,8 @@
 		    }
 		    
 		},
-		// 快递、外卖拜访申请
-		{
-			"path": "pages/userMessenger/visitToApply/visitToApply",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-
-		},
-		// 快递、外卖拜访申请记录
-		{
-			"path": "pages/userMessenger/visitToApply/applicationRecord/applicationRecord",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-
-		},
-		// 快递、外卖拜访申请记录详情
-		{
-			"path": "pages/userMessenger/visitToApply/visitDetails/visitDetails",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-
-		}
 		// 快递、外卖通行二维码
-		, {
+		 {
 			"path": "pages/userMessenger/goQrCode/goQrCode",
 			"style": {
 				"navigationBarTitleText": "",

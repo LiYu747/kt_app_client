@@ -5,7 +5,7 @@
 			<view class="title flex al-center ju-center pos-rel">
 				<view @click="goInform" class="informBox pos-abs">
 					<view class="munber flex al-center ju-center pos-abs">
-						0
+						{{informmsg.length}}
 					</view>
 					<image src="../../../image/home/infos.png" class="infosImg" mode=""></image>
 
@@ -41,7 +41,8 @@
 	import actionBar from '../../../components/userCenter/actionBar.vue';
 	import userDetails from '../../../vendor/user/userDetails.js';
 	import jwt from '../../../vendor/auth/jwt.js';
-	import cache from "../../../vendor/cache/cache.js"
+	import cache from "../../../vendor/cache/cache.js";
+	import home from '../../../vendor/home/home.js'
 	export default {
 		name: "",
 		components: {
@@ -53,6 +54,7 @@
 				user: null, //用户资料
 				text: '未登录',
 				flag: false,
+				informmsg:[]
 			}
 		},
 		methods: {
@@ -73,6 +75,26 @@
 			userinfo() {
 				uni.navigateTo({
 					url: '/pages/user/personal/personal'
+				})
+			},
+			
+			// 获取消息通知
+			getInform() {
+				home.userMessage({
+					data: {},
+					fail: (err) => {
+						uni.showToast({
+							title: '网络出错',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						if (res.statusCode != 200) return
+						if (res.data.code != 200) return
+						let data = res.data.data.data
+						this.informmsg = data
+						// console.log(data);
+					}
 				})
 			},
 			// 获取用户资料
@@ -114,7 +136,7 @@
 		onShow() {
 			this.getUser()
 			this.loadUserData();
-
+            this.getInform()
 		},
 		filters: {
 

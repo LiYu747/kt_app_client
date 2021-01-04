@@ -7,6 +7,12 @@ class Home {
 		req.get(params);
 	}
 	
+	// 消息通知
+	userMessage (params) {
+		params.url = routes.home.adPos.userMessage;
+		req.get(params);
+	}
+	
 	// 周边消息
 	news (params) {
 		params.url = routes.home.news.peripheralNews
@@ -169,9 +175,21 @@ class Home {
 		req.get(params)
 	}
 	
+	//申请成为
+	applyToBecome (params) {
+		params.url = routes.propertyManagement.applicationProgress
+		req.post(params)
+	}
+	
 	 //查看自己的信息
 	 lookMymsg (params) {
 	 	params.url = routes.propertyManagement.lookMymsg
+	 	req.get(params)
+	 }
+	 
+	 // 通行二维码
+	 passQr (params) {
+	 	params.url = routes.propertyManagement.passQr
 	 	req.get(params)
 	 }
 }

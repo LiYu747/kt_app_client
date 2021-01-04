@@ -23,19 +23,19 @@
 			<view class="">
 				<view class="itemBox flex ju-between al-center"
 				 @click="memberInfo(item)"
-				  :class="{'itemBtm':index==locdata.length-1}"
-				   v-for="(item,index) in locdata" :key='item.id'>
+				  :class="{'itemBtm':index==Members.length-1}"
+				   v-for="(item,index) in Members" :key='item.id'>
 					<view class="">
 						<view class="flex">
 							姓名
-							<view class="m-l2">
-								{{item.name}}
+							<view v-if='item.own_user' class="m-l2">
+								{{item.own_user.username}}
 							</view>
 						</view>
 						<view class="flex m-t2">
 							手机号码
-							<view class="m-l2">
-								{{item.tel}}
+							<view v-if='item.own_user' class="m-l2">
+								{{item.own_user.tel}}
 							</view>
 						</view>
 					</view>
@@ -98,21 +98,15 @@
 					},
 				],
 				id: '',
-				locdata:[{
-					name:'张三',
-					tel:'158****5654'
-				},
-				{
-					name:'李四',
-					tel:'154****4526'
-				}]
+				Members:[],//所有成员 
+				typeid:''//用户类型
 			}
 		},
 		methods: {
 			// 添加成员
 			pushMember(){
 				uni.navigateTo({
-					url:'/pages/address/addediting/pushMember/pushMember'
+					url:'/pages/address/addediting/pushMember/pushMember?addressid=' + this.id + '&typeid=' + this.typeid
 				})
 			},
 			// 用户成员详情信息
@@ -122,6 +116,9 @@
 					url:'/pages/address/addediting/memberInfo/memberInfo'
 				})
 			},
+			
+			
+			
 			// 用户居住信息
 			getData() {
 				uni.showLoading({
@@ -131,7 +128,7 @@
 					data: {
 						id: this.id
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
@@ -154,8 +151,9 @@
 							})
 							return;
 						}
-						console.log(res.data.data);
+						// console.log(res.data.data);
 						let data = res.data.data
+						this.typeid = data.type
 						if (data.type == 1) {
 							this.parameter[2].value = '户主'
 						}
@@ -171,7 +169,45 @@
 				})
 			},
 
-
+             //查看住所内的所有成员
+			  allMembers(){
+				  uni.showLoading({
+				  	titel:'加载中'
+				  })
+				 address.lookMember({
+					 data:{
+						 id:this.id
+					 },
+					 fail: () => {
+					 	uni.hideLoading()
+					 	uni.showToast({
+					 		title: '网络错误',
+					 		icon: 'none'
+					 	})
+					 },
+					 success: (res) => {
+						 uni.hideLoading()
+						 if (res.statusCode != 200) {
+						 	uni.showToast({
+						 		title: '网络出错了',
+						 		icon: 'none'
+						 	})
+						 	return;
+						 }
+						 if (res.data.code != 200) {
+						 	uni.showToast({
+						 		title: res.data.msg,
+						 		icon: 'none'
+						 	})
+						 	return;
+						 }
+						 let data = res.data.data
+						 this.Members = data
+						 console.log(data);
+					 }
+				 }) 
+			  },
+			  
 			// 获取用户资料
 			Userdata() {
 				user.userDeta({
@@ -198,6 +234,7 @@
 		onShow() {
 			this.Userdata()
 			this.getData()
+			this.allMembers()
 		},
 		onLoad(val) {
 			this.id = val.id

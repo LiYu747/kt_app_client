@@ -1,41 +1,45 @@
 <template>
 	<view>
-		<subunit></subunit>
-		<view class="searchBox">
-			<view class="itemBox flex al-center" v-for="item in locdata" :key='item.id'>
-				<view class="flex al-center">
-					<view class="c-red">
-						*
+		<view class="fidex">
+			<subunit titel='添加用户'></subunit>
+			<view class="searchBox">
+				<view class="itemBox flex al-center" v-for="item in locdata" :key='item.id'>
+					<view class="flex al-center">
+						<view class="c-red">
+							*
+						</view>
+						<view class="">
+							{{item.label}}
+						</view>
 					</view>
-					<view class="">
-						{{item.label}}
+					<view class="m-l2">
+						<input class="ipt" :type="item.type" :placeholder="item.placeholder" v-model="item.value" />
 					</view>
 				</view>
-				<view class="m-l2">
-					<input class="ipt" :type="item.type" :placeholder="item.placeholder" v-model="item.value" />
+				<view class="flex ju-center">
+					<view @click="search" class="searchBtn flex al-center ju-center m-t2">
+						搜索
+					</view>
 				</view>
 			</view>
-			<view class="flex ju-center">
-				<view @click="search" class="searchBtn flex al-center ju-center m-t2">
-					搜索
-				</view>
+			<view class="resultTil al-center flex ju-center">
+				搜索结果
 			</view>
 		</view>
 
-		<view class="resultBox flex-d al-center">
-			<view class="resultTil">
-				搜索结果
-			</view>
+		<view class="topLine">
 
-			<view v-if="result.length>0" @click="iSshow = true" class="listsBox m-t3">
-				<view class=" flex-d  ju-center" v-for=" (item,index) in result" 
-				 :key='item.id'>
+		</view>
+
+		<view class="resultBox flex-d al-center">
+			<view v-if="result.username" @click="iSshow = true" class="listsBox">
+				<view class=" flex-d  ju-center">
 					<view class=" resultItem flex al-center">
 						<view class="">
 							姓名
 						</view>
 						<view class="m-l2">
-							{{item.name}}
+							{{result.username}}
 						</view>
 					</view>
 					<view class="resultItem flex al-center">
@@ -43,26 +47,23 @@
 							手机号码
 						</view>
 						<view class="m-l2">
-							{{item.tel}}
+							{{result.tel}}
 						</view>
 					</view>
-					<view class="resultItem flex al-center" :class="{'noBtm':index==result.length-1}">
+					<view class="resultItem flex al-center nobtm">
 						<view class="">
 							身份证号
 						</view>
 						<view class="m-l2">
-							{{item.idcord}}
+							{{result.id_card_no}}
 						</view>
 					</view>
 				</view>
 			</view>
-			
-			<view v-if="result.length==0&&flag==true" class="nofind">
-				没有您要找的用户,请核对信息
-			</view>
+
 		</view>
 
-		<view v-if="iSshow==true" class="showBox pos-abs flex al-center ju-center">
+		<view v-if="result.username" class="showBox m-t3  flex al-center ju-center">
 			<view class="showCentent">
 				<view @click="addYse" class="flex al-center m-t1">
 					<image v-show="isYse==true" class="zrimg" src="https://oss.kuaitongkeji.com/static/img/app/address/yes.png" mode=""></image>
@@ -81,22 +82,30 @@
 					</view>
 				</view>
 				<u-picker @confirm="ok" mode="time" v-model="show" :params="params"></u-picker>
+				<view @click="showType = !showType" class="flex m-t3 al-center">
+					<image src="../../../../image/address/blckpd.png" class="blckpdImg" mode=""></image>
+					<view class="m-l2">
+						选择用户类型
+					</view>
+					<view class="m-l2">
+						{{typeTet}}
+					</view>
+				</view>
+				<view v-show="showType == true" class="typeBox pos-abs flex-d al-center">
+					<view class="itemType" @click="selType(item)" v-for="item in types" :key='item.id'>
+						{{item.label}}
+					</view>
+				</view>
 				<view class="m-t3 flex">
 					<view class="remarkTxt">
 						备注
 					</view>
 					<view class="">
-						<textarea class="reArea" v-model="reValue" placeholder="" />
+						<textarea class="reArea" v-model="reValue" maxlength="10" placeholder="" />
 						</view>
 				</view>
 				
 				<view  class="flex al-center ju-around m-t2">
-					<view @click="iSshow = false" class="btnr flex al-center ju-center">
-						<image src="https://oss.kuaitongkeji.com/static/img/app/qrcode/2.png" class="btnimg" mode=""></image>
-						<view class=" pos-abs">
-							取消
-						</view>
-					</view>
 					<view @click="affirm" class="btnr flex al-center ju-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/qrcode/2.png" class="btnimg" mode=""></image>
 						<view class=" pos-abs">
@@ -106,11 +115,13 @@
 				</view>
 			 </view>
 		</view>
+		
 	</view>
 </template>
 
 <script>
 	import subunit from '../../../../components/sub-unit/subunit.vue'
+	import address from '../../../../vendor/address/address.js'
 	export default {
 		name: "",
 		components: {
@@ -122,17 +133,21 @@
 				show:false,//选择时间
 				iSshow:false,//选择表单
 				isYse:false,//选择打勾
+				types:[
+					{id:3,label:'租户'},
+					{id:2,label:'家庭成员'}
+				],//用户类型
+				showType:false,//是否显示用户类型
+				typeTet:'', //选择的类型
+				typeId:'',//选择类型的id
 				time:'',//有效时间
 				reValue:'',//备注
-				flag:false,//判断是否搜索
 				params: {
 					year: true,
 					month: true,
 					day: true,
-					hour: true,
-					minute: true,
-					second: true
 				},
+				addressid:'',//用户地址id
 				locdata: [{
 						label: '姓名',
 						value: '',
@@ -147,17 +162,88 @@
 
 					}
 				],
-				result: [{name:'张三',tel:'176****0164',idcord:'513***********4519'}
-				]
+				result: {}
 			}
 		},
 		methods: {
 			// 表单确定选择
 			affirm(){
-				this.iSshow = false
-				console.log(this.isYse);
-				console.log(this.time);
-				console.log(this.reValue);
+				if(!this.typeId){
+				 uni.showToast({
+				 	title:'选择用户类型',
+					icon:"none"
+				 })
+				 return;
+				}
+				uni.showLoading({
+					title:'加载中'
+				})
+				let timenum = 0
+				if(this.time){
+					 timenum = 1
+				}
+				let allow = 0
+				if(this.isYse==true){
+					allow = 1
+				}
+				if(this.isYse==false){
+					allow = 0
+				}
+			    uni.showModal({
+			      content:'您确定添加该用户吗',
+			      success:(res) => {
+					  if(res.cancel){
+						 uni.hideLoading()  
+					  }
+			    	if(res.confirm){
+			    	address.pushMember({
+			    		data:{
+			    			id:this.addressid,
+			    			member_id:this.result.id,
+			    			allow_edit_member:allow,
+			    			type:this.typeId,
+			    			valid_type:timenum,
+			    			valid_end:this.time,
+			    			host_remark:this.reValue
+			    		},
+			    		fail: () => {
+			    			uni.hideLoading()
+			    			uni.showToast({
+			    				title: '网络错误',
+			    				icon: 'none',
+			    				duration:4000
+			    			})
+			    		},
+			    		success: (res) => {
+			    			uni.hideLoading()
+			    			console.log(res);
+			    			if (res.statusCode != 200) {
+			    				uni.showToast({
+			    					title: '网络出错了',
+			    					icon: 'none',
+			    					duration:4000
+			    				})
+			    				return;
+			    			}
+			    			if (res.data.code != 200) {
+			    				uni.showToast({
+			    					title: res.data.msg,
+			    					icon: 'none',
+			    					duration:4000
+			    				})
+			    				return;
+			    			}
+			    			uni.showToast({
+			    				title:res.data.msg
+			    			})
+			    			 this.iSshow = false
+			    		}
+			    	})
+			    	}
+			    	
+			      }
+			    })
+				
 			},
 			// 点击打钩选择
 			addYse(){
@@ -168,6 +254,13 @@
 				// console.log(val);
 				this.time = val.year + '-' + val.month + '-' + val.day
 				},
+			//选择用户类型	
+			selType(item){
+				this.showType = false
+				this.typeTet = item.label
+				this.typeId = item.id
+				// console.log(item);
+			},
 			//搜索
 			search() {
 				if (this.locdata[0].value == '') {
@@ -184,14 +277,57 @@
 					})
 					return;
 				}
-				this.flag = true
+				uni.showLoading({
+					title:'加载中'
+				})
+				address.findUser({
+					data:{
+						username:this.locdata[0].value,
+						tel:this.locdata[1].value
+					},
+					fail: () => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+						},
+					success: (res) => {
+						uni.hideLoading()
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none',
+								duration:4000
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none',
+								duration:4000
+							})
+							return;
+						}
+						let data = res.data.data
+						this.result = data
+                        console.log(data);
+					}	
+				})
+				
 			}
 		},
 		mounted() {
 
 		},
-		onLoad() {
-
+		onLoad(option) {
+			this.addressid =  option.addressid
+			if(option.typeid==3){
+				this.types =[
+					{id:3,label:'租户'},
+				]
+			}
 		},
 		filters: {
 
@@ -209,6 +345,16 @@
 </script>
 
 <style scoped lang="scss">
+	.fidex{
+		width: 100%;
+		position: fixed;
+		z-index: 9;
+	}
+	
+	.topLine{
+		height: 480rpx;
+	}
+	
 	.searchBox {
 		width: 94%;
 		padding: 0 3%;
@@ -241,11 +387,13 @@
 	}
 
 	.resultBox {
-		margin-top: 30rpx;
 		color: #666666;
 	}
 
 	.resultTil {
+		width: 100%;
+		height: 60rpx;
+		background: rgb(247,247,247);
 		font-size: 12px;
 	}
 	
@@ -267,16 +415,10 @@
 		border-bottom: none;
 	}
 	
-	.showBox{
-		top: 0;
-		width: 100%;
-		height: 100vh;
-		background: rgba(0,0,0,0.3);
-	}
 	
 	.showCentent{
 		width: 500rpx;
-		height: 350rpx;
+		height: 380rpx;
 		border-radius: 20rpx;
 		padding: 30rpx;
 		background: #FFFFFF;
@@ -301,11 +443,13 @@
 	.reArea{
 		margin-left: 20rpx;
 		width: 350rpx;
-		height: 80rpx;
+		height: 40rpx;
+		// background: red;
 		font-size: 15px;
 	}	
 	
 	.btnr {
+		margin-top: 20rpx;
 		color: #FFFFFF;
 		font-size: 28rpx;
 	}
@@ -318,5 +462,23 @@
 	.nofind{
 		margin-top: 50rpx;
 		font-size: 14px;
+	}
+	
+	.nobtm{
+		border-bottom: none;
+	}
+	
+	.typeBox{
+		margin-top: 10rpx;
+		width: 170rpx;
+		background: #FFFFFF;
+		z-index: 9;
+		border-radius: 10rpx;
+		border: 1px solid #EEEEEE;
+		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		padding-bottom: 20rpx;
+	}
+	.itemType{
+		margin-top: 30rpx;
 	}
 </style>

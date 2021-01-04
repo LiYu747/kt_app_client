@@ -37,7 +37,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view v-if="lists.length==0 && isLoding == false" class="nono flex al-center ju-center">
+		<view  v-if="lists.length==0 && isLoding == false" class="nono flex al-center ju-center">
 			您还没有申请记录哦~
 		</view>
 
@@ -58,6 +58,7 @@
 	import cache from '../../../vendor/cache/cache.js'
 	import user from '../../../vendor/user/userDetails.js'
 	import jwt from '../../../vendor/auth/jwt.js'
+	import urlUtil from '../../../vendor/common/url.js';
 	export default {
 		name: "",
 		components: {
@@ -78,11 +79,13 @@
 		methods: {
 			// 去详情
 			godetails(item) {
-				let id = item.id
-				// console.log(id);
-				uni.navigateTo({
-					url: `/pages/residence/checkdetails/checkdetails?id=${id}`
+				urlUtil.to({
+					pageAlias: 'move_in_apply_detail',
+					options: 'id=' + item.id,
 				})
+				// uni.navigateTo({
+				// 	url: `/pages/residence/checkdetails/checkdetails?id=${id}`
+				// })
 			},
 			// 返回
 			goback() {

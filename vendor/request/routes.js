@@ -58,24 +58,31 @@ module.exports = {
 	},
 
 	home: {
+			
 		// 轮播图
 		adPos: {
-			rotationChart: apiPath + 'ad/adPos/show'
+			// 轮播图
+			rotationChart: apiPath + 'ad/adPos/show',
+			
+			// 消息通知
+			userMessage : apiPath + 'user/msg'
 		},
 
 		// 社区资讯
 		infortion: {
+			// 社区资讯
 			infor: apiPath + 'village/news',
 			// 资讯详情
 			infordils: apiPath + 'village/news/show',
 			// 小区新闻
 			CommunityNews: apiPath + 'community/news',
 			// 小区新闻详情
-			NewsDils: apiPath + 'community/news/show'
+			NewsDils: apiPath + 'community/news/show',	
 		},
 
 		// 周边
 		news: {
+			// 周边
 			peripheralNews: apiPath + 'article/news',
 			// 周边详情
 			surroundingDetails: apiPath + 'article/news/show'
@@ -177,8 +184,19 @@ module.exports = {
 		alladd: {
 			// 用户的所有住址
 			list: apiPath + 'user/house',
+			
 			// 某一个住址的详细信息
-			listdetails: apiPath + 'user/house/show'
+			listdetails: apiPath + 'user/house/show',
+			
+			//查看住所内的所有成员
+			lookMember  : apiPath + 'user/house/members',
+			
+			// 查找用户是否存在
+			findUser : apiPath + 'user/user/check',
+			
+			//添加住所成员
+			pushMember : apiPath + 'user/house/addMember'
+			
 		},
 		//预约电梯
 		bookingElevator: {
@@ -219,10 +237,13 @@ module.exports = {
 		 // 小区内的住户
 		 allResident : host + 'village_staff/user/user',
 		 
-		 //查看申请记录的进度
+		 //查看申请记录的进度(GET)&&//申请成为(POST)
 		 applicationProgress : apiPath + 'courier/apply',
 		 
 		 //查看自己的信息
-		 lookMymsg : apiPath + 'courier/info'
+		 lookMymsg : apiPath + 'courier/info',
+		 
+		 // 通行二维码
+		 passQr : apiPath + 'courier/info/passQr'
 	}
 }

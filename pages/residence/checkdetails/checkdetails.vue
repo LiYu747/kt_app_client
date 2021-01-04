@@ -138,8 +138,6 @@
 		},
 		onLoad(val) {
 			this.id = val.id
-
-
 		},
 		filters: {
 

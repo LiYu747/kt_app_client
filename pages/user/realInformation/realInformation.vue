@@ -69,6 +69,9 @@
 						if (res.confirm) {
 							jwt.flush({
 								success: () => {
+									uni.navigateBack({
+										delta:1
+									})
 								}
 							});
 						}

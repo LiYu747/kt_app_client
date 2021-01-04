@@ -18,5 +18,23 @@ class Address {
 		params.url = routes.address.bookingElevator.booking
 		req.get(params)
 	}
+	
+	//查看住所内的所有成员
+	lookMember ( params) {
+			 params.url = routes.address.alladd.lookMember
+			 req.get(params)
+	}
+	
+	// 查找用户是否存在
+	findUser ( params) {
+			 params.url = routes.address.alladd.findUser
+			 req.get(params)
+	}
+	
+	//添加住所成员
+	pushMember ( params) {
+			 params.url = routes.address.alladd.pushMember
+			 req.post(params)
+	}
 }
 module.exports = new Address

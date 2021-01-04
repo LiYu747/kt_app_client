@@ -114,20 +114,52 @@
 			},
 			// 获取二维码
 			data() {
-				home.obtaincode({
+				uni.showLoading({
+					title:'加载中'
+				})
+				home.passQr({
 					data: {},
 					fail: (err) => {
+						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
+							uni.hideLoading()
 						// console.log(res.data.data.content);
-						if (res.statusCode != 200) return;
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title:'网络出错了',
+								icon:'none'
+							})
+							return;
+						}
 
-						if (res.data.code != 200) return;
-						this.val = res.data.data.content
+						if (res.data.code == 403) {
+							uni.showModal({
+								content: res.data.msg ,
+								success: (res) => {
+									uni.navigateBack({
+										delta: 1
+									})
+								}
+							})
+							return;
+						}
+						if(res.data.code == 200){
+							this.val = res.data.data.content
+						}
+						else{
+							uni.showToast({
+								title:res.data.msg,
+								icon:'none'
+							})
+							return;
+						}
+						// console.log(res);
+						
 					}
 				})
 			}

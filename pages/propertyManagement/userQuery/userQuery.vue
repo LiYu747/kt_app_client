@@ -174,7 +174,7 @@
 							this.page = data.current_page + 1;
 							this.hasMore = data.next_page_url ? true : false;
 							this.lists = this.lists.concat(data.data)
-							console.log(data.data);
+							// console.log(data.data);
 						}
 						else{
 							uni.showToast({

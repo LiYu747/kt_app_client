@@ -137,7 +137,7 @@
 							return;
 						}
 						let data = res.data.data
-						console.log(data);
+						// console.log(data);
 						this.state = data.verify_status_text
 						this.stateCode = data.verify_status
 						this.remark = data.user_remark

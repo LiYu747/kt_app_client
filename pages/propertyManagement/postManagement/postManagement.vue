@@ -150,7 +150,7 @@
 						}
 						if (res.data.code == 200) {
 							let data = res.data.data
-							console.log(data.data);
+							// console.log(data.data);
 							this.page = data.current_page + 1;
 							this.hasMore = data.next_page_url ? true : false;
 							data.data.map(item => {

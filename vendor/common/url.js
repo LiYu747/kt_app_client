@@ -9,11 +9,20 @@ class url {
 		// 填写入住小区申请的页面
 		apply_move_in_form : '/pages/residence/checkIn/checkIn',
 		
+		// 入住申请详情页
+		move_in_apply_detail: '/pages/residence/checkdetails/checkdetails',
+		
 		// 拜访其他人的记录列表页
 		visit_friends_log_lists : '/pages/visitapplication/newDetalis/newDetalis',
 		
+		//拜访其他人的记录详情页
+		visit_friends_log_detail : '/pages/visitapplication/goDetails/goDetails',
+		
 		// 来拜访自己的记录列表页
 		friends_visit_self_log_lists : '/pages/operation/visitRecord/visitRecord' ,
+		
+		// 来拜访自己的申请记录详情页
+		friends_visit_self_detail : '/pages/operation/details/details',
 		
 		// 用户的回家二维码页面
 		back_home_qr : '/pages/qrcode/qrCode/qrCode',

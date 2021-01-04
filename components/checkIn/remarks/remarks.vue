@@ -34,8 +34,8 @@
 		mounted() {
 
 		},
-		onLoad() {
-
+		onLoad(val) {
+  
 		},
 		filters: {
 

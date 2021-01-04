@@ -90,7 +90,7 @@
 							return;
 						}
 						if (res.data.code == 200) {
-							console.log(res.data.data);
+							// console.log(res.data.data);
 							let data = res.data.data
 							this.locdata[0].value = data.info.platform
 							this.locdata[1].value = data.info.code

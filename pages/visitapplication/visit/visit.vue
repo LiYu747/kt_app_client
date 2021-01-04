@@ -1,6 +1,6 @@
 <template>
 	<view class="flex-d al-center">
-		<subunit @goback='goback' class="posp fiexd" :retur=true titel="拜访申请"></subunit>
+		<subunit class="posp fiexd" titel="拜访申请"></subunit>
 		<view @click="gorecord" class="pos-abs fiexd location">
 			申请记录
 		</view>
@@ -15,20 +15,54 @@
 					 input-align='right' :disabled="item.disabled" label-width="170">
 					</u-field>
 					<view v-if="index===record.length-1" class="pos-abs righ">
-						<image @click="Onshow(index)" src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
 					</view>
 				</view>
 			</view>
 			<u-select v-model="show" mode="mutil-column-auto" :default-value='value' :list="renderVillageLists" @confirm="confirm"></u-select>
 		</view>
+		<!-- 上传文件 -->
+		<view class="uploadFiles">
+			<view class="uploadTil flex al-center">
+				上传图片
+				<view v-if="text" class="fz-12 m-l1 c-red">
+					(*您可以上传外卖或者快递的图片给用户)
+				</view>
+			</view>
+			<view class="filesBox flex">
+				<view class="" v-for="item in images" :key='item.id'>
+					<image :src="item" class="itemImg" mode=""></image>
+				</view>
+				<view @click="succ" class="puls flex-d al-center ju-center">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>
+					添加
+				</view>
+			</view>
+		</view>
 
 		<!-- 备注 -->
-		<remarks ref='marks' class="top" titel='申请备注'></remarks>
+		<view class="pos-rel reMessage">
+			<view class="textTil flex al-center">
+				申请备注
+			</view>
+			<view class="">
+				<textarea class="tar" maxlength="1000" v-model="text"></textarea>
+			</view>
+		</view>
 		<!-- 提交 -->
 		<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
 			<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
 			<view class="pos-abs subtext">
 				提交
+			</view>
+		</view>
+
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				上传中
 			</view>
 		</view>
 	</view>
@@ -44,6 +78,7 @@
 	import cache from '../../../vendor/cache/cache.js'
 	import user from '../../../vendor/user/userDetails.js'
 	import jwt from '../../../vendor/auth/jwt.js'
+	import route from '../../../vendor/request/routes.js'
 	export default {
 		name: "",
 		components: {
@@ -95,23 +130,20 @@
 				// 选择小区id
 				id: [],
 				show: false,
-				value: [],
-
+				value: [], //小区列表默认选择的对象
+				images: [], //要上传的文件
+				text:'' ,//默认备注
+				isLoding: false
 			}
 		},
 		methods: {
-			// 显示选择小区
-			Onshow(index) {
-				if (index == this.record.length - 1) {
-					this.show = true
-				}
-			},
+			// 显示选择小区列表
 			itemlabel(index) {
 				if (index == this.record.length - 1) {
 					this.show = true
 				}
 			},
-			// 选择
+			// 选择小区
 			confirm(val) {
 				// console.log(val);
 				// 获取的id
@@ -141,12 +173,66 @@
 				})
 				// console.log(index);
 			},
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
+
+			// 上传文件
+			succ() {
+				uni.chooseImage({
+					extension: ['jpg', 'jpeg', 'png', 'gif'],
+					success: (chooseImageRes) => {
+						const files = chooseImageRes.tempFilePaths;
+						this.isLoding = true;
+						let that = this;
+
+						if (files.length == 0) return;
+
+						let func = [];
+						files.forEach((item) => {
+							func.push(that.upload(item));
+						});
+
+						Promise.all(func).then((res) => {
+							that.isLoding = false;
+						}).catch((err) => {
+							that.isLoding = false;
+							uni.showModal({
+								title: "上传文件出错:" + err,
+							})
+						})
+					}
 				})
 			},
+			upload(fileItem) {
+				let that = this;
+				return new Promise((res, rej) => {
+					uni.uploadFile({
+						url: route.services.file.upload,
+						filePath: fileItem,
+						name: 'file',
+						fail: (err) => {
+							// that.isLoding = false;
+							rej('网络出错');
+						},
+						success: (val) => {
+							// that.isLoding = false;
+							if (val.statusCode != 200) {
+								rej(val.statusCode);
+								return;
+							}
+
+							let jres = JSON.parse(val.data);
+
+							if (jres.code != 200) {
+								rej(jres.msg);
+								return;
+							}
+							// console.log(jres.data.url);
+							that.images.push(jres.data.url)
+							res(jres);
+						}
+					})
+				})
+			},
+
 			// 提交
 			Submit() {
 				if (this.record[3].value == '') {
@@ -163,10 +249,10 @@
 					})
 					return;
 				}
+				if(this.isLoding == true) return;
 				uni.showLoading({
 					title: '提交中...'
 				})
-				let remarks = this.$refs.marks.value
 				home.VisitApplication({
 					data: {
 						hostName: this.record[3].value,
@@ -175,7 +261,7 @@
 						apartmentId: this.id[2],
 						floorId: this.id[3],
 						roomId: this.id[4],
-						visitorRemark: remarks
+						visitorRemark: this.text
 					},
 					fail: (err) => {
 						uni.hideLoading()
@@ -206,7 +292,8 @@
 							title: res.data.msg,
 							duration: 2000
 						});
-						this.$refs.marks.value = ''
+						this.images = []
+						this.text = ''
 						this.record[3].value = ''
 						this.record[4].value = ''
 						// console.log(res);
@@ -324,7 +411,7 @@
 
 
 				this.renderVillageLists = tmp;
-				console.log(tmp);
+				// console.log(tmp);
 			},
 
 			// 获取用户资料
@@ -389,9 +476,11 @@
 		},
 		onShow() {
 			this.loadUserData()
-		},
-		onLoad() {
 
+		},
+		onLoad(option) {
+		   if(!option.text)  return;
+          this.text = option.text
 		},
 		filters: {
 
@@ -475,7 +564,37 @@
 	}
 
 	.top {
-		margin-top: 60rpx;
+		margin-top: 20rpx;
+	}
+	
+	.reMessage {
+		margin-top: 22rpx;
+		width: 644rpx;
+		padding-bottom: 20rpx;
+		background: #FFFFFF;
+		border-radius: 10rpx;
+		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+		padding-left: 20rpx;
+		padding-right: 26rpx;
+	}
+	
+	.textTil {
+		height: 69rpx;
+		font-size: 30rpx;
+		color: #666666;
+		border-bottom: 1rpx solid #BFBFBF;
+	}
+	
+	.tar {
+		margin-top: 20rpx;
+		padding: 10rpx;
+		padding-bottom: 0;
+		width: 623rpx;
+		height: 130rpx;
+		resize: none;
+		overflow: auto;
+		font-size: 24rpx;
+		color: #666666;
 	}
 
 	.location {
@@ -505,5 +624,69 @@
 
 	/deep/ .uni-picker-view-indicator {
 		height: 88rpx !important;
+	}
+
+	.uploadFiles {
+		margin-top: 40rpx;
+		width: 650rpx;
+		padding: 0 20rpx;
+		background: #FFFFFF;
+		border-radius: 10rpx;
+		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+		color: #666666;
+	}
+
+	.uploadTil {
+		height: 68rpx;
+		font-size: 15px;
+		border-bottom: 2rpx solid #CCCCCC;
+	}
+
+	.filesBox {
+		margin-top: 20rpx;
+		width: 100%;
+		flex-wrap: wrap;
+		margin-bottom: 30rpx;
+	}
+
+	.puls {
+		width: 140rpx;
+		height: 140rpx;
+		background: rgb(244, 245, 246);
+		border-radius: 10rpx;
+		font-size: 26rpx;
+		color: #8a8a8a;
+		margin-bottom: 15rpx;
+	}
+
+	.pushimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+
+	.itemImg {
+		width: 140rpx;
+		height: 140rpx;
+		margin-right: 20rpx;
+		margin-bottom: 10rpx;
+	}
+
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

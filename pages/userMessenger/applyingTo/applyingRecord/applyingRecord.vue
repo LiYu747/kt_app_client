@@ -1,9 +1,9 @@
 <template>
 	<view>
 		<subunit class="fixed" titel='申请进度'></subunit>
-		<view @click="gomyMsg" class="myMsg">
+		<!-- <view @click="gomyMsg" class="myMsg">
 			我的信息
-		</view>
+		</view> -->
 		<view class="topLine"></view>
 		<view class="contentBox">
 			<view class="state flex al-center">
@@ -117,7 +117,7 @@
 							this.locdata[0].value = data.platform
 							this.locdata[1].value = data.code
 							this.locdata[2].value = data.created_at.slice(0,16)
-								console.log(data);
+								// console.log(data);
 						} else {
 							uni.showToast({
 								title: res.data.msg,

@@ -114,19 +114,36 @@
 			},
 			// 获取二维码
 			data() {
+				uni.showLoading({
+					title: '加载中'
+				})
 				home.obtaincode({
 					data: {},
 					fail: (err) => {
+						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
+						uni.hideLoading()
 						// console.log(res.data.data.content);
-						if (res.statusCode != 200) return;
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+						}
 
-						if (res.data.code != 200) return;
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return
+						}
 						this.val = res.data.data.content
 					}
 				})
@@ -136,7 +153,7 @@
 			this.loadUserData()
 		},
 		mounted() {
-			
+
 		},
 		onLoad() {
 
