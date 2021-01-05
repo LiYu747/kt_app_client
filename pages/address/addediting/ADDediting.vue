@@ -2,29 +2,28 @@
 	<view class="flex-d al-center">
 		<subunit titel="地址详情" class="fixed"> </subunit>
 		<view class="topLine">
-			
+
 		</view>
 		<view class="content">
 			<view class="postop">
 				<view class=" fied flex-d  pos-rel ju-center" v-for="(item,index) in parameter" :key='item.id' :class="{'dv':index===parameter.length-1}">
 					<u-field label-width="150" v-model="item.value" :label="item.label" :clearable=false :disabled="item.disabled">
 					</u-field>
-					<view class="line  pos-abs"> 
+					<view class="line  pos-abs">
 					</view>
 				</view>
 			</view>
 		</view>
-        
+
 		<view class="memberBox">
 			<view class="memberTil flex al-center ju-between">
 				成员
-			<image @click="pushMember" src="https://oss.kuaitongkeji.com/static/img/app/forum/pushtag.png" class="pushtagimg" mode=""></image>
+				<image v-if="Islimits==1" @click="pushMember" src="https://oss.kuaitongkeji.com/static/img/app/forum/pushtag.png" class="pushtagimg"
+				 mode=""></image>
 			</view>
-			<view class="">
-				<view class="itemBox flex ju-between al-center"
-				 @click="memberInfo(item)"
-				  :class="{'itemBtm':index==Members.length-1}"
-				   v-for="(item,index) in Members" :key='item.id'>
+			<view v-if="Members.length>0" class="">
+				<view class="itemBox flex ju-between al-center" @click="memberInfo(item)" :class="{'itemBtm':index==Members.length-1}"
+				 v-for="(item,index) in Members" :key='item.id'>
 					<view class="">
 						<view class="flex">
 							姓名
@@ -39,18 +38,23 @@
 							</view>
 						</view>
 					</view>
-					<view class="">
+					<view v-if="Islimits==1" class="">
 						<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
 					</view>
 				</view>
 			</view>
+			<view v-if="Members.length == 0 &&isLoding==false" class="nomen flex ju-center">
+				暂时还没有成员
+			</view>
 		</view>
-		
-		<!-- 提交 -->
-		<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
-			<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
-			<view class="pos-abs subtext">
-				提交
+
+
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				加载中
 			</view>
 		</view>
 	</view>
@@ -98,45 +102,45 @@
 					},
 				],
 				id: '',
-				Members:[],//所有成员 
-				typeid:''//用户类型
+				Islimits:'',//是否有权限添加,为1可添加
+				Members: [], //所有成员 
+				typeid: '', //用户类型
+				isLoding: false
 			}
 		},
 		methods: {
 			// 添加成员
-			pushMember(){
+			pushMember() {
 				uni.navigateTo({
-					url:'/pages/address/addediting/pushMember/pushMember?addressid=' + this.id + '&typeid=' + this.typeid
+					url: '/pages/address/addediting/pushMember/pushMember?addressid=' + this.id + '&typeid=' + this.typeid
 				})
 			},
+
 			// 用户成员详情信息
-			memberInfo(item){
-				console.log(item);
+			memberInfo(item) {
+				if(this.Islimits==0) return;
+				// console.log(item.id);
 				uni.navigateTo({
-					url:'/pages/address/addediting/memberInfo/memberInfo'
+					url: '/pages/address/addediting/memberInfo/memberInfo?id=' + item.id
 				})
 			},
-			
-			
-			
+
 			// 用户居住信息
 			getData() {
-				uni.showLoading({
-					title:'加载中...'
-				})
+				this.isLoding = true
 				address.listdetails({
 					data: {
 						id: this.id
 					},
 					fail: () => {
-						uni.hideLoading()
+						this.isLoding = false
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
-							uni.hideLoading()
+						this.isLoding = false
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络出错了',
@@ -151,8 +155,9 @@
 							})
 							return;
 						}
-						// console.log(res.data.data);
 						let data = res.data.data
+						this.Islimits = data.allow_edit_member
+                        console.log(this.Islimits);						
 						this.typeid = data.type
 						if (data.type == 1) {
 							this.parameter[2].value = '户主'
@@ -164,50 +169,49 @@
 							this.parameter[2].value = '租户'
 						}
 						this.parameter[3].value = data.own_village.name
-						this.parameter[4].value = data.own_building.name + data.own_apartment.name + data.own_floor.name + data.own_room.room_number
+						this.parameter[4].value = data.own_building.name + data.own_apartment.name + data.own_floor.name + data.own_room
+							.room_number
 					}
 				})
 			},
 
-             //查看住所内的所有成员
-			  allMembers(){
-				  uni.showLoading({
-				  	titel:'加载中'
-				  })
-				 address.lookMember({
-					 data:{
-						 id:this.id
-					 },
-					 fail: () => {
-					 	uni.hideLoading()
-					 	uni.showToast({
-					 		title: '网络错误',
-					 		icon: 'none'
-					 	})
-					 },
-					 success: (res) => {
-						 uni.hideLoading()
-						 if (res.statusCode != 200) {
-						 	uni.showToast({
-						 		title: '网络出错了',
-						 		icon: 'none'
-						 	})
-						 	return;
-						 }
-						 if (res.data.code != 200) {
-						 	uni.showToast({
-						 		title: res.data.msg,
-						 		icon: 'none'
-						 	})
-						 	return;
-						 }
-						 let data = res.data.data
-						 this.Members = data
-						 console.log(data);
-					 }
-				 }) 
-			  },
-			  
+			//查看住所内的所有成员
+			allMembers() {
+				this.isLoding = true
+				address.lookMember({
+					data: {
+						id: this.id
+					},
+					fail: () => {
+						this.isLoding = false
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						this.isLoding = false
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						}
+						let data = res.data.data
+						this.Members = data
+						// console.log(data);
+					}
+				})
+			},
+
 			// 获取用户资料
 			Userdata() {
 				user.userDeta({
@@ -223,7 +227,7 @@
 						if (res.data.code != 200) return;
 						let Users = res.data.data
 						this.parameter[0].value = Users.username
-						this.parameter[1].value = Users.tel.slice(0,4) + '****' + Users.tel.slice(7,11)
+						this.parameter[1].value = Users.tel.slice(0, 4) + '****' + Users.tel.slice(7, 11)
 					},
 				})
 			}
@@ -256,11 +260,12 @@
 </script>
 
 <style scoped lang="scss">
-	.fixed{
+	.fixed {
 		position: fixed;
 		z-index: 9;
 	}
-	.topLine{
+
+	.topLine {
 		height: 148rpx;
 	}
 
@@ -309,8 +314,8 @@
 		font-size: 30rpx;
 		color: #FFFFFF;
 	}
-	
-	.memberBox{
+
+	.memberBox {
 		margin-top: 40rpx;
 		width: 650rpx;
 		border-radius: 10rpx;
@@ -318,45 +323,72 @@
 		background: #FFFFFF;
 		box-shadow: 2rpx 2rpx 6rpx 1rpx #d9d9d9;
 		font-size: 15px;
-			color: #666666;
+		color: #666666;
 		padding-bottom: 30rpx;
 	}
-	.memberTil{
+
+	.memberTil {
 		height: 80rpx;
 		border-bottom: 1px solid #CCCCCC;
 	}
-	
+
 	.pushtagimg {
 		width: 40rpx;
 		height: 40rpx;
 	}
-	
-	.itemBox{
+
+	.itemBox {
 		padding: 20rpx 0;
 		border-bottom: 1px solid #CCCCCC;
 		font-size: 14px;
 	}
-	
+
 	.reimg {
 		width: 18rpx;
-		height: 28rpx; 
+		height: 28rpx;
 		margin-right: 10rpx;
 	}
-	
-	.itemBtm{
+
+	.itemBtm {
 		border-bottom: none;
 	}
-	
+
 	.Submit {
 		width: 358rpx;
 		height: 68rpx;
 	}
-	
+
 	.subtext {
 		font-size: 30rpx;
 		color: #FFFFFF;
 	}
-	.bot{
+
+	.bot {
 		margin-bottom: 40rpx;
+	}
+
+	.nomen {
+		margin-top: 30rpx;
+		font-size: 14px;
+		color: #999999;
+	}
+
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
 	}
 </style>

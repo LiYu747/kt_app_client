@@ -84,12 +84,6 @@
 					keepSuccess: false,
 					success: () => {
 						this.data()
-						const time = setTimeout(() => {
-							this.text = '手动刷新'
-							this.flag = 1
-							this.countdown()
-							this.show = 1
-						}, 2000)
 					},
 					fail: () => {
 						uni.switchTab({
@@ -145,6 +139,12 @@
 							return
 						}
 						this.val = res.data.data.content
+						const time = setTimeout(() => {
+							this.text = '手动刷新'
+							this.flag = 1
+							this.countdown()
+							this.show = 1
+						}, 2000)
 					}
 				})
 			}

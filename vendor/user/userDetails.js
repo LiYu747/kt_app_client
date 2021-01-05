@@ -20,6 +20,12 @@ class userd{
 		req.patch(params)
 	}
 	
+	// 更新实名认证信息
+	updataRealname(params){
+		params.url = routes.user.userupdate.updataRealname
+		req.patch(params)
+	}
+	
 	//获取地图导航key
 	Navigation(params){
 		params.url = routes.Navigation.Navmap;

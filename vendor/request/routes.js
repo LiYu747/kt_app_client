@@ -49,9 +49,15 @@ module.exports = {
 		},
 		// 修改个人信息
 		userupdate: {
+				// 修改个人信息
 			update: apiPath + 'user/user/update',
+			
 			//修改证件照
-			updataphoto: apiPath + 'user/user/setFaceimg'
+			updataphoto: apiPath + 'user/user/setFaceimg',
+			
+			// 更新实名认证信息
+			updataRealname : apiPath + 'user/user/realInfo'
+			
 		},
 
 
@@ -65,7 +71,10 @@ module.exports = {
 			rotationChart: apiPath + 'ad/adPos/show',
 			
 			// 消息通知
-			userMessage : apiPath + 'user/msg'
+			userMessage : apiPath + 'user/msg',
+			
+			// 标为已读
+			userRead  : apiPath + 'user/msg/read'
 		},
 
 		// 社区资讯
@@ -195,7 +204,16 @@ module.exports = {
 			findUser : apiPath + 'user/user/check',
 			
 			//添加住所成员
-			pushMember : apiPath + 'user/house/addMember'
+			pushMember : apiPath + 'user/house/addMember',
+			
+			//成员的详情
+			memberDetails : apiPath + 'user/house/memberInfo',
+			
+			// 更新成员信息权限
+			updateMember : apiPath + 'user/house/editMember',
+			
+			// 移除某个成员
+			 deleteMember  : apiPath + 'user/house/removeMember'
 			
 		},
 		//预约电梯

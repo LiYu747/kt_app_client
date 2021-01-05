@@ -55,6 +55,12 @@
 		<view @click="ApplyingTo" class="m-t2 gointo">
 			去申请成为
 		</view>
+		   <view class="m-t4 flex al-center">
+		   	若您已申请
+			<view class="m-l2 gointo" @click="application">
+				去查看申请进度
+			</view>
+		   </view>
 		</view>
 	</view>
 </template>
@@ -87,10 +93,16 @@
 					}
 				],
 				isShowType: false,
-				code:''
+				code:'403'
 			}
 		},
 		methods: {
+			//申请进度
+			application(){
+				uni.navigateTo({
+					url: '/pages/userMessenger/applyingTo/applyingRecord/applyingRecord'
+				})
+			},
 			selecType(item) {
 				if (item.type == 'expressage') return;
 				uni.reLaunch({
@@ -144,7 +156,7 @@
 							})
 							return;
 						}
-						this.code = res.data.code
+						// this.code = res.data.code
 					}
 				})
 			}
@@ -268,7 +280,7 @@
 		}
 		
 	.gointo{
-		color: blue;
-		text-decoration:underline;
+		color: #01AAED;
+		// text-decoration:underline;
 	}	
 </style>

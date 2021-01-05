@@ -11,20 +11,26 @@
 						{{item.label}}
 					</view>
 					<view class="">
-						<input type="text" class="ipt" :focus="item.focus" :disabled="item.disabled" :placeholder="item.placeholder" v-model="item.value" />
+						<input type="text" class="ipt" :focus="item.focus" :disabled="item.disabled" :placeholder="item.placeholder"
+						 v-model="item.value" />
 					</view>
 					<view v-if="index==2" class="pos-abs rigth">
-						<image  class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+						<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
 					</view>
 				</view>
 			</view>
-			
+
+			<!-- 保存 -->
+			<view @click="save" class="flex al-center ju-center save">
+				<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="enimg" mode=""></image>
+				<view class="pos-abs">
+					保存
+				</view>
+			</view>
+
 			<!-- 退出登录 -->
 			<view @click="logOut" class="end flex al-center ju-center">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="enimg" mode=""></image>
-				<view class=" pos-abs">
-					退出登录
-				</view>
+				退出登录
 			</view>
 		</view>
 	</view>
@@ -42,35 +48,84 @@
 		props: {},
 		data() {
 			return {
+				idcard:'',//身份证信息
+				originalId:'',//原数据
 				locdata: [{
 						label: '真实姓名',
-						value: '李钰'
+						value: ''
 					},
 					{
 						label: '身份证号',
 						value: '',
 						focus: false,
-						placeholder:'请输入您的身份证号'
+						placeholder: '请输入您的身份证号'
 					},
-					{
-						label: '修改密码',
-						value: '',
-						disabled:true
-					},
+					// {
+					// 	label: '修改密码',
+					// 	value: '',
+					// 	disabled:true
+					// },
 				]
 			}
 		},
 		methods: {
+
+			//保存
+			save() {
+				let idcard = ''
+				if(this.locdata[1].value == this.idcard){
+					idcard = this.originalId
+				}
+				else{
+					idcard = this.locdata[1].value
+				}
+				uni.showLoading({
+					title:'加载中'
+				})
+				user.updataRealname({
+					data: {
+						username: this.locdata[0].value,
+						id_card_no:idcard
+					},
+					fail: () => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						uni.hideLoading()
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						};
+						uni.showToast({
+							title: res.data.msg,
+						})
+					}
+				})
+			},
 			// 退出登录
-			logOut(){
+			logOut() {
 				uni.showModal({
-					title: '您确定要退出吗',
+					content: '您确定要退出吗',
 					success: (res => {
 						if (res.confirm) {
 							jwt.flush({
 								success: () => {
 									uni.navigateBack({
-										delta:1
+										delta: 1
 									})
 								}
 							});
@@ -79,7 +134,7 @@
 				})
 			},
 			//用户信息
-			getUserinfo(){
+			getUserinfo() {
 				user.userDeta({
 					data: {},
 					fail: () => {
@@ -93,12 +148,17 @@
 						if (res.data.code != 200) return;
 						let Users = res.data.data
 						this.locdata[0].value = Users.username
-						if(!Users.id_card_no){
+						if (!Users.id_card_no) {
 							this.locdata[1].focus = true
+							return;
 						}
-						this.locdata[1].value = Users.id_card_no.slice(0,3) + '**********' + Users.id_card_no.slice(Users.id_card_no.length-4,Users.id_card_no.length)
+						this.locdata[1].value = Users.id_card_no.slice(0, 3) + '**********' + Users.id_card_no.slice(Users.id_card_no.length -
+							4, Users.id_card_no.length)
+						this.idcard = 	 Users.id_card_no.slice(0, 3) + '**********' + Users.id_card_no.slice(Users.id_card_no.length -
+							4, Users.id_card_no.length)
+						this.originalId = 	Users.id_card_no
 					},
-				
+
 				})
 			}
 		},
@@ -157,26 +217,37 @@
 		text-align: right;
 		font-size: 15px;
 	}
-	.rigth{
+
+	.rigth {
 		right: 20rpx;
 	}
+
 	.reimg {
 		width: 18rpx;
-		height: 25rpx; 
+		height: 25rpx;
 	}
-	.uni-input-placeholder{
+
+	.uni-input-placeholder {
 		font-size: 14px;
 		color: #999999;
 	}
-	
+
 	.end {
-		margin-top: 61rpx;
-		font-size: 30rpx;
-		color: #FFFFFF;
+		margin-top: 50rpx;
+		width: 358rpx;
+		height: 75rpx;
+		border-radius: 30rpx;
+		background: #FFFFFF;
+		color: red;
 	}
-	
+
 	.enimg {
 		width: 358rpx;
 		height: 68rpx;
+	}
+
+	.save {
+		margin-top: 50rpx;
+		color: #FFFFFF;
 	}
 </style>

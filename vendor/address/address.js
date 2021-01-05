@@ -36,5 +36,23 @@ class Address {
 			 params.url = routes.address.alladd.pushMember
 			 req.post(params)
 	}
+	
+	//成员的详情
+	memberDetails ( params) {
+			 params.url = routes.address.alladd.memberDetails
+			 req.get(params)
+	}
+	
+	// 更新成员信息权限
+	updateMember ( params) {
+			 params.url = routes.address.alladd.updateMember
+			 req.patch(params)
+	}
+	
+	// 移除某个成员
+	deleteMember ( params) {
+			 params.url = routes.address.alladd.deleteMember
+			 req.delete(params)
+	}
 }
 module.exports = new Address

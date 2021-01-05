@@ -72,7 +72,7 @@
 						是否允许添加其他成员
 					</view>
 				</view>
-				<view @click="show = true" class="flex m-t3 al-center">
+				<view  @click="timeshow = !timeshow , showType=false" class="flex m-t3 al-center">
 					<image src="../../../../image/address/blckpd.png" class="blckpdImg" mode=""></image>
 					<view class="m-l2">
 						有效期限
@@ -81,8 +81,13 @@
 						{{time}}
 					</view>
 				</view>
+				<view v-show="timeshow == true" class="timeBox pos-abs flex-d al-center">
+					<view class="itemType" @click="selTime(item)" v-for="item in timeList" :key='item.id'>
+						{{item.label}}
+					</view>
+				</view>
 				<u-picker @confirm="ok" mode="time" v-model="show" :params="params"></u-picker>
-				<view @click="showType = !showType" class="flex m-t3 al-center">
+				<view @click="showType = !showType , timeshow = false" class="flex m-t3 al-center">
 					<image src="../../../../image/address/blckpd.png" class="blckpdImg" mode=""></image>
 					<view class="m-l2">
 						选择用户类型
@@ -130,6 +135,13 @@
 		props: {},
 		data() {
 			return {
+				timeList:[
+					{label:'永久',
+					id:0},
+				    { label:'临时',
+					id:1}],
+					timeshow:false, //是否显示选择时间
+					timenum:0,//默认永久
 				show:false,//选择时间
 				iSshow:false,//选择表单
 				isYse:false,//选择打勾
@@ -178,10 +190,6 @@
 				uni.showLoading({
 					title:'加载中'
 				})
-				let timenum = 0
-				if(this.time){
-					 timenum = 1
-				}
 				let allow = 0
 				if(this.isYse==true){
 					allow = 1
@@ -202,7 +210,7 @@
 			    			member_id:this.result.id,
 			    			allow_edit_member:allow,
 			    			type:this.typeId,
-			    			valid_type:timenum,
+			    			valid_type:this.timenum,
 			    			valid_end:this.time,
 			    			host_remark:this.reValue
 			    		},
@@ -216,7 +224,7 @@
 			    		},
 			    		success: (res) => {
 			    			uni.hideLoading()
-			    			console.log(res);
+			    			// console.log(res);
 			    			if (res.statusCode != 200) {
 			    				uni.showToast({
 			    					title: '网络出错了',
@@ -245,6 +253,17 @@
 			    })
 				
 			},
+			//时间选择
+			selTime(item){
+				this.timeshow = false
+				this.timenum = item.id
+				if(item.id == 0){
+					this.time = item.label
+				}
+				if( item.id == 1){
+					this.show = true
+				}
+			},
 			// 点击打钩选择
 			addYse(){
 				this.isYse = !this.isYse
@@ -261,6 +280,7 @@
 				this.typeId = item.id
 				// console.log(item);
 			},
+			
 			//搜索
 			search() {
 				if (this.locdata[0].value == '') {
@@ -312,7 +332,7 @@
 						}
 						let data = res.data.data
 						this.result = data
-                        console.log(data);
+                        // console.log(data);
 					}	
 				})
 				
@@ -360,6 +380,17 @@
 		padding: 0 3%;
 		height: 260rpx;
 		background: #FFFFFF;
+	}
+	
+	.timeBox{
+		margin-top: 10rpx;
+		width: 170rpx;
+		background: #FFFFFF;
+		z-index: 9;
+		border-radius: 10rpx;
+		border: 1px solid #EEEEEE;
+		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		padding-bottom: 20rpx;
 	}
 
 	.itemBox {
@@ -479,6 +510,6 @@
 		padding-bottom: 20rpx;
 	}
 	.itemType{
-		margin-top: 30rpx;
+		margin-top: 20rpx;
 	}
 </style>

@@ -4,7 +4,7 @@
 		<view class="cont">
 			<view class="nav flex al-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
-				<view class="text">
+				<view  class="text">
 					{{text}}
 				</view> 
 			</view>
@@ -59,7 +59,7 @@
 					},
 					{
 						titel: '时间',
-						value: '2020-07-24'
+						value: ''
 					}
 				],
 				id: ''  //传的id
@@ -90,6 +90,7 @@
 						})
 					},
 					success: (res) => {
+						console.log(res);
 						uni.hideLoading()
 						if (res.statusCode != 200) return;
 
@@ -137,6 +138,7 @@
 			this.Userdata()
 		},
 		onLoad(val) {
+			// console.log(val);
 			this.id = val.id
 		},
 		filters: {

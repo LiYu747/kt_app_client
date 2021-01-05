@@ -13,6 +13,12 @@ class Home {
 		req.get(params);
 	}
 	
+	// 标为已读
+	userRead (params) {
+		params.url = routes.home.adPos.userRead;
+		req.patch(params);
+	}
+	
 	// 周边消息
 	news (params) {
 		params.url = routes.home.news.peripheralNews

@@ -3,7 +3,7 @@
 	<div class="whole">
 		<view class="nav ">
 			<view class="title flex al-center ju-center pos-rel">
-				<view @click="goInform" class="informBox pos-abs">
+				<view v-if="user" @click="goInform" class="informBox pos-abs">
 					<view class="munber flex al-center ju-center pos-abs">
 						{{informmsg.length}}
 					</view>

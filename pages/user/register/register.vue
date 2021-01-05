@@ -263,10 +263,11 @@
 							});
 							return;
 						}
-
+                      
+						  
 						this.$refs.uToast.show({
 							title: res.data.msg,
-							type: 'success',
+							// type: 'success',
 							url: `/pages/auth/login/login?register=${true}`
 						});
 

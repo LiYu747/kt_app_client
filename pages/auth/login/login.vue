@@ -44,14 +44,14 @@
 			</u-form>
 		</view>
 		
-		<view @click="cut" class="">
+		<!-- <view @click="cut" class="">
 			<view v-show="iSlogin==true" class="passlogin flex m-t1">
 				验证码登录
 			</view>
 			<view v-show="iSlogin==false" class="passlogin flex m-t1">
 				密码登录
 			</view>
-		</view>
+		</view> -->
 
 		<!-- 登录按钮 -->
 		<view class="flex-d al-center m-t4">
