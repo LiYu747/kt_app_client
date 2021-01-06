@@ -8,7 +8,10 @@
     "pages/user/register/register",
     "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
     "pages/user/personal/personal",
+    "pages/user/realInformation/realInformation",
     "pages/address/addediting/ADDediting",
+    "pages/address/addediting/pushMember/pushMember",
+    "pages/address/addediting/memberInfo/memberInfo",
     "pages/residence/checkIn/checkIn",
     "pages/visitapplication/visit/visit",
     "pages/operation/visitRecord/visitRecord",
@@ -40,29 +43,27 @@
     "pages/classification/community/community",
     "pages/classification/service/service",
     "pages/classification/travel/travel",
+    "pages/classification/teaBasedDrink/teaDrink",
+    "pages/classification/scenicArea/scenicArea",
+    "pages/classification/shopping/shopping",
     "pages/communityForum/forumlists/customTarbar/customTarbar",
     "pages/web/index/index",
     "pages/propertyManagement/propertyhome/propertyhome",
-    "pages/userMessenger/userhome/userhome",
     "pages/propertyManagement/userQuery/userQuery",
-    "pages/propertyManagement/theUserDetails/theUserDetails",
+    "pages/propertyManagement/userQuery/theUserDetails/theUserDetails",
     "pages/propertyManagement/CheckToSee/CheckToSee",
+    "pages/propertyManagement/CheckToSee/seeDetails/seeDetails",
     "pages/propertyManagement/accessToInformation/accessToInformation",
-    "pages/classification/scenicSpot/scenicSpot",
-    "pages/classification/shopping/shopping",
-    "pages/classification/teaBasedDrink/teaBasedDrink"
+    "pages/propertyManagement/postManagement/postManagement",
+    "pages/propertyManagement/postManagement/postDetails/postDetails",
+    "pages/userMessenger/userhome/userhome",
+    "pages/userMessenger/applyingTo/applyingTo",
+    "pages/userMessenger/applyingTo/applyingRecord/applyingRecord",
+    "pages/userMessenger/applyingTo/myInformation/myInformation",
+    "pages/userMessenger/goQrCode/goQrCode",
+    "pages/user/userInform/userInform",
+    "pages/residence/houseOwner/houseOwner"
   ],
-  "plugins": {
-    "routePlan": {
-      "version": "1.0.11",
-      "provider": "wx50b5593e81dd937a"
-    }
-  },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置定位"
-    }
-  },
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
@@ -75,7 +76,8 @@
     "selectedColor": "#F95454",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "iconPath": "static/tabbar/home1.png",
         "selectedIconPath": "static/tabbar/home2.png",

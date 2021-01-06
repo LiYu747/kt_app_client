@@ -156,8 +156,7 @@
 							return;
 						}
 						let data = res.data.data
-						this.Islimits = data.allow_edit_member
-                        console.log(this.Islimits);						
+						this.Islimits = data.allow_edit_member					
 						this.typeid = data.type
 						if (data.type == 1) {
 							this.parameter[2].value = '户主'

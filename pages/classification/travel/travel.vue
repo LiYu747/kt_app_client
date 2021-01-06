@@ -69,7 +69,7 @@
 					title: '我的位置', //地图标题 
 					latitude: '',
 					longitude: '', 
-					iconPath: '../../../static/pos.png'  //ios为iospos  安卓为pod
+					iconPath: '../../../static/iospos.png'  //ios为iospos  安卓为pos 
 				}],
 				city: '', //自动获取的城市
 				golat: '', //要去地方的经度

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "记录详情",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "usingComponents": {

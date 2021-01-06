@@ -1,6 +1,9 @@
 <template>
 	<view class="">
-		<subunit titel="详情" :retur="true" @goback='goback'></subunit>
+		<subunit titel="详情" class="fixed"></subunit>
+		<view class="topLine">
+			
+		</view>
 		<view class="cont">
 			<view class="nav flex al-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
@@ -29,6 +32,15 @@
 				</view>
 			</view>
 			<u-picker :default-time='invalid_at' @confirm="ok" mode="time" v-model="show" :params="params"></u-picker>
+			<view v-if="redIMG" class="">
+				<view class="tex1">
+				  补充图片
+				</view>
+				<view class="imgBox">
+					<image :src="redIMG" class="redImg" mode=""></image>
+				</view>
+			</view>
+			
 			<view class="tex1">
 				备注
 			</view>
@@ -38,11 +50,11 @@
 			<view class="tex1">
 				申请结果
 			</view>
-			<textarea v-model="textvalue" placeholder="您可以在这里填写您不同意的原因哦" class="frame">
+			<textarea v-model="textvalue" placeholder="您可以在这里填写您不同意的原因哦" class="frame ">
              </textarea>
 
 			<!-- 按钮 -->
-			<view v-if="text==='待处理'" class="flex al-center ju-around m-t4">
+			<view v-if="text==='待处理'" class="flex al-center ju-around m-t4 ">
 				<view @click="pass" class="btnr flex al-center ju-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="btnimg" mode=""></image>
 					<view class=" pos-abs">
@@ -54,6 +66,9 @@
 				</view>
 			</view>
 		</view>
+	     <view class="boton">
+	     	
+	     </view>
 	</view>
 </template>
 
@@ -75,6 +90,7 @@
 				valuetime: '', //二维码有效时间
 				show: false,
 				invalid_at: '', //传的时间
+				redIMG:'',//图片
 				params: {
 					year: true,
 					month: true,
@@ -146,10 +162,14 @@
 						this.text = data.verify_text
 						this.locadata[0].value = data.own_visitor.username
 						this.locadata[1].value =  data.own_visitor.tel.slice(0,3) + '****' + data.own_visitor.tel.slice(7,11)
-						this.locadata[2].value = data.created_at.slice(0, 10)
-						this.locadata[3].value = data.village_name + data.building_name + data.apartment_name + data.floor_name
+						this.locadata[2].value = data.created_at.slice(0, 16)
+						if(data.own_village){
+							this.locadata[3].value = '' + data.own_village.name + data.own_building.name + data.own_apartment.name +
+							data.own_floor.name + data.own_room.room_number
+						}
 						this.remarks = data.visitor_remark
 						this.result = data.verify_text
+						this.redIMG = data.ext_img
 					}
 				})
 			},
@@ -284,9 +304,15 @@
 </script>
 
 <style scoped lang="scss">
+	.fixed{
+		position: fixed;
+		z-index: 9;
+	}
+	.topLine{
+		height: 148rpx;
+	}
 	.cont {
 		width: 710rpx;
-		height: 100rpx;
 		padding: 0 20rpx;
 	}
 
@@ -385,5 +411,23 @@
 	}
 	.textarea-placeholder{
 		color: #999999;
+	}
+	
+	.imgBox{
+		width: 94%;
+		padding: 3%;
+		border-radius: 10rpx;
+		background: #FFFFFF;
+		font-size: 26rpx;
+		color: rgb(165, 165, 165);
+	}
+	
+	.redImg{
+		width: 120rpx;
+		height: 160rpx;
+	}
+	
+	.boton{
+		height: 80rpx;
 	}
 </style>

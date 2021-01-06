@@ -32,7 +32,7 @@
 		</view>
 
 		<view class="resultBox flex-d al-center">
-			<view v-if="result.username" @click="iSshow = true" class="listsBox">
+			<view v-if="result.username"  class="listsBox">
 				<view class=" flex-d  ju-center">
 					<view class=" resultItem flex al-center">
 						<view class="">
@@ -72,8 +72,8 @@
 						是否允许添加其他成员
 					</view>
 				</view>
-				<view  @click="timeshow = !timeshow , showType=false" class="flex m-t3 al-center">
-					<image src="../../../../image/address/blckpd.png" class="blckpdImg" mode=""></image>
+				<view @click="timeshow = !timeshow , showType=false" class="flex m-t3 al-center">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/blckpd.png" class="blckpdImg" mode=""></image>
 					<view class="m-l2">
 						有效期限
 					</view>
@@ -88,7 +88,7 @@
 				</view>
 				<u-picker @confirm="ok" mode="time" v-model="show" :params="params"></u-picker>
 				<view @click="showType = !showType , timeshow = false" class="flex m-t3 al-center">
-					<image src="../../../../image/address/blckpd.png" class="blckpdImg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/blckpd.png" class="blckpdImg" mode=""></image>
 					<view class="m-l2">
 						选择用户类型
 					</view>
@@ -143,7 +143,6 @@
 					timeshow:false, //是否显示选择时间
 					timenum:0,//默认永久
 				show:false,//选择时间
-				iSshow:false,//选择表单
 				isYse:false,//选择打勾
 				types:[
 					{id:3,label:'租户'},
@@ -187,16 +186,8 @@
 				 })
 				 return;
 				}
-				uni.showLoading({
-					title:'加载中'
-				})
-				let allow = 0
-				if(this.isYse==true){
-					allow = 1
-				}
-				if(this.isYse==false){
-					allow = 0
-				}
+			
+				
 			    uni.showModal({
 			      content:'您确定添加该用户吗',
 			      success:(res) => {
@@ -204,6 +195,16 @@
 						 uni.hideLoading()  
 					  }
 			    	if(res.confirm){
+						let allow = 0
+						if(this.isYse==true){
+							allow = 1
+						}
+						if(this.isYse==false){
+							allow = 0
+						}
+						uni.showLoading({
+							title:'加载中'
+						})
 			    	address.pushMember({
 			    		data:{
 			    			id:this.addressid,
@@ -244,7 +245,9 @@
 			    			uni.showToast({
 			    				title:res.data.msg
 			    			})
-			    			 this.iSshow = false
+							this.locdata[0].value = ''
+							this.locdata[1].value = ''
+							this.result = {}
 			    		}
 			    	})
 			    	}

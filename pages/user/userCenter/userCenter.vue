@@ -3,13 +3,7 @@
 	<div class="whole">
 		<view class="nav ">
 			<view class="title flex al-center ju-center pos-rel">
-				<view v-if="user" @click="goInform" class="informBox pos-abs">
-					<view class="munber flex al-center ju-center pos-abs">
-						{{informmsg.length}}
-					</view>
-					<image src="../../../image/home/infos.png" class="infosImg" mode=""></image>
-
-				</view>
+			
 				个人中心
 				<view class="pos-abs location">
 					<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
@@ -23,17 +17,17 @@
 		<view class="flex-d al-center">
 			<view @click="userinfo" class="portrait flex  ju-center pos-rel">
 				<image v-if="user" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
-				<image v-else src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs" mode=""></image>
+				<image v-if='!user' src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs" mode=""></image>
 			</view>
 			<view @click="userinfo" v-if="user" class="text">
 				{{user.nickname}}
 			</view>
-			<view @click="gologin" v-else class="text">
+			<view  v-else class="text">
 				{{text}}
 			</view>
 		</view>
 		<!-- 操作栏 -->
-		<actionBar></actionBar>
+		<actionBar :informmsg='informmsg' :user='user'></actionBar>
 	</div>
 </template>
 
@@ -54,7 +48,7 @@
 				user: null, //用户资料
 				text: '未登录',
 				flag: false,
-				informmsg:[]
+				informmsg:0
 			}
 		},
 		methods: {
@@ -78,9 +72,9 @@
 				})
 			},
 			
-			// 获取消息通知
+			// 获取消息通知数量
 			getInform() {
-				home.userMessage({
+				home.unread({
 					data: {},
 					fail: (err) => {
 						uni.showToast({
@@ -91,13 +85,13 @@
 					success: (res) => {
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						let data = res.data.data.data
-						this.informmsg = data
+						let data = res.data.data
+						this.informmsg = data.total_unread
 						// console.log(data);
 					}
 				})
 			},
-			// 获取用户资料
+			// 获取用户资料 
 			getUser() {
 				userDetails.userDeta({
 					data: {},
@@ -178,7 +172,7 @@
 	}
 
 	.location {
-		left: 50rpx;
+		right: 50rpx;
 	}
 
 	.jximg {
@@ -214,16 +208,25 @@
 		right: 50rpx;
 	}
 
-	.infosImg {
-		width: 34rpx;
-		height: 34rpx;
-	}
+	
 
 	.munber {
-		width: 30rpx;
-		height: 30rpx;
+		width: 34rpx;
+		height: 34rpx;
 		background: red;
 		border-radius: 50%;
+		font-size: 12px;
+		color: #FFFFFF;
+		z-index: 2;
+		margin-top: -12rpx;
+		margin-left: 16rpx;
+	}
+	
+	.munMore{
+		width: 50rpx;
+		height: 34rpx;
+		background: red;
+		border-radius: 20rpx;
 		font-size: 12px;
 		color: #FFFFFF;
 		z-index: 2;

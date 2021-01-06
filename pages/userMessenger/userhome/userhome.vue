@@ -30,21 +30,21 @@
 				</view>
 				<!-- 右边 -->
 				<view class="m-l2">
-					<view @click="ApplyingTo" class="">
+					<view @click="myInfo" class="">
 						<view class="">
-							<image src="../../../image/userMessenger/goto.png" class="ApplyingTo" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/goto.png" class="ApplyingTo" mode=""></image>
 						</view>
 					</view>
 					<view @click="VisitToApply" class=" m-t1">
 						<view class="">
-							<image src="../../../image/userMessenger/visit.png" class="ApplyingTo" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/visit.png" class="ApplyingTo" mode=""></image>
 						</view>
 					</view>
 				</view>
 			</view>
 			
 			<view @click="navigation" class=" flex ju-center">
-				<image src="../../../image/userMessenger/path.png" class="pathImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/path.png" class="pathImg" mode=""></image>
 			</view>
 		</view>
 		
@@ -93,7 +93,7 @@
 					}
 				],
 				isShowType: false,
-				code:'403'
+				code:''
 			}
 		},
 		methods: {
@@ -115,6 +115,13 @@
 					url: '/pages/userMessenger/goQrCode/goQrCode'
 				})
 			},
+			// 我都信息
+			myInfo(){
+				uni.navigateTo({
+					url:'/pages/userMessenger/applyingTo/myInformation/myInformation'
+				})
+			},
+				
 			// 申请进入
 			ApplyingTo() {
 				uni.navigateTo({
@@ -156,7 +163,14 @@
 							})
 							return;
 						}
-						// this.code = res.data.code
+						if(res.data.code != 200 && res.data.code != 403){
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							return;
+						}
+						this.code = res.data.code
 					}
 				})
 			}

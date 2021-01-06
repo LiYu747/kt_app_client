@@ -2,16 +2,7 @@
 	<view class="">
 		<view class="fiedx">
 			<subunit titel='进出记录'></subunit>
-		<!-- 	<view class="searchBox flex al-center ju-center pos-rel">
-				<view class="allTxt pos-abs flex al-center">
-					全部
-					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
-				</view>
-				<view class="searchBack flex al-center">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/serach.png" class="serachImg" mode=""></image>
-					<input type="text" class="ipt" value="" placeholder="请输入关键词" />
-				</view>
-			</view> -->
+	
 		</view>
 		<view class="topLine">
 
@@ -250,7 +241,7 @@
 		padding: 20rpx 0;
     }
 	.bomLine {
-		padding: 20rpx 0;
+		padding: 30rpx 0;
 		font-size: 12px;
 	}
 	.showloding {

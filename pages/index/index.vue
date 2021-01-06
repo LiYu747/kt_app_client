@@ -18,11 +18,15 @@
 				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
 
 				<view v-if='user'  @click="goInform" class="informBox pos-abs">
-					<view class="munber flex al-center ju-center pos-abs">
-						{{informmsg.length}}
+					<view v-if="0<informmsg.total_unread && informmsg.total_unread< 100"  class="munber flex al-center ju-center pos-abs">
+						<view class="" >
+							{{informmsg.total_unread}}
+						</view>
 					</view>
-					<image src="../../image/home/infos.png" class="infosImg" mode=""></image>
-
+					<view v-if='informmsg.total_unread >99' class="munMore  flex al-center ju-center pos-abs">
+						99+
+					</view>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/home/infos.png" class="infosImg" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -117,7 +121,7 @@
 				videoUrl: '', //视频地址
 				cover: '', //视频封面
 				showPullDownRefreshIcon: false,
-				informmsg:[],//用户消息
+				informmsg:{},//用户未读消息数量
 			}
 		},
 		onLoad(val) {
@@ -130,9 +134,9 @@
 					url: '/pages/user/userInform/userInform'
 				})
 			},
-			// 获取消息通知
+			// 未读获取消息通知
 			getInform() {
-				home.userMessage({
+				home.unread({
 					data: {},
 					fail: (err) => {
 						this.stopRefreshIcon()
@@ -145,7 +149,8 @@
 						this.stopRefreshIcon()
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						let data = res.data.data.data
+						let data = res.data.data
+						// console.log(data);
 						this.informmsg = data
 					}
 				})
@@ -501,10 +506,22 @@
 	}
 
 	.munber {
-		width: 30rpx;
-		height: 30rpx;
+		width: 34rpx;
+		height: 34rpx;
 		background: red;
 		border-radius: 50%;
+		font-size: 12px;
+		color: #FFFFFF;
+		z-index: 2;
+		margin-top: -12rpx;
+		margin-left: 16rpx;
+	}
+	
+	.munMore{
+		width: 50rpx;
+		height: 34rpx;
+		background: red;
+		border-radius: 20rpx;
 		font-size: 12px;
 		color: #FFFFFF;
 		z-index: 2;

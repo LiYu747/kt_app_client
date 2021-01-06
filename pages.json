@@ -620,6 +620,18 @@
             }
             
         }
+        ,
+		// 房主查看消息
+		{
+            "path" : "pages/residence/houseOwner/houseOwner",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

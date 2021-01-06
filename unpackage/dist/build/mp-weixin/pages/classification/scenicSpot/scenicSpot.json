@@ -1,6 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "subclass": "/components/sub-class/subclass"
-  }
-}

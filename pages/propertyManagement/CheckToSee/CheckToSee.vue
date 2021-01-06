@@ -5,7 +5,7 @@
 			<view @click="xlshow = !xlshow" class="searchBox ">
 				<view class="allTx flex al-center">
 					筛选
-					<image src="../../../image/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
 				</view>
 			</view>
 			<view v-show="xlshow==true" class="xlshow ">
@@ -20,7 +20,7 @@
 		</view>
 
 		<view v-if="lists.length>0" class="flex-d m-t1 al-center">
-			<view class="itemBox" @click="goDetails(item)" v-for="item in lists" :key='item.id'>
+			<view class="itemBox" @click="goDetails(item)" v-for="(item,index) in lists" :key='item.id'>
 				<view class="itemName flex al-center ju-between">
 					<view class="">
 						姓名：{{item.own_user.username}}
@@ -337,7 +337,7 @@
 
 	.bomLine {
 		font-size: 12px;
-		padding: 20rpx 0;
+		padding: 30rpx 0;
 	}
 
 	.dv {

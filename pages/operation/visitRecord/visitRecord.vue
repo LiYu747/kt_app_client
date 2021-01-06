@@ -29,8 +29,8 @@
 				</view>
 				<view class="bx2 flex al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/pos.png" class="dv3" mode=""></image>
-					<view class="">
-						{{items.village_name}}
+					<view class="" v-if="items.own_village">
+						{{items.own_village.name}}
 					</view>
 				</view>
 			</view>

@@ -21,9 +21,9 @@
 				<view class="">
 					有效期限
 				</view>
-				<view class="itemValue">
+				<view class="itemValue"> 
 					{{time}}
-					<image src="../../../../image/address/blckpd.png" class="blckpdImg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/address/blckpd.png" class="blckpdImg" mode=""></image>
 				</view>
 				<view v-show="tiemShow" class="timeShow pos-abs flex-d al-center">
 					<view class="juritem" @click="seltime(item)" v-for=" item in timeList" :key='item.id'>

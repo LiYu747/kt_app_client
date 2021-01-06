@@ -23,8 +23,8 @@
 				</view>
 				<view class="bx2 flex al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/pos.png" class="dv3" mode=""></image>
-					<view class="">
-						{{items.village_name}}
+					<view v-if="items.own_village" class="">
+						{{items.own_village.name}}
 					</view>
 				</view>
 
@@ -119,6 +119,7 @@
 								if (res.data.code != 200) return;
 
 								let data = res.data.data;
+								// console.log(data);
 								this.page = data.current_page + 1;
 								this.hasMore = data.next_page_url ? true : false;
 

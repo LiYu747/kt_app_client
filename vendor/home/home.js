@@ -13,6 +13,18 @@ class Home {
 		req.get(params);
 	}
 	
+	// 未读消息数量
+	unread (params) {
+		params.url = routes.home.adPos.unread;
+		req.get(params);
+	}
+	
+	// 标记所有未读为已读
+	allRead (params) {
+		params.url = routes.home.adPos.allRead;
+		req.patch(params);
+	}
+	
 	// 标为已读
 	userRead (params) {
 		params.url = routes.home.adPos.userRead;

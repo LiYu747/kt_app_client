@@ -5,6 +5,12 @@
 		   <view class="itemtext">
 		   	{{item.titel}}
 		   </view>
+		   	<view v-if="index ==5" class="">
+		   		<view  v-if="0<informmsg && user" class="munber flex al-center ju-center">
+		   			{{informmsg}}
+		   		</view>
+
+		   	</view>
 	</view>
 </view>
 </template>
@@ -15,7 +21,14 @@ name: "",
 components: {
 
 },
-props: {},
+props: {
+	informmsg:{
+		type:Number
+	} ,
+	user:{
+		type:Object
+	}
+},
 data () {
   return {
 	  locdata:[
@@ -38,6 +51,10 @@ data () {
 		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/Trecords.png',
 		   titel:'出行记录',
 		   url:'/pages/user/travelRecords/travelRecords'
+		  },
+		  {image:'https://oss.kuaitongkeji.com/static/img/app/address/msgtz.png', 
+		   titel:'消息通知',
+		   url:'/pages/user/userInform/userInform' 
 		  },
 		  {image:'https://oss.kuaitongkeji.com/static/img/app/user/about.png', 
 		   titel:'关于快通',
@@ -107,5 +124,18 @@ data () {
 .top{
 	margin-top: 20rpx;
 }
-
+.infosImg {
+		width: 34rpx;
+		height: 34rpx;
+	}
+.munber {
+		padding: 2px 6px;
+		background: red;
+		border-radius: 20rpx;
+		font-weight: 700;
+		font-size: 10px;
+		color: #FFFFFF;
+		z-index: 2;
+		margin-left: 20rpx;
+	}	
 </style>

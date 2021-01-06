@@ -84,7 +84,7 @@
 				</view>
 			</view>
 		</view>
-		<subrelease :id='id'></subrelease>
+		<subrelease :ids='id'></subrelease>
 	</view>
 </template>
 

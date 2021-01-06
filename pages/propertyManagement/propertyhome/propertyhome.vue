@@ -64,7 +64,7 @@
 		</view>
 		
 		<view @click="PostManagement" class=" flex ju-center">
-			<image src="../../../image/propertyManagement/postManagement.png" class="postManagement" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/postManagement.png" class="postManagement" mode=""></image>
 		</view>
 	</view>
 </template>

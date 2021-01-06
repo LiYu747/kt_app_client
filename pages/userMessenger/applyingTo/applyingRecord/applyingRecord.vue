@@ -71,12 +71,7 @@
 			}
 		},
 		methods: {
-			// 我的信息
-			gomyMsg(){
-			 uni.navigateTo({
-			 	url:'/pages/userMessenger/applyingTo/myInformation/myInformation'
-			 })	
-			},
+	
 			// 数据
 			getData() {
 				uni.showLoading({

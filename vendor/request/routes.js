@@ -1,6 +1,8 @@
+//测试域名
+// let host = 'https://test.kuaitongkeji.com/'
 //本地开发域名
-let host = 'http://local.kt.cn/';
-// let host = 'https://api.kuaitongkeji.com/';   
+// let host = 'http://local.kt.cn/';
+let host = 'https://api.kuaitongkeji.com/';   
 let apiPath = host + 'api/';
 
 
@@ -69,6 +71,12 @@ module.exports = {
 		adPos: {
 			// 轮播图
 			rotationChart: apiPath + 'ad/adPos/show',
+			
+			// 未读消息数量
+			unread : apiPath + 'user/msg/unreadNum',
+			
+			// 标记所有未读为已读
+			allRead : apiPath + 'user/msg/readAll',
 			
 			// 消息通知
 			userMessage : apiPath + 'user/msg',

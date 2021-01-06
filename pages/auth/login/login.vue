@@ -172,7 +172,7 @@
 									icon:'none',
 									duration: 2000
 								})
-								console.log(res.data.data.code);
+								// console.log(res.data.data.code);
 								const authtime = setInterval(() => {
 									this.code = false
 									this.timer--

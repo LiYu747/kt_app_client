@@ -16,7 +16,7 @@ components: {
   
 },
 props: {
-	id:{
+	ids:{
 		type:String
 	}
 },
@@ -26,11 +26,11 @@ data () {
 		  {
 		  icon:'https://oss.kuaitongkeji.com/static/img/app/forum/home1.png',
 		  titel:'论坛主页',
-		   url:`/pages/communityForum/forumlists/forumlists?id=${this.id}`,
+		   url:`/pages/communityForum/forumlists/forumlists?id=${this.ids}`,
 		   },
 		  {
 			icon:'https://oss.kuaitongkeji.com/static/img/app/forum/photo1.png',
-		    url:`/pages/communityForum/release/release?id=${this.id}`
+		    url:`/pages/communityForum/release/release?id=${this.ids}`
 		  },
 		  {
 		  icon:'https://oss.kuaitongkeji.com/static/img/app/forum/my2.png',

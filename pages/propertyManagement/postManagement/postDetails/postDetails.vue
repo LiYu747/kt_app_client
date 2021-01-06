@@ -38,7 +38,7 @@
 		</view>
 
 		<!-- 按钮 -->
-		<view v-if="statusCode == 0"  class="flex al-center ju-around btn">
+		<view   class="flex al-center ju-around btn">
 			<view @click="pass" class="btnr flex al-center ju-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="btnimg" mode=""></image>
 				<view class=" pos-abs">

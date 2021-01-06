@@ -28,6 +28,14 @@
 				 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :showLoading='false' :onval="onval" :loadMake="loadMake"
 				 :usingComponents="true" />
 			</view>
+			<view v-if="redIMG" class="">
+				<view class="tex1">
+				  补充图片
+				</view>
+				<view class="imgBox">
+					<image :src="redIMG" class="redImg" mode=""></image>
+				</view>
+			</view>
 			<view class="tex1">
 				备注
 			</view>
@@ -64,6 +72,7 @@
 				username: '', //处理结果 
 				remark: '', //备注
 				result: '', //结果
+				redIMG:'', //图片
 				locadata: [{
 						titel: '姓名',
 						value: ''
@@ -122,12 +131,17 @@
 						let data = res.data.data
 						// console.log(res.data.data);
 						this.locadata[0].value = data.own_host.username
-						this.locadata[1].value = data.village_name + data.building_name + data.apartment_name + data.floor_name
+						if (data.own_village) {
+							this.locadata[1].value = '' + data.own_village.name + data.own_building.name + data.own_apartment.name +
+								data.own_building
+								.name + data.own_room.room_number
+						}
 						this.locadata[2].value = data.created_at.slice(0, 16)
 						this.username = data.verify_text
 						this.remark = data.visitor_remark
 						this.result = data.verify_msg
 						this.val = data.qr_content
+						this.redIMG = data.ext_img
 					}),
 
 
@@ -252,5 +266,19 @@
 		padding: 60rpx 0;
 		margin: 20rpx 0;
 		border-bottom: 1px solid #ccc;
+	}
+	
+	.imgBox{
+		width: 94%;
+		padding: 3%;
+		border-radius: 10rpx;
+		background: #FFFFFF;
+		font-size: 26rpx;
+		color: rgb(165, 165, 165);
+	}
+	
+	.redImg{
+		width: 120rpx;
+		height: 160rpx;
 	}
 </style>

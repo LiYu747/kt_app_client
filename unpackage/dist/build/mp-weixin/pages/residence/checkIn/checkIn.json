@@ -1,10 +1,9 @@
 {
-  "navigationBarTitleText": "入住申请",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "usingComponents": {
     "u-field": "/uview-ui/components/u-field/u-field",
-    "easy-select": "/components/easy-select/easy-select",
     "u-select": "/uview-ui/components/u-select/u-select",
     "subunit": "/components/sub-unit/subunit",
     "enclosure": "/components/checkIn/enclosure/enclosure",

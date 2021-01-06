@@ -18,7 +18,7 @@
     "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
-    "checkSiteMap": false,
+    "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "useMultiFrameRuntime": false,
@@ -37,7 +37,7 @@
   "compileType": "miniprogram",
   "libVersion": "",
   "appid": "wxc7e2e247d7594448",
-  "projectname": "%E5%BF%AB%E9%80%9A%E4%BF%A1%E6%81%AF",
+  "projectname": "快通信息",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
@@ -49,175 +49,13 @@
       "current": -1,
       "list": []
     },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
     "game": {
-      "current": -1,
-      "list": []
-    },
-    "gamePlugin": {
       "current": -1,
       "list": []
     },
     "miniprogram": {
       "current": -1,
-      "list": [
-        {
-          "id": -1,
-          "name": "pages/visitapplication/visit/visit",
-          "pathName": "pages/visitapplication/visit/visit",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/residence/checkIn/checkIn",
-          "pathName": "pages/residence/checkIn/checkIn",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/address/addediting/ADDediting",
-          "pathName": "pages/address/addediting/ADDediting",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/user/personal/personal",
-          "pathName": "pages/user/personal/personal",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/InformationDetails/InformationDetails/InformationDetails",
-          "pathName": "pages/InformationDetails/InformationDetails/InformationDetails",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/visitapplication/newDetalis/newDetalis",
-          "pathName": "pages/visitapplication/newDetalis/newDetalis",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/operation/visitRecord/visitRecord",
-          "pathName": "pages/operation/visitRecord/visitRecord",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/communityForum/introduction/introduction",
-          "pathName": "pages/communityForum/introduction/introduction",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/communityForum/introduction/introduction",
-          "pathName": "pages/communityForum/introduction/introduction",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/communityForum/forumlists/forumlists",
-          "pathName": "pages/communityForum/forumlists/forumlists",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/auth/login/login",
-          "pathName": "pages/auth/login/login",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/communityForum/release/release",
-          "pathName": "pages/communityForum/release/release",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/residence/checkRecord/checkRecord",
-          "pathName": "pages/residence/checkRecord/checkRecord",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/visitapplication/goRecord/goRecord",
-          "pathName": "pages/visitapplication/goRecord/goRecord",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/user/personal/personal",
-          "pathName": "pages/user/personal/personal",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/communityForum/forumlists/forumlists",
-          "pathName": "pages/communityForum/forumlists/forumlists",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "components/forum/forumdils",
-          "pathName": "components/forum/forumdils",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/visitapplication/visit/visit",
-          "pathName": "pages/visitapplication/visit/visit",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/classification/scenicSpot/scenicSpot",
-          "pathName": "pages/classification/scenicSpot/scenicSpot",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/classification/shopping/shopping",
-          "pathName": "pages/classification/shopping/shopping",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": -1,
-          "name": "pages/web/index/index",
-          "pathName": "pages/web/index/index",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }

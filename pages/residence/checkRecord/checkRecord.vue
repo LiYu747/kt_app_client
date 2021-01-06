@@ -79,13 +79,9 @@
 		methods: {
 			// 去详情
 			godetails(item) {
-				urlUtil.to({
-					pageAlias: 'move_in_apply_detail',
-					options: 'id=' + item.id,
+				uni.navigateTo({
+					url: `/pages/residence/checkdetails/checkdetails?id=${item.id}`
 				})
-				// uni.navigateTo({
-				// 	url: `/pages/residence/checkdetails/checkdetails?id=${id}`
-				// })
 			},
 			// 返回
 			goback() {
@@ -95,8 +91,6 @@
 			},
 			// 获取数据
 			loadPageData() {
-
-				
 
 				this.isLoding = true;
 

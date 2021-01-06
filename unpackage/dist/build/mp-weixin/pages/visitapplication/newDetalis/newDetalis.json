@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "最新拜访信息",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "usingComponents": {

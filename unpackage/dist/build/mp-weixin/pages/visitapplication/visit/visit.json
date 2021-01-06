@@ -1,7 +1,7 @@
 {
-  "navigationBarTitleText": "拜访申请",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
-  "navigationStyle": "custom", 
+  "navigationStyle": "custom",
   "usingComponents": {
     "u-field": "/uview-ui/components/u-field/u-field",
     "u-select": "/uview-ui/components/u-select/u-select",

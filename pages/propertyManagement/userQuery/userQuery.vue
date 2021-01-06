@@ -16,7 +16,7 @@
 
 		</view>
 		<view v-if="lists.length>0" class="flex-d al-center m-t1">
-			<view class="itemBox" @click="goUserDetails" v-for=" item in lists" :key='item.id'>
+			<view class="itemBox" @click="goUserDetails" v-for=" (item,index) in lists" :key='index'>
 				<view class="flex al-center">
 					<view class="itemName">
 						{{item.username}}
@@ -108,6 +108,7 @@
 			},
 			// 搜索
 			search(){
+				this.noText = ''
 				this.falg = true
 				this.lists = []
 				this.page = 1
@@ -291,7 +292,7 @@
 		height: 66rpx;
 		border-radius: 50%;
 		background: rgb(255, 0, 0);
-		color: #ffff;
+		color: #ffffff;
 	}
 
 	.itemIDcard {
@@ -321,7 +322,7 @@
 	}
 
 	.bomLine {
-		margin-top: 20rpx;
+		margin: 30rpx 0;
 		width: 100%;
 		font-size: 12px;
 	}

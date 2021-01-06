@@ -2,18 +2,23 @@
 	<view class="">
 		<view class="fixed ">
 			<subunit titel='消息' class=""></subunit>
-			<!-- <view class=" pos-abs empty">
-				清空
-			</view> -->
+			<view @click="ReadAll" class=" pos-abs empty">
+				全部已读
+			</view>
 		</view>
 		<view class="topLine"></view>
 		<view v-if="infoLists.length>0" class="contenBox">
-			<view class="itemBox flex al-center pos-rel" @click="goDetails(item)" v-for="item in infoLists" :key='item.id'>
-				<view class="itemTxt">
-					{{item.title}}
+			<view class="flex-d al-center"  v-for="item in infoLists" :key='item.id'>
+				<view class="itemTime">
+					{{item.created_at}}
 				</view>
-				<view v-if="item.read_at == null" class="circle pos-abs">
+				<view @click="goDetails(item)" class="itemBox flex al-center pos-rel">
+					<view class="itemTxt">
+						{{item.title}}
+					</view>
+					<view v-if="item.read_at == null" class="circle pos-abs">
 					
+					</view>
 				</view>
 			</view>
 			<view v-show="isLoding == true&&infoLists.length>0" class=" flex ju-center al-center lodbox">
@@ -60,19 +65,59 @@
 			}
 		},
 		methods: {
+			// 全部已读
+			ReadAll() {
+				uni.showLoading({
+					title:'加载中'
+				})
+				home.allRead({
+					data: {},
+					fail: () => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络出错',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						uni.hideLoading()
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出问题了',
+								icon: 'none'
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						}
+						this.page = 1
+						this.infoLists = []
+						this.getInform()
+						// console.log(res);
+					}
+				})
+			},
+
 			// 去详情页面
-			goDetails(item){
-				if(!item.page) return;
+			goDetails(item) {
+				this.Read(item.id)
+				if (!item.page) return;
 				urlUtil.to({
 					pageAlias: item.page,
 					options: item.params,
 				})
-				this.Read(item.id)
 			},
 			// 消息已读
-			Read(id){
+			Read(id) {
 				home.userRead({
-					data:{id:id},
+					data: {
+						id: id
+					},
 					fail: () => {
 						uni.showToast({
 							title: '网络出错',
@@ -80,9 +125,12 @@
 						})
 					},
 					success: (res) => {
-						if(res.statusCode != 200) return;
-						if(res.data.code != 200) return;
-						console.log(res);
+						if (res.statusCode != 200) return;
+						if (res.data.code != 200) return;
+						this.page = 1
+						this.infoLists = []
+						this.getInform()
+						// console.log(res);
 					}
 				})
 			},
@@ -120,6 +168,9 @@
 						let data = res.data.data
 						this.page = data.current_page + 1;
 						this.hasMore = data.next_page_url ? true : false;
+						data.data.map( item => {
+							item.created_at = item.created_at.slice(0,16)
+						})
 						this.infoLists = this.infoLists.concat(data.data)
 						// console.log(data.data);
 					}
@@ -239,12 +290,18 @@
 		margin-top: 100rpx;
 		color: #999999;
 	}
-	
-	.circle{
+
+	.circle {
 		width: 16rpx;
 		height: 16rpx;
 		border-radius: 50%;
 		background: red;
 		right: 20rpx;
+	}
+	
+	.itemTime{
+		font-size: 12px;
+		color: #999999;
+		margin-bottom: 10rpx;
 	}
 </style>

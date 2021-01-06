@@ -92,7 +92,7 @@
 		<view class="btom">
 
 		</view>
-		<subbotn :id='id'></subbotn>
+		<subbotn :ids='id'></subbotn>
 	</view>
 </template>
 

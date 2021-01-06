@@ -20,7 +20,7 @@
 				</view>
 			</view>
 			<view class="line"></view>
-			<view class="accessoryBox">
+			<view v-if="files.length>0" class="accessoryBox">
 				<view class="remarkTil">
 					附件
 				</view>
@@ -277,7 +277,7 @@
 		width: 94%;
 		padding: 3%;
 		height: 100rpx;
-		background: #ffff;
+		background: #FFFFFF;
 		border-radius: 10rpx;
 		font-size: 12px;
 		color: rgb(165, 165, 165);

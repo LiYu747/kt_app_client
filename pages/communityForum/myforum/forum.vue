@@ -100,7 +100,7 @@
 				</view>
 			</view>
 		</view>
-		<submy :id='id'></submy>
+		<submy :ids='id'></submy>
 	</view>
 </template>
 

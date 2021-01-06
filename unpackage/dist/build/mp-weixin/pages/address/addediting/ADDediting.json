@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "小区详情",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "usingComponents": {

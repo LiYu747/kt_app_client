@@ -25,13 +25,13 @@
 		<view class="uploadFiles">
 			<view class="uploadTil flex al-center">
 				上传图片
-				<view v-if="text" class="fz-12 m-l1 c-red">
+				<view v-if="textShow==true" class="fz-12 m-l1 c-red">
 					(*您可以上传外卖或者快递的图片给用户)
 				</view>
 			</view>
 			<view class="filesBox flex">
-				<view class="" v-for="item in images" :key='item.id'>
-					<image :src="item" class="itemImg" mode=""></image>
+				<view v-if="images" class="" >
+					<image :src="images" class="itemImg" mode=""></image>
 				</view>
 				<view @click="succ" class="puls flex-d al-center ju-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>
@@ -131,9 +131,10 @@
 				id: [],
 				show: false,
 				value: [], //小区列表默认选择的对象
-				images: [], //要上传的文件
+				images: '', //要上传的文件
 				text:'' ,//默认备注
-				isLoding: false
+				isLoding: false,
+				textShow:false
 			}
 		},
 		methods: {
@@ -168,7 +169,6 @@
 				this.record.map((item, index) => {
 					if (index === 4) {
 						item.value = arr
-
 					}
 				})
 				// console.log(index);
@@ -225,8 +225,9 @@
 								rej(jres.msg);
 								return;
 							}
+								that.images = jres.data.url 
 							// console.log(jres.data.url);
-							that.images.push(jres.data.url)
+							
 							res(jres);
 						}
 					})
@@ -261,7 +262,8 @@
 						apartmentId: this.id[2],
 						floorId: this.id[3],
 						roomId: this.id[4],
-						visitorRemark: this.text
+						visitorRemark: this.text,
+						ext_img:this.images
 					},
 					fail: (err) => {
 						uni.hideLoading()
@@ -292,7 +294,7 @@
 							title: res.data.msg,
 							duration: 2000
 						});
-						this.images = []
+						this.images = ''
 						this.text = ''
 						this.record[3].value = ''
 						this.record[4].value = ''
@@ -479,8 +481,11 @@
 
 		},
 		onLoad(option) {
-		   if(!option.text)  return;
-          this.text = option.text
+		   if(option.text)  {
+			   this.text = option.text
+			   this.textShow = true
+		   }
+          
 		},
 		filters: {
 
