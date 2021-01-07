@@ -24,8 +24,8 @@
 				<!-- 密码 -->
 				<u-form-item v-show="iSlogin==true" label="" prop="password">
 					<view class="uiput flex al-center pos-rel">
-							<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
-						<u-input class="ipt" type="text" :clearable='flag' v-model="form.password" placeholder="输入密码" value="" />
+						<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
+						<u-input class="ipt" type="password" :clearable='flag' v-model="form.password" placeholder="输入密码" value="" />
 					</view>
 				</u-form-item>
 				<!-- 验证码 -->
@@ -39,19 +39,19 @@
 							</view>
 						</view>
 					</view>
-					<u-toast ref="uToast" />
 				</u-form-item>
+				<u-toast ref="uToast" />
 			</u-form>
 		</view>
-		
-		<!-- <view @click="cut" class="">
+
+		<view @click="cut" class="">
 			<view v-show="iSlogin==true" class="passlogin flex m-t1">
 				验证码登录
 			</view>
 			<view v-show="iSlogin==false" class="passlogin flex m-t1">
 				密码登录
 			</view>
-		</view> -->
+		</view>
 
 		<!-- 登录按钮 -->
 		<view class="flex-d al-center m-t4">
@@ -94,21 +94,22 @@
 		props: {},
 		data() {
 			return {
-				iSlogin:false,
+				iSlogin: false,
 				flag: false,
 				text: '获取验证码',
 				code: true,
 				timer: 60,
+				loginMethod: 'sms_code', //默认验证码登录sms_code，密码登录为secret
 				form: {
 					phone: '',
-					password:'',
+					password: '',
 					Verification: ''
 				},
 				rules: {
 					phone: [
 						// 对电话字段格式验证
 						{
-							pattern:/^1[3|4|5|7|8][0-9]{9}$/,
+							pattern: /^1[3|4|5|7|8][0-9]{9}$/,
 							message: '手机号码格式不正确',
 							trigger: 'blur'
 						},
@@ -127,11 +128,11 @@
 			// 获取验证码
 			addvercode() {
 
-				if (this.code != true )  return;
-				if( this.form.phone == ''){
+				if (this.code != true) return;
+				if (this.form.phone == '') {
 					uni.showToast({
-						title:'请输入手机号',
-						icon:'none'
+						title: '请输入手机号',
+						icon: 'none'
 					})
 					return;
 				}
@@ -139,59 +140,67 @@
 					title: '发送中...'
 				})
 				sms.userLoginCode({
-						data: {
-							tel: this.form.phone,
-						},
-						fail: () => {
-							uni.hideLoading()
+					data: {
+						tel: this.form.phone,
+					},
+					fail: () => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						// console.log(res);
+						// 发送成功
+						uni.hideLoading()
+						if (res.statusCode != 200) {
 							uni.showToast({
-								title: '网络错误',
-								icon:'none'
-							})
-						},
-						success: (res) => {
-							// console.log(res);
-							// 发送成功
-							uni.hideLoading()
-							if (res.statusCode != 200) {
-								uni.showToast({
-									title: '网络请求出错',
-									icon:'none'
-								});
-								return;
-							}
-						     if (res.data.code != 200) {
-						     	uni.showToast({
-						     		title: res.data.msg,
-						     		icon: 'none'
-						     	});
-						     	return;
-						     }
-								uni.showToast({
-									title: res.data.msg,
-									icon:'none',
-									duration: 2000
-								})
-								// console.log(res.data.data.code);
-								const authtime = setInterval(() => {
-									this.code = false
-									this.timer--
-									this.text = '验证码' + '(' + this.timer + 's' + ')'
-									if (this.timer <= 0) {
+								title: '网络请求出错',
+								icon: 'none'
+							});
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							});
+							return;
+						}
+						uni.showToast({
+							title: res.data.msg,
+							icon: 'none',
+							duration: 2000
+						})
+						// this.form.Verification = res.data.data.code 
+						// console.log(res.data.data.code);
+						const authtime = setInterval(() => {
+							this.code = false
+							this.timer--
+							this.text = '验证码' + '(' + this.timer + 's' + ')'
+							if (this.timer <= 0) {
 
-										this.timer = 60
-										this.text = '重新发送'
-										this.code = true
-										clearInterval(authtime)
-									}
-								}, 1000)
-						},
-					})
+								this.timer = 60
+								this.text = '重新发送'
+								this.code = true
+								clearInterval(authtime)
+							}
+						}, 1000)
+					},
+				})
 
 			},
 			// 切换登录
-			cut(){
-			this.iSlogin = !this.iSlogin
+			cut() {
+				this.iSlogin = !this.iSlogin
+				// this.iSlogin 为true 是密码登录 ,反之
+				if (this.iSlogin == true) {
+					this.loginMethod = 'secret'
+				}
+				if (this.iSlogin == false) {
+					this.loginMethod = 'sms_code'
+				}
 			},
 			// 返回按钮
 			goback() {
@@ -215,17 +224,10 @@
 			},
 			// 登录
 			Login() {
-				if(this.form.phone == ''){
+				if (this.form.phone == '') {
 					uni.showToast({
-						title:'请输入手机号',
-						icon:'none'
-					})
-					return;
-				}
-				if(this.form.Verification == ''){
-					uni.showToast({
-						title:'请输入验证码',
-						icon:'none'
+						title: '请输入手机号',
+						icon: 'none'
 					})
 					return;
 				}
@@ -234,8 +236,10 @@
 				})
 				userinfo.Signin({
 					data: {
+						login_method: this.loginMethod,
 						tel: this.form.phone,
-						smsCode: this.form.Verification
+						smsCode: this.form.Verification,
+						secret: this.form.password
 					},
 					fail: () => {
 						uni.hideLoading()
@@ -248,6 +252,10 @@
 						uni.hideLoading()
 						// console.log(res);
 						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
 							return;
 						}
 						if (res.data.code != 200) {
@@ -268,23 +276,22 @@
 							jwt.execTask();
 						})
 						// 
-						 this.$refs.uToast.show({
-						 	title: res.data.msg,
-						 	type: 'success',
-						 });
+						this.$refs.uToast.show({
+							title: res.data.msg,
+							type: 'success',
+						});
 						const time = setTimeout(() => {
-							if(this.isRegister == 'true'){
+							if (this.isRegister == 'true') {
 								uni.navigateBack({
-									delta:3
+									delta: 3
 								})
-							}
-							else{
+							} else {
 								uni.navigateBack({
-									delta:1
+									delta: 1
 								})
 							}
 							clearTimeout(time)
-						}, 2000)	 
+						}, 2000)
 					},
 				})
 			}
@@ -296,9 +303,9 @@
 			this.$refs.uForm.setRules(this.rules);
 		},
 		onLoad(val) {
-			if(!val.register) return;
+			if (!val.register) return;
 			// console.log(val);
-			this.isRegister = val.register		 
+			this.isRegister = val.register
 		},
 		filters: {
 
@@ -318,7 +325,7 @@
 <style scoped lang="scss">
 	.back {
 		position: relative;
-		background-image: url( https://oss.kuaitongkeji.com/static/img/app/login/backg.png);
+		background-image: url(https://oss.kuaitongkeji.com/static/img/app/login/backg.png);
 		height: 100vh;
 		background-repeat: no-repeat; //不重复
 		background-size: 100% 100%; // 满屏
@@ -439,8 +446,8 @@
 		font-size: 12px;
 		margin-top: 57rpx;
 	}
-	
-	.passlogin{
+
+	.passlogin {
 		font-size: 12px;
 		color: #F07535;
 		margin-right: 100rpx;

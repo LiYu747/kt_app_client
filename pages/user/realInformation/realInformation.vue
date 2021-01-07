@@ -6,7 +6,7 @@
 		</view>
 		<view class="flex-d al-center">
 			<view class="contenBox">
-				<view class="flex al-center ju-between itemBox pos-rel" v-for=" (item,index) in locdata" :key='item.id'>
+				<view class="flex al-center ju-between itemBox pos-rel" @click="settingPsw(index)" v-for=" (item,index) in locdata" :key='item.id'>
 					<view class="">
 						{{item.label}}
 					</view>
@@ -60,15 +60,23 @@
 						focus: false,
 						placeholder: '请输入您的身份证号'
 					},
-					// {
-					// 	label: '修改密码',
-					// 	value: '',
-					// 	disabled:true
-					// },
+					{
+						label: '设置新密码',
+						value: '',
+						disabled:true
+					},
 				]
 			}
 		},
 		methods: {
+			
+			// 设置密码
+			settingPsw(index){
+				if(index != 2) return;
+				uni.navigateTo({
+				 url:'/pages/user/realInformation/setPassword/setPassword'	
+				})
+			},
 
 			//保存
 			save() {

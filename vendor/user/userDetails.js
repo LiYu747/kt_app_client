@@ -26,6 +26,18 @@ class userd{
 		req.patch(params)
 	}
 	
+	// 设置密码的验证码
+	stePawcode(params){
+		params.url = routes.user.userupdate.stePawcode
+		req.post(params)
+	}
+	
+	//设置新密码
+	steNewpaw(params){
+		params.url = routes.user.userupdate.steNewpaw
+		req.patch(params)
+	}
+	
 	//获取地图导航key
 	Navigation(params){
 		params.url = routes.Navigation.Navmap;

@@ -1,8 +1,8 @@
 //测试域名
-// let host = 'https://test.kuaitongkeji.com/'
+let host = 'https://test.kuaitongkeji.com/'
 //本地开发域名
 // let host = 'http://local.kt.cn/';
-let host = 'https://api.kuaitongkeji.com/';   
+// let host = 'https://api.kuaitongkeji.com/';   
 let apiPath = host + 'api/';
 
 
@@ -58,7 +58,13 @@ module.exports = {
 			updataphoto: apiPath + 'user/user/setFaceimg',
 			
 			// 更新实名认证信息
-			updataRealname : apiPath + 'user/user/realInfo'
+			updataRealname : apiPath + 'user/user/realInfo',
+			
+			// 设置密码的验证码
+			stePawcode : host + 'services/sms/setSecret',
+			
+			//设置新密码
+			steNewpaw : apiPath + 'user/user/password'
 			
 		},
 

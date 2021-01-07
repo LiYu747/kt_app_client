@@ -158,14 +158,15 @@
 				
 			//删除成员
 				delMember(){
-					uni.showLoading({
-						title:'加载中'
-					})
+					
 					uni.showModal({
 						content:'您确定要删除该成员吗',
 						success:(res) => {
 							// console.log(res);
 							if(res.confirm){
+								uni.showLoading({
+									title:'加载中'
+								})
 								address.deleteMember({
 									data:{id:this.id},
 									fail: () => {
