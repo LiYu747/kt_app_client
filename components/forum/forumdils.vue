@@ -63,7 +63,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view class="nono flex al-center ju-center" v-if="comments.length==0&&this.isLoding==false">
+		<view class="nono flex al-center ju-center" v-if="comments.length==0&&isLoding==false">
 			还没有任何评论哦~
 		</view>
 		<view v-show="flag===true" class="btom">
@@ -126,22 +126,20 @@
 			},
 			// 详情数据 
 			Data() {
-				uni.showLoading({
-					title: '加载中...'
-				})
+				this.isLoding = true;
 				village.postDetails({
 					data: {
 						id: this.id
 					},
 					fail: (err) => {
-						uni.hideLoading()
+						this.isLoding = false;
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
-						uni.hideLoading()
+						this.isLoding = false;
 						// console.log(res.data.data);
 						if (res.statusCode != 200) return
 						if (res.data.code == 200) {
@@ -473,7 +471,7 @@
 	}
 
 	.nono {
-		border-top: 1rpx solid #B3B3B3;
+		border-top: 1px solid #B3B3B3;
 		width: 100%;
 		font-size: 28rpx;
 		color: #666666;

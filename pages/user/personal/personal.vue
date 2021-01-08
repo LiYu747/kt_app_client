@@ -246,7 +246,7 @@
 						}
 						// console.log(res.data.data);
 						let data = res.data.data
-						if(data.image == 'https://oss.kuaitongkeji.com/static/img/avatar/male_64.png'){
+						if(data.avatar == 'https://oss.kuaitongkeji.com/static/img/avatar/male_64.png'){
 							this.flag = true
 						}	
 						this.faceimg = data.faceimg
@@ -260,7 +260,9 @@
 						}
 						this.parameter[3].value = data.username
 						this.parameter[4].value =   data.tel.slice(0,3) + '****' +data.tel.slice(7,11)
-						this.parameter[5].value =  data.id_card_no.slice(0,3) + '**********' + data.id_card_no.slice(data.id_card_no.length-4,data.id_card_no.length)
+						if(data.id_card_no){
+							this.parameter[5].value =  data.id_card_no.slice(0,3) + '**********' + data.id_card_no.slice(data.id_card_no.length-4,data.id_card_no.length)
+						}
 					},
 				})
 			}

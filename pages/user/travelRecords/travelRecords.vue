@@ -19,7 +19,7 @@
 					{{item.desc}}
 				</view>
 			</view>
-			<view v-show="isLoding == true" class=" flex ju-center m-t2 al-center lodbox">
+			<view v-show="isLoding == true  " class=" flex ju-center m-t2 al-center lodbox">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
@@ -31,7 +31,7 @@
 			暂无出行记录
 		</view>
 		
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+		<view v-show="isLoding == true && lists.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
 					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>

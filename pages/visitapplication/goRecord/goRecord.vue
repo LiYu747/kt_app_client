@@ -37,7 +37,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view v-else class="nono flex al-center ju-center">
+		<view v-if="lists.length==0 && isLoding == false" class="nono flex al-center ju-center">
 			您还没有申请记录哦~
 		</view>
 

@@ -11,6 +11,18 @@
 		<view class="logo flex ju-center">
 			<image src="https://oss.kuaitongkeji.com/static/img/app/login/logo.png" class="logoimg" mode=""></image>
 		</view>
+		
+		<view  class="cutBox flex al-center">
+			<view @click="cut" class="">
+				<view v-show="iSlogin==false" class="passlogin flex m-t1">
+					验证码登录
+				</view>
+				<view v-show="iSlogin==true" class="passlogin flex m-t1">
+					密码登录
+				</view>
+			</view>
+			<image src="../../../image/zhuanh.png" class="zhuanh" mode=""></image>
+		</view>
 		<!-- 输入框 -->
 		<view class="top flex-d al-center">
 			<u-form :model="form" ref="uForm">
@@ -22,14 +34,14 @@
 					</view>
 				</u-form-item>
 				<!-- 密码 -->
-				<u-form-item v-show="iSlogin==true" label="" prop="password">
+				<u-form-item v-show="iSlogin==false" label="" prop="password">
 					<view class="uiput flex al-center pos-rel">
 						<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
 						<u-input class="ipt" type="password" :clearable='flag' v-model="form.password" placeholder="输入密码" value="" />
 					</view>
 				</u-form-item>
 				<!-- 验证码 -->
-				<u-form-item v-show="iSlogin==false" label="" prop="Verification">
+				<u-form-item v-show="iSlogin==true" label="" prop="Verification">
 					<view class="uiput flex al-center pos-rel">
 						<image class="iptimg2 pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/login/security.png" mode=""></image>
 						<u-input class="ipt" type="number" :clearable='flag' v-model="form.Verification" placeholder="输入验证码" />
@@ -44,14 +56,7 @@
 			</u-form>
 		</view>
 
-		<view @click="cut" class="">
-			<view v-show="iSlogin==true" class="passlogin flex m-t1">
-				验证码登录
-			</view>
-			<view v-show="iSlogin==false" class="passlogin flex m-t1">
-				密码登录
-			</view>
-		</view>
+	
 
 		<!-- 登录按钮 -->
 		<view class="flex-d al-center m-t4">
@@ -99,7 +104,7 @@
 				text: '获取验证码',
 				code: true,
 				timer: 60,
-				loginMethod: 'sms_code', //默认验证码登录sms_code，密码登录为secret
+				loginMethod: 'secret', //默认密码登录为secret,验证码登录sms_code，
 				form: {
 					phone: '',
 					password: '',
@@ -194,12 +199,12 @@
 			// 切换登录
 			cut() {
 				this.iSlogin = !this.iSlogin
-				// this.iSlogin 为true 是密码登录 ,反之
+				// this.iSlogin 为true 是验证码 ,反之
 				if (this.iSlogin == true) {
-					this.loginMethod = 'secret'
+						this.loginMethod = 'sms_code'
 				}
 				if (this.iSlogin == false) {
-					this.loginMethod = 'sms_code'
+					this.loginMethod = 'secret'
 				}
 			},
 			// 返回按钮
@@ -368,18 +373,22 @@
 			color: #FF773C;
 			// background: red; 
 			font-size: 12px;
-			width: 350rpx;
+			width: 430rpx;
 		}
 
 		/deep/ .uni-input-placeholder {
 			color: #FF773C !important;
 			font-size: 12px;
 		}
+			/deep/
+		.u-icon__icon{
+			font-size: 18px !important;
+		}
 	}
 
-
+   
 	.top {
-		margin-top: 75rpx;
+		// margin-top: 75rpx;
 	}
 
 	.iptimg {
@@ -446,11 +455,24 @@
 		font-size: 12px;
 		margin-top: 57rpx;
 	}
+	
+	.cutBox{
+		margin-top: 75rpx;
+		height: 50rpx;
+		width: 650rpx;
+		display: flex;
+		justify-content: flex-end;
+	}
 
 	.passlogin {
 		font-size: 12px;
 		color: #F07535;
-		margin-right: 100rpx;
-		justify-content: flex-end;
+	}
+	
+	.zhuanh{
+		margin-top: 8rpx;
+		margin-left: 10rpx;
+		width: 30rpx;
+		height: 30rpx;
 	}
 </style>

@@ -36,6 +36,7 @@
 		},
 		methods: {
 			getData() {
+				this.list = []
 				home.CommunityNews({
 					data: {},
 					fail: (err) => {
@@ -142,21 +143,13 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 1;
-		
 	}
 	.imgnb {
 		width: 23rpx;
 		height: 20rpx;
 	}
 
-	.text {
-		color: #FFAD4C;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
-	}
+
 
 	.imgss {
 		width: 28rpx;
