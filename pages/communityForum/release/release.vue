@@ -43,7 +43,7 @@
 			</view>
 			<u-popup mode='bottom' height="600rpx" v-model="show">
 				<view class="operation flex al-center pos-rel">
-                         <view @click=" show = false" class="m-t1 m-l1">
+                         <view @click=" show = false" class="m-t2 m-l2">
                          	取消
                          </view>
 						 <view @click="ok" class="affirm pos-abs">
@@ -63,7 +63,29 @@
 				</view>
 				<textarea class="are" v-model="content" maxlength='1000'></textarea>
 			</view>
-
+             <!-- //自己可见 -->
+             <view @click="seeShow = true" class="celShow flex al-center pos-rel">
+              	<image src="../../../image/forum/uplock.png" class="uplockImg" mode=""></image>
+			  <view class=" fz-14 m-l2">
+			  	{{seeTet}}
+			  </view>
+			  <image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+             </view>
+			 <u-popup mode='bottom' height="400rpx" border-radius='20' v-model="seeShow">
+			 	<view class="operation flex al-center pos-rel">
+			           
+			 	</view>
+				<view class="seeBox">
+					<view class="flex al-center seeItem" @click="addCel(item,index)" v-for="(item,index) in seeList" :key='item.id'>
+						<image :src="item.ref" class="uplockImg" mode=""></image>
+						<view class="itemLb">
+							{{item.label}}
+						</view>
+						<image v-show="index==idx" src="../../../image/forum/sclyse.png" class="sclyseImg" mode=""></image>
+					</view>
+				</view>
+			 </u-popup>
+			 
 			<!-- 提交 -->
 			<view @click="Submit" class="matop flex al-center ju-center">
 				<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
@@ -122,15 +144,36 @@
 				content: '', //内容
 				isLoding: false,
 				choiceID:''  , //标签选中的id
+				seeTet:'公开可见',
+				seeShow:false,
+				idx:"",
+				seeList: [
+					{
+					 value: '1',
+					 label: '公开可见',
+					   ref:require('@/image/forum/uplock.png')
+					}	,
+				 {
+				  value: '0',
+				  label: '仅自己可见',
+				  ref:require('@/image/forum/lock.png')
+				 }	,
+				 
+				]
 			}
 		},
 		methods: {
+			// 选择是否可见
+			addCel(item,index){
+				this.idx = index
+			},
 
 			// 选中
 			choice(item) {
 				if (item.default) return
 				item.type = !item.type
 			},
+			
             // 确定选择
 			ok(){
 			   this.choiceData  =  this.tagdata.filter( item => {
@@ -143,6 +186,7 @@
 				this.choiceID = this.choiceID.slice(0,this.choiceID.length-1)
                 this.show = false
 			},
+			
 			// 选择文件
 			add() {
 				uni.chooseImage({
@@ -263,7 +307,7 @@
 			
 		},
 		mounted() {
-this.grtColumn()
+           this.grtColumn()
 		},
 		onLoad(val) {
 			this.id = val.id
@@ -359,7 +403,7 @@ this.grtColumn()
 		padding: 0 20rpx;
 		color: #666666;
 	}
-
+	
 	.tex1 {
 		font-size: 28rpx;
 	}
@@ -368,11 +412,22 @@ this.grtColumn()
 		font-size: 24rpx;
 		width: 550rpx;
 	}
+	
+	.celShow{
+		margin-top: 20rpx;
+		width: 649rpx;
+		height: 80rpx;
+		background: #FFFFFF;
+		border-radius: 10rpx;
+		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		padding: 0 20rpx;
+		color: #666666;
+	}
 
 	.content {
 		margin-top: 30rpx;
 		width: 649rpx;
-		height: 250rpx;
+		height: 210rpx;
 		padding: 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
@@ -382,7 +437,7 @@ this.grtColumn()
 	.are {
 		margin-top: 4rpx;
 		margin-left: 10rpx;
-		height: 240rpx;
+		height: 200rpx;
 		width: 550rpx;
 		font-size: 24rpx;
 		align-content: center;
@@ -460,8 +515,9 @@ this.grtColumn()
 	}
 	
 	.affirm{
-		top: 10rpx;
-		right: 10rpx;
+		top: 20rpx;
+		right: 20rpx;
+		color: rgb(50,150,250);
 	}
 	
 	.optbox{
@@ -483,4 +539,42 @@ this.grtColumn()
 	.boot{
 		height: 150rpx;
 	}
+	
+	.uplockImg{
+		width: 30rpx;
+		height: 30rpx;
+		}
+		
+	 .reimg {
+		 position: absolute;
+		 right: 30rpx;
+	 	width: 18rpx;
+	 	height: 25rpx;
+	 }	
+	 
+	 .seeBox{
+		 padding: 40rpx;
+		 padding-right: 0;
+	 }
+	 
+	 .seeItem{
+		 height: 90rpx;
+		 font-size: 14px;
+	 }
+	 
+	 .itemLb{
+		 margin-left: 10rpx;
+		 display: flex;
+		 align-items: center;
+		 width: 100%;
+		 height: 90rpx;
+		 border-bottom: 1px solid #EEEEEE;
+	 }
+	 
+	 .sclyseImg{
+		 width: 44rpx;
+		 height: 44rpx;
+		 position: absolute;
+		 right: 30rpx;
+	 }
 </style>
