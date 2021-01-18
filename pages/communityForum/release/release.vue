@@ -65,9 +65,9 @@
 			</view>
              <!-- //自己可见 -->
              <view @click="seeShow = true" class="celShow flex al-center pos-rel">
-              	<image src="../../../image/forum/uplock.png" class="uplockImg" mode=""></image>
+              	<image :src="seeTet.img" class="uplockImg" mode=""></image>
 			  <view class=" fz-14 m-l2">
-			  	{{seeTet}}
+			  	{{seeTet.text}}
 			  </view>
 			  <image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
              </view>
@@ -144,21 +144,24 @@
 				content: '', //内容
 				isLoding: false,
 				choiceID:''  , //标签选中的id
-				seeTet:'公开可见',
 				seeShow:false,
 				idx:"",
+				visible:'1',
+				seeTet:{
+					text : '公开 : 所有人可见',
+					img:require('@/image/forum/uplock.png')
+				},
 				seeList: [
 					{
 					 value: '1',
-					 label: '公开可见',
+					 label: '公开 : 所有人可见',
 					   ref:require('@/image/forum/uplock.png')
 					}	,
 				 {
 				  value: '0',
-				  label: '仅自己可见',
+				  label: '私密 : 仅自己可见',
 				  ref:require('@/image/forum/lock.png')
 				 }	,
-				 
 				]
 			}
 		},
@@ -166,6 +169,9 @@
 			// 选择是否可见
 			addCel(item,index){
 				this.idx = index
+				this.seeTet.img = item.ref
+				this.seeTet.text = item.label
+				this.visible = item.value
 			},
 
 			// 选中
@@ -242,7 +248,8 @@
 						title: this.title,
 						content: this.content,
 						albums: this.image,
-						tribune_cat:this.choiceID
+						tribune_cat:this.choiceID,
+						visible: this.visible
 					},
 					fail: (err) => {
 						uni.hideLoading()
