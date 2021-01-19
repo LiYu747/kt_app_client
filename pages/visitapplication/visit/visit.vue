@@ -31,7 +31,7 @@
 			</view>
 			<view class="filesBox flex">
 				<view v-if="images" class="" >
-					<image :src="images" class="itemImg" mode=""></image>
+					<image :src="images" class="itemImg" mode="aspectFill"></image>
 				</view>
 				<view @click="succ" class="puls flex-d al-center ju-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>

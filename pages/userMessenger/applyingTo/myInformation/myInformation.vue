@@ -19,7 +19,7 @@
 				</view>
 				<view class="filesBox">
 					<view class="" v-for="item in files" :key='item.id'>
-						<image :src="item" class="itemImg" mode=""></image>
+						<image :src="item" class="itemImg" mode="aspectFill"></image>
 					</view>
 				</view>
 			</view>

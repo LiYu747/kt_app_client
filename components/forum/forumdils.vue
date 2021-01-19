@@ -1,8 +1,8 @@
 <template>
 	<view class="">
-		<subunit class="pos" titel="小区论坛" :retur="true" @goback='goback'></subunit>
-		<view class="ged"></view>
-		<view class="woer ">
+		<subunit class="fixed" titel="详情"></subunit>
+		<view class="topLine"></view>
+		<view class="woer">
 			<view class="nav flex">
 				<image class="img" :src="user.avatar" mode=""></image>
 				<view class="m-l2 text">
@@ -27,7 +27,7 @@
 			<!-- 图片 -->
 			<view class="flex al-center imgbx">
 				<view class="" v-for="item in arr.album" @click="look(item)" :key='item.id'>
-					<image class="itemimg" :src="item.url" mode=""></image>
+					<image class="itemimg" :src="item.url" mode="aspectFill"></image>
 				</view>
 			</view>
 			<view class="layou">
@@ -77,7 +77,7 @@
 		</view>
 		<!-- 查看图片 -->
 		<view v-show="see == true" @click="off" class="look flex al-center ju-center">
-			<image :src="src" class="srcimg" mode=""></image>
+			<image :src="src" class="srcimg" mode="aspectFill"></image>
 		</view>
 
 		<view v-show="isLoding == true&&comments.length==0" class="showloding flex al-center ju-center">
@@ -112,18 +112,14 @@
 				src: '', //查看图片路径
 				see: false, //图片遮罩层
 				page: 1,
+				pageSize:15,
 				isLoding: false,
 				hasMore: true,
 				text: '',
+	
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
 			// 详情数据 
 			Data() {
 				this.isLoding = true;
@@ -131,7 +127,7 @@
 					data: {
 						id: this.id
 					},
-					fail: (err) => {
+					fail: () => {
 						this.isLoding = false;
 						uni.showToast({
 							title: '网络错误',
@@ -153,12 +149,6 @@
 								icon: 'none',
 								duration: 2000
 							})
-							const time = setTimeout(() => {
-								uni.navigateBack({
-									delta: 1
-								})
-								clearTimeout(time)
-							}, 2000)
 						}
 					}
 				})
@@ -170,6 +160,7 @@
 					data: {
 						tribune_id: this.id,
 						page: this.page,
+						pageSize:this.pageSize
 					},
 					fail: (err) => {
 						this.isLoding = false;
@@ -191,7 +182,8 @@
 							item.created_at = item.created_at.slice(0, 16)
 						})
 						this.hasMore = data.next_page_url ? true : false;
-						this.comments = data.data
+						this.page = this.page + 1
+						this.comments = this.comments.concat(data.data) 
 					},
 				})
 			},
@@ -232,6 +224,7 @@
 						if (res.data.code == 200) {
 							this.page = 1
 							this.context = ''
+							this.comments = []
 							this.loadPageData()
 							uni.showToast({
 								title: res.data.msg,
@@ -250,46 +243,18 @@
 
 		},
 		mounted() {
+			
+			
+		},
+		onShow(){
 			this.Data()
 			this.loadPageData()
 		},
 		// 下拉加载更多
 		onReachBottom() {
-			// console.log(this.hasMore);
-			if (this.hasMore == true&&this.isLoding == false) {
-				this.isLoding = true;
-				this.page = this.page + 1
-				village.postComments({
-					data: {
-						tribune_id: this.id,
-						page: this.page,
-					},
-					fail: (err) => {
-						this.isLoding = false;
-						uni.showToast({
-							title: '网络错误',
-							icon: 'none'
-						})
-						// console.log(err);
-					},
-					success: (res) => {
-						this.isLoding = false;
-						// console.log(res);
-						if (res.statusCode != 200) return;
-
-						if (res.data.code != 200) return;
-
-						let data = res.data.data;
-						data.data.map(item => {
-							item.created_at = item.created_at.slice(0, 16)
-						})
-						this.hasMore = data.next_page_url ? true : false;
-						this.comments = this.comments.concat(data.data)
-					},
-
-				})
-			}
 			this.text = '没有更多了~'
+		   if (this.isLoding == true || this.hasMore == false) return;
+		    this.loadPageData()
 		},
 		onLoad(val) {
 			// console.log('详情', val.id);
@@ -312,18 +277,70 @@
 </script>
 
 <style scoped lang="scss">
-	.pos {
+	.fixed {
 		position: fixed;
 		z-index: 66;
 	}
 
-	.ged {
+	.topLine {
 		height: 160rpx;
 	}
 
+	.actfixed {
+		position: fixed;
+		top: 88rpx;
+		z-index: 66;
+		right: 50rpx;
+	}
+
+	.actionBar {
+		width: 40rpx;
+		height: 40rpx;
+	}
+
+	.retunt {
+		margin-top: 30rpx;
+		width: 60rpx;
+		height: 24rpx;
+	}
+
+	.cancelBox {
+		width: 90%;
+		height: 80rpx;
+		background: rgb(236, 234, 245);
+		position: absolute;
+		bottom: 20rpx;
+		border-radius: 10rpx;
+	}
+
+	.compile {
+		width: 40rpx;
+		height: 30rpx;
+		margin: 0 30rpx;
+	}
+
+	.delete {
+		width: 40rpx;
+		height: 40rpx;
+		margin: 0 30rpx;
+	}
+
+	.tagbox {
+		width: 100%;
+		height: 90rpx;
+	}
+
+	.tagTex {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 90rpx;
+		border-bottom: 1px solid #EEEEEE;
+	}
+
 	.woer {
-		width: 94%;
-		padding: 0 3%;
+		width: 92%;
+		padding: 0 4%;
 		color: #666666;
 	}
 
@@ -370,8 +387,8 @@
 	}
 
 	.itemimg {
-		width: 140rpx;
-		height: 180rpx;
+		width: 150rpx;
+		height: 170rpx;
 		margin-right: 20rpx;
 	}
 

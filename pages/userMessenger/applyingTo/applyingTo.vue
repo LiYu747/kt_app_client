@@ -33,7 +33,7 @@
 				<view class="flex ju-center">
 					<view class="fileBox flex">
 						<view class="" v-for="item in image" :key='item.id'>
-							<image :src="item" class="itenImg" mode=""></image>
+							<image :src="item" class="itenImg" mode="aspectFill"></image>
 						</view>
 						<view @click="pushBtn" class="pushBtn flex-d al-center ju-center">
 							<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>

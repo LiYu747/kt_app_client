@@ -1,8 +1,8 @@
 <template>
   <view class="booy flex al-center ju-center">
-  	<view class=" flex-d al-center" @click="add(item)" v-for="(item,index) in icondata"  :key='item.id' >
-  	        <image :class="{'oic2':index==1}" :src="item.icon" class="oic1" mode=""></image>
-			 <view :class="{'calor':index==0}" class="itemtext">
+  	<view class=" flex-d al-center"  v-for="(item,index) in icondata"  :key='item.id' >
+  	        <image @click="add(item)" :class="{'oic2':index==1}" :src="item.icon" class="oic1" mode=""></image>
+			 <view @click="add(item)" :class="{'calor':index==0}" class="itemtext">
 			 	{{item.titel}}
 			 </view>
   	</view>

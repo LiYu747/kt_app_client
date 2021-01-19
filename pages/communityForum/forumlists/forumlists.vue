@@ -56,7 +56,7 @@
 					<!-- 图片 -->
 					<view class="flex al-center m-t4">
 						<view v-for="(items,indexs) in item.album.slice(0,3)" :key='indexs'>
-							<image :src="items.url" class="items" mode=""></image>
+							<image :src="items.url" class="items" mode="aspectFill"></image>
 						</view>
 					</view>
 				</view>
@@ -80,7 +80,7 @@
 		<view class="nono flex al-center ju-center" v-if="selectID!='' && lists.length==0 && isLoding==false && flag==false">
 			没有您想看类型的帖子,试试其他的吧
 		</view>
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+		<view v-show="isLoding == true && lists.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
 					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
@@ -115,7 +115,7 @@
 				id: '', //传的id
 				lists: [], //数据列表
 				page: 1,
-				ps: 15,
+				ps: 2,
 				isLoding: false,
 				hasMore: true,
 				text: '', //没有更多的提示
@@ -244,7 +244,10 @@
 			}
 		},
 		mounted() {
-         
+         // this.lists = []
+         // this.page = 1
+         this.loadPageData()
+         this.grtColumn()
 		},
 		onLoad(val) {
 			this.id = val.id
@@ -257,10 +260,7 @@
 
 		},
 		onShow() {
-			this.lists = []
-			this.page = 1
-			this.loadPageData()
-			this.grtColumn()
+			
 		},
 		filters: {
 
@@ -329,9 +329,10 @@
 	}
 
 	.items {
-		width: 130rpx;
+		width: 150rpx;
 		height: 170rpx;
 		margin-right: 20rpx;
+		margin-bottom: 10rpx;
 	}
 
 	.comimg {

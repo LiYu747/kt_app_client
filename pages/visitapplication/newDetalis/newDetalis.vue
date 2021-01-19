@@ -37,7 +37,7 @@
 				  补充图片
 				</view>
 				<view class="imgBox">
-					<image :src="redIMG" class="redImg" mode=""></image>
+					<image :src="redIMG" class="redImg" mode="aspectFill"></image>
 				</view>
 			</view>
 			<view class="tex1">

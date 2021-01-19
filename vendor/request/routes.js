@@ -185,12 +185,21 @@ module.exports = {
 
 			// 发布评论
 			relComments: apiPath + 'village/tribuneComment',
+			
+			//删除帖子
+			delPost : apiPath + 'user/villageTribune',
+			
+			//修改帖子可见性
+			visiblePost : apiPath + 'user/villageTribune/visible',
 
 			//自己发布的帖子
 			SelfComments: apiPath + 'user/villageTribune',
 
 			// 自己发布的帖子评论
 			SelfPost: apiPath + 'user/villageTribuneComments',
+			
+			//自己发布的帖子详情
+			MypostDeta : apiPath + 'user/villageTribune/show',
 
 			//默认的栏目列表
 			DefaultColumnList: apiPath + 'village/tribuneCat',

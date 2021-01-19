@@ -56,6 +56,24 @@ class Allvillage{
 		req.get(params)
 	}
 	
+	//删除帖子
+	delPost (params) {
+		params.url = routes.village.vagelist.delPost
+		req.delete(params)
+	}
+	
+	//修改帖子可见性
+	visiblePost (params) {
+		params.url = routes.village.vagelist.visiblePost
+		req.patch(params)
+	}
+	
+	//自己发布的帖子详情
+	MypostDeta (params) {
+		params.url = routes.village.vagelist.MypostDeta
+		req.get(params)
+	}
+	
 	// 发布评论
 	relComments (params){
 		params.url = routes.village.vagelist.relComments;

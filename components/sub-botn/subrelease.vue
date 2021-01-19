@@ -2,7 +2,7 @@
   <view class="booy flex al-center ju-center">
   	<view class=" flex-d al-center"  v-for="(item,index) in icondata"  :key='item.id' > 
   	        <image @click="add(item)" :class="{'oic2':index==1}" :src="item.icon" class="oic1" mode=""></image>
-  			 <view  class="itemtext">
+  			 <view @click="add(item)"  class="itemtext">
   			 	{{item.titel}}
   			 </view> 
   	</view>

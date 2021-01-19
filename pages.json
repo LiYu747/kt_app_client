@@ -292,6 +292,19 @@
 			}
 
 		},
+		
+		//我发布的帖子详情
+		{
+		    "path" : "pages/communityForum/mypostdeta/mypostdeta",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		
 		// 最新拜访申请消息
 		{
 			"path": "pages/visitapplication/newDetalis/newDetalis",
@@ -331,6 +344,17 @@
 				"navigationStyle": "custom"
 			}
 
+		},
+		// 设置帖子
+		{
+		    "path" : "components/forum/setting/setting",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
 		},
 		// 健康码
 		{
@@ -644,6 +668,8 @@
             }
             
         }
+       
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

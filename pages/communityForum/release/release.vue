@@ -12,7 +12,7 @@
 				</view>
 				<view v-else class="back flex al-center">
 					<view class="" v-for="(item,index) in image" :key='item.id'>
-						<image v-if="index<3" class="itemimg" :src="item" mode=""></image>
+						<image v-if="index<3" class="itemimg" :src="item" mode="aspectFill"></image>
 					</view>
 				</view>
 				<view @click="add" class="btn flex al-center ju-center">
@@ -190,50 +190,66 @@
 					this.choiceID += item.id + ','
 				})
 				this.choiceID = this.choiceID.slice(0,this.choiceID.length-1)
+				// console.log(this.choiceID)
                 this.show = false
 			},
-			
-			// 选择文件
+			// 上传文件
 			add() {
 				uni.chooseImage({
+					extension: ['jpg', 'jpeg', 'png', 'gif'],
 					success: (chooseImageRes) => {
-						this.isLoding = true
-						let tempFilePaths = chooseImageRes.tempFilePaths;
-						let num = tempFilePaths.length
-						// console.log(this.locimg);
-						if (tempFilePaths.length == 0) return;
-						tempFilePaths.forEach((item) => {
-							uni.uploadFile({
-								url: route.services.file.upload, //
-								filePath: item,
-								name: 'file',
-								success: (val) => {
-									if (val.statusCode != 200) {
-										uni.showToast({
-											title: '网络请求出错',
-											icon: 'none'
-										});
-										return;
-									}
-									if (JSON.parse(val.data).code != 200) {
-										uni.showToast({
-											title: JSON.parse(val.data).msg,
-											icon: 'none'
-										});
-										return;
-									}
-									this.image.push(JSON.parse(val.data).data.url)
-									if (this.image.length == num) {
-										this.isLoding = false
-										uni.showToast({
-											title: '上传成功'
-										})
-									}
-								}
-							});
+						const files = chooseImageRes.tempFilePaths;
+						this.isLoding = true;
+						let that = this;
+			
+						if (files.length == 0) return;
+			
+						let func = [];
+						files.forEach((item) => {
+							func.push(that.upload(item));
+						});
+			
+						Promise.all(func).then((res) => {
+							that.isLoding = false;
+						}).catch((err) => {
+							that.isLoding = false;
+							uni.showModal({
+								title: "上传文件出错:" + err,
+							})
 						})
 					}
-				});
+				})
+			},
+			upload(fileItem) {
+				let that = this;
+				return new Promise((res, rej) => {
+					uni.uploadFile({
+						url: route.services.file.upload,
+						filePath: fileItem,
+						name: 'file',
+						fail: (err) => {
+							// that.isLoding = false;
+							rej('网络出错');
+						},
+						success: (val) => {
+							// that.isLoding = false;
+							if (val.statusCode != 200) {
+								rej(val.statusCode);
+								return;
+							}
+			
+							let jres = JSON.parse(val.data);
+			
+							if (jres.code != 200) {
+								rej(jres.msg);
+								return;
+							}
+								that.image.push(jres.data.url ) 
+							// console.log(jres.data.url);
+							res(jres);
+						}
+					})
+				})
 			},
 
 			// 发布

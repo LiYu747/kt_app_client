@@ -28,7 +28,7 @@
 						<!-- 图片 -->
 						<view class="flex al-center m-t4">
 							<view v-for="items in item.album.slice(0,3)" :key='items.id'>
-								<image :src="items.url" class="items" mode=""></image>
+								<image :src="items.url" class="items" mode="aspectFill"></image>
 							</view>
 						</view>
 						<view class="time">
@@ -70,7 +70,12 @@
 								回复的主题：
 							</view>
 							<view class="conten">
-								{{item.own_village_tribune.title}}
+								<view v-if="item.own_village_tribune" class="">
+									{{item.own_village_tribune.title}}
+								</view>
+								 <view v-else class="nonoTet">
+								 	*该帖子已被用户删除
+								 </view>
 							</view>
 						</view>
 					</view>
@@ -151,9 +156,7 @@
 
 			},
 			start(e) {
-
 				this.clientX = e.changedTouches[0].clientX;
-
 			},
 			end(e) {
 				// console.log(e)
@@ -180,8 +183,6 @@
 			},
 			// 自己发布的帖子 获取数据
 			loadPageData() {
-
-
 				this.isLoding = true;
 
 				jwt.doOnlyTokenValid({
@@ -272,11 +273,12 @@
 			gotoD(item) {
 				// console.log(item.id);
 				uni.navigateTo({
-					url: `/components/forum/forumdils?id=${item.id}`
+					url: `/pages/communityForum/mypostdeta/mypostdeta?id=${item.id}`
 				})
 			},
 			// 跳转回复的页面
 			reply(item) {
+				if(!item.own_village_tribune) return;
 				// console.log(item);  
 				uni.navigateTo({
 					url: `/components/forum/forumdils?id=${item.tribune_id}`
@@ -304,7 +306,7 @@
 			}
 		},
 		mounted() {
-
+         	// this.SelfPost()
 		},
 		// 下拉加载更多
 		onReachBottom() {
@@ -404,9 +406,10 @@
 	}
 
 	.items {
-		width: 140rpx;
+		width: 150rpx;
 		height: 170rpx;
 		margin-right: 20rpx;
+		margin-bottom: 10rpx;
 	}
 
 	.comimg {
@@ -512,4 +515,8 @@
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
 	}
+	
+	.nonoTet{
+	color: red;	
+		}
 </style>

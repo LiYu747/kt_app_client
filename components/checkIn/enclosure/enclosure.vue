@@ -9,7 +9,7 @@
 			</view>
 			<view class="flex al-center fujbox">
 				<view class="" v-for="item in image" :key='item.id'>
-					<image :src="item" class="itemimg" mode=""></image>
+					<image :src="item" class="itemimg" mode="aspectFill"></image>
 				</view>
 				<view @click="succ" class="puls flex-d al-center ju-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>
