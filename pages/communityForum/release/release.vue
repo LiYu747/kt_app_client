@@ -72,9 +72,7 @@
 			  <image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
              </view>
 			 <u-popup mode='bottom' height="400rpx" border-radius='20' v-model="seeShow">
-			 	<view class="operation flex al-center pos-rel">
-			           
-			 	</view>
+			 	
 				<view class="seeBox">
 					<view class="flex al-center seeItem" @click="addCel(item,index)" v-for="(item,index) in seeList" :key='item.id'>
 						<image :src="item.ref" class="uplockImg" mode=""></image>
@@ -82,6 +80,11 @@
 							{{item.label}}
 						</view>
 						<image v-show="index==idx" src="../../../image/forum/sclyse.png" class="sclyseImg" mode=""></image>
+					</view>
+				</view>
+				<view class="flex-d al-center">
+					<view @click="seeShow = false" class="cancelBox flex al-center ju-center">
+						取消
 					</view>
 				</view>
 			 </u-popup>
@@ -172,6 +175,7 @@
 				this.seeTet.img = item.ref
 				this.seeTet.text = item.label
 				this.visible = item.value
+				this.seeShow = false
 			},
 
 			// 选中
@@ -599,5 +603,14 @@
 		 height: 44rpx;
 		 position: absolute;
 		 right: 30rpx;
+	 }
+	 
+	 .cancelBox {
+	 	width: 90%;
+	 	height: 80rpx;
+	 	background: rgb(236, 234, 245);
+	 	position: absolute;
+	 	bottom: 20rpx;
+	 	border-radius: 10rpx;
 	 }
 </style>

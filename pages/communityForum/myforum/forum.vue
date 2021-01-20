@@ -5,10 +5,10 @@
 		</view>
 		<view @touchstart="start" @touchend="end" class="">
 			<view class="nav flex al-center posd">
-				<view class="left flex al-center ju-center" v-for="(item,index) in til" @click="add(index)" :class="{dv:index===0}"
+				<view class="left flex al-center ju-center" v-for="(item,index) in til" @click="add(item,index)" :class="{dv:index===0}"
 				 :key='index'>
 					<view :class="{dv1:index===idx}">
-						{{item}}
+						{{item.name}}
 					</view>
 				</view>
 			</view>
@@ -126,7 +126,7 @@
 		data() {
 			return {
 				id: '', //传的id
-				til: ['我发布的', '我参与的'],
+				til: [{name:'我发布的',height:0}, {name:'我参与的',height:0}],
 				scrollTop: 0,
 				idx: 0,
 				username: '', //姓名
@@ -147,13 +147,12 @@
 		},
 
 		methods: {
-			add(index) {
+			add(item,index) {
 				this.idx = index
 				uni.pageScrollTo({
-					scrollTop: 0,
+					scrollTop: item.height,
 					duration: 0
 				});
-
 			},
 			start(e) {
 				this.clientX = e.changedTouches[0].clientX;
@@ -278,7 +277,13 @@
 			},
 			// 跳转回复的页面
 			reply(item) {
-				if(!item.own_village_tribune) return;
+				if(!item.own_village_tribune){
+					uni.showToast({
+						title:'该帖子已被用户删除',
+						icon:'none'
+					})
+					return;
+				}
 				// console.log(item);  
 				uni.navigateTo({
 					url: `/components/forum/forumdils?id=${item.tribune_id}`
@@ -332,6 +337,13 @@
 			this.loadPageData()
 			this.SelfPost()
 			this.Userdata()
+		},
+		onPageScroll(val) {
+			this.til.map( (item,index) => {
+				if(index == this.idx){
+					item.height = val.scrollTop
+				}
+			})
 		},
 		filters: {
 

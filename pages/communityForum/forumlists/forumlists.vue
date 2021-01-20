@@ -8,11 +8,21 @@
 				<image @click="empty" src="https://oss.kuaitongkeji.com/static/img/app/forum/clier.png" class="clierimg" mode=""></image>
 				<view v-show="value !=''" @click="remove" class=" pos-abs rig">
 					取消
-				</view> 
+				</view>
 			</view>
 		</view>
 		<!-- tag标签 -->
-	  <view class="pos-rel tagpos">
+		<view class="back">
+			<view class=" wid">
+				<u-tabs :list="tagdata" :is-scroll="true" inactive-color="#666666" active-color="#F07535" :current="current"
+				 @change="change"></u-tabs>
+			</view>
+			<view class="posclassfiy flex al-center ju-center">
+				<image @click="custom" src="https://oss.kuaitongkeji.com/static/img/app/forum/classfiy.png" class="classfiyimg"
+				 mode=""></image>
+			</view>
+		</view>
+		<!-- <view class="pos-rel tagpos">
 	  	<scroll-view  scroll-x="true" class="scroll-view_H" >
 	  		<view class="tagbox flex al-center">
 	  			<view class="itemtag" 
@@ -26,14 +36,12 @@
 	  			</view>
 	  		</view>
 	  	</scroll-view>
-		<view class="posclassfiy flex al-center ju-center">
-			<image @click="custom" src="https://oss.kuaitongkeji.com/static/img/app/forum/classfiy.png" class="classfiyimg" mode=""></image>
-		</view>
-	  </view>
+		
+	  </view> -->
 
-       <view class="lines">
-       	
-       </view>
+		<view class="lines">
+
+		</view>
 		<view class="release">
 			<view v-if="lists.length>0" class="">
 				<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
@@ -123,21 +131,30 @@
 				keyword: '',
 				flag: false, //判断有没有搜索结果
 				tagdata: [],
-				idx:0,//选择类型
-				selectID:'', //选择的id
-				
+				idx: 0, //选择类型
+				selectID: '', //选择的id
+				current: 0
 			}
 		},
 		methods: {
-			 // 选择类型
-			 select(item,index){
-				 this.idx = index
-				 this.selectID = item.id
-				 this.text = ''
-				 this.page = 1
-				 this.lists = []
-				 this.loadPageData()	
-			 },
+			change(index) {
+				this.current = index;
+				this.selectID = this.tagdata[index].id
+			    this.text = ''
+			    this.page = 1
+			    this.lists = []
+			    this.loadPageData()
+
+			},
+			// // 选择类型
+			// select(item, index) {
+			// 	this.idx = index
+			// 	this.selectID = item.id
+			// 	this.text = ''
+			// 	this.page = 1
+			// 	this.lists = []
+			// 	this.loadPageData()
+			// },
 			//搜索
 			confirm() {
 				this.keyword = this.value
@@ -155,11 +172,11 @@
 			remove() {
 				uni.hideKeyboard()
 			},
-			
+
 			// 自定义tabar标签
-			custom(){
+			custom() {
 				uni.navigateTo({
-					url:'/pages/communityForum/forumlists/customTarbar/customTarbar'
+					url: '/pages/communityForum/forumlists/customTarbar/customTarbar'
 				})
 			},
 
@@ -181,7 +198,7 @@
 						village.communityPost({
 							data: {
 								villageId: this.id,
-								tribune_cat:this.selectID,
+								tribune_cat: this.selectID,
 								kw: this.keyword,
 								page: this.page,
 								pageSize: this.ps
@@ -203,11 +220,11 @@
 								if (res.data.code != 200) return;
 
 								let data = res.data.data;
-                                   
+
 								this.page = data.current_page + 1;
 								this.hasMore = data.next_page_url ? true : false;
-                                  
-								this.lists = this.lists.concat(data.data); 
+									
+								this.lists = this.lists.concat(data.data);
 							},
 
 						})
@@ -222,20 +239,20 @@
 					url: `/components/forum/forumdils?id=${item.id}`
 				})
 			},
-			
+
 			//获取默认栏目列表
-			grtColumn(){
+			grtColumn() {
 				village.DefaultColumnList({
-					data:{},
+					data: {},
 					fail: () => {
 						uni.showToast({
-							title:'网络错误',
-							icon:'none'
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
 					success: (res) => {
-						if(res.statusCode != 200) return;
-						if(res.data.code != 200) return;
+						if (res.statusCode != 200) return;
+						if (res.data.code != 200) return;
 
 						this.tagdata = res.data.data
 						// console.log(this.tagdata );
@@ -244,10 +261,10 @@
 			}
 		},
 		mounted() {
-         // this.lists = []
-         // this.page = 1
-         this.loadPageData()
-         this.grtColumn()
+			// this.lists = []
+			// this.page = 1
+			this.loadPageData()
+			this.grtColumn()
 		},
 		onLoad(val) {
 			this.id = val.id
@@ -260,8 +277,9 @@
 
 		},
 		onShow() {
-			
+
 		},
+		
 		filters: {
 
 		},
@@ -278,14 +296,29 @@
 </script>
 
 <style scoped lang="scss">
-	.tagpos{
+	.back {
+		width: 100%;
+		background-color: #FFFFFF;
+		position: fixed;
+		left: 0;
+		top: 148rpx;
+		z-index: 99;
+	}
+
+	.wid {
+		width: 90%;
+	}
+
+	.tagpos {
 		width: 100%;
 		position: fixed;
 		z-index: 9;
 	}
-	.lines{
+
+	.lines {
 		height: 100rpx;
 	}
+
 	.itemimg {
 		width: 100rpx;
 		height: 100rpx;
@@ -467,7 +500,7 @@
 		height: 76rpx;
 		display: flex;
 		align-items: center;
-		 margin-left: 40rpx;
+		margin-left: 40rpx;
 		font-size: 30rpx;
 		color: #666666;
 	}
@@ -478,13 +511,14 @@
 		width: 100%;
 		background: #ffffff;
 		border-bottom: 1px solid #eeeeee;
+
 		/deep/.uni-scroll-view::-webkit-scrollbar {
-				/* 隐藏滚动条，但依旧具备可以滚动的功能 */
-				display: none
-			}
+			/* 隐藏滚动条，但依旧具备可以滚动的功能 */
+			display: none
+		}
 	}
 
-    .dv{
+	.dv {
 		height: 76rpx;
 		display: flex;
 		align-items: center;
@@ -492,22 +526,23 @@
 		border-bottom: 1px solid #F07535;
 		border-top: 1px solid #FFFFFF;
 	}
-      
-	.posclassfiy{
-		width: 100rpx;
+
+	.posclassfiy {
+		width: 90rpx;
 		height: 70rpx;
 		position: absolute;
 		top: 10rpx;
 		right: 0rpx;
 		background: #FFFFFF;
-		 box-shadow: -5px 0  10px 4px#FFFFFF;  
-	}  
-	 
-	.classfiyimg{
+		box-shadow: -5px 0 10px 4px#FFFFFF;
+	}
+
+	.classfiyimg {
 		width: 40rpx;
 		height: 40rpx;
 	}
-	.itemwidth{
-	   margin-right: 120rpx;
+
+	.itemwidth {
+		margin-right: 120rpx;
 	}
 </style>
