@@ -73,7 +73,7 @@
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex ju-center m-t3 m-b2 fz-14" v-if="hasMore == false && lists.length!=0">
+			<view class="flex ju-center m-t3 m-b2 fz-12" v-if="hasMore == false && lists.length!=0">
 				{{text}}
 			</view>
 
@@ -123,7 +123,7 @@
 				id: '', //传的id
 				lists: [], //数据列表
 				page: 1,
-				ps: 2,
+				ps: 15,
 				isLoding: false,
 				hasMore: true,
 				text: '', //没有更多的提示
@@ -436,6 +436,7 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 
 	.searchimg {

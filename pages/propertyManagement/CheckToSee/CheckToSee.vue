@@ -355,6 +355,7 @@
 	}
 
 	.lodbox {
+		padding: 20rpx 0;
 		font-size: 24rpx;
 	}
 
@@ -376,6 +377,7 @@
 		height: 200rpx;
 		border-radius: 10rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 
 	.nocheckin {

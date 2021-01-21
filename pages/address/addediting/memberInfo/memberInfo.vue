@@ -31,7 +31,7 @@
 					</view>
 				</view>
 			</view>
-			<u-picker @confirm="ok" mode="time" v-model="show" :params="params"></u-picker>
+			<u-picker @confirm="ok" mode="time" v-model="show" :default-time='defaultTime' :params="params"></u-picker>
 			<view class="remarkBox">
 				<view class="">
 					备注
@@ -107,7 +107,8 @@
 						label: '是否允许添加其他成员',
 						value: ''
 					}
-				]
+				],
+				defaultTime:''//默认值
 		        }
 	        },
 	    methods: {
@@ -158,7 +159,6 @@
 				
 			//删除成员
 				delMember(){
-					
 					uni.showModal({
 						content:'您确定要删除该成员吗',
 						success:(res) => {
@@ -194,8 +194,8 @@
 											})
 											return;
 										}
-										uni.showToast({
-											title:res.data.msg
+										uni.navigateBack({
+											delta:1
 										})
 									}
 								})
@@ -225,6 +225,9 @@
 				}
 				if(item.id == 1){
 					this.show = true
+					if(this.time != '永久'){
+						this.defaultTime =  this.time
+					}
 				}
 				
 			},

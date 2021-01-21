@@ -17,7 +17,9 @@
 				<view class="item flex pos-rel" @click="godils(item)" v-for="(item,index) in locdata" :key='index'>
 					<image :src="item.faceimg" mode="" class="itemimg"></image>
 					<view class="font fz-12">
-						{{item.title}}
+						<view class="fonts">
+							{{item.title}}
+						</view>
 					</view>
 					<view class="time  pos-abs location ">
 						{{item.created_at.slice(0,10)}}
@@ -159,6 +161,11 @@
 		margin-left: 24rpx;
 		width: 144rpx;
 		height: 116rpx;
+		-webkit-transform: scale(0.9);
+		-webkit-transform-origin: left top
+	}
+	
+	.fonts{
 		word-break:break-all;
 		overflow: hidden;
 		line-height: 1.3;
@@ -166,9 +173,7 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 4; 
-		-webkit-transform: scale(0.9);
-		-webkit-transform-origin: left top
-	}
+		}
 
 	.location {
 		right: 22rpx;

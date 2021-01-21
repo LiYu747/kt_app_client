@@ -86,7 +86,7 @@
 						{{item.label}}
 					</view>
 				</view>
-				<u-picker @confirm="ok" mode="time" v-model="show" :params="params"></u-picker>
+				<u-picker @confirm="ok" mode="time" v-model="show" :default-time='defaultTime' :params="params"></u-picker>
 				<view @click="showType = !showType , timeshow = false" class="flex m-t3 al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/address/blckpd.png" class="blckpdImg" mode=""></image>
 					<view class="m-l2">
@@ -173,7 +173,8 @@
 
 					}
 				],
-				result: {}
+				result: {},
+				defaultTime:''
 			}
 		},
 		methods: {
@@ -265,6 +266,9 @@
 				}
 				if( item.id == 1){
 					this.show = true
+					if(this.time != '永久'){
+					  this.defaultTime = this.time
+						}
 				}
 			},
 			// 点击打钩选择

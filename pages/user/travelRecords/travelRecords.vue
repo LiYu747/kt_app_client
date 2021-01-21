@@ -19,11 +19,11 @@
 					{{item.desc}}
 				</view>
 			</view>
-			<view v-show="isLoding == true  " class=" flex ju-center m-t2 al-center lodbox">
+			<view v-show="isLoding == true  " class=" flex ju-center al-center lodbox">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex ju-center m-b2 fz-14 m-t2" v-if="hasMore == false">
+			<view class="flex ju-center notext fz-14" v-if="hasMore == false">
 				{{text}}
 			</view>
 		</view>
@@ -187,6 +187,11 @@
 	.nono {
 		height: 300rpx;
 	}
+	
+	.notext{
+		padding: 30rpx 0;
+		font-size: 12px;
+	}
 
 	.lodimg {
 		width: 30rpx;
@@ -196,6 +201,7 @@
 
 	.lodbox {
 		font-size: 24rpx;
+		padding: 20rpx 0;
 	}
 	
 	.showloding {
@@ -215,5 +221,6 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 </style>

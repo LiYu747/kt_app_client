@@ -41,7 +41,7 @@
 				<view v-show="idx === 1" class="twbx m-t2">
 					<view v-if="Notice.length>0" class="">
 						<view class="" v-for="(item,index) in Notice" :key='item.id'>
-							<view @click="godils(item)" class="wid">
+							<view @click="godils(item)" class="wid m-b1">
 								{{index+1}} . {{item.title}}
 							</view>
 						</view>
@@ -355,5 +355,6 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 </style>

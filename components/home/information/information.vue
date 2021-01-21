@@ -129,12 +129,11 @@
 		width: 650rpx;
 		background: #FFFFFF;
 		box-shadow: 2rpx 4rpx 6rpx 0 #C0C4CC;
-		padding: 20rpx ;
+		padding: 30rpx 20rpx;
 	}
 
 	.context {
 		width: 400rpx;
-		height: 78rpx;
 		display: -webkit-box;
 		overflow: hidden;
 		text-overflow: ellipsis;

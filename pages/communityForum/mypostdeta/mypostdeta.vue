@@ -15,52 +15,52 @@
 			</view>
 			<!-- 图片 -->
 			<view class="flex al-center imgbx">
-				<view class="" v-for="item in arr.album"  :key='item.id'>
+				<view class="" v-for="item in arr.album" :key='item.id'>
 					<image class="itemimg" :src="item.url" mode="aspectFill"></image>
 				</view>
 			</view>
 			<view class="fz-12 m-t2 time">
 				{{arr.created_at}}
 			</view>
-		     
-			 
-			 <view class=" flex-d al-center m-t4">
-			 	<view @click="seeShow = true" class="contentBox pos-rel">
-			 		<view class="tabbar flex al-center">
-			 			谁能看见
-			 			 <view class=" pos-abs rig flex al-center">
-			 			 	<image :src="seeList[idx].ref" class="uplockImg" mode=""></image>
-			 				{{seeList[idx].label}}
-			 			 </view>
-			 			<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
-			 		</view>
-			 	</view>
-			 	<!-- 提交 -->
-			 	<view @click="delt" class="matop flex al-center ju-center">
-			 		<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
-			 		<view class="bai pos-abs">
-			 			删除帖子
-			 		</view>
-			 	</view>
-			 	<u-popup mode='bottom' height="400rpx" border-radius='20'  v-model="seeShow">
-			 		<view class="seeBox">
-			 			<view class="flex al-center seeItem" @click="addCel(item,index)" v-for="(item,index) in seeList" :key='item.id'>
-			 				<image :src="item.ref" class="uplockImg" mode=""></image>
-			 				<view class="itemLb">
-			 					{{item.label}}
-			 				</view>
-			 				<image v-show="index==idx" src="../../../image/forum/sclyse.png" class="sclyseImg" mode=""></image>
-			 			</view>
-			 		</view>
-			 		<view class="flex-d al-center">
-			 			<view @click="seeShow = false" class="cancelBox flex al-center ju-center">
-			 				取消
-			 			</view>
-			 		</view>
-			 	</u-popup>
-			 </view>
+
+
+			<view class=" flex-d al-center m-t4">
+				<view @click="seeShow = true" class="contentBox pos-rel">
+					<view class="tabbar flex al-center">
+						谁能看见
+						<view class=" pos-abs rig flex al-center">
+							<image :src="seeList[idx].ref" class="uplockImg" mode=""></image>
+							{{seeList[idx].label}}
+						</view>
+						<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+					</view>
+				</view>
+				<!-- 提交 -->
+				<view @click="delt" class="matop flex al-center ju-center">
+					<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
+					<view class="bai pos-abs">
+						删除帖子
+					</view>
+				</view>
+				<u-popup mode='bottom' height="400rpx" border-radius='20' v-model="seeShow">
+					<view class="seeBox">
+						<view class="flex al-center seeItem" @click="addCel(item,index)" v-for="(item,index) in seeList" :key='item.id'>
+							<image :src="item.ref" class="uplockImg" mode=""></image>
+							<view class="itemLb">
+								{{item.label}}
+							</view>
+							<image v-show="index==idx" src="../../../image/forum/sclyse.png" class="sclyseImg" mode=""></image>
+						</view>
+					</view>
+					<view class="flex-d al-center">
+						<view @click="seeShow = false" class="cancelBox flex al-center ju-center">
+							取消
+						</view>
+					</view>
+				</u-popup>
+			</view>
 		</view>
-	
+
 	</view>
 </template>
 
@@ -79,66 +79,65 @@
 				id: "",
 				arr: {}, //数据
 				user: {},
-				seeList: [
-					{
+				seeList: [{
 						value: '0',
 						label: ' 仅自己可见',
 						ref: require('@/image/forum/lock.png')
-					},{
+					}, {
 						value: '1',
 						label: ' 所有人可见',
 						ref: require('@/image/forum/uplock.png')
 					},
-					
+
 				],
-				seeShow:false,
-				idx:0,
-				id:'',
+				seeShow: false,
+				idx: 0,
+				id: '',
 			}
 		},
 		methods: {
-            // 选择是否可见
-            addCel(item,index){
-				if(	this.idx == index) return;
-            	this.idx = index
+			// 选择是否可见
+			addCel(item, index) {
+				if (this.idx == index) return;
+				this.idx = index
 				uni.showLoading({
-					title:'加载中'
+					title: '加载中'
 				})
-            	village.visiblePost({
-            	data:{
-            		id:this.id,
-            		visible: item.value
-            	},
-            	fail: () => {
-            		uni.hideLoading()
-            		uni.showToast({
-            			title: '网络错误',
-            			icon: 'none'
-            		})
-            	},
-            	success: (res) => {
-            		uni.hideLoading()
-            		if (res.statusCode != 200) {
-            			uni.showToast({
-            				title: '网络出错了',
-            				icon: 'none'
-            			})
-            			return;
-            		}
-            		if (res.data.code != 200) {
-            			uni.showToast({
-            				title: res.data.msg,
-            				icon: 'none'
-            			})
-            			return;
-            		}
-					this.seeShow = false
-            		uni.showToast({
-            			title: res.data.msg
-            		})
-            	}
-            		})
-            },
+				village.visiblePost({
+					data: {
+						id: this.id,
+						visible: item.value
+					},
+					fail: () => {
+						uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						uni.hideLoading()
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						}
+						this.seeShow = false
+						uni.showToast({
+							title: res.data.msg
+						})
+					}
+				})
+			},
 			// 删除
 			delt() {
 				uni.showModal({
@@ -175,9 +174,13 @@
 										})
 										return;
 									}
-									uni.showToast({
-										title: res.data.msg
+									// uni.showToast({
+									// 	title: res.data.msg
+									// })
+									uni.navigateBack({
+										delta:1
 									})
+									this.$store.commit("isDel", res.data.code);
 								}
 							})
 						}
@@ -187,20 +190,22 @@
 
 			// 详情数据 
 			Data() {
-				this.isLoding = true;
+				uni.showLoading({
+					title:'加载中'
+				})
 				village.MypostDeta({
 					data: {
 						id: this.id
 					},
 					fail: () => {
-						this.isLoding = false;
+						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
-						this.isLoding = false;
+						uni.hideLoading()
 						// console.log(res.data.data);
 						if (res.statusCode != 200) return
 						if (res.data.code == 200) {
@@ -219,25 +224,27 @@
 					}
 				})
 			},
-			
+
 
 		},
 		mounted() {
-			
-			
+			this.$store.commit("isDel", '');
 		},
-		onShow(){
+		onShow() {
 			this.Data()
 		},
 		// 下拉加载更多
 		onReachBottom() {
-		
+
 		},
 		onLoad(val) {
 			this.id = val.id
 		},
 
 		filters: {
+
+		},
+		created() {
 
 		},
 		computed: {
@@ -279,11 +286,11 @@
 		width: 60rpx;
 		height: 24rpx;
 	}
-     
-	.time{
+
+	.time {
 		text-align: right;
-	} 
-	 
+	}
+
 	.cancelBox {
 		width: 90%;
 		height: 80rpx;
@@ -398,72 +405,72 @@
 		color: #666666;
 		border-radius: 10rpx;
 	}
-	
+
 	.tabbar {
 		height: 80rpx;
 		padding: 0 20rpx;
 	}
-	
+
 	.reimg {
 		position: absolute;
 		right: 30rpx;
 		width: 18rpx;
 		height: 25rpx;
 	}
-	
-	.rig{
+
+	.rig {
 		position: absolute;
 		right: 60rpx;
-		}
-	
-	.seeBox{
-		padding: 40rpx;
-		padding-right: 0;	
 	}
-	
-	.uplockImg{
+
+	.seeBox {
+		padding: 40rpx;
+		padding-right: 0;
+	}
+
+	.uplockImg {
 		width: 30rpx;
 		height: 30rpx;
-		}
-	
-	.seeItem{
-		height: 90rpx;
-		font-size: 14px;	
 	}
-	
-	.itemLb{
+
+	.seeItem {
+		height: 90rpx;
+		font-size: 14px;
+	}
+
+	.itemLb {
 		margin-left: 10rpx;
 		display: flex;
 		align-items: center;
 		width: 100%;
 		height: 90rpx;
-		border-bottom: 1px solid #EEEEEE;	
+		border-bottom: 1px solid #EEEEEE;
 	}
-	
-	.sclyseImg{
+
+	.sclyseImg {
 		width: 44rpx;
 		height: 44rpx;
 		position: absolute;
-		right: 30rpx;	
+		right: 30rpx;
 	}
-	
-	.cancelBox{
+
+	.cancelBox {
 		width: 90%;
 		height: 80rpx;
-		background: rgb(236,234,245);
+		background: rgb(236, 234, 245);
 		position: absolute;
 		bottom: 20rpx;
 		border-radius: 10rpx;
 	}
-	
+
 	.matop {
 		margin-top: 100rpx;
 		font-size: 30rpx;
 	}
-	
+
 	.Submit {
 		width: 400rpx;
 		height: 70rpx;
-	
+
 	}
 </style>

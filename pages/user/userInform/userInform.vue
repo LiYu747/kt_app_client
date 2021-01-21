@@ -67,6 +67,7 @@
 		methods: {
 			// 全部已读
 			ReadAll() {
+				if(this.infoLists.length == 0) return;
 				uni.showLoading({
 					title:'加载中'
 				})
@@ -95,17 +96,23 @@
 							})
 							return;
 						}
-						this.page = 1
-						this.infoLists = []
-						this.getInform()
-						// console.log(res);
+						this.infoLists.map(item => {
+							item.read_at = '已读'
+						})
 					}
 				})
 			},
 
 			// 去详情页面
 			goDetails(item) {
-				this.Read(item.id)
+				if(!item.read_at){
+					this.Read(item.id)
+					this.infoLists.map( items => {
+						if(items.id == item.id){
+							items.read_at = '已读'
+						}
+					})
+				}
 				if (!item.page) return;
 				urlUtil.to({
 					pageAlias: item.page,
@@ -127,10 +134,8 @@
 					success: (res) => {
 						if (res.statusCode != 200) return;
 						if (res.data.code != 200) return;
-						this.page = 1
-						this.infoLists = []
-						this.getInform()
 						// console.log(res);
+						
 					}
 				})
 			},
@@ -172,15 +177,12 @@
 							item.created_at = item.created_at.slice(0,16)
 						})
 						this.infoLists = this.infoLists.concat(data.data)
-						// console.log(data.data);
 					}
 				})
 			},
 		},
 		onShow() {
-			this.page = 1
-			this.infoLists = []
-			this.getInform()
+			
 		},
 		// 下拉加载更多
 		onReachBottom() {
@@ -189,7 +191,7 @@
 			this.getInform();
 		},
 		mounted() {
-
+           this.getInform()
 		},
 		onLoad() {
 

@@ -4,7 +4,7 @@
 		<view class="top">
 		</view>
 		<view v-if="lists.length>0" class="">
-			<view class="card" @click="godetails(items)" v-for="(items,indexs) in lists" :key='items.id' :class="{bottom:indexs==lists.length-1}">
+			<view class="card" @click="godetails(items)" v-for="(items,indexs) in lists" :key='items.id' >
 				<view class="bx1 flex al-center pos-rel">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/user.png" class="dv3" mode=""></image>
 					<view class="">
@@ -33,7 +33,7 @@
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
+			<view class="flex ju-center notext fz-14" v-if="hasMore == false">
 				{{text}}
 			</view>
 		</view>
@@ -250,6 +250,11 @@
 		width: 100%;
 		height: 300rpx;
 	}
+	
+	.notext{
+		padding: 30rpx 0;
+		font-size: 12px;
+	}
 
 	.lodimg {
 		width: 30rpx;
@@ -259,6 +264,7 @@
 
 	.lodbox {
 		font-size: 24rpx;
+		padding: 20rpx 0;
 	}
 
 	.showloding {
@@ -278,5 +284,6 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 </style>

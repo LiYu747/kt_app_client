@@ -182,7 +182,7 @@
 							item.created_at = item.created_at.slice(0, 16)
 						})
 						this.hasMore = data.next_page_url ? true : false;
-						this.page = this.page + 1
+						this.page = data.current_page + 1
 						this.comments = this.comments.concat(data.data) 
 					},
 				})

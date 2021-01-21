@@ -7,13 +7,17 @@ export default new Vuex.Store({
 			{id:1,name:"纪念日"}
 		],
 		
-		city:"四川省"
+		city:"四川省",
+		isDel:''
 	},
 	// 同步更改值
 	mutations:{
 		changeValue(state,info){
 		  	console.log(info)
-			}
+			},
+		isDel(state,info){
+			this.state.isDel = info
+			}	
 	},
 	//异步
 	actions:{

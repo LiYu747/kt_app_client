@@ -1,7 +1,7 @@
 <template>
 	<view class="">
 		<view class=" posfidex">
-			<subunit titel='' :retur='false'></subunit>
+			<subunit :retur='false'></subunit>
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" @input="change" placeholder="请输入小区名称关键词" />
@@ -85,7 +85,7 @@
 		methods: {
 			// 搜索数据
 			getData() {
-				if (this.isLoding == true || this.hasMore == false) return;
+			
 				this.isLoding = true
 				village.allvillage({
 					data: {
@@ -136,6 +136,10 @@
 			}
 
 		},
+		onShow() {
+		
+			
+		},
 		mounted() {
 			this.getData()
 		},
@@ -144,8 +148,10 @@
 			this.value = val.value
 		},
 		onReachBottom() {
-			this.getData()
 			this.text = '没有更多了~'
+			if (this.isLoding == true || this.hasMore == false) return;
+			this.getData()
+			
 		},
 		filters: {
 
@@ -286,24 +292,8 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 	
-	.showloding {
-			position: absolute;
-			width: 100%;
-			height: 100vh;
-			top: 0;
-			color: #FFFFFF;
-		}
 	
-		.loimg {
-			width: 50rpx;
-			height: 50rpx;
-		}
-	
-		.loding {
-			width: 260rpx;
-			height: 200rpx;
-			background: rgba(88, 88, 88, 0.8);
-		}
 </style>

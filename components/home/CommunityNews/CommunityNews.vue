@@ -36,7 +36,7 @@
 		},
 		methods: {
 			getData() {
-				this.list = []
+				// this.list = []
 				home.CommunityNews({
 					data: {},
 					fail: (err) => {

@@ -18,7 +18,7 @@
 			<!-- 我发布的 -->
 			<view v-show='idx===0' class="release">
 				<view v-if="lists.length>0" class="">
-					<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='item.id'>
+					<view class="item" @click="gotoD(item,index)" v-for="(item,index) in lists" :key='item.id'>
 						<view class="titel">
 							{{item.title}}
 						</view>
@@ -41,7 +41,7 @@
 					加载中...
 				</view>
 
-				<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore == false">
+				<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore == false">
 					{{text}}
 				</view>
 				<view class="nono flex ju-center" v-if="lists.length == 0 && isLoding==false">
@@ -88,7 +88,7 @@
 					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 					加载中...
 				</view>
-				<view class="flex ju-center m-b2 m-t3 fz-14" v-if="hasMore1 == false">
+				<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore1 == false">
 					{{text1}}
 				</view>
 				<view class="btom">
@@ -138,11 +138,13 @@
 				code: 1,
 				data1: [], //我参与的
 				page1: 1,
+				pageSize1:15,
 				text1: '',
 				isLoding1: false, //是否显示loding
 				hasMore1: true, //是否还有更多
 				code1: 1,
 				clientX: '',
+				goindex:'' ,//查看哪一项的index
 			}
 		},
 
@@ -198,7 +200,6 @@
 							data: {
 								villageId: this.id,
 								page: this.page,
-
 							},
 							fail: (err) => {
 								this.isLoding = false;
@@ -241,6 +242,7 @@
 						village.SelfPost({
 							data: {
 								page: this.page1,
+								pageSize:this.pageSize1
 							},
 							fail: (err) => {
 								this.isLoding1 = false;
@@ -258,7 +260,7 @@
 
 								if (res.data.code != 200) return;
 								let data = res.data.data;
-								this.page1 = data.from + 1;
+								this.page1 = data.current_page + 1;
 								this.hasMore1 = data.next_page_url ? true : false;
 
 								this.data1 = this.data1.concat(data.data);
@@ -269,7 +271,8 @@
 				})
 			},
 			// 去详情
-			gotoD(item) {
+			gotoD(item,index) {
+				this.goindex = index
 				// console.log(item.id);
 				uni.navigateTo({
 					url: `/pages/communityForum/mypostdeta/mypostdeta?id=${item.id}`
@@ -312,6 +315,7 @@
 		},
 		mounted() {
          	// this.SelfPost()
+				this.loadPageData()
 		},
 		// 下拉加载更多
 		onReachBottom() {
@@ -330,13 +334,13 @@
 			this.id = val.id
 		},
 		onShow() {
-			this.lists = []
-			this.page = 1
 			this.data1 = []
 			this.page1 = 1
-			this.loadPageData()
 			this.SelfPost()
 			this.Userdata()
+			if(this.$store.state.isDel == '200'){
+				 this.lists.splice(this.goindex,1)
+			}
 		},
 		onPageScroll(val) {
 			this.til.map( (item,index) => {
@@ -526,6 +530,7 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 	
 	.nonoTet{

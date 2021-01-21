@@ -322,8 +322,7 @@
 	}
 
 	.bomLine {
-		margin: 30rpx 0;
-		width: 100%;
+		padding: 20rpx 0;
 		font-size: 12px;
 	}
 
@@ -345,6 +344,7 @@
 	
 	.lodbox {
 		font-size: 24rpx;
+		padding: 20rpx 0;
 	}
 	
 	.showloding {
@@ -365,6 +365,7 @@
 		height: 200rpx;
 		border-radius: 10rpx;
 		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 	
 </style>
