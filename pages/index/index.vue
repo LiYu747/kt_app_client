@@ -57,6 +57,8 @@
 			<CommunityNews ref='news' v-if='user'></CommunityNews>
 			<!-- 周边 -->
 			<periphery ref='peri'></periphery>
+			
+			<!-- <button @click="gogo">点击</button> -->
 		</view>
 		<!-- 视频播放 -->
 		<view v-if="paly == true" @mousewheel.prevent class=" pos-abs moive flex-d al-center ju-center">
@@ -128,6 +130,11 @@
 			// console.log(val);
 		},
 		methods: {
+			gogo() {
+			uni.navigateTo({
+				url: '/components/forum/setting/lianx'
+			})
+			},
 			// 消息通知
 			goInform() {
 				uni.navigateTo({

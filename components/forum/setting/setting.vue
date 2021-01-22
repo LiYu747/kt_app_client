@@ -4,52 +4,69 @@
 		<view class="topLine">
 
 		</view>
-
-		<!-- <view class="back">
-			<view class=" wid">
-				<u-tabs :list="tagdata" :is-scroll="true" inactive-color="#666666" active-color="#F07535" :current="current"
-				 @change="change"></u-tabs>
+		<view class=" flex al-center www">
+			<view class="wid">
+				<u-tabs-swiper ref="uTabs" active-color='#F07535' :list="tagdata" :current="current" @change="tabsChange"
+				 :is-scroll="true" swiperWidth="750"></u-tabs-swiper>
 			</view>
-		</view> -->
-
-		<view class="wid pos-abs ac">
-			<u-tabs-swiper ref="uTabs" :list="list" :current="current" @change="tabsChange" :is-scroll="false" swiperWidth="750"></u-tabs-swiper>
-
+			分类
 		</view>
-		<view class="wid">
-			<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
-				<swiper-item class="swiper-item">
-					<scroll-view scroll-y @scrolltolower="onreachBottom" class="text">
-						<view class="item"  v-for="item in arr" :key='item.id'>
-                             <view >
-                             	    {{item.name}}
-                             </view>
-						</view>
-						<view class="line">
-							
-						</view>
-					</scroll-view>
-				</swiper-item>
-				<swiper-item class="swiper-item">
-					<scroll-view scroll-y @scrolltolower="onreachBottom">
-						<view class="text">
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-							单价看到你思考就能可是大家能看到爱看年代开始的你阿坎德那时快看到你所看到可能的喀什觉得年卡扩散的卡上电脑卡死开始到
-						</view>
-					</scroll-view>
-				</swiper-item>
-			</swiper>
+		<view class="swip ">
+
+			<view class="move">
+				<swiper  :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
+					<swiper-item class="swiper-item" v-for="(items, index) in tagdata" :key="index">
+						<scroll-view scroll-y style="height:100%" @scrolltolower="onreachBottom">
+							<view class="item" v-for="(item,index) in items.arr" @click="gotoD(item)" :key='index'>
+								<view class="flex">
+									<!-- 头像 -->
+									<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
+									<view class="name m-l1 m-t1">
+										{{item.own_user.nickname}}
+										<view class="time">
+											{{item.created_at.slice(0,16)}}
+										</view>
+									</view>
+								</view>
+								<!-- 内容 -->
+								<view class="content">
+									<view class="show">
+										{{item.title}}
+									</view>
+								</view>
+								<!-- 图片 -->
+								<view class="flex al-center m-t4">
+									<view v-for="(items,indexs) in item.album.slice(0,3)" :key='indexs'>
+										<image :src="items.url" class="items" mode="aspectFill"></image>
+									</view>
+								</view>
+							</view>
+							 <view class="flex ju-center  notext fz-12" v-if="items.notext">
+							 	         {{items.notext}}
+							 </view>
+							<view v-show="isLoding == true &&items.arr.length!=0" class="m-t2 flex ju-center al-center lodbox">
+								<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+								加载中...
+							</view>
+							<view class="notext fz-12 flex ju-center" v-if="items.hasMore == false&&items.arr.length>0">
+								{{notext}}
+							</view>
+						</scroll-view>
+					</swiper-item>
+				</swiper>
+			</view>
 		</view>
+		
+		<view v-show="isLoding == true && tagdata.length==0" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
+		</view>
+		
 	</view>
-
-
 </template>
 
 <script>
@@ -65,58 +82,99 @@
 		data() {
 			return {
 				current: 0,
-				tagdata: [{
-						name: '为保',
-						hieg: '0'
-					},
-					{
-						name: '新闻',
-						hieg: '0'
-					},
-					{
-						name: '没得',
-						hieg: '0'
-					},
-					{
-						name: 'ol',
-						hieg: '0'
-					}
-				],
-				list: [{
-					name: '十年'
-				}, {
-					name: '青春'
-				}, {
-					name: '之约'
-				}],
-				// 因为内部的滑动机制限制，请将tabs组件和swiper组件的current用不同变量赋值
+				tagdata: [],
 				current: 0, // tabs组件的current值，表示当前活动的tab选项
 				swiperCurrent: 0, // swiper组件的current值，表示当前那个swiper-item是活动的
-                 arr:[{
-					 name:'11'
-				 },
-				 {
-				 					 name:'bb'
-				 },
-				 {
-				 					 name:'cc'
-				 }
-				 ]
-
+				selectID: '',
+				page: 1,
+				ps: 3,
+				idx: 0,
+				hasMore: true,
+				isLoding:false,
+				notext:''
 			}
 		},
 		methods: {
-			change(index) {
-				this.current = index
-				console.log(this.tagdata[index].hieg)
-				uni.pageScrollTo({
-					scrollTop: this.tagdata[index].hieg,
-					duration: 0
-				});
+			//获取默认栏目列表
+			grtColumn() {
+				this.isLoding = true
+				village.DefaultColumnList({
+					data: {},
+					fail: () => {
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						if (res.statusCode != 200) return;
+						if (res.data.code != 200) return;
+						res.data.data.map(item => {
+							item.arr = []
+							item.hasMore = false
+							item.page = 1
+							item.notext = null
+							item.nono = null
+							// 获取数据
+							village.communityPost({
+								data: {
+									villageId: this.id,
+									tribune_cat: item.id,
+									kw: this.keyword,
+									page: this.page,
+									pageSize: this.ps
+								},
+								fail: (err) => {
+									this.isLoding = false;
+									// console.log(err);
+									uni.showToast({
+										title: '网络错误',
+										icon: 'none'
+									})
+								},
+								success: (res) => {
+									// console.log(res);
+									this.isLoding = false;
+
+									if (res.statusCode != 200) return;
+
+									if (res.data.code != 200) return;
+
+									let data = res.data.data;
+
+									if(data.data.length>0){
+									item.arr = data.data	
+										}
+									if(data.data.length == 0){
+										item.notext = '没有您想看类型的帖子,试试其他的吧'
+									}	
+									item.hasMore = data.next_page_url ? true : false;
+									item.page = data.current_page + 1
+								},
+
+							})
+
+						})
+						this.tagdata = res.data.data
+						// this.selectID = this.tagdata[0].id
+
+					}
+				})
 			},
+             
+			// 去详情
+			gotoD(item) {
+				// console.log(item.id);
+				uni.navigateTo({
+					url: `/components/forum/forumdils?id=${item.id}`
+				})
+			}, 
+			 
 			// tabs通知swiper切换
 			tabsChange(index) {
+				this.idx = index
 				this.swiperCurrent = index;
+				this.notext = ''
 			},
 			// swiper-item左右移动，通知tabs的滑块跟随移动
 			transition(e) {
@@ -132,26 +190,58 @@
 				this.current = current;
 			},
 			// scroll-view到底部加载更多
-			onreachBottom() {
+			onreachBottom(e) {
+				this.notext = '没有更多了'
+				this.tagdata.map((item, index) => {
+					// 获取数据
+					if (item.hasMore == true && index == this.idx && this.isLoding==false) {
+						this.isLoding = true
+						village.communityPost({
+							data: {
+								villageId: this.id,
+								tribune_cat: item.id,
+								kw: this.keyword,
+								page: item.page,
+								pageSize: this.ps
+							},
+							fail: () => {
+								this.isLoding = false;
+								// console.log(err);
+								uni.showToast({
+									title: '网络错误',
+									icon: 'none'
+								})
+							},
+							success: (res) => {
+								console.log(res);
+								this.isLoding = false;
 
+								if (res.statusCode != 200) return;
+
+								if (res.data.code != 200) return;
+
+								let data = res.data.data;
+
+								this.page = data.current_page + 1;
+								this.hasMore = data.next_page_url ? true : false;
+								// this.lists = data.data
+								item.arr = item.arr.concat(data.data)
+								item.hasMore = data.next_page_url ? true : false;
+								item.page = data.current_page + 1
+							},
+
+						})
+					}
+				})
 			}
 		},
 		mounted() {
-
+			this.grtColumn()
 		},
 		onLoad(option) {
 
 		},
-		onPageScroll(val) {
-			if (this.current == 0) {
-				this.tagdata[0].hieg = val.scrollTop
-			}
 
-			if (this.current == 1) {
-				this.tagdata[1].hieg = val.scrollTop
-			}
-
-		},
 		filters: {
 
 		},
@@ -168,68 +258,121 @@
 </script>
 
 <style scoped lang="scss">
-	.ac {
-		top: 148rpx;
-	}
-
 	.pos {
 		position: fixed;
 		z-index: 99;
 	}
-    .line{
-		height: 100rpx;
+
+	.notext {
+		padding: 30rpx 0;
 	}
+
 	.topLine {
-		height: 250rpx;
+		height: 148rpx;
 	}
 
-
-	.back {
+	.www {
 		width: 100%;
-		background-color: #FFFFFF;
-		position: fixed;
-		left: 0;
-		top: 148rpx;
-		z-index: 99;
 	}
 
 	.wid {
+		width: 90%;
+	}
+
+	.swip {
 		width: 100%;
+		height: 100vh;
+		position: fixed;
+		top: 0;
 	}
 
-	.boxss {
-		width: 100rpx;
-		// height: 100rpx;
-		background: #FFBE00;
-		display: -webkit-box;
-		overflow: hidden;
-		/*超出部分隐藏*/
-		text-overflow: ellipsis;
-		/* 超出部分显示省略号 */
-		white-space: normal;
-		/*规定段落中的文本不进行换行 */
-		word-wrap: break-word;
-		-webkit-line-clamp: 4;
-		-webkit-box-orient: vertical;
-	}
-
-	.boxs {
-		// height: 1200rpx;
-		background: red;
-	}
-
-	.text {
-		height: 1000rpx;
+	.move {
+		margin-top: 240rpx;
 	}
 
 	uni-swiper {
-		height: 1000rpx;
-       background: #FFBE00;
+		height: calc(80vh - 84rpx);
+		box-sizing: border-box;
+		// background: #F07535;
+	}
+
+	.itemimg {
+		width: 100rpx;
+		height: 100rpx;
+		border-radius: 50%;
+	}
+
+	.item {
+		width: 690rpx;
+		padding: 100rpx 30rpx;
+		border-bottom: 1rpx solid #BFBFBF;
+		color: #666666;
+	}
+
+	.name {
+		font-size: 26rpx;
+		color: #F07535;
+	}
+
+	.time {
+		color: #B3B3B3;
+		font-size: 24rpx;
+		margin-top: 10rpx;
+		-webkit-transform: scale(0.8);
+		-webkit-transform-origin: left top
+	}
+
+	.content {
+		margin-top: 20rpx;
+		width: 650rpx;
+		background: rgb(230, 230, 230);
+		padding: 20rpx 20rpx;
+		font-size: 28rpx;
+	}
+
+	.show {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	}
+
+	.items {
+		width: 150rpx;
+		height: 170rpx;
+		margin-right: 20rpx;
+		margin-bottom: 10rpx;
 	}
 	
-	.item{
-		height: 400rpx;
-		background: red;
-		margin-bottom: 100rpx;
+	.lodimg {
+		width: 30rpx;
+		height: 30rpx;
+		margin-right: 20rpx;
+	}
+	
+	.lodbox {
+		font-size: 24rpx;
+		padding: 30rpx 0;
+	}
+	
+	.showloding {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 </style>

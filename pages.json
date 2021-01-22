@@ -668,6 +668,15 @@
             }
             
         }
+        ,{
+            "path" : "components/forum/setting/lianx",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
