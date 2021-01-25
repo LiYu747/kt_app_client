@@ -2,7 +2,7 @@
 // let host = 'https://test.kuaitongkeji.com/'
 //本地开发域名
 let host = 'http://local.kt.cn/';
-// let host = 'https://api.kuaitongkeji.com/';   
+// let host = 'https://api.kuaitongkeji.com/';     
 let apiPath = host + 'api/';
 
 

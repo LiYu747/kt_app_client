@@ -345,17 +345,7 @@
 			}
 
 		},
-		// 设置帖子
-		{
-		    "path" : "components/forum/setting/setting",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-		    }
-		    
-		},
+	
 		// 健康码
 		{
 			"path": "pages/classification/healthCode/healthCode",
@@ -667,13 +657,25 @@
 				"navigationStyle": "custom"
             }
             
-        }
+        },
+		// 设置帖子
+		{
+		    "path" : "components/forum/setting/setting",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		}
         ,{
             "path" : "components/forum/setting/lianx",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
             }
             
         }

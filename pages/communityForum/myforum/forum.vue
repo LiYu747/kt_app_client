@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="fidx" titel="我的" :retur="false"></subunit> 
+		<subunit class="fidx" titel="我的"></subunit>
 		<view class="line">
 		</view>
 		<view @touchstart="start" @touchend="end" class="">
@@ -17,83 +17,87 @@
 			</view>
 			<!-- 我发布的 -->
 			<view v-show='idx===0' class="release">
-				<view v-if="lists.length>0" class="">
-					<view class="item" @click="gotoD(item,index)" v-for="(item,index) in lists" :key='item.id'>
-						<view class="titel">
-							{{item.title}}
-						</view>
-						<view class="content">
-							{{item.content}}
-						</view>
-						<!-- 图片 -->
-						<view class="flex al-center m-t4">
-							<view v-for="items in item.album.slice(0,3)" :key='items.id'>
-								<image :src="items.url" class="items" mode="aspectFill"></image>
+				<scroll-view scroll-y style="height: calc(100vh - 340rpx);;width: 100%;" @scrolltolower="onreachBottom1">
+					<view v-if="lists.length>0" class="">
+						<view class="item" @click="gotoD(item,index)" v-for="(item,index) in lists" :key='item.id'>
+							<view class="titel">
+								{{item.title}}
+							</view>
+							<view class="content">
+								{{item.content}}
+							</view>
+							<!-- 图片 -->
+							<view class="flex al-center m-t4">
+								<view v-for="items in item.album.slice(0,3)" :key='items.id'>
+									<image :src="items.url" class="items" mode="aspectFill"></image>
+								</view>
+							</view>
+							<view class="time">
+								{{item.created_at.slice(0,16)}}
 							</view>
 						</view>
-						<view class="time">
-							{{item.created_at.slice(0,16)}}
-						</view>
 					</view>
-				</view>
-				<view v-if=" isLoding == true&&lists.length >0" class=" flex ju-center m-t2 al-center lodbox">
-					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-					加载中...
-				</view>
+					<view v-if=" isLoding == true&&lists.length >0" class=" flex ju-center m-t2 al-center lodbox">
+						<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+						加载中...
+					</view>
 
-				<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore == false">
-					{{text}}
-				</view>
-				<view class="nono flex ju-center" v-if="lists.length == 0 && isLoding==false">
-					您还没有任何发布
-				</view>
-				<view class="btom">
+					<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore == false">
+						{{text}}
+					</view>
+					<view class="nono flex ju-center" v-if="lists.length == 0 && isLoding==false">
+						您还没有任何发布
+					</view>
+					<view class="btom">
 
-				</view>
+					</view>
+				</scroll-view>
 			</view>
 
 			<!-- 我参与的 -->
 			<view v-show="idx===1" class="release">
-				<view class="" v-if="data1.length>0">
-					<view class="itemtext" @click="reply(item)" v-for="(item,index) in data1" :key='index'>
-						<view class="flex color ju-between">
-							<view class="">
-								{{username}}:
-							</view>
-							<view class="name ">
-								{{item.content}}
-							</view>
-						</view>
-
-						<view class=" flex m-t1 ju-between">
-							<view class="">
-								回复的主题：
-							</view>
-							<view class="conten">
-								<view v-if="item.own_village_tribune" class="">
-									{{item.own_village_tribune.title}}
+				<scroll-view scroll-y style="height: calc(100vh - 340rpx);;width: 100%" @scrolltolower="onreachBottom2">
+					<view class="" v-if="data1.length>0">
+						<view class="itemtext" @click="reply(item)" v-for="(item,index) in data1" :key='index'>
+							<view class="flex color ju-between">
+								<view class="">
+									{{username}}:
 								</view>
-								 <view v-else class="nonoTet">
-								 	*该帖子已被用户删除
-								 </view>
+								<view class="name ">
+									{{item.content}}
+								</view>
+							</view>
+
+							<view class=" flex m-t1 ju-between">
+								<view class="">
+									回复的主题：
+								</view>
+								<view class="conten">
+									<view v-if="item.own_village_tribune" class="">
+										{{item.own_village_tribune.title}}
+									</view>
+									<view v-else class="nonoTet">
+										*该帖子已被用户删除
+									</view>
+								</view>
 							</view>
 						</view>
 					</view>
-				</view>
 
-				<view class="nono flex ju-center" v-if="data1.length==0 && isLoding1==false">
-					您还没有发表评论
-				</view>
-				<view v-show="isLoding1 == true&&data1.length>0" class="m-t2 flex ju-center al-center lodbox">
-					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-					加载中...
-				</view>
-				<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore1 == false">
-					{{text1}}
-				</view>
-				<view class="btom">
+					<view class="nono flex ju-center" v-if="data1.length==0 && isLoding1==false">
+						您还没有发表评论
+					</view>
+					<view v-show="isLoding1 == true&&data1.length>0" class="m-t2 flex ju-center al-center lodbox">
+						<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+						加载中...
+					</view>
+					<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore1 == false">
+						{{text1}}
+					</view>
+					<view class="btom">
 
-				</view>
+					</view>
+				</scroll-view>
 			</view>
 
 			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
@@ -126,7 +130,13 @@
 		data() {
 			return {
 				id: '', //传的id
-				til: [{name:'我发布的',height:0}, {name:'我参与的',height:0}],
+				til: [{
+					name: '我发布的',
+					height: 0
+				}, {
+					name: '我参与的',
+					height: 0
+				}],
 				scrollTop: 0,
 				idx: 0,
 				username: '', //姓名
@@ -138,23 +148,20 @@
 				code: 1,
 				data1: [], //我参与的
 				page1: 1,
-				pageSize1:15,
+				pageSize1: 15,
 				text1: '',
 				isLoding1: false, //是否显示loding
 				hasMore1: true, //是否还有更多
 				code1: 1,
 				clientX: '',
-				goindex:'' ,//查看哪一项的index
+				goindex: '', //查看哪一项的index
 			}
 		},
 
 		methods: {
-			add(item,index) {
+
+			add(item, index) {
 				this.idx = index
-				uni.pageScrollTo({
-					scrollTop: item.height,
-					duration: 0
-				});
 			},
 			start(e) {
 				this.clientX = e.changedTouches[0].clientX;
@@ -210,7 +217,7 @@
 								// console.log(err);
 							},
 							success: (res) => {
-                                // console.log(res);
+								// console.log(res);
 								this.isLoding = false;
 
 								if (res.statusCode != 200) return;
@@ -242,15 +249,14 @@
 						village.SelfPost({
 							data: {
 								page: this.page1,
-								pageSize:this.pageSize1
+								pageSize: this.pageSize1
 							},
-							fail: (err) => {
+							fail: () => {
 								this.isLoding1 = false;
 								uni.showToast({
 									title: '网络错误',
 									icon: 'none'
 								})
-								// console.log(err);
 							},
 							success: (res) => {
 								// console.log(res);
@@ -271,7 +277,7 @@
 				})
 			},
 			// 去详情
-			gotoD(item,index) {
+			gotoD(item, index) {
 				this.goindex = index
 				// console.log(item.id);
 				uni.navigateTo({
@@ -280,10 +286,10 @@
 			},
 			// 跳转回复的页面
 			reply(item) {
-				if(!item.own_village_tribune){
+				if (!item.own_village_tribune) {
 					uni.showToast({
-						title:'该帖子已被用户删除',
-						icon:'none'
+						title: '该帖子已被用户删除',
+						icon: 'none'
 					})
 					return;
 				}
@@ -296,59 +302,58 @@
 			Userdata() {
 				user.userDeta({
 					data: {},
-					fail: (err => {
+					fail: () => {
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
-					}),
-					success: (res => {
+					},
+					success: (res) => {
 						if (res.statusCode != 200) return;
 						if (res.data.code != 200) return;
 						// console.log(res);
 						let Users = res.data.data
 						this.username = Users.username
-					}),
+					},
 
 				})
-			}
-		},
-		mounted() {
-         	// this.SelfPost()
-				this.loadPageData()
-		},
-		// 下拉加载更多
-		onReachBottom() {
-			if (this.idx == 0) {
+			},
+			// 下拉加载更多
+			onreachBottom1(e) {
 				this.text = '没有更多了~'
 				if (this.isLoding == true || this.hasMore == false) return;
 				this.loadPageData()
-
-			} else if (this.idx == 1) {
+			},
+			// 下拉加载更多
+			onreachBottom2(e) {
 				this.text1 = '没有更多了~'
 				if (this.isLoding1 == true || this.hasMore1 == false) return;
 				this.SelfPost()
-			}
+			},
+		},
+		mounted() {
+			this.SelfPost()
+			this.loadPageData()
+			this.Userdata()
+		},
+		// 下拉加载更多
+		onReachBottom() {
+			
 		},
 		onLoad(val) {
 			this.id = val.id
 		},
 		onShow() {
-			this.data1 = []
-			this.page1 = 1
-			this.SelfPost()
-			this.Userdata()
-			if(this.$store.state.isDel == '200'){
-				 this.lists.splice(this.goindex,1)
+			if(this.$store.state.isComment == '200'){
+				this.data1 = []
+				this.page1 = 1
+				this.SelfPost()
+			}
+			if (this.$store.state.isDel == '200') {
+				this.lists.splice(this.goindex, 1)
 			}
 		},
-		onPageScroll(val) {
-			this.til.map( (item,index) => {
-				if(index == this.idx){
-					item.height = val.scrollTop
-				}
-			})
-		},
+	
 		filters: {
 
 		},
@@ -371,7 +376,7 @@
 	}
 
 	.line {
-		height: 148rpx; 
+		height: 148rpx;
 	}
 
 	.nav {
@@ -469,7 +474,7 @@
 	}
 
 	.btom {
-		height: 140rpx;
+		height: 10rpx;
 	}
 
 	.itemtext {
@@ -532,8 +537,8 @@
 		background: rgba(88, 88, 88, 0.8);
 		border-radius: 10rpx;
 	}
-	
-	.nonoTet{
-	color: red;	
-		}
+
+	.nonoTet {
+		color: red;
+	}
 </style>

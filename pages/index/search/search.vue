@@ -1,17 +1,14 @@
 <template>
 	<view class="">
-		<view class=" posfidex">
-			<subunit :retur='false'></subunit>
+		<subunit class="posfidex"></subunit>
+		<view class="line ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" @input="change" placeholder="请输入小区名称关键词" />
-				<view @click="remove" class=" pos-abs rig">
+				<view @click="remove" class="posfidex  rig">
 					取消
 				</view>
 			</view>
-		</view>
-		<view class="bottom">
-
 		</view>
 		<view v-if="locdata.length>0" class="top flex-d al-center">
 			<view @click="gotoo(item)" class="item" v-for="item in locdata" :key="item.id">
@@ -44,19 +41,19 @@
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
+			<view class="flex ju-center m-b2 fz-12" v-if="hasMore == false">
 				{{text}}
 			</view>
 
 		</view>
-		 <view v-show="isLoding == true&&locdata.length==0" class="showloding flex al-center ju-center">
-		 	<view class="loding flex-d al-center ju-center">
-		 		<view class=" ">
-		 			<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-		 		</view>
-		 		搜索中
-		 	</view>
-		 </view>
+		<view v-show="isLoding == true&&locdata.length==0" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				搜索中
+			</view>
+		</view>
 		<view class="nono flex al-center ju-center" v-if="locdata.length == 0&&isLoding == false">
 			没有您搜索的小区哦~~~
 		</view>
@@ -85,14 +82,14 @@
 		methods: {
 			// 搜索数据
 			getData() {
-			
+
 				this.isLoding = true
 				village.allvillage({
 					data: {
 						page: this.page,
 						kw: this.value
 					},
-					fail: (err) => {
+					fail: () => {
 						this.isLoding = false
 						uni.showToast({
 							title: '网络错误',
@@ -100,12 +97,12 @@
 						})
 					},
 					success: (res) => {
-							this.isLoding = false
+						this.isLoding = false
 						//console.log(res.data.data);
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;
-					
+
 						let data = res.data.data
 						this.page = data.current_page + 1
 						this.hasMore = data.next_page_url ? true : false;
@@ -137,8 +134,8 @@
 
 		},
 		onShow() {
-		
-			
+
+
 		},
 		mounted() {
 			this.getData()
@@ -151,7 +148,7 @@
 			this.text = '没有更多了~'
 			if (this.isLoding == true || this.hasMore == false) return;
 			this.getData()
-			
+
 		},
 		filters: {
 
@@ -170,18 +167,24 @@
 
 <style scoped lang="scss">
 	.ipt {
-		width: 750rpx;
-		height: 88rpx;
-		margin-top: -80rpx;
+		top: 100rpx;
+		z-index: 10;
+	}
+
+	.line {
+		// width: 100%;
+		height: 148rpx;
 	}
 
 	.img {
 		width: 33rpx;
 		height: 34rpx;
 		left: 168rpx;
+		position: fixed;
 	}
 
 	.input {
+		position: fixed;
 		width: 394rpx;
 		height: 54rpx;
 		background: rgba(255, 255, 255, 0.3);
@@ -205,6 +208,7 @@
 
 	.posfidex {
 		position: fixed;
+		z-index: 9;
 	}
 
 	.bottom {
@@ -274,7 +278,7 @@
 	.lodbox {
 		font-size: 24rpx;
 	}
-	
+
 	.showloding {
 		position: absolute;
 		width: 100%;
@@ -282,18 +286,16 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-	
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-	
+
 	.loding {
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
 		border-radius: 10rpx;
 	}
-	
-	
 </style>

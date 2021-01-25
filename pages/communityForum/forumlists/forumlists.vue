@@ -1,18 +1,18 @@
 <template>
 	<view class="">
-		<subunit titel='' class="fiedx" :retur='true'></subunit>
-		<view class="line pos-rel">
+		<subunit  class="fixed" ></subunit>
+		<view class="line ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model.trim="value" @confirm='confirm' placeholder="请输入帖子关键词" />
 				<image @click="empty" src="https://oss.kuaitongkeji.com/static/img/app/forum/clier.png" class="clierimg" mode=""></image>
-				<view v-show="value !=''" @click="remove" class=" pos-abs rig">
+				<view v-show="value !=''" @click="remove" class="fixed  rig">
 					取消
 				</view>
 			</view>
 		</view>
 		<!-- tag标签 -->
-		<view class="back">
+		<view v-if="flag == false" class="back">
 			<view class=" wid">
 				<u-tabs :list="tagdata" :is-scroll="true" inactive-color="#666666" active-color="#F07535" :current="current"
 				 @change="change"></u-tabs>
@@ -42,7 +42,7 @@
 		<view class="lines">
 
 		</view>
-		<view class="release">
+		<view v-if="flag == false" class="release">
 			<view v-if="lists.length>0" class="">
 				<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
 					<view class="flex">
@@ -79,13 +79,7 @@
 
 		</view>
 
-		<view class="nono flex al-center ju-center" v-if="lists.length == 0 && hasMore==false && flag==false && selectID==''">
-			小区还没有发布帖子哦~
-		</view>
-		<view class="nono flex al-center ju-center" v-if="flag==true&&lists.length==0&&isLoding==false">
-			没有您搜索的帖子哦~
-		</view>
-		<view class="nono flex al-center ju-center" v-if="selectID!='' && lists.length==0 && isLoding==false && flag==false">
+		<view class="nono flex al-center ju-center" v-if="lists.length==0 && isLoding==false && flag==false">
 			没有您想看类型的帖子,试试其他的吧
 		</view>
 		<view v-show="isLoding == true && lists.length==0" class="showloding flex al-center ju-center">
@@ -96,10 +90,52 @@
 				加载中
 			</view>
 		</view>
-
-		<view class="btom">
-
+          
+		 <view class="btom">
+		 
+		 </view> 
+		  
+		<view v-if="flag == true" class="searchend pos-abs">
+			<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
+				<view class="flex">
+					<!-- 头像 -->
+					<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
+					<view class="name m-l1 m-t1">
+						{{item.own_user.nickname}}
+						<view class="time">
+							{{item.created_at.slice(0,16)}}
+						</view>
+					</view>
+				</view>
+				<!-- 内容 -->
+				<view class="content">
+					<view class="show">
+						{{item.title}}
+					</view>
+				</view>
+				<!-- 图片 -->
+				<view class="flex al-center m-t4">
+					<view v-for="(items,indexs) in item.album.slice(0,3)" :key='indexs'>
+						<image :src="items.url" class="items" mode="aspectFill"></image>
+					</view>
+				</view>
+			</view>
+			<view v-show="isLoding == true && lists.length!=0" class="m-t2 flex ju-center al-center lodbox">
+				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				加载中...
+			</view>
+			<view class="flex ju-center m-t3 m-b2 fz-12" v-if="hasMore == false && lists.length!=0">
+				{{text}}
+			</view>
+			<view class="btoms">
+			
+			</view>
+			<view class="nono flex al-center ju-center" v-if="lists.length==0&&isLoding==false">
+				没有您搜索的帖子哦~
+			</view>
 		</view>
+
+		
 		<subbotn :ids='id'></subbotn>
 	</view>
 </template>
@@ -140,10 +176,10 @@
 			change(index) {
 				this.current = index;
 				this.selectID = this.tagdata[index].id
-			    this.text = ''
-			    this.page = 1
-			    this.lists = []
-			    this.loadPageData()
+				this.text = ''
+				this.page = 1
+				this.lists = []
+				this.loadPageData()
 
 			},
 			// // 选择类型
@@ -159,14 +195,22 @@
 			confirm() {
 				this.keyword = this.value
 				this.page = 1
-				this.hasMore = true
 				this.lists = []
+				this.selectID = ''
+				this.text = ''
 				this.loadPageData()
 				this.flag = true
 			},
 			// 清空
 			empty() {
 				this.value = ''
+				this.keyword = ''
+				this.flag = false
+				this.text = ''
+				this.page = 1
+				this.selectID = this.tagdata[this.current].id
+				this.lists = []
+				this.loadPageData()
 			},
 			// 取消
 			remove() {
@@ -223,7 +267,7 @@
 
 								this.page = data.current_page + 1;
 								this.hasMore = data.next_page_url ? true : false;
-									
+
 								this.lists = this.lists.concat(data.data);
 							},
 
@@ -256,6 +300,8 @@
 
 						this.tagdata = res.data.data
 						// console.log(this.tagdata );
+						this.selectID = res.data.data[0].id
+						this.loadPageData()
 					}
 				})
 			}
@@ -263,8 +309,9 @@
 		mounted() {
 			// this.lists = []
 			// this.page = 1
-			this.loadPageData()
 			this.grtColumn()
+
+
 		},
 		onLoad(val) {
 			this.id = val.id
@@ -272,14 +319,14 @@
 		// 下拉更多
 		onReachBottom() {
 			this.text = '没有更多了~'
-			if (this.isLoding == true || this.hasMore == false) return;
+		   if (this.isLoding == true || this.hasMore == false) return;
 			this.loadPageData()
 
 		},
 		onShow() {
 
 		},
-		
+
 		filters: {
 
 		},
@@ -327,7 +374,7 @@
 
 	.item {
 		width: 690rpx;
-		padding: 30rpx;
+		padding:  30rpx;
 		border-bottom: 1rpx solid #BFBFBF;
 		color: #666666;
 	}
@@ -411,10 +458,11 @@
 	}
 
 	.line {
+		// width: 100%;
 		height: 148rpx;
 	}
 
-	.fiedx {
+	.fixed {
 		position: fixed;
 		z-index: 9;
 	}
@@ -545,5 +593,16 @@
 
 	.itemwidth {
 		margin-right: 120rpx;
+	}
+
+	.searchend {
+		top: 148rpx;
+		width: 100%;
+		// height: 100%;
+		// background: red;
+	}
+	
+	.btoms{
+		height: 120rpx;
 	}
 </style>

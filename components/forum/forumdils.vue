@@ -59,7 +59,7 @@
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex btom ju-center m-t3  fz-14" v-if="hasMore == false">
+			<view class="flex btom ju-center m-t3  fz-12" v-if="hasMore == false">
 				{{text}}
 			</view>
 		</view>
@@ -230,6 +230,7 @@
 								title: res.data.msg,
 								duration: 2000
 							})
+							this.$store.commit("isComment", res.data.code);
 						} else {
 							uni.showToast({
 								title: res.data.msg,
@@ -243,8 +244,7 @@
 
 		},
 		mounted() {
-			
-			
+				this.$store.commit("isComment", '');
 		},
 		onShow(){
 			this.Data()
