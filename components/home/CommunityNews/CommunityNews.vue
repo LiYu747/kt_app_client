@@ -36,10 +36,10 @@
 		},
 		methods: {
 			getData() {
-				// this.list = []
+				this.list = []
 				home.CommunityNews({
 					data: {},
-					fail: (err) => {
+					fail: () => {
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'

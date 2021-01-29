@@ -134,14 +134,14 @@
 					return;
 				}
 				uni.showLoading({
-					title: '加载中...'
+					title: '发送中...'
 				})
 				sms.userRegCode({
 					data: {
 						tel: this.form.phone
 					},
 					fail: () => {
-						this.isLoding = false;
+						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
@@ -153,7 +153,7 @@
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络请求出错',
-								icon:'none'
+								icon: 'none'
 							});
 							return;
 						}
@@ -166,7 +166,7 @@
 						}
 						uni.showToast({
 							title: res.data.msg,
-							icon:'none'
+							icon: 'none'
 						})
 						// this.form.Verification = res.data.data.code
 						// console.log(res.data.data.code);
@@ -188,17 +188,17 @@
 			// 注册
 			register() {
 				if (this.isLoding == true) return;
-				if( this.form.nickname == ''){
+				if (this.form.nickname == '') {
 					uni.showToast({
-					title:'请输入昵称',
-					icon:'none'
+						title: '请输入昵称',
+						icon: 'none'
 					})
 					return;
 				}
-				if( this.form.name == ''){
+				if (this.form.name == '') {
 					uni.showToast({
-					title:'请输入姓名',
-					icon:'none'
+						title: '请输入姓名',
+						icon: 'none'
 					})
 					return;
 				}
@@ -209,17 +209,17 @@
 				// 	})
 				// 	return;
 				// }
-				if( this.form.phone == ''){
+				if (this.form.phone == '') {
 					uni.showToast({
-					title:'请输入手机号',
-					icon:'none'
+						title: '请输入手机号',
+						icon: 'none'
 					})
 					return;
 				}
-				if( this.form.Verification == ''){
+				if (this.form.Verification == '') {
 					uni.showToast({
-					title:'请输入验证码',
-					icon:'none'
+						title: '请输入验证码',
+						icon: 'none'
 					})
 					return;
 				}
@@ -263,8 +263,8 @@
 							});
 							return;
 						}
-                      
-						  
+
+
 						this.$refs.uToast.show({
 							title: res.data.msg,
 							// type: 'success',

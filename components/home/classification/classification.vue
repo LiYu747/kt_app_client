@@ -1,6 +1,6 @@
 <template>
     <div>
-        <view class="box flex flex-w">
+        <view class="boxss flex flex-w">
         	<view class="flex-d al-center loyout ju-around" v-for="(item,index) in lists" :key='index' @click="goclass(item)">
         		   <image :src="item.image" class="itemimg" mode=""></image>
 				   <view class="  text">
@@ -32,7 +32,7 @@ data () {
 	  		data: {
 	  			code: 'home_quick_nav_2'
 	  		},
-	  		fail: (err) => {
+	  		fail: () => {
 	  			uni.showToast({
 	  				title:'网络错误',
 					icon:'none'
@@ -88,7 +88,7 @@ data () {
 </script>
 
 <style scoped lang="scss">
-.box{
+.boxss{
 	margin-top: 20rpx;
 	width: 700rpx;
 	height: 253rpx;

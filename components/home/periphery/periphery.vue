@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<view class="box">
+		<view class="boxss">
 			<view class="flex al-center  m-b1 pos-rel">
 				<image class="imgss" src="https://oss.kuaitongkeji.com/static/img/app/home/zx@2x.png" mode=""></image>
 				<view class="text">
@@ -21,7 +21,7 @@
 							{{item.title}}
 						</view>
 					</view>
-					<view class="time  pos-abs location ">
+					<view class="  pos-abs location ">
 						{{item.created_at.slice(0,10)}}
 					</view>
 				</view>
@@ -83,7 +83,7 @@
 						page: 1,
 						pageSize:4
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
@@ -121,7 +121,7 @@
 </script>
 
 <style scoped lang="scss">
-	.box {
+	.boxss {
 
 		margin-top: 40rpx;
 		width: 690rpx;

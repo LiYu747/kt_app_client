@@ -62,11 +62,12 @@
 			},
 			// 用户所有地址
 			loadPageData() {
-				this.isLoding = true
+				
 				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
 					success: () => {
+						this.isLoding = true
 						address.alladd({
 							data: {
 								page: this.page,

@@ -45,7 +45,7 @@
 					data: {
 						id: this.loctext[0].id
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
@@ -70,7 +70,7 @@
 						page: 1,
 						pageSize:1
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'

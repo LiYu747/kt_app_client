@@ -70,23 +70,23 @@
 					filePath: path,
 					name: 'file',
 					complete: (res) => {
-						
+
 						this.isLoding = false
-						
+
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络请求出错',
-								icon:'none'
+								icon: 'none'
 							});
 							return;
 						}
 
 						let data = JSON.parse(res.data)
-						
+
 						if (data.code != 200) {
 							uni.showToast({
 								title: data.msg,
-								icon:'none'
+								icon: 'none'
 							});
 							return;
 						}

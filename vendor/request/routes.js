@@ -1,7 +1,7 @@
 //测试域名
-// let host = 'https://test.kuaitongkeji.com/'
+let host = 'https://test.kuaitongkeji.com/'
 //本地开发域名
-let host = 'http://local.kt.cn/';
+// let host = 'http://local.kt.cn/';
 // let host = 'https://api.kuaitongkeji.com/';     
 let apiPath = host + 'api/';
 
@@ -160,7 +160,11 @@ module.exports = {
 		vagelist: {
 			// 小区列表
 			list: apiPath + 'village/village',
+			
 			selectLists: apiPath + 'village/village/selectLists',
+			
+			// 获取某单元楼不受访问限制的楼层
+			foolropen : apiPath + 'village/floors/open',
 
 			// 小区公告
 			Notice: apiPath + 'village/notice',

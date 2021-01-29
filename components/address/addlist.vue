@@ -58,6 +58,7 @@
 
 <script>
 	import address from '../../vendor/address/address.js'
+	import village from '../../vendor/village/village.js'
 	export default {
 		name: "",
 		components: {
@@ -102,7 +103,13 @@
 			},
 			// 预约电梯
 			order(item) {
-				// console.log(item.id);
+				// console.log(item);
+				// village.foolropen({
+				// 	data:{id:item.id},
+				// 	success: (res) => {
+				// 		console.log(res);
+				// 	}
+				// })
 				uni.showLoading({
 					title:'预约中...'
 				})
@@ -111,7 +118,7 @@
 						id: item.id,
 						toFloor: 1
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',

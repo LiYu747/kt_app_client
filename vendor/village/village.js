@@ -8,6 +8,12 @@ class Allvillage{
 		req.get(params)
 	}
 	
+	// 获取某单元楼不受访问限制的楼层
+	foolropen (params){
+		params.url = routes.village.vagelist.foolropen;
+		req.get(params)
+	}
+	
 	//多个小区的联动列表
 	selectLists (params){
 		params.url = routes.village.vagelist.selectLists;

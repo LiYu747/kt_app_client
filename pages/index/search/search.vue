@@ -4,7 +4,7 @@
 		<view class="line ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
-				<input class="input" type="text" v-model="value" @input="change" placeholder="请输入小区名称关键词" />
+				<input class="input" type="text" v-model="value" @confirm="change" placeholder="请输入小区名称关键词" />
 				<view @click="remove" class="posfidex  rig">
 					取消
 				</view>
@@ -125,11 +125,9 @@
 				})
 			},
 			change() {
-				if (this.value == '') {
-					this.remove()
-				} else {
-					this.getData()
-				}
+				this.page = 1
+				this.locdata = []
+				this.getData()
 			}
 
 		},

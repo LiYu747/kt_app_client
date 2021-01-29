@@ -58,7 +58,7 @@
 			<!-- 周边 -->
 			<periphery ref='peri'></periphery>
 			
-			<button @click="gogo">点击</button>
+			<!-- <button @click="gogo">点击</button> -->
 		</view>
 		<!-- 视频播放 -->
 		<view v-if="paly == true" @mousewheel.prevent class=" pos-abs moive flex-d al-center ju-center">
@@ -180,7 +180,7 @@
 			// 点击轮播图
 			addswiper(val) {
 				let movie = this.list[val]
-				// console.log(movie);
+				console.log(movie);
 				if (movie.video) {
 					this.videoUrl = movie.video
 					this.cover = movie.image
@@ -220,7 +220,7 @@
 					data: {
 						code: 'home_index_banner'
 					},
-					fail: (err) => {
+					fail: () => {
 						this.stopRefreshIcon()
 						uni.showToast({
 							title: '网络出错',
@@ -242,7 +242,7 @@
 					data: {
 						code: 'home_quick_nav_1'
 					},
-					fail: (err) => {
+					fail: () => {
 						this.stopRefreshIcon()
 						uni.showToast({
 							title: '网络出错',
