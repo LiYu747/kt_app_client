@@ -75,14 +75,13 @@
 		},
 		// 更新实名信息
 		{
-		    "path" : "pages/user/realInformation/realInformation",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/user/realInformation/realInformation",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
 		},
 		// 地址编辑
 		{
@@ -95,25 +94,23 @@
 		},
 		//添加用户
 		{
-		    "path" : "pages/address/addediting/pushMember/pushMember",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/address/addediting/pushMember/pushMember",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
 		},
 		// 用户详情
 		{
-		    "path" : "pages/address/addediting/memberInfo/memberInfo",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/address/addediting/memberInfo/memberInfo",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
 		},
 		//入住申请
 		{
@@ -292,19 +289,18 @@
 			}
 
 		},
-		
+
 		//我发布的帖子详情
 		{
-		    "path" : "pages/communityForum/mypostdeta/mypostdeta",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/communityForum/mypostdeta/mypostdeta",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
 		},
-		
+
 		// 最新拜访申请消息
 		{
 			"path": "pages/visitapplication/newDetalis/newDetalis",
@@ -345,7 +341,7 @@
 			}
 
 		},
-	
+
 		// 健康码
 		{
 			"path": "pages/classification/healthCode/healthCode",
@@ -355,6 +351,38 @@
 				"navigationStyle": "custom"
 			}
 
+		},
+		// 找房
+		{
+			"path": "pages/classification/lookRoom/lookRoom",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		},
+		// 更多房源
+		{
+		    "path" : "pages/classification/lookRoom/moreRoom",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		  // 房源详情
+		{
+		    "path" : "pages/classification/lookRoom/detailRoom",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
 		},
 		//医疗健康
 		{
@@ -544,30 +572,26 @@
 				"navigationStyle": "custom"
 			}
 
-		}
-		,
+		},
 		//帖子管理
 		{
-		    "path" : "pages/propertyManagement/postManagement/postManagement",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/propertyManagement/postManagement/postManagement",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
-		}
-		,
+			}
+
+		},
 		//帖子详情
 		{
-		    "path" : "pages/propertyManagement/postManagement/postDetails/postDetails",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/propertyManagement/postManagement/postDetails/postDetails",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
 		}
 		// 外卖、快递首页
 		, {
@@ -589,31 +613,29 @@
 			}
 
 		},
-		
+
 		//申请进入进度
 		{
-		    "path" : "pages/userMessenger/applyingTo/applyingRecord/applyingRecord",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/userMessenger/applyingTo/applyingRecord/applyingRecord",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
 		},
 		//申请信息
 		{
-		    "path" : "pages/userMessenger/applyingTo/myInformation/myInformation",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "pages/userMessenger/applyingTo/myInformation/myInformation",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
 		},
 		// 快递、外卖通行二维码
-		 {
+		{
 			"path": "pages/userMessenger/goQrCode/goQrCode",
 			"style": {
 				"navigationBarTitleText": "",
@@ -622,63 +644,56 @@
 			}
 
 		}
-	   
-         //用户消息通知
-        ,{
-            "path" : "pages/user/userInform/userInform",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
+
+		//用户消息通知
+		, {
+			"path": "pages/user/userInform/userInform",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-            }
-            
-        }
-        ,
+			}
+
+		},
 		// 房主查看消息
 		{
-            "path" : "pages/residence/houseOwner/houseOwner",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
+			"path": "pages/residence/houseOwner/houseOwner",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-            }
-            
-        }
-        ,
+			}
+
+		},
 		// /设置密码
 		{
-            "path" : "pages/user/realInformation/setPassword/setPassword",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
+			"path": "pages/user/realInformation/setPassword/setPassword",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-            }
-            
-        },
+			}
+
+		},
 		// 设置帖子
 		{
-		    "path" : "components/forum/setting/setting",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false,
+			"path": "components/forum/setting/setting",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-		    }
-		    
+			}
+
+		}, {
+			"path": "components/forum/setting/lianx",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
 		}
-        ,{
-            "path" : "components/forum/setting/lianx",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-            }
-            
-        }
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

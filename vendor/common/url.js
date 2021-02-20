@@ -27,8 +27,8 @@ class url {
 		// 用户的回家二维码页面
 		back_home_qr : '/pages/qrcode/qrCode/qrCode',
 		
-		// 旅行
-		travel : '/pages/classification/scenicArea/scenicArea',
+		// 找房
+		travel : '/pages/classification/lookRoom/lookRoom',
 		
 		// 购物
 		shopping : '/pages/classification/shopping/shopping',
