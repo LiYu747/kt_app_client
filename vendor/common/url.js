@@ -28,7 +28,7 @@ class url {
 		back_home_qr : '/pages/qrcode/qrCode/qrCode',
 		
 		// 找房
-		travel : '/pages/classification/lookRoom/lookRoom',
+		looking_for_room : '/pages/classification/lookRoom/lookRoom',
 		
 		// 购物
 		shopping : '/pages/classification/shopping/shopping',

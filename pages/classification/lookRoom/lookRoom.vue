@@ -2,34 +2,73 @@
 	<view class="">
 		<subclass titel='找房'></subclass>
 		<view class="flex-d al-center">
-			<view class="simulation">
-				以下均为模拟数据
-			</view>
 			<view class="contenBox">
-				<view class="item m-t3" v-for=" item in locdata" :key='item.id'>
+				<view class="flex al-center m-t3 ju-between">
+					<view class="rentOut flex al-center">
+						<image src="../../../image/lookroom/sell.png" class="sellImg" mode=""></image>
+						<view class="sellMsg">
+							我要出租
+						</view>
+					</view>
+					<view class="sellers m-l2 flex al-center">
+						<image src="../../../image/lookroom/buy.png" class="buyImg" mode=""></image>
+						<view class="sellMsg">
+							我要卖房
+						</view>
+					</view>
+				</view>
+				<view class="item m-t3">
 					<view class="titel flex al-center ju-between">
-						{{item.titel}}
-						<view @click="addmore(item)" class="bricolor fz-14 flex al-center">
+						租房
+						<view @click="addmore" class="bricolor fz-14 flex al-center">
 							更多
 							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
 						</view>
 					</view>
 					<view class="flex ju-between">
-						<view class="items " @click="gotoDetails(items)" v-for=" items in item.dome" :key='items.id'>
-							<image :src="items.image" class="itemsimg" mode=""></image>
+						<view class="items " @click="gotoDetails(items)" v-for=" items in rentingRoom" :key='items.id'>
+							<image v-if="items.faceimg" :src="items.faceimg" class="itemsimg" mode="aspectFill"></image>
+							<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg"
+							 class="itemsimg" mode="aspectFill"></image>
 							<view class="itemsname m-t1 fz-14">
-								{{items.name}}
+								{{items.title}}
 							</view>
 							<view class="fz-12 bricolor">
-								{{items.brief}}
+								{{items.room}}室{{items.hall}}厅/{{items.area}}㎡
 							</view>
 							<view class="pritext flex m-t1">
-								{{items.price}}
-								<view v-if="items.price > 2000&&items.price<10000" class="fz-12">
+								{{items.rents}}
+								<view class="fz-12">
 									元/月
 								</view>
-								<view v-if="items.price>10000" class="fz-12">
-									元/平
+
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="item m-t3">
+					<view class="titel flex al-center ju-between">
+						买房
+						<view @click="moreBuye()" class="bricolor fz-14 flex al-center">
+							更多
+							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
+						</view>
+					</view>
+					<view class="flex ju-between">
+						<view class="items " @click="gotoDetails(items)" v-for=" items in sellRoom" :key='items.id'>
+							<image v-if="items.faceimg" :src="items.faceimg" class="itemsimg" mode="aspectFill"></image>
+							<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg"
+							 class="itemsimg" mode="aspectFill"></image>
+							<view class="itemsname m-t1 fz-14">
+								{{items.title}}
+							</view>
+							<view class="fz-12 bricolor">
+								{{items.room}}室{{items.hall}}厅/{{items.area}}㎡
+							</view>
+							<view class="pritext flex m-t1">
+								{{items.sale_price}}
+								<view class="fz-12">
+									万
 								</view>
 							</view>
 						</view>
@@ -46,6 +85,7 @@
 
 <script>
 	import subclass from '../../../components/sub-class/subclass.vue'
+	import home from '../../../vendor/home/home.js'
 	export default {
 		name: "",
 		components: {
@@ -54,95 +94,108 @@
 		props: {},
 		data() {
 			return {
-				locdata: [{
-						titel: '租房',
-						dome: [{
-								name: '复地御香山3悦',
-								brief: '五居室 南卧/18㎡',
-								price: '4000',
-								image: require('@/image/lookroom/logo1.png')
-							},
-							{
-								name: '复地御香山3悦',
-								brief: '五居室 南卧/18㎡',
-								price: '4000',
-								image: require('@/image/lookroom/logo1.png')
-							},
-							{
-								name: '复地御香山3悦',
-								brief: '五居室 南卧/18㎡',
-								price: '4000',
-								image: require('@/image/lookroom/logo1.png')
-							}
-						]
-					},
-					{
-						titel: '二手房',
-						dome: [{
-								name: '正西街274号',
-								brief: '2室1厅/77.06㎡',
-								price: '82万',
-								image: require('@/image/lookroom/logo2.png')
-							},
-							{
-								name: '复地御香山3悦',
-								brief: '五居室 南卧/18㎡',
-								price: '4000',
-								image: require('@/image/lookroom/logo1.png')
-							},
-							{
-								name: '复地御香山3悦',
-								brief: '五居室 南卧/18㎡',
-								price: '4000',
-								image: require('@/image/lookroom/logo1.png')
-							}
-						]
-					},
-					{
-						titel: '新房',
-						dome: [{
-								name: '润扬观澜鹭岛三期',
-								brief: '建面 97-143㎡',
-								price: '12000',
-								image: require('@/image/lookroom/logo3.png')
-							},
-							{
-								name: '复地御香山3悦',
-								brief: '五居室 南卧/18㎡',
-								price: '4000',
-								image: require('@/image/lookroom/logo1.png')
-							},
-							{
-								name: '复地御香山3悦',
-								brief: '五居室 南卧/18㎡',
-								price: '4000',
-								image: require('@/image/lookroom/logo1.png')
-							}
-						]
-					},
-				]
+				rentingRoom: [],
+				sellRoom: []
 			}
 		},
 		methods: {
-          // 更多
-		  addmore(item){
-			   // console.log(item);
-			 uni.navigateTo({
-			 	url:'/pages/classification/lookRoom/moreRoom?title=' + item.titel
-			 })  
-			  },
-		 // 去详情
-		gotoDetails(items) {
-			uni.navigateTo({
-				url:'/pages/classification/lookRoom/detailRoom'
-			})
-		}
+
+			// 更多租房
+			addmore() {
+				// console.log(item);
+				uni.navigateTo({
+					url: '/pages/classification/lookRoom/rentRoom/moreRoom'
+				})
+			},
+			//更多买房
+			moreBuye() {
+				uni.navigateTo({
+					url: '/pages/classification/lookRoom/buyHouse/moreBuy'
+				})
+			},
+			// 去详情
+			gotoDetails(items) {
+				uni.navigateTo({
+					url: '/pages/classification/lookRoom/rentRoom/detailRoom?id=' + items.id
+				})
+			},
+			// 所有的出租房信息
+			getRoom() {
+				home.allRoom({
+					data: {
+						page: 1,
+						pageSize: 3
+					},
+					fail: () => {
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						}
+						let data = res.data.data.data
+						this.rentingRoom = data
+						console.log(res.data.data.data);
+					}
+				})
+			},
+			// 所有出售房信息
+			getSell() {
+				home.sellRecords({
+					data: {
+						page: 1,
+						pageSize: 3
+					},
+					fail: () => {
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						console.log(res);
+						if (res.statusCode != 200) {
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+						}
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						}
+						let data = res.data.data.data
+						this.sellRoom = data
+					}
+				})
+
+
+			}
 		},
 		onShow() {
 
 		},
 		mounted() {
-
+			this.getRoom()
+			this.getSell()
 		},
 		onLoad() {
 
@@ -219,12 +272,44 @@
 	.btmLine {
 		height: 50rpx;
 	}
-	
-	.simulation{
+
+	.simulation {
 		display: flex;
 		justify-content: center;
 		margin-top: 20rpx;
 		font-size: 30rpx;
 		color: #b3b3b3;
+	}
+
+	.rentOut {
+		width: 335rpx;
+		height: 100rpx;
+		background: #F84E4E;
+		border-radius: 10rpx;
+	}
+
+	.sellers {
+		width: 335rpx;
+		height: 100rpx;
+		background: #FF9126;
+		border-radius: 10rpx;
+	}
+
+	.sellImg {
+		width: 66rpx;
+		height: 66rpx;
+		margin-left: 60rpx;
+	}
+
+	.buyImg {
+		width: 58rpx;
+		height: 65rpx;
+		margin-left: 60rpx;
+	}
+
+	.sellMsg {
+		color: #ffffff;
+		font-size: 34rpx;
+		margin-left: 20rpx;
 	}
 </style>

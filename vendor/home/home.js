@@ -31,6 +31,24 @@ class Home {
 		req.patch(params);
 	}
 	
+	// 查看所有的出租房信息
+	allRoom (params) {
+		params.url = routes.home.classifyPost.allRoom;
+		req.get(params);
+	}
+	
+	// 租房信息详情
+	roomDateils (params) {
+		params.url = routes.home.classifyPost.roomDateils;
+		req.get(params);
+	}
+	
+	// 查看平台所有房屋出售记录
+	sellRecords (params) {
+		params.url = routes.home.classifyPost.sellRecords;
+		req.get(params);
+	}
+	
 	// 周边消息
 	news (params) {
 		params.url = routes.home.news.peripheralNews

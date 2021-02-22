@@ -1,7 +1,7 @@
 //测试域名
-let host = 'https://test.kuaitongkeji.com/'
+// let host = 'https://test.kuaitongkeji.com/'
 //本地开发域名
-// let host = 'http://local.kt.cn/';
+let host = 'http://local.kt.cn/';
 // let host = 'https://api.kuaitongkeji.com/';     
 let apiPath = host + 'api/';
 
@@ -89,6 +89,18 @@ module.exports = {
 			
 			// 标为已读
 			userRead  : apiPath + 'user/msg/read'
+		},
+		
+		// 分类接口
+		classifyPost : {
+			// 查看所有的出租房信息
+			allRoom : apiPath + 'rental/rental' ,
+			
+			// 租房信息详情
+			roomDateils : apiPath + 'rental/rental/show',
+			
+			// 查看平台所有房屋出售记录
+			sellRecords : apiPath + 'house/sale'
 		},
 
 		// 社区资讯

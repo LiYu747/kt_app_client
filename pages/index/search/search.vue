@@ -82,7 +82,6 @@
 		methods: {
 			// 搜索数据
 			getData() {
-
 				this.isLoding = true
 				village.allvillage({
 					data: {

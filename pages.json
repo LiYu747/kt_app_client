@@ -362,9 +362,20 @@
 			}
 
 		},
-		// 更多房源
+		// 更多租房
 		{
-		    "path" : "pages/classification/lookRoom/moreRoom",
+		    "path" : "pages/classification/lookRoom/rentRoom/moreRoom",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		}
+		// 更多买房
+		,{
+		    "path" : "pages/classification/lookRoom/buyHouse/moreBuy",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
@@ -373,9 +384,9 @@
 		    }
 		    
 		},
-		  // 房源详情
+		  // 租房详情
 		{
-		    "path" : "pages/classification/lookRoom/detailRoom",
+		    "path" : "pages/classification/lookRoom/rentRoom/detailRoom",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
@@ -694,6 +705,7 @@
 
 		}
        
+      
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
