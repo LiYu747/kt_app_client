@@ -79,7 +79,7 @@
 				<view class="itemvalue">
 					房屋概况
 				</view>
-				<view class="fz-12 m-t2 m-b2">
+				<view class="fz-12 m-t2 m-b2" style="white-space:pre-wrap">
 				   {{roomInof.desc}}
 				 <!--  复地御香山3悦小区紧邻繁华地段，小区周边配套成熟，交通选择多，生
 				   活设施全。 -->
