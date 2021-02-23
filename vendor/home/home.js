@@ -49,6 +49,12 @@ class Home {
 		req.get(params);
 	}
 	
+	// 出售房屋的记录详情
+	sellDetails (params) {
+		params.url = routes.home.classifyPost.sellDetails;
+		req.get(params);
+	}
+	
 	// 周边消息
 	news (params) {
 		params.url = routes.home.news.peripheralNews

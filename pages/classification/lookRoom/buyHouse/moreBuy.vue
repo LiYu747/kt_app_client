@@ -32,7 +32,7 @@
 								{{item.sale_price}}万
 							</view>
 							<view class="fz-12 m-l2 pricolor">
-							{{item.avg_price}}元/平	
+								{{item.avg_price}}元/平
 							</view>
 							<view class="nextTex  pos-abs fz-12 flex al-center">
 								<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextImg"
@@ -94,24 +94,26 @@
 			// 去详情
 			gotoDetails(item) {
 				uni.navigateTo({
-					url: '/pages/classification/lookRoom/detailRoom?id=' + item.id
+					url: '/pages/classification/lookRoom/buyHouse/buyDetails?id=' + item.id
 				})
 			},
 			// 所有出售房信息
 			getSell() {
+				this.isLoding = true
 				home.sellRecords({
 					data: {
-						page: 1,
-						pageSize: 3
+						page: this.page,
+						pageSize: this.pageSize
 					},
 					fail: () => {
+						this.isLoding = false
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
-						
+						this.isLoding = false
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络出错了',
@@ -128,9 +130,6 @@
 						}
 						let data = res.data.data
 						data.data.map(item => {
-							if (!item.bathroom) {
-								item.bathroom = 0
-							}
 							if (item.zx == 'low') {
 								item.zx = '清水房'
 							}
@@ -140,12 +139,13 @@
 							if (item.zx == 'well') {
 								item.zx = '精装'
 							}
-							item.brief = item.room + '室' + item.hall + '厅' + item.bathroom + '卫'
+							let bathroom = item.bathroom != null ? item.bathroom + '卫' : "";
+							let hall = item.hall != null ? item.hall + '厅' : '';
+							item.brief = item.room + '室' + hall + bathroom
 						})
-						console.log(data);
 						this.page = data.current_page + 1;
 						this.hasMore = data.next_page_url ? true : false;
-						this.rentingRoom = this.rentingRoom.concat( data.data)
+						this.rentingRoom = this.rentingRoom.concat(data.data)
 					}
 				})
 
@@ -259,10 +259,10 @@
 	.pritext {
 		color: #F07535;
 	}
-	
-	.pricolor{
+
+	.pricolor {
 		color: #999999;
-		}
+	}
 
 	.notext {
 		padding: 20rpx 0;

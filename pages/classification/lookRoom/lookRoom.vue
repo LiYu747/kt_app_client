@@ -4,7 +4,7 @@
 		<view class="flex-d al-center">
 			<view class="contenBox">
 				<view class="flex al-center m-t3 ju-between">
-					<view class="rentOut flex al-center">
+					<view @click="myRental" class="rentOut flex al-center">
 						<image src="../../../image/lookroom/sell.png" class="sellImg" mode=""></image>
 						<view class="sellMsg">
 							我要出租
@@ -20,12 +20,12 @@
 				<view class="item m-t3">
 					<view class="titel flex al-center ju-between">
 						租房
-						<view @click="addmore" class="bricolor fz-14 flex al-center">
+						<view v-if="rentingRoom.length>0" @click="addmore" class="bricolor fz-14 flex al-center">
 							更多
 							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
 						</view>
 					</view>
-					<view class="flex ju-between">
+					<view v-if="rentingRoom.length>0" class="flex ju-between">
 						<view class="items " @click="gotoDetails(items)" v-for=" items in rentingRoom" :key='items.id'>
 							<image v-if="items.faceimg" :src="items.faceimg" class="itemsimg" mode="aspectFill"></image>
 							<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg"
@@ -34,7 +34,7 @@
 								{{items.title}}
 							</view>
 							<view class="fz-12 bricolor">
-								{{items.room}}室{{items.hall}}厅/{{items.area}}㎡
+								{{items.introduce}}/{{items.area}}㎡
 							</view>
 							<view class="pritext flex m-t1">
 								{{items.rents}}
@@ -45,17 +45,20 @@
 							</view>
 						</view>
 					</view>
+					<view v-if="rentingRoom.length == 0" class="flex ju-center fz-12 nomsg">
+						{{notext}}
+					</view>
 				</view>
 				<view class="item m-t3">
 					<view class="titel flex al-center ju-between">
 						买房
-						<view @click="moreBuye()" class="bricolor fz-14 flex al-center">
+						<view v-if="sellRoom.length>0" @click="moreBuye" class="bricolor fz-14 flex al-center">
 							更多
 							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
 						</view>
 					</view>
-					<view class="flex ju-between">
-						<view class="items " @click="gotoDetails(items)" v-for=" items in sellRoom" :key='items.id'>
+					<view v-if="sellRoom.length>0" class="flex ju-between">
+						<view class="items " @click="gotoBuy(items)" v-for=" items in sellRoom" :key='items.id'>
 							<image v-if="items.faceimg" :src="items.faceimg" class="itemsimg" mode="aspectFill"></image>
 							<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg"
 							 class="itemsimg" mode="aspectFill"></image>
@@ -63,7 +66,7 @@
 								{{items.title}}
 							</view>
 							<view class="fz-12 bricolor">
-								{{items.room}}室{{items.hall}}厅/{{items.area}}㎡
+								{{items.introduce}}/{{items.area}}㎡
 							</view>
 							<view class="pritext flex m-t1">
 								{{items.sale_price}}
@@ -72,6 +75,9 @@
 								</view>
 							</view>
 						</view>
+					</view>
+					<view v-if="sellRoom.length == 0" class="flex ju-center fz-12 nomsg">
+						{{notext2}}
 					</view>
 				</view>
 			</view>
@@ -95,7 +101,9 @@
 		data() {
 			return {
 				rentingRoom: [],
-				sellRoom: []
+				sellRoom: [],
+				notext: '',
+				notext2: ''
 			}
 		},
 		methods: {
@@ -113,10 +121,22 @@
 					url: '/pages/classification/lookRoom/buyHouse/moreBuy'
 				})
 			},
-			// 去详情
+			// 去租房详情
 			gotoDetails(items) {
 				uni.navigateTo({
 					url: '/pages/classification/lookRoom/rentRoom/detailRoom?id=' + items.id
+				})
+			},
+			//去买房详情
+			gotoBuy(items) {
+				uni.navigateTo({
+					url: '/pages/classification/lookRoom/buyHouse/buyDetails?id=' + items.id
+				})
+			},
+			// 我要出租
+			myRental() {
+				uni.navigateTo({
+					url: '/pages/classification/lookRoom/rentalForm'
 				})
 			},
 			// 所有的出租房信息
@@ -148,8 +168,14 @@
 							return;
 						}
 						let data = res.data.data.data
+						data.map(item => {
+							let hall = item.hall != null ? item.hall + '厅' : '';
+							item.introduce = item.room + '室' + hall
+						})
+						if (data.length == 0) {
+							this.notext = '还没有人发布租房信息'
+						}
 						this.rentingRoom = data
-						console.log(res.data.data.data);
 					}
 				})
 			},
@@ -167,7 +193,6 @@
 						})
 					},
 					success: (res) => {
-						console.log(res);
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络出错了',
@@ -183,6 +208,13 @@
 							return;
 						}
 						let data = res.data.data.data
+						data.map(item => {
+							let hall = item.hall != null ? item.hall + '厅' : '';
+							item.introduce = item.room + '室' + hall
+						})
+						if (data.length == 0) {
+							this.notext2 = '还没有人发布卖房信息'
+						}
 						this.sellRoom = data
 					}
 				})
@@ -311,5 +343,10 @@
 		color: #ffffff;
 		font-size: 34rpx;
 		margin-left: 20rpx;
+	}
+
+	.nomsg {
+		color: #CCCCCC;
+		padding: 20rpx 0;
 	}
 </style>

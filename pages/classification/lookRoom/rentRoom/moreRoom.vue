@@ -11,14 +11,15 @@
 				</view>
 			</view>
 		</view>
-         <view class="topLine">
-         	
-         </view>
+		<view class="topLine">
+
+		</view>
 		<view class="flex-d al-center">
 			<view v-if="rentingRoom.length > 0" class="flex-d al-center">
 				<view class="contenBox m-t3 flex ju-between" @click="gotoDetails(item)" v-for="item in rentingRoom" :key='item.id'>
 					<image v-if="item.faceimg" :src="item.faceimg" class="itemImg" mode="aspectFill"></image>
-					<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg" class="itemImg" mode="aspectFill"></image>
+					<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg"
+					 class="itemImg" mode="aspectFill"></image>
 					<view class="msgBox">
 						<view class="itemName">
 							{{item.title}}
@@ -33,11 +34,11 @@
 							<view class="fz-12">
 								元/月
 							</view>
-							 <view class="nextTex  pos-abs fz-12 flex al-center">
-								 {{item.pv}}人浏览
-								 <image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextImg"
-								  mode=""></image>
-							 </view>
+							<view class="nextTex  pos-abs fz-12 flex al-center">
+								{{item.pv}}人浏览
+								<image src="https://oss.kuaitongkeji.com/static/img/app/classification/Healthcare/next.png" class="nextImg"
+								 mode=""></image>
+							</view>
 						</view>
 					</view>
 				</view>
@@ -50,7 +51,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view v-show="isLoding == true && rentingRoom.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -83,18 +84,18 @@
 				}, {
 					name: '更多'
 				}],
-				page:1,
-				pageSize:15,
+				page: 1,
+				pageSize: 15,
 				hasMore: true,
 				isLoding: false,
-				text:'',
+				text: '',
 			}
 		},
 		methods: {
 			// 去详情
 			gotoDetails(item) {
 				uni.navigateTo({
-					url:'/pages/classification/lookRoom/rentRoom/detailRoom?id=' + item.id
+					url: '/pages/classification/lookRoom/rentRoom/detailRoom?id=' + item.id
 				})
 			},
 			// 所有的出租房信息
@@ -130,9 +131,6 @@
 						}
 						let data = res.data.data
 						data.data.map(item => {
-							if (!item.bathroom) {
-								item.bathroom = 0
-							}
 							if (item.zx == 'low') {
 								item.zx = '清水房'
 							}
@@ -142,11 +140,13 @@
 							if (item.zx == 'well') {
 								item.zx = '精装'
 							}
-							item.brief = item.room + '室' + item.hall + '厅' + item.bathroom + '卫'
+							let bathroom = item.bathroom != null ? item.bathroom + '卫' : "";
+							let hall = item.hall != null ? item.hall + '厅' : '';
+							item.brief = item.room + '室' + hall + bathroom
 						})
 						this.page = data.current_page + 1;
 						this.hasMore = data.next_page_url ? true : false;
-						this.rentingRoom = this.rentingRoom.concat( data.data)
+						this.rentingRoom = this.rentingRoom.concat(data.data)
 					}
 				})
 			},
@@ -155,16 +155,15 @@
 			this.getRoom()
 		},
 		onShow() {
-			
+
 		},
 		// 下拉更多
 		onReachBottom() {
 			this.text = '没有更多了~'
-		   if (this.isLoding == true || this.hasMore == false) return;
+			if (this.isLoding == true || this.hasMore == false) return;
 			this.loadPageData()
 		},
-		onLoad() {
-		},
+		onLoad() {},
 		filters: {
 
 		},
@@ -181,15 +180,15 @@
 </script>
 
 <style scoped lang="scss">
-	.fixed{
+	.fixed {
 		position: fixed;
 		z-index: 99;
-		}
-		
-	.topLine{
-	 height: 230rpx;	
-	}	 
-	
+	}
+
+	.topLine {
+		height: 230rpx;
+	}
+
 	.tilBox {
 		width: 650rpx;
 		height: 80rpx;
@@ -249,8 +248,8 @@
 		margin-left: 10rpx;
 		margin-top: 5rpx;
 	}
-	
-	.nextTex{
+
+	.nextTex {
 		right: 0;
 		top: 20rpx;
 		color: #CCCCCC;
@@ -260,23 +259,23 @@
 		color: #F07535;
 		align-items: baseline;
 	}
-	
-	.notext{
+
+	.notext {
 		padding: 20rpx 0;
 		color: #333333;
 	}
-	
+
 	.lodimg {
 		width: 30rpx;
 		height: 30rpx;
 		margin-right: 20rpx;
 	}
-	
+
 	.lodbox {
 		font-size: 24rpx;
 		padding: 20rpx;
 	}
-	
+
 	.showloding {
 		position: absolute;
 		width: 100%;
@@ -284,12 +283,12 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-	
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-	
+
 	.loding {
 		width: 260rpx;
 		height: 200rpx;

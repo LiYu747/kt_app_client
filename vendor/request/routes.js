@@ -100,7 +100,10 @@ module.exports = {
 			roomDateils : apiPath + 'rental/rental/show',
 			
 			// 查看平台所有房屋出售记录
-			sellRecords : apiPath + 'house/sale'
+			sellRecords : apiPath + 'house/sale',
+			
+			// 出售房屋的记录详情
+			sellDetails : apiPath + 'house/sale/show'
 		},
 
 		// 社区资讯

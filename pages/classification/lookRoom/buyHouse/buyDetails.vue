@@ -17,11 +17,8 @@
 				<view class="nameDetail">
 					{{roomInof.title}}
 				</view>
-				<view class="pritext flex m-t1">
-					{{roomInof.rents}}
-					<view class="fz-12">
-						元/月
-					</view>
+				<view class="fz-12 m-t2 haveSeen">
+					已有{{roomInof.pv}}人浏览
 				</view>
 			</view>
 
@@ -41,18 +38,33 @@
 				</view>
 			</view>
 
-			<view class="isHave">
-				<view class="fz-14 m-b1 flex al-center">
-					电梯
+			<view class="isHave flex">
+				<view class="fz-14 m-b1 haveBox flex al-center">
+					楼层：
+					<view class="isResult m-l2">
+						{{roomInof.floor}}/{{roomInof.total_floor}}
+					</view>
+				</view>
+				<view class="fz-14  m-b1 flex haveBox al-center">
+					电梯：
 					<view class="isResult m-l2">
 						{{roomInof.ele}}
 					</view>
 				</view>
-				<view class="fz-14  m-b1 flex al-center">
-					装修
+				<view class="fz-14 haveBox m-b1 flex al-center">
+					装修：
 					<view class="isResult m-l2">
 						{{roomInof.zx}}
 					</view>
+				</view>
+			</view>
+
+			<view class="briefRoom">
+				<view class="fz-18">
+					房屋概况
+				</view>
+				<view class="fz-12 m-t2 m-b2" style="white-space:pre-wrap">
+					{{roomInof.desc}}
 				</view>
 			</view>
 
@@ -63,36 +75,17 @@
 				</view>
 			</view>
 
-			<view class="briefRoom">
-				<view class="itemvalue">
-					房屋概况
-				</view>
-				<view class="fz-12 m-t2 m-b2" style="white-space:pre-wrap">
-					{{roomInof.desc}}
-				</view>
-			</view>
-
 			<view class="isHave flex">
 				<view class="fz-16 haveBox isResult flex al-center">
 					联系人
 					<view class="fz-12 m-l2 conName">
-						<view v-if="roomInof.contact_name" class="">
-							{{roomInof.contact_name}}
-						</view>
-						<view class="">
-							暂无
-						</view>
+						{{roomInof.contact_name}}
 					</view>
 				</view>
 				<view class="fz-16   flex haveBox isResult al-center">
 					联系电话
 					<view class="fz-12 m-l2 userTel">
-						<view class="" v-if="roomInof.tel">
-							{{roomInof.tel}}
-						</view>
-						<view class="isResult" v-else>
-							暂无
-						</view>
+						{{roomInof.tel}}
 					</view>
 				</view>
 			</view>
@@ -125,13 +118,13 @@
 				interval: 2000,
 				duration: 500,
 				locdata: [{
-					title: '面积',
+					title: '售价',
 					value: ''
 				}, {
-					title: '楼层',
+					title: '房型',
 					value: ''
 				}, {
-					title: '户型',
+					title: '建筑面积',
 					value: ''
 				}],
 				roomInof: {},
@@ -142,16 +135,16 @@
 				uni.showLoading({
 					title:"加载中"
 				})
-				home.roomDateils({
+				home.sellDetails({
 					data: {
 						id: id
 					},
 					fail: () => {
-						uni.hideLoading()
-						uni.showToast({
-							title: '网络错误',
-							icon: 'none'
-						})
+                      uni.hideLoading()
+                      uni.showToast({
+                      	title: '网络错误',
+                      	icon: 'none'
+                      })
 					},
 					success: (res) => {
 						uni.hideLoading()
@@ -179,9 +172,9 @@
 						}
 						let bathroom = data.bathroom != null ? data.bathroom + '卫' : "";
 						let hall = data.hall != null ? data.hall + '厅' : '';
-						this.locdata[0].value = data.area + '㎡'
-						this.locdata[1].value = data.floor + '/' + data.total_floor + '层'
-						this.locdata[2].value = data.room + '室' + hall + bathroom
+						this.locdata[0].value = data.sale_price + '万';
+						this.locdata[1].value = data.room + '室' + hall + bathroom;
+						this.locdata[2].value = data.area + '㎡'
 						if (data.zx == 'low') {
 							data.zx = '清水房'
 						}
@@ -309,7 +302,7 @@
 
 	.itemvalue {
 		color: #F07535;
-		font-size: 34rpx;
+		font-size: 36rpx;
 	}
 
 	.itemtil {
@@ -323,8 +316,13 @@
 		background: #FFFFFF;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
 		border-radius: 10rpx;
-		padding: 20rpx;
+		padding: 30rpx;
 		color: #999999;
+		flex-wrap: wrap;
+	}
+
+	.haveBox {
+		width: 50%;
 	}
 
 	.isResult {
@@ -387,15 +385,16 @@
 		height: 360rpx;
 	}
 
-	.haveBox {
-		width: 50%;
-	}
-
 	.conName {
 		color: #4D4D4D;
 	}
 
 	.userTel {
 		color: #0078FF;
+	}
+
+	.haveSeen {
+		text-align: right;
+		color: #333333;
 	}
 </style>
