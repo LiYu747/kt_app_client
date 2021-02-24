@@ -144,6 +144,14 @@
 	margin-bottom: 10rpx;
 }
 
+.p-b2{
+	padding-bottom: 20rpx;
+}
+
+.p-b3{
+	padding-bottom: 30rpx;
+}
+
 .flex-w {
 	flex-wrap: wrap;
 	align-content: flex-start;

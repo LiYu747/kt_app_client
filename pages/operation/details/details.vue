@@ -44,7 +44,7 @@
 			<view class="tex1">
 				备注
 			</view>
-			<view class="frame">
+			<view class="frame" style="white-space:pre-wrap">
 				{{remarks}}
 			</view>
 			<view class="tex1">

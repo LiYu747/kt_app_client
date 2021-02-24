@@ -8,65 +8,82 @@
 		<view class="layoutBox flex ">
 			标题
 			<textarea autoHeight="true" class="textBox" maxlength="30" v-model="value" placeholder="请输入标题(30字以内)" />
-			</view>
- 	      <view class="contentBox m-t3">
-		   <view class="itemBox flex al-center ju-between" @click="fillIn(item,index)" v-for="(item,index) in formlist" :key="item.id" :class="index==formlist.length-1?'dv':''">
-			{{item.titel}}
-			<view class="flex al-center">
-			<input :type="item.style"  v-model="item.value" :disabled="item.disabled" class="ipt" />
-			<image v-if="index!=4" class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
-			<view v-if="index==4" class="">
-				㎡
-			</view>
-			</view>
-		  </view>
-	    </view>
-		<!-- 户型 -->
-		<u-select v-model="houseType" mode="mutil-column" :default-value='defaultType' :list="listType" @confirm="confirmRoom"></u-select>
-		<!-- 楼层 -->
-		<u-picker range-key="label" :default-selector='defaultFloor' v-model="Isfloor" mode="multiSelector" @columnchange='change' :range="listFloor" @confirm="confirmFloor"></u-picker>
-		<!-- 装修 -->
-		<u-select v-model="fitmentShow" :default-value='defaultFitment'  @confirm="confirmFitment"  :list="fitmentList"></u-select>
-		<!-- 电梯 -->
-		<u-select v-model="elevatorShow" :default-value='defaultElevator'  @confirm="confirmElevator"  :list="elevatorList"></u-select>
-		<view class="contentBox m-t3">
-			  <view class="itemBox flex al-center ju-between">
-			  	租金
-				<view class="flex al-center">
-				<input type="text"  class="ipt" />
-				<view  class="">
-					元
-				</view>
-				</view>
-			  </view>
-			  <view class="itemBox flex al-center dv ju-between" >
-			  	押金
-				<view class="flex al-center">
-				<input type="text"   class="ipt" />
-				<image  class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
-				</view>
-			  </view>
 		</view>
-		
 		<view class="contentBox m-t3">
+			<view class="itemBox flex al-center ju-between" @click="fillIn(item,index)" v-for="(item,index) in formlist" :key="item.id"
+			 :class="index==formlist.length-1?'dv':''">
+				{{item.titel}}
+				<view class="flex al-center">
+					<input :type="item.style" :placeholder="item.placeholder" v-model="item.value" :disabled="item.disabled" class="ipt" />
+					<image v-if="index!=4" class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+					<view v-if="index==4" class=" m-l1">
+						㎡
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 户型 -->
+		<u-select v-model="houseType" title='请选择户型' mode="mutil-column" :default-value='defaultType' :list="listType"
+		 @confirm="confirmRoom"></u-select>
+		<!-- 楼层 -->
+		<!-- <u-picker range-key="label" title='请选择楼层' :default-selector='defaultFloor' v-model="Isfloor" mode="multiSelector" @columnchange='change' :range="listFloor" @confirm="confirmFloor"></u-picker> -->
+		<u-select v-model="Isfloor" title='请选择楼层' mode="mutil-column" :default-value='defaultFitment' @confirm="confirmFitment" :list="listFloor"></u-select>
+		<!-- 装修 -->
+		<u-select v-model="fitmentShow" title='请选择装修' :default-value='defaultFitment' @confirm="confirmFitment" :list="fitmentList"></u-select>
+		<!-- 电梯 -->
+		<u-select v-model="elevatorShow" title='请选择是否有电梯' :default-value='defaultElevator' @confirm="confirmElevator" :list="elevatorList"></u-select>
+		<!-- 押金 -->
+		<u-select v-model="cashShow" title='请选择押金' :default-value='defaultCash' mode="mutil-column" @confirm="confirmCash"
+		 :list="cashList"></u-select>
+		<view class="contentBox m-t3">
+			<view class="itemBox flex al-center ju-between">
+				租金
+				<view class="flex al-center">
+					<input type="number" v-model="rentNum" placeholder="请填写" class="ipt" />
+					<view class="fz-14 m-l1">
+						元
+					</view>
+				</view>
+			</view>
+			<view @click="cashShow = true" class="itemBox flex al-center dv ju-between">
+				押金
+				<view class="flex al-center">
+					<input type="text" disabled="true" placeholder="请选择" v-model='cash' class="ipt" />
+					<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+				</view>
+			</view>
+		</view>
+
+		<view class="contentBox m-t3 ">
 			<view class="roomtetx">
 				房屋照片
 			</view>
-			<view class="">
-				<image src="../../../image/lookroom/photo.png" class="photoImg" mode=""></image>
+			<view class="flex al-center flex-w">
+				<view class="" v-for="item in image" :key='item.id'>
+					<image :src="item" mode="aspectFill" class="itemImg"></image>
+				</view>
+				<view class="selphoto flex al-center ju-center">
+					<image @click="selPhoto" src="../../../image/lookroom/photo.png" class="photoImg" mode=""></image>
+				</view>
 			</view>
 			<view class="roomtetx">
 				封面图片
 			</view>
-			<view class="">
-				<image src="../../../image/lookroom/cover.png" class="coverImg" mode=""></image>
+			<view class="p-b2 flex">
+				<image v-if="coverImg" :src="coverImg" class="itemImg" mode="aspectFill"></image>
+				<view class="selphoto flex al-center ju-center">
+					<image @click="celCover" src="../../../image/lookroom/cover.png" class="coverImg" mode=""></image>
+				</view>
 			</view>
 		</view>
-		
+
 		<view class="contentBox m-t3">
 			<view class="roomtetx">
 				房源简介
 			</view>
+			<view class=" p-b3">
+				<textarea class="textAr" auto-height="true" maxlength="1000" value="" v-model="textvalue" placeholder="请填写" />
+				</view>
 		</view>
 		
 		<view class="contentBox m-t3">
@@ -76,86 +93,193 @@
 		</view>
 		
 		<view class="flex ju-center">
-			<view class="submit flex al-center ju-center">
-				<image src="../../../image/lookroom/submit.png" class="submitImg" mode=""></image>
+			<view  class="submit flex al-center ju-center">
+				<image @click="iSfill" src="../../../image/lookroom/submit.png" class="submitImg" mode=""></image>
 				<view class="pos-abs fz-16 bai">
 					提交
 				</view>
 			</view>
 		</view>
 		
-		
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				上传中
+			</view>
+		</view>
   </view>
 </template>
 
 <script>
 	import subunit from '../../../components/sub-unit/subunit.vue'
+	import route from '../../../vendor/request/routes.js'
+	import home from '../../../vendor/home/home.js'
 export default {
 name: "",
 components: {
-subunit
+subunit,
 },
 props: {},
 data () {
   return {
 	  value:'', //标题
+	  addDetails:'',//详细地址
+	  lgt:'',//经度
+	  lat:'',//纬度
 	  houseType:false, //户型
 	  listType:[[],[],[]], //户型数据
 	  defaultType:[], //户型默认
 	  Isfloor: false, //楼层
-	  listFloor:[[],[]], //楼层数据
+	  listFloor:[[ {value:'',label:'请选择'}],[]], //楼层数据
 	  defaultFloor:[0,0], //楼层默认
+	  floor:'',//选择楼层
+	  totalFloor:'',//选择总楼层
 	  fitmentShow:false, //装修
 	  fitmentList:[{value:'well',label:'精装',extra:0},{value:'simple',label:'简装',extra:1},{value:'low',label:'清水房',extra:2}],//装修数据
 	  defaultFitment :[], //装修默认
+	  celFit:"",//选择装修
 	  elevatorShow:false, //电梯
 	  elevatorList:[{value:0,label:'无'},{value:1,label:'有'}], //电梯数据
 	  defaultElevator:[], //电梯默认
+	  rentNum:'',//租金
+	  cash:'',//押金
+	  cashShow:false,//押金
+	  cashList:[[{value:1,label:'不需要'}],[]],//押金数据
+	  defaultCash:[],//押金默认
+	  rents_bet:'',//押几
+	  rents_pay:'',//付几
+	  image:[],//图片数据
+	  isLoding:false,
+	  coverImg:'',//封面图片
+	  flag:false,
+	  textvalue:'',//房屋简介
 	  formlist:[{
 		  titel:'小区名字及地址',
-		  value:"复地御香山3悦",
+		  value:"",
 		  disabled:true,
-		  style:'text'
+		  style:'text',
+		  placeholder:'请选择小区'
 	  },
 	  {
 		titel:'户型',
 	    value:"",
 		disabled:true,
-		  style:'text'
+		  style:'text',
+		   placeholder:'请选择'
 	  },
 	  {
 		titel:'楼层',
 		value:"",
 		disabled:true,
-		  style:'text'
+		  style:'text',
+		    placeholder:'请选择'
 	  },
 	  {
 	    titel:'装修',
 	  	value:"",
 		disabled:true,
-		  style:'text'
+		  style:'text',
+		    placeholder:'请选择'
 	  },
 	  {
 	    titel:'面积',
 	  	value:"",
-		  style:'number'
+		  style:'number',
+		 placeholder:'请填写'
 	  },
 	  {
 	    titel:'电梯',
 	  	value:"",
 		disabled:true,
-		  style:'text'
+		  style:'text',
+		    placeholder:'请选择'
 	  },
-	  ]
+	  ],
+	  celIs:false,
+	  allfol:[]
     }
   },
   methods: {
+	   // 提交
+	   subunit(){
+		  let faceimg = this.coverImg
+		   if(!this.coverImg){
+			   faceimg = this.image[0]
+		   }
+		   uni.showLoading({
+		   	title:'提交中'
+		   })
+		 home.releaseRent({
+			 data:{
+				 // 必传
+				 title: this.value,
+				 room:this.defaultType[0] + 1,
+				 hall:this.defaultType[1] + 1,
+				 bathroom:this.defaultType[2] + 1,
+				 area:this.formlist[4].value,
+				 ele:this.defaultElevator[0],
+				 floor:this.floor,
+				 total_floor:this.totalFloor,
+				 zx:this.celFit,
+				 rents:this.rentNum,
+				 album:this.image,
+				 village:this.formlist[0].value,
+				 desc:this.textvalue,
+				 tel:'17608040164',
+				 contact_name:'李钰',
+				// 可选
+				  rents_bet: this.rents_bet,
+				  rents_pay: this.rents_pay,
+				  location:this.addDetails,
+				  lgt:this.lgt,
+				  lat:this.lat,
+				  faceimg:faceimg
+			 },
+			 fail: () => {
+				 uni.hideLoading()
+				 uni.showToast({
+				 	title: '网络错误',
+				 	icon: 'none'
+				 })
+			 },
+			 success:(res) => {
+				  uni.hideLoading()
+				  if (res.statusCode != 200) {
+				  	uni.showToast({
+				  		title: '网络出错了',
+				  		icon: 'none'
+				  	})
+				  	return;
+				  }
+				  if (res.data.code != 200) {
+				  	uni.showToast({
+				  		title: res.data.msg,
+				  		icon: 'none'
+				  	})
+				  	return;
+				  }
+				  uni.showToast({
+				  	title: res.data.msg,
+				  	icon: 'none',
+					duration:3000
+				  })
+				 }
+		 })  
+	   },
 	  // 选择操作
       fillIn(item,index){
+		  if(index == 0) {
+			  this.location()
+		  }
 		  if(index == 1){
 			this.houseType = true  
 		  }
 		  if(index == 2){
+			 if(this.celIs == false){
+				  this.listFloor[1] = this.allfol
+			 }
 			this.Isfloor = true
 		  }
 		  if(index == 3) {
@@ -164,6 +288,18 @@ data () {
 		  if(index == 5) {
 			  this.elevatorShow = true
 		  }
+	  },
+	  //选择押金
+	  confirmCash(e){
+		  let text =  e[0].label != '不需要'?e[0].label:''
+		  this.rents_bet = text
+		  this.rents_pay = e[1].label
+		  this.cash = text +  e[1].label
+		  let Default = []
+		 e.map( item => {
+			 Default.push(item.value-1)
+		 })
+		  this.defaultCash = Default
 	  },
 	  //选择电梯
 	  confirmElevator(e){
@@ -175,25 +311,29 @@ data () {
 	  // 选择装修
 	  confirmFitment(e){
 		 this.formlist[3].value = e[0].label
+		 this.celFit = e[0].value
 		 let Default = []
 		 Default.push(e[0].extra)
 		 this.defaultFitment = Default
 	  },
 	  // 选择楼层
 	  confirmFloor(e){
+		  this.celIs = true
 		  let floor = e[0]
 		  let allFloor = e[1]
 		  this.defaultFloor = e
 		  this.formlist[2].value = this.listFloor[0][floor].value + '/' + this.listFloor[1][allFloor].value
+		  this.floor = this.listFloor[0][floor].value
+		  this.totalFloor = this.listFloor[1][allFloor].value
 		  },
 	  change(e){
-		  if(e.column == 1) return;
-		   let Floor = []
-		for( var i=e.index+1 ; i<100 ; i++){
-		 let allFloor = {value:i,label:'共'+i+'层'}
-		 Floor.push(allFloor)
-		}
-		 this.listFloor[1] = Floor
+			  let arr = []
+			  for( var i=e.index ; i<100 ; i++){
+			  			let allFloor = {value:i,label:'共'+i+'层'}
+						arr.push(allFloor)
+			  }
+			 this.listFloor[1] = arr   
+		   console.log(e);
 	  },
 	  // 选择户型
 	  confirmRoom(e){
@@ -206,7 +346,73 @@ data () {
 		  this.defaultType = Default
 		  this.formlist[1].value = value
 	  },
+	  //选择图片
+	  selPhoto(){
+		  this.flag = false
+		  this.succ()
+	  },
+	  //选择封面
+	  celCover(){
+		  this.flag = true
+		  this.succ()
+	  },
+	  succ(){
+		 uni.chooseImage({
+		 	extension: ['jpg', 'jpeg', 'png', 'gif'],
+		 	success: (chooseImageRes) => {
+		 		const files = chooseImageRes.tempFilePaths;
+		 		this.isLoding = true;
+		 		let that = this;
+		 		if (files.length == 0) return;
+		 		let func = [];
+		 		files.forEach((item) => {
+		 			func.push(that.upload(item));
+		 		});
+		 
+		 		Promise.all(func).then((res) => {
+		 			that.isLoding = false;
+		 		}).catch((err) => {
+		 			that.isLoding = false;
+		 			uni.showModal({
+		 				title: "上传文件出错:" + err,
+		 			})
+		 		})
+		 	}
+		 })  
+	  },
+	  upload(fileItem) {
+	  	let that = this;
+	  	return new Promise((res, rej) => {
+	  		uni.uploadFile({
+	  			url: route.services.file.upload,
+	  			filePath: fileItem,
+	  			name: 'file',
+	  			fail: (err) => {
+	  				rej('网络出错');
+	  			},
+	  			success: (val) => {
+	  				if (val.statusCode != 200) {
+	  					rej(val.statusCode);
+	  					return;
+	  				}
 	  
+	  				let jres = JSON.parse(val.data);
+	  
+	  				if (jres.code != 200) {
+	  					rej(jres.msg);
+	  					return;
+	  				}
+					if(that.flag == false){
+						that.image.push(jres.data.url)
+					}
+					if(that.flag == true) {
+						that.coverImg = jres.data.url
+					}
+	  				res(jres);
+	  			}
+	  		})
+	  	})
+	  },
 	  all(){
 		  // 户型数据
 		 for( var i=1 ; i<11;i++){
@@ -223,9 +429,104 @@ data () {
 			 let allFloor = {value:i,label:'共'+i+'层'}
 			 this.listFloor[0].push(floor)
 			  this.listFloor[1].push(allFloor)
+			  this.allfol.push(allFloor)
+		 }
+		 // 押金数据
+		 for( var i=1 ; i<13 ; i++){
+		 	 let floor = {value:i+1,label:'押'+i}
+		 	let allFloor = {value:i,label:'付'+i}
+		 	this.cashList[0].push(floor)
+		 	this.cashList[1].push(allFloor)
 		 }
 		  
-	  }
+	  },
+	  // 定位
+	  location(){
+		   let that = this 
+		  uni.chooseLocation({
+		      success: function (res) {
+				  that.formlist[0].value = res.name
+				  that.addDetails = res.address
+				  that.lgt = res.longitude.toFixed(6)//经度
+				  that.lat = res.latitude.toFixed(6)//纬度
+		      }
+		  });
+	  },
+	 //判断
+	iSfill(){
+		
+		if(!this.value){
+			uni.showToast({
+				title:"请输入标题",
+				icon:"none"
+			})
+			return;		
+		} 
+		if(!this.formlist[0].value) {
+					 uni.showToast({
+					 	title:"请选择小区",
+					 	icon:"none"
+					 })
+					 return;
+		} 
+		if(this.defaultType.length == 0){
+					 uni.showToast({
+					 	title:"请选择户型",
+					 	icon:"none"
+					 })
+					 return;
+		}
+		if(!this.floor){
+					 uni.showToast({
+						title:"请选择楼层",
+						icon:"none"
+					 })
+					 return;
+		}
+		if(!this.celFit){
+					 uni.showToast({
+						title:"请选择装修",
+						icon:"none"
+					 })
+					 return;
+		}
+		if(!this.formlist[4].value){
+					 uni.showToast({
+						title:"请填写面积",
+						icon:"none"
+					 })
+					 return;
+		}
+		if( this.defaultElevator.length == 0){
+					 uni.showToast({
+						title:"请选择是否有电梯",
+						icon:"none"
+					 })
+					 return;
+		}
+		if( !this.rentNum){
+					 uni.showToast({
+						title:"请填写租金",
+						icon:"none"
+					 })
+					 return;
+		}
+		if( this.image.length == 0){
+					 uni.showToast({
+						title:"请上传房屋照片",
+						icon:"none"
+					 })
+					 return;
+		}
+		if( !this.textvalue){
+					 uni.showToast({
+						title:"请填写房屋简介",
+						icon:"none"
+					 })
+					 return;
+		} 
+		this.subunit()
+	}
 	  
 	
   },
@@ -260,7 +561,7 @@ data () {
 }
 
 .layoutBox{
-	width: 750rpx;
+	width: 690rpx;
 	background: #FFFFFF;
 	padding: 20rpx 30rpx;
 	color: #333333;
@@ -272,7 +573,7 @@ data () {
 	height: 40rpx;
 	font-size: 14px;
 	color: #666666;
-	margin-top: 2rpx;
+	margin-top: 4rpx;
 	}
 
 .contentBox{
@@ -333,5 +634,49 @@ data () {
 .submitImg{
 	width: 360rpx;
 	height: 70rpx;
+	}
+	/deep/
+     .u-select__header[data-v-a577ac80]{
+	color: #666666;
+}	
+
+    .textAr{
+		width: 100%;
+		font-size: 14px;
+		color: #666666;
+	}
+	
+    .itemImg{
+		width: 190rpx;
+		height: 140rpx;
+		margin-right: 30rpx;
+		margin-bottom: 20rpx;
+	}
+	
+	.selphoto{
+		width: 190rpx;
+		height: 140rpx;
+		background: #EEEEEE;
+		margin-bottom: 30rpx;
+	}
+
+	.showloding {
+		position: fixed;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 </style>

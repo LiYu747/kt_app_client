@@ -17,9 +17,9 @@
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model="value" confirm-type="search" @confirm='confirm' placeholder="请输入小区名称关键词" />
 
-				<view v-if='user'  @click="goInform" class="informBox pos-abs">
-					<view v-if="0<informmsg.total_unread && informmsg.total_unread< 100"  class="munber flex al-center ju-center pos-abs">
-						<view class="" >
+				<view v-if='user' @click="goInform" class="informBox pos-abs">
+					<view v-if="0<informmsg.total_unread && informmsg.total_unread< 100" class="munber flex al-center ju-center pos-abs">
+						<view class="">
 							{{informmsg.total_unread}}
 						</view>
 					</view>
@@ -57,8 +57,8 @@
 			<CommunityNews ref='news' v-if='user'></CommunityNews>
 			<!-- 周边 -->
 			<periphery ref='peri'></periphery>
-			
-			<!-- <button @click="gogo">点击</button> -->
+
+			<button @click="gogo">点击</button>
 		</view>
 		<!-- 视频播放 -->
 		<view v-if="paly == true" @mousewheel.prevent class=" pos-abs moive flex-d al-center ju-center">
@@ -123,7 +123,7 @@
 				videoUrl: '', //视频地址
 				cover: '', //视频封面
 				showPullDownRefreshIcon: false,
-				informmsg:{},//用户未读消息数量
+				informmsg: {}, //用户未读消息数量
 			}
 		},
 		onLoad(val) {
@@ -131,9 +131,9 @@
 		},
 		methods: {
 			gogo() {
-			uni.navigateTo({
-				url: '/components/forum/setting/setting'
-			})
+				uni.navigateTo({
+					url: '/pages/classification/lookRoom/rentalForm'
+				})
 			},
 			// 消息通知
 			goInform() {
@@ -271,7 +271,7 @@
 		mounted() {
 			this.Chart()
 			this.operationData()
-			
+
 		},
 		onShow() {
 			this.getInform()
@@ -524,8 +524,8 @@
 		margin-top: -12rpx;
 		margin-left: 16rpx;
 	}
-	
-	.munMore{
+
+	.munMore {
 		width: 50rpx;
 		height: 34rpx;
 		background: red;

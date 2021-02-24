@@ -31,6 +31,12 @@ class Home {
 		req.patch(params);
 	}
 	
+	//发布出租房消息
+	releaseRent (params) {
+		params.url = routes.home.classifyPost.releaseRent;
+		req.post(params);
+	}
+	
 	// 查看所有的出租房信息
 	allRoom (params) {
 		params.url = routes.home.classifyPost.allRoom;

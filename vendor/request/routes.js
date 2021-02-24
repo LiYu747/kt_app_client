@@ -93,6 +93,9 @@ module.exports = {
 		
 		// 分类接口
 		classifyPost : {
+			//发布出租房消息
+			releaseRent : apiPath + 'user/rental',
+			
 			// 查看所有的出租房信息
 			allRoom : apiPath + 'rental/rental' ,
 			
