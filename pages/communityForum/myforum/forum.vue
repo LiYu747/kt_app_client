@@ -45,7 +45,7 @@
 					<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore == false">
 						{{text}}
 					</view>
-					<view class="nono flex ju-center" v-if="lists.length == 0 && isLoding==false">
+					<view class="nono flex ju-center cl9 fz-14" v-if="lists.length == 0 && isLoding==false">
 						您还没有任何发布
 					</view>
 					<view class="btom">
@@ -84,7 +84,7 @@
 						</view>
 					</view>
 
-					<view class="nono flex ju-center" v-if="data1.length==0 && isLoding1==false">
+					<view class="nono flex ju-center  cl9 fz-14" v-if="data1.length==0 && isLoding1==false">
 						您还没有发表评论
 					</view>
 					<view v-show="isLoding1 == true&&data1.length>0" class="m-t2 flex ju-center al-center lodbox">
@@ -192,89 +192,68 @@
 			// 自己发布的帖子 获取数据
 			loadPageData() {
 				this.isLoding = true;
-
-				jwt.doOnlyTokenValid({
-					keepSuccess: false,
-					showModal: true,
-					fail: () => {
-						this.isLoding = false;
-						uni.navigateBack({
-							delta: 1
-						})
+				village.SelfComments({
+					data: {
+						villageId: this.id,
+						page: this.page,
 					},
-					success: () => {
-						village.SelfComments({
-							data: {
-								villageId: this.id,
-								page: this.page,
-							},
-							fail: (err) => {
-								this.isLoding = false;
-								uni.showToast({
-									title: '网络错误',
-									icon: 'none'
-								})
-								// console.log(err);
-							},
-							success: (res) => {
-								// console.log(res);
-								this.isLoding = false;
-
-								if (res.statusCode != 200) return;
-
-								if (res.data.code != 200) return;
-								this.code = res.data.code
-								let data = res.data.data;
-								this.page = data.current_page + 1;
-								this.hasMore = data.next_page_url ? true : false;
-
-								this.lists = this.lists.concat(data.data);
-							},
-
+					fail: (err) => {
+						this.isLoding = false;
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
 						})
-					}
+						// console.log(err);
+					},
+					success: (res) => {
+						// console.log(res);
+						this.isLoding = false;
+
+						if (res.statusCode != 200) return;
+
+						if (res.data.code != 200) return;
+						this.code = res.data.code
+						let data = res.data.data;
+						this.page = data.current_page + 1;
+						this.hasMore = data.next_page_url ? true : false;
+
+						this.lists = this.lists.concat(data.data);
+					},
+
 				})
+
 			},
 			// 自己评论的帖子
 			SelfPost() {
 				this.isLoding1 = true;
-
-				jwt.doOnlyTokenValid({
-					keepSuccess: false,
-					showModal: true,
+				village.SelfPost({
+					data: {
+						page: this.page1,
+						pageSize: this.pageSize1
+					},
 					fail: () => {
 						this.isLoding1 = false;
-					},
-					success: () => {
-						village.SelfPost({
-							data: {
-								page: this.page1,
-								pageSize: this.pageSize1
-							},
-							fail: () => {
-								this.isLoding1 = false;
-								uni.showToast({
-									title: '网络错误',
-									icon: 'none'
-								})
-							},
-							success: (res) => {
-								// console.log(res);
-								this.isLoding1 = false;
-
-								if (res.statusCode != 200) return;
-
-								if (res.data.code != 200) return;
-								let data = res.data.data;
-								this.page1 = data.current_page + 1;
-								this.hasMore1 = data.next_page_url ? true : false;
-
-								this.data1 = this.data1.concat(data.data);
-							},
-
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
 						})
-					}
+					},
+					success: (res) => {
+						// console.log(res);
+						this.isLoding1 = false;
+
+						if (res.statusCode != 200) return;
+
+						if (res.data.code != 200) return;
+						let data = res.data.data;
+						this.page1 = data.current_page + 1;
+						this.hasMore1 = data.next_page_url ? true : false;
+
+						this.data1 = this.data1.concat(data.data);
+					},
+
 				})
+
 			},
 			// 去详情
 			gotoD(item, index) {
@@ -338,13 +317,13 @@
 		},
 		// 下拉加载更多
 		onReachBottom() {
-			
+
 		},
 		onLoad(val) {
 			this.id = val.id
 		},
 		onShow() {
-			if(this.$store.state.isComment == '200'){
+			if (this.$store.state.isComment == '200') {
 				this.data1 = []
 				this.page1 = 1
 				this.SelfPost()
@@ -353,7 +332,7 @@
 				this.lists.splice(this.goindex, 1)
 			}
 		},
-	
+
 		filters: {
 
 		},

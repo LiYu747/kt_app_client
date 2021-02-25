@@ -3,12 +3,14 @@
 	<div class="whole">
 		<view class="nav ">
 			<view class="title flex al-center ju-center pos-rel">
-			
 				个人中心
 				<view class="pos-abs location">
 					<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
 				</view>
 			</view>
+		</view>
+		<view class="topLine">
+			
 		</view>
 		<view class="">
 			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode="" class="jximg"></image>
@@ -28,6 +30,9 @@
 		</view>
 		<!-- 操作栏 -->
 		<actionBar :informmsg='informmsg' :user='user'></actionBar>
+		<view class="btmLine">
+			
+		</view>
 	</div>
 </template>
 
@@ -157,8 +162,18 @@
 		width: 100%;
 		height: 128rpx;
 		background: #F07535;
+		position: fixed;
+		z-index: 99;
 	}
-
+    
+	.topLine{
+		height: 128rpx;
+	}
+	
+	.btmLine{
+		height: 40rpx;
+	}
+	
 	.setimg {
 		width: 40rpx;
 		height: 40rpx;

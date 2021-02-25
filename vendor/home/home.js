@@ -37,6 +37,48 @@ class Home {
 		req.post(params);
 	}
 	
+	// 发布出售房屋信息
+	releaseSellers (params) {
+		params.url = routes.home.classifyPost.releaseSellers;
+		req.post(params);
+	}
+	
+	// 自己发布的所有出租房信息
+	postrentMsg (params) {
+		params.url = routes.home.classifyPost.postrentMsg;
+		req.get(params);
+	}
+	
+	// 查看自己发布的房屋出售记录
+	postsellMsg (params) {
+		params.url = routes.home.classifyPost.postsellMsg;
+		req.get(params);
+	}
+	
+	// 出租房详情
+	rentDils (params) {
+		params.url = routes.home.classifyPost.rentDils;
+		req.get(params);
+	}
+	
+	// 房屋出售记录的详情
+	saleDils (params) {
+		params.url = routes.home.classifyPost.saleDils;
+		req.get(params);
+	}
+	
+	// 设置出租房可见性
+	rentShow (params) {
+		params.url = routes.home.classifyPost.rentShow;
+		req.patch(params);
+	}
+	
+	//更新房屋数据
+	updataRoom (params) {
+		params.url = routes.home.classifyPost.updataRoom;
+		req.patch(params);
+	}
+	
 	// 查看所有的出租房信息
 	allRoom (params) {
 		params.url = routes.home.classifyPost.allRoom;

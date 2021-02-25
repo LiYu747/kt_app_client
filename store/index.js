@@ -10,6 +10,7 @@ export default new Vuex.Store({
 		city:"四川省",
 		isDel:'',
 		isComment:'',
+		homeContent:{},
 	},
 	// 同步更改值
 	mutations:{
@@ -23,7 +24,11 @@ export default new Vuex.Store({
 		//判断用户是否触发评论事件		
 		isComment(state,info){
 			this.state.isComment = info
-			}
+			},
+		// 传首页文章详细数据
+		homeContent(state,info){
+			this.state.homeContent = info
+			},
 	},
 	//异步
 	actions:{

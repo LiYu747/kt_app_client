@@ -64,10 +64,10 @@
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						// console.log(res.data.data);
-						let content = res.data.data.desc
-						let title = res.data.data.title
+						let content = {title:res.data.data.title,content:res.data.data.desc}
+						this.$store.commit("homeContent",content);
 						uni.navigateTo({
-							url: `/pages/InformationDetails/InformationDetails/InformationDetails?content=${content}&&title=${title}`
+							url: '/pages/InformationDetails/InformationDetails/InformationDetails'
 						})
 					}
 				})

@@ -8,7 +8,7 @@
 		<view class="layoutBox flex ">
 			标题
 			<textarea autoHeight="true" class="textBox" maxlength="30" v-model="value" placeholder="请输入标题(30字以内)" />
-		</view>
+			</view>
 		<view class="contentBox m-t3">
 			<view class="itemBox flex al-center ju-between" @click="fillIn(item,index)" v-for="(item,index) in formlist" :key="item.id"
 			 :class="index==formlist.length-1?'dv':''">
@@ -16,7 +16,7 @@
 				<view class="flex al-center">
 					<input :type="item.style" :placeholder="item.placeholder" v-model="item.value" :disabled="item.disabled" class="ipt" />
 					<image v-if="index!=4" class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
-					<view v-if="index==4" class=" m-l1">
+					<view v-if="index==4" class=" m-l2">
 						㎡
 					</view>
 				</view>
@@ -27,7 +27,7 @@
 		 @confirm="confirmRoom"></u-select>
 		<!-- 楼层 -->
 		<!-- <u-picker range-key="label" title='请选择楼层' :default-selector='defaultFloor' v-model="Isfloor" mode="multiSelector" @columnchange='change' :range="listFloor" @confirm="confirmFloor"></u-picker> -->
-		<u-select v-model="Isfloor" title='请选择楼层' mode="mutil-column" :default-value='defaultFitment' @confirm="confirmFitment" :list="listFloor"></u-select>
+		<u-select v-model="Isfloor" title='请选择楼层' mode="mutil-column-auto" :default-value='defaultFloor' @confirm="confirmFloor" :list="listFloor"></u-select>
 		<!-- 装修 -->
 		<u-select v-model="fitmentShow" title='请选择装修' :default-value='defaultFitment' @confirm="confirmFitment" :list="fitmentList"></u-select>
 		<!-- 电梯 -->
@@ -40,7 +40,7 @@
 				租金
 				<view class="flex al-center">
 					<input type="number" v-model="rentNum" placeholder="请填写" class="ipt" />
-					<view class="fz-14 m-l1">
+					<view class="fz-14 m-l2">
 						元
 					</view>
 				</view>
@@ -59,20 +59,28 @@
 				房屋照片
 			</view>
 			<view class="flex al-center flex-w">
-				<view class="" v-for="item in image" :key='item.id'>
+				<view class=" pos-rel" v-for="(item,index) in image" :key='item.id'>
 					<image :src="item" mode="aspectFill" class="itemImg"></image>
+					<view @click="delImage(index)" class="delBox flex al-center ju-center">
+						<image src="../../../image/lookroom/del.png" class="delImg" mode=""></image>
+					</view>
 				</view>
-				<view class="selphoto flex al-center ju-center">
-					<image @click="selPhoto" src="../../../image/lookroom/photo.png" class="photoImg" mode=""></image>
+				<view @click="selPhoto"  class="selphoto flex al-center ju-center">
+					<image src="../../../image/lookroom/photo.png" class="photoImg" mode=""></image>
 				</view>
 			</view>
 			<view class="roomtetx">
 				封面图片
 			</view>
 			<view class="p-b2 flex">
-				<image v-if="coverImg" :src="coverImg" class="itemImg" mode="aspectFill"></image>
-				<view class="selphoto flex al-center ju-center">
-					<image @click="celCover" src="../../../image/lookroom/cover.png" class="coverImg" mode=""></image>
+				<view  v-if="coverImg" class="pos-rel">
+					<image :src="coverImg" class="itemImg" mode="aspectFill"></image>
+					<view @click="coverImg=''" class="delBox flex al-center ju-center">
+						<image src="../../../image/lookroom/del.png" class="delImg" mode=""></image>
+					</view>
+				</view>
+				<view @click="celCover" class="selphoto flex al-center ju-center">
+					<image  src="../../../image/lookroom/cover.png" class="coverImg" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -85,16 +93,30 @@
 				<textarea class="textAr" auto-height="true" maxlength="1000" value="" v-model="textvalue" placeholder="请填写" />
 				</view>
 		</view>
-		
+	
 		<view class="contentBox m-t3">
 			<view class="roomtetx">
-			联系电话
+				<view class="flex al-center">
+					联系人
+					<view class=" m-l3 fz-14">
+						{{username}}
+					</view>
+				</view>
+				<view class="Hline">
+					
+				</view>
+			    <view class=" flex al-center">
+			    	联系电话
+					<view class=" m-l3 fz-14">
+						{{tel}}
+					</view>
+			    </view>
 			</view>
 		</view>
 		
-		<view class="flex ju-center">
-			<view  class="submit flex al-center ju-center">
-				<image @click="iSfill" src="../../../image/lookroom/submit.png" class="submitImg" mode=""></image>
+		<view class="flex ju-center ">
+			<view  @click="iSfill"  class="submit flex al-center ju-center">
+				<image src="../../../image/lookroom/submit.png" class="submitImg" mode=""></image>
 				<view class="pos-abs fz-16 bai">
 					提交
 				</view>
@@ -116,6 +138,8 @@
 	import subunit from '../../../components/sub-unit/subunit.vue'
 	import route from '../../../vendor/request/routes.js'
 	import home from '../../../vendor/home/home.js'
+	import jwt from '../../../vendor/auth/jwt.js'
+	import user from '../../../vendor/user/userDetails.js'
 export default {
 name: "",
 components: {
@@ -124,6 +148,7 @@ subunit,
 props: {},
 data () {
   return {
+	  id:'',
 	  value:'', //标题
 	  addDetails:'',//详细地址
 	  lgt:'',//经度
@@ -132,8 +157,8 @@ data () {
 	  listType:[[],[],[]], //户型数据
 	  defaultType:[], //户型默认
 	  Isfloor: false, //楼层
-	  listFloor:[[ {value:'',label:'请选择'}],[]], //楼层数据
-	  defaultFloor:[0,0], //楼层默认
+	  listFloor:[], //楼层数据
+	  defaultFloor:[], //楼层默认
 	  floor:'',//选择楼层
 	  totalFloor:'',//选择总楼层
 	  fitmentShow:false, //装修
@@ -197,8 +222,8 @@ data () {
 		    placeholder:'请选择'
 	  },
 	  ],
-	  celIs:false,
-	  allfol:[]
+	  username:'',
+	  tel:''
     }
   },
   methods: {
@@ -227,8 +252,8 @@ data () {
 				 album:this.image,
 				 village:this.formlist[0].value,
 				 desc:this.textvalue,
-				 tel:'17608040164',
-				 contact_name:'李钰',
+				 tel:this.tel,
+				 contact_name:this.username,
 				// 可选
 				  rents_bet: this.rents_bet,
 				  rents_pay: this.rents_pay,
@@ -265,6 +290,13 @@ data () {
 				  	icon: 'none',
 					duration:3000
 				  })
+				  let settime = setTimeout(() =>{
+					 uni.navigateBack({
+					 	delta:1
+					 })
+					 clearTimeout(settime)
+				  },3000)
+					  
 				 }
 		 })  
 	   },
@@ -277,9 +309,7 @@ data () {
 			this.houseType = true  
 		  }
 		  if(index == 2){
-			 if(this.celIs == false){
-				  this.listFloor[1] = this.allfol
-			 }
+			 
 			this.Isfloor = true
 		  }
 		  if(index == 3) {
@@ -292,8 +322,14 @@ data () {
 	  //选择押金
 	  confirmCash(e){
 		  let text =  e[0].label != '不需要'?e[0].label:''
-		  this.rents_bet = text
-		  this.rents_pay = e[1].label
+		  let rents = ''
+		  if(e[0].extra){
+			  rents = e[0].extra
+		  }else{
+			   rents = ''
+		  }
+		  this.rents_bet = rents
+		  this.rents_pay = e[1].value
 		  this.cash = text +  e[1].label
 		  let Default = []
 		 e.map( item => {
@@ -302,7 +338,7 @@ data () {
 		  this.defaultCash = Default
 	  },
 	  //选择电梯
-	  confirmElevator(e){
+    confirmElevator(e){
 		this.formlist[5].value = e[0].label
 		let Default = []
 		Default.push(e[0].value)
@@ -318,23 +354,14 @@ data () {
 	  },
 	  // 选择楼层
 	  confirmFloor(e){
-		  this.celIs = true
-		  let floor = e[0]
-		  let allFloor = e[1]
-		  this.defaultFloor = e
-		  this.formlist[2].value = this.listFloor[0][floor].value + '/' + this.listFloor[1][allFloor].value
-		  this.floor = this.listFloor[0][floor].value
-		  this.totalFloor = this.listFloor[1][allFloor].value
+		  let floor = e[0].value
+		  let allFloor = e[1].value
+		  this.defaultFloor = [e[0].value-1,e[1].value-e[0].value]
+		  this.formlist[2].value = floor + '/' + allFloor
+		  this.floor = floor
+		  this.totalFloor = allFloor
 		  },
-	  change(e){
-			  let arr = []
-			  for( var i=e.index ; i<100 ; i++){
-			  			let allFloor = {value:i,label:'共'+i+'层'}
-						arr.push(allFloor)
-			  }
-			 this.listFloor[1] = arr   
-		   console.log(e);
-	  },
+	
 	  // 选择户型
 	  confirmRoom(e){
 		  let Default = []
@@ -425,15 +452,18 @@ data () {
 		 }
 		 // 楼层数据
 		 for( var i=1 ; i<100 ; i++){
-			 let floor = {value:i,label:i+'层'}
+			 let floor = {value:i,label:i+'层',children:[]}
 			 let allFloor = {value:i,label:'共'+i+'层'}
-			 this.listFloor[0].push(floor)
-			  this.listFloor[1].push(allFloor)
-			  this.allfol.push(allFloor)
+			  this.listFloor.push(floor)
+			  this.listFloor.map(item => {
+				 if(item.children){
+					 item.children.push(allFloor)
+				 }
+			 })
 		 }
 		 // 押金数据
 		 for( var i=1 ; i<13 ; i++){
-		 	 let floor = {value:i+1,label:'押'+i}
+		 	 let floor = {value:i+1,label:'押'+i,extra:i}
 		 	let allFloor = {value:i,label:'付'+i}
 		 	this.cashList[0].push(floor)
 		 	this.cashList[1].push(allFloor)
@@ -453,8 +483,7 @@ data () {
 		  });
 	  },
 	 //判断
-	iSfill(){
-		
+    iSfill(){
 		if(!this.value){
 			uni.showToast({
 				title:"请输入标题",
@@ -463,78 +492,276 @@ data () {
 			return;		
 		} 
 		if(!this.formlist[0].value) {
-					 uni.showToast({
-					 	title:"请选择小区",
-					 	icon:"none"
-					 })
-					 return;
-		} 
+			 uni.showToast({
+				title:"请选择小区",
+				icon:"none"
+			 })
+			 return;
+        } 
 		if(this.defaultType.length == 0){
-					 uni.showToast({
-					 	title:"请选择户型",
-					 	icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请选择户型",
+				icon:"none"
+			 })
+			 return;
 		}
 		if(!this.floor){
-					 uni.showToast({
-						title:"请选择楼层",
-						icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请选择楼层",
+				icon:"none"
+			 })
+			 return;
 		}
 		if(!this.celFit){
-					 uni.showToast({
-						title:"请选择装修",
-						icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请选择装修",
+				icon:"none"
+			 })
+			 return;
 		}
 		if(!this.formlist[4].value){
-					 uni.showToast({
-						title:"请填写面积",
-						icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请填写面积",
+				icon:"none"
+			 })
+			 return;
 		}
 		if( this.defaultElevator.length == 0){
-					 uni.showToast({
-						title:"请选择是否有电梯",
-						icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请选择是否有电梯",
+				icon:"none"
+			 })
+			 return;
 		}
 		if( !this.rentNum){
-					 uni.showToast({
-						title:"请填写租金",
-						icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请填写租金",
+				icon:"none"
+			 })
+			 return;
 		}
 		if( this.image.length == 0){
-					 uni.showToast({
-						title:"请上传房屋照片",
-						icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请上传房屋照片",
+				icon:"none"
+			 })
+			 return;
 		}
 		if( !this.textvalue){
-					 uni.showToast({
-						title:"请填写房屋简介",
-						icon:"none"
-					 })
-					 return;
+			 uni.showToast({
+				title:"请填写房屋简介",
+				icon:"none"
+			 })
+			 return;
 		} 
+		if(this.id){
+			this.upData()
+			return;
+		}
 		this.subunit()
-	}
+	},
 	  
-	
+	// 获取用户资料
+	// 判断是否登录
+	loadUserData() {
+		jwt.doOnlyTokenValid({
+			showModal: true,
+			keepSuccess: false,
+			success: () => {
+				user.userDeta({
+					data: {},
+					fail: () => {
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						if (res.statusCode != 200) return;
+						if (res.data.code != 200) return;
+						let Users = res.data.data
+						this.username = Users.username
+						this.tel = Users.tel
+					},
+				})
+			},
+			fail: () => {
+				uni.switchTab({
+					url: '/pages/index/index'
+				})
+			}
+		})
+	},
+  
+    getData(id) {
+    	uni.showLoading({
+    		title:"加载中"
+    	})
+    	home.rentDils({
+    		data: {
+    			id: id
+    		},
+    		fail: () => {
+    			uni.hideLoading()
+    			uni.showToast({
+    				title: '网络错误',
+    				icon: 'none'
+    			})
+    		},
+    		success: (res) => {
+    			uni.hideLoading()
+    			if (res.statusCode != 200) {
+    				uni.showToast({
+    					title: '网络出错了',
+    					icon: 'none'
+    				})
+    				return;
+    			}
+    			if (res.data.code != 200) {
+    				uni.showToast({
+    					title: res.data.msg,
+    					icon: 'none'
+    				})
+    				return;
+    			}
+    			let data = res.data.data
+				this.celFit = data.zx
+				if (data.zx == 'low') {
+					data.zx = '清水房'
+					this.defaultFitment = [2]
+				}
+				if (data.zx == 'simple') {
+					data.zx = '简装'
+					this.defaultFitment = [1]
+				}
+				if (data.zx == 'well') {
+					data.zx = '精装'
+					this.defaultFitment = [0]
+				}
+				if (data.ele == 0) {
+					data.ele = '无'
+					this.defaultElevator = [0]
+				}
+				if (data.ele == 1) {
+					data.ele = '有'
+					this.defaultElevator = [1]
+				}
+    			this.value = data.title
+				this.formlist[0].value = data.village
+				this.formlist[1].value = data.room + '室' + data.hall + '厅' + data.bathroom + '卫'
+				this.defaultType = [data.room-1, data.hall-1,data.bathroom-1]
+				this.formlist[2].value = data.floor + '/' + data.total_floor
+				this.defaultFloor = [data.floor-1,data.total_floor-data.floor]
+				this.formlist[3].value = data.zx 
+				this.formlist[4].value = data.area
+				this.formlist[5].value = data.ele
+				this.rentNum = data.rents
+				let rents = data.rents_bet?'押' + data.rents_bet : ''
+				this.cash =  rents + '付' +data.rents_pay 
+				if(!data.rents_bet){
+					data.rents_bet = 0
+				}
+				this.defaultCash = [data.rents_bet,data.rents_pay-1]
+				this.textvalue = data.desc
+				this.image = data.album
+				this.coverImg = data.faceimg
+				this.floor = data.floor
+				this.totalFloor = data.total_floor
+				this.rents_bet = data.rents_bet
+				this.rents_pay = data.rents_pay
+				this.addDetails = data.location
+				this.lgt = data.lgt
+				this.lat = data.lat
+    		}
+    	})
+    },
+	upData(){
+		console.log(this.totalFloor);
+		let faceimg = this.coverImg
+		  if(!this.coverImg){
+			faceimg = this.image[0]
+		  }
+		  uni.showLoading({
+		  	title:'提交中'
+		  })
+		home.updataRoom({
+			 data:{
+				 // 必传
+				 id:this.id,
+				 title: this.value,
+				 room:this.defaultType[0] + 1,
+				 hall:this.defaultType[1] + 1,
+				 bathroom:this.defaultType[2] + 1,
+				 area:this.formlist[4].value,
+				 ele:this.defaultElevator[0],
+				 floor:this.floor,
+				 total_floor:this.totalFloor,
+				 zx:this.celFit,
+				 rents:this.rentNum,
+				 album:this.image,
+				 village:this.formlist[0].value,
+				 desc:this.textvalue,
+				 tel:this.tel,
+				 contact_name:this.username,
+				// 可选
+				  rents_bet: this.rents_bet,
+				  rents_pay: this.rents_pay,
+				  location:this.addDetails,
+				  lgt:this.lgt,
+				  lat:this.lat,
+				  faceimg:faceimg
+			 },
+			 fail: () => {
+				 uni.hideLoading()
+				 uni.showToast({
+					title: '网络错误',
+					icon: 'none'
+				 })
+			 },
+			 success:(res) => {
+				  uni.hideLoading()
+				  if (res.statusCode != 200) {
+					uni.showToast({
+						title: '网络出错了',
+						icon: 'none'
+					})
+					return;
+				  }
+				  if (res.data.code != 200) {
+					uni.showToast({
+						title: res.data.msg,
+						icon: 'none'
+					})
+					return;
+				  }
+				  uni.showToast({
+					title: res.data.msg,
+					icon: 'none',
+					duration:3000
+				  })
+				  let settime = setTimeout(() =>{
+					 uni.navigateBack({
+						delta:1
+					 })
+					 clearTimeout(settime)
+				  },2000)
+					  
+				 }
+		})  
+	},
+    //删除照片
+	delImage(index){
+		this.image.splice(index,1)
+	}
   },
   mounted () {
    this.all()
+   this.loadUserData()
   },
-  onLoad () {
-
+  onLoad (val) {
+    if(!val.id) return;
+	this.id = val.id
+	this.getData(val.id)
   },
   filters: {
 
@@ -628,7 +855,7 @@ data () {
 .submit{
 	width: 360rpx;
 	height: 70rpx;
-	padding: 60rpx 0;
+	margin: 70rpx 0;
 }
 
 .submitImg{
@@ -678,5 +905,28 @@ data () {
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
 		border-radius: 10rpx;
+	}
+	
+	.Hline{
+		width: 100%;
+		height: 1px ;
+		background:#CCCCCC ;
+		margin: 20rpx 0;
+	}
+	
+	.delImg{
+		width: 25rpx;
+		height: 25rpx;
+	}
+	
+	.delBox{
+		position: absolute;
+		top: 5rpx;
+		right: 35rpx;
+		width: 35rpx;
+		height: 35rpx;
+		border-radius: 50%;
+		border: 1px solid #FFFFFF;
+	    background: rgba(0,0,0,0.2) 
 	}
 </style>

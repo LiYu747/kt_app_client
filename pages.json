@@ -412,6 +412,63 @@
 				"navigationStyle": "custom"
 		    }
 		    
+		}
+		,
+		 //我要卖房
+		{
+		    "path" : "pages/classification/lookRoom/sellersForm",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		// 房屋租售
+		{
+		    "path" : "pages/classification/lookRoom/rentAndsale/rentAndsale",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		}
+		// 房屋出租详情
+		,{
+		    "path" : "pages/classification/lookRoom/rentAndsale/rentroomDils",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		}
+		,
+		// 房屋售卖详情
+		{
+		    "path" : "pages/classification/lookRoom/rentAndsale/saleroomDils",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		//租房设置
+		{
+		    "path" : "pages/classification/lookRoom/rentAndsale/setRent",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+					"navigationStyle": "custom"
+		    }
+		    
 		},
 		//医疗健康
 		{
@@ -722,8 +779,9 @@
 			}
 
 		}
-
-	   
+       
+        
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

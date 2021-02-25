@@ -1,6 +1,6 @@
 <template>
 	<view class="flex-d al-center ovov">
-		<subunit class="pos " :retur="true"  titel="详情"></subunit>
+		<subunit class="pos "   titel="详情"></subunit>
 		<view class="line">
 
 		</view>
@@ -30,10 +30,13 @@
 		methods: {
 	
 		},
-		mounted() {},
-		onLoad(val) {
-			this.title = val.title
-			this.content  = val.content
+		mounted() {
+		  let val =	this.$store.state.homeContent
+		  this.title = val.title
+		  this.content  = val.content
+		},
+		onLoad() {
+		
 		},
 		filters: {
 

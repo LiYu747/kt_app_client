@@ -10,7 +10,7 @@
 							我要出租
 						</view>
 					</view>
-					<view class="sellers m-l2 flex al-center">
+					<view @click="mySellers" class="sellers m-l2 flex al-center">
 						<image src="../../../image/lookroom/buy.png" class="buyImg" mode=""></image>
 						<view class="sellMsg">
 							我要卖房
@@ -138,6 +138,12 @@
 				uni.navigateTo({
 					url: '/pages/classification/lookRoom/rentalForm'
 				})
+			},
+			//我要卖房
+			mySellers(){
+			uni.navigateTo({
+				url: '/pages/classification/lookRoom/sellersForm'
+			})
 			},
 			// 所有的出租房信息
 			getRoom() {

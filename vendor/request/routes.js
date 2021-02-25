@@ -96,6 +96,9 @@ module.exports = {
 			//发布出租房消息
 			releaseRent : apiPath + 'user/rental',
 			
+			// 发布出售房屋信息
+			releaseSellers : apiPath + 'user/houseSale',
+			
 			// 查看所有的出租房信息
 			allRoom : apiPath + 'rental/rental' ,
 			
@@ -106,7 +109,25 @@ module.exports = {
 			sellRecords : apiPath + 'house/sale',
 			
 			// 出售房屋的记录详情
-			sellDetails : apiPath + 'house/sale/show'
+			sellDetails : apiPath + 'house/sale/show',
+			
+			// 自己发布的所有出租房信息
+			postrentMsg : apiPath + 'user/rental',
+			
+			// 查看自己发布的房屋出售记录
+			postsellMsg : apiPath + 'user/houseSale',
+			
+			// 出租房详情
+			rentDils : apiPath + 'user/rental/show',
+			
+			// 房屋出售记录的详情
+			saleDils : apiPath + 'user/houseSale/show',
+			
+			// 设置出租房可见性
+			rentShow : apiPath + 'user/rental/setVisible',
+			
+			//更新房屋数据
+			updataRoom : apiPath + 'user/rental'
 		},
 
 		// 社区资讯

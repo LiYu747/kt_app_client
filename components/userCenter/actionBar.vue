@@ -52,6 +52,10 @@ data () {
 		   titel:'出行记录',
 		   url:'/pages/user/travelRecords/travelRecords'
 		  },
+		  {image:require("@/image/lookroom/zoom.png"),
+		   titel:'房屋租售',
+		   url:'/pages/classification/lookRoom/rentAndsale/rentAndsale'
+		  },
 		  {image:'https://oss.kuaitongkeji.com/static/img/app/address/msgtz.png', 
 		   titel:'消息通知',
 		   url:'/pages/user/userInform/userInform' 
@@ -60,17 +64,13 @@ data () {
 		   titel:'关于快通',
 		   url:'/pages/user/versionNumber/versionNumber'
 		  },
-		  // {image:'https://oss.kuaitongkeji.com/static/img/app/user/Logout.png',
-		  //  titel:'退出登录',
-		  //  signout:'signout'
-		  // },
+		  
 	  ]
     }
   },
   methods: {
 	  // 点击每一栏事件
    add(item,index){
-	  // this.$emit('add',item)
 	  if(!item.url) return;
 	  uni.navigateTo({
 	  	url: item.url

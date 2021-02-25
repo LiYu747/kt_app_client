@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit  class="fixed" ></subunit>
+		<subunit class="fixed"></subunit>
 		<view class="line ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
@@ -90,11 +90,11 @@
 				加载中
 			</view>
 		</view>
-          
-		 <view class="btom">
-		 
-		 </view> 
-		  
+
+		<view class="btom">
+
+		</view>
+
 		<view v-if="flag == true" class="searchend pos-abs">
 			<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
 				<view class="flex">
@@ -128,14 +128,14 @@
 				{{text}}
 			</view>
 			<view class="btoms">
-			
+
 			</view>
 			<view class="nono flex al-center ju-center" v-if="lists.length==0&&isLoding==false">
 				没有您搜索的帖子哦~
 			</view>
 		</view>
 
-		
+
 		<subbotn :ids='id'></subbotn>
 	</view>
 </template>
@@ -309,9 +309,6 @@
 		mounted() {
 			// this.lists = []
 			// this.page = 1
-			this.grtColumn()
-
-
 		},
 		onLoad(val) {
 			this.id = val.id
@@ -319,12 +316,12 @@
 		// 下拉更多
 		onReachBottom() {
 			this.text = '没有更多了~'
-		   if (this.isLoding == true || this.hasMore == false) return;
+			if (this.isLoding == true || this.hasMore == false) return;
 			this.loadPageData()
 
 		},
 		onShow() {
-
+			this.grtColumn()
 		},
 
 		filters: {
@@ -374,7 +371,7 @@
 
 	.item {
 		width: 690rpx;
-		padding:  30rpx;
+		padding: 30rpx;
 		border-bottom: 1rpx solid #BFBFBF;
 		color: #666666;
 	}
@@ -601,8 +598,8 @@
 		// height: 100%;
 		// background: red;
 	}
-	
-	.btoms{
+
+	.btoms {
 		height: 120rpx;
 	}
 </style>

@@ -8,7 +8,7 @@
 			<view class="backBox pos-rel m-t2 flex al-center ju-center">
 				<swiper class="swiper" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration">
 					<swiper-item v-for="item in roomInof.album" :key="item.id" class="flex ju-center">
-						<image :src="item" class="logoImg " mode="heightFix"></image>
+						<image :src="item" class="logoImg " mode="aspectFill"></image>
 					</swiper-item>
 				</swiper>
 			</view>
