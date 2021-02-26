@@ -67,7 +67,7 @@
 			<view v-show="idx===1" class="release">
 				<scroll-view scroll-y style="height: calc(100vh - 240rpx);;width: 100%" @scrolltolower="onreachBottom2">
 					<view class="flex-d al-center" v-if="data1.length>0">
-						<view class="item m-t3 flex" @click="reply(item)" v-for="(item,index) in data1" :key='index'>
+						<view class="item m-t3 flex" @click="reply(item,index)" v-for="(item,index) in data1" :key='index'>
 							<image :src="item.faceimg" class="itemImg" mode="aspectFill"></image>
 							<view class="m-l2 rigBox fz-16 pos-rel">
 								{{item.title}}
@@ -140,7 +140,7 @@
 				}],
 				scrollTop: 0,
 				idx: 0,
- 				lists: [], //我发布的
+ 				lists: [], //我发布的租房
 				page: 1,
 				pageSize:15,
 				text: '',
@@ -154,6 +154,8 @@
 				isLoding1: false, //是否显示loding
 				hasMore1: true, //是否还有更多
 				clientX: '',
+				index1:'',//租房看的哪一项
+				index2:'',//售房看的哪一项
 			}
 		},
 
@@ -251,12 +253,14 @@
 			},
 			// 去详情
 			gotoD(item, index) {
+				this.index1 = index
 				uni.navigateTo({
 				url: '/pages/classification/lookRoom/rentAndsale/rentroomDils?id=' + item.id
 				})
 			},
 			// 跳转回复的页面
-			reply(item) {
+			reply(item,index) {
+				this.index2 = index
 				uni.navigateTo({
 				url: '/pages/classification/lookRoom/rentAndsale/saleroomDils?id=' + item.id
 				})
@@ -278,10 +282,8 @@
 				this.clientX = e.changedTouches[0].clientX;
 			},
 			end(e) {
-				// console.log(e)
 				const subX = e.changedTouches[0].clientX - this.clientX;
 				if (subX > 100) {
-					// console.log('右滑')
 					if (this.idx == 0) return
 					this.idx = 0
 			
@@ -306,9 +308,17 @@
 		onLoad(val) {
 		},
 		onShow() {
-			
+			if(this.$store.state.roomisDel == 200){
+				this.lists.splice(this.index1,1)
+			}
+			if(this.$store.state.saleDel == 200){
+				this.data1.splice(this.index2,1)
+			}
 		},
-
+        onHide() {
+        	this.$store.commit('roomisDel','')
+			this.$store.commit('saleDel','')
+        },
 		filters: {
 
 		},

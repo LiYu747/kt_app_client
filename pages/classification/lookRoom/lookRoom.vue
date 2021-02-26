@@ -25,8 +25,8 @@
 							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
 						</view>
 					</view>
-					<view v-if="rentingRoom.length>0" class="flex ju-between">
-						<view class="items " @click="gotoDetails(items)" v-for=" items in rentingRoom" :key='items.id'>
+					<view v-if="rentingRoom.length>0" class="flex ">
+						<view class="items m-b1" @click="gotoDetails(items)" v-for=" items in rentingRoom" :key='items.id'>
 							<image v-if="items.faceimg" :src="items.faceimg" class="itemsimg" mode="aspectFill"></image>
 							<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg"
 							 class="itemsimg" mode="aspectFill"></image>
@@ -57,8 +57,8 @@
 							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
 						</view>
 					</view>
-					<view v-if="sellRoom.length>0" class="flex ju-between">
-						<view class="items " @click="gotoBuy(items)" v-for=" items in sellRoom" :key='items.id'>
+					<view v-if="sellRoom.length>0" class="flex ">
+						<view class="items" @click="gotoBuy(items)" v-for=" items in sellRoom" :key='items.id'>
 							<image v-if="items.faceimg" :src="items.faceimg" class="itemsimg" mode="aspectFill"></image>
 							<image v-else src="https://oss.kuaitongkeji.com/upload/2021/02/20/Kztg485iqwsrKNrDLXKIeQ7apbhuyi4v1SHpslOv.jpeg"
 							 class="itemsimg" mode="aspectFill"></image>
@@ -284,6 +284,10 @@
 		word-wrap: break-word;
 		-webkit-line-clamp: 1;
 		-webkit-box-orient: vertical;
+	}
+	
+	.items{
+		margin-left: 14rpx;
 	}
 
 	.itemsimg {

@@ -122,7 +122,6 @@
 				</view>
 			</view>
 		</view>
-		
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -227,6 +226,7 @@ data () {
     }
   },
   methods: {
+	
 	   // 提交
 	   subunit(){
 		  let faceimg = this.coverImg
@@ -676,7 +676,6 @@ data () {
     	})
     },
 	upData(){
-		console.log(this.totalFloor);
 		let faceimg = this.coverImg
 		  if(!this.coverImg){
 			faceimg = this.image[0]
@@ -739,29 +738,31 @@ data () {
 					icon: 'none',
 					duration:3000
 				  })
-				  let settime = setTimeout(() =>{
-					 uni.navigateBack({
-						delta:1
-					 })
-					 clearTimeout(settime)
-				  },2000)
-					  
+				
+					let settime = setTimeout( () => {
+						  uni.navigateBack({
+							delta:3
+						  })
+					},3000)	  
 				 }
 		})  
 	},
     //删除照片
 	delImage(index){
 		this.image.splice(index,1)
-	}
+	},
+	
   },
   mounted () {
    this.all()
-   this.loadUserData()
   },
   onLoad (val) {
     if(!val.id) return;
 	this.id = val.id
 	this.getData(val.id)
+  },
+  onShow() {
+  	this.loadUserData()
   },
   filters: {
 

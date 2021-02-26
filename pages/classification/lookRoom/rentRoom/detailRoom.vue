@@ -56,7 +56,7 @@
 				</view>
 			</view>
 
-			<view class="addressBox m-t3 flex  fz-14">
+			<view @click="Address" class="addressBox m-t3 flex  fz-14">
 				<image src="../../../../image/lookroom/add.png" class="addImg" mode=""></image>
 				<view class="m-l2 addressmsg">
 					{{roomInof.village}}
@@ -96,8 +96,10 @@
 					</view>
 				</view>
 			</view>
-
-			<view class="">
+             <view class="fz-12 cl3 m-t3 texttip">
+             	声明：本网站所刊载的内容来源于用户上传；该等物业信息不包含购买要约意图，文字、图片信息不构成物业交付标准或配套； 相关物业信息供参考，请致电相关负责人了解详情，请以用户提供信息为准。
+             </view>
+			<view @click="consult" class="">
 				<image src="../../../../image/lookroom/consult.png" class="consultImg" mode=""></image>
 			</view>
 
@@ -138,9 +140,30 @@
 			}
 		},
 		methods: {
+			//拨打电话
+			consult() {
+				if(!this.roomInof.tel) return;
+				uni.makePhoneCall({
+				 phoneNumber: this.roomInof.tel
+				});
+			},
+			// 地址
+			Address() {
+				if (!this.roomInof.lat) return;
+				if (!this.roomInof.lgt) return;
+				let latitude = Number(this.roomInof.lat)
+				let longitude = Number(this.roomInof.lgt)
+				uni.openLocation({
+					latitude: latitude,
+					longitude: longitude,
+					success: function() {
+						console.log('success');
+					}
+				});
+			},
 			getData(id) {
 				uni.showLoading({
-					title:"加载中"
+					title: "加载中"
 				})
 				home.roomDateils({
 					data: {
@@ -397,5 +420,9 @@
 
 	.userTel {
 		color: #0078FF;
+	}
+	
+	.texttip{
+	  width: 650rpx;	
 	}
 </style>

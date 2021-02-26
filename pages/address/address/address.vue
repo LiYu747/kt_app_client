@@ -6,7 +6,7 @@
 		</view>
 		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 		<addList :locdata='locdata' :isLoding='isLoding' :text='text' :hasMore='hasMore'></addList>
-		<view v-show="showPullDownRefreshIcon == true" class="show pos-abs flex al-center ju-center">
+		<view v-show="showPullDownRefreshIcon == true" class="show  flex al-center ju-center">
 			<view class="showcentent flex al-center ju-between">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				刷新中
@@ -197,6 +197,7 @@
 	}
 
 	.show {
+		position: fixed;
 		width: 100%;
 		height: 100vh;
 		z-index: 9;

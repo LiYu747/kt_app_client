@@ -73,10 +73,34 @@ class Home {
 		req.patch(params);
 	}
 	
-	//更新房屋数据
+	//更新租房数据
 	updataRoom (params) {
 		params.url = routes.home.classifyPost.updataRoom;
 		req.patch(params);
+	}
+	
+	//删除租房数据
+	delrenRoom (params) {
+		params.url = routes.home.classifyPost.delrenRoom;
+		req.delete(params);
+	}
+	
+	// 出售记录的可见性
+	saleShow (params) {
+		params.url = routes.home.classifyPost.saleShow;
+		req.patch(params);
+	}
+	
+	//更新卖房数据
+	houseSaleUp (params) {
+		params.url = routes.home.classifyPost.houseSaleUp;
+		req.patch(params);
+	}
+	
+	//删除卖房
+	delSale (params) {
+		params.url = routes.home.classifyPost.delSale;
+		req.delete(params);
 	}
 	
 	// 查看所有的出租房信息

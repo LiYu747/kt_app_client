@@ -24,6 +24,7 @@
 <script>
 	import subunit from '../../../../components/sub-unit/subunit.vue'
 	import home from '../../../../vendor/home/home.js'
+	import cache from '../../../../vendor/cache/cache.js'
 export default {
 name: "",
 components: {
@@ -46,6 +47,7 @@ data () {
 				show = 1
 			}
     		this.isLook(show)	
+			
     	},
 		//更新数据
 		updatamsg(){
@@ -56,7 +58,50 @@ data () {
 		//删除
 		aadDel(){
 			uni.showModal({
-				content:'您确定要删除吗'
+				content:'您确定要删除吗',
+				success:(res) => {
+					if(res.cancel == true) return;
+					home.delrenRoom({
+						data:{
+							id:this.id
+						},
+						fail: () => {
+							uni.showToast({
+								title:'网络问题',
+								icon:'none'
+							})
+						},
+						success: (res) => {
+							if(res.statusCode != 200){
+								uni.showToast({
+									title:'网络出错了',
+									icon:'none'
+								})
+								return;
+							}
+							if(res.data.code != 200){
+								uni.showToast({
+									title:res.data.msg,
+									icon:'none'
+								})
+								return;
+							}
+							uni.showToast({
+								title:res.data.msg,
+								icon:'none',
+								duration:2000
+							})
+							let settime = setTimeout(() => {
+								uni.navigateBack({
+									delta:2
+								})
+								clearTimeout(settime)
+							},2000)
+							this.$store.commit('roomisDel',res.data.code)
+						}
+					})
+					
+				}
 			})
 		},
         //更改可见性
@@ -87,6 +132,7 @@ data () {
 						})
 						return;
 					}
+					cache.set('isShow',show)
 					uni.showToast({
 						title: res.data.msg,
 						icon: 'none'
@@ -99,13 +145,17 @@ data () {
 
   },
   onLoad (val) {
-    if(val.isShow == 0){
+	 let isShow =  cache.get('isShow')
+    if(isShow == 0){
 		this.checked = false
 	}
-	if(val.isShow == 1){
+	if(isShow == 1){
 		this.checked = true
 	}
 	this.id = val.id
+  },
+  onShow() {
+  	this.$store.commit('roomisDel','')
   },
   filters: {
 

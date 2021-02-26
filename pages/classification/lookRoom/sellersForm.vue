@@ -49,8 +49,11 @@
 				房屋照片
 			</view>
 			<view class="flex al-center flex-w">
-				<view class="" v-for="item in image" :key='item.id'>
+				<view class="pos-rel" v-for="(item,index) in image" :key='item.id'>
 					<image :src="item" mode="aspectFill" class="itemImg"></image>
+					<view @click="delImage(index)" class="delBox flex al-center ju-center">
+						<image src="../../../image/lookroom/del.png" class="delImg" mode=""></image>
+					</view>
 				</view>
 				<view @click="selPhoto"  class="selphoto flex al-center ju-center">
 					<image src="../../../image/lookroom/photo.png" class="photoImg" mode=""></image>
@@ -60,7 +63,12 @@
 				封面图片
 			</view>
 			<view class="p-b2 flex">
-				<image v-if="coverImg" :src="coverImg" class="itemImg" mode="aspectFill"></image>
+				<view  v-if="coverImg" class="pos-rel">
+					<image :src="coverImg" class="itemImg" mode="aspectFill"></image>
+					<view @click="coverImg=''" class="delBox flex al-center ju-center">
+						<image src="../../../image/lookroom/del.png" class="delImg" mode=""></image>
+					</view>
+				</view>
 				<view @click="celCover" class="selphoto flex al-center ju-center">
 					<image  src="../../../image/lookroom/cover.png" class="coverImg" mode=""></image>
 				</view>
@@ -130,6 +138,7 @@ subunit,
 props: {},
 data () {
   return {
+	  id:'',
 	  value:'', //标题
 	  addDetails:'',//详细地址
 	  lgt:'',//经度
@@ -230,8 +239,6 @@ data () {
 				 tel:this.tel,
 				 contact_name:this.username,
 				// 可选
-				  rents_bet: this.rents_bet,
-				  rents_pay: this.rents_pay,
 				  location:this.addDetails,
 				  lgt:this.lgt,
 				  lat:this.lat,
@@ -503,6 +510,10 @@ data () {
 			 })
 			 return;
 		} 
+		if(this.id){
+			this.upData()
+			return;
+		}
 		this.subunit()
 	},
 	  
@@ -537,13 +548,171 @@ data () {
 			}
 		})
 	},
-  },
+    
+	// 数据
+	getData(id) {
+		uni.showLoading({
+			title:"加载中"
+		})
+		home.saleDils({
+			data: {
+				id: id
+			},
+			fail: () => {
+				uni.hideLoading()
+				uni.showToast({
+					title: '网络错误',
+					icon: 'none'
+				})
+			},
+			success: (res) => {
+				uni.hideLoading()
+				if (res.statusCode != 200) {
+					uni.showToast({
+						title: '网络出错了',
+						icon: 'none'
+					})
+					return;
+				}
+				if (res.data.code != 200) {
+					uni.showToast({
+						title: res.data.msg,
+						icon: 'none'
+					})
+					return;
+				}
+				let data = res.data.data
+				this.celFit = data.zx
+				if (data.zx == 'low') {
+					data.zx = '清水房'
+					this.defaultFitment = [2]
+				}
+				if (data.zx == 'simple') {
+					data.zx = '简装'
+					this.defaultFitment = [1]
+				}
+				if (data.zx == 'well') {
+					data.zx = '精装'
+					this.defaultFitment = [0]
+				}
+				if (data.ele == 0) {
+					data.ele = '无'
+					this.defaultElevator = [0]
+				}
+				if (data.ele == 1) {
+					data.ele = '有'
+					this.defaultElevator = [1]
+				}
+				this.value = data.title
+				this.formlist[0].value = data.village
+				this.formlist[1].value = data.room + '室' + data.hall + '厅' + data.bathroom + '卫'
+				this.defaultType = [data.room-1, data.hall-1,data.bathroom-1]
+				this.formlist[2].value = data.floor + '/' + data.total_floor
+				this.defaultFloor = [data.floor-1,data.total_floor-data.floor]
+				this.formlist[3].value = data.zx 
+				this.formlist[4].value = data.area
+				this.formlist[5].value = data.ele
+				this.rentNum = data.sale_price
+				this.textvalue = data.desc
+				this.image = data.album
+				this.coverImg = data.faceimg
+				this.floor = data.floor
+				this.totalFloor = data.total_floor
+				this.rents_bet = data.rents_bet
+				this.rents_pay = data.rents_pay
+				this.addDetails = data.location
+				this.lgt = data.lgt
+				this.lat = data.lat
+			}
+		})
+	},
+	upData(){
+		let faceimg = this.coverImg
+		  if(!this.coverImg){
+			faceimg = this.image[0]
+		  }
+		  uni.showLoading({
+		  	title:'提交中'
+		  })
+		home.houseSaleUp({
+			 data:{
+				 // 必传
+				 id:this.id,
+				// 必传
+				 title: this.value,
+				 room:this.defaultType[0] + 1,
+				 hall:this.defaultType[1] + 1,
+				 bathroom:this.defaultType[2] + 1,
+				 area:this.formlist[4].value,
+				 ele:this.defaultElevator[0],
+				 floor:this.floor,
+				 total_floor:this.totalFloor,
+				 zx:this.celFit,
+				 sale_price:this.rentNum,
+				 album:this.image,
+				 village:this.formlist[0].value,
+				 desc:this.textvalue,
+				 tel:this.tel,
+				 contact_name:this.username,
+				// 可选
+				  location:this.addDetails,
+				  lgt:this.lgt,
+				  lat:this.lat,
+				  faceimg:faceimg
+			 },
+			 fail: () => {
+				 uni.hideLoading()
+				 uni.showToast({
+					title: '网络错误',
+					icon: 'none'
+				 })
+			 },
+			 success:(res) => {
+				  uni.hideLoading()
+				  if (res.statusCode != 200) {
+					uni.showToast({
+						title: '网络出错了',
+						icon: 'none'
+					})
+					return;
+				  }
+				  if (res.data.code != 200) {
+					uni.showToast({
+						title: res.data.msg,
+						icon: 'none'
+					})
+					return;
+				  }
+				  uni.showToast({
+					title: res.data.msg + ',需等待审核',
+					icon: 'none',
+					duration:3000
+				  })
+				
+				  let settime = setTimeout( () => {
+					  uni.navigateBack({
+					  	delta:3
+					  })
+				  },3000)	  
+				 }
+		})  
+	},
+	//删除照片
+	delImage(index){
+		this.image.splice(index,1)
+	}
+ },
   mounted () {
    this.all()
-   this.loadUserData()
+ 
   },
-  onLoad () {
-
+  onLoad (val) {
+    if(!val.id) return;
+    this.id = val.id
+    this.getData(val.id)
+  },
+  onShow() {
+  	  this.loadUserData()
   },
   filters: {
 
@@ -695,4 +864,20 @@ data () {
 		background:#CCCCCC ;
 		margin: 20rpx 0;
 	}
+	
+	.delImg{
+			width: 25rpx;
+			height: 25rpx;
+		}
+		
+		.delBox{
+			position: absolute;
+			top: 5rpx;
+			right: 35rpx;
+			width: 35rpx;
+			height: 35rpx;
+			border-radius: 50%;
+			border: 1px solid #FFFFFF;
+		    background: rgba(0,0,0,0.2) 
+		}
 </style>

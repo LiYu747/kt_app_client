@@ -59,7 +59,7 @@
 				</view>
 			</view>
 
-			<view class="addressBox m-t3 flex  fz-14">
+			<view @click="Address" class="addressBox m-t3 flex  fz-14">
 				<image src="../../../../image/lookroom/add.png" class="addImg" mode=""></image>
 				<view class="m-l2 addressmsg">
 					{{roomInof.village}}
@@ -100,7 +100,7 @@
 				</view>
 			</view>
 
-			<view class="">
+			<view @click="consult" class="">
 				<image src="../../../../image/lookroom/consult.png" class="consultImg" mode=""></image>
 			</view>
 
@@ -115,6 +115,7 @@
 <script>
 	import subunit from '../../../../components/sub-unit/subunit.vue'
 	import home from '../../../../vendor/home/home.js'
+	import cache from '../../../../vendor/cache/cache.js'
 	export default {
 		name: "",
 		components: {
@@ -138,15 +139,21 @@
 					value: ''
 				}],
 				roomInof: {},
-				isShow:'',
 				id:''
 			}
 		},
 		methods: {
+			//拨打电话
+			consult() {
+				if(!this.roomInof.tel) return;
+				uni.makePhoneCall({
+				 phoneNumber: this.roomInof.tel
+				});
+			},
 			// 去设置
 			install(){
 				uni.navigateTo({
-					url:'/pages/classification/lookRoom/rentAndsale/setRent?isShow=' + this.isShow + "&id=" + this.id
+					url:'/pages/classification/lookRoom/rentAndsale/setRent?id=' + this.id 
 				})
 			},
 			getData(id) {
@@ -193,8 +200,8 @@
 						this.locdata[0].value = data.area + '㎡'
 						this.locdata[1].value = data.floor + '/' + data.total_floor + '层'
 						this.locdata[2].value = data.room + '室' + hall + bathroom
-						this.isShow = data.is_show
 						this.id = data.id
+						cache.set('isShow',data.is_show)
 						if (data.zx == 'low') {
 							data.zx = '清水房'
 						}
@@ -214,7 +221,19 @@
 						this.roomInof = data
 					}
 				})
-			}
+			},
+			// 地址
+			Address(){
+				let latitude = Number(this.roomInof.lat)
+				let longitude = Number(this.roomInof.lgt)
+				uni.openLocation({
+				    latitude: latitude,
+				    longitude: longitude, 
+				    success: function () {
+				        console.log('success');
+				    }
+				});
+			},
 		},
 		mounted() {
 

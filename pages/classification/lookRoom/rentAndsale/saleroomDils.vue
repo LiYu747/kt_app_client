@@ -1,6 +1,9 @@
 <template>
 	<view class="page">
 		<subunit titel='详情' class="fidex"></subunit>
+		<view class="seticon">
+			<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
+		</view>
 		<view class="topLine">
 
 		</view>
@@ -68,7 +71,7 @@
 				</view>
 			</view>
 
-			<view class="addressBox m-t3 flex  fz-14">
+			<view @click="Address" class="addressBox m-t3 flex  fz-14">
 				<image src="../../../../image/lookroom/add.png" class="addImg" mode=""></image>
 				<view class="m-l2 addressmsg">
 					{{roomInof.village}}
@@ -90,7 +93,7 @@
 				</view>
 			</view>
 
-			<view class="">
+			<view @click="consult" class="">
 				<image src="../../../../image/lookroom/consult.png" class="consultImg" mode=""></image>
 			</view>
 
@@ -105,6 +108,7 @@
 <script>
 	import subunit from '../../../../components/sub-unit/subunit.vue'
 	import home from '../../../../vendor/home/home.js'
+	import cache from '../../../../vendor/cache/cache.js'
 	export default {
 		name: "",
 		components: {
@@ -128,9 +132,25 @@
 					value: ''
 				}],
 				roomInof: {},
+				id:''
 			}
 		},
 		methods: {
+			//拨打电话
+			consult() {
+				if(!this.roomInof.tel) return;
+				uni.makePhoneCall({
+				 phoneNumber: this.roomInof.tel
+				});
+			},
+			
+			// 设置
+			install(){
+				uni.navigateTo({
+					url:'/pages/classification/lookRoom/rentAndsale/setSale?id=' + this.id 
+				})
+			},
+			// 数据
 			getData(id) {
 				uni.showLoading({
 					title:"加载中"
@@ -175,6 +195,8 @@
 						this.locdata[0].value = data.sale_price + '万';
 						this.locdata[1].value = data.room + '室' + hall + bathroom;
 						this.locdata[2].value = data.area + '㎡'
+						this.id = data.id
+						cache.set('isShow',data.is_show)
 						if (data.zx == 'low') {
 							data.zx = '清水房'
 						}
@@ -194,7 +216,19 @@
 						this.roomInof = data
 					}
 				})
-			}
+			},
+			// 地址
+			Address(){
+				let latitude = Number(this.roomInof.lat)
+				let longitude = Number(this.roomInof.lgt)
+				uni.openLocation({
+				    latitude: latitude,
+				    longitude: longitude, 
+				    success: function () {
+				        console.log('success');
+				    }
+				});
+			},
 		},
 		mounted() {
 
@@ -396,5 +430,17 @@
 	.haveSeen {
 		text-align: right;
 		color: #333333;
+	}
+	
+	.seticon{
+		position: fixed;
+		right: 50rpx;
+		top: 80rpx;
+		z-index: 99;
+	}
+	
+	.setimg {
+		width: 40rpx;
+		height: 40rpx;
 	}
 </style>

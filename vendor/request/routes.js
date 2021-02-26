@@ -126,8 +126,20 @@ module.exports = {
 			// 设置出租房可见性
 			rentShow : apiPath + 'user/rental/setVisible',
 			
-			//更新房屋数据
-			updataRoom : apiPath + 'user/rental'
+			//更新租房数据
+			updataRoom : apiPath + 'user/rental',
+			
+			//删除租房数据
+			delrenRoom : apiPath + 'user/rental',
+			
+			// 出售记录的可见性
+			saleShow : apiPath + 'user/houseSale/setVisible',
+			
+			//更新卖房数据
+			houseSaleUp : apiPath + 'user/houseSale',
+			
+			//删除卖房
+			delSale : apiPath + 'user/houseSale'
 		},
 
 		// 社区资讯

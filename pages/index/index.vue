@@ -58,7 +58,7 @@
 			<!-- 周边 -->
 			<periphery ref='peri'></periphery>
 
-			<button @click="gogo">点击</button>
+			<!-- <button @click="gogo">点击</button> -->
 		</view>
 		<!-- 视频播放 -->
 		<view v-if="paly == true" @mousewheel.prevent class=" pos-abs moive flex-d al-center ju-center">
@@ -74,6 +74,14 @@
 					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				</view>
 				刷新中
+			</view>
+		</view>
+		<view class="guideBox">
+			<view class="btmbox">
+				<image src="../../image/lookroom/logo1.png" class="btmImg" mode=""></image>
+			</view>
+			<view class="">
+				
 			</view>
 		</view>
 	</view>
@@ -271,7 +279,7 @@
 		mounted() {
 			this.Chart()
 			this.operationData()
-
+			uni.hideTabBar() 
 		},
 		onShow() {
 			this.getInform()
@@ -447,7 +455,7 @@
 	}
 
 	.showloding {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		height: 100vh;
 		top: 0;
@@ -535,5 +543,25 @@
 		z-index: 2;
 		margin-top: -12rpx;
 		margin-left: 16rpx;
+	}
+	
+	.guideBox{
+		position: fixed;
+		top: 0;
+	  width: 100%;
+	  height: 100vh;
+	  background: rgba(0,0,0,0.85);  
+	  z-index: 9999;
+	}
+	.btmbox{
+		position: fixed;
+		bottom: 0; 
+		width: 100%;
+		height: 100rpx;
+		z-index: -99;
+	}
+	.btmImg{
+		width: 100%;
+		height: 100rpx;
 	}
 </style>

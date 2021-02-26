@@ -11,6 +11,8 @@ export default new Vuex.Store({
 		isDel:'',
 		isComment:'',
 		homeContent:{},
+		roomisDel:'',
+		saleDel:'',
 	},
 	// 同步更改值
 	mutations:{
@@ -29,6 +31,14 @@ export default new Vuex.Store({
 		homeContent(state,info){
 			this.state.homeContent = info
 			},
+		//判断租房信息是否删除
+		 roomisDel(state,info){
+			this.state.roomisDel = info 
+		 },
+		//判断售房信息是否删除
+		 saleDel(state,info){
+			this.state.saleDel = info 
+		 }
 	},
 	//异步
 	actions:{
