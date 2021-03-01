@@ -10,12 +10,22 @@
 				<image src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png"  class="abimg" mode=""></image>
 			</view>
 		</view>
+		<view @click="guidance" class="tabar flex al-center">
+			 新手指导
+			<view class=" flex al-center pos-abs posrigth">
+				 <view class="">
+					
+				 </view>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png"  class="abimg" mode=""></image>
+			</view>
+		</view>
     </view>
 </template>
 
 <script>
 	import subunit from '../../../components/sub-unit/subunit.vue'
 	import clients from '../../../vendor/clients/clients.js'
+	import cache from '../../../vendor/cache/cache.js'
 export default {
 name: "",
 components: {
@@ -32,6 +42,13 @@ data () {
   getVersion(){
 	    this.version =  clients.version
 		clients.askUpdateClient()
+  },
+  // 新手指导
+  guidance(){
+	  cache.set('Gshow', true)
+	  uni.switchTab({
+	  	url:'/pages/index/index'
+	  })
   }
   },
   mounted () {

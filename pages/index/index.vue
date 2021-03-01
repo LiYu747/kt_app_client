@@ -41,7 +41,7 @@
 				 effect3d-previous-margin='60' indicator-pos='none' :effect3d="true"></u-swiper>
 			</view>
 			<!-- 操作 -->
-			<view class="flex operation ju-between">
+			<view @mousewheel.prevent class="flex operation ju-between">
 				<view class="flex-d al-center" v-for="(item,index) in localdata" @click="operation(item)" :key='item.id'>
 					<image :src="item.image" class="itemimg" mode=""></image>
 					<view class="itemtext">
@@ -76,13 +76,30 @@
 				刷新中
 			</view>
 		</view>
-		<view class="guideBox">
-			<view class="btmbox">
-				<image src="../../image/lookroom/logo1.png" class="btmImg" mode=""></image>
+		<!-- 用户指导 -->
+		<view v-if="Gshow == true" @mousewheel.prevent class="guideBox">
+			<view class="flex-d al-center bai guidePush">
+				添加地址
+				<image src="../../image/Newguidance/arrowsD.png" mode="" class="arrowsDimg"></image>
+			</view>
+			<view class="btmbox flex ju-center">
+				<view @click="GgoAdd" class="addBox">
+				</view>
+				<image src="../../image/Newguidance/homeLogo.png" class="btmImg" mode=""></image>
 			</view>
 			<view class="">
+
+			</view>
+		</view>
+
+		<view v-if="guideiS == true" @mousewheel.prevent class="guideBox">
+			<view class="itemHimg">
 				
 			</view>
+			
+			<!-- <view class="" @click="nextT(index)" v-for="(item,index) in guideHome" :key='item.id'>
+				<image v-if="index == idx" :src="item" class="itemHimg" :class="" mode=""></image>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -132,12 +149,35 @@
 				cover: '', //视频封面
 				showPullDownRefreshIcon: false,
 				informmsg: {}, //用户未读消息数量
+				Gshow: false, //新手指导
+				guideiS: false,
+				guideHome: [require('@/image/Newguidance/home1.png'), require('@/image/Newguidance/home2.png'), require(
+						'@/image/Newguidance/home3.png'),
+					require('@/image/Newguidance/home4.png')
+				],
+				idx: 0
 			}
 		},
 		onLoad(val) {
 			// console.log(val);
 		},
 		methods: {
+			nextT(index) {
+				if (index < 3) {
+					this.idx++
+				}
+				if (index == 3) {
+					uni.switchTab({
+						url: '/pages/user/userCenter/userCenter'
+					})
+				}
+
+			},
+			GgoAdd() {
+				uni.switchTab({
+					url: '/pages/address/address/address'
+				})
+			},
 			gogo() {
 				uni.navigateTo({
 					url: '/pages/classification/lookRoom/rentalForm'
@@ -276,12 +316,33 @@
 
 
 		},
+		onLoad() {
+			
+		},
 		mounted() {
 			this.Chart()
 			this.operationData()
-			uni.hideTabBar() 
+
 		},
 		onShow() {
+			this.idx = 0
+			if (cache.get("Gshow") && !cache.get('step')) {
+				this.Gshow = true
+			} else {
+				this.Gshow = false
+			}
+			if (cache.get("Gshow") && cache.get('step')) {
+				this.guideiS = true
+			} else {
+				this.guideiS = false
+			}
+			if (cache.get("Gshow")) {
+				uni.hideTabBar()
+			}
+			else{
+				uni.showTabBar()
+				}
+			
 			this.getInform()
 			let user = cache.get('jwt')
 			if (user) {
@@ -398,6 +459,7 @@
 		width: 100%;
 		height: 304rpx;
 		top: 150rpx;
+		
 	}
 
 
@@ -416,6 +478,7 @@
 		padding: 20rpx;
 		padding-top: 14rpx;
 		padding-bottom: 22rpx;
+		z-index: 99999;
 	}
 
 	.itemtext {
@@ -544,24 +607,55 @@
 		margin-top: -12rpx;
 		margin-left: 16rpx;
 	}
-	
-	.guideBox{
+
+	.guideBox {
 		position: fixed;
 		top: 0;
-	  width: 100%;
-	  height: 100vh;
-	  background: rgba(0,0,0,0.85);  
-	  z-index: 9999;
+		width: 100%;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.75);
+		z-index: 9999;
 	}
-	.btmbox{
+
+	.btmbox {
 		position: fixed;
-		bottom: 0; 
+		bottom: 0;
 		width: 100%;
 		height: 100rpx;
 		z-index: -99;
 	}
-	.btmImg{
+
+	.btmImg {
 		width: 100%;
 		height: 100rpx;
+	}
+
+	.arrowsDimg {
+		width: 60rpx;
+		height: 100rpx;
+	}
+
+	.guidePush {
+		position: fixed;
+		bottom: 100rpx;
+		width: 100%;
+	}
+
+	.addBox {
+		position: absolute;
+		width: 100rpx;
+		height: 100rpx;
+		z-index: 99;
+	}
+
+	.itemHimg {
+		position: fixed;
+		top: 510rpx;
+		width: 150rpx;
+		height: 170rpx;
+		left: 30rpx;
+		 background: transparent;
+		 z-index: ;
+		
 	}
 </style>

@@ -10,7 +10,7 @@
 			</view>
 		</view>
 		<view class="topLine">
-			
+
 		</view>
 		<view class="">
 			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode="" class="jximg"></image>
@@ -19,19 +19,30 @@
 		<view class="flex-d al-center">
 			<view @click="userinfo" class="portrait flex  ju-center pos-rel">
 				<image v-if="user" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
-				<image v-if='!user' src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs" mode=""></image>
+				<image v-if='!user' src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs"
+				 mode=""></image>
 			</view>
 			<view @click="userinfo" v-if="user" class="text">
 				{{user.nickname}}
 			</view>
-			<view  v-else class="text">
+			<view v-else class="text">
 				{{text}}
 			</view>
 		</view>
 		<!-- 操作栏 -->
 		<actionBar :informmsg='informmsg' :user='user'></actionBar>
 		<view class="btmLine">
-			
+
+		</view>
+
+		<view @mousewheel.prevent v-if="Gshow == true" class="guideBox">
+			<view class="" v-for="(item,index) in guideUser" :key='item.id'>
+				<image @click="nextT(index)" v-if="index==idx" :src="item" class="Gitemimg" mode=""></image>
+				<view v-if="idx==2" class=" itemText bai flex ju-center">
+					<view @click="finish" class="textZ">
+					</view>
+				</view>
+			</view>
 		</view>
 	</div>
 </template>
@@ -53,10 +64,26 @@
 				user: null, //用户资料
 				text: '未登录',
 				flag: false,
-				informmsg:0
+				informmsg: 0,
+				Gshow: false,
+				guideUser: [require('@/image/Newguidance/user1.png'), require('@/image/Newguidance/user2.png'), require(
+					'@/image/Newguidance/user3.png')],
+				idx: 0
 			}
 		},
 		methods: {
+			finish() {
+				cache.forget('Gshow')
+				cache.forget('step')
+				uni.switchTab({
+					url: '/pages/index/index'
+				})
+			},
+			nextT(index) {
+				if (index < 2) {
+					this.idx++
+				}
+			},
 			// 消息通知
 			goInform() {
 				uni.navigateTo({
@@ -76,7 +103,7 @@
 					url: '/pages/user/personal/personal'
 				})
 			},
-			
+
 			// 获取消息通知数量
 			getInform() {
 				home.unread({
@@ -133,9 +160,15 @@
 		},
 		onLoad(val) {},
 		onShow() {
+			this.idx = 0
+			if (cache.get('Gshow')) {
+				this.Gshow = true
+			} else {
+				this.Gshow = false
+			}
 			this.getUser()
 			this.loadUserData();
-            this.getInform()
+			this.getInform()
 		},
 		filters: {
 
@@ -165,15 +198,15 @@
 		position: fixed;
 		z-index: 99;
 	}
-    
-	.topLine{
+
+	.topLine {
 		height: 128rpx;
 	}
-	
-	.btmLine{
+
+	.btmLine {
 		height: 40rpx;
 	}
-	
+
 	.setimg {
 		width: 40rpx;
 		height: 40rpx;
@@ -223,7 +256,7 @@
 		right: 50rpx;
 	}
 
-	
+
 
 	.munber {
 		width: 34rpx;
@@ -236,8 +269,8 @@
 		margin-top: -12rpx;
 		margin-left: 16rpx;
 	}
-	
-	.munMore{
+
+	.munMore {
 		width: 50rpx;
 		height: 34rpx;
 		background: red;
@@ -247,5 +280,32 @@
 		z-index: 2;
 		margin-top: -12rpx;
 		margin-left: 16rpx;
+	}
+
+	.guideBox {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.75);
+		z-index: 9999;
+	}
+
+	.Gitemimg {
+		width: 100%;
+		height: 100vh;
+	}
+
+	.itemText {
+		width: 100%;
+		position: absolute;
+		z-index: 9999;
+		color: #FFFFFF;
+		bottom: 80rpx;
+	}
+
+	.textZ {
+		width: 230rpx;
+		height: 72rpx;
 	}
 </style>

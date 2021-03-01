@@ -43,7 +43,12 @@
 			</view>
 		</view>
 
-
+       <view v-if="Gshow == true" @mousewheel.prevent class="guideBox">
+       	 <view class="" @click="nextTo(index)" v-for="(item,index) in guidance" :key='item.id'>
+			<image v-if="idx == index" :src="item" class="Gitem" mode=""></image>
+       	 </view>
+       </view>
+	 
 	</view>
 </template>
 
@@ -68,6 +73,7 @@
 		props: {},
 		data() {
 			return {
+				guidance:[require('@/image/Newguidance/celAdd.png'),require("@/image/Newguidance/accessory.png"),require("@/image/Newguidance/remark.png")] ,//指导图片
 				value: [], //地址绑定v-model
 				options: [{
 						value: '1',
@@ -128,10 +134,18 @@
 				household: '',
 				// 附件
 				files: [],
-
+				Gshow:false,
+                idx:0
 			}
 		},
 		methods: {
+			nextTo(index){
+				this.idx ++
+				if(index == 2){
+					this.Gshow = false
+				}
+				
+			},
 			//申请记录
 			Application() {
 				uni.navigateTo({
@@ -196,6 +210,17 @@
 			},
 			// 提交
 			Submit() {
+				if(cache.get('Gshow')){
+					cache.set('step',true)
+				 const time = setTimeout(() => {
+					uni.switchTab({
+						url:'/pages/address/address/address'
+					})
+					
+					clearTimeout(time)
+				 }, 2000)
+				 return;
+				}
 				// 获取备注
 				if (this.$refs.encl.isLoding == true) return;
 				if (this.household == '') {
@@ -255,6 +280,7 @@
 							title: res.data.msg,
 							duration: 2000
 						});
+					
 						const time = setTimeout(() => {
 							uni.redirectTo({
 								url: '/pages/residence/checkRecord/checkRecord'
@@ -427,6 +453,9 @@
 		mounted() {
 			// console.log(obj);
 			this.loadVillageLists();
+			if(cache.get('Gshow')){
+				this.Gshow = true
+			}
 		},
 		onShow() {
 			this.loadUserData()
@@ -583,5 +612,19 @@
 
 	/deep/ .uni-picker-view-indicator {
 		height: 88rpx !important;
+	}
+	
+	.guideBox{
+	  position: fixed;
+	  top: 0;
+	  width: 100%;
+	  height: 100vh;
+	  background: rgba(0,0,0,0.75);  
+	  z-index: 999;
+	}
+    
+	.Gitem{
+		width: 100%;
+		height: 100vh;
 	}
 </style>
