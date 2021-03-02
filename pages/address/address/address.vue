@@ -1,8 +1,8 @@
 <template>
 	<view class=" pos-rel content">
-		<subunit ref='xcoll' :retur='false' class="fled" titel="入住信息" @add='add' :image='aimg'></subunit>
-		<view v-show="flag%2!==0" class="shows pos-abs ">
-			<image class="showimg" @click="getto" src="https://oss.kuaitongkeji.com/static/img/app/address/ads.png" mode=""></image>
+		<subunit ref='xcoll' :retur='false' class="fled" titel="入住信息" ></subunit>
+		<view class="location" :class="Gshow == true?'locIndex':''">
+			<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg" mode=""></image>
 		</view>
 		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 		<addList :locdata='locdata' :isLoding='isLoding' :text='text' :hasMore='hasMore'></addList>
@@ -13,18 +13,22 @@
 			</view>
 		</view>
 		<view v-if="Gshow == true && Step == false" class="">
-                <view class="guideBox">
-                	<view class="Gposr flex">
-                		  <view class="bai Gtext">
-                		  	填写地址详细信息
-                		  </view>
-                		  <image src="../../../image/Newguidance/arrowsRU.png" class="arrowsRU" mode=""></image>
-                	</view>
-                </view>
-				<image src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image>
+			<view class="guideBox">
+				<view class="Gposr flex">
+					<view class="bai Gtext">
+						填写地址详细信息
+					</view>
+					<image src="../../../image/Newguidance/arrowsRU.png" class="arrowsRU" mode=""></image>
+				</view>
+			</view>
+			<image src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image>
 		</view>
-		<view v-if="Step == true" class="">
-			<image @click="gotohome" src="../../../image/Newguidance/addressT.png" class="addressT" mode=""></image>
+		<view v-if="Step == true && Gshow == false" class="">
+			<view @click="gotohome" class="guideBox2">
+				<image src="../../../image/Newguidance/ele.png" mode="" class="ele"></image>
+
+			</view>
+			<image src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image>
 		</view>
 	</view>
 </template>
@@ -44,8 +48,6 @@
 		props: {},
 		data() {
 			return {
-				aimg: 'https://oss.kuaitongkeji.com/static/img/app/address/plus.png',
-				flag: '', // 判断是否显示申请入驻
 				text: '', //没有更多了
 				locdata: [], //数据列表
 				page: 1,
@@ -53,14 +55,19 @@
 				isLoding: false,
 				hasMore: true,
 				showPullDownRefreshIcon: false,
-				Gshow:false,
-				Step:false,//用户第二次进入页面
+				Gshow: false,
+				Step: false, //用户第二次进入页面
 			}
 		},
 		methods: {
-			gotohome(){
+			push() {
+				uni.navigateTo({
+					url: '/pages/residence/checkIn/checkIn'
+				})
+			},
+			gotohome() {
 				uni.switchTab({
-					url:'/pages/index/index'
+					url: '/pages/index/index'
 				})
 			},
 			// 入驻申请
@@ -68,11 +75,7 @@
 				this.flag = val
 			},
 			// 去入驻申请
-			getto() {
-				uni.navigateTo({
-					url: '/pages/residence/checkIn/checkIn'
-				})
-			},
+
 			// 下拉刷新
 			stopRefreshIcon() {
 				if (this.showPullDownRefreshIcon == true) {
@@ -83,24 +86,13 @@
 			// 用户所有地址
 			loadPageData() {
 
-				jwt.doOnlyTokenValid({ 
+				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
 					success: () => {
-						if(cache.get('Gshow')&&!cache.get('step')){
-							this.Gshow = true
-						}else{
-							this.Gshow = false
-						}
-						console.log(this.Gshow);
-						if(cache.get('Gshow')&&cache.get('step')){
-							this.Step = true
-						}else{
-							this.Step = false
-						}
-						// console.log(this.Step);
-						this.isLoding = true
 						
+						this.isLoding = true
+
 						address.alladd({
 							data: {
 								page: this.page,
@@ -115,7 +107,16 @@
 								})
 							},
 							success: (res) => {
-
+                                   if (cache.get('Gshow') && !cache.get('step')) {
+                                   	this.Gshow = true
+                                   } else {
+                                   	this.Gshow = false
+                                   }
+                                   if (cache.get('Gshow') && cache.get('step')) {
+                                   	this.Step = true
+                                   } else {
+                                   	this.Step = false
+                                   }
 								this.stopRefreshIcon();
 
 								this.isLoding = false;
@@ -145,6 +146,9 @@
 						this.isLoding = false
 						this.stopRefreshIcon();
 						this.locdata = []
+						uni.switchTab({
+							url:'/pages/index/index'
+						})
 					}
 				})
 
@@ -154,14 +158,12 @@
 		mounted() {
 
 		},
-		onLoad(val) {
-		},
+		onLoad(val) {},
 		onShow() {
 			this.loadPageData()
 		},
 		onHide() {
-			this.flag = ''
-			this.$refs.xcoll.rotateTimes = 1
+
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
@@ -180,7 +182,7 @@
 		filters: {
 
 		},
-		computed: { 
+		computed: {
 
 		},
 		watch: {
@@ -202,7 +204,7 @@
 		margin-top: 128rpx;
 		width: 100%;
 		height: 156rpx;
-		
+
 	}
 
 	.sj {
@@ -268,40 +270,87 @@
 
 	.guideBox {
 		position: fixed;
-		top: 135rpx;
+		top: 0rpx;
 		width: 100%;
 		height: 100vh;
 		background: rgba(0, 0, 0, 0.75);
 		z-index: 9999;
 	}
-	
-	.arrowsRU{
-		width: 130rpx;
-		height: 100rpx;
+
+	.arrowsRU {
+		width: 120rpx;
+		height: 80rpx;
 	}
-	
-	.Gposr{
+
+	.Gposr {
+		margin-top: 130rpx;
 		position: fixed;
-		right: 70rpx;
+		right: 100rpx;
 	}
-	
-	.Gtext{
-		margin-top: 66rpx;
+
+	.Gtext {
+		margin-top: 50rpx;
 		margin-right: 20rpx;
 	}
-	
-	.addressT{
+
+	.addressT {
 		position: fixed;
 		top: 0;
 		z-index: 99999;
 		width: 100%;
 		height: 100vh;
 	}
-	
-	.addLogo{
+
+	.addLogo {
 		width: 100%;
 		height: 100rpx;
 		position: fixed;
 		bottom: 0;
+	}
+
+	.guideBox2 {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.75);
+		z-index: 9999;
+	}
+
+	.ele {
+		margin-top: 200rpx;
+		width: 100%;
+	}
+
+
+
+	.setimg {
+		width: 40rpx;
+		height: 40rpx;
+	}
+
+	.location {
+		position: fixed;
+		top: 80rpx;
+		right: 60rpx;
+		z-index: 99;
+	}
+
+
+	.locIndex {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 70rpx;
+		height: 70rpx;
+		border-radius: 50%;
+		background: #F07535;
+		z-index: 99999;
+		margin-top: -20rpx;
+	}
+
+	.reimg {
+		width: 22rpx;
+		height: 41rpx;
 	}
 </style>

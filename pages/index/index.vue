@@ -41,11 +41,70 @@
 				 effect3d-previous-margin='60' indicator-pos='none' :effect3d="true"></u-swiper>
 			</view>
 			<!-- 操作 -->
-			<view @mousewheel.prevent class="flex operation ju-between">
-				<view class="flex-d al-center" v-for="(item,index) in localdata" @click="operation(item)" :key='item.id'>
+			<view  class="flex operation ju-between">
+				<view class="flex-d al-center pos-rel" v-for="(item,index) in localdata" @click="operation(item)" :class="guideiS==true&&index==idx?'Gitem':''" :key='item.id'>
 					<image :src="item.image" class="itemimg" mode=""></image>
 					<view class="itemtext">
 						{{item.name}}
+					</view>
+					<view v-if="guideiS == true " class="">
+						<view v-if="idx==0" class="flex pos-abs m-ln1">
+							<image src="../../image/Newguidance/arrowsLU.png" class="arrowsLU" mode=""></image>
+							<view class="flex Lutext">
+								入住申请，
+								<view class="bai">
+									填写入住地址详细信息
+								</view>
+							</view>
+						</view>
+						<view v-if="idx == 1" class="m-ln2 pos-abs">
+							<image src="../../image/Newguidance/upward.png" class="upward" mode=""></image>
+							<view class="upText ">
+								<view class="flex al-center">
+									拜访申请，
+									<view class="bai">
+										朋友做客等可填写信息
+									</view>
+								</view>
+								<view class="bai">
+									房主通过后小区大门自动识别打开
+								</view>
+							</view>
+						</view>
+						<view v-if="idx == 2" class="m-ln3 pos-abs">
+							<image src="../../image/Newguidance/upward.png" class="upward" mode=""></image>
+							<view class="upText2 ">
+								<view class="flex al-center">
+									来访记录，
+									<view class="bai">
+									可查看来访记录详细信息
+									</view>
+								</view>
+								<view class="bai">
+									所以亲戚 朋友的来访记录都在这里！
+								</view>
+							</view>
+						</view>
+						<view class="m-ln4 pos-abs" v-if="idx==3">
+							<image src="../../image/Newguidance/arrowsRU.png" class="arrowsLU" mode=""></image>
+							<view class="goHome flex">
+								<view class="">
+									回家二维码，
+									<view class="bai">
+										安全无接触
+									</view>
+								</view>
+								<view class="bai">
+									可直接扫码进入小区
+								</view>
+							</view>
+							<view class="lowRight">
+								<view class="bai lowT">
+									进入个人中心
+								</view>
+								<image src="../../image/Newguidance/lowRight.png" class="lowImg" mode=""></image>
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -77,7 +136,7 @@
 			</view>
 		</view>
 		<!-- 用户指导 -->
-		<view v-if="Gshow == true" @mousewheel.prevent class="guideBox">
+		<view v-if="Gshow == true&&guideiS==false" @mousewheel.prevent class="guideBox"> 
 			<view class="flex-d al-center bai guidePush">
 				添加地址
 				<image src="../../image/Newguidance/arrowsD.png" mode="" class="arrowsDimg"></image>
@@ -92,14 +151,17 @@
 			</view>
 		</view>
 
-		<view v-if="guideiS == true" @mousewheel.prevent class="guideBox">
-			<view class="itemHimg">
-				
+		<view v-if="guideiS == true" @mousewheel.prevent class="">
+			<view  @click="nextT" class="guideBox">
+				<view v-if="idx == 3" class="btmbox flex ju-center">
+					<view class="addBox">
+					</view>
+					<image src="../../image/Newguidance/userLogo.png" class="btmImg" mode=""></image>
+				</view>
 			</view>
-			
-			<!-- <view class="" @click="nextT(index)" v-for="(item,index) in guideHome" :key='item.id'>
-				<image v-if="index == idx" :src="item" class="itemHimg" :class="" mode=""></image>
-			</view> -->
+			<view class="" v-if="idx!==3">
+				<image src="../../image/Newguidance/home.png" class="addLogo" mode=""></image>
+			</view>
 		</view>
 	</view>
 </template>
@@ -155,23 +217,21 @@
 						'@/image/Newguidance/home3.png'),
 					require('@/image/Newguidance/home4.png')
 				],
-				idx: 0
+				idx: 0,
+				dynamicState:100,
 			}
 		},
 		onLoad(val) {
 			// console.log(val);
 		},
 		methods: {
-			nextT(index) {
-				if (index < 3) {
-					this.idx++
-				}
-				if (index == 3) {
+			nextT() {
+				this.idx ++
+				if(this.idx==4) {
 					uni.switchTab({
-						url: '/pages/user/userCenter/userCenter'
+						url:'/pages/user/userCenter/userCenter'
 					})
 				}
-
 			},
 			GgoAdd() {
 				uni.switchTab({
@@ -213,6 +273,7 @@
 			//选择用户类型
 			selecType(item) {
 				if (item.type == 'user') return;
+				
 				uni.reLaunch({
 					url: item.url
 				})
@@ -228,7 +289,6 @@
 			// 点击轮播图
 			addswiper(val) {
 				let movie = this.list[val]
-				console.log(movie);
 				if (movie.video) {
 					this.videoUrl = movie.video
 					this.cover = movie.image
@@ -248,6 +308,7 @@
 			},
 			// 跳转
 			operation(item) {
+				if(this.guideiS == true) return;
 				if (item.page) {
 					urlUtil.to({
 						pageAlias: item.page,
@@ -314,7 +375,6 @@
 				}
 			},
 
-
 		},
 		onLoad() {
 			
@@ -322,7 +382,7 @@
 		mounted() {
 			this.Chart()
 			this.operationData()
-
+			
 		},
 		onShow() {
 			this.idx = 0
@@ -342,7 +402,6 @@
 			else{
 				uni.showTabBar()
 				}
-			
 			this.getInform()
 			let user = cache.get('jwt')
 			if (user) {
@@ -367,19 +426,40 @@
 		},
 		onHide() {
 			this.isShowType = false
+			this.Gshow = false
 		}
 	}
 </script>
 
 <style>
+	.m-ln1{
+		left: 50rpx;
+		top: 160rpx;
+		width: 750rpx !important;
+	}
+	.m-ln2{
+		width: 750rpx !important;
+		left: 44rpx;
+		top: 160rpx;
+	}
+	.m-ln3{
+		width: 750rpx !important;
+		left: 40rpx;
+		top: 160rpx;
+	}
+	.m-ln4{
+		width: 750rpx !important;
+		left: -20rpx;
+		top: 160rpx;
+	}
 	.wrap {
 		padding: 40rpx;
 	}
 
 	.content {
-		display: flex;
+	/* 	display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: center; */
 		background: rgb(245, 245, 245);
 	}
 
@@ -478,7 +558,6 @@
 		padding: 20rpx;
 		padding-top: 14rpx;
 		padding-bottom: 22rpx;
-		z-index: 99999;
 	}
 
 	.itemtext {
@@ -637,7 +716,7 @@
 
 	.guidePush {
 		position: fixed;
-		bottom: 100rpx;
+		bottom: 120rpx;
 		width: 100%;
 	}
 
@@ -655,7 +734,70 @@
 		height: 170rpx;
 		left: 30rpx;
 		 background: transparent;
-		 z-index: ;
-		
+	}
+	
+	.Gitem {
+		z-index: 99999;
+		background: #FFFFFF;
+		padding: 10rpx;
+	}
+	
+	.arrowsLU{
+		width: 120rpx;
+		height: 88rpx;
+	}
+	
+	.lowImg{
+		width: 110rpx;
+		height: 100rpx;
+	}
+	
+	.Gmsgbox{
+		position: fixed;
+		top: 680rpx;
+	}
+	
+	.Lutext{
+		margin-top: 55rpx;
+		margin-left: 10rpx;
+		color: #FFD428;
+	}
+	
+	.upward{
+		width: 50rpx;
+		height: 100rpx;
+	}
+	
+	.upText{
+		color:#FFD428 ;
+		margin-left: -130rpx;
+	}
+	
+	.upText2{
+		color:#FFD428 ;
+		margin-left: -200rpx;
+	}
+	
+	.goHome{
+		color:#FFD428 ;
+		position: relative;
+		left: -480rpx;
+		top: -40rpx;
+	}
+	
+	.lowRight{
+		position: fixed;
+		bottom: 100rpx;
+	}
+	
+	.lowT{
+		margin-left: -200rpx;
+	}
+	
+	.addLogo{
+		width: 100%;
+		height: 100rpx;
+		position: fixed;
+		bottom: 0;
 	}
 </style>

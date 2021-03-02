@@ -5,7 +5,7 @@
 				{{titel}}
 			</view>
 			<view class="">
-				<textarea class="tar" maxlength="1000" v-model="value"></textarea>
+				<textarea class="tar"  :disabled="Gshow"  maxlength="1000" v-model="value"></textarea>
 			</view>
 		</view>
 	</view>
@@ -21,6 +21,9 @@
 			titel: {
 				type: String,
 				default: '备注'
+			},
+			Gshow: {
+				type: Boolean
 			}
 		},
 		data() {

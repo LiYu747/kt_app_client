@@ -4,9 +4,18 @@
 		<view class="nav ">
 			<view class="title flex al-center ju-center pos-rel">
 				个人中心
-				<view class="pos-abs location">
-					<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
+			</view>
+		</view>
+		<view class=" location" @click="nextT" :class="Gshow==true&&idx==0?'zIndex':''" >
+			<image @click="install"  src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
+			<view v-if='idx==0&&Gshow==true' class="pos-abs flex staTex">
+				<view class="flex m-l3 m-r2 m-t4 setTex">
+					信息设置 ,
+					<view class="bai">
+						 修改密码以及退出登录等。
+					</view>
 				</view>
+				<image src="../../../image/Newguidance/arrowsRU.png" mode="" class="arrowsRU "></image>
 			</view>
 		</view>
 		<view class="topLine">
@@ -16,33 +25,51 @@
 			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode="" class="jximg"></image>
 		</view>
 		<!-- 头像 -->
-		<view class="flex-d al-center">
-			<view @click="userinfo" class="portrait flex  ju-center pos-rel">
-				<image v-if="user" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
-				<image v-if='!user' src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs"
-				 mode=""></image>
-			</view>
-			<view @click="userinfo" v-if="user" class="text">
-				{{user.nickname}}
-			</view>
-			<view v-else class="text">
-				{{text}}
+		<view class="flex-d al-center" >
+			<view class="pos-rel flex-d al-center"  @click="nextT" :class="idx==1?'ative':''">
+				<view @click="userinfo" class="portrait flex  ju-center pos-rel" :class="Gshow==true&&idx==1?'top0':''">
+					<image v-if="user" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
+					<image v-if='!user' src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs"
+					 mode=""></image>
+				</view>
+				<view @click="userinfo" v-if="user" class="text" :class="Gshow==true&&idx==1?'top1':''">
+					{{user.nickname}}
+				</view>
+				<view v-else class="text">
+					{{text}}
+				</view>
+				<view v-if="idx==1" class="pos-abs infoT flex-d al-center">
+					<image src="../../../image/Newguidance/upward.png" class="upward" mode=""></image>
+					<view class="setTex flex m-t2">
+						个人信息，
+						<view class="bai">
+							修改个人信息
+						</view>
+					</view>
+				</view>
 			</view>
 		</view>
 		<!-- 操作栏 -->
-		<actionBar :informmsg='informmsg' :user='user'></actionBar>
+		<view class="pos-rel" :class="idx==2?'aceZindex':''">
+			<view v-if="idx == 2" class="pos-abs find bai">
+				精彩功能，正在等你发现！
+			</view>
+			<actionBar :Gshow='Gshow' :informmsg='informmsg' :user='user'></actionBar>
+			<view  v-if="idx == 2" class="fildn pos-abs">
+			<view @click="finish" class="explore flex al-center ju-center bai">
+				去探索
+			</view>
+			</view>
+		</view>
 		<view class="btmLine">
 
 		</view>
 
-		<view @mousewheel.prevent v-if="Gshow == true" class="guideBox">
-			<view class="" v-for="(item,index) in guideUser" :key='item.id'>
-				<image @click="nextT(index)" v-if="index==idx" :src="item" class="Gitemimg" mode=""></image>
-				<view v-if="idx==2" class=" itemText bai flex ju-center">
-					<view @click="finish" class="textZ">
-					</view>
-				</view>
+		<view @mousewheel.prevent  v-if="Gshow == true" class="">
+			<view @click="nextT" class="guideBox">
+				
 			</view>
+			<image src="../../../image/Newguidance/user.png" class="addLogo" mode=""></image>
 		</view>
 	</div>
 </template>
@@ -79,10 +106,9 @@
 					url: '/pages/index/index'
 				})
 			},
-			nextT(index) {
-				if (index < 2) {
+			nextT() {
+				if(this.idx==2)return;
 					this.idx++
-				}
 			},
 			// 消息通知
 			goInform() {
@@ -93,12 +119,14 @@
 
 			// 去设置
 			install() {
+				if(this.Gshow == true) return;
 				uni.navigateTo({
 					url: '/pages/user/realInformation/realInformation'
 				})
 			},
 			//用户基本信息
 			userinfo() {
+				if(this.Gshow == true) return;
 				uni.navigateTo({
 					url: '/pages/user/personal/personal'
 				})
@@ -166,6 +194,7 @@
 			} else {
 				this.Gshow = false
 			}
+			
 			this.getUser()
 			this.loadUserData();
 			this.getInform()
@@ -220,7 +249,10 @@
 	}
 
 	.location {
+		position: fixed;
+		top: 60rpx;
 		right: 50rpx;
+		z-index: 99;
 	}
 
 	.jximg {
@@ -251,12 +283,18 @@
 		font-family: Microsoft YaHei;
 		color: #666666;
 	}
+	
+	.top0{
+	top: 0;
+	}
+	.top1{
+		margin-top: 0;
+		z-index: 999;
+	}
 
 	.informBox {
 		right: 50rpx;
 	}
-
-
 
 	.munber {
 		width: 34rpx;
@@ -307,5 +345,91 @@
 	.textZ {
 		width: 230rpx;
 		height: 72rpx;
+	}
+	
+	.zIndex{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 70rpx;
+		height: 70rpx;
+		border-radius: 50%;
+		background:#F07535;
+		z-index: 99999;
+		margin-top: -20rpx;
+	}
+	
+	.arrowsRU{
+		width: 120rpx;
+		height: 88rpx;
+		position: relative;
+		right: 40rpx;
+	}
+	
+	.staTex{
+		right: 0rpx;
+		top: 80rpx;
+		width: 750rpx;
+		display: flex;
+		justify-content: flex-end;
+	}
+		
+	.setTex{
+		color: #FFD428;
+	}	
+	
+	
+	.ative{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 250rpx;
+		height: 220rpx;
+		background: #FFFFFF; 
+		z-index: 99999;
+		margin-top: -60rpx;
+	}	
+	
+	.upward{
+		width: 60rpx;
+		height: 100rpx;
+	}
+	
+	.infoT{
+		width: 750rpx;
+		top: 230rpx;
+	}
+	
+	.aceZindex{
+		background: rgb(245, 245, 245);
+		z-index: 99999;
+	}
+	
+	.find{
+		width: 750rpx;
+		margin-top: -70rpx;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.fildn{
+		width: 750rpx;
+		margin-top: 40rpx;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.explore{
+		width: 300rpx;
+		height: 80rpx;
+		border-radius: 10rpx;
+		background: rgb(240,117,53);
+	}
+	
+	.addLogo{
+		width: 100%;
+		height: 100rpx;
+		position: fixed;
+		bottom: 0;
 	}
 </style>

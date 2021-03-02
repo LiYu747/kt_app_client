@@ -10,8 +10,8 @@
 			</view>
 			<view>
 				<view class="item flex al-center pos-rel" v-for="(item,index) in  record" @click="Onshow(index)" :key='item.id'
-				 :class="{'dv':index===record.length-1}">
-					<u-field v-model="item.value " :placeholder="item.placeholder" :label="item.label" :clearable=false :required='item.required'
+				 :class="[index==record.length-1?'dv':'',index==4&&idx==0&&Gshow==true?'zIndex':'']" >
+					<u-field  v-model="item.value " :placeholder="item.placeholder" :label="item.label" :clearable=false :required='item.required'
 					 input-align='right' :disabled="item.disabled">
 					</u-field>
 					<view class="pos-abs righ" v-if="index===record.length-2">
@@ -22,6 +22,10 @@
 							</view>
 						</view>
 					</view>
+					<view v-if="Gshow == true&&idx==0"  class="Lutext bai fz-16 ">
+						 <image src="../../../image/Newguidance/arrowsLU.png" class="arrowsLU m-r1" mode=""></image>
+						 选择您的小区地址
+					</view>
 					<view v-if="index===record.length-1" class="pos-abs righ">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
 					</view>
@@ -31,10 +35,26 @@
 		</view>
 
 		<!-- 附件 -->
-		<enclosure ref='encl' @abb='add'></enclosure>
-
+		<view class="pos-rel" @click="nextTo" :class="idx==1?'enclText':''">
+			<enclosure ref='encl' :Gshow='Gshow'   @abb='add'></enclosure>
+			<view v-if="Gshow == true" class="pos-abs">
+				<image src="../../../image/Newguidance/arrowsLU.png" mode="" class="arrowsLU m-l4 m-t2"></image>
+				<view class="bai pushMsg">
+					添加附件，租房合同、房产证等
+				</view>
+			</view>
+		</view>
+           
 		<!-- 备注 -->
-		<remarks ref='marks'></remarks>
+		<view class="pos-rel" @click="nextTo" :class="idx==2?'enclText':''">
+			<view v-if="Gshow == true" class=" m-l4 pos-abs llText flex bai">
+				<image src="../../../image/Newguidance/leftLower.png" class="leftLower m-t2" mode=""></image>
+				<view class="m-l1">
+					备注文字，审核人员可以看到
+				</view>
+			</view>
+			<remarks :Gshow='Gshow' ref='marks'></remarks>
+		</view>
 		<!-- 提交 -->
 		<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
 			<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
@@ -43,10 +63,8 @@
 			</view>
 		</view>
 
-       <view v-if="Gshow == true" @mousewheel.prevent class="guideBox">
-       	 <view class="" @click="nextTo(index)" v-for="(item,index) in guidance" :key='item.id'>
-			<image v-if="idx == index" :src="item" class="Gitem" mode=""></image>
-       	 </view>
+       <view v-if="Gshow == true" @click="nextTo" @mousewheel.prevent class="guideBox">
+       
        </view>
 	 
 	</view>
@@ -73,7 +91,6 @@
 		props: {},
 		data() {
 			return {
-				guidance:[require('@/image/Newguidance/celAdd.png'),require("@/image/Newguidance/accessory.png"),require("@/image/Newguidance/remark.png")] ,//指导图片
 				value: [], //地址绑定v-model
 				options: [{
 						value: '1',
@@ -141,7 +158,7 @@
 		methods: {
 			nextTo(index){
 				this.idx ++
-				if(index == 2){
+				if(this.idx == 3){
 					this.Gshow = false
 				}
 				
@@ -170,6 +187,10 @@
 					this.iSidentity = !this.iSidentity
 				}
 				if (index == this.record.length - 1) {
+					if(this.Gshow == true){
+						this.idx++
+						return;
+					}
 					this.show = true
 				}
 			},
@@ -210,17 +231,7 @@
 			},
 			// 提交
 			Submit() {
-				if(cache.get('Gshow')){
-					cache.set('step',true)
-				 const time = setTimeout(() => {
-					uni.switchTab({
-						url:'/pages/address/address/address'
-					})
-					
-					clearTimeout(time)
-				 }, 2000)
-				 return;
-				}
+			
 				// 获取备注
 				if (this.$refs.encl.isLoding == true) return;
 				if (this.household == '') {
@@ -280,7 +291,16 @@
 							title: res.data.msg,
 							duration: 2000
 						});
-					
+					   if(cache.get('Gshow')){
+					   	cache.set('step',true)
+					    const time = setTimeout(() => {
+					   	uni.switchTab({
+					   		url:'/pages/address/address/address'
+					   	})
+					   	clearTimeout(time)
+					    }, 2000)
+					    return;
+					   }
 						const time = setTimeout(() => {
 							uni.redirectTo({
 								url: '/pages/residence/checkRecord/checkRecord'
@@ -418,7 +438,7 @@
 								let Users = res.data.data
 								this.record[0].value = Users.username
 								this.record[1].value = Users.tel.slice(0, 3) + '****' + Users.tel.slice(7, 11)
-								if (!Users.id_card_no) {
+								if (!Users.id_card_no&&this.Gshow==false) { 
 									uni.showModal({
 										content: '请完善您的身份信息',
 										success: function(res) {
@@ -530,15 +550,21 @@
 		color: #666666;
 		border-bottom: 1rpx solid #BFBFBF;
 	}
-
+     
+	 .zIndex{
+		z-index: 99999;
+		background: #FFFFFF; 
+	 }
+	 
 	.item {
 		height: 75rpx;
 		font-size: 24rpx;
 		color: #666666;
 		border-bottom: 1rpx solid #BFBFBF;
-
+		
 		/deep/ .u-field {
 			padding-left: 20rpx;
+		
 		}
 
 		/deep/ .uni-input-input {
@@ -626,5 +652,34 @@
 	.Gitem{
 		width: 100%;
 		height: 100vh;
+	}
+	
+	.arrowsLU{
+		width: 120rpx;
+		height: 88rpx;
+	}
+	
+	.Lutext{
+		position: absolute;
+		left: 50rpx;
+		top: 90rpx;
+	}
+	
+	.enclText{
+		z-index: 99999;
+	}
+	
+	.llText{
+		margin-top: -100rpx;
+	}
+	
+	.leftLower{
+		width: 100rpx;
+		height: 88rpx;
+	}
+	
+	.pushMsg{
+		margin-left: 170rpx;
+		margin-top: -40rpx;
 	}
 </style>

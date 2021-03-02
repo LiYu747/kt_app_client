@@ -36,7 +36,11 @@
 		components: {
 
 		},
-		props: {},
+		props: {
+			Gshow: {
+				type: Boolean
+			}
+		},
 		data() {
 			return {
 				image: [],
@@ -45,6 +49,7 @@
 		},
 		methods: {
 			succ() {
+				if(this.Gshow == true) return;
 				uni.chooseImage({
 					extension: ['jpg', 'jpeg', 'png', 'gif'],
 					success: (chooseImageRes) => {
