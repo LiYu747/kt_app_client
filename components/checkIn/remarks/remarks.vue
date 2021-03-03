@@ -5,7 +5,8 @@
 				{{titel}}
 			</view>
 			<view class="">
-				<textarea class="tar"  :disabled="Gshow"  maxlength="1000" v-model="value"></textarea>
+				<textarea v-if="Gshow==3" :disabled=true class="tar"   maxlength="1000" v-model="value"></textarea>
+				<textarea v-else class="tar"   maxlength="1000" v-model="value"></textarea>
 			</view>
 		</view>
 	</view>
@@ -23,19 +24,19 @@
 				default: '备注'
 			},
 			Gshow: {
-				type: Boolean
+				type: Number
 			}
 		},
 		data() {
 			return {
-				value: ''
+				value: '',
 			}
 		},
 		methods: {
 
 		},
 		mounted() {
-
+           
 		},
 		onLoad(val) {
   
@@ -46,7 +47,9 @@
 		computed: {
 
 		},
-		watch: {},
+		watch: {
+		
+		},
 		directives: {
 
 		}

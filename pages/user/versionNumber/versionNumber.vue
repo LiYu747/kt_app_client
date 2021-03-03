@@ -45,9 +45,16 @@ data () {
   },
   // 新手指导
   guidance(){
-	  cache.set('Gshow', true)
-	  uni.switchTab({
-	  	url:'/pages/index/index'
+	  uni.showModal({
+	  	content:'您确定要开启新手指导',
+		success: (res) => {
+			if(res.confirm){
+				cache.set('Gshow', 1)
+				uni.switchTab({
+					url:'/pages/index/index'
+				})
+			}
+		}
 	  })
   }
   },

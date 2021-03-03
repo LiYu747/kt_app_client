@@ -1,16 +1,16 @@
 <template>
 	<view class="flex-d al-center">
-		<subunit @goback='goback' class="posp" :retur=true titel="申请入住"></subunit>
+		<subunit :abel=able   class="posp"  titel="申请入住"></subunit>
 		<view @click="Application" class=" pos-abs move">
 			申请记录
-		</view>
+		</view> 
 		<view class=" message">
 			<view class="text flex al-center">
 				基本信息
 			</view>
 			<view>
 				<view class="item flex al-center pos-rel" v-for="(item,index) in  record" @click="Onshow(index)" :key='item.id'
-				 :class="[index==record.length-1?'dv':'',index==4&&idx==0&&Gshow==true?'zIndex':'']" >
+				 :class="[index==record.length-1?'dv':'',index==4&&idx==0&&Gshow==3?'zIndex':'']" >
 					<u-field  v-model="item.value " :placeholder="item.placeholder" :label="item.label" :clearable=false :required='item.required'
 					 input-align='right' :disabled="item.disabled">
 					</u-field>
@@ -22,7 +22,7 @@
 							</view>
 						</view>
 					</view>
-					<view v-if="Gshow == true&&idx==0"  class="Lutext bai fz-16 ">
+					<view v-if="Gshow == 3&&idx==0"  class="Lutext bai fz-16 ">
 						 <image src="../../../image/Newguidance/arrowsLU.png" class="arrowsLU m-r1" mode=""></image>
 						 选择您的小区地址
 					</view>
@@ -37,7 +37,7 @@
 		<!-- 附件 -->
 		<view class="pos-rel" @click="nextTo" :class="idx==1?'enclText':''">
 			<enclosure ref='encl' :Gshow='Gshow'   @abb='add'></enclosure>
-			<view v-if="Gshow == true" class="pos-abs">
+			<view v-if="Gshow == 3" class="pos-abs">
 				<image src="../../../image/Newguidance/arrowsLU.png" mode="" class="arrowsLU m-l4 m-t2"></image>
 				<view class="bai pushMsg">
 					添加附件，租房合同、房产证等
@@ -47,7 +47,7 @@
            
 		<!-- 备注 -->
 		<view class="pos-rel" @click="nextTo" :class="idx==2?'enclText':''">
-			<view v-if="Gshow == true" class=" m-l4 pos-abs llText flex bai">
+			<view v-if="Gshow == 3" class=" m-l4 pos-abs llText flex bai">
 				<image src="../../../image/Newguidance/leftLower.png" class="leftLower m-t2" mode=""></image>
 				<view class="m-l1">
 					备注文字，审核人员可以看到
@@ -63,7 +63,7 @@
 			</view>
 		</view>
 
-       <view v-if="Gshow == true" @click="nextTo" @mousewheel.prevent class="guideBox">
+       <view v-if="Gshow == 3" @click="nextTo"  @touchmove.stop.prevent class="guideBox">
        
        </view>
 	 
@@ -151,17 +151,18 @@
 				household: '',
 				// 附件
 				files: [],
-				Gshow:false,
-                idx:0
+				Gshow:0,
+                idx:0,
+				disb:'',
+				able:false
 			}
 		},
 		methods: {
 			nextTo(index){
 				this.idx ++
 				if(this.idx == 3){
-					this.Gshow = false
+					this.Gshow = 4
 				}
-				
 			},
 			//申请记录
 			Application() {
@@ -175,19 +176,15 @@
 				this.household = options.value
 				this.iSidentity = true
 			},
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+		
+			
 			// 显示选择小区
 			Onshow(index) {
 				if (index == this.record.length - 2) {
 					this.iSidentity = !this.iSidentity
 				}
 				if (index == this.record.length - 1) {
-					if(this.Gshow == true){
+					if(this.Gshow == 3){
 						this.idx++
 						return;
 					}
@@ -231,7 +228,16 @@
 			},
 			// 提交
 			Submit() {
-			
+			     if(cache.get('Gshow')){
+			     	cache.set('Gshow',this.Gshow)
+			      const time = setTimeout(() => {
+			     	uni.switchTab({
+			     		url:'/pages/address/address/address'
+			     	})
+			     	clearTimeout(time)
+			      }, 2000)
+			      return;
+			     }
 				// 获取备注
 				if (this.$refs.encl.isLoding == true) return;
 				if (this.household == '') {
@@ -291,16 +297,7 @@
 							title: res.data.msg,
 							duration: 2000
 						});
-					   if(cache.get('Gshow')){
-					   	cache.set('step',true)
-					    const time = setTimeout(() => {
-					   	uni.switchTab({
-					   		url:'/pages/address/address/address'
-					   	})
-					   	clearTimeout(time)
-					    }, 2000)
-					    return;
-					   }
+					   
 						const time = setTimeout(() => {
 							uni.redirectTo({
 								url: '/pages/residence/checkRecord/checkRecord'
@@ -438,7 +435,7 @@
 								let Users = res.data.data
 								this.record[0].value = Users.username
 								this.record[1].value = Users.tel.slice(0, 3) + '****' + Users.tel.slice(7, 11)
-								if (!Users.id_card_no&&this.Gshow==false) { 
+								if (!Users.id_card_no&&!cache.get('Gshow')) { 
 									uni.showModal({
 										content: '请完善您的身份信息',
 										success: function(res) {
@@ -472,16 +469,40 @@
 		},
 		mounted() {
 			// console.log(obj);
-			this.loadVillageLists();
 			if(cache.get('Gshow')){
-				this.Gshow = true
+				this.Gshow = cache.get('Gshow')
+				this.able = true
 			}
+			this.loadVillageLists();
 		},
 		onShow() {
 			this.loadUserData()
 		},
+		onBackPress(e){
+			if(!cache.get('Gshow')) return;
+			if (e.from == 'backbutton') { 
+				uni.showModal({
+					content: '您确定要退出新手指导？您也可以到个人中心、关于快通中重新开启',
+					success: function (res) {
+						if (res.confirm) {
+							cache.forget('Gshow')
+							uni.navigateBack({
+								delta: 1
+							});
+						} else if (res.cancel) {
+							
+						}
+						
+					}
+				});
+				return true; //阻止默认返回行为
+			}
+		},
 		onLoad() {
 
+		},
+		onHide() {
+			this.Gshow = 0
 		},
 		filters: {
 

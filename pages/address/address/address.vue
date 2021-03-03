@@ -1,7 +1,7 @@
 <template>
 	<view class=" pos-rel content">
 		<subunit ref='xcoll' :retur='false' class="fled" titel="入住信息" ></subunit>
-		<view class="location" :class="Gshow == true?'locIndex':''">
+		<view class="location" :class="Gshow == 2?'locIndex':''">
 			<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg" mode=""></image>
 		</view>
 		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
@@ -12,7 +12,7 @@
 				刷新中
 			</view>
 		</view>
-		<view v-if="Gshow == true && Step == false" class="">
+		<view v-if="Gshow == 2" class="">
 			<view class="guideBox">
 				<view class="Gposr flex">
 					<view class="bai Gtext">
@@ -23,8 +23,8 @@
 			</view>
 			<image src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image>
 		</view>
-		<view v-if="Step == true && Gshow == false" class="">
-			<view @click="gotohome" class="guideBox2">
+		<view v-if="Gshow == 4" class="">
+			<view @click="gotohome"  @touchmove.stop.prevent class="guideBox2">
 				<image src="../../../image/Newguidance/ele.png" mode="" class="ele"></image>
 
 			</view>
@@ -47,7 +47,7 @@
 		},
 		props: {},
 		data() {
-			return {
+			return { 
 				text: '', //没有更多了
 				locdata: [], //数据列表
 				page: 1,
@@ -55,17 +55,22 @@
 				isLoding: false,
 				hasMore: true,
 				showPullDownRefreshIcon: false,
-				Gshow: false,
-				Step: false, //用户第二次进入页面
+				Gshow: 0,
 			}
 		},
 		methods: {
 			push() {
+				if(this.Gshow == 2){
+					cache.set('Gshow',this.Gshow + 1)
+				}
 				uni.navigateTo({
 					url: '/pages/residence/checkIn/checkIn'
 				})
 			},
 			gotohome() {
+				if(this.Gshow == 4){
+					cache.set('Gshow',this.Gshow + 1)
+				}
 				uni.switchTab({
 					url: '/pages/index/index'
 				})
@@ -107,16 +112,11 @@
 								})
 							},
 							success: (res) => {
-                                   if (cache.get('Gshow') && !cache.get('step')) {
-                                   	this.Gshow = true
-                                   } else {
-                                   	this.Gshow = false
-                                   }
-                                   if (cache.get('Gshow') && cache.get('step')) {
-                                   	this.Step = true
-                                   } else {
-                                   	this.Step = false
-                                   }
+                                   if (cache.get('Gshow')) {
+                                   	this.Gshow = cache.get('Gshow')
+                                   }else{
+									   uni.showTabBar()
+								   }   
 								this.stopRefreshIcon();
 
 								this.isLoding = false;
@@ -146,6 +146,9 @@
 						this.isLoding = false
 						this.stopRefreshIcon();
 						this.locdata = []
+						if(cache.get('Gshow')){
+							cache.set('Gshow',1)
+						}
 						uni.switchTab({
 							url:'/pages/index/index'
 						})
@@ -163,7 +166,7 @@
 			this.loadPageData()
 		},
 		onHide() {
-
+          this.Gshow = 0
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
@@ -179,6 +182,7 @@
 			if (this.isLoding == true || this.hasMore == false) return;
 			this.loadPageData()
 		},
+		
 		filters: {
 
 		},
@@ -320,6 +324,7 @@
 	.ele {
 		margin-top: 200rpx;
 		width: 100%;
+		height: 470rpx;
 	}
 
 

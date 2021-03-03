@@ -10,7 +10,7 @@
 						<view class="typeLine">
 						</view>
 						<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
-							{{item.name}}
+							{{item.name}} 
 						</view>
 					</view>
 				</view>
@@ -42,61 +42,55 @@
 			</view>
 			<!-- 操作 -->
 			<view  class="flex operation ju-between">
-				<view class="flex-d al-center pos-rel" v-for="(item,index) in localdata" @click="operation(item)" :class="guideiS==true&&index==idx?'Gitem':''" :key='item.id'>
+				<view  class="flex-d al-center pos-rel" v-for="(item,index) in localdata" @click="operation(item)" :class="Gshow == 5&&index==idx?'Gitem':''" :key='item.id'>
 					<image :src="item.image" class="itemimg" mode=""></image>
 					<view class="itemtext">
 						{{item.name}}
 					</view>
-					<view v-if="guideiS == true " class="">
-						<view v-if="idx==0" class="flex pos-abs m-ln1">
+					<view @touchmove.stop.prevent v-if="Gshow == 5" class="">
+						<view v-if="idx==0&&index==0" class="flex pos-abs m-ln1">
 							<image src="../../image/Newguidance/arrowsLU.png" class="arrowsLU" mode=""></image>
-							<view class="flex Lutext">
-								入住申请，
+							<view class=" Lutext">
+								入住申请
 								<view class="bai">
 									填写入住地址详细信息
 								</view>
 							</view>
 						</view>
-						<view v-if="idx == 1" class="m-ln2 pos-abs">
+						<view v-if="idx == 1&&index==1" class="m-ln2 pos-abs">
 							<image src="../../image/Newguidance/upward.png" class="upward" mode=""></image>
-							<view class="upText ">
-								<view class="flex al-center">
-									拜访申请，
+							<view class="upText fz-16">
+								<view class="al-center">
+									拜访申请
 									<view class="bai">
-										朋友做客等可填写信息
+										朋友做客等可填写信息，房主通过后小区大门自动识别打开
 									</view>
 								</view>
-								<view class="bai">
-									房主通过后小区大门自动识别打开
-								</view>
+								
 							</view>
 						</view>
-						<view v-if="idx == 2" class="m-ln3 pos-abs">
+						<view v-if="idx == 2&&index==2" class="m-ln3 pos-abs">
 							<image src="../../image/Newguidance/upward.png" class="upward" mode=""></image>
-							<view class="upText2 ">
-								<view class="flex al-center">
-									来访记录，
+							<view class="upText2 fz-16">
+								<view class=" al-center flex-d">
+									来访记录
 									<view class="bai">
-									可查看来访记录详细信息
+									可查看来访记录详细信息，所有亲戚朋友的来访记录都在这里！
 									</view>
 								</view>
-								<view class="bai">
-									所以亲戚 朋友的来访记录都在这里！
-								</view>
+								
 							</view>
 						</view>
-						<view class="m-ln4 pos-abs" v-if="idx==3">
+						<view class="m-ln4 pos-abs" v-if="idx==3&&index==3">
 							<image src="../../image/Newguidance/arrowsRU.png" class="arrowsLU" mode=""></image>
-							<view class="goHome flex">
+							<view class="goHome flex-d al-center">
 								<view class="">
 									回家二维码，
 									<view class="bai">
-										安全无接触
+										安全无接触，可直接扫码进入小区
 									</view>
 								</view>
-								<view class="bai">
-									可直接扫码进入小区
-								</view>
+								
 							</view>
 							<view class="lowRight">
 								<view class="bai lowT">
@@ -120,7 +114,7 @@
 			<!-- <button @click="gogo">点击</button> -->
 		</view>
 		<!-- 视频播放 -->
-		<view v-if="paly == true" @mousewheel.prevent class=" pos-abs moive flex-d al-center ju-center">
+		<view v-if="paly == true"  @touchmove.stop.prevent class=" pos-abs moive flex-d al-center ju-center">
 			<view @click="close" class="showback pos-abs">
 			</view>
 			<video :src="videoUrl" :poster='cover'></video>
@@ -136,7 +130,11 @@
 			</view>
 		</view>
 		<!-- 用户指导 -->
-		<view v-if="Gshow == true&&guideiS==false" @mousewheel.prevent class="guideBox"> 
+		<view v-if="model == 0"  @touchmove.stop.prevent class="guideBox">
+			
+		</view>
+		
+		<view v-if="Gshow == 1" @touchmove.stop.prevent class="guideBox">  
 			<view class="flex-d al-center bai guidePush">
 				添加地址
 				<image src="../../image/Newguidance/arrowsD.png" mode="" class="arrowsDimg"></image>
@@ -151,7 +149,7 @@
 			</view>
 		</view>
 
-		<view v-if="guideiS == true" @mousewheel.prevent class="">
+		<view v-if="Gshow == 5" @touchmove.stop.prevent class="">
 			<view  @click="nextT" class="guideBox">
 				<view v-if="idx == 3" class="btmbox flex ju-center">
 					<view class="addBox">
@@ -211,29 +209,27 @@
 				cover: '', //视频封面
 				showPullDownRefreshIcon: false,
 				informmsg: {}, //用户未读消息数量
-				Gshow: false, //新手指导
-				guideiS: false,
-				guideHome: [require('@/image/Newguidance/home1.png'), require('@/image/Newguidance/home2.png'), require(
-						'@/image/Newguidance/home3.png'),
-					require('@/image/Newguidance/home4.png')
-				],
+				Gshow: 0, //新手指导
 				idx: 0,
-				dynamicState:100,
+                model:0
 			}
 		},
 		onLoad(val) {
 			// console.log(val);
 		},
 		methods: {
+			
 			nextT() {
 				this.idx ++
 				if(this.idx==4) {
+					cache.set('Gshow',this.Gshow+1)
 					uni.switchTab({
 						url:'/pages/user/userCenter/userCenter'
 					})
 				}
 			},
 			GgoAdd() {
+				cache.set('Gshow',this.Gshow+1)
 				uni.switchTab({
 					url: '/pages/address/address/address'
 				})
@@ -308,7 +304,10 @@
 			},
 			// 跳转
 			operation(item) {
-				if(this.guideiS == true) return;
+				if(this.Gshow == 5) {
+					this.nextT()
+					return;
+				};
 				if (item.page) {
 					urlUtil.to({
 						pageAlias: item.page,
@@ -382,24 +381,27 @@
 		mounted() {
 			this.Chart()
 			this.operationData()
-			
 		},
 		onShow() {
-			this.idx = 0
-			if (cache.get("Gshow") && !cache.get('step')) {
-				this.Gshow = true
-			} else {
-				this.Gshow = false
-			}
-			if (cache.get("Gshow") && cache.get('step')) {
-				this.guideiS = true
-			} else {
-				this.guideiS = false
+			if(this.model == 0){
+				uni.showModal({
+					content:'我们将为您开启新手指导教程',
+					cancelText:'跳过',
+					success: (res) => {
+						if(res.confirm){
+							console.log('确定');
+						}
+						if(res.cancel){
+							console.log('跳过');
+						}
+					}
+				})
 			}
 			if (cache.get("Gshow")) {
+				this.Gshow = cache.get("Gshow") 
 				uni.hideTabBar()
-			}
-			else{
+			}  
+			else{ 
 				uni.showTabBar()
 				}
 			this.getInform()
@@ -426,29 +428,33 @@
 		},
 		onHide() {
 			this.isShowType = false
-			this.Gshow = false
+			this.Gshow = 0
+			this.idx = 0
 		}
 	}
 </script>
 
 <style>
 	.m-ln1{
-		left: 50rpx;
+		left: 0rpx;
 		top: 160rpx;
-		width: 750rpx !important;
+		width: 600rpx;
+		padding-left: 50rpx;
 	}
 	.m-ln2{
-		width: 750rpx !important;
-		left: 44rpx;
+		padding-left: 40rpx;
+		width: 350rpx;
+		left: 0rpx;
 		top: 160rpx;
 	}
 	.m-ln3{
-		width: 750rpx !important;
-		left: 40rpx;
+		width: 250rpx ;
+		padding-left: 240rpx;
+		left: -200rpx;
 		top: 160rpx;
 	}
 	.m-ln4{
-		width: 750rpx !important;
+		width: 150rpx;
 		left: -20rpx;
 		top: 160rpx;
 	}
@@ -693,7 +699,7 @@
 		width: 100%;
 		height: 100vh;
 		background: rgba(0, 0, 0, 0.75);
-		z-index: 9999;
+		z-index: 999;
 	}
 
 	.btmbox {
@@ -770,7 +776,7 @@
 	
 	.upText{
 		color:#FFD428 ;
-		margin-left: -130rpx;
+		margin-left: -40rpx;
 	}
 	
 	.upText2{
@@ -781,8 +787,9 @@
 	.goHome{
 		color:#FFD428 ;
 		position: relative;
-		left: -480rpx;
+		left: -220rpx;
 		top: -40rpx;
+		width: 240rpx;
 	}
 	
 	.lowRight{

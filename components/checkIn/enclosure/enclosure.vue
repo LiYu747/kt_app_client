@@ -38,8 +38,8 @@
 		},
 		props: {
 			Gshow: {
-				type: Boolean
-			}
+				type: Number,
+				}
 		},
 		data() {
 			return {
@@ -49,7 +49,7 @@
 		},
 		methods: {
 			succ() {
-				if(this.Gshow == true) return;
+				if (this.Gshow == 3) return;
 				uni.chooseImage({
 					extension: ['jpg', 'jpeg', 'png', 'gif'],
 					success: (chooseImageRes) => {
@@ -162,7 +162,7 @@
 	}
 
 	.showloding {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		height: 100vh;
 		top: 0;

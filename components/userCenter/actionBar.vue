@@ -30,7 +30,7 @@
 				type: Object
 			},
 			Gshow: {
-				type: Boolean
+				type: Number
 			}
 		},
 		data() {
@@ -83,7 +83,7 @@
 		methods: {
 			// 点击每一栏事件
 			add(item, index) {
-				if(this.Gshow==true) return;
+				if(this.Gshow==6) return;
 				if (!item.url) return;
 				uni.navigateTo({
 					url: item.url

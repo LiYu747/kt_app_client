@@ -4,10 +4,15 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			
 			if(!cache.get('first')){
-				cache.set('Gshow',true)
-				cache.set('first',true)
+				cache.set('Gshow',1)
 			}
+			// #ifdef APP-PLUS
+			if(cache.get('first')){
+				cache.forget('Gshow')
+			}
+			// #endif
 		},
 		onShow: function() {
 			console.log('App Show')

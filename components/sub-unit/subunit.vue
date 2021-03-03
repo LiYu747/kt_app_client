@@ -9,6 +9,7 @@
 </template>
 
 <script>
+	import cache from '../../vendor/cache/cache.js'
 	export default {
 		name: "",
 		components: {
@@ -23,16 +24,32 @@
 				type: String,
 				default: ''
 			},
-			image: {
-				type: String,
+			abel: {
+				type: Boolean,
 			}
 		},
 		data() {
 			return {}
-		},
+		}, 
 		methods: {
-			
 			goback() {
+				if(this.abel == true){
+					uni.showModal({
+						content: '您确定要退出新手指导？您也可以到个人中心、关于快通中重新开启',
+						success: function (res) {
+							if (res.confirm) {
+								uni.navigateBack({
+									delta: 1
+								});
+								cache.forget('Gshow')
+							} else if (res.cancel) {
+								
+							}
+							
+						}
+					});
+					return;
+					}
 				uni.navigateBack({
 					delta: 1
 				})

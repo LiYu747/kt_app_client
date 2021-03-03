@@ -6,11 +6,11 @@
 				个人中心
 			</view>
 		</view>
-		<view class=" location" @click="nextT" :class="Gshow==true&&idx==0?'zIndex':''" >
+		<view class=" location" @click="nextT" :class="Gshow==6&&idx==0?'zIndex':''" >
 			<image @click="install"  src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
-			<view v-if='idx==0&&Gshow==true' class="pos-abs flex staTex">
-				<view class="flex m-l3 m-r2 m-t4 setTex">
-					信息设置 ,
+			<view v-if='idx==0&&Gshow==6' class="pos-abs flex staTex">
+				<view class="flex-d al-center m-l3 m-r2 m-t4 setTex">
+					信息设置 
 					<view class="bai">
 						 修改密码以及退出登录等。
 					</view>
@@ -25,23 +25,23 @@
 			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode="" class="jximg"></image>
 		</view>
 		<!-- 头像 -->
-		<view class="flex-d al-center" >
-			<view class="pos-rel flex-d al-center"  @click="nextT" :class="idx==1?'ative':''">
-				<view @click="userinfo" class="portrait flex  ju-center pos-rel" :class="Gshow==true&&idx==1?'top0':''">
+		<view class="flex-d al-center" > 
+			<view class="pos-rel flex-d al-center"  @click="nextT" :class="idx==1&&Gshow==6?'ative':''">
+				<view @click="userinfo" class="portrait flex  ju-center pos-rel" :class="Gshow==6&&idx==1?'top0':''">
 					<image v-if="user" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
 					<image v-if='!user' src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs"
 					 mode=""></image>
 				</view>
-				<view @click="userinfo" v-if="user" class="text" :class="Gshow==true&&idx==1?'top1':''">
+				<view @click="userinfo" v-if="user" class="text" :class="Gshow==6&&idx==1?'top1':''">
 					{{user.nickname}}
-				</view>
-				<view v-else class="text">
+				</view> 
+				<view v-else class="text" >
 					{{text}}
 				</view>
-				<view v-if="idx==1" class="pos-abs infoT flex-d al-center">
+				<view v-if="idx==1&&Gshow==6" class="pos-abs infoT flex-d al-center">
 					<image src="../../../image/Newguidance/upward.png" class="upward" mode=""></image>
-					<view class="setTex flex m-t2">
-						个人信息，
+					<view class="setTex flex-d al-center m-t2">
+						个人信息
 						<view class="bai">
 							修改个人信息
 						</view>
@@ -65,7 +65,7 @@
 
 		</view>
 
-		<view @mousewheel.prevent  v-if="Gshow == true" class="">
+		<view @mousewheel.prevent   @touchmove.stop.prevent  v-if="Gshow == 6" class=""> 
 			<view @click="nextT" class="guideBox">
 				
 			</view>
@@ -92,16 +92,14 @@
 				text: '未登录',
 				flag: false,
 				informmsg: 0,
-				Gshow: false,
-				guideUser: [require('@/image/Newguidance/user1.png'), require('@/image/Newguidance/user2.png'), require(
-					'@/image/Newguidance/user3.png')],
+				Gshow: 0,
 				idx: 0
 			}
 		},
 		methods: {
 			finish() {
+				cache.set('first',true)
 				cache.forget('Gshow')
-				cache.forget('step')
 				uni.switchTab({
 					url: '/pages/index/index'
 				})
@@ -119,14 +117,14 @@
 
 			// 去设置
 			install() {
-				if(this.Gshow == true) return;
+				if(this.Gshow == 6) return;
 				uni.navigateTo({
 					url: '/pages/user/realInformation/realInformation'
 				})
 			},
 			//用户基本信息
 			userinfo() {
-				if(this.Gshow == true) return;
+				if(this.Gshow == 6) return;
 				uni.navigateTo({
 					url: '/pages/user/personal/personal'
 				})
@@ -184,20 +182,20 @@
 
 		},
 		mounted() {
-
+         
 		},
 		onLoad(val) {},
 		onShow() {
-			this.idx = 0
 			if (cache.get('Gshow')) {
-				this.Gshow = true
-			} else {
-				this.Gshow = false
-			}
-			
+				this.Gshow = cache.get('Gshow')
+			} 
 			this.getUser()
 			this.loadUserData();
 			this.getInform()
+		},
+		onHide() {
+			this.Gshow = 0
+			this.idx = 0
 		},
 		filters: {
 
@@ -401,6 +399,7 @@
 	}
 	
 	.aceZindex{
+		margin-top: -120rpx;
 		background: rgb(245, 245, 245);
 		z-index: 99999;
 	}
@@ -424,6 +423,7 @@
 		height: 80rpx;
 		border-radius: 10rpx;
 		background: rgb(240,117,53);
+		margin-bottom: 40rpx;
 	}
 	
 	.addLogo{
