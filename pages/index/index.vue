@@ -130,8 +130,8 @@
 			</view>
 		</view>
 		<!-- 用户指导 -->
-		<view v-if="model == 0"  @touchmove.stop.prevent class="guideBox">
-			
+		<view v-if="Gshow == 0"  @touchmove.stop.prevent class="guideBox">
+				<image src="../../image/Newguidance/home.png" class="addLogo" mode=""></image>
 		</view>
 		
 		<view v-if="Gshow == 1" @touchmove.stop.prevent class="guideBox">  
@@ -151,13 +151,13 @@
 
 		<view v-if="Gshow == 5" @touchmove.stop.prevent class="">
 			<view  @click="nextT" class="guideBox">
-				<view v-if="idx == 3" class="btmbox flex ju-center">
+				<view v-show="idx == 3" class="btmbox flex ju-center">
 					<view class="addBox">
 					</view>
 					<image src="../../image/Newguidance/userLogo.png" class="btmImg" mode=""></image>
 				</view>
 			</view>
-			<view class="" v-if="idx!==3">
+			<view class="" v-show="idx!==3">
 				<image src="../../image/Newguidance/home.png" class="addLogo" mode=""></image>
 			</view>
 		</view>
@@ -209,9 +209,8 @@
 				cover: '', //视频封面
 				showPullDownRefreshIcon: false,
 				informmsg: {}, //用户未读消息数量
-				Gshow: 0, //新手指导
+				Gshow: null, //新手指导
 				idx: 0,
-                model:0
 			}
 		},
 		onLoad(val) {
@@ -222,23 +221,27 @@
 			nextT() {
 				this.idx ++
 				if(this.idx==4) {
-					cache.set('Gshow',this.Gshow+1)
+					let num = this.Gshow+1
+					cache.set('Gshow',{key:'步骤'+ num,value: num})
+					this.Gshow = null
 					uni.switchTab({
 						url:'/pages/user/userCenter/userCenter'
 					})
 				}
 			},
 			GgoAdd() {
-				cache.set('Gshow',this.Gshow+1)
+				let num = this.Gshow+1
+				cache.set('Gshow',{key:'步骤'+ num,value: num})
 				uni.switchTab({
 					url: '/pages/address/address/address'
 				})
 			},
-			gogo() {
-				uni.navigateTo({
-					url: '/pages/classification/lookRoom/rentalForm'
-				})
-			},
+			// gogo() {
+				// cache.forget('first')
+				// uni.navigateTo({
+				// 	url: '/pages/classification/lookRoom/rentalForm'
+				// })
+			// },
 			// 消息通知
 			goInform() {
 				uni.navigateTo({
@@ -383,23 +386,28 @@
 			this.operationData()
 		},
 		onShow() {
-			if(this.model == 0){
+			if (cache.get("Gshow")) {
+				this.Gshow = cache.get("Gshow").value 
+					uni.hideTabBar()
+				if(this.Gshow == 0){
 				uni.showModal({
+					title:'提示',
 					content:'我们将为您开启新手指导教程',
 					cancelText:'跳过',
 					success: (res) => {
 						if(res.confirm){
-							console.log('确定');
+							this.Gshow = this.Gshow + 1
+							cache.set('Gshow',{key:'步骤'+ this.Gshow,value: this.Gshow})
 						}
 						if(res.cancel){
-							console.log('跳过');
+							cache.set('first',true)
+							cache.forget('Gshow')
+							this.Gshow = null
+							uni.showTabBar()
 						}
 					}
-				})
-			}
-			if (cache.get("Gshow")) {
-				this.Gshow = cache.get("Gshow") 
-				uni.hideTabBar()
+				})	
+				}
 			}  
 			else{ 
 				uni.showTabBar()
@@ -428,7 +436,7 @@
 		},
 		onHide() {
 			this.isShowType = false
-			this.Gshow = 0
+			this.Gshow = null
 			this.idx = 0
 		}
 	}

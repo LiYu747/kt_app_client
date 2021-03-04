@@ -153,7 +153,6 @@
 				files: [],
 				Gshow:0,
                 idx:0,
-				disb:'',
 				able:false
 			}
 		},
@@ -228,16 +227,7 @@
 			},
 			// 提交
 			Submit() {
-			     if(cache.get('Gshow')){
-			     	cache.set('Gshow',this.Gshow)
-			      const time = setTimeout(() => {
-			     	uni.switchTab({
-			     		url:'/pages/address/address/address'
-			     	})
-			     	clearTimeout(time)
-			      }, 2000)
-			      return;
-			     }
+			  
 				// 获取备注
 				if (this.$refs.encl.isLoding == true) return;
 				if (this.household == '') {
@@ -297,7 +287,19 @@
 							title: res.data.msg,
 							duration: 2000
 						});
-					   
+					    if(cache.get('Gshow')){
+					    	let num = this.Gshow
+					    	cache.set('Gshow',{key:'步骤'+ num,value: num})
+					    	 
+					     const time = setTimeout(() => {
+					    	uni.switchTab({
+					    		url:'/pages/address/address/address'
+					    	})
+					    	this.Gshow = 0  
+					    	clearTimeout(time)
+					     }, 2000)
+					     return;
+					    }
 						const time = setTimeout(() => {
 							uni.redirectTo({
 								url: '/pages/residence/checkRecord/checkRecord'
@@ -307,7 +309,6 @@
 					}),
 				})
 			},
-
 
 			loadVillageLists() {
 				let that = this;
@@ -470,7 +471,11 @@
 		mounted() {
 			// console.log(obj);
 			if(cache.get('Gshow')){
-				this.Gshow = cache.get('Gshow')
+				// #ifdef APP-PLUS
+				var page = this.$mp.page.$getAppWebview();
+				page.setStyle({ popGesture: 'none' });
+				// #endif
+				this.Gshow = cache.get('Gshow').value
 				this.able = true
 			}
 			this.loadVillageLists();
@@ -502,7 +507,6 @@
 
 		},
 		onHide() {
-			this.Gshow = 0
 		},
 		filters: {
 

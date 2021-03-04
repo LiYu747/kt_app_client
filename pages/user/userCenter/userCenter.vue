@@ -187,7 +187,7 @@
 		onLoad(val) {},
 		onShow() {
 			if (cache.get('Gshow')) {
-				this.Gshow = cache.get('Gshow')
+				this.Gshow = cache.get('Gshow').value
 			} 
 			this.getUser()
 			this.loadUserData();

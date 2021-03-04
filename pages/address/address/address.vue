@@ -21,15 +21,14 @@
 					<image src="../../../image/Newguidance/arrowsRU.png" class="arrowsRU" mode=""></image>
 				</view>
 			</view>
-			<image src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image>
 		</view>
 		<view v-if="Gshow == 4" class="">
 			<view @click="gotohome"  @touchmove.stop.prevent class="guideBox2">
 				<image src="../../../image/Newguidance/ele.png" mode="" class="ele"></image>
 
 			</view>
-			<image src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image>
 		</view>
+			<image v-show="flag == true" src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image> 
 	</view>
 </template>
 
@@ -56,21 +55,26 @@
 				hasMore: true,
 				showPullDownRefreshIcon: false,
 				Gshow: 0,
+				flag:false,
 			}
 		},
 		methods: {
 			push() {
 				if(this.Gshow == 2){
-					cache.set('Gshow',this.Gshow + 1)
+					let num = this.Gshow+1
+					cache.set('Gshow',{key:'步骤'+ num,value: num})
 				}
+				this.flag = false
 				uni.navigateTo({
 					url: '/pages/residence/checkIn/checkIn'
 				})
 			},
 			gotohome() {
 				if(this.Gshow == 4){
-					cache.set('Gshow',this.Gshow + 1)
+					let num = this.Gshow+1
+					cache.set('Gshow',{key:'步骤'+ num,value: num})
 				}
+				this.flag = false
 				uni.switchTab({
 					url: '/pages/index/index'
 				})
@@ -95,7 +99,11 @@
 					showModal: true,
 					keepSuccess: false,
 					success: () => {
-						
+						if (cache.get('Gshow')) {
+							this.Gshow = cache.get('Gshow').value
+						}else{
+							   uni.showTabBar()								
+						} 
 						this.isLoding = true
 
 						address.alladd({
@@ -112,11 +120,7 @@
 								})
 							},
 							success: (res) => {
-                                   if (cache.get('Gshow')) {
-                                   	this.Gshow = cache.get('Gshow')
-                                   }else{
-									   uni.showTabBar()
-								   }   
+                                    
 								this.stopRefreshIcon();
 
 								this.isLoding = false;
@@ -147,7 +151,7 @@
 						this.stopRefreshIcon();
 						this.locdata = []
 						if(cache.get('Gshow')){
-							cache.set('Gshow',1)
+							cache.set('Gshow',{'key':'开启',value:0})
 						}
 						uni.switchTab({
 							url:'/pages/index/index'
@@ -164,9 +168,15 @@
 		onLoad(val) {},
 		onShow() {
 			this.loadPageData()
+			if(cache.get('Gshow')){
+				this.flag = true
+			}else{
+				this.flag = false
+			}
 		},
 		onHide() {
           this.Gshow = 0
+		  this.flag = false
 		},
 		// 下拉刷新
 		onPullDownRefresh() {

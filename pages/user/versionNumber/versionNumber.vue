@@ -49,7 +49,7 @@ data () {
 	  	content:'您确定要开启新手指导',
 		success: (res) => {
 			if(res.confirm){
-				cache.set('Gshow', 1)
+				cache.set('Gshow',{'key':'开启',value:0})
 				uni.switchTab({
 					url:'/pages/index/index'
 				})
@@ -92,7 +92,7 @@ data () {
 .tabar {
 	color: #666666;
 	margin-top: 40rpx;
-    width: 100%;
+    width: 690rpx;
 	height: 80rpx;
 	padding: 0 30rpx; 
 	border-bottom: 1rpx solid #eeeeee;

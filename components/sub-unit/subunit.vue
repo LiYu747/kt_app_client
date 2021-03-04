@@ -38,10 +38,11 @@
 						content: '您确定要退出新手指导？您也可以到个人中心、关于快通中重新开启',
 						success: function (res) {
 							if (res.confirm) {
+								cache.forget('Gshow')
 								uni.navigateBack({
 									delta: 1
 								});
-								cache.forget('Gshow')
+
 							} else if (res.cancel) {
 								
 							}
