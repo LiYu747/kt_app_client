@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="fidex" titel="详情" :retur="true" @goback='goback'></subunit>
+		<subunit class="fidex" titel="详情"></subunit>
 		<view class="topline">
 
 		</view>
@@ -101,12 +101,7 @@
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+		
 			// 获取数据
 			loadPageData() {
 				uni.showLoading({

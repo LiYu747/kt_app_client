@@ -173,10 +173,7 @@
 			this.location()
 		},
 		onLoad(option) {
-			if (option.null == '') return;
-			this.goPosition = option.addressName
-			// this.golat = option.lat
-			// this.golng = option.lng
+		
 		},
 		filters: {
 

@@ -91,9 +91,6 @@
 				if (value === "") {
 					callback(new Error("请输入密码"));
 				} else {
-					if (this.form.cfmPassword !== "") {
-						this.$refs.uForm.setRules("cfmPassword");
-					}
 					callback();
 				}
 			};
@@ -195,13 +192,16 @@
 							});
 							return;
 						}
-						this.form.password = ''
-						this.form.cfmPassword = ''
-						this.form.oldPassword = ''
-						this.form.Verification = ''
+					
 						uni.showToast({
 							title: res.data.msg,
+							duration:2000
 						});
+						const setTime = setTimeout( () => {
+							    uni.navigateBack({
+							    	delta:1
+							    })
+						},2000)
 					}
 				})
 			},

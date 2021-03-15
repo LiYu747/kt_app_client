@@ -173,7 +173,7 @@
 			selectOne(options) {
 				this.record[3].value = options.label
 				this.household = options.value
-				this.iSidentity = true
+				// this.iSidentity = true
 			},
 		
 			
@@ -259,7 +259,7 @@
 						user_remark: mrak,
 						files: this.files
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
@@ -654,6 +654,7 @@
 		position: fixed;
 		color: #FFFFFF;
 		font-size: 30rpx;
+		z-index: 99;
 	}
 
 	/deep/ .u-select__body__picker-view__item[data-v-a577ac80] {

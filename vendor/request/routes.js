@@ -1,7 +1,7 @@
 //测试域名
-// let host = 'https://test.kuaitongkeji.com/'
+let host = 'https://test.kuaitongkeji.com/'
 //本地开发域名
-let host = 'http://local.kt.cn/';
+// let host = 'http://local.kt.cn/';
 // let host = 'https://api.kuaitongkeji.com/';     
 let apiPath = host + 'api/';
 
@@ -168,7 +168,9 @@ module.exports = {
 			// 申请记录
 			applerecord: apiPath + 'user/moveInApply',
 			// 记录详情
-			recordDils: apiPath + 'user/moveInApply/show'
+			recordDils: apiPath + 'user/moveInApply/show',
+			// 审核入住申请
+			audit : apiPath + 'user/moveInApply/deal'
 		},
 
 		//拜访申请Visit record

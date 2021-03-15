@@ -6,9 +6,13 @@
 		</view>
 		<view class="content">
 			<view class="postop">
-				<view class=" fied flex-d  pos-rel ju-center" v-for="(item,index) in parameter" :key='item.id' :class="{'dv':index===parameter.length-1}">
-					<u-field label-width="150" v-model="item.value" :label="item.label" :clearable=false :disabled="item.disabled">
-					</u-field>
+				<view class=" fied flex  pos-rel al-center" v-for="(item,index) in parameter" :key='item.id' :class="{'dv':index===parameter.length-1}">
+					<view class="">
+						{{item.label}}
+					</view>
+					<view class="m-l4">
+						{{item.value}}
+					</view>
 					<view class="line  pos-abs">
 					</view>
 				</view>
@@ -176,20 +180,18 @@
 
 			//查看住所内的所有成员
 			allMembers() {
-				this.isLoding = true
+				
 				address.lookMember({
 					data: {
 						id: this.id
 					},
 					fail: () => {
-						this.isLoding = false
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
-						this.isLoding = false
 						if (res.statusCode != 200) {
 							uni.showToast({
 								title: '网络出错了',
@@ -232,11 +234,11 @@
 			}
 		},
 		mounted() {
-
+            this.Userdata()
+			this.getData()
 		},
 		onShow() {
-			this.Userdata()
-			this.getData()
+			
 			this.allMembers()
 		},
 		onLoad(val) {

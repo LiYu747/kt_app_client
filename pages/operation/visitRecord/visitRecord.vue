@@ -1,10 +1,10 @@
 <template>
 	<view class="flex-d al-center">
-		<subunit class="fled" titel="来访记录" @goback='goback' :retur="true"></subunit>
+		<subunit class="fled" titel="来访记录"></subunit>
 		<view class="top">
 		</view>
 		<view v-if="lists.length > 0" class="">
-			<view class="card" v-for="(items,indexs) in lists" @click="godetails(items)" :key='items.id' >
+			<view class="card" v-for="(items,indexs) in lists" @click="godetails(items,indexs)" :key='items.id'>
 				<view class="bx1 flex al-center pos-rel">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/user.png" class="dv3" mode=""></image>
 					<view class="">
@@ -45,7 +45,7 @@
 		<view v-if='lists.length == 0 && isLoding == false' class="nono flex al-center ju-center">
 			您还没有来访记录
 		</view>
-		
+
 		<view v-show="isLoding == true&&lists.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -70,79 +70,95 @@
 		props: {},
 		data() {
 			return {
-				text: '',  //没有有更多提示
-				lists: [],  //数据列表
+				idx:0,
+				text: '', //没有有更多提示
+				lists: [], //数据列表
 				page: 1,
 				ps: 15,
-				isLoding: false,  //是否显示loding
+				isLoding: false, //是否显示loding
 				hasMore: true, //是否还有更多
 			}
 		},
 		methods: {
 			// 去详情
-			godetails(item) {
+			godetails(item,index) {
+				this.idx = index
 				uni.navigateTo({
 					url: `/pages/operation/details/details?id=${item.id}`
 				})
 			},
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
+
+			// 获取数据
+			getData() {
+				this.isLoding = true;
+				home.Visitrecord({
+					data: {
+						page: this.page,
+						pageSize: this.ps
+					},
+					fail: () => {
+						this.isLoding = false;
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+
+						this.isLoding = false;
+
+						if (res.statusCode != 200) return;
+
+						if (res.data.code != 200) return;
+
+						let data = res.data.data;
+
+						this.page = data.current_page + 1;
+						this.hasMore = data.next_page_url ? true : false;
+						data.data.map(item => {
+							item.own_visitor.tel = item.own_visitor.tel.slice(0, 3) + '****' + item.own_visitor.tel.slice(7, 11)
+						})
+						this.lists = this.lists.concat(data.data);
+
+						// console.log(this.lists);
+					},
+
 				})
 			},
-			// 获取数据
+			// 判断是否登录
 			loadPageData() {
-
-				this.isLoding = true;
-
 				jwt.doOnlyTokenValid({
 					keepSuccess: false,
 					showModal: true,
 					fail: () => {
-						this.isLoding = false;
 						uni.switchTab({
 							url: '/pages/index/index'
 						})
 					},
 					success: () => {
-						home.Visitrecord({
-							data: {
-								page: this.page,
-								pageSize: this.ps
-							},
-							fail: () => {
-								this.isLoding = false;
-								uni.showToast({
-									title: '网络错误',
-									icon: 'none'
-								})
-							},
-							success: (res) => {
-                                
-								this.isLoding = false;
-
-								if (res.statusCode != 200) return;
-
-								if (res.data.code != 200) return;
-
-								let data = res.data.data;
-
-								this.page = data.current_page + 1;
-								this.hasMore = data.next_page_url ? true : false;
-                                data.data.map(item => {
-									item.own_visitor.tel = item.own_visitor.tel.slice(0,3) + '****' +item.own_visitor.tel.slice(7,11)
-								})
-								this.lists = this.lists.concat(data.data);
-								
-								// console.log(this.lists);
-							},
-							
-						})
+						if (this.lists.length == 0) {
+							this.getData()
+						}
 					}
 				})
 
-
+			},
+			//判断用户是否进行了操作
+			userisDo() {
+				let code = this.$store.state.iSuserDO
+				if (code == 0) return;
+				let msg = ''
+				if (code== 2) {
+					msg = '已同意'
+				}
+				if (code == 3) {
+					msg = '未同意'
+				}
+				this.lists.map((item, index) => {
+					if (index == this.idx) {
+						item.verify_text = msg
+					}
+				})
 			}
 		},
 		mounted() {
@@ -152,16 +168,18 @@
 
 		},
 		onShow() {
-			this.lists = []
-			this.page = 1
 			this.loadPageData()
+			this.userisDo()
 		},
 		// 下拉触底
 		onReachBottom() {
 			this.text = '没有更多了~'
-		if (this.isLoding == true || this.hasMore == false) return;
+			if (this.isLoding == true || this.hasMore == false) return;
 			this.loadPageData();
-			
+
+		},
+		onHide() {
+			this.$store.commit('iSuserDO', 0)
 		},
 		onPullDownRefresh() {
 
@@ -267,8 +285,8 @@
 		width: 100%;
 		height: 300rpx;
 	}
-	
-	.notext{
+
+	.notext {
 		padding: 30rpx;
 		font-size: 12px;
 	}
@@ -283,7 +301,7 @@
 		padding: 20rpx 0;
 		font-size: 24rpx;
 	}
-	
+
 	.showloding {
 		position: absolute;
 		width: 100%;
@@ -291,12 +309,12 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-	
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-	
+
 	.loding {
 		width: 260rpx;
 		height: 200rpx;

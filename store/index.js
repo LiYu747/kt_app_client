@@ -8,6 +8,7 @@ export default new Vuex.Store({
 		],
 		
 		city:"四川省",
+		iSuserDO:0,
 		isDel:'',
 		isComment:'',
 		homeContent:{},
@@ -19,6 +20,10 @@ export default new Vuex.Store({
 		changeValue(state,info){
 		  	console.log(info)
 			},
+		 //判断用户是否在来访记录操作
+		 iSuserDO(state,info){
+			this.state.iSuserDO = info 
+		 },	 
 		// 判断用户是否触发删除事件
 		isDel(state,info){
 			this.state.isDel = info
@@ -38,7 +43,8 @@ export default new Vuex.Store({
 		//判断售房信息是否删除
 		 saleDel(state,info){
 			this.state.saleDel = info 
-		 }
+		 },
+		 
 	},
 	//异步
 	actions:{

@@ -176,10 +176,10 @@
 			}
 		},
 		mounted() {
-
+            this.getUserinfo()
 		},
 		onShow() {
-			this.getUserinfo()
+			
 		},
 		onLoad() {
 

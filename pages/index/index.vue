@@ -252,7 +252,7 @@
 			getInform() {
 				home.unread({
 					data: {},
-					fail: (err) => {
+					fail: () => {
 						this.stopRefreshIcon()
 						uni.showToast({
 							title: '网络出错',

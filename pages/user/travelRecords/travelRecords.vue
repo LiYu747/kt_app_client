@@ -1,13 +1,13 @@
 <template>
 	<view class="">
-		<subunit class="pos" :retur='true' @goback='goback' titel='出行记录'></subunit>
+		<subunit class="pos" titel='出行记录'></subunit>
 		<view class="line"> </view>
 		<view v-if="lists.length>0" class=" flex-d al-center">
 			<view class="item" v-for="item in lists" :key='item.id'>
 				<!-- 时间 -->
 				<view class="bx1 flex al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/time.png" class="dv3" mode=""></image>
-					{{item.open_gate_at.slice(0,16)}}
+					{{item.open_gate_at}}
 				</view>
 				<!-- 地点 -->
 				<view class="bx1 flex al-center">
@@ -30,7 +30,7 @@
 		<view class="nono flex al-center ju-center" v-if='lists.length==0&&isLoding==false'>
 			暂无出行记录
 		</view>
-		
+
 		<view v-show="isLoding == true && lists.length==0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -54,8 +54,8 @@
 		props: {},
 		data() {
 			return {
-				text: '',  //是否还有更多
-				lists: [],  //出行记录数据
+				text: '', //是否还有更多
+				lists: [], //出行记录数据
 				page: 1,
 				ps: 15,
 				isLoding: false, //是否显示loding
@@ -86,11 +86,11 @@
 								pageSize: this.ps
 
 							},
-							fail: (err) => {
+							fail: () => {
 								this.isLoding = false;
 								uni.showToast({
 									title: '网络错误',
-									icon:'none'
+									icon: 'none'
 								})
 								// console.log(err);
 							},
@@ -98,27 +98,36 @@
 
 								this.isLoding = false;
 
-								if (res.statusCode != 200) return;
+								if (res.statusCode != 200) {
+									uni.showToast({
+										title: '网络出错了',
+										icon: 'none'
+									})
+									return;
+								}
 
-								if (res.data.code != 200) return;
+								if (res.data.code != 200) {
+									uni.showToast({
+										title: res.data.msg,
+										icon: 'none'
+									})
+									return;
+								}
 
 								let data = res.data.data;
+								data.data.map(item => {
+									item.open_gate_at = item.open_gate_at.slice(0, 16)
+								})
 								this.page = data.current_page + 1;
 								this.hasMore = data.next_page_url ? true : false;
 
 								this.lists = this.lists.concat(data.data);
 							},
-							
+
 						})
 					}
 				})
 			},
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			}
 		},
 		mounted() {
 			this.loadPageData()
@@ -187,8 +196,8 @@
 	.nono {
 		height: 300rpx;
 	}
-	
-	.notext{
+
+	.notext {
 		padding: 30rpx 0;
 		font-size: 12px;
 	}
@@ -203,7 +212,7 @@
 		font-size: 24rpx;
 		padding: 20rpx 0;
 	}
-	
+
 	.showloding {
 		position: absolute;
 		width: 100%;
@@ -211,12 +220,12 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-	
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-	
+
 	.loding {
 		width: 260rpx;
 		height: 200rpx;

@@ -4,13 +4,16 @@ class url {
 	
 	route = {
 		//APP首页
-		app_home_index : '/page/index/index',
+		app_home_index : '/pages/index/index',
 		
 		// 填写入住小区申请的页面
 		apply_move_in_form : '/pages/residence/checkIn/checkIn',
 		
-		// 入住申请详情页
-		move_in_apply_detail: '/pages/residence/houseOwner/houseOwne',
+		// 用户查看入住申请详情页
+		deal_move_in_apply_detail: '/pages/residence/houseOwner/houseOwner',
+		
+		// 入住申请详细页
+		move_in_apply_detail : '/pages/residence/checkdetails/checkdetails',
 		
 		// 拜访其他人的记录列表页
 		visit_friends_log_lists : '/pages/visitapplication/newDetalis/newDetalis',

@@ -1,6 +1,6 @@
 <template>
 	<view class="flex-d al-center">
-		<subunit class="fled" titel="拜访记录" @goback='goback' :retur="true"></subunit>
+		<subunit class="fled" titel="拜访记录"></subunit>
 		<view class="top">
 		</view>
 		<view v-if="lists.length>0" class="">
@@ -29,7 +29,7 @@
 				</view>
 
 			</view>
-			<view v-show="isLoding == true&&lists.length>0" class=" flex ju-center al-center lodbox">
+			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
@@ -80,12 +80,7 @@
 					url: `/pages/visitapplication/goDetails/goDetails?id=${id}`
 				})
 			},
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+		
 			// 获取数据
 			loadPageData() {
 
@@ -134,12 +129,10 @@
 			},
 		},
 		mounted() {
-
+           this.loadPageData()
 		},
 		onShow() {
-			this.lists = []
-			this.page = 1
-			this.loadPageData()
+			
 		},
 		// 下拉加载更多
 		onReachBottom() {

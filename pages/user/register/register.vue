@@ -202,13 +202,13 @@
 					})
 					return;
 				}
-				// if( this.form.idcard == ''){
-				// 	uni.showToast({
-				// 	title:'请输入身份证',
-				// 	icon:'none'
-				// 	})
-				// 	return;
-				// }
+				if( this.photo == ''){
+					uni.showToast({
+					title:'请上传人像照片',
+					icon:'none'
+					})
+					return;
+				}
 				if (this.form.phone == '') {
 					uni.showToast({
 						title: '请输入手机号',

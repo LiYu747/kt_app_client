@@ -85,6 +85,7 @@
 		width: 100%;
 		height: 148rpx;
 		background: #F07535;
+		z-index: 99;
 	}
 
 	.nav {

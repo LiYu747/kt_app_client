@@ -1,8 +1,8 @@
 <template>
 	<view class="whole flex-d al-center">
-		<subunit titel="个人信息" @goback='goback' :retur='true'></subunit>
+		<subunit titel="个人信息" ></subunit>
 		<view @click="UploadAvatar" class="activ flex al-center ju-center">
-			<image :src="image" class="img" mode=""></image>
+			<image :src="image" class="img" mode="aspectFill"></image>
 		</view>
 		<view @click="UploadAvatar" class="text">
 			上传头像
@@ -95,12 +95,7 @@
 			} 
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+			
 			// 上传头像
 			UploadAvatar() {
 				uni.chooseImage({
@@ -112,6 +107,13 @@
 							url: route.services.file.upload, //仅为示例，非真实的接口地址
 							filePath: tempFilePaths[0],
 							name: 'file',
+							fail: () => {
+								this.isLoding = false;
+								uni.showToast({
+									title: '网络出错',
+									icon:'none'
+								});
+							},
 							success: (val) => {
 								// console.log(val);
 								this.isLoding = false;
@@ -201,11 +203,10 @@
 							return;
 						}
 						if (res.data.code != 200) {
-							this.$refs.uToast.show({
+							uni.showToast({
 								title: res.data.msg,
-								type: 'error',
-								icon: false
-							});
+								duration: 2000
+							})
 							return;
 						}
 						uni.showToast({

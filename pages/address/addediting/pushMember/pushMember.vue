@@ -86,7 +86,7 @@
 						{{item.label}}
 					</view>
 				</view>
-				<u-picker @confirm="ok" mode="time" v-model="show" :default-time='defaultTime' :params="params"></u-picker>
+				<u-picker @confirm="ok"  mode="time" v-model="show" :default-time='defaultTime' :params="params"></u-picker>
 				<view @click="showType = !showType , timeshow = false" class="flex m-t3 al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/address/blckpd.png" class="blckpdImg" mode=""></image>
 					<view class="m-l2">
@@ -106,7 +106,7 @@
 						备注
 					</view>
 					<view class="">
-						<textarea class="reArea" v-model="reValue" maxlength="10" placeholder="" />
+						<textarea class="reArea" v-model="reValue" maxlength="10" placeholder="(10字以内)" />
 						</view>
 				</view>
 				
@@ -174,7 +174,8 @@
 					}
 				],
 				result: {},
-				defaultTime:''
+				defaultTime:'',
+			
 			}
 		},
 		methods: {
@@ -187,13 +188,11 @@
 				 })
 				 return;
 				}
-			
-				
 			    uni.showModal({
 			      content:'您确定添加该用户吗',
 			      success:(res) => {
 					  if(res.cancel){
-						 uni.hideLoading()  
+						
 					  }
 			    	if(res.confirm){
 						let allow = 0

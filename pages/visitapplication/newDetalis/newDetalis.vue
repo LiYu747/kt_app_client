@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="fidex" titel="最新拜访信息" :retur="true" @goback='goback'></subunit>
+		<subunit class="fidex" titel="最新拜访信息" ></subunit>
 		<view @click="addTo" class="pos-abs move">
 			添加申请
 		</view>
@@ -57,7 +57,7 @@
 
 			</view>
 		</view>
-		<view v-show='!getmsg.info&&isLoding == false' class="onon flex al-center ju-center">
+		<view v-show='notInfo == true&&isLoding==false' class="onon flex al-center ju-center">
 			您还没有最新的拜访申请，快去 <view @click="addTo" class="apply">申请</view> 吧~
 		</view>
 		
@@ -104,7 +104,6 @@
 						value: ''
 					}
 				],
-				id: '', //传过来的id
 				val: '', // 要生成的二维码值
 				size: 300, // 二维码大小
 				unit: 'upx', // 单位
@@ -116,16 +115,13 @@
 				lv: 2, // 二维码容错级别 ， 一般不用设置，默认就行
 				onval: true, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
-				isLoding:false
+				isLoding:false,
+				notInfo:false
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+		
+		
 			// 添加
 			addTo() {
 				uni.navigateTo({
@@ -134,14 +130,13 @@
 			},
 			// 获取数据
 			loadPageData() {
-				this.isLoding = true
 				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
 					success: () => {
+						this.isLoding = true
 						home.newapply({
 							data: {
-								id: this.id
 							},
 							fail: (err) => {
 								this.isLoding = false
@@ -156,7 +151,12 @@
 
 								if (res.data.code != 200) return;
 								let data = res.data.data
-								if (!data) return;
+								if (!data) {
+									this.notInfo = true 
+									return;
+								}else {
+									this.notInfo = false
+								}
 								this.getmsg = res.data.data
 								// console.log(res.data.data);
 								this.locadata[0].value = data.info.own_host.username
@@ -192,14 +192,13 @@
 			}
 		},
 		mounted() {
-
+           
 		},
 		onShow() {
-			this.loadPageData()
+			 this.loadPageData()
 		},
 		onLoad(val) {
-			// console.log(val.id);
-			this.id = val.id
+		
 
 		},
 		filters: {
@@ -333,7 +332,7 @@
 	}
 	
 	.showloding {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		height: 100vh;
 		top: 0;

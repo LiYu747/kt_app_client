@@ -1,6 +1,6 @@
 <template>
 	<view class="flex-d al-center">
-		<subunit titel="我的二维码" :retur="true" @goback='goback'></subunit>
+		<subunit titel="我的二维码"></subunit>
 		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 		<view class="pack flex-d al-center">
 			<view class="nav flex al-center">
@@ -13,7 +13,7 @@
 					 :usingComponents="true" />
 				</view>
 			</view>
-			<view class="cortt flex al-center" @click="add">
+			<view v-if="code==200" class="cortt flex al-center" @click="add">
 				<image v-show="flag===1" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/1.png" class="img1" mode=""></image>
 				<image v-show="flag===0" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/3.png" class="img2" mode=""></image>
 				{{text}}
@@ -23,6 +23,15 @@
 				<view class="pos-abs texts bai">
 					{{timetext}}
 				</view>
+			</view>
+		</view>
+		
+		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				加载中
 			</view>
 		</view>
 	</view>
@@ -59,23 +68,15 @@
 				show: 0,
 				time: 60,
 				timetext: '有效时间:60s',
+				isLoding:false,
+				code:0
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+		
 			// 手动刷新
 			add() {
-				this.text = '刷新成功'
-				this.flag = 0
-				this.show = 0
-				this.time = 60
 				this.loadUserData()
-				// this.timetext = '有效时间:60s'
 			},
 			// 判断是否登录
 			loadUserData() {
@@ -108,20 +109,18 @@
 			},
 			// 获取二维码
 			data() {
-				uni.showLoading({
-					title: '加载中'
-				})
+				this.isLoding = true
 				home.obtaincode({
 					data: {},
-					fail: (err) => {
-						uni.hideLoading()
+					fail: () => {
+						this.isLoding = false
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
 						})
 					},
 					success: (res) => {
-						uni.hideLoading()
+						this.isLoding = false
 						// console.log(res.data.data.content);
 						if (res.statusCode != 200) {
 							uni.showToast({
@@ -138,22 +137,28 @@
 							})
 							return
 						}
+						this.code = res.data.code
 						this.val = res.data.data.content
+						this.text = '刷新成功'
+						this.flag = 0
+						this.show = 0
+						this.time = 60					
 						const time = setTimeout(() => {
 							this.text = '手动刷新'
 							this.flag = 1
 							this.countdown()
 							this.show = 1
+							clearTimeout(time)
 						}, 2000)
 					}
 				})
 			}
 		},
 		onShow() {
-			this.loadUserData()
+			
 		},
 		mounted() {
-
+            this.loadUserData()
 		},
 		onLoad() {
 
@@ -237,5 +242,25 @@
 
 	.mrl {
 		margin-right: 0;
+	}
+	
+	.showloding {
+		position: fixed;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		color: #FFFFFF;
+	}
+	
+	.loimg {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	
+	.loding {
+		width: 260rpx;
+		height: 200rpx;
+		background: rgba(88, 88, 88, 0.8);
+		border-radius: 10rpx;
 	}
 </style>

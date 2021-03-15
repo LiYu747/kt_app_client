@@ -235,7 +235,7 @@
 	}
 
 	.itemBox {
-		width: 650;
+		width: 650rpx;
 		padding: 30rpx 20rpx;
 		background: #FFFFFF;
 		margin-bottom: 30rpx;

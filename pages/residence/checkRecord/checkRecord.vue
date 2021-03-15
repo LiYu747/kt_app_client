@@ -1,6 +1,6 @@
 <template>
 	<view class="flex-d al-center">
-		<subunit class="fled" titel="申请记录" @goback='goback' :retur="true"></subunit>
+		<subunit class="fled" titel="申请记录" ></subunit>
 		<view class="top">
 		</view>
 		<view v-if="lists.length>0" class="">
@@ -83,12 +83,7 @@
 					url: `/pages/residence/checkdetails/checkdetails?id=${item.id}`
 				})
 			},
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+		
 			// 获取数据
 			loadPageData() {
 
@@ -107,7 +102,7 @@
 								pageSize: this.ps
 
 							},
-							fail: (err) => {
+							fail: () => {
 								this.isLoding = false;
 								uni.showToast({
 									title: '网络错误',
@@ -124,6 +119,7 @@
 								if (res.data.code != 200) return;
 
 								let data = res.data.data;
+								if(data.data.length == 0) return;
 								data.data.map(item => {
 									if (item.verify_status == 1) {
 										item.verify_status_text = '审核中'
@@ -146,9 +142,10 @@
 			Userdata() {
 				user.userDeta({
 					data: {},
-					fail: (err) => {
+					fail: () => {
 						uni.showToast({
-							title: err.msg
+							title: '网络出错了',
+							icon:'none'
 						})
 					},
 					success: (res) => {
@@ -164,13 +161,12 @@
 
 		},
 		mounted() {
-			
-		},
-		onShow() {
-			this.lists = []
-			this.page = 1
 			this.loadPageData()
 			this.Userdata()
+		},
+		onShow() {
+			
+			
 		},
 		// 下拉加载更多
 		onReachBottom() {
@@ -199,7 +195,7 @@
 
 <style scoped lang="scss">
 	.card {
-		margin-top: 20rpx;
+		margin-top: 30rpx;
 		width: 690rpx;
 		background: #FFFFFF;
 		color: #666666;

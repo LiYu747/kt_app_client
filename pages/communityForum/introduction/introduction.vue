@@ -2,7 +2,6 @@
 	<view class="fz-12">
 		<subunit class="fixed" titel='小区简介'></subunit>
 		<view class="line">
-
 		</view>
 		<view class="">
 			<u-swiper v-if="list.length>0" :list="list" border-radius='0' height="350"></u-swiper>
@@ -104,15 +103,18 @@
 					url: `/pages/communityForum/forumlists/forumlists?id=${this.id}`
 				})
 			},
-			// 去导航页
+			// 查看地方
 			navigation(){
-				// console.log(this.arr);
 				let addressName = this.arr.address_name
 				let lat = this.arr.lat
 				let lng = this.arr.lng
-				uni.navigateTo({
-					url:`/pages/classification/travel/travel?addressName=${addressName}&lat=${lat}&lng=${lng}`
-				})
+				   uni.openLocation({
+				            latitude: Number(this.arr.lat),
+				            longitude: Number(this.arr.lng),  
+				            success: function () {
+				                console.log('success');
+				            }
+				        });
 			},
 			// 小区公告
 			noticeData() {
@@ -120,7 +122,7 @@
 					data: {
 						village_id: this.id
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
@@ -249,7 +251,7 @@
 	}
 
 	.te2 {
-		border-bottom: 1rpx solid #BFBFBF;
+		border-bottom: 1px solid #BFBFBF;
 	}
 
 	.item {

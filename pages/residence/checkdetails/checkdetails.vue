@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit titel="详情" :retur="true" @goback='goback'></subunit>
+		<subunit titel="详情" ></subunit>
 		<view class="cont">
 			<view class="nav flex al-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
@@ -66,12 +66,7 @@
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
+			
 			
 			// 获取数据
 			loadPageData() {
@@ -82,7 +77,7 @@
 					data: {
 						id: this.id
 					},
-					fail: (err) => {
+					fail: () => {
 							uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
@@ -101,6 +96,10 @@
 						}
 						if (data.verify_status == 2) {
 							data.verify_status_text = '通过'
+						
+						}
+						if (data.verify_status == 3) {
+							data.verify_status_text = '未通过'
 						}
 						// console.log(data);
 						if(data.own_village){
@@ -120,7 +119,7 @@
 			Userdata() {
 				user.userDeta({
 					data: {},
-					fail: (err) => {
+					fail: () => {
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'

@@ -265,7 +265,7 @@
 						visitorRemark: this.text,
 						ext_img:this.images
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.hideLoading()
 
 						uni.showToast({
@@ -294,10 +294,13 @@
 							title: res.data.msg,
 							duration: 2000
 						});
-						this.images = ''
-						this.text = ''
-						this.record[3].value = ''
-						this.record[4].value = ''
+						
+						const time = setTimeout(() => {
+							uni.redirectTo({
+								url: '/pages/visitapplication/goRecord/goRecord'
+							})
+							clearTimeout(time)
+						}, 2000)
 						// console.log(res);
 					},
 
@@ -419,9 +422,7 @@
 			// 获取用户资料
 			// 判断是否登录
 			loadUserData() {
-				uni.showLoading({
-					title: '加载中...'
-				})
+				
 				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
@@ -429,14 +430,12 @@
 						user.userDeta({
 							data: {},
 							fail: (err) => {
-								uni.hideLoading()
 								uni.showToast({
 									title: '网络错误',
 									icon: 'none'
 								})
 							},
 							success: (res) => {
-								uni.hideLoading()
 								if (res.statusCode != 200) return;
 								if (res.data.code != 200) return;
 								let Users = res.data.data
@@ -475,9 +474,10 @@
 		},
 		mounted() {
 			this.loadVillageLists();
+			this.loadUserData()
 		},
 		onShow() {
-			this.loadUserData()
+			
 
 		},
 		onLoad(option) {

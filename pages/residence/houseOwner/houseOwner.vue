@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit titel="详情" :retur="true" @goback='goback'></subunit>
+		<subunit titel="详情" ></subunit>
 		<view class="cont">
 			<view class="nav flex al-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
@@ -27,8 +27,21 @@
 			<view class="tex1">
 				申请结果
 			</view>
-			<textarea v-model="result" disabled='true' class="frame">
+			<textarea v-model="result"  placeholder="您可以在这里告诉他申请结果" class="frame">
 			</textarea>
+		</view>
+		<!-- 按钮 -->
+		
+		<view v-if="text=='审核中'"  class=" flex al-center ju-around m-t4 ">
+			<view @click="pass" class="btnr flex al-center ju-center">
+				<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="btnimg" mode=""></image>
+				<view class=" pos-abs">
+					通过
+				</view>
+			</view>
+			<view @click="nopass" class="btnl flex al-center ju-center">
+				不通过
+			</view>
 		</view>
 	</view>
 </template>
@@ -66,12 +79,64 @@
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
+			// 通过
+			pass(){
+				let num = 2
+				this.operate(num)
+			},
+			// 不通过
+			nopass(){
+				let num = 3
+				this.operate(num)
+			},
+			
+			operate(status){
+				uni.showLoading({
+					title:'加载中...'
+				})
+				home.audit({
+					data:{
+						id:this.id,
+						verify_status:status,
+						verify_msg:this.result
+					},
+					fail: () => {
+							uni.hideLoading()
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						// console.log(res);
+						uni.hideLoading()
+						if (res.statusCode != 200){
+							uni.showToast({
+								title: '网络出错了',
+								icon: 'none'
+							})
+							return;
+							} 
+					
+						if (res.data.code != 200) {
+							uni.showToast({
+								title: res.data.msg,
+								icon: 'none'
+							})
+							return;
+						}
+						uni.showToast({
+							title: res.data.msg,
+							icon: 'none'
+						})
+						const time = setTimeout(() => {
+							this.loadPageData()
+							clearTimeout(time)
+						}, 1500)
+					},
 				})
 			},
+			
 			
 			// 获取数据
 			loadPageData() {
@@ -82,7 +147,7 @@
 					data: {
 						id: this.id
 					},
-					fail: (err) => {
+					fail: () => {
 							uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',
@@ -101,6 +166,9 @@
 						}
 						if (data.verify_status == 2) {
 							data.verify_status_text = '通过'
+						}
+						if (data.verify_status == 3) {
+							data.verify_status_text = '未通过'
 						}
 						// console.log(data);
 						if(data.own_village){
@@ -161,7 +229,6 @@
 <style scoped lang="scss">
 	.cont {
 		width: 710rpx;
-		height: 100rpx;
 		padding: 0 20rpx;
 	}
 
