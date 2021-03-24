@@ -600,7 +600,7 @@
 	 }
 	 
 	 .sclyseImg{
-		 width: 44rpx;
+		 width: 44rpx; 
 		 height: 44rpx;
 		 position: absolute;
 		 right: 30rpx;

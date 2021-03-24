@@ -14,36 +14,70 @@
 		<!-- tag标签 -->
 		<view v-if="flag == false" class="back">
 			<view class=" wid">
-				<u-tabs :list="tagdata" :is-scroll="true" inactive-color="#666666" active-color="#F07535" :current="current"
-				 @change="change"></u-tabs>
+				<u-tabs-swiper ref="uTabs" active-color='#F07535' :list="tagdata" :current="current" @change="tabsChange"
+				 :is-scroll="true" swiperWidth="750"></u-tabs-swiper>
+
 			</view>
 			<view class="posclassfiy flex al-center ju-center">
 				<image @click="custom" src="https://oss.kuaitongkeji.com/static/img/app/forum/classfiy.png" class="classfiyimg"
 				 mode=""></image>
 			</view>
 		</view>
-		<!-- <view class="pos-rel tagpos">
-	  	<scroll-view  scroll-x="true" class="scroll-view_H" >
-	  		<view class="tagbox flex al-center">
-	  			<view class="itemtag" 
-	  			v-for="(item,index) in tagdata" 
-	  			:key='item.id'  
-	  			@click="select(item,index)"
-	  			>
-	  				<view :class="{'itemwidth':index==tagdata.length-1,'dv':index==idx}">
-	  					{{item.name}}
-	  				</view>
-	  			</view>
-	  		</view>
-	  	</scroll-view>
-		
-	  </view> -->
-
 		<view class="lines">
 
 		</view>
 		<view v-if="flag == false" class="release">
-			<view v-if="lists.length>0" class="">
+			<swiper :current="swiperCurrent" @change="Onchange" style="height: calc(100vh - 348rpx);box-sizing: border-box;;" @transition="transition" @animationfinish="animationfinish">
+				<swiper-item class="swiper-item" v-for="(items, index) in tagdata" :key="index">
+					<scroll-view scroll-y style="height:100%;width: 100%;" @scrolltolower="onreachBottom">
+						<view class="">
+							<view class="item" @click="gotoD(item)" v-for="item in items.list" :key='item.id'>
+								<view class="flex">
+									<!-- 头像 -->
+									<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
+									<view class="name m-l1 m-t1">
+										{{item.own_user.nickname}}
+										<view class="time">
+											{{item.created_at.slice(0,16)}}
+										</view>
+									</view>
+								</view>
+								<!-- 内容 -->
+								<view class="content">
+									<view class="show">
+										{{item.title}}
+									</view>
+								</view>
+								<!-- 图片 -->
+								<view class="flex al-center m-t4">
+									<view v-for="(itemss,indexss) in item.album.slice(0,3)" :key='indexss'>
+										<image :src="itemss.url" class="items" mode="aspectFill"></image>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view v-show="Isnext == true" class="m-t2 flex ju-center al-center lodbox">
+							<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+							加载中...
+						</view>
+						<view v-if="items.text" class="flex ju-center m-t3 m-b2 fz-12">
+							{{items.text}}
+						</view>
+						<view class="nono flex al-center ju-center" v-if="items.list.length==0 && isLoding == false">
+							没有您想看类型的帖子,试试其他的吧
+						</view>
+
+                          <view class="btom">
+                          
+                          </view>
+					</scroll-view>
+				</swiper-item>
+			</swiper>
+		
+		</view>
+
+		<view v-if="flag == true" class="searchend pos-abs">
+			<view class="" v-if="lists.length>0">
 				<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
 					<view class="flex">
 						<!-- 头像 -->
@@ -68,74 +102,31 @@
 						</view>
 					</view>
 				</view>
-			</view>
-			<view v-show="isLoding == true && lists.length!=0" class="m-t2 flex ju-center al-center lodbox">
-				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-				加载中...
-			</view>
-			<view class="flex ju-center m-t3 m-b2 fz-12" v-if="hasMore == false && lists.length!=0">
-				{{text}}
-			</view>
-
-		</view>
-
-		<view class="nono flex al-center ju-center" v-if="lists.length==0 && isLoding==false && flag==false">
-			没有您想看类型的帖子,试试其他的吧
-		</view>
-		<view v-show="isLoding == true && lists.length==0" class="showloding flex al-center ju-center">
-			<view class="loding flex-d al-center ju-center">
-				<view class=" ">
-					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				<view v-show="isLoding == true" class="m-t3 m-b2 flex ju-center al-center lodbox">
+					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+					加载中...
 				</view>
-				加载中
-			</view>
-		</view>
-
-		<view class="btom">
-
-		</view>
-
-		<view v-if="flag == true" class="searchend pos-abs">
-			<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
-				<view class="flex">
-					<!-- 头像 -->
-					<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
-					<view class="name m-l1 m-t1">
-						{{item.own_user.nickname}}
-						<view class="time">
-							{{item.created_at.slice(0,16)}}
-						</view>
-					</view>
+				<view v-if="hasMore == false" class="flex ju-center m-t3 m-b2 fz-12" >
+					{{text}}
 				</view>
-				<!-- 内容 -->
-				<view class="content">
-					<view class="show">
-						{{item.title}}
-					</view>
-				</view>
-				<!-- 图片 -->
-				<view class="flex al-center m-t4">
-					<view v-for="(items,indexs) in item.album.slice(0,3)" :key='indexs'>
-						<image :src="items.url" class="items" mode="aspectFill"></image>
-					</view>
-				</view>
+				
 			</view>
-			<view v-show="isLoding == true && lists.length!=0" class="m-t2 flex ju-center al-center lodbox">
-				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-				加载中...
-			</view>
-			<view class="flex ju-center m-t3 m-b2 fz-12" v-if="hasMore == false && lists.length!=0">
-				{{text}}
-			</view>
-			<view class="btoms">
-
-			</view>
-			<view class="nono flex al-center ju-center" v-if="lists.length==0&&isLoding==false">
+			<view v-if="isLoding == false && lists.length==0" class="nono flex al-center ju-center" >
 				没有您搜索的帖子哦~
 			</view>
+			<view class="btoms">
+			
+			</view>
 		</view>
 
-
+         <view v-show="isLoding == true && lists.length == 0" class="showloding flex al-center ju-center">
+         	<view class="loding flex-d al-center ju-center">
+         		<view class=" ">
+         			<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+         		</view>
+         		加载中
+         	</view>
+         </view>
 		<subbotn :ids='id'></subbotn>
 	</view>
 </template>
@@ -157,133 +148,91 @@
 		data() {
 			return {
 				id: '', //传的id
-				lists: [], //数据列表
-				page: 1,
-				ps: 15,
-				isLoding: false,
-				hasMore: true,
-				text: '', //没有更多的提示
-				value: '',
-				keyword: '',
 				flag: false, //判断有没有搜索结果
 				tagdata: [],
 				idx: 0, //选择类型
 				selectID: '', //选择的id
-				current: 0
+				current: 0, // tabs组件的current值，表示当前活动的tab选项
+				swiperCurrent: 0, // swiper组件的current值，表示当前那个swiper-item是活动的
+				page: 1,
+				ps: 15,
+				isLoding: false,
+				Isnext: false,
+				//搜索
+				lists: [], //数据列表
+				text: '', //没有更多的提示
+				value: '',
+				hasMore : true
 			}
 		},
 		methods: {
-			change(index) {
-				this.current = index;
-				this.selectID = this.tagdata[index].id
-				this.text = ''
-				this.page = 1
-				this.lists = []
-				this.loadPageData()
+			//滑动切换
+			Onchange(e) {
+				let current = e.detail.current;
+				this.idx = e.detail.current
+				if (this.tagdata[current].list.length > 0) return;
+				this.loadPageData(this.tagdata[current].id, current)
+			},
+			// tabs通知swiper切换
+			tabsChange(index) {
+				this.swiperCurrent = index;
+			},
+			// swiper-item左右移动，通知tabs的滑块跟随移动
+			transition(e) {
 
+				let dx = e.detail.dx;
+				this.$refs.uTabs.setDx(dx);
 			},
-			// // 选择类型
-			// select(item, index) {
-			// 	this.idx = index
-			// 	this.selectID = item.id
-			// 	this.text = ''
-			// 	this.page = 1
-			// 	this.lists = []
-			// 	this.loadPageData()
-			// },
-			//搜索
-			confirm() {
-				this.keyword = this.value
-				this.page = 1
-				this.lists = []
-				this.selectID = ''
-				this.text = ''
-				this.loadPageData()
-				this.flag = true
-			},
-			// 清空
-			empty() {
-				this.value = ''
-				this.keyword = ''
-				this.flag = false
-				this.text = ''
-				this.page = 1
-				this.selectID = this.tagdata[this.current].id
-				this.lists = []
-				this.loadPageData()
-			},
-			// 取消
-			remove() {
-				uni.hideKeyboard()
-			},
-
-			// 自定义tabar标签
-			custom() {
-				uni.navigateTo({
-					url: '/pages/communityForum/forumlists/customTarbar/customTarbar'
-				})
+			// 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
+			// swiper滑动结束，分别设置tabs和swiper的状态
+			animationfinish(e) {
+				let current = e.detail.current;
+				this.$refs.uTabs.setFinishCurrent(current);
+				this.swiperCurrent = current;
+				this.current = current;
 			},
 
 			// 获取数据
-			loadPageData() {
-
-				this.isLoding = true;
-
-				jwt.doOnlyTokenValid({
-					keepSuccess: false,
-					showModal: true,
+			loadPageData(id, idx) {
+				this.isLoding = true
+				village.communityPost({
+					data: {
+						villageId: this.id,
+						tribune_cat: id,
+						kw: this.keyword,
+						page: this.page,
+						pageSize: this.ps
+					},
 					fail: () => {
-						this.isLoding = false;
-						uni.navigateBack({
-							delta: 1
+						this.isLoding = false
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
 						})
 					},
-					success: () => {
-						village.communityPost({
-							data: {
-								villageId: this.id,
-								tribune_cat: this.selectID,
-								kw: this.keyword,
-								page: this.page,
-								pageSize: this.ps
-							},
-							fail: (err) => {
-								this.isLoding = false;
-								// console.log(err);
-								uni.showToast({
-									title: '网络错误',
-									icon: 'none'
-								})
-							},
-							success: (res) => {
-								// console.log(res);
-								this.isLoding = false;
+					success: (res) => {
+						this.isLoding = false
+						if (res.statusCode != 200) return;
 
-								if (res.statusCode != 200) return;
-
-								if (res.data.code != 200) return;
-
-								let data = res.data.data;
-
-								this.page = data.current_page + 1;
-								this.hasMore = data.next_page_url ? true : false;
-
-								this.lists = this.lists.concat(data.data);
-							},
-
+						if (res.data.code != 200) return;
+						let data = res.data.data;
+						data.data.map(item => {
+							item.created_at = item.created_at.slice(0, 16)
+							item.album = item.album.slice(0, 3)
 						})
+						this.tagdata.map((item, index) => {
+							if (index == idx) {
+								item.list = data.data
+								item.page = data.current_page + 1
+								item.hasMore = data.next_page_url ? true : false
+							}
+						})
+
 					}
-				})
-			},
 
-			// 去详情
-			gotoD(item) {
-				// console.log(item.id);
-				uni.navigateTo({
-					url: `/components/forum/forumdils?id=${item.id}`
 				})
-			},
 
+			},
 			//获取默认栏目列表
 			grtColumn() {
 				village.DefaultColumnList({
@@ -297,31 +246,165 @@
 					success: (res) => {
 						if (res.statusCode != 200) return;
 						if (res.data.code != 200) return;
-
-						this.tagdata = res.data.data
 						// console.log(this.tagdata );
-						this.selectID = res.data.data[0].id
-						this.loadPageData()
+						res.data.data.map(item => {
+							item.list = []
+							item.hasMore = false
+							item.page = 1
+							item.text = null
+							item.nono = null
+						})
+						this.tagdata = res.data.data
+						this.loadPageData(res.data.data[this.idx].id, this.idx)
+					}
+				})
+			},
+			// scroll-view到底部加载更多
+			onreachBottom() {
+				let idx = this.idx
+				if (this.isLoding == true || this.Isnext == true) return;
+				if (this.tagdata[idx].hasMore == false) {
+					this.tagdata.map((item, index) => {
+						if (idx == index) {
+							item.text = '没有更多了'
+						}
+					})
+					return;
+				}
+				this.Isnext = true
+				village.communityPost({
+					data: {
+						villageId: this.id,
+						tribune_cat: this.tagdata[idx].id,
+						page: this.tagdata[idx].page,
+						pageSize: this.ps
+					},
+					fail: () => {
+						this.Isnext = false
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						this.Isnext = false
+						if (res.statusCode != 200) return;
+
+						if (res.data.code != 200) return;
+
+						let data = res.data.data;
+						data.data.map(item => {
+							item.created_at = item.created_at.slice(0, 16)
+							item.album = item.album.slice(0, 3)
+						})
+						this.tagdata.map((item, index) => {
+							if (index == idx) {
+								item.list = item.list.concat(data.data)
+								item.page = data.current_page + 1
+								item.hasMore = data.next_page_url ? true : false
+							}
+						})
+					},
+
+				})
+			},
+			// 去详情
+			gotoD(item) {
+				// console.log(item.id);
+				uni.navigateTo({
+					url: `/components/forum/forumdils?id=${item.id}`
+				})
+			},
+			//搜索
+			confirm() {
+			if (this.value == '') return;
+			    this.page = 1
+				this.text = ''
+			    this.lists = []
+				this.flag = true
+				this.search()
+			},
+			// 清空
+			empty() {
+				this.value = ''
+				this.flag = false
+				this.text = ''
+				this.page = 1
+			},
+			
+			// 搜索
+			search() {
+				this.isLoding = true
+				village.communityPost({
+					data: {
+						villageId: this.id,
+						kw: this.value,
+						page: this.page,
+						pageSize: this.ps
+					},
+					fail: (err) => {
+						this.isLoding = false
+						uni.showToast({
+							title: '网络错误',
+							icon: 'none'
+						})
+					},
+					success: (res) => {
+						this.isLoding = false
+						if (res.statusCode != 200) return;
+			
+						if (res.data.code != 200) return;
+						let data = res.data.data;
+						this.hasMore = data.next_page_url ? true : false;
+						this.page = data.current_page + 1
+						this.lists  = this.lists.concat(data.data)
+					},
+				})
+			},
+			// 取消
+			remove() {
+				uni.hideKeyboard()
+			},
+
+			// 自定义tabar标签
+			custom() {
+				uni.navigateTo({
+					url: '/pages/communityForum/forumlists/customTarbar/customTarbar'
+				})
+			},
+			iSlogin() {
+				jwt.doOnlyTokenValid({
+					keepSuccess: false,
+					showModal: true,
+					fail: () => {
+						uni.navigateBack({
+							delta: 1
+						})
+					},
+					success: () => {
+
 					}
 				})
 			}
 		},
 		mounted() {
-			// this.lists = []
-			// this.page = 1
+			this.grtColumn()
 		},
 		onLoad(val) {
+			if (!val.id) return;
 			this.id = val.id
 		},
 		// 下拉更多
 		onReachBottom() {
-			this.text = '没有更多了~'
-			if (this.isLoding == true || this.hasMore == false) return;
-			this.loadPageData()
+		  this.text = '没有更多了'
+		 if (this.isLoding == true || this.hasMore == false) return;
+		 this.search();
+		},
+		onHide() {
 
 		},
 		onShow() {
-			this.grtColumn()
+			this.iSlogin()
 		},
 
 		filters: {
@@ -442,6 +525,7 @@
 
 	.nono {
 		height: 300rpx;
+		color: #CCCCCC;
 	}
 
 	.lodimg {
@@ -600,6 +684,6 @@
 	}
 
 	.btoms {
-		height: 120rpx;
+		height: 130rpx;
 	}
 </style>

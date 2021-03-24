@@ -152,7 +152,7 @@
 				})
 			},
 
-			auditreq() {
+			auditreq(text) {
 				uni.showLoading({
 					title: '加载中'
 				})
@@ -188,6 +188,7 @@
 						uni.showToast({
 							title: res.data.msg
 						})
+						this.$store.commit('checkIspass',text)
 						const time = setTimeout(() => {
 							this.getData()
 							clearTimeout(time)
@@ -198,12 +199,12 @@
 			// 通过
 			pass() {
 				this.verify_status = '2'
-				this.auditreq()
+				this.auditreq('已通过')
 			},
 			//不通过
 			nopass() {
 				this.verify_status = '3'
-				this.auditreq()
+				this.auditreq('未通过')
 			}
 		},
 		mounted() {

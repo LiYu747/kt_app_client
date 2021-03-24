@@ -14,6 +14,7 @@ export default new Vuex.Store({
 		homeContent:{},
 		roomisDel:'',
 		saleDel:'',
+		checkIspass:''
 	},
 	// 同步更改值
 	mutations:{
@@ -44,7 +45,11 @@ export default new Vuex.Store({
 		 saleDel(state,info){
 			this.state.saleDel = info 
 		 },
-		 
+		 // 判断入住信息或帖子物业是否通过
+		 checkIspass(state,info){
+			this.state.checkIspass = info  
+		 },
+	
 	},
 	//异步
 	actions:{

@@ -252,8 +252,8 @@
 	}
 	
 	.sjxlIcon {
-		width: 28rpx;
-		height: 16rpx;
+		width: 34rpx;
+		height: 22rpx;
 		margin-left: 28rpx;
 	}
 	

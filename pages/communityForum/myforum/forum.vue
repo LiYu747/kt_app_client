@@ -100,7 +100,7 @@
 				</scroll-view>
 			</view>
 
-			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+			<view v-show="isLoding == true&&lists.length==0&&data1.length==0" class="showloding flex al-center ju-center">
 				<view class="loding flex-d al-center ju-center">
 					<view class=" ">
 						<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
@@ -145,14 +145,12 @@
 				text: '',
 				isLoding: false, //是否显示loding
 				hasMore: true, //是否还有更多
-				code: 1,
 				data1: [], //我参与的
 				page1: 1,
 				pageSize1: 15,
 				text1: '',
 				isLoding1: false, //是否显示loding
 				hasMore1: true, //是否还有更多
-				code1: 1,
 				clientX: '',
 				goindex: '', //查看哪一项的index
 			}
@@ -212,7 +210,6 @@
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;
-						this.code = res.data.code
 						let data = res.data.data;
 						this.page = data.current_page + 1;
 						this.hasMore = data.next_page_url ? true : false;
@@ -484,7 +481,8 @@
 	}
 
 	.nono {
-		margin-top: 50rpx;
+		  position: relative;
+		  top: 50rpx;
 	}
 
 	.lodimg {

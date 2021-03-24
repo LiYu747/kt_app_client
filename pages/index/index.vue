@@ -237,10 +237,9 @@
 				})
 			},
 			// gogo() {
-				// cache.forget('first')
-				// uni.navigateTo({
-				// 	url: '/pages/classification/lookRoom/rentalForm'
-				// })
+			// 	uni.navigateTo({
+			// 		url: '/components/forum/setting/lianx'
+			// 	})
 			// },
 			// 消息通知
 			goInform() {
@@ -637,8 +636,8 @@
 	}
 
 	.sjxlIcon {
-		width: 28rpx;
-		height: 16rpx;
+		width: 34rpx;
+		height: 22rpx;
 		margin-left: 28rpx;
 	}
 

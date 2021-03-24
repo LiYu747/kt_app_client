@@ -1,19 +1,19 @@
 <template>
 	<view class="">
 		<subunit :retur='false' titel='快递 外卖'></subunit>
-			<view class="userSelection pos-abs">
-				<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon"
-				 mode=""></image>
-				<view v-show="isShowType == true" class="typeBox flex-d al-center">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
-					<view class="typeLine">
-					</view>
-					<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
-						{{item.name}}
-					</view>
+		<view class="userSelection pos-abs">
+			<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon"
+			 mode=""></image>
+			<view v-show="isShowType == true" class="typeBox flex-d al-center">
+				<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
+				<view class="typeLine">
+				</view>
+				<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
+					{{item.name}}
 				</view>
 			</view>
-			<view v-if="code==200" class="">
+		</view>
+		<view v-if="code==200" class="">
 			<view class="contenBox flex">
 				<!-- 左边 -->
 				<view class="">
@@ -42,25 +42,25 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view @click="navigation" class=" flex ju-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/userMessenger/path.png" class="pathImg" mode=""></image>
 			</view>
 		</view>
-		
+
 		<view class="flex-d al-center nointo" v-if="code==403">
-		<view class="">
+			<view class="">
 				您还没有申请成为外卖或者快递员
-		</view>
-		<view @click="ApplyingTo" class="m-t2 gointo">
-			去申请成为
-		</view>
-		   <view class="m-t4 flex al-center">
-		   	若您已申请
-			<view class="m-l2 gointo" @click="application">
-				去查看申请进度
 			</view>
-		   </view>
+			<view @click="ApplyingTo" class="m-t2 gointo">
+				去申请成为
+			</view>
+			<view class="m-t4 flex al-center">
+				若您已申请
+				<view class="m-l2 gointo" @click="application">
+					去查看申请进度
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -93,12 +93,12 @@
 					}
 				],
 				isShowType: false,
-				code:''
+				code: 0
 			}
 		},
 		methods: {
 			//申请进度
-			application(){
+			application() {
 				uni.navigateTo({
 					url: '/pages/userMessenger/applyingTo/applyingRecord/applyingRecord'
 				})
@@ -116,13 +116,13 @@
 				})
 			},
 			// 我都信息
-			myInfo(){
+			myInfo() {
 				uni.navigateTo({
-					url:'/pages/userMessenger/applyingTo/myInformation/myInformation'
+					url: '/pages/userMessenger/applyingTo/myInformation/myInformation'
 				})
 			},
-				
-			// 申请进入
+
+			// 申请成为
 			ApplyingTo() {
 				uni.navigateTo({
 					url: '/pages/userMessenger/applyingTo/applyingTo'
@@ -135,7 +135,7 @@
 				})
 			},
 			// 路线导航
-			navigation(){
+			navigation() {
 				uni.navigateTo({
 					url: '/pages/classification/travel/travel'
 				})
@@ -143,16 +143,16 @@
 			// 获取信息
 			getData() {
 				uni.showLoading({
-					title:'加载中'
+					title: '加载中'
 				})
 				home.lookMymsg({
 					data: {},
 					fail: () => {
 						uni.hideLoading()
-			            uni.showToast({
-			            	title: '网络错误',
-			            	icon: "none"
-			            })
+						uni.showToast({
+							title: '网络错误',
+							icon: "none"
+						})
 					},
 					success: (res) => {
 						uni.hideLoading()
@@ -163,7 +163,7 @@
 							})
 							return;
 						}
-						if(res.data.code != 200 && res.data.code != 403){
+						if (res.data.code != 200 && res.data.code != 403) {
 							uni.showToast({
 								title: res.data.msg,
 								icon: "none"
@@ -177,10 +177,10 @@
 
 		},
 		onShow() {
-			this.getData()
+
 		},
 		mounted() {
-
+			this.getData()
 		},
 		onLoad() {
 
@@ -210,8 +210,8 @@
 	}
 
 	.sjxlIcon {
-		width: 28rpx;
-		height: 16rpx;
+		width: 34rpx;
+		height: 22rpx;
 		margin-left: 28rpx;
 	}
 
@@ -281,20 +281,20 @@
 		width: 335rpx;
 		height: 200rpx;
 	}
-	
-	.pathImg{
+
+	.pathImg {
 		margin-top: -20rpx;
 		width: 690rpx;
 		height: 200rpx;
 	}
-	
-	.nointo{
+
+	.nointo {
 		margin-top: 50rpx;
 		color: #666666;
-		}
-		
-	.gointo{
+	}
+
+	.gointo {
 		color: #01AAED;
 		// text-decoration:underline;
-	}	
+	}
 </style>

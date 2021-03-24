@@ -7,40 +7,41 @@
 				<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
 			</view>
 		</view>
-		<view v-show="xlshow==true" class="xlshow ">
-			<view class="itemLabel flex al-center ju-center" @click="select(item,index)" :class="{'back':index==idx}" v-for="(item,index) in condition" :key='item.id'>
+		<view v-show="xlshow==true" class="xlshow flex-d al-center">
+			<view class="itemLabel flex al-center ju-center" @click="select(item,index)" :class="{'back':index==idx}" v-for="(item,index) in condition"
+			 :key='item.id'>
 				{{item.label}}
 			</view>
 		</view>
 		<view class="topLine"></view>
 		<view v-if="lists.length>0" class="flex-d al-center">
-			<view class="itemBox" @click="goDetails(item)" v-for="item in lists" :key='item.id'>
-                   <view class="layoutBox flex al-center ju-between">
-                   	标题 : {{item.title}}
+			<view class="itemBox" @click="goDetails(item,index)" v-for="(item,index) in lists" :key='item.id'>
+				<view class="layoutBox flex al-center ju-between">
+					标题 : {{item.title}}
 					<view :class="item.verify_status_text=='通过审核'?'dv':'nodv'">
 						{{item.verify_status_text}} >
 					</view>
-                   </view>
-				   <view class="layoutBox">
-				   	发布时间 : {{item.created_at}}
-				   </view>
+				</view>
+				<view class="layoutBox">
+					发布时间 : {{item.created_at}}
+				</view>
 			</view>
 		</view>
-		
+
 		<view v-if="lists.length==0&&isLoading==false&&falg==false" class="noPost flex ju-center">
 			暂时还没有发布的帖子
 		</view>
 		<view v-if="lists.length==0&&isLoading==false&&falg == true" class="noPost flex ju-center">
 			没有您要看的帖子
 		</view>
-		
+
 		<view v-if="hasMore==false" class="bomLine flex ju-center al-center">
 			{{noText}}
 		</view>
-        <view v-show="isLoading == true && lists.length>0" class=" flex ju-center al-center lodbox">
-        	<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-        	加载中...
-        </view>
+		<view v-show="isLoading == true && lists.length>0" class=" flex ju-center al-center lodbox">
+			<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+			加载中...
+		</view>
 		<view v-show="isLoading == true && lists.length == 0" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -49,7 +50,7 @@
 				加载中
 			</view>
 		</view>
-		
+
 	</view>
 </template>
 
@@ -64,38 +65,39 @@
 		props: {},
 		data() {
 			return {
-				xlshow:false,
-				falg:false, //判断筛选结果
-				idx:0,
-				noText:'',
+				xlshow: false,
+				falg: false, //判断筛选结果
+				idx: 0,
+				noText: '',
 				page: 1,
 				pageSize: 15,
-				status:'',//筛选条件
+				status: '', //筛选条件
 				isLoading: false,
 				hasMore: true,
 				lists: [],
-				condition:[{
-					label:'全部',
-					status:''
-				},
-				{
-					label:'待审核',
-					status:'0'
-				},
-				{
-					label:'已通过',
-					status:'1'
-				},
-				{
-					label:'未通过',
-					status:'2'
-				},
-				]
+				condition: [{
+						label: '全部',
+						status: ''
+					},
+					{
+						label: '待审核',
+						status: '0'
+					},
+					{
+						label: '已通过',
+						status: '1'
+					},
+					{
+						label: '未通过',
+						status: '2'
+					},
+				],
+				index1: 0
 			}
 		},
 		methods: {
 			// 筛选
-			select(item,index){
+			select(item, index) {
 				this.idx = index
 				this.xlshow = false
 				this.falg = true
@@ -106,11 +108,12 @@
 				this.getData()
 			},
 			// 去帖子详情
-			goDetails(item){
+			goDetails(item, index) {
+				this.index1 = index
 				uni.navigateTo({
-					url:'/pages/propertyManagement/postManagement/postDetails/postDetails?id=' + item.id
+					url: '/pages/propertyManagement/postManagement/postDetails/postDetails?id=' + item.id
 				})
-				
+
 			},
 			// 获取数据
 			getData() {
@@ -119,7 +122,7 @@
 					data: {
 						page: this.page,
 						pageSize: this.pageSize,
-						verify_status:this.status
+						verify_status: this.status
 					},
 					fail: () => {
 						this.isLoading = false
@@ -154,7 +157,7 @@
 							this.page = data.current_page + 1;
 							this.hasMore = data.next_page_url ? true : false;
 							data.data.map(item => {
-								item.created_at = item.created_at.slice(0,16)
+								item.created_at = item.created_at.slice(0, 16)
 							})
 							this.lists = this.lists.concat(data.data)
 						} else {
@@ -168,21 +171,27 @@
 			}
 		},
 		mounted() {
+			this.getData()
 		},
 		onShow() {
-			this.page = 1
-			this.lists = []
-			this.noText=''
-			this.getData()
+			if (!this.$store.state.checkIspass) return;
+			this.lists.map((item, index) => {
+				if (index == this.index1) {
+					item.verify_status_text = this.$store.state.checkIspass
+				}
+			})
 		},
 		onLoad() {
 
+		},
+		onHide() {
+			this.$store.commit('checkIspass', '')
 		},
 		onReachBottom() {
 			this.noText = '没有更多了'
 			if (this.isLoding == true || this.hasMore == false) return;
 			this.getData()
-			
+
 		},
 		filters: {
 
@@ -208,6 +217,7 @@
 	.topLine {
 		height: 148rpx;
 	}
+
 	.searchBox {
 		position: fixed;
 		top: 84rpx;
@@ -216,8 +226,8 @@
 		font-size: 16px;
 		z-index: 9;
 	}
-	
-	.xlshow{
+
+	.xlshow {
 		position: fixed;
 		width: 160rpx;
 		background: #FFFFFF;
@@ -228,60 +238,60 @@
 		padding-bottom: 30rpx;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
 	}
-	
-	.itemLabel{
+
+	.itemLabel {
 		font-size: 14px;
 		color: #666666;
 		margin-top: 20rpx;
 	}
-	
-	.back{
-		width: 100%;
+
+	.back {
+		width: 90%;
 		background: #F07535;
 		color: #FFFFFF;
 	}
-	
+
 	.pullDown {
 		width: 20rpx;
 		height: 12rpx;
 		margin-left: 10rpx;
 	}
-	
-	
-	.itemBox{
+
+
+	.itemBox {
 		margin-top: 30rpx;
 		width: 650rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		padding:  20rpx;
+		padding: 20rpx;
 		font-size: 14px;
 		padding-bottom: 50rpx;
 		color: #666666;
 		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
 	}
-	
-	.layoutBox{
+
+	.layoutBox {
 		width: 100%;
 		height: 80rpx;
 		border-bottom: 1px solid #CCCCCC;
 		display: flex;
 		align-items: center;
 	}
-	
-	.dv{
+
+	.dv {
 		color: #23D400;
 	}
-	
-	.nodv{
+
+	.nodv {
 		color: #F07535;
 	}
-	
-	.noPost{
+
+	.noPost {
 		font-size: 14px;
 		color: #666666;
 		margin-top: 100rpx;
 	}
-	
+
 	.bomLine {
 		font-size: 12px;
 		padding: 30rpx 0;
@@ -294,7 +304,8 @@
 		top: 0;
 		color: #FFFFFF;
 	}
-.lodimg {
+
+	.lodimg {
 		width: 30rpx;
 		height: 30rpx;
 		margin-right: 20rpx;
@@ -304,6 +315,7 @@
 		padding: 20rpx 0;
 		font-size: 24rpx;
 	}
+
 	.loimg {
 		width: 50rpx;
 		height: 50rpx;
@@ -316,7 +328,8 @@
 		background: rgba(88, 88, 88, 0.8);
 		border-radius: 10rpx;
 	}
-	.bomLine{
+
+	.bomLine {
 		height: 50rpx;
 	}
 </style>

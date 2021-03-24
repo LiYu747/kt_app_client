@@ -61,7 +61,7 @@
 						url: '/pages/user/travelRecords/travelRecords'
 					},
 					{
-						image: require("@/image/lookroom/zoom.png"),
+						image: "https://oss.kuaitongkeji.com/static/img/app/lookroom/zoom.png",
 						titel: '房屋租售',
 						url: '/pages/classification/lookRoom/rentAndsale/rentAndsale'
 					},

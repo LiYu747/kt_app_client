@@ -162,7 +162,7 @@
 						page: this.page,
 						pageSize:this.pageSize
 					},
-					fail: (err) => {
+					fail: () => {
 						this.isLoding = false;
 						uni.showToast({
 							title: '网络错误',
@@ -210,7 +210,7 @@
 						tribune_id: this.id,
 						content: this.context
 					},
-					fail: (err) => {
+					fail: () => {
 						uni.hideLoading()
 						uni.showToast({
 							title: '网络错误',

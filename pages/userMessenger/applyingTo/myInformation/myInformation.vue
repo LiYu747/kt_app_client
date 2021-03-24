@@ -41,15 +41,15 @@
 				files:[],
 				locdata: [{
 						label: '申请平台',
-						value: '美团'
+						value: ''
 					},
 					{
 						label: '申请编号',
-						value: '123456'
+						value: ''
 					},
 					{
 						label: '申请时间',
-						value: '2020-4-15'
+						value: ''
 					},
 				]
 			}

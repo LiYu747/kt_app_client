@@ -17,7 +17,8 @@
 			</view>
 			<!-- 我的出租 -->
 			<view v-show='idx===0' class="release">
-				<scroll-view scroll-y style="height: calc(100vh - 240rpx);;width: 100%;" @scrolltolower="onreachBottom1">
+				<scroll-view scroll-y style="height: calc(100vh - 240rpx);;width: 100%;" refresher-enabled='true'
+				 @refresherrefresh='fresh' :refresher-triggered='isPull'   @scrolltolower="onreachBottom1">
 					<view v-if="lists.length>0" class="flex-d al-center">
 						<view class="item m-t3 flex" @click="gotoD(item,index)" v-for="(item,index) in lists" :key='item.id'>
 							<image :src="item.faceimg" class="itemImg" mode="aspectFill"></image>
@@ -65,7 +66,8 @@
 
 			<!-- 我的卖房 -->
 			<view v-show="idx===1" class="release">
-				<scroll-view scroll-y style="height: calc(100vh - 240rpx);;width: 100%" @scrolltolower="onreachBottom2">
+				<scroll-view scroll-y style="height: calc(100vh - 240rpx);;width: 100%" 
+			refresher-enabled='true'  @refresherrefresh='fresh' :refresher-triggered='isPull'  	@scrolltolower="onreachBottom2">
 					<view class="flex-d al-center" v-if="data1.length>0">
 						<view class="item m-t3 flex" @click="reply(item,index)" v-for="(item,index) in data1" :key='index'>
 							<image :src="item.faceimg" class="itemImg" mode="aspectFill"></image>
@@ -146,7 +148,6 @@
 				text: '',
 				isLoding: false, //是否显示loding
 				hasMore: true, //是否还有更多
-				code: 1,
 				data1: [], //我参与的
 				page1: 1,
 				pageSize1: 15,
@@ -156,6 +157,7 @@
 				clientX: '',
 				index1:'',//租房看的哪一项
 				index2:'',//售房看的哪一项
+				isPull : '',
 			}
 		},
 
@@ -163,18 +165,33 @@
 			add(item, index) {
 				this.idx = index
 			},
-			
+			 
+			 // 下拉刷新
+			 fresh(){
+					var that = this;
+					if(!this.isPull){
+						this.isPull = true; //下拉加载，先让其变true再变false才能关闭
+						//关闭加载状态 (转动的圈)，需要一点延时才能关闭
+						this.page = 1
+						this.lists = []
+						this.loadPageData()
+						this.page1 = 1
+						this.data1 = []
+						this.SelfPost()
+					}
+			 },
+			 
 			// 租房信息
 			loadPageData() {
 				this.isLoding = true;
 				home.postrentMsg({
 					data: {
-						villageId: this.id,
 						page: this.page,
 						pageSize:this.pageSize
 					},
 					fail: () => {
 						this.isLoding = false;
+						this.isPull = false
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
@@ -182,11 +199,10 @@
 					},
 					success: (res) => {
 						this.isLoding = false;
-
+                        this.isPull = false
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;
-						this.code = res.data.code
 						let data = res.data.data;
 						this.page = data.current_page + 1;
 						this.hasMore = data.next_page_url ? true : false;
@@ -218,6 +234,7 @@
 					},
 					fail: () => {
 						this.isLoding1 = false;
+							this.isPull = false
 						uni.showToast({
 							title: '网络错误',
 							icon: 'none'
@@ -225,7 +242,7 @@
 					},
 					success: (res) => {
 						this.isLoding1 = false;
-
+                          	this.isPull = false
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;
@@ -258,7 +275,7 @@
 				url: '/pages/classification/lookRoom/rentAndsale/rentroomDils?id=' + item.id
 				})
 			},
-			// 跳转回复的页面
+			// 去卖房详情
 			reply(item,index) {
 				this.index2 = index
 				uni.navigateTo({
@@ -472,7 +489,8 @@
 	}
 
 	.nono {
-		margin-top: 50rpx;
+		position: relative;
+		top: 50rpx;
 	}
 
 	.lodimg {

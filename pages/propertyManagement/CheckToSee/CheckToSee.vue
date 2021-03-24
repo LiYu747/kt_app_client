@@ -8,7 +8,7 @@
 					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
 				</view>
 			</view>
-			<view v-show="xlshow==true" class="xlshow ">
+			<view v-show="xlshow==true" class="xlshow flex-d al-center">
 				<view class="itemLabel flex al-center ju-center" @click="select(item,index)" :class="{'back':index==idx}" v-for="(item,index) in condition"
 				 :key='item.id'>
 					{{item.label}}
@@ -20,7 +20,7 @@
 		</view>
 
 		<view v-if="lists.length>0" class="flex-d m-t1 al-center">
-			<view class="itemBox" @click="goDetails(item)" v-for="(item,index) in lists" :key='item.id'>
+			<view class="itemBox" @click="goDetails(item,index)" v-for="(item,index) in lists" :key='item.id'>
 				<view class="itemName flex al-center ju-between">
 					<view class="">
 						姓名：{{item.own_user.username}}
@@ -117,7 +117,8 @@
 						label: '未通过',
 						status: '3'
 					},
-				]
+				],
+				index1:0
 			}
 		},
 		methods: {
@@ -133,7 +134,8 @@
 				this.getData()
 			},
 			// 用户详情
-			goDetails(item) {
+			goDetails(item,index) {
+				this.index1 = index
 				// console.log(item);
 				uni.navigateTo({
 					url: '/pages/propertyManagement/CheckToSee/seeDetails/seeDetails?id=' + item.id
@@ -199,13 +201,16 @@
 			}
 		},
 		mounted() {
-
+         this.getData()
 		},
 		onShow() {
-			this.page = 1
-			this.lists = []
-			this.noText = ''
-			this.getData()
+			if(!this.$store.state.checkIspass) return;
+			this.lists.map((item,index) => {
+				if(this.index1 == index){
+					item.verify_status_text = this.$store.state.checkIspass
+				}
+			})
+			
 		},
 		onReachBottom() {
 			this.noText = '没有更多了'
@@ -215,6 +220,7 @@
 		},
 		onHide() {
 			this.xlshow = false
+			this.$store.commit('checkIspass','')
 		},
 		onLoad() {
 
@@ -274,7 +280,7 @@
 	}
 
 	.back {
-		width: 100%;
+		width: 90%;
 		background: #F07535;
 		color: #FFFFFF;
 	}

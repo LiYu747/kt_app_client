@@ -1,7 +1,8 @@
 //测试域名
-let host = 'https://test.kuaitongkeji.com/'
+// let host = 'https://test.kuaitongkeji.com/'
 //本地开发域名
-// let host = 'http://local.kt.cn/';
+let host = 'http://local.kt.cn/';
+// 线上域名
 // let host = 'https://api.kuaitongkeji.com/';     
 let apiPath = host + 'api/';
 
@@ -51,95 +52,95 @@ module.exports = {
 		},
 		// 修改个人信息
 		userupdate: {
-				// 修改个人信息
+			// 修改个人信息
 			update: apiPath + 'user/user/update',
-			
+
 			//修改证件照
 			updataphoto: apiPath + 'user/user/setFaceimg',
-			
+
 			// 更新实名认证信息
-			updataRealname : apiPath + 'user/user/realInfo',
-			
+			updataRealname: apiPath + 'user/user/realInfo',
+
 			// 设置密码的验证码
-			stePawcode : host + 'services/sms/setSecret',
-			
+			stePawcode: host + 'services/sms/setSecret',
+
 			//设置新密码
-			steNewpaw : apiPath + 'user/user/password'
-			
+			steNewpaw: apiPath + 'user/user/password'
+
 		},
 
 
 	},
 
 	home: {
-			
+
 		// 轮播图
 		adPos: {
 			// 轮播图
 			rotationChart: apiPath + 'ad/adPos/show',
-			
+
 			// 未读消息数量
-			unread : apiPath + 'user/msg/unreadNum',
-			
+			unread: apiPath + 'user/msg/unreadNum',
+
 			// 标记所有未读为已读
-			allRead : apiPath + 'user/msg/readAll',
-			
+			allRead: apiPath + 'user/msg/readAll',
+
 			// 消息通知
-			userMessage : apiPath + 'user/msg',
-			
+			userMessage: apiPath + 'user/msg',
+
 			// 标为已读
-			userRead  : apiPath + 'user/msg/read'
+			userRead: apiPath + 'user/msg/read'
 		},
-		
+
 		// 分类接口
-		classifyPost : {
+		classifyPost: {
 			//发布出租房消息
-			releaseRent : apiPath + 'user/rental',
-			
+			releaseRent: apiPath + 'user/rental',
+
 			// 发布出售房屋信息
-			releaseSellers : apiPath + 'user/houseSale',
-			
+			releaseSellers: apiPath + 'user/houseSale',
+
 			// 查看所有的出租房信息
-			allRoom : apiPath + 'rental/rental' ,
-			
+			allRoom: apiPath + 'rental/rental',
+
 			// 租房信息详情
-			roomDateils : apiPath + 'rental/rental/show',
-			
+			roomDateils: apiPath + 'rental/rental/show',
+
 			// 查看平台所有房屋出售记录
-			sellRecords : apiPath + 'house/sale',
-			
+			sellRecords: apiPath + 'house/sale',
+
 			// 出售房屋的记录详情
-			sellDetails : apiPath + 'house/sale/show',
-			
+			sellDetails: apiPath + 'house/sale/show',
+
 			// 自己发布的所有出租房信息
-			postrentMsg : apiPath + 'user/rental',
-			
+			postrentMsg: apiPath + 'user/rental',
+
 			// 查看自己发布的房屋出售记录
-			postsellMsg : apiPath + 'user/houseSale',
-			
+			postsellMsg: apiPath + 'user/houseSale',
+
 			// 出租房详情
-			rentDils : apiPath + 'user/rental/show',
-			
+			rentDils: apiPath + 'user/rental/show',
+
 			// 房屋出售记录的详情
-			saleDils : apiPath + 'user/houseSale/show',
-			
+			saleDils: apiPath + 'user/houseSale/show',
+
 			// 设置出租房可见性
-			rentShow : apiPath + 'user/rental/setVisible',
-			
+			rentShow: apiPath + 'user/rental/setVisible',
+
 			//更新租房数据
-			updataRoom : apiPath + 'user/rental',
-			
+			updataRoom: apiPath + 'user/rental',
+
 			//删除租房数据
-			delrenRoom : apiPath + 'user/rental',
-			
+			delrenRoom: apiPath + 'user/rental',
+
 			// 出售记录的可见性
-			saleShow : apiPath + 'user/houseSale/setVisible',
-			
+			saleShow: apiPath + 'user/houseSale/setVisible',
+
 			//更新卖房数据
-			houseSaleUp : apiPath + 'user/houseSale',
-			
+			houseSaleUp: apiPath + 'user/houseSale',
+
 			//删除卖房
-			delSale : apiPath + 'user/houseSale'
+			delSale: apiPath + 'user/houseSale'
 		},
 
 		// 社区资讯
@@ -151,7 +152,7 @@ module.exports = {
 			// 小区新闻
 			CommunityNews: apiPath + 'community/news',
 			// 小区新闻详情
-			NewsDils: apiPath + 'community/news/show',	
+			NewsDils: apiPath + 'community/news/show',
 		},
 
 		// 周边
@@ -170,7 +171,9 @@ module.exports = {
 			// 记录详情
 			recordDils: apiPath + 'user/moveInApply/show',
 			// 审核入住申请
-			audit : apiPath + 'user/moveInApply/deal'
+			audit: apiPath + 'user/moveInApply/deal',
+			//房东查看入住申请
+			userLook: apiPath + 'user/moveInApply/detail'
 		},
 
 		//拜访申请Visit record
@@ -213,11 +216,11 @@ module.exports = {
 		vagelist: {
 			// 小区列表
 			list: apiPath + 'village/village',
-			
+
 			selectLists: apiPath + 'village/village/selectLists',
-			
+
 			// 获取某单元楼不受访问限制的楼层
-			foolropen : apiPath + 'village/floors/open',
+			foolropen: apiPath + 'village/floors/open',
 
 			// 小区公告
 			Notice: apiPath + 'village/notice',
@@ -242,21 +245,21 @@ module.exports = {
 
 			// 发布评论
 			relComments: apiPath + 'village/tribuneComment',
-			
+
 			//删除帖子
-			delPost : apiPath + 'user/villageTribune',
-			
+			delPost: apiPath + 'user/villageTribune',
+
 			//修改帖子可见性
-			visiblePost : apiPath + 'user/villageTribune/visible',
+			visiblePost: apiPath + 'user/villageTribune/visible',
 
 			//自己发布的帖子
 			SelfComments: apiPath + 'user/villageTribune',
 
 			// 自己发布的帖子评论
 			SelfPost: apiPath + 'user/villageTribuneComments',
-			
+
 			//自己发布的帖子详情
-			MypostDeta : apiPath + 'user/villageTribune/show',
+			MypostDeta: apiPath + 'user/villageTribune/show',
 
 			//默认的栏目列表
 			DefaultColumnList: apiPath + 'village/tribuneCat',
@@ -273,28 +276,28 @@ module.exports = {
 		alladd: {
 			// 用户的所有住址
 			list: apiPath + 'user/house',
-			
+
 			// 某一个住址的详细信息
 			listdetails: apiPath + 'user/house/show',
-			
+
 			//查看住所内的所有成员
-			lookMember  : apiPath + 'user/house/members',
-			
+			lookMember: apiPath + 'user/house/members',
+
 			// 查找用户是否存在
-			findUser : apiPath + 'user/user/check',
-			
+			findUser: apiPath + 'user/user/check',
+
 			//添加住所成员
-			pushMember : apiPath + 'user/house/addMember',
-			
+			pushMember: apiPath + 'user/house/addMember',
+
 			//成员的详情
-			memberDetails : apiPath + 'user/house/memberInfo',
-			
+			memberDetails: apiPath + 'user/house/memberInfo',
+
 			// 更新成员信息权限
-			updateMember : apiPath + 'user/house/editMember',
-			
+			updateMember: apiPath + 'user/house/editMember',
+
 			// 移除某个成员
-			 deleteMember  : apiPath + 'user/house/removeMember'
-			
+			deleteMember: apiPath + 'user/house/removeMember'
+
 		},
 		//预约电梯
 		bookingElevator: {
@@ -310,38 +313,38 @@ module.exports = {
 
 	// 小区物业管理
 	propertyManagement: {
-      
-	    // 小区进出记录
-		recordOfAccess : host + 'village_staff/village/inOutRecord',
-		
+
+		// 小区进出记录
+		recordOfAccess: host + 'village_staff/village/inOutRecord',
+
 		//入住申请所有记录
-		checkinRecord : host + 'village_staff/village/moveInApply',
-		
+		checkinRecord: host + 'village_staff/village/moveInApply',
+
 		//入住申请记录详情
-	    checkinDetails : host + 'village_staff/village/moveInApply/show',
-		
+		checkinDetails: host + 'village_staff/village/moveInApply/show',
+
 		// 审核某条记录
-		 auditRecord : host + 'village_staff/village/moveInApply/verify',
-		 
-		 //获取所有帖子
-		 allPost : host + 'village_staff/village/tribune',
-		 
-		 //帖子详情
-		 postDetails : host + 'village_staff/village/tribune/show',
-		 
-		 // 审核帖子
-		 ReviewPosts : host + 'village_staff/village/tribune/verify',
-		 
-		 // 小区内的住户
-		 allResident : host + 'village_staff/user/user',
-		 
-		 //查看申请记录的进度(GET)&&//申请成为(POST)
-		 applicationProgress : apiPath + 'courier/apply',
-		 
-		 //查看自己的信息
-		 lookMymsg : apiPath + 'courier/info',
-		 
-		 // 通行二维码
-		 passQr : apiPath + 'courier/info/passQr'
+		auditRecord: host + 'village_staff/village/moveInApply/verify',
+
+		//获取所有帖子
+		allPost: host + 'village_staff/village/tribune',
+
+		//帖子详情
+		postDetails: host + 'village_staff/village/tribune/show',
+
+		// 审核帖子
+		ReviewPosts: host + 'village_staff/village/tribune/verify',
+
+		// 小区内的住户
+		allResident: host + 'village_staff/user/user',
+
+		//查看申请记录的进度(GET)&&//申请成为(POST)
+		applicationProgress: apiPath + 'courier/apply',
+
+		//查看自己的信息
+		lookMymsg: apiPath + 'courier/info',
+
+		// 通行二维码
+		passQr: apiPath + 'courier/info/passQr'
 	}
 }

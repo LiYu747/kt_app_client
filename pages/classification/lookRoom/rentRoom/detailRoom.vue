@@ -79,7 +79,7 @@
 						<view v-if="roomInof.contact_name" class="">
 							{{roomInof.contact_name}}
 						</view>
-						<view class="">
+						<view class="" v-else>
 							暂无
 						</view>
 					</view>

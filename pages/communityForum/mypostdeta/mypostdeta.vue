@@ -92,7 +92,6 @@
 				],
 				seeShow: false,
 				idx: 0,
-				id: '',
 			}
 		},
 		methods: {

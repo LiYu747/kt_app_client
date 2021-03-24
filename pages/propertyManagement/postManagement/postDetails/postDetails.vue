@@ -74,15 +74,15 @@
 			// 通过
 			pass(){
 			this.verifyStatus = 1	
-			this.passReq()
+			this.passReq('通过审核')
 			},
 			// 不通过
 			nopass(){
 				this.verifyStatus = 2
-				this.passReq()
+				this.passReq('未通过审核')
 			},
 			// 是否通过
-			passReq(){
+			passReq(text){
 				uni.showLoading({
 					title:'加载中'
 				})
@@ -117,6 +117,7 @@
 						uni.showToast({
 							title: res.data.msg
 						})
+						this.$store.commit('checkIspass',text)
 						const time = setTimeout(() => {
 							this.getData()
 							clearTimeout(time)

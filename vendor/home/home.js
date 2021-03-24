@@ -186,6 +186,12 @@ class Home {
 		params.url = routes.home.applecheckin.audit
 		req.patch(params)
 	}
+	
+	///房东查看入住申请
+	userLook(params) {
+		params.url = routes.home.applecheckin.userLook
+		req.get(params)
+	}
 
 	// 出行记录
 	travelRecords(params) {

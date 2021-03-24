@@ -143,7 +143,7 @@
 				uni.showLoading({
 					title:'加载中...'
 				})
-				home.recordDils({
+				home.userLook({
 					data: {
 						id: this.id
 					},
@@ -178,7 +178,6 @@
 						this.locadata[2].value = data.created_at.slice(0, 16)
 						this.text = data.verify_status_text
 						this.remark = data.user_remark
-						this.result = data.verify_msg
 					},
 					
 				})
@@ -234,7 +233,7 @@
 
 	.nav {
 		height: 120rpx;
-		border-bottom: 1rpx solid #cccccc;
+		border-bottom: 1px solid #cccccc;
 		margin-bottom: 20rpx;
 	}
 
@@ -298,7 +297,7 @@
 		width: 318rpx;
 		height: 68rpx;
 		border-radius: 50rpx;
-		border: 1rpx solid rgb(240, 117, 53);
+		border: 1px solid rgb(240, 117, 53);
 		font-size: 28rpx;
 		color: rgb(240, 117, 53);
 	}

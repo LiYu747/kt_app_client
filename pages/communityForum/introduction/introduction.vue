@@ -69,6 +69,7 @@
 <script>
 	import subunit from '../../../components/sub-unit/subunit.vue'
 	import village from '../../../vendor/village/village.js'
+	import jwt from '../../../vendor/auth/jwt.js'
 	export default {
 		name: "",
 		components: {

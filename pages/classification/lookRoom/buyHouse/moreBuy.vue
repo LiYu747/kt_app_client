@@ -162,7 +162,7 @@
 		onReachBottom() {
 			this.text = '没有更多了~'
 			if (this.isLoding == true || this.hasMore == false) return;
-			this.loadPageData()
+			this.getSell()
 		},
 		onLoad() {},
 		filters: {
