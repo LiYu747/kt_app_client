@@ -5,13 +5,13 @@
 			<view class="contenBox">
 				<view class="flex al-center m-t3 ju-between">
 					<view @click="myRental" class="rentOut flex al-center">
-						<image src="../../../image/lookroom/sell.png" class="sellImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/sell.png" class="sellImg" mode=""></image>
 						<view class="sellMsg">
 							我要出租
 						</view>
 					</view>
 					<view @click="mySellers" class="sellers m-l2 flex al-center">
-						<image src="../../../image/lookroom/buy.png" class="buyImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/buy.png" class="buyImg" mode=""></image>
 						<view class="sellMsg">
 							我要卖房
 						</view>
@@ -22,7 +22,7 @@
 						租房
 						<view v-if="rentingRoom.length>0" @click="addmore" class="bricolor fz-14 flex al-center">
 							更多
-							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/more.png" class="moreimg" mode=""></image>
 						</view>
 					</view>
 					<view v-if="rentingRoom.length>0" class="flex ">
@@ -54,7 +54,7 @@
 						买房
 						<view v-if="sellRoom.length>0" @click="moreBuye" class="bricolor fz-14 flex al-center">
 							更多
-							<image src="../../../image/lookroom/more.png" class="moreimg" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/more.png" class="moreimg" mode=""></image>
 						</view>
 					</view>
 					<view v-if="sellRoom.length>0" class="flex ">

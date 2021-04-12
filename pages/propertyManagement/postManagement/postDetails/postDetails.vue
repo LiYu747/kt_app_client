@@ -1,9 +1,6 @@
 <template>
 	<view>
-		<subunit class="fixed" titel='帖子详情'></subunit>
-		<view class="topLine">
-
-		</view>
+		<subunit  titel='帖子详情'></subunit>
 		<view class="contentBox">
 			<view class="state flex al-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="stateimg" mode=""></image>

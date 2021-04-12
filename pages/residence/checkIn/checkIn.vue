@@ -1,72 +1,74 @@
 <template>
-	<view class="flex-d al-center">
-		<subunit :abel=able   class="posp"  titel="申请入住"></subunit>
+	<view class="">
+		<subunit :abel=able  titel="申请入住"></subunit>
 		<view @click="Application" class=" pos-abs move">
 			申请记录
 		</view> 
-		<view class=" message">
-			<view class="text flex al-center">
-				基本信息
-			</view>
-			<view>
-				<view class="item flex al-center pos-rel" v-for="(item,index) in  record" @click="Onshow(index)" :key='item.id'
-				 :class="[index==record.length-1?'dv':'',index==4&&idx==0&&Gshow==3?'zIndex':'']" >
-					<u-field  v-model="item.value " :placeholder="item.placeholder" :label="item.label" :clearable=false :required='item.required'
-					 input-align='right' :disabled="item.disabled">
-					</u-field>
-					<view class="pos-abs righ" v-if="index===record.length-2">
-						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
-						<view v-show="iSidentity==true" class="content">
-							<view class="itemBox" @click="selectOne(item)" v-for="item in options" :key='item.id'>
-								{{item.label}}
+		<view class="flex-d al-center">
+			<view class=" message">
+				<view class="text flex al-center">
+					基本信息
+				</view>
+				<view>
+					<view class="item flex al-center pos-rel" v-for="(item,index) in  record" @click="Onshow(index)" :key='item.id'
+					 :class="[index==record.length-1?'dv':'',index==4&&idx==0&&Gshow==3?'zIndex':'']" >
+						<u-field  v-model="item.value " :placeholder="item.placeholder" :label="item.label" :clearable=false :required='item.required'
+						 input-align='right' :disabled="item.disabled">
+						</u-field>
+						<view class="pos-abs righ" v-if="index===record.length-2">
+							<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
+							<view v-show="iSidentity==true" class="content">
+								<view class="itemBox" @click="selectOne(item)" v-for="item in options" :key='item.id'>
+									{{item.label}}
+								</view>
 							</view>
 						</view>
+						<view v-if="Gshow == 3&&idx==0"  class="Lutext bai fz-16 ">
+							 <image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsLU.png" class="arrowsLU m-r1" mode=""></image>
+							 选择您的小区地址
+						</view>
+						<view v-if="index===record.length-1" class="pos-abs righ">
+							<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
+						</view>
 					</view>
-					<view v-if="Gshow == 3&&idx==0"  class="Lutext bai fz-16 ">
-						 <image src="../../../image/Newguidance/arrowsLU.png" class="arrowsLU m-r1" mode=""></image>
-						 选择您的小区地址
-					</view>
-					<view v-if="index===record.length-1" class="pos-abs righ">
-						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
+				</view>
+				<u-select v-model="show" mode="mutil-column-auto" :default-value='value' :list="renderVillageLists" @confirm="confirm"></u-select>
+			</view>
+		
+			<!-- 附件 -->
+			<view class="pos-rel" @click="nextTo" :class="idx==1?'enclText':''">
+				<enclosure ref='encl' :Gshow='Gshow'   @abb='add'></enclosure>
+				<view v-if="Gshow == 3" class="pos-abs">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsLU.png" mode="" class="arrowsLU m-l4 m-t2"></image>
+					<view class="bai pushMsg">
+						添加附件，租房合同、房产证等
 					</view>
 				</view>
 			</view>
-			<u-select v-model="show" mode="mutil-column-auto" :default-value='value' :list="renderVillageLists" @confirm="confirm"></u-select>
-		</view>
-
-		<!-- 附件 -->
-		<view class="pos-rel" @click="nextTo" :class="idx==1?'enclText':''">
-			<enclosure ref='encl' :Gshow='Gshow'   @abb='add'></enclosure>
-			<view v-if="Gshow == 3" class="pos-abs">
-				<image src="../../../image/Newguidance/arrowsLU.png" mode="" class="arrowsLU m-l4 m-t2"></image>
-				<view class="bai pushMsg">
-					添加附件，租房合同、房产证等
+		       
+			<!-- 备注 -->
+			<view class="pos-rel" @click="nextTo" :class="idx==2?'enclText':''">
+				<view v-if="Gshow == 3" class=" m-l4 pos-abs llText flex bai">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/leftLower.png" class="leftLower m-t2" mode=""></image>
+					<view class="m-l1">
+						备注文字，审核人员可以看到
+					</view>
+				</view>
+				<remarks :Gshow='Gshow' ref='marks'></remarks>
+			</view>
+			<!-- 提交 -->
+			<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
+				<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
+				<view class="pos-abs subtext">
+					提交
 				</view>
 			</view>
+		
+		   <view v-if="Gshow == 3" @click="nextTo"  @touchmove.stop.prevent class="guideBox">
+		   
+		   </view>
+		 
 		</view>
-           
-		<!-- 备注 -->
-		<view class="pos-rel" @click="nextTo" :class="idx==2?'enclText':''">
-			<view v-if="Gshow == 3" class=" m-l4 pos-abs llText flex bai">
-				<image src="../../../image/Newguidance/leftLower.png" class="leftLower m-t2" mode=""></image>
-				<view class="m-l1">
-					备注文字，审核人员可以看到
-				</view>
-			</view>
-			<remarks :Gshow='Gshow' ref='marks'></remarks>
-		</view>
-		<!-- 提交 -->
-		<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
-			<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
-			<view class="pos-abs subtext">
-				提交
-			</view>
-		</view>
-
-       <view v-if="Gshow == 3" @click="nextTo"  @touchmove.stop.prevent class="guideBox">
-       
-       </view>
-	 
 	</view>
 </template>
 
@@ -537,8 +539,7 @@
 	}
 
 	.message {
-
-		margin-top: 170rpx;
+		margin-top: 30rpx;
 		width: 644rpx;
 		padding-bottom: 40rpx;
 		background: #FFFFFF;

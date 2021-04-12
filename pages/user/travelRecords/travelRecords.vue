@@ -1,7 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="pos" titel='出行记录'></subunit>
-		<view class="line"> </view>
+		<subunit  titel='出行记录'></subunit>
 		<view v-if="lists.length>0" class=" flex-d al-center">
 			<view class="item" v-for="item in lists" :key='item.id'>
 				<!-- 时间 -->

@@ -1,9 +1,6 @@
 <template>
 	<view class="">
-		<subunit titel='发布' class="fidex" :retur='false'></subunit>
-		<view class="line">
-			
-		</view>
+		<subunit titel='发布'  :retur='false'></subunit>
 		<view class="flex-d color al-center"> 
 			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 			<view class="nav flex-d al-center">
@@ -79,7 +76,7 @@
 						<view class="itemLb">
 							{{item.label}}
 						</view>
-						<image v-show="index==idx" src="../../../image/forum/sclyse.png" class="sclyseImg" mode=""></image>
+						<image v-show="index==idx" src="https://oss.kuaitongkeji.com/static/img/app/forum/sclyse.png" class="sclyseImg" mode=""></image>
 					</view>
 				</view>
 				<view class="flex-d al-center">
@@ -152,18 +149,18 @@
 				visible:'1',
 				seeTet:{
 					text : '公开 : 所有人可见',
-					img:require('@/image/forum/uplock.png')
+					img:"https://oss.kuaitongkeji.com/static/img/app/forum/uplock.png"
 				},
 				seeList: [
 					{
 					 value: '1',
 					 label: '公开 : 所有人可见',
-					   ref:require('@/image/forum/uplock.png')
+					   ref:"https://oss.kuaitongkeji.com/static/img/app/forum/uplock.png"
 					}	,
 				 {
 				  value: '0',
 				  label: '私密 : 仅自己可见',
-				  ref:require('@/image/forum/lock.png')
+				  ref:"https://oss.kuaitongkeji.com/static/img/app/forum/lock.png"
 				 }	,
 				]
 			}

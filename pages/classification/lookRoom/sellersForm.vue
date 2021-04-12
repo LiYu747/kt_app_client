@@ -52,11 +52,11 @@
 				<view class="pos-rel" v-for="(item,index) in image" :key='item.id'>
 					<image :src="item" mode="aspectFill" class="itemImg"></image>
 					<view @click="delImage(index)" class="delBox flex al-center ju-center">
-						<image src="../../../image/lookroom/del.png" class="delImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/del.png" class="delImg" mode=""></image>
 					</view>
 				</view>
 				<view @click="selPhoto"  class="selphoto flex al-center ju-center">
-					<image src="../../../image/lookroom/photo.png" class="photoImg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/photo.png" class="photoImg" mode=""></image>
 				</view>
 			</view>
 			<view class="roomtetx">
@@ -66,11 +66,11 @@
 				<view  v-if="coverImg" class="pos-rel">
 					<image :src="coverImg" class="itemImg" mode="aspectFill"></image>
 					<view @click="coverImg=''" class="delBox flex al-center ju-center">
-						<image src="../../../image/lookroom/del.png" class="delImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/del.png" class="delImg" mode=""></image>
 					</view>
 				</view>
 				<view @click="celCover" class="selphoto flex al-center ju-center">
-					<image  src="../../../image/lookroom/cover.png" class="coverImg" mode=""></image>
+					<image  src="https://oss.kuaitongkeji.com/static/img/app/lookroom/cover.png" class="coverImg" mode=""></image>
 				</view>
 			</view>
 		</view>
@@ -106,7 +106,7 @@
 		
 		<view class="flex ju-center ">
 			<view  @click="iSfill"  class="submit flex al-center ju-center">
-				<image src="../../../image/lookroom/submit.png" class="submitImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/submit.png" class="submitImg" mode=""></image>
 				<view class="pos-abs fz-16 bai">
 					提交
 				</view>

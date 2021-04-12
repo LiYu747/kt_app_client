@@ -1,6 +1,7 @@
 <template>
+<view class="">
+	<subunit titel="个人信息" ></subunit>
 	<view class="whole flex-d al-center">
-		<subunit titel="个人信息" ></subunit>
 		<view @click="UploadAvatar" class="activ flex al-center ju-center">
 			<image :src="image" class="img" mode="aspectFill"></image>
 		</view>
@@ -14,7 +15,7 @@
 			</view>
 			<u-select v-model="show" :default-value='value' @confirm='ok' :list="list"></u-select>
 		</view>
-
+	
 		<!-- 提交 -->
 		<view @click="Submit" class="end flex al-center ju-center">
 			<image src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" class="enimg" mode=""></image>
@@ -22,7 +23,7 @@
 				提交
 			</view>
 		</view>
-
+	
 		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
 			<view class="loding flex-d al-center ju-center">
 				<view class=" ">
@@ -32,6 +33,7 @@
 			</view>
 		</view>
 	</view>
+</view>
 </template>
 
 <script>

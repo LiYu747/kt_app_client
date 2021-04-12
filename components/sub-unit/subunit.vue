@@ -1,11 +1,16 @@
 <template>
-	<view class="box">
-		<view class="nav pos-rel flex ju-center al-center">
+<view class="">
+	<view class="box" :style="{	height:this.$store.state.customBar + 'rpx'}">
+		<view class="nav pos-abs flex ju-center al-center">
 			<image v-if="retur === true" @click="goback" src="https://oss.kuaitongkeji.com/static/img/app/login/1729908969cd5d7d911e096d6db3c70.png"
 			 class="reimg pos-abs" mode=""></image>
 			{{titel}}
 		</view>
 	</view>
+	<view class="Line" :style="{height:this.$store.state.customBar + 'rpx'}">
+		
+	</view>
+</view>
 </template>
 
 <script>
@@ -29,7 +34,8 @@
 			}
 		},
 		data() {
-			return {}
+			return {
+			}
 		}, 
 		methods: {
 			goback() {
@@ -57,7 +63,6 @@
 			}
 		},
 		mounted() {
-
 		},
 		onShow() {
 
@@ -83,16 +88,16 @@
 <style scoped lang="scss">
 	.box {
 		width: 100%;
-		height: 148rpx;
 		background: #F07535;
 		z-index: 99;
+		position: fixed;
 	}
 
 	.nav {
-		top: 60rpx;
-		height: 88rpx;
+		width: 100%;
 		font-size: 36rpx;
-		color: #FFFFFF;
+		color: #FFFFFF; 
+		bottom: 20rpx;
 	}
 	
 	.reimg {

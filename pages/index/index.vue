@@ -1,16 +1,16 @@
 <template>
 	<view class="content">
-		<view class="nav ">
-			<view class="ipt  ju-center flex al-center pos-rel">
+		<view class="nav" :style="{	height:iStatusBarHeight + 'rpx'}">
+			<view class="ipt  ju-center flex al-center">
 				<view v-if='user' class="userSelection pos-abs">
 					<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon"
-					 mode=""></image>
+					 mode=""></image> 
 					<view v-show="isShowType == true" class="typeBox flex-d al-center">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
 						<view class="typeLine">
 						</view>
 						<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
-							{{item.name}} 
+							{{item.name}}  
 						</view>
 					</view>
 				</view>
@@ -30,13 +30,15 @@
 				</view>
 			</view>
 		</view>
+			<view  :style="{height:iStatusBarHeight + 'rpx'}">
+			</view> 
 		<!-- 主页 -->
 		<view class="flex-d al-center">
 			<view class="boxss">
 				<image class="imgjx" src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode=""></image>
 			</view>
 			<!-- 轮播图 -->
-			<view class=" pos-abs pos">
+			<view class="posmove">
 				<u-swiper @click="addswiper" :list="list" border-radius='20' bg-color='rgba(255, 255, 255, 0)' height="340"
 				 effect3d-previous-margin='60' indicator-pos='none' :effect3d="true"></u-swiper>
 			</view>
@@ -49,7 +51,7 @@
 					</view>
 					<view @touchmove.stop.prevent v-if="Gshow == 5" class="">
 						<view v-if="idx==0&&index==0" class="flex pos-abs m-ln1">
-							<image src="../../image/Newguidance/arrowsLU.png" class="arrowsLU" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsLU.png" class="arrowsLU" mode=""></image>
 							<view class=" Lutext">
 								入住申请
 								<view class="bai">
@@ -58,7 +60,7 @@
 							</view>
 						</view>
 						<view v-if="idx == 1&&index==1" class="m-ln2 pos-abs">
-							<image src="../../image/Newguidance/upward.png" class="upward" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/upward.png" class="upward" mode=""></image>
 							<view class="upText fz-16">
 								<view class="al-center">
 									拜访申请
@@ -70,7 +72,7 @@
 							</view>
 						</view>
 						<view v-if="idx == 2&&index==2" class="m-ln3 pos-abs">
-							<image src="../../image/Newguidance/upward.png" class="upward" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/upward.png" class="upward" mode=""></image>
 							<view class="upText2 fz-16">
 								<view class=" al-center flex-d">
 									来访记录
@@ -82,7 +84,7 @@
 							</view>
 						</view>
 						<view class="m-ln4 pos-abs" v-if="idx==3&&index==3">
-							<image src="../../image/Newguidance/arrowsRU.png" class="arrowsLU" mode=""></image>
+							<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsRU.png" class="arrowsLU" mode=""></image>
 							<view class="goHome flex-d al-center">
 								<view class="">
 									回家二维码，
@@ -96,7 +98,7 @@
 								<view class="bai lowT">
 									进入个人中心
 								</view>
-								<image src="../../image/Newguidance/lowRight.png" class="lowImg" mode=""></image>
+								<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/lowRight.png" class="lowImg" mode=""></image>
 							</view>
 						</view>
 					</view>
@@ -111,7 +113,7 @@
 			<!-- 周边 -->
 			<periphery ref='peri'></periphery>
 
-			<!-- <button @click="gogo">点击</button> -->
+			<button @click="gogo">点击</button>
 		</view>
 		<!-- 视频播放 -->
 		<view v-if="paly == true"  @touchmove.stop.prevent class=" pos-abs moive flex-d al-center ju-center">
@@ -131,18 +133,18 @@
 		</view>
 		<!-- 用户指导 -->
 		<view v-if="Gshow == 0"  @touchmove.stop.prevent class="guideBox">
-				<image src="../../image/Newguidance/home.png" class="addLogo" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/home.png" class="addLogo" mode=""></image>
 		</view>
 		
 		<view v-if="Gshow == 1" @touchmove.stop.prevent class="guideBox">  
 			<view class="flex-d al-center bai guidePush">
 				添加地址
-				<image src="../../image/Newguidance/arrowsD.png" mode="" class="arrowsDimg"></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsD.png" mode="" class="arrowsDimg"></image>
 			</view>
 			<view class="btmbox flex ju-center">
 				<view @click="GgoAdd" class="addBox">
 				</view>
-				<image src="../../image/Newguidance/homeLogo.png" class="btmImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/homeLogo.png" class="btmImg" mode=""></image>
 			</view>
 			<view class="">
 
@@ -154,17 +156,18 @@
 				<view v-show="idx == 3" class="btmbox flex ju-center">
 					<view class="addBox">
 					</view>
-					<image src="../../image/Newguidance/userLogo.png" class="btmImg" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/userLogo.png" class="btmImg" mode=""></image>
 				</view>
 			</view>
 			<view class="" v-show="idx!==3">
-				<image src="../../image/Newguidance/home.png" class="addLogo" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/home.png" class="addLogo" mode=""></image>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import subunit from '../../components/sub-unit/subunit.vue'
 	import home from '../../vendor/home/home.js'
 	import classification from '../../components/home/classification/classification.vue';
 	import information from '../../components/home/information/information.vue';
@@ -179,10 +182,12 @@
 			classification,
 			information,
 			periphery,
-			CommunityNews
+			CommunityNews,
+			subunit
 		},
 		data() {
 			return {
+				iStatusBarHeight:0,
 				userType: [{
 						name: '用户',
 						type: 'user',
@@ -236,11 +241,11 @@
 					url: '/pages/address/address/address'
 				})
 			},
-			// gogo() {
-			// 	uni.navigateTo({
-			// 		url: '/components/forum/setting/lianx'
-			// 	})
-			// },
+			gogo() {
+				uni.navigateTo({
+					url: '/components/forum/setting/lianx'
+				})
+			},
 			// 消息通知
 			goInform() {
 				uni.navigateTo({
@@ -383,6 +388,8 @@
 		mounted() {
 			this.Chart()
 			this.operationData()
+			this.iStatusBarHeight = uni.getSystemInfoSync().statusBarHeight + 128
+			this.$store.commit('customBar',this.iStatusBarHeight)
 		},
 		onShow() {
 			if (cache.get("Gshow")) {
@@ -442,6 +449,8 @@
 </script>
 
 <style>
+	
+
 	.m-ln1{
 		left: 0rpx;
 		top: 160rpx;
@@ -497,10 +506,9 @@
 
 	.nav {
 		width: 750rpx;
-		height: 132rpx;
 		background: #F07535;
 		position: fixed;
-		z-index: 9;
+		z-index: 99;
 	}
 
 	.img {
@@ -511,8 +519,9 @@
 
 	.ipt {
 		width: 750rpx;
-		height: 88rpx;
-		margin-top: 50rpx;
+		height: 80rpx;
+		position: absolute;
+		bottom: 10rpx; 
 	}
 
 	.input {
@@ -534,7 +543,6 @@
 	.boxss {
 		width: 750rpx;
 		height: 156rpx;
-		margin-top: 130rpx;
 	}
 
 	.imgjx {
@@ -542,20 +550,13 @@
 		height: 156rpx;
 	}
 
-	.imglb {
 
-		width: 580rpx;
-		height: 304rpx;
-	}
-
-	.pos {
+	.posmove {
 		width: 100%;
 		height: 304rpx;
-		top: 150rpx;
-		
+		position: relative;
+		top: -136rpx;
 	}
-
-
 
 	.itemimg {
 		width: 100rpx;
@@ -563,7 +564,7 @@
 	}
 
 	.operation {
-		margin-top: 226rpx;
+		margin-top: -80rpx;
 		width: 650rpx;
 		height: 150rpx;
 		background: #FFFFFF;
@@ -631,7 +632,7 @@
 	}
 
 	.userSelection {
-		top: 20rpx;
+		top: 30rpx;
 		left: 40rpx;
 	}
 
@@ -668,7 +669,8 @@
 	}
 
 	.informBox {
-		right: 50rpx;
+		top: 30rpx;
+		right: 70rpx;
 	}
 
 	.infosImg {

@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<subunit titel='设置新密码' class="fixed"></subunit>
-		<view class="topLine"> </view>
+		<subunit titel='设置新密码' ></subunit>
 		<view class="flex-d al-center">
 			<view class="cententBox">
 				<u-form :model="form" ref="uForm">

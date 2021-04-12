@@ -1,7 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="fixed" titel="详情"></subunit>
-		<view class="topLine"></view>
+		<subunit titel="详情"></subunit>
 		<view class="woer">
 			<!-- 标题 -->
 			<view class="title">
@@ -49,7 +48,7 @@
 							<view class="itemLb">
 								{{item.label}}
 							</view>
-							<image v-show="index==idx" src="../../../image/forum/sclyse.png" class="sclyseImg" mode=""></image>
+							<image v-show="index==idx" src="https://oss.kuaitongkeji.com/static/img/app/forum/sclyse.png" class="sclyseImg" mode=""></image>
 						</view>
 					</view>
 					<view class="flex-d al-center">
@@ -82,11 +81,11 @@
 				seeList: [{
 						value: '0',
 						label: ' 仅自己可见',
-						ref: require('@/image/forum/lock.png')
+						ref: "https://oss.kuaitongkeji.com/static/img/app/forum/lock.png"
 					}, {
 						value: '1',
 						label: ' 所有人可见',
-						ref: require('@/image/forum/uplock.png')
+						ref: "https://oss.kuaitongkeji.com/static/img/app/forum/uplock.png"
 					},
 
 				],

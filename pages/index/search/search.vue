@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="posfidex"></subunit>
+		<subunit></subunit>
 		<view class="line ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>

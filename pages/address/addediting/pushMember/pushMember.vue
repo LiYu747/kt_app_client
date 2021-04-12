@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view class="fidex">
 			<subunit titel='添加用户'></subunit>
+		<view class="fidex">
 			<view class="searchBox">
 				<view class="itemBox flex al-center" v-for="item in locdata" :key='item.id'>
 					<view class="flex al-center">
@@ -378,7 +378,7 @@
 	}
 	
 	.topLine{
-		height: 480rpx;
+		height: 340rpx;
 	}
 	
 	.searchBox {

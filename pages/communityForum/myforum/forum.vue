@@ -1,8 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="fidx" titel="我的"></subunit>
-		<view class="line">
-		</view>
+		<subunit titel="我的"></subunit>
 		<view @touchstart="start" @touchend="end" class="">
 			<view class="nav flex al-center posd">
 				<view class="left flex al-center ju-center" v-for="(item,index) in til" @click="add(item,index)" :class="{dv:index===0}"
@@ -327,9 +325,17 @@
 			}
 			if (this.$store.state.isDel == '200') {
 				this.lists.splice(this.goindex, 1)
+				this.data1 = []
+				this.page1 = 1
+				this.SelfPost()
 			}
 		},
-
+		onUnload() {
+			this.$store.commit("isComment", '');
+		},
+         onHide() {
+         	this.$store.commit("isComment", '');
+         },
 		filters: {
 
 		},

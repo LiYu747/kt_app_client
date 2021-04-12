@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<subunit titel='帖子管理' class="fixed"></subunit>
+		<subunit titel='帖子管理'></subunit>
 		<view @click="xlshow = !xlshow" class="searchBox ">
 			<view class="allTx flex al-center">
 				筛选
@@ -13,7 +13,6 @@
 				{{item.label}}
 			</view>
 		</view>
-		<view class="topLine"></view>
 		<view v-if="lists.length>0" class="flex-d al-center">
 			<view class="itemBox" @click="goDetails(item,index)" v-for="(item,index) in lists" :key='item.id'>
 				<view class="layoutBox flex al-center ju-between">

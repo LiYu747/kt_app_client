@@ -1,52 +1,52 @@
 <template>
-	<view class="flex-d al-center">
-		<subunit class="fled" titel="拜访记录"></subunit>
-		<view class="top">
-		</view>
-		<view v-if="lists.length>0" class="">
-			<view class="card" @click="godetails(items)" v-for="(items,indexs) in lists" :key='items.id' >
-				<view class="bx1 flex al-center pos-rel">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/user.png" class="dv3" mode=""></image>
-					<view class="">
-						{{items.own_host.username}}
+	<view class="">
+		<subunit  titel="拜访记录"></subunit>
+		<view class="flex-d al-center">
+			<view v-if="lists.length>0" class="">
+				<view class="card" @click="godetails(items)" v-for="(items,indexs) in lists" :key='items.id' >
+					<view class="bx1 flex al-center pos-rel">
+						<image src="https://oss.kuaitongkeji.com/static/img/app/visit/user.png" class="dv3" mode=""></image>
+						<view class="">
+							{{items.own_host.username}}
+						</view>
+						<view class=" pos-abs rig">
+							{{items.verify_text}}
+							>
+						</view>
 					</view>
-					<view class=" pos-abs rig">
-						{{items.verify_text}}
-						>
+					<view class="bx1 flex al-center">
+						<image src="https://oss.kuaitongkeji.com/static/img/app/visit/time.png" class="dv3" mode=""></image>
+						<view class="">
+							{{items.created_at.slice(0,16)}}
+						</view>
 					</view>
+					<view class="bx2 flex al-center">
+						<image src="https://oss.kuaitongkeji.com/static/img/app/visit/pos.png" class="dv3" mode=""></image>
+						<view v-if="items.own_village" class="">
+							{{items.own_village.name}}
+						</view>
+					</view>
+		
 				</view>
-				<view class="bx1 flex al-center">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/time.png" class="dv3" mode=""></image>
-					<view class="">
-						{{items.created_at.slice(0,16)}}
-					</view>
+				<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
+					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+					加载中...
 				</view>
-				<view class="bx2 flex al-center">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/visit/pos.png" class="dv3" mode=""></image>
-					<view v-if="items.own_village" class="">
-						{{items.own_village.name}}
-					</view>
+				<view class="flex ju-center notext fz-14" v-if="hasMore == false">
+					{{text}}
 				</view>
-
 			</view>
-			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
-				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-				加载中...
+			<view v-if="lists.length==0 && isLoding == false" class="nono flex al-center ju-center">
+				您还没有申请记录哦~
 			</view>
-			<view class="flex ju-center notext fz-14" v-if="hasMore == false">
-				{{text}}
-			</view>
-		</view>
-		<view v-if="lists.length==0 && isLoding == false" class="nono flex al-center ju-center">
-			您还没有申请记录哦~
-		</view>
-
-		<view v-show="isLoding == true&&lists.length==0" class="showloding flex al-center ju-center">
-			<view class="loding flex-d al-center ju-center">
-				<view class=" ">
-					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+		
+			<view v-show="isLoding == true&&lists.length==0" class="showloding flex al-center ju-center">
+				<view class="loding flex-d al-center ju-center">
+					<view class=" ">
+						<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+					</view>
+					加载中
 				</view>
-				加载中
 			</view>
 		</view>
 	</view>

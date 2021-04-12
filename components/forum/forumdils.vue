@@ -1,10 +1,9 @@
 <template>
 	<view class="">
-		<subunit class="fixed" titel="详情"></subunit>
-		<view class="topLine"></view>
+		<subunit titel="详情"></subunit>
 		<view class="woer">
 			<view class="nav flex">
-				<image class="img" :src="user.avatar" mode=""></image>
+				<image class="img" :src="user.avatar" mode="aspectFill"></image>
 				<view class="m-l2 text">
 					<view class="">
 						{{user.nickname}}
@@ -40,8 +39,8 @@
 		<view v-if="comments.length>0" class="">
 			<view class="line flex pos-rel" v-for="(item,index) in comments" :key='item.id'>
 				<view class="flex-d al-center marg">
-					<image v-if="item.own_user" class="img" :src="item.own_user.avatar" mode=""></image>
-					<view v-if="item.own_user" class="nickname ">
+					<image v-if="item.own_user" class="img" :src="item.own_user.avatar" mode="aspectFill"></image>
+					<view v-if="item.own_user" class="nickname">
 						{{item.own_user.nickname}}
 					</view>
 				</view>
@@ -71,13 +70,13 @@
 		</view>
 		<view v-show="flag===true" class="posbot flex al-center pos-rel">
 			<textarea autoHeight="true" placeholder='评论' v-model="context" class="ch flex al-center"></textarea>
-			<view @click="send" class="btn flex pos-abs al-center ju-center">
+			<view @click="send" class="btn flex pos-abs al-center ju-center" :class="context != ''?'sendStyle':''">
 				发送
 			</view>
 		</view>
 		<!-- 查看图片 -->
 		<view v-show="see == true" @click="off" class="look flex al-center ju-center">
-			<image :src="src" class="srcimg" mode="aspectFill"></image>
+			<image :src="src" class="srcimg" mode="aspectFit"></image>
 		</view>
 
 		<view v-show="isLoding == true&&comments.length==0" class="showloding flex al-center ju-center">
@@ -202,6 +201,13 @@
 			},
 			// 发送评论
 			send() {
+				if(this.context == ''){
+					uni.showToast({
+						title:'请输入评论内容',
+						icon:'none'
+					})
+					return;
+				}
 				uni.showLoading({
 					title: '发送中...'
 				})
@@ -244,7 +250,7 @@
 
 		},
 		mounted() {
-				this.$store.commit("isComment", '');
+			
 		},
 		onShow(){
 			this.Data()
@@ -340,7 +346,7 @@
 
 	.woer {
 		width: 92%;
-		padding: 0 4%;
+		padding: 4%;
 		color: #666666;
 	}
 
@@ -416,7 +422,12 @@
 		text-align: center;
 		color: #F07535;
 		font-size: 24rpx;
-		word-break: break-all
+		word-break: break-all;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp:1;
 	}
 
 	.marg {
@@ -501,7 +512,7 @@
 		width: 100%;
 		height: 100vh;
 		z-index: 99;
-		background: rgba(0, 0, 0, 0.3);
+		background: rgb(0, 0, 0);
 	}
 
 	.srcimg {
@@ -536,5 +547,9 @@
 		width: 260rpx;
 		height: 200rpx;
 		background: rgba(88, 88, 88, 0.8);
+	}
+	
+	.sendStyle{
+		background: #F07535;
 	}
 </style>

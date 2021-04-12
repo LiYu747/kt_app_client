@@ -1,9 +1,6 @@
 <template>
 	<view class="">
-		<subunit titel="详情" class="fixed"></subunit>
-		<view class="topLine">
-
-		</view>
+		<subunit titel="详情" ></subunit>
 		<view class="cont">
 			<view class="nav flex al-center">
 				<image src="https://oss.kuaitongkeji.com/static/img/app/visit/gnt.png" class="img" mode=""></image>
@@ -15,7 +12,7 @@
 				<view class="">
 					{{item.titel}}
 				</view>
-				<view class="pos-abs rig">
+				<view class="pos-abs rig"> 
 					{{item.value}}
 				</view>
 			</view>
@@ -269,7 +266,7 @@
 
 	.cont {
 		width: 710rpx;
-		padding: 0 20rpx;
+		padding:20rpx;
 	}
 
 	.nav {

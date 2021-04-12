@@ -15,7 +15,7 @@
 						 修改密码以及退出登录等。
 					</view>
 				</view>
-				<image src="../../../image/Newguidance/arrowsRU.png" mode="" class="arrowsRU "></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsRU.png" mode="" class="arrowsRU "></image>
 			</view>
 		</view>
 		<view class="topLine">
@@ -28,7 +28,7 @@
 		<view class="flex-d al-center" > 
 			<view class="pos-rel flex-d al-center"  @click="nextT" :class="idx==1&&Gshow==6?'ative':''">
 				<view @click="userinfo" class="portrait flex  ju-center pos-rel" :class="Gshow==6&&idx==1?'top0':''">
-					<image v-if="user" :src="user.avatar" mode="scaleToFill" class="headimg pos-abs"></image>
+					<image v-if="user" :src="user.avatar" mode="aspectFill" class="headimg pos-abs"></image>
 					<image v-if='!user' src="https://oss.kuaitongkeji.com/static/img/app/user/headportrait.png" class="headimg pos-abs"
 					 mode=""></image>
 				</view>
@@ -39,7 +39,7 @@
 					{{text}}
 				</view>
 				<view v-if="idx==1&&Gshow==6" class="pos-abs infoT flex-d al-center">
-					<image src="../../../image/Newguidance/upward.png" class="upward" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/upward.png" class="upward" mode=""></image>
 					<view class="setTex flex-d al-center m-t2">
 						个人信息
 						<view class="bai">
@@ -69,7 +69,7 @@
 			<view @click="nextT" class="guideBox">
 				
 			</view>
-			<image src="../../../image/Newguidance/user.png" class="addLogo" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/user.png" class="addLogo" mode=""></image>
 		</view>
 	</div>
 </template>
@@ -220,14 +220,14 @@
 
 	.nav {
 		width: 100%;
-		height: 128rpx;
+		height: 148rpx;
 		background: #F07535;
 		position: fixed;
 		z-index: 99;
 	}
 
 	.topLine {
-		height: 128rpx;
+		height: 148rpx;
 	}
 
 	.btmLine {
@@ -240,7 +240,7 @@
 	}
 
 	.title {
-		top: 40rpx;
+		top: 60rpx;
 		font-size: 36rpx;
 		color: #FFFFFF;
 		height: 88rpx;
@@ -248,7 +248,7 @@
 
 	.location {
 		position: fixed;
-		top: 60rpx;
+		top: 80rpx;
 		right: 50rpx;
 		z-index: 99;
 	}

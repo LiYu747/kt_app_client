@@ -1,8 +1,6 @@
 <template>
 	<view class="fz-12">
-		<subunit class="fixed" titel='小区简介'></subunit>
-		<view class="line">
-		</view>
+		<subunit  titel='小区简介'></subunit>
 		<view class="">
 			<u-swiper v-if="list.length>0" :list="list" border-radius='0' height="350"></u-swiper>
 			<u-swiper v-if="list.length==0" :list="localist" border-radius='0' height="350"></u-swiper>

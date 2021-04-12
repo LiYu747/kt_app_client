@@ -1,20 +1,23 @@
 <template>
-	<view class="flex-d al-center">
+	<view class="">
 		<subunit titel=''></subunit>
-		<view class="wraps">
-			<view class="title flex pos-rel">
-				<view class=" m-l2">
-					分类
+		<view class="flex-d al-center">
+			
+			<view class="wraps">
+				<view class="title flex pos-rel">
+					<view class=" m-l2">
+						分类
+					</view>
+					<view @click="redact" class="rigth pos-abs">
+						编辑
+					</view>
 				</view>
-				<view @click="redact" class="rigth pos-abs">
-					编辑
+				<view class="  wrap">
+					<drag-sorts ref='drag' :list="getData" :props="props" @change="onDragSortChange"></drag-sorts>
 				</view>
 			</view>
-			<view class="  wrap">
-				<drag-sorts ref='drag' :list="getData" :props="props" @change="onDragSortChange"></drag-sorts>
-			</view>
+		
 		</view>
-
 	</view>
 </template>
 

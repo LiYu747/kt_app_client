@@ -57,7 +57,7 @@
 			</view>
 
 			<view @click="Address" class="addressBox m-t3 flex  fz-14">
-				<image src="../../../../image/lookroom/add.png" class="addImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/add.png" class="addImg" mode=""></image>
 				<view class="m-l2 addressmsg">
 					{{roomInof.village}}
 				</view>
@@ -100,7 +100,7 @@
              	声明：本网站所刊载的内容来源于用户上传；该等物业信息不包含购买要约意图，文字、图片信息不构成物业交付标准或配套； 相关物业信息供参考，请致电相关负责人了解详情，请以用户提供信息为准。
              </view>
 			<view @click="consult" class="">
-				<image src="../../../../image/lookroom/consult.png" class="consultImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/consult.png" class="consultImg" mode=""></image>
 			</view>
 
 			<view class="btmLine">

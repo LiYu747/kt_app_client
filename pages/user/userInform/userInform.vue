@@ -1,12 +1,9 @@
 <template>
 	<view class="">
-		<view class="fixed ">
 			<subunit titel='消息' class=""></subunit>
-			<view @click="ReadAll" class=" pos-abs empty">
+			<view @click="ReadAll" class="empty">
 				全部已读
 			</view>
-		</view>
-		<view class="topLine"></view>
 		<view v-if="infoLists.length>0" class="contenBox">
 			<view class="flex-d al-center"  v-for="item in infoLists" :key='item.id'>
 				<view class="itemTime">
@@ -25,7 +22,7 @@
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex ju-center m-b2 fz-14" v-if="hasMore == false">
+			<view class="flex ju-center m-b2 fz-12" v-if="hasMore == false">
 				{{text}}
 			</view>
 		</view>
@@ -219,10 +216,12 @@
 	}
 
 	.empty {
+		position: fixed;
 		top: 84rpx;
 		right: 50rpx;
 		color: #FFFFFF;
 		font-size: 15px;
+		z-index: 999;
 	}
 
 	.topLine {

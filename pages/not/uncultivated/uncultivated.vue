@@ -1,12 +1,14 @@
 <template>
-  <view class="flex-d al-center">
-  	<subunit :retur="true" :titel="titel" @goback='goback'></subunit>
-	<view class="pack flex-d al-center">
-		 <view class="text">
-		 	正在开发中... ...
-		 </view>
+<view class="">
+	<subunit :titel="titel" ></subunit>
+	<view class="flex-d al-center">
+		<view class="pack flex-d al-center">
+			 <view class="text">
+			 	正在开发中... ...
+			 </view>
+		</view>
 	</view>
-  </view>
+</view>
 </template>
 
 <script>

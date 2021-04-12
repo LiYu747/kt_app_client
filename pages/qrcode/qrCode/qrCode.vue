@@ -1,37 +1,39 @@
 <template>
-	<view class="flex-d al-center">
+	<view class="">
 		<subunit titel="我的二维码"></subunit>
-		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
-		<view class="pack flex-d al-center">
-			<view class="nav flex al-center">
-				请将二维码对准扫码口
-			</view>
-			<view class="boxs">
-				<view class="qrimg">
-					<tki-qrcode cid="qrcode1" ref="qrcode" :val="val" :size="size" :unit="unit" :background="background" :foreground="foreground"
-					 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :showLoading='false' :onval="onval" :loadMake="loadMake"
-					 :usingComponents="true" />
+		<view class="flex-d al-center">
+			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
+			<view class="pack flex-d al-center">
+				<view class="nav flex al-center">
+					请将二维码对准扫码口
+				</view>
+				<view class="boxs">
+					<view class="qrimg">
+						<tki-qrcode cid="qrcode1" ref="qrcode" :val="val" :size="size" :unit="unit" :background="background" :foreground="foreground"
+						 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :showLoading='false' :onval="onval" :loadMake="loadMake"
+						 :usingComponents="true" />
+					</view>
+				</view>
+				<view v-if="code==200" class="cortt flex al-center" @click="add">
+					<image v-show="flag===1" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/1.png" class="img1" mode=""></image>
+					<image v-show="flag===0" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/3.png" class="img2" mode=""></image>
+					{{text}}
+				</view>
+				<view v-show="show===1" class="m-t2 flex al-center ju-center">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/qrcode/2.png" class="time" mode=""></image>
+					<view class="pos-abs texts bai">
+						{{timetext}}
+					</view>
 				</view>
 			</view>
-			<view v-if="code==200" class="cortt flex al-center" @click="add">
-				<image v-show="flag===1" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/1.png" class="img1" mode=""></image>
-				<image v-show="flag===0" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/3.png" class="img2" mode=""></image>
-				{{text}}
-			</view>
-			<view v-show="show===1" class="m-t2 flex al-center ju-center">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/qrcode/2.png" class="time" mode=""></image>
-				<view class="pos-abs texts bai">
-					{{timetext}}
+			
+			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+				<view class="loding flex-d al-center ju-center">
+					<view class=" ">
+						<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+					</view>
+					加载中
 				</view>
-			</view>
-		</view>
-		
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
-			<view class="loding flex-d al-center ju-center">
-				<view class=" ">
-					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-				</view>
-				加载中
 			</view>
 		</view>
 	</view>

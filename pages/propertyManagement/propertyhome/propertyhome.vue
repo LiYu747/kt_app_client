@@ -1,19 +1,20 @@
 <template>
 	<view class="">
 		<subunit :retur='false' titel='物业'></subunit>
-		<view class="userSelection pos-abs">
-			<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
-			<view v-show="isShowType == true" class="typeBox flex-d al-center">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
-				<view class="typeLine">
+		<view class="userSelection" :style="{height: this.$store.state.customBar + 'rpx' }">
+			<view class="navBox pos-abs">
+				<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
+				<view v-show="isShowType == true" class="typeBox flex-d al-center">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
+					<view class="typeLine">
+					</view>
+					<view class="fz-12 itemType flex ju-center al-center"
+					 v-for="item in userType"
+					 @click="selecType(item)"
+					  :key='item.id'>
+						{{item.name}}
+					</view>
 				</view>
-				<view class="fz-12 itemType flex ju-center al-center"
-				 v-for="item in userType"
-				 @click="selecType(item)"
-				  :key='item.id'>
-					{{item.name}}
-				</view>
-		
 			</view>
 		</view>
 		<view class="contenBox flex">
@@ -247,22 +248,23 @@
 		margin-top: 40rpx;
 	}
 	.userSelection {
-		top: 80rpx;
-		left: 40rpx;
+	 position: fixed;
+	 top: 0;
+	 z-index: 99;
 	}
 	
 	.sjxlIcon {
 		width: 34rpx;
 		height: 22rpx;
-		margin-left: 28rpx;
+		margin-left: 40rpx;
 	}
 	
 	.xljxImg {
 		margin-top: 5rpx;
 		width: 140rpx;
 		height: 200rpx;
-		position: absolute;
-		z-index: 9;
+		z-index: 99;
+		
 	}
 	
 	.typeLine {
@@ -270,10 +272,10 @@
 	}
 	
 	.typeBox {
-		margin-top: 5rpx;
 		width: 140rpx;
 		height: 200rpx;
 		color: #666666;
+		position: relative;
 	}
 	
 	.itemType {
@@ -288,5 +290,9 @@
 		margin-top: -10rpx;
 		width: 690rpx;
 		height: 200rpx;
+	}
+	
+	.navBox{
+		bottom: 20rpx;
 	}
 </style>

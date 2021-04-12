@@ -1,9 +1,6 @@
 <template>
 	<view>
-		<subunit titel='实名信息' class="fixed"></subunit>
-		<view class="topLine">
-
-		</view>
+		<subunit titel='实名信息'></subunit>
 		<view class="flex-d al-center">
 			<view class="contenBox">
 				<view class="flex al-center ju-between itemBox pos-rel" @click="settingPsw(index)" v-for=" (item,index) in locdata" :key='item.id'>

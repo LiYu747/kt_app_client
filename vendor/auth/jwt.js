@@ -60,7 +60,6 @@ class JWT{
 		let jwtPre = "Bearer ";
 		let str = jwt_token.slice(jwtPre.length);
 		let jwtArr = str.split('.'); 
-		
 		let info = jwtArr.length == 3 ? jwtArr[1] : null;
 		if(!info ) return null;
 		return JSON.parse(base64.decode(info));

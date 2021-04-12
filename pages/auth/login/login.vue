@@ -21,7 +21,7 @@
 					密码登录
 				</view>
 			</view>
-			<image src="../../../image/zhuanh.png" class="zhuanh" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/zhuanh.png" class="zhuanh" mode=""></image>
 		</view>
 		<!-- 输入框 -->
 		<view class="top flex-d al-center">
@@ -272,7 +272,6 @@
 						}
 
 						let info = jwt.parseToken(res.data.data.jwt_token);
-
 						if (!info) return;
 
 						// console.log('login data',info);

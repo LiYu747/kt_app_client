@@ -3,7 +3,7 @@
         <view class="boxss flex flex-w">
         	<view class="flex-d al-center loyout ju-around" v-for="(item,index) in lists" :key='index' @click="goclass(item)">
         		   <image :src="item.image" class="itemimg" mode=""></image>
-				   <view class="  text">
+				   <view class="text">
 				   	{{item.name}}
 				   </view>
         	</view>

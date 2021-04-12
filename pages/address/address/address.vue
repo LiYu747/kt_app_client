@@ -1,6 +1,6 @@
 <template>
 	<view class=" pos-rel content">
-		<subunit ref='xcoll' :retur='false' class="fled" titel="入住信息" ></subunit>
+		<subunit ref='xcoll' :retur='false' titel="入住信息" ></subunit>
 		<view class="location" :class="Gshow == 2?'locIndex':''">
 			<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg" mode=""></image>
 		</view>
@@ -18,17 +18,17 @@
 					<view class="bai Gtext">
 						填写地址详细信息
 					</view>
-					<image src="../../../image/Newguidance/arrowsRU.png" class="arrowsRU" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsRU.png" class="arrowsRU" mode=""></image>
 				</view>
 			</view>
 		</view>
 		<view v-if="Gshow == 4" class="">
 			<view @click="gotohome"  @touchmove.stop.prevent class="guideBox2">
-				<image src="../../../image/Newguidance/ele.png" mode="" class="ele"></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/ele.png" mode="" class="ele"></image>
 
 			</view>
 		</view>
-			<image v-show="flag == true" src="../../../image/Newguidance/addLogo.png" class="addLogo" mode=""></image> 
+			<image v-show="flag == true" src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/addLogo.png" class="addLogo" mode=""></image> 
 	</view>
 </template>
 
@@ -215,7 +215,6 @@
 	}
 
 	.img {
-		margin-top: 128rpx;
 		width: 100%;
 		height: 156rpx;
 

@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<view class="fiedx">
+	
 			<subunit titel='入住查看'></subunit>
 			<view @click="xlshow = !xlshow" class="searchBox ">
 				<view class="allTx flex al-center">
@@ -14,10 +14,6 @@
 					{{item.label}}
 				</view>
 			</view>
-		</view>
-		<view class="topLine">
-
-		</view>
 
 		<view v-if="lists.length>0" class="flex-d m-t1 al-center">
 			<view class="itemBox" @click="goDetails(item,index)" v-for="(item,index) in lists" :key='item.id'>

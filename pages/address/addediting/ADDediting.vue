@@ -1,64 +1,63 @@
 <template>
-	<view class="flex-d al-center">
-		<subunit titel="地址详情" class="fixed"> </subunit>
-		<view class="topLine">
-
-		</view>
-		<view class="content">
-			<view class="postop">
-				<view class=" fied flex  pos-rel al-center" v-for="(item,index) in parameter" :key='item.id' :class="{'dv':index===parameter.length-1}">
-					<view class="">
-						{{item.label}}
-					</view>
-					<view class="m-l4">
-						{{item.value}}
-					</view>
-					<view class="line  pos-abs">
-					</view>
-				</view>
-			</view>
-		</view>
-
-		<view class="memberBox">
-			<view class="memberTil flex al-center ju-between">
-				成员
-				<image v-if="Islimits==1" @click="pushMember" src="https://oss.kuaitongkeji.com/static/img/app/forum/pushtag.png" class="pushtagimg"
-				 mode=""></image>
-			</view>
-			<view v-if="Members.length>0" class="">
-				<view class="itemBox flex ju-between al-center" @click="memberInfo(item)" :class="{'itemBtm':index==Members.length-1}"
-				 v-for="(item,index) in Members" :key='item.id'>
-					<view class="">
-						<view class="flex">
-							姓名
-							<view v-if='item.own_user' class="m-l2">
-								{{item.own_user.username}}
-							</view>
+	<view class="">
+		<subunit titel="地址详情" > </subunit>
+		<view class="flex-d al-center">
+			<view class="content">
+				<view class="postop">
+					<view class=" fied flex  pos-rel al-center" v-for="(item,index) in parameter" :key='item.id' :class="{'dv':index===parameter.length-1}">
+						<view class="">
+							{{item.label}}
 						</view>
-						<view class="flex m-t2">
-							手机号码
-							<view v-if='item.own_user' class="m-l2">
-								{{item.own_user.tel}}
-							</view>
+						<view class="m-l4">
+							{{item.value}}
+						</view>
+						<view class="line  pos-abs">
 						</view>
 					</view>
-					<view v-if="Islimits==1" class="">
-						<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+				</view>
+			</view>
+
+			<view class="memberBox">
+				<view class="memberTil flex al-center ju-between">
+					成员
+					<image v-if="Islimits==1" @click="pushMember" src="https://oss.kuaitongkeji.com/static/img/app/forum/pushtag.png"
+					 class="pushtagimg" mode=""></image>
+				</view>
+				<view v-if="Members.length>0" class="">
+					<view class="itemBox flex ju-between al-center" @click="memberInfo(item)" :class="{'itemBtm':index==Members.length-1}"
+					 v-for="(item,index) in Members" :key='item.id'>
+						<view class="">
+							<view class="flex">
+								姓名
+								<view v-if='item.own_user' class="m-l2">
+									{{item.own_user.username}}
+								</view>
+							</view>
+							<view class="flex m-t2">
+								手机号码
+								<view v-if='item.own_user' class="m-l2">
+									{{item.own_user.tel}}
+								</view>
+							</view>
+						</view>
+						<view v-if="Islimits==1" class="">
+							<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+						</view>
 					</view>
 				</view>
-			</view>
-			<view v-if="Members.length == 0 &&isLoding==false" class="nomen flex ju-center">
-				暂时还没有成员
-			</view>
-		</view>
-
-
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
-			<view class="loding flex-d al-center ju-center">
-				<view class=" ">
-					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				<view v-if="Members.length == 0 &&isLoding==false" class="nomen flex ju-center">
+					暂时还没有成员
 				</view>
-				加载中
+			</view>
+
+
+			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+				<view class="loding flex-d al-center ju-center">
+					<view class=" ">
+						<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+					</view>
+					加载中
+				</view>
 			</view>
 		</view>
 	</view>
@@ -106,7 +105,7 @@
 					},
 				],
 				id: '',
-				Islimits:'',//是否有权限添加,为1可添加
+				Islimits: '', //是否有权限添加,为1可添加
 				Members: [], //所有成员 
 				typeid: '', //用户类型
 				isLoding: false
@@ -122,7 +121,7 @@
 
 			// 用户成员详情信息
 			memberInfo(item) {
-				if(this.Islimits==0) return;
+				if (this.Islimits == 0) return;
 				// console.log(item.id);
 				uni.navigateTo({
 					url: '/pages/address/addediting/memberInfo/memberInfo?id=' + item.id
@@ -160,7 +159,7 @@
 							return;
 						}
 						let data = res.data.data
-						this.Islimits = data.allow_edit_member					
+						this.Islimits = data.allow_edit_member
 						this.typeid = data.type
 						if (data.type == 1) {
 							this.parameter[2].value = '户主'
@@ -180,7 +179,7 @@
 
 			//查看住所内的所有成员
 			allMembers() {
-				
+
 				address.lookMember({
 					data: {
 						id: this.id
@@ -234,11 +233,11 @@
 			}
 		},
 		mounted() {
-            this.Userdata()
+			this.Userdata()
 			this.getData()
 		},
 		onShow() {
-			
+
 			this.allMembers()
 		},
 		onLoad(val) {

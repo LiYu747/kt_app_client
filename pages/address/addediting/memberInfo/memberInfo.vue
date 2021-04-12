@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<subunit titel='详情' class="fixed"></subunit>
-		<view class="topLine"></view>
+		<subunit titel='详情' ></subunit>
 		<view class="contenBox flex-d al-center pos-rel">
 			<view class="itemBox flex al-center ju-between" @click="addItem(index)" v-for="(item,index) in locdata " :key='item.id'>
 				<view class="">

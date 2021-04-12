@@ -1,13 +1,6 @@
 <template>
 	<view class="">
-		<view class="fiedx">
 			<subunit titel='进出记录'></subunit>
-	
-		</view>
-		<view class="topLine">
-
-		</view>
-
 		<view v-if="lists.length>0" class="flex-d al-center ">
 			<view class="itemBox" v-for="item in lists" :key='item.id'>
 				   <view class="layoutBox">

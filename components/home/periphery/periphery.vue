@@ -16,7 +16,7 @@
 			<view v-if="locdata.length>0" class="conten flex ju-between flex-w">
 				<view class="item flex pos-rel" @click="godils(item)" v-for="(item,index) in locdata" :key='index'>
 					<image v-if="item.faceimg" :src="item.faceimg" mode="aspectFill" class="itemimg"></image>
-					<image v-else src="../../../image/lookroom/sup.jpg" mode="aspectFill" class="itemimg"></image>
+					<image v-else src="https://oss.kuaitongkeji.com/static/img/app/lookroom/sup.jpg" mode="aspectFill" class="itemimg"></image>
 					<view class="font fz-12">
 						<view class="fonts">
 							{{item.title}}

@@ -1,14 +1,13 @@
 <template>
-	<view class="flex-d al-center ovov">
-		<subunit class="pos "   titel="详情"></subunit>
-		<view class="line">
-
-		</view>
-		<view class="titel">
-			{{title}}
-		</view>
-		<view  class="desc">
-			<u-parse :html="content"></u-parse>
+	<view class="">
+		<subunit   titel="详情"></subunit>
+		<view class="flex-d al-center ovov">
+			<view class="titel">
+				{{title}}
+			</view>
+			<view  class="desc">
+				<u-parse :html="content"></u-parse>
+			</view>
 		</view>
 	</view>
 </template>

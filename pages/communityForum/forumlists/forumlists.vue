@@ -1,7 +1,7 @@
 <template>
 	<view class="">
-		<subunit class="fixed"></subunit>
-		<view class="line ">
+		<subunit></subunit>
+		<!-- <view class="line ">
 			<view class="ipt  ju-center flex al-center pos-rel">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model.trim="value" @confirm='confirm' placeholder="请输入帖子关键词" />
@@ -10,7 +10,7 @@
 					取消
 				</view>
 			</view>
-		</view>
+		</view> -->
 		<!-- tag标签 -->
 		<view v-if="flag == false" class="back">
 			<view class=" wid">
@@ -34,7 +34,7 @@
 							<view class="item" @click="gotoD(item)" v-for="item in items.list" :key='item.id'>
 								<view class="flex">
 									<!-- 头像 -->
-									<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
+									<image :src="item.own_user.avatar" class="itemimg" mode="aspectFill"></image>
 									<view class="name m-l1 m-t1">
 										{{item.own_user.nickname}}
 										<view class="time">
@@ -400,8 +400,11 @@
 		 if (this.isLoding == true || this.hasMore == false) return;
 		 this.search();
 		},
+		onUnload() {
+			this.$store.commit("isComment", '');
+		},
 		onHide() {
-
+		
 		},
 		onShow() {
 			this.iSlogin()

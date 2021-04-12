@@ -72,7 +72,7 @@
 			</view>
 
 			<view @click="Address" class="addressBox m-t3 flex  fz-14">
-				<image src="../../../../image/lookroom/add.png" class="addImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/add.png" class="addImg" mode=""></image>
 				<view class="m-l2 addressmsg">
 					{{roomInof.village}}
 				</view>
@@ -94,7 +94,7 @@
 			</view>
 
 			<view @click="consult" class="">
-				<image src="../../../../image/lookroom/consult.png" class="consultImg" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/lookroom/consult.png" class="consultImg" mode=""></image>
 			</view>
 
 			<view class="btmLine">

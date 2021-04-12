@@ -1,12 +1,8 @@
 <template>
 	<view class="">
-		<subunit class="fidex" titel="最新拜访信息" ></subunit>
+		<subunit  titel="最新拜访信息" ></subunit>
 		<view @click="addTo" class="pos-abs move">
 			添加申请
-		</view>
-
-		<view class="topline">
-
 		</view>
 		<view v-if="getmsg.info" class="cont">
 			<view class="nav flex al-center">

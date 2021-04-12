@@ -1,69 +1,12 @@
 <template>
 	<view class="">
-		<subunit class="fidx" titel="我的"></subunit>
-
-		<view>
-			<view>
-				<u-tabs-swiper ref="uTabs" active-color='#F07535' :list="tagdata" :current="current" @change="tabsChange" :is-scroll="true" swiperWidth="750"></u-tabs-swiper>
-			</view>
-			<swiper :current="swiperCurrent" @change="Onchange" @transition="transition" 
-			 @animationfinish="animationfinish">
-				<swiper-item class="swiper-item"  v-for="(items, index) in tagdata" :key="index">
-						<scroll-view scroll-y style="height:100%;width: 100%;" @scrolltolower="onreachBottom">
-							<view class="">
-								<view class="item" @click="gotoD(item)" v-for="item in items.list" :key='item.id'>
-									<view class="flex">
-										<!-- 头像 -->
-										<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
-										<view class="name m-l1 m-t1">
-											{{item.own_user.nickname}}
-											<view class="time">
-												{{item.created_at.slice(0,16)}}
-											</view>
-										</view>
-									</view>
-									<!-- 内容 -->
-									<view class="content">
-										<view class="show">
-											{{item.title}}
-										</view>
-									</view>
-									<!-- 图片 -->
-									<view class="flex al-center m-t4">
-										<view v-for="(itemss,indexss) in item.album.slice(0,3)" :key='indexss'>
-											<image :src="itemss.url" class="items" mode="aspectFill"></image>
-										</view>
-									</view>
-								</view>
-							</view>
-							<view  v-show="Isnext == true" class=" flex ju-center al-center lodbox">
-								<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-								加载中...
-							</view>
-							<view  class="flex ju-center m-t3 m-b2 fz-12" >
-								{{items.text}}
-							</view>
-							<view class="nono flex al-center ju-center" v-if="items.list.length==0 && isLoding == false">
-								没有您想看类型的帖子,试试其他的吧
-							</view>
-							
-						
-						</scroll-view>
-				</swiper-item>
-			</swiper>
-		</view>
-		<view v-show="isLoding == true " class="showloding flex al-center ju-center">
-			<view class="loding flex-d al-center ju-center">
-				<view class=" ">
-					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-				</view>
-				加载中
-			</view>
-		</view>
+	   <view class="" @click="add">
+	   	    {{text}}
+	   </view>
 	</view>
 </template>
 
-<script>
+<script >
 import subunit from '../../../components/sub-unit/subunit.vue'
 import village from '../../../vendor/village/village.js'
 export default {
@@ -75,7 +18,8 @@ props: {},
 data() {
 	return {
 		lists:[{name:'撒大'},{name:'撒大大'},{name:'阿是'},{name:'撒是'},{name:'撒是'},{name:'撒s都是是'},{name:'是是'}],
-		text :' ',
+		 arr:{name:"撒大1",age:15,color:"red"},
+		text :'啊啊 ',
 		tagdata: [],
 		current: 0, // tabs组件的current值，表示当前活动的tab选项
 		swiperCurrent: 0, // swiper组件的current值，表示当前那个swiper-item是活动的
@@ -85,11 +29,23 @@ data() {
 		hasMore: true,
 		flag: false,
 		idx: 0,
-		Isnext : false
+		Isnext : false,
+		msg:[]
 	}
 },
 
 methods: {
+	
+	add(){
+		const x = (x, y) => { return x * y };
+		var z = x(2,5)
+		this.msg.push(1)
+		console.log(z);
+		// for (var x in this.lists ){
+		// 	console.log( this.lists[x]);
+		// }
+		this.text = '改变'
+	},
 	 //滑动切换
 	 Onchange(e){
 		let current = e.detail.current;
@@ -235,6 +191,7 @@ methods: {
 	},
 	mounted() {
 		this.grtColumn()
+	
 	},
 	// 下拉加载更多
 	onReachBottom() {

@@ -14,10 +14,15 @@ export default new Vuex.Store({
 		homeContent:{},
 		roomisDel:'',
 		saleDel:'',
-		checkIspass:''
+		checkIspass:'',
+		customBar: 0,
 	},
 	// 同步更改值
 	mutations:{
+		 //用户导航栏高度
+		 customBar(state,info){
+			 state.customBar = info
+		 },
 		changeValue(state,info){
 		  	console.log(info)
 			},

@@ -1,68 +1,70 @@
 <template>
-	<view class="flex-d al-center">
-		<subunit class="posp fiexd" titel="拜访申请"></subunit>
+	<view class="">
+		<subunit  titel="拜访申请"></subunit>
 		<view @click="gorecord" class="pos-abs fiexd location">
 			申请记录
 		</view>
-		<view class=" message">
-			<view class="text flex al-center">
-				基本信息
+		<view class="flex-d al-center">
+			<view class=" message">
+				<view class="text flex al-center">
+					基本信息
+				</view>
+				<view class="">
+					<view class="item flex al-center pos-rel" @click="itemlabel(index)" v-for="(item,index) in  record" :key='item.id'
+					 :class="{'dv':index===record.length-1}">
+						<u-field v-model="item.value " :label="item.label" :placeholder="item.placeholder" :clearable=false :required='item.required'
+						 input-align='right' :disabled="item.disabled" label-width="170">
+						</u-field>
+						<view v-if="index===record.length-1" class="pos-abs righ">
+							<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
+						</view>
+					</view>
+				</view>
+				<u-select v-model="show" mode="mutil-column-auto" :default-value='value' :list="renderVillageLists" @confirm="confirm"></u-select>
 			</view>
-			<view class="">
-				<view class="item flex al-center pos-rel" @click="itemlabel(index)" v-for="(item,index) in  record" :key='item.id'
-				 :class="{'dv':index===record.length-1}">
-					<u-field v-model="item.value " :label="item.label" :placeholder="item.placeholder" :clearable=false :required='item.required'
-					 input-align='right' :disabled="item.disabled" label-width="170">
-					</u-field>
-					<view v-if="index===record.length-1" class="pos-abs righ">
-						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xiala.png" class="xiala" mode=""></image>
+			<!-- 上传文件 -->
+			<view class="uploadFiles">
+				<view class="uploadTil flex al-center">
+					上传图片
+					<view v-if="textShow==true" class="fz-12 m-l1 c-red">
+						(*您可以上传外卖或者快递的图片给用户)
+					</view>
+				</view>
+				<view class="filesBox flex">
+					<view v-if="images" class="" >
+						<image :src="images" class="itemImg" mode="aspectFill"></image>
+					</view>
+					<view @click="succ" class="puls flex-d al-center ju-center">
+						<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>
+						添加
 					</view>
 				</view>
 			</view>
-			<u-select v-model="show" mode="mutil-column-auto" :default-value='value' :list="renderVillageLists" @confirm="confirm"></u-select>
-		</view>
-		<!-- 上传文件 -->
-		<view class="uploadFiles">
-			<view class="uploadTil flex al-center">
-				上传图片
-				<view v-if="textShow==true" class="fz-12 m-l1 c-red">
-					(*您可以上传外卖或者快递的图片给用户)
+		
+			<!-- 备注 -->
+			<view class="pos-rel reMessage">
+				<view class="textTil flex al-center">
+					申请备注
+				</view>
+				<view class="">
+					<textarea class="tar" maxlength="1000" v-model="text"></textarea>
 				</view>
 			</view>
-			<view class="filesBox flex">
-				<view v-if="images" class="" >
-					<image :src="images" class="itemImg" mode="aspectFill"></image>
-				</view>
-				<view @click="succ" class="puls flex-d al-center ju-center">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/home/push.png" class="pushimg" mode=""></image>
-					添加
+			<!-- 提交 -->
+			<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
+				<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
+				<view class="pos-abs subtext">
+					提交
 				</view>
 			</view>
-		</view>
-
-		<!-- 备注 -->
-		<view class="pos-rel reMessage">
-			<view class="textTil flex al-center">
-				申请备注
-			</view>
-			<view class="">
-				<textarea class="tar" maxlength="1000" v-model="text"></textarea>
-			</view>
-		</view>
-		<!-- 提交 -->
-		<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
-			<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
-			<view class="pos-abs subtext">
-				提交
-			</view>
-		</view>
-
-		<view v-show="isLoding == true" class="showloding flex al-center ju-center">
-			<view class="loding flex-d al-center ju-center">
-				<view class=" ">
-					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+		
+			<view v-show="isLoding == true" class="showloding flex al-center ju-center">
+				<view class="loding flex-d al-center ju-center">
+					<view class=" ">
+						<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+					</view>
+					上传中
 				</view>
-				上传中
 			</view>
 		</view>
 	</view>
@@ -505,7 +507,7 @@
 <style scoped lang="scss">
 	.message {
 
-		margin-top: 170rpx;
+		margin-top: 30rpx;
 		width: 644rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
