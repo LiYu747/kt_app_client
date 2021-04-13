@@ -112,12 +112,24 @@
    margin-left: 40rpx;
 }
 
+.m-l5{
+	margin-left: 50rpx;
+}
+
 .m-r1 {
 	margin-right: 10rpx;
 }
 
 .m-r2 {
 	margin-right: 20rpx;
+}
+
+.m-r3 {
+	margin-right: 30rpx;
+}
+
+.m-r4{
+	margin-right: 40rpx;
 }
 
 .m-t1 {

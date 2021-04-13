@@ -275,6 +275,7 @@
 	.logoImg {
 		width: 690rpx;
 		height: 360rpx;
+		border-radius: 20rpx;
 	}
 
 	.cutBox {

@@ -1,9 +1,11 @@
 <template>
 	<view class="">
 			<subunit titel='消息' class=""></subunit>
-			<view @click="ReadAll" class="empty">
+		<view class="navBox" :style="{height: this.$store.state.customBar + 'rpx'}">
+			<view @click="ReadAll" class="empty pos-abs">
 				全部已读
 			</view>
+		</view>
 		<view v-if="infoLists.length>0" class="contenBox">
 			<view class="flex-d al-center"  v-for="item in infoLists" :key='item.id'>
 				<view class="itemTime">
@@ -209,16 +211,17 @@
 </script>
 
 <style scoped lang="scss">
-	.fixed {
-		width: 100%;
+    .navBox{
+		width: 30%;
+		top: 0;
+		right: 0;
 		position: fixed;
-		z-index: 9;
+		z-index: 99;
 	}
 
 	.empty {
-		position: fixed;
-		top: 84rpx;
 		right: 50rpx;
+		bottom: 20rpx;
 		color: #FFFFFF;
 		font-size: 15px;
 		z-index: 999;

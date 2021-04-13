@@ -1,11 +1,10 @@
 <template>
 	<view>
-		<subunit titel='申请成为' class="fixed"></subunit>
-		<view @click="goRecord" class="record">
-			申请进度
-		</view>
-		<view class="lineTop">
-
+		<subunit titel='申请成为'></subunit>
+		<view class="navBox" :style="{height: this.$store.state.customBar + 'rpx'}">
+			<view @click="goRecord" class="record pos-abs">
+					申请进度
+			</view>
 		</view>
 		<view class="flex-d al-center">
 			<view class="msgBox">
@@ -292,18 +291,23 @@
 </script>
 
 <style scoped lang="scss">
+	.navBox {
+		width: 30%;
+		top: 0;
+		right: 0;
+		position: fixed;
+		z-index: 99;
+	}
 	.fixed {
 		position: fixed;
 		z-index: 9;
 	}
 
 	.record {
-		top: 84rpx;
-		right: 50rpx;
-		z-index: 10;
+	   bottom: 20rpx;
 		color: #FFFFFF;
 		font-size: 15px;
-		position: fixed;
+		right: 40rpx;
 	}
 
 	.lineTop {

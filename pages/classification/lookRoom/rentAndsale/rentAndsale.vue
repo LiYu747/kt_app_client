@@ -1,8 +1,6 @@
 <template>
 	<view class="">
-		<subunit class="fidx" titel="房屋租售"></subunit>
-		<view class="line">
-		</view>
+		<subunit titel="房屋租售"></subunit>
 		<view @touchstart="start" @touchend="end" class="">
 			<view class="nav flex al-center posd">
 				<view class="left flex al-center ju-center" v-for="(item,index) in til" @click="add(item,index)" :class="{dv:index===0}"

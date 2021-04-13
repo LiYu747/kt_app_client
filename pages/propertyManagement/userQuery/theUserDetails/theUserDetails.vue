@@ -20,7 +20,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="accessoryBox flex-d al-center">
 				<view class="accTitle flex al-center ju-between">
 					<view class="">
@@ -50,21 +50,22 @@
 		data() {
 			return {
 				displayBox: [{
-					title: '姓名',
-					content: '李海峰'
-				},
-				{
-					title: '手机号',
-					content: '152****4145'
-				},
-				{
-					title: '身份证号',
-					content: '235648********3654'
-				},
-				{
-					title: '地址',
-					content: '怡心湖小区1单元2003'
-				}]
+						title: '姓名',
+						content: '李海峰'
+					},
+					{
+						title: '手机号',
+						content: '152****4145'
+					},
+					{
+						title: '身份证号',
+						content: '235648********3654'
+					},
+					{
+						title: '地址',
+						content: '怡心湖小区1单元2003'
+					}
+				]
 			}
 		},
 		methods: {
@@ -124,8 +125,8 @@
 		height: 70rpx;
 		border-bottom: 1px solid #cccccc;
 	}
-	
-	.accessoryBox{
+
+	.accessoryBox {
 		margin-top: 30rpx;
 		width: 650rpx;
 		border-radius: 10rpx;
@@ -135,20 +136,21 @@
 		color: #666666;
 		padding-bottom: 30rpx;
 	}
-	
-	.accTitle{
+
+	.accTitle {
 		margin-top: 20rpx;
 		width: 100%;
 		height: 60rpx;
 		border-bottom: 1px solid #cccccc;
 		font-size: 18px;
 	}
-	.accessoryImgbox{
+
+	.accessoryImgbox {
 		margin-top: 20rpx;
 		width: 590rpx;
 	}
-	
-	.timgImg{
+
+	.timgImg {
 		width: 120rpx;
 		height: 142rpx;
 		margin-right: 20rpx;

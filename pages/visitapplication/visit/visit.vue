@@ -1,9 +1,11 @@
 <template>
 	<view class="">
 		<subunit  titel="拜访申请"></subunit>
-		<view @click="gorecord" class="pos-abs fiexd location">
+	<view class="navBox" :style="{height:  this.$store.state.customBar + 'rpx'}">
+		<view @click="gorecord" class="pos-abs  location">
 			申请记录
 		</view>
+	</view>
 		<view class="flex-d al-center">
 			<view class=" message">
 				<view class="text flex al-center">
@@ -505,8 +507,14 @@
 </script>
 
 <style scoped lang="scss">
+	.navBox {
+		width: 30%;
+		top: 0;
+		right: 0;
+		position: fixed;
+		z-index: 99;
+	}
 	.message {
-
 		margin-top: 30rpx;
 		width: 644rpx;
 		background: #FFFFFF;
@@ -607,8 +615,8 @@
 	.location {
 		font-size: 30rpx;
 		color: #FFFFFF;
-		top: 82rpx;
 		right: 50rpx;
+		bottom: 20rpx;
 	}
 
 	.fiexd {

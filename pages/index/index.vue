@@ -3,14 +3,16 @@
 		<view class="nav" :style="{	height:iStatusBarHeight + 'rpx'}">
 			<view class="ipt  ju-center flex al-center">
 				<view v-if='user' class="userSelection pos-abs">
-					<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon"
-					 mode=""></image> 
-					<view v-show="isShowType == true" class="typeBox flex-d al-center">
-						<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
-						<view class="typeLine">
+					<image @click="isShowType = !isShowType" src="../../image/Clssmenu.png" class="sjxlIcon" mode=""></image>
+					<view v-show="isShowType == true" class="pos-abs  m-t1">
+						<view class="trilateral">
 						</view>
-						<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
-							{{item.name}}  
+						<view class="nomenBox">
+							<view class="itemType flex al-center" v-for="item in userType" :key='item.id'>
+								<view @click="selecType(item)" class="">
+									{{item.name}}
+								</view>
+							</view>
 						</view>
 					</view>
 				</view>
@@ -30,8 +32,8 @@
 				</view>
 			</view>
 		</view>
-			<view  :style="{height:iStatusBarHeight + 'rpx'}">
-			</view> 
+		<view :style="{height:iStatusBarHeight + 'rpx'}">
+		</view>
 		<!-- 主页 -->
 		<view class="flex-d al-center">
 			<view class="boxss">
@@ -43,8 +45,9 @@
 				 effect3d-previous-margin='60' indicator-pos='none' :effect3d="true"></u-swiper>
 			</view>
 			<!-- 操作 -->
-			<view  class="flex operation ju-between">
-				<view  class="flex-d al-center pos-rel" v-for="(item,index) in localdata" @click="operation(item)" :class="Gshow == 5&&index==idx?'Gitem':''" :key='item.id'>
+			<view class="flex operation ju-between">
+				<view class="flex-d al-center pos-rel" v-for="(item,index) in localdata" @click="operation(item)" :class="Gshow == 5&&index==idx?'Gitem':''"
+				 :key='item.id'>
 					<image :src="item.image" class="itemimg" mode=""></image>
 					<view class="itemtext">
 						{{item.name}}
@@ -68,7 +71,7 @@
 										朋友做客等可填写信息，房主通过后小区大门自动识别打开
 									</view>
 								</view>
-								
+
 							</view>
 						</view>
 						<view v-if="idx == 2&&index==2" class="m-ln3 pos-abs">
@@ -77,10 +80,10 @@
 								<view class=" al-center flex-d">
 									来访记录
 									<view class="bai">
-									可查看来访记录详细信息，所有亲戚朋友的来访记录都在这里！
+										可查看来访记录详细信息，所有亲戚朋友的来访记录都在这里！
 									</view>
 								</view>
-								
+
 							</view>
 						</view>
 						<view class="m-ln4 pos-abs" v-if="idx==3&&index==3">
@@ -92,7 +95,7 @@
 										安全无接触，可直接扫码进入小区
 									</view>
 								</view>
-								
+
 							</view>
 							<view class="lowRight">
 								<view class="bai lowT">
@@ -116,7 +119,7 @@
 			<button @click="gogo">点击</button>
 		</view>
 		<!-- 视频播放 -->
-		<view v-if="paly == true"  @touchmove.stop.prevent class=" pos-abs moive flex-d al-center ju-center">
+		<view v-if="paly == true" @touchmove.stop.prevent class=" pos-abs moive flex-d al-center ju-center">
 			<view @click="close" class="showback pos-abs">
 			</view>
 			<video :src="videoUrl" :poster='cover'></video>
@@ -132,11 +135,11 @@
 			</view>
 		</view>
 		<!-- 用户指导 -->
-		<view v-if="Gshow == 0"  @touchmove.stop.prevent class="guideBox">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/home.png" class="addLogo" mode=""></image>
+		<view v-if="Gshow == 0" @touchmove.stop.prevent class="guideBox">
+			<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/home.png" class="addLogo" mode=""></image>
 		</view>
-		
-		<view v-if="Gshow == 1" @touchmove.stop.prevent class="guideBox">  
+
+		<view v-if="Gshow == 1" @touchmove.stop.prevent class="guideBox">
 			<view class="flex-d al-center bai guidePush">
 				添加地址
 				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsD.png" mode="" class="arrowsDimg"></image>
@@ -152,7 +155,7 @@
 		</view>
 
 		<view v-if="Gshow == 5" @touchmove.stop.prevent class="">
-			<view  @click="nextT" class="guideBox">
+			<view @click="nextT" class="guideBox">
 				<view v-show="idx == 3" class="btmbox flex ju-center">
 					<view class="addBox">
 					</view>
@@ -187,7 +190,7 @@
 		},
 		data() {
 			return {
-				iStatusBarHeight:0,
+				iStatusBarHeight: 0,
 				userType: [{
 						name: '用户',
 						type: 'user',
@@ -222,21 +225,27 @@
 			// console.log(val);
 		},
 		methods: {
-			
+
 			nextT() {
-				this.idx ++
-				if(this.idx==4) {
-					let num = this.Gshow+1
-					cache.set('Gshow',{key:'步骤'+ num,value: num})
+				this.idx++
+				if (this.idx == 4) {
+					let num = this.Gshow + 1
+					cache.set('Gshow', {
+						key: '步骤' + num,
+						value: num
+					})
 					this.Gshow = null
 					uni.switchTab({
-						url:'/pages/user/userCenter/userCenter'
+						url: '/pages/user/userCenter/userCenter'
 					})
 				}
 			},
 			GgoAdd() {
-				let num = this.Gshow+1
-				cache.set('Gshow',{key:'步骤'+ num,value: num})
+				let num = this.Gshow + 1
+				cache.set('Gshow', {
+					key: '步骤' + num,
+					value: num
+				})
 				uni.switchTab({
 					url: '/pages/address/address/address'
 				})
@@ -276,7 +285,7 @@
 			//选择用户类型
 			selecType(item) {
 				if (item.type == 'user') return;
-				
+
 				uni.reLaunch({
 					url: item.url
 				})
@@ -311,7 +320,7 @@
 			},
 			// 跳转
 			operation(item) {
-				if(this.Gshow == 5) {
+				if (this.Gshow == 5) {
 					this.nextT()
 					return;
 				};
@@ -383,41 +392,43 @@
 
 		},
 		onLoad() {
-			
+
 		},
 		mounted() {
 			this.Chart()
 			this.operationData()
 			this.iStatusBarHeight = uni.getSystemInfoSync().statusBarHeight + 128
-			this.$store.commit('customBar',this.iStatusBarHeight)
+			cache.set("customBar", this.iStatusBarHeight)
 		},
 		onShow() {
 			if (cache.get("Gshow")) {
-				this.Gshow = cache.get("Gshow").value 
-					uni.hideTabBar()
-				if(this.Gshow == 0){
-				uni.showModal({
-					title:'提示',
-					content:'我们将为您开启新手指导教程',
-					cancelText:'跳过',
-					success: (res) => {
-						if(res.confirm){
-							this.Gshow = this.Gshow + 1
-							cache.set('Gshow',{key:'步骤'+ this.Gshow,value: this.Gshow})
+				this.Gshow = cache.get("Gshow").value
+				uni.hideTabBar()
+				if (this.Gshow == 0) {
+					uni.showModal({
+						title: '提示',
+						content: '我们将为您开启新手指导教程',
+						cancelText: '跳过',
+						success: (res) => {
+							if (res.confirm) {
+								this.Gshow = this.Gshow + 1
+								cache.set('Gshow', {
+									key: '步骤' + this.Gshow,
+									value: this.Gshow
+								})
+							}
+							if (res.cancel) {
+								cache.set('first', true)
+								cache.forget('Gshow')
+								this.Gshow = null
+								uni.showTabBar()
+							}
 						}
-						if(res.cancel){
-							cache.set('first',true)
-							cache.forget('Gshow')
-							this.Gshow = null
-							uni.showTabBar()
-						}
-					}
-				})	
+					})
 				}
-			}  
-			else{ 
+			} else {
 				uni.showTabBar()
-				}
+			}
 			this.getInform()
 			let user = cache.get('jwt')
 			if (user) {
@@ -449,37 +460,39 @@
 </script>
 
 <style>
-	
-
-	.m-ln1{
+	.m-ln1 {
 		left: 0rpx;
 		top: 160rpx;
 		width: 600rpx;
 		padding-left: 50rpx;
 	}
-	.m-ln2{
+
+	.m-ln2 {
 		padding-left: 40rpx;
 		width: 350rpx;
 		left: 0rpx;
 		top: 160rpx;
 	}
-	.m-ln3{
-		width: 250rpx ;
+
+	.m-ln3 {
+		width: 250rpx;
 		padding-left: 240rpx;
 		left: -200rpx;
 		top: 160rpx;
 	}
-	.m-ln4{
+
+	.m-ln4 {
 		width: 150rpx;
 		left: -20rpx;
 		top: 160rpx;
 	}
+
 	.wrap {
 		padding: 40rpx;
 	}
 
 	.content {
-	/* 	display: flex;
+		/* 	display: flex;
 		flex-direction: column;
 		align-items: center; */
 		background: rgb(245, 245, 245);
@@ -521,7 +534,7 @@
 		width: 750rpx;
 		height: 80rpx;
 		position: absolute;
-		bottom: 10rpx; 
+		bottom: 10rpx;
 	}
 
 	.input {
@@ -632,14 +645,12 @@
 	}
 
 	.userSelection {
-		top: 30rpx;
-		left: 40rpx;
+		left: 50rpx;
 	}
 
 	.sjxlIcon {
 		width: 34rpx;
-		height: 22rpx;
-		margin-left: 28rpx;
+		height: 34rpx;
 	}
 
 	.xljxImg {
@@ -662,15 +673,11 @@
 	}
 
 	.itemType {
-		margin-top: 10rpx;
-		width: 100%;
-		height: 40rpx;
-		border-bottom: 1px solid #E6E6E6;
+		height: 60rpx;
 	}
 
 	.informBox {
-		top: 30rpx;
-		right: 70rpx;
+		right: 50rpx;
 	}
 
 	.infosImg {
@@ -748,72 +755,89 @@
 		width: 150rpx;
 		height: 170rpx;
 		left: 30rpx;
-		 background: transparent;
+		background: transparent;
 	}
-	
+
 	.Gitem {
 		z-index: 99999;
 		background: #FFFFFF;
 		padding: 10rpx;
 	}
-	
-	.arrowsLU{
+
+	.arrowsLU {
 		width: 120rpx;
 		height: 88rpx;
 	}
-	
-	.lowImg{
+
+	.lowImg {
 		width: 110rpx;
 		height: 100rpx;
 	}
-	
-	.Gmsgbox{
+
+	.Gmsgbox {
 		position: fixed;
 		top: 680rpx;
 	}
-	
-	.Lutext{
+
+	.Lutext {
 		margin-top: 55rpx;
 		margin-left: 10rpx;
 		color: #FFD428;
 	}
-	
-	.upward{
+
+	.upward {
 		width: 50rpx;
 		height: 100rpx;
 	}
-	
-	.upText{
-		color:#FFD428 ;
+
+	.upText {
+		color: #FFD428;
 		margin-left: -40rpx;
 	}
-	
-	.upText2{
-		color:#FFD428 ;
+
+	.upText2 {
+		color: #FFD428;
 		margin-left: -200rpx;
 	}
-	
-	.goHome{
-		color:#FFD428 ;
+
+	.goHome {
+		color: #FFD428;
 		position: relative;
 		left: -220rpx;
 		top: -40rpx;
 		width: 240rpx;
 	}
-	
-	.lowRight{
+
+	.lowRight {
 		position: fixed;
 		bottom: 100rpx;
 	}
-	
-	.lowT{
+
+	.lowT {
 		margin-left: -200rpx;
 	}
-	
-	.addLogo{
+
+	.addLogo {
 		width: 100%;
 		height: 100rpx;
 		position: fixed;
 		bottom: 0;
+	}
+	
+	.trilateral {
+		width: 0;
+		height: 0;
+		border: 14rpx solid;
+		border-color: transparent transparent white white;
+	}
+	
+	.nomenBox {
+		margin-top: -10rpx;
+		border-radius: 10rpx;
+		width: 240rpx;
+		padding: 20rpx 30rpx;
+		background: #FFFFFF;
+		font-size: 14px;
+		color: #666666;
 	}
 </style>

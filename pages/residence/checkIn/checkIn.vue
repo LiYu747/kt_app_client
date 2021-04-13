@@ -1,9 +1,11 @@
 <template>
 	<view class="">
 		<subunit :abel=able  titel="申请入住"></subunit>
-		<view @click="Application" class=" pos-abs move">
-			申请记录
-		</view> 
+		<view class="navBox" :style="{height:  this.$store.state.customBar + 'rpx'}">
+			<view @click="Application" class=" pos-abs move">
+				申请记录
+			</view> 
+		</view>
 		<view class="flex-d al-center">
 			<view class=" message">
 				<view class="text flex al-center">
@@ -526,18 +528,13 @@
 </script>
 
 <style scoped lang="scss">
-	.easy {
-		width: 160rpx !important;
-		height: 60rpx !important;
-		font-size: 32rpx !important;
-		border: none !important;
-		direction: rtl !important;
-
-		/deep/ .uni-input-placeholder {
-			font-size: 24rpx;
-		}
-	}
-
+      .navBox {
+      	width: 30%;
+      	top: 0;
+      	right: 0;
+      	position: fixed;
+      	z-index: 99;
+      }
 	.message {
 		margin-top: 30rpx;
 		width: 644rpx;
@@ -650,12 +647,11 @@
 	}
 
 	.move {
-		top: 82rpx;
+		bottom: 20rpx;
 		right: 50rpx;
-		position: fixed;
 		color: #FFFFFF;
 		font-size: 30rpx;
-		z-index: 99;
+		
 	}
 
 	/deep/ .u-select__body__picker-view__item[data-v-a577ac80] {

@@ -1,8 +1,7 @@
 <template>
 	<view class="">
-		<view class="fiedx">
 			<subunit titel='用户查询'></subunit>
-			<view class="searchBox flex al-center ju-center pos-rel">
+			<view class="searchBox flex al-center ju-center">
 				<view class="searchBack flex al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/serach.png" class="serachImg" mode=""></image>
 					<input type="text" class="ipt" v-model="username" @confirm="search" placeholder="请输入关键词" />
@@ -11,10 +10,9 @@
 					取消
 				</view>
 			</view>
-		</view>
-		<view class="topLine">
-
-		</view>
+			<view class="topLine">
+				
+			</view>
 		<view v-if="lists.length>0" class="flex-d al-center m-t1">
 			<view class="itemBox" @click="goUserDetails" v-for=" (item,index) in lists" :key='index'>
 				<view class="flex al-center">
@@ -230,10 +228,16 @@
 	}
 
 	.searchBox {
+		position: fixed;
 		width: 100%;
 		height: 88rpx;
 		background: #FFFFFF;
 		border-bottom: 1px solid #eeeeee;
+		z-index: 99;
+	}
+	
+	.topLine{
+		height: 88rpx;
 	}
 
 	.searchBack {

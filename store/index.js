@@ -1,5 +1,6 @@
 import Vue  from 'vue'
 import Vuex from  "vuex"
+import cache from '../vendor/cache/cache.js'
 Vue.use(Vuex)
 export default new Vuex.Store({
 	state:{
@@ -15,14 +16,10 @@ export default new Vuex.Store({
 		roomisDel:'',
 		saleDel:'',
 		checkIspass:'',
-		customBar: 0,
+		customBar: cache.get("customBar"),//用户状态栏高度
 	},
 	// 同步更改值
 	mutations:{
-		 //用户导航栏高度
-		 customBar(state,info){
-			 state.customBar = info
-		 },
 		changeValue(state,info){
 		  	console.log(info)
 			},

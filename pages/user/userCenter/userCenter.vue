@@ -1,13 +1,9 @@
 <template>
 	<!-- 个人中心 -->
 	<div class="whole">
-		<view class="nav ">
-			<view class="title flex al-center ju-center pos-rel">
-				个人中心
-			</view>
-		</view>
-		<view class=" location" @click="nextT" :class="Gshow==6&&idx==0?'zIndex':''" >
-			<image @click="install"  src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
+		<submit :retur='false' titel="个人中心"></submit>
+		<view class=" location" @click="nextT" :style="{height: this.$store.state.customBar + 'rpx'}" :class="Gshow==6&&idx==0?'zIndex':''" >
+			<image @click="install"  src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg pos-abs" mode=""></image>
 			<view v-if='idx==0&&Gshow==6' class="pos-abs flex staTex">
 				<view class="flex-d al-center m-l3 m-r2 m-t4 setTex">
 					信息设置 
@@ -17,9 +13,6 @@
 				</view>
 				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/arrowsRU.png" mode="" class="arrowsRU "></image>
 			</view>
-		</view>
-		<view class="topLine">
-
 		</view>
 		<view class="">
 			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" mode="" class="jximg"></image>
@@ -80,10 +73,12 @@
 	import jwt from '../../../vendor/auth/jwt.js';
 	import cache from "../../../vendor/cache/cache.js";
 	import home from '../../../vendor/home/home.js'
+	import submit from '../../../components/sub-unit/subunit.vue'
 	export default {
 		name: "",
 		components: {
-			actionBar
+			actionBar,
+			submit
 		},
 		props: {},
 		data() {
@@ -235,6 +230,8 @@
 	}
 
 	.setimg {
+		right: 50rpx;
+		bottom: 24rpx;
 		width: 40rpx;
 		height: 40rpx;
 	}
@@ -247,9 +244,10 @@
 	}
 
 	.location {
+		width: 30%;
+		top: 0;
+		right: 0;
 		position: fixed;
-		top: 80rpx;
-		right: 50rpx;
 		z-index: 99;
 	}
 

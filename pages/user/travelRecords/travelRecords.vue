@@ -26,7 +26,7 @@
 				{{text}}
 			</view>
 		</view>
-		<view class="nono flex al-center ju-center" v-if='lists.length==0&&isLoding==false'>
+		<view class="nono flex fz-14 al-center ju-center" v-if='lists.length==0&&isLoding==false'>
 			暂无出行记录
 		</view>
 
@@ -194,6 +194,7 @@
 
 	.nono {
 		height: 300rpx;
+		color: #666666;
 	}
 
 	.notext {

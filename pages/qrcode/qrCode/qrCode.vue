@@ -66,7 +66,7 @@
 				onval: true, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
 				text: '刷新成功',
-				flag: 0,
+				flag: 1,
 				show: 0,
 				time: 60,
 				timetext: '有效时间:60s',
@@ -78,6 +78,7 @@
 		
 			// 手动刷新
 			add() {
+				if(this.flag == 0) return;
 				this.loadUserData()
 			},
 			// 判断是否登录

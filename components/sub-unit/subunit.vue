@@ -1,13 +1,13 @@
 <template>
 <view class="">
-	<view class="box" :style="{	height:this.$store.state.customBar + 'rpx'}">
+	<view class="box" :style="{	height:customBar + 'rpx'}">
 		<view class="nav pos-abs flex ju-center al-center">
 			<image v-if="retur === true" @click="goback" src="https://oss.kuaitongkeji.com/static/img/app/login/1729908969cd5d7d911e096d6db3c70.png"
-			 class="reimg pos-abs" mode=""></image>
+			 class="reimg pos-abs" mode="" :class="titel == ''?'locod':''"></image>
 			{{titel}}
 		</view>
 	</view>
-	<view class="Line" :style="{height:this.$store.state.customBar + 'rpx'}">
+	<view class="Line" :style="{height:customBar + 'rpx'}">
 		
 	</view>
 </view>
@@ -35,6 +35,7 @@
 		},
 		data() {
 			return {
+				customBar:0
 			}
 		}, 
 		methods: {
@@ -63,6 +64,7 @@
 			}
 		},
 		mounted() {
+			this.customBar =  cache.get("customBar")
 		},
 		onShow() {
 
@@ -104,5 +106,8 @@
 		width: 22rpx;
 		height: 41rpx;
 		left: 40rpx;
+	}
+	.locod{
+		bottom: 10rpx;
 	}
 </style>

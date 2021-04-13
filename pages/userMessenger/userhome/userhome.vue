@@ -1,15 +1,19 @@
 <template>
 	<view class="">
 		<subunit :retur='false' titel='快递 外卖'></subunit>
-		<view class="userSelection pos-abs">
-			<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon"
-			 mode=""></image>
-			<view v-show="isShowType == true" class="typeBox flex-d al-center">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
-				<view class="typeLine">
-				</view>
-				<view class="fz-12 itemType flex ju-center al-center" v-for="item in userType" @click="selecType(item)" :key='item.id'>
-					{{item.name}}
+		<view class="userSelection" :style="{height:customBar + 'rpx' }">
+			<view class="navBox pos-abs">
+				<image @click="isShowType = !isShowType" src="../../../image/Clssmenu.png" class="sjxlIcon" mode=""></image>
+				<view v-show="isShowType == true" class="pos-abs m-l5 m-t1">
+					<view class="trilateral">
+					</view>
+					<view class="nomenBox">
+						<view class="itemType flex al-center" v-for="item in userType" :key='item.id'>
+							<view @click="selecType(item)" class="">
+								{{item.name}}
+							</view>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -68,6 +72,7 @@
 <script>
 	import subunit from '../../../components/sub-unit/subunit.vue'
 	import home from '../../../vendor/home/home.js'
+	import cache from '../../../vendor/cache/cache.js'
 	export default {
 		name: "",
 		components: {
@@ -76,6 +81,7 @@
 		props: {},
 		data() {
 			return {
+				customBar:0,
 				userType: [{
 						name: '用户',
 						type: 'user',
@@ -181,6 +187,7 @@
 		},
 		mounted() {
 			this.getData()
+			this.customBar = cache.get("customBar")
 		},
 		onLoad() {
 
@@ -205,14 +212,15 @@
 
 <style scoped lang="scss">
 	.userSelection {
-		top: 80rpx;
-		left: 40rpx;
+		position: fixed;
+		top: 0;
+		z-index: 99;
 	}
 
 	.sjxlIcon {
 		width: 34rpx;
-		height: 22rpx;
-		margin-left: 28rpx;
+		height: 34rpx;
+		margin-left: 50rpx;
 	}
 
 	.xljxImg {
@@ -227,19 +235,9 @@
 		height: 20rpx;
 	}
 
-	.typeBox {
-		margin-top: 5rpx;
-		width: 140rpx;
-		height: 200rpx;
-		color: #666666;
-	}
 
 	.itemType {
-		z-index: 9;
-		margin-top: 10rpx;
-		width: 100%;
-		height: 40rpx;
-		border-bottom: 1px solid #E6E6E6;
+		height: 60rpx;
 	}
 
 	.contenBox {
@@ -296,5 +294,25 @@
 	.gointo {
 		color: #01AAED;
 		// text-decoration:underline;
+	}
+
+	.navBox {
+		bottom: 20rpx;
+	}
+
+	.trilateral {
+		width: 0;
+		height: 0;
+		border: 10rpx solid;
+		border-color: transparent transparent white white;
+	}
+
+	.nomenBox {
+		border-radius: 10rpx;
+		width: 240rpx;
+		padding: 20rpx 30rpx;
+		background: #FFFFFF;
+		font-size: 14px;
+		color: #666666;
 	}
 </style>

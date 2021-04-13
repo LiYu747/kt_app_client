@@ -1,25 +1,28 @@
 <template>
 	<view class="">
 		<subunit :retur='false' titel='物业'></subunit>
-		<view class="userSelection" :style="{height: this.$store.state.customBar + 'rpx' }">
+		<view class="userSelection" :style="{height: customBar + 'rpx' }">
 			<view class="navBox pos-abs">
-				<image @click="isShowType = !isShowType" src="https://oss.kuaitongkeji.com/static/img/app/home/sjxl.png" class="sjxlIcon" mode=""></image>
-				<view v-show="isShowType == true" class="typeBox flex-d al-center">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/home/xljx.png" class="xljxImg" mode=""></image>
-					<view class="typeLine">
-					</view>
-					<view class="fz-12 itemType flex ju-center al-center"
+				<image @click="isShowType = !isShowType" src="../../../image/Clssmenu.png" class="sjxlIcon" mode=""></image>
+			<view v-show="isShowType == true" class="pos-abs m-l5 m-t1">
+				<view class="trilateral"> 
+				</view>
+				<view class="nomenBox">
+					<view
+					@click="selecType(item)"
+					class="itemType flex al-center"
 					 v-for="item in userType"
-					 @click="selecType(item)"
 					  :key='item.id'>
-						{{item.name}}
+							{{item.name}}
 					</view>
 				</view>
+			</view>
 			</view>
 		</view>
 		<view class="contenBox flex">
 			<view @click="goQuery" class="userQuery pos-rel">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/userBack.png" class="userBack pos-abs" mode=""></image>
+				<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/userBack.png" class="userBack pos-abs"
+				 mode=""></image>
 				<view class="zidx">
 					用户查询
 				</view>
@@ -33,9 +36,11 @@
 
 			<view class=" m-l2">
 				<view @click="CheckTo" class="CheckToSee flex fz-12 pos-rel">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/checkBack.png" class="checkBack pos-abs" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/checkBack.png" class="checkBack pos-abs"
+					 mode=""></image>
 					<view class="">
-						<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/Checklook.png" class="ChecklookImg" mode=""></image>
+						<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/Checklook.png" class="ChecklookImg"
+						 mode=""></image>
 					</view>
 					<view class="">
 						<view class="checktex1">
@@ -47,7 +52,8 @@
 					</view>
 				</view>
 				<view @click="comeAndGo" class="recordOfAccess flex pos-rel">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/accessBack.png" class="checkBack pos-abs" mode=""></image>
+					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/accessBack.png" class="checkBack pos-abs"
+					 mode=""></image>
 					<view class="">
 						<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/contract.png" class="contractImg" mode=""></image>
 					</view>
@@ -60,18 +66,24 @@
 						</view>
 					</view>
 				</view>
-				
+
 			</view>
 		</view>
-		
+
 		<view @click="PostManagement" class=" flex ju-center">
-			<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/postManagement.png" class="postManagement" mode=""></image>
+			<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/postManagement.png" class="postManagement"
+			 mode=""></image>
+		</view>
+		
+		<view v-show="isShowType == true" @click="isShowType = false" class="showBox">
+			
 		</view>
 	</view>
 </template>
 
 <script>
 	import subunit from '../../../components/sub-unit/subunit.vue'
+	import cache from '../../../vendor/cache/cache.js'
 	export default {
 		name: "",
 		components: {
@@ -80,10 +92,11 @@
 		props: {},
 		data() {
 			return {
+				customBar:0,
 				userType: [{
 						name: '用户',
 						type: 'user',
-						url:'/pages/index/index'
+						url: '/pages/index/index'
 					},
 					{
 						name: '物业',
@@ -96,49 +109,49 @@
 						url: '/pages/userMessenger/userhome/userhome'
 					}
 				],
-				isShowType:false
+				isShowType: false
 			}
 		},
 		methods: {
-         selecType(item){
-			 if(item.type == 'property') return;
-			 uni.reLaunch({
-			 	url: item.url
-			 })
-		 },
-		 //用户查询
-		 goQuery(){
-			 uni.navigateTo({
-			 	url:"/pages/propertyManagement/userQuery/userQuery"
-			 })
-		 },
-		 //入住查看
-		 CheckTo(){
-			 uni.navigateTo({
-			 	url:'/pages/propertyManagement/CheckToSee/CheckToSee'
-			 })
-		 },
-		 //出入记录
-		 comeAndGo(){
-			 uni.navigateTo({
-			 	url:'/pages/propertyManagement/accessToInformation/accessToInformation'
-			 })
-		 },
-		 // 帖子管理
-		 PostManagement() {
-			 uni.navigateTo({
-			 	url:'/pages/propertyManagement/postManagement/postManagement'
-			 })
-		 }
+			selecType(item) {
+				if (item.type == 'property') return;
+				uni.reLaunch({
+					url: item.url
+				})
+			},
+			//用户查询
+			goQuery() {
+				uni.navigateTo({
+					url: "/pages/propertyManagement/userQuery/userQuery"
+				})
+			},
+			//入住查看
+			CheckTo() {
+				uni.navigateTo({
+					url: '/pages/propertyManagement/CheckToSee/CheckToSee'
+				})
+			},
+			//出入记录
+			comeAndGo() {
+				uni.navigateTo({
+					url: '/pages/propertyManagement/accessToInformation/accessToInformation'
+				})
+			},
+			// 帖子管理
+			PostManagement() {
+				uni.navigateTo({
+					url: '/pages/propertyManagement/postManagement/postManagement'
+				})
+			}
 		},
 		mounted() {
-
+              this.customBar = cache.get("customBar")
 		},
 		onLoad() {
 
 		},
 		onHide() {
-			this.isShowType = false
+			
 		},
 		filters: {
 
@@ -204,8 +217,8 @@
 		padding: 0 20rpx;
 		color: #fff;
 	}
-	
-	.checkBack{
+
+	.checkBack {
 		top: 0;
 		right: 0;
 		width: 335rpx;
@@ -241,58 +254,73 @@
 		padding: 0 20rpx;
 		color: #FFFFFF;
 	}
-	
+
 	.contractImg {
 		width: 104rpx;
 		height: 104rpx;
 		margin-top: 40rpx;
 	}
+
 	.userSelection {
-	 position: fixed;
-	 top: 0;
-	 z-index: 99;
+		position: fixed;
+		top: 0;
+		z-index: 999;
 	}
-	
+
 	.sjxlIcon {
 		width: 34rpx;
-		height: 22rpx;
-		margin-left: 40rpx;
+		height: 34rpx;
+		margin-left: 50rpx;
 	}
-	
+
 	.xljxImg {
 		margin-top: 5rpx;
 		width: 140rpx;
 		height: 200rpx;
 		z-index: 99;
-		
+
 	}
-	
+
 	.typeLine {
 		height: 20rpx;
 	}
-	
-	.typeBox {
-		width: 140rpx;
-		height: 200rpx;
-		color: #666666;
-		position: relative;
-	}
-	
+
+
 	.itemType {
-		z-index: 9;
-		margin-top: 10rpx;
-		width: 100%;
-		height: 40rpx;
-		border-bottom: 1px solid #E6E6E6;
+		height: 60rpx;
 	}
-	
-	.postManagement{
+
+	.postManagement {
 		margin-top: -10rpx;
 		width: 690rpx;
 		height: 200rpx;
 	}
-	
-	.navBox{
+
+	.navBox {
 		bottom: 20rpx;
+	}
+
+	.trilateral {
+		width: 0;
+		height: 0;
+		border: 10rpx solid;
+		border-color: transparent transparent white white;
+	}
+	
+	.nomenBox{
+		border-radius: 10rpx;
+		width: 240rpx;
+	    padding: 20rpx 30rpx;
+		background: #FFFFFF;
+		font-size: 14px;
+		color: #666666;
+	}
+	
+	.showBox{
+		width: 100%;
+		height: 100vh;
+		position: fixed;
+		top: 0;
+		z-index: 99;
 	}
 </style>

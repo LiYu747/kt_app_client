@@ -319,7 +319,7 @@
 	.itemUrl{
 		margin-right: 20rpx;
 		margin-bottom: 10rpx;
-		width: 120rpx;
+		width: 130rpx;
 		height: 160rpx;
 	}
 	

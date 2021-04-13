@@ -1,33 +1,33 @@
 <template>
 	<view class="">
 		<subunit></subunit>
-		<!-- <view class="line ">
-			<view class="ipt  ju-center flex al-center pos-rel">
+		<view class="navBox" :style="{height:  this.$store.state.customBar + 'rpx'}">
+			<view class="ipt  flex al-center pos-abs">
 				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
 				<input class="input" type="text" v-model.trim="value" @confirm='confirm' placeholder="请输入帖子关键词" />
 				<image @click="empty" src="https://oss.kuaitongkeji.com/static/img/app/forum/clier.png" class="clierimg" mode=""></image>
-				<view v-show="value !=''" @click="remove" class="fixed  rig">
+				<view v-show="value !=''" @click="remove" class="rig m-l2">
 					取消
 				</view>
 			</view>
-		</view> -->
+		</view>
 		<!-- tag标签 -->
 		<view v-if="flag == false" class="back">
-			<view class=" wid">
+			<view class="wid">
 				<u-tabs-swiper ref="uTabs" active-color='#F07535' :list="tagdata" :current="current" @change="tabsChange"
 				 :is-scroll="true" swiperWidth="750"></u-tabs-swiper>
-
 			</view>
 			<view class="posclassfiy flex al-center ju-center">
 				<image @click="custom" src="https://oss.kuaitongkeji.com/static/img/app/forum/classfiy.png" class="classfiyimg"
 				 mode=""></image>
 			</view>
 		</view>
-		<view class="lines">
+		<view v-if="flag == false" class="lines">
 
 		</view>
 		<view v-if="flag == false" class="release">
-			<swiper :current="swiperCurrent" @change="Onchange" style="height: calc(100vh - 348rpx);box-sizing: border-box;;" @transition="transition" @animationfinish="animationfinish">
+			<swiper :current="swiperCurrent" @change="Onchange" style="height: calc(100vh - 320rpx);box-sizing: border-box;;"
+			 @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item" v-for="(items, index) in tagdata" :key="index">
 					<scroll-view scroll-y style="height:100%;width: 100%;" @scrolltolower="onreachBottom">
 						<view class="">
@@ -42,7 +42,7 @@
 										</view>
 									</view>
 								</view>
-								<!-- 内容 -->
+								<!-- 标题 -->
 								<view class="content">
 									<view class="show">
 										{{item.title}}
@@ -54,34 +54,35 @@
 										<image :src="itemss.url" class="items" mode="aspectFill"></image>
 									</view>
 								</view>
+								
+								<view class="Hline">
+									
+								</view>
 							</view>
 						</view>
-						<view v-show="Isnext == true" class="m-t2 flex ju-center al-center lodbox">
+						<view v-show="Isnext == true" class=" flex ju-center al-center lodbox">
 							<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 							加载中...
 						</view>
-						<view v-if="items.text" class="flex ju-center m-t3 m-b2 fz-12">
+						<view v-if="items.text" class="flex ju-center btom fz-12">
 							{{items.text}}
 						</view>
 						<view class="nono flex al-center ju-center" v-if="items.list.length==0 && isLoding == false">
 							没有您想看类型的帖子,试试其他的吧
 						</view>
 
-                          <view class="btom">
-                          
-                          </view>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
-		
+
 		</view>
 
-		<view v-if="flag == true" class="searchend pos-abs">
+		<view v-if="flag == true" class="searchend ">
 			<view class="" v-if="lists.length>0">
 				<view class="item" @click="gotoD(item)" v-for="(item,index) in lists" :key='index'>
 					<view class="flex">
 						<!-- 头像 -->
-						<image :src="item.own_user.avatar" class="itemimg" mode=""></image>
+						<image :src="item.own_user.avatar" class="itemimg" mode="aspectFill"></image>
 						<view class="name m-l1 m-t1">
 							{{item.own_user.nickname}}
 							<view class="time">
@@ -101,32 +102,35 @@
 							<image :src="items.url" class="items" mode="aspectFill"></image>
 						</view>
 					</view>
+					<view class="Hline">
+						
+					</view>
 				</view>
-				<view v-show="isLoding == true" class="m-t3 m-b2 flex ju-center al-center lodbox">
+				<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
 					<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 					加载中...
 				</view>
-				<view v-if="hasMore == false" class="flex ju-center m-t3 m-b2 fz-12" >
+				<view v-if="hasMore == false" class="flex ju-center btm fz-12">
 					{{text}}
 				</view>
-				
+
 			</view>
-			<view v-if="isLoding == false && lists.length==0" class="nono flex al-center ju-center" >
+			<view v-if="isLoding == false && lists.length==0" class="nono flex al-center ju-center">
 				没有您搜索的帖子哦~
 			</view>
 			<view class="btoms">
-			
+				
 			</view>
 		</view>
 
-         <view v-show="isLoding == true && lists.length == 0" class="showloding flex al-center ju-center">
-         	<view class="loding flex-d al-center ju-center">
-         		<view class=" ">
-         			<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
-         		</view>
-         		加载中
-         	</view>
-         </view>
+		<view v-show="isLoding == true && lists.length == 0" class="showloding flex al-center ju-center">
+			<view class="loding flex-d al-center ju-center">
+				<view class=" ">
+					<image class="loimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
+				</view>
+				加载中
+			</view>
+		</view>
 		<subbotn :ids='id'></subbotn>
 	</view>
 </template>
@@ -162,7 +166,7 @@
 				lists: [], //数据列表
 				text: '', //没有更多的提示
 				value: '',
-				hasMore : true
+				hasMore: true
 			}
 		},
 		methods: {
@@ -317,10 +321,10 @@
 			},
 			//搜索
 			confirm() {
-			if (this.value == '') return;
-			    this.page = 1
+				if (this.value == '') return;
+				this.page = 1
 				this.text = ''
-			    this.lists = []
+				this.lists = []
 				this.flag = true
 				this.search()
 			},
@@ -331,7 +335,7 @@
 				this.text = ''
 				this.page = 1
 			},
-			
+
 			// 搜索
 			search() {
 				this.isLoding = true
@@ -352,12 +356,12 @@
 					success: (res) => {
 						this.isLoding = false
 						if (res.statusCode != 200) return;
-			
+
 						if (res.data.code != 200) return;
 						let data = res.data.data;
 						this.hasMore = data.next_page_url ? true : false;
 						this.page = data.current_page + 1
-						this.lists  = this.lists.concat(data.data)
+						this.lists = this.lists.concat(data.data)
 					},
 				})
 			},
@@ -396,15 +400,15 @@
 		},
 		// 下拉更多
 		onReachBottom() {
-		  this.text = '没有更多了'
-		 if (this.isLoding == true || this.hasMore == false) return;
-		 this.search();
+			this.text = '没有更多了'
+			if (this.isLoding == true || this.hasMore == false) return;
+			this.search();
 		},
 		onUnload() {
 			this.$store.commit("isComment", '');
 		},
 		onHide() {
-		
+
 		},
 		onShow() {
 			this.iSlogin()
@@ -426,13 +430,21 @@
 </script>
 
 <style scoped lang="scss">
+	
+	.navBox{
+		width: 90%;
+		position: fixed;
+		top: 0;
+		z-index: 99;
+		right: 0;
+	}
 	.back {
 		width: 100%;
 		background-color: #FFFFFF;
 		position: fixed;
 		left: 0;
-		top: 148rpx;
 		z-index: 99;
+		border-bottom: 1px solid #CCCCCC;
 	}
 
 	.wid {
@@ -446,7 +458,7 @@
 	}
 
 	.lines {
-		height: 100rpx;
+		height: 80rpx;
 	}
 
 	.itemimg {
@@ -456,10 +468,13 @@
 	}
 
 	.item {
+		position: relative;
+		top: 30rpx;
 		width: 690rpx;
 		padding: 30rpx;
-		border-bottom: 1rpx solid #BFBFBF;
 		color: #666666;
+		background: #fff;
+		margin-bottom: 30rpx;
 	}
 
 	.name {
@@ -476,10 +491,8 @@
 	}
 
 	.content {
-		margin-top: 20rpx;
+		margin-top: 30rpx;
 		width: 650rpx;
-		background: rgb(230, 230, 230);
-		padding: 20rpx 20rpx;
 		font-size: 28rpx;
 	}
 
@@ -492,10 +505,11 @@
 	}
 
 	.items {
-		width: 150rpx;
-		height: 170rpx;
-		margin-right: 20rpx;
+		width: 210rpx;
+		height: 210rpx;
+		margin-right: 30rpx;
 		margin-bottom: 10rpx;
+		border-radius: 10rpx;
 	}
 
 	.comimg {
@@ -523,7 +537,12 @@
 	}
 
 	.btom {
-		height: 50rpx;
+		  padding-top: 20rpx;
+		  padding-bottom: 34rpx;
+	}
+	
+	.btm{
+		padding:  20rpx;
 	}
 
 	.nono {
@@ -539,11 +558,15 @@
 
 	.lodbox {
 		font-size: 24rpx;
+		padding-top: 20rpx;
+		padding-bottom: 34rpx;
 	}
 
-	.line {
-		// width: 100%;
-		height: 148rpx;
+	.Hline {
+		margin-top: 10rpx;
+		width: 100%;
+		height: 1px;
+		background: #ccc;
 	}
 
 	.fixed {
@@ -582,19 +605,19 @@
 	}
 
 	.ipt {
-		top: 100rpx;
-		z-index: 99;
+		width: 100%;
+		height: 60rpx;
+		bottom: 20rpx;
+		left: 60rpx;
 	}
 
 	.img {
 		width: 38rpx;
 		height: 38rpx;
-		left: 168rpx;
-		position: fixed;
+		left: 16rpx;
 	}
 
 	.input {
-		position: fixed;
 		width: 394rpx;
 		height: 54rpx;
 		background: rgba(255, 255, 255, 0.3);
@@ -620,8 +643,7 @@
 		width: 24rpx;
 		height: 24rpx;
 		position: absolute;
-		right: 170rpx;
-		position: fixed;
+		left: 420rpx;
 	}
 
 	.tagbox {
@@ -667,7 +689,6 @@
 		top: 10rpx;
 		right: 0rpx;
 		background: #FFFFFF;
-		box-shadow: -5px 0 10px 4px#FFFFFF;
 	}
 
 	.classfiyimg {
@@ -680,10 +701,7 @@
 	}
 
 	.searchend {
-		top: 148rpx;
 		width: 100%;
-		// height: 100%;
-		// background: red;
 	}
 
 	.btoms {

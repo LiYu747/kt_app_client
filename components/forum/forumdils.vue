@@ -393,9 +393,11 @@
 	}
 
 	.itemimg {
-		width: 150rpx;
-		height: 170rpx;
-		margin-right: 20rpx;
+		width: 200rpx;
+		height: 200rpx;
+		margin-right: 30rpx;
+		border-radius: 10rpx;
+		margin-bottom: 10rpx;
 	}
 
 	.move {

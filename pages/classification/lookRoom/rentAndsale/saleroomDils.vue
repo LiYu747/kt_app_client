@@ -1,11 +1,8 @@
 <template>
 	<view class="page">
-		<subunit titel='详情' class="fidex"></subunit>
-		<view class="seticon">
-			<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
-		</view>
-		<view class="topLine">
-
+		<subunit titel='详情'></subunit>
+		<view class="navBox" :style="{height: this.$store.state.customBar + 'rpx'}">
+			<image @click="install" src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg pos-abs" mode=""></image>
 		</view>
 		<view class="flex-d al-center">
 			<view class="backBox pos-rel m-t2 flex al-center ju-center">
@@ -255,7 +252,15 @@
 	.page {
 		background: #FFFFFF;
 	}
-
+    
+	.navBox {
+		width: 30%;
+		top: 0;
+		right: 0;
+		position: fixed;
+		z-index: 99;
+	}
+	
 	.fidex {
 		position: fixed;
 		z-index: 9;
@@ -279,6 +284,7 @@
 	.logoImg {
 		width: 690rpx;
 		height: 360rpx;
+		border-radius: 20rpx;
 	}
 
 	.cutBox {
@@ -440,6 +446,8 @@
 	}
 	
 	.setimg {
+		right: 50rpx;
+		bottom: 24rpx;
 		width: 40rpx;
 		height: 40rpx;
 	}

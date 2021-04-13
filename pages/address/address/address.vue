@@ -1,8 +1,8 @@
 <template>
 	<view class=" pos-rel content">
-		<subunit ref='xcoll' :retur='false' titel="入住信息" ></subunit>
-		<view class="location" :class="Gshow == 2?'locIndex':''">
-			<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg" mode=""></image>
+		<subunit  :retur='false' titel="入住信息" ></subunit>
+		<view class="location" :style="{height:  this.$store.state.customBar + 'rpx'}" :class="Gshow == 2?'locIndex':''">
+			<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg pos-abs" mode=""></image>
 		</view>
 		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 		<addList :locdata='locdata' :isLoding='isLoding' :text='text' :hasMore='hasMore'></addList>
@@ -336,17 +336,18 @@
 		height: 470rpx;
 	}
 
-
-
 	.setimg {
+		bottom: 28rpx;
+		right: 50rpx;
 		width: 40rpx;
 		height: 40rpx;
 	}
 
 	.location {
+		width: 30%;
+		top: 0;
+		right: 0;
 		position: fixed;
-		top: 80rpx;
-		right: 60rpx;
 		z-index: 99;
 	}
 
@@ -363,8 +364,5 @@
 		margin-top: -20rpx;
 	}
 
-	.reimg {
-		width: 22rpx;
-		height: 41rpx;
-	}
+
 </style>

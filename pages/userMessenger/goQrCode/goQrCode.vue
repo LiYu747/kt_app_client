@@ -1,27 +1,29 @@
 <template>
-	<view class="flex-d al-center">
-		<subunit titel="通行二维码" :retur="true" @goback='goback'></subunit>
-		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
-		<view class="pack flex-d al-center">
-			<view class="nav flex al-center">
-				请将二维码对准扫码口
-			</view>
-			<view class="boxs">
-				<view class="qrimg">
-					<tki-qrcode cid="qrcode1" ref="qrcode" :val="val" :size="size" :unit="unit" :background="background" :foreground="foreground"
-					 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :showLoading='false' :onval="onval" :loadMake="loadMake"
-					 :usingComponents="true" />
+	<view class="">
+		<subunit titel="通行二维码"></subunit>
+		<view class="flex-d al-center">
+			<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
+			<view class="pack flex-d al-center">
+				<view class="nav flex al-center">
+					请将二维码对准扫码口
 				</view>
-			</view>
-			<view class="cortt flex al-center" @click="add">
-				<image v-show="flag===1" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/1.png" class="img1" mode=""></image>
-				<image v-show="flag===0" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/3.png" class="img2" mode=""></image>
-				{{text}}
-			</view>
-			<view v-show="show===1" class="m-t2 flex al-center ju-center">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/qrcode/2.png" class="time" mode=""></image>
-				<view class="pos-abs texts bai">
-					{{timetext}}
+				<view class="boxs">
+					<view class="qrimg">
+						<tki-qrcode cid="qrcode1" ref="qrcode" :val="val" :size="size" :unit="unit" :background="background" :foreground="foreground"
+						 :pdground="pdground" :icon="icon" :iconSize="iconsize" :lv="lv" :showLoading='false' :onval="onval" :loadMake="loadMake"
+						 :usingComponents="true" />
+					</view>
+				</view>
+				<view class="cortt flex al-center" @click="add">
+					<image v-show="flag===1" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/1.png" class="img1" mode=""></image>
+					<image v-show="flag===0" src="https://oss.kuaitongkeji.com/static/img/app/qrcode/3.png" class="img2" mode=""></image>
+					{{text}}
+				</view>
+				<view v-show="show===1" class="m-t2 flex al-center ju-center">
+					<image src="https://oss.kuaitongkeji.com/static/img/app/qrcode/2.png" class="time" mode=""></image>
+					<view class="pos-abs texts bai">
+						{{timetext}}
+					</view>
 				</view>
 			</view>
 		</view>
@@ -55,48 +57,28 @@
 				onval: true, // val值变化时自动重新生成二维码
 				loadMake: true, // 组件加载完成后自动生成二维码
 				text: '刷新成功',
-				flag: 0,
+				flag: 1,
 				show: 0,
 				time: 60,
 				timetext: '有效时间:60s',
 			}
 		},
 		methods: {
-			// 返回
-			goback() {
-				uni.navigateBack({
-					delta: 1
-				})
-			},
 			// 手动刷新
 			add() {
-				this.text = '刷新成功'
-				this.flag = 0
-				this.show = 0
-				this.time = 60
+				if(this.flag == 0 ) return;
 				this.loadUserData()
 				// this.timetext = '有效时间:60s'
 			},
 			// 判断是否登录
 			loadUserData() {
-				jwt.doOnlyTokenValid({
-					showModal: true,
-					keepSuccess: false,
-					success: () => {
-						this.data()
-						const time = setTimeout(() => {
-							this.text = '手动刷新'
-							this.flag = 1
-							this.countdown()
-							this.show = 1
-						}, 2000)
-					},
-					fail: () => {
-						uni.switchTab({
-							url: '/pages/index/index'
-						})
-					}
-				})
+				this.data()
+				const time = setTimeout(() => {
+					this.text = '手动刷新'
+					this.flag = 1
+					this.countdown()
+					this.show = 1
+				}, 2000)
 			},
 			// 倒计时
 			countdown() {
@@ -115,7 +97,7 @@
 			// 获取二维码
 			data() {
 				uni.showLoading({
-					title:'加载中'
+					title: '加载中'
 				})
 				home.passQr({
 					data: {},
@@ -127,19 +109,19 @@
 						})
 					},
 					success: (res) => {
-							uni.hideLoading()
+						uni.hideLoading()
 						// console.log(res.data.data.content);
 						if (res.statusCode != 200) {
 							uni.showToast({
-								title:'网络出错了',
-								icon:'none'
+								title: '网络出错了',
+								icon: 'none'
 							})
 							return;
 						}
 
 						if (res.data.code == 403) {
 							uni.showModal({
-								content: res.data.msg ,
+								content: res.data.msg,
 								success: (res) => {
 									uni.navigateBack({
 										delta: 1
@@ -148,18 +130,21 @@
 							})
 							return;
 						}
-						if(res.data.code == 200){
+						if (res.data.code == 200) {
+							this.text = '刷新成功'
+							this.flag = 0
+							this.show = 0
+							this.time = 60
 							this.val = res.data.data.content
-						}
-						else{
+						} else {
 							uni.showToast({
-								title:res.data.msg,
-								icon:'none'
+								title: res.data.msg,
+								icon: 'none'
 							})
 							return;
 						}
 						// console.log(res);
-						
+
 					}
 				})
 			}
@@ -168,7 +153,7 @@
 			this.loadUserData()
 		},
 		mounted() {
-			
+
 		},
 		onLoad() {
 

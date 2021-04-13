@@ -1,14 +1,14 @@
 <template>
 	<view class="">
-		<subunit></subunit>
-		<view class="line ">
-			<view class="ipt  ju-center flex al-center pos-rel">
-				<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
-				<input class="input" type="text" v-model="value" @confirm="change" placeholder="请输入小区名称关键词" />
-				<view @click="remove" class="posfidex  rig">
-					取消
+		<subunit ></subunit>
+		<view class="navBox"  :style="{height:  this.$store.state.customBar + 'rpx'}">
+				<view class="ipt  ju-center flex al-center pos-abs">
+					<image class="img pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/home/ss.png" mode=""></image>
+					<input class="input" type="text" v-model="value" @confirm="change" placeholder="请输入小区名称关键词" />
+					<view @click="remove" class="rig m-l2">
+						取消
+					</view>
 				</view>
-			</view>
 		</view>
 		<view v-if="locdata.length>0" class="top flex-d al-center">
 			<view @click="gotoo(item)" class="item" v-for="item in locdata" :key="item.id">
@@ -54,8 +54,8 @@
 				搜索中
 			</view>
 		</view>
-		<view class="nono flex al-center ju-center" v-if="locdata.length == 0&&isLoding == false">
-			没有您搜索的小区哦~~~
+		<view class="nono fz-14 flex al-center ju-center" v-if="locdata.length == 0&&isLoding == false">
+			没有您搜索的小区哦
 		</view>
 	</view>
 </template>
@@ -163,25 +163,27 @@
 </script>
 
 <style scoped lang="scss">
-	.ipt {
-		top: 100rpx;
-		z-index: 10;
+	.navBox{
+		width: 90%;
+		position: fixed;
+		top: 0;
+		z-index: 99;
+		right: 0;
 	}
-
-	.line {
-		// width: 100%;
-		height: 148rpx;
+	
+	.ipt {
+     	bottom: 20rpx;
+		width: 100%;
+		height: 60rpx;
 	}
 
 	.img {
 		width: 33rpx;
 		height: 34rpx;
-		left: 168rpx;
-		position: fixed;
+		left: 90rpx;
 	}
 
 	.input {
-		position: fixed;
 		width: 394rpx;
 		height: 54rpx;
 		background: rgba(255, 255, 255, 0.3);
@@ -204,8 +206,6 @@
 	}
 
 	.posfidex {
-		position: fixed;
-		z-index: 9;
 	}
 
 	.bottom {
@@ -264,6 +264,7 @@
 	.nono {
 		width: 100%;
 		height: 300rpx;
+		color: #666666;
 	}
 
 	.lodimg {

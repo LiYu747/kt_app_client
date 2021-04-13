@@ -1,16 +1,23 @@
 <template>
 	<view>
 		<subunit titel='帖子管理'></subunit>
-		<view @click="xlshow = !xlshow" class="searchBox ">
-			<view class="allTx flex al-center">
-				筛选
-				<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
-			</view>
-		</view>
-		<view v-show="xlshow==true" class="xlshow flex-d al-center">
-			<view class="itemLabel flex al-center ju-center" @click="select(item,index)" :class="{'back':index==idx}" v-for="(item,index) in condition"
-			 :key='item.id'>
-				{{item.label}}
+		<view class="navBox" :style="{height: this.$store.state.customBar + 'rpx'}">
+			<view class="searchBox ">
+				<view @click="xlshow = !xlshow" class="allTx flex al-center">
+					筛选
+					<image src="https://oss.kuaitongkeji.com/static/img/app/propertyManagement/pullDown.png" class="pullDown" mode=""></image>
+				</view>
+				<view v-show="xlshow==true" class="celBox pos-abs flex-d al-center">
+					<view class="trilateral">
+
+					</view>
+					<view class="xlshow flex-d al-center">
+						<view class="itemLabel flex al-center ju-center" @click="select(item,index)" :class="{'back':index==idx}" v-for="(item,index) in condition"
+						 :key='item.id'>
+							{{item.label}}
+						</view>
+					</view>
+				</view>
 			</view>
 		</view>
 		<view v-if="lists.length>0" class="flex-d al-center">
@@ -49,7 +56,9 @@
 				加载中
 			</view>
 		</view>
-
+	  <view v-show="xlshow==true" @click="xlshow = false"  class="showBox">
+			
+		</view>
 	</view>
 </template>
 
@@ -208,6 +217,14 @@
 </script>
 
 <style scoped lang="scss">
+	.navBox {
+		width: 30%;
+		top: 0;
+		right: 0;
+		position: fixed;
+		z-index: 999;
+	}
+
 	.fixed {
 		position: fixed;
 		z-index: 9;
@@ -218,20 +235,17 @@
 	}
 
 	.searchBox {
-		position: fixed;
-		top: 84rpx;
+		position: absolute;
 		right: 50rpx;
 		color: #FFFFFF;
 		font-size: 16px;
 		z-index: 9;
+		bottom: 20rpx;
 	}
 
 	.xlshow {
-		position: fixed;
 		width: 160rpx;
 		background: #FFFFFF;
-		top: 140rpx;
-		right: 30rpx;
 		border-radius: 10rpx;
 		z-index: 9;
 		padding-bottom: 30rpx;
@@ -330,5 +344,26 @@
 
 	.bomLine {
 		height: 50rpx;
+	}
+
+	.celBox {
+		right: -32rpx;
+		margin-top: 10rpx;
+	}
+
+	.trilateral {
+		width: 0;
+		height: 0;
+		border-width: 0 20rpx 20rpx;
+		border-style: solid;
+		border-color: transparent transparent #FFFFFF;
+	}
+	
+	.showBox{
+		width: 100%;
+		height: 100vh;
+		position: fixed;
+		top: 0;
+		z-index: 99;
 	}
 </style>

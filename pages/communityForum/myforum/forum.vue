@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<subunit titel="我的"></subunit>
+		<subunit titel="我的" :retur="false"></subunit>
 		<view @touchstart="start" @touchend="end" class="">
 			<view class="nav flex al-center posd">
 				<view class="left flex al-center ju-center" v-for="(item,index) in til" @click="add(item,index)" :class="{dv:index===0}"
