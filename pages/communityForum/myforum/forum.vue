@@ -15,7 +15,7 @@
 			</view>
 			<!-- 我发布的 -->
 			<view v-show='idx===0' class="release">
-				<scroll-view scroll-y style="height: calc(100vh - 340rpx);;width: 100%;" @scrolltolower="onreachBottom1">
+				<scroll-view scroll-y style="height: calc(100vh - 310rpx);;width: 100%;" @scrolltolower="onreachBottom1">
 					<view v-if="lists.length>0" class="">
 						<view class="item" @click="gotoD(item,index)" v-for="(item,index) in lists" :key='item.id'>
 							<view class="titel">
@@ -26,21 +26,24 @@
 							</view>
 							<!-- 图片 -->
 							<view class="flex al-center m-t4">
-								<view v-for="items in item.album.slice(0,3)" :key='items.id'>
-									<image :src="items.url" class="items" mode="aspectFill"></image>
+								<view v-for="(items,indexs) in item.album.slice(0,3)" :key='items.id'>
+									<image :src="items.url" class="items" :class="(indexs+1)%3 == 0?'onmargin':''" mode="aspectFill"></image>
 								</view>
 							</view>
 							<view class="time">
 								{{item.created_at.slice(0,16)}}
 							</view>
+							<view class="Hline">
+								
+							</view>
 						</view>
 					</view>
-					<view v-if=" isLoding == true&&lists.length >0" class=" flex ju-center m-t2 al-center lodbox">
+					<view v-if=" isLoding == true&&lists.length >0" class=" flex ju-center  al-center lodbox">
 						<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 						加载中...
 					</view>
 
-					<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore == false">
+					<view class="flex ju-center lodbox  " v-if="hasMore == false">
 						{{text}}
 					</view>
 					<view class="nono flex ju-center cl9 fz-14" v-if="lists.length == 0 && isLoding==false">
@@ -54,7 +57,7 @@
 
 			<!-- 我参与的 -->
 			<view v-show="idx===1" class="release">
-				<scroll-view scroll-y style="height: calc(100vh - 340rpx);;width: 100%" @scrolltolower="onreachBottom2">
+				<scroll-view scroll-y style="height: calc(100vh - 310rpx);;width: 100%" @scrolltolower="onreachBottom2">
 					<view class="" v-if="data1.length>0">
 						<view class="itemtext" @click="reply(item)" v-for="(item,index) in data1" :key='index'>
 							<view class="flex color ju-between">
@@ -85,11 +88,11 @@
 					<view class="nono flex ju-center  cl9 fz-14" v-if="data1.length==0 && isLoding1==false">
 						您还没有发表评论
 					</view>
-					<view v-show="isLoding1 == true&&data1.length>0" class="m-t2 flex ju-center al-center lodbox">
+					<view v-show="isLoding1 == true&&data1.length>0" class=" flex ju-center al-center lodbox">
 						<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 						加载中...
 					</view>
-					<view class="flex ju-center m-b2 m-t3 fz-12" v-if="hasMore1 == false">
+					<view class="flex ju-center lodbox" v-if="hasMore1 == false">
 						{{text1}}
 					</view>
 					<view class="btom">
@@ -192,6 +195,7 @@
 					data: {
 						villageId: this.id,
 						page: this.page,
+						pageSize: this.pageSize1
 					},
 					fail: (err) => {
 						this.isLoding = false;
@@ -294,13 +298,13 @@
 			},
 			// 下拉加载更多
 			onreachBottom1(e) {
-				this.text = '没有更多了~'
+				this.text = '没有更多了'
 				if (this.isLoding == true || this.hasMore == false) return;
 				this.loadPageData()
 			},
 			// 下拉加载更多
 			onreachBottom2(e) {
-				this.text1 = '没有更多了~'
+				this.text1 = '没有更多了'
 				if (this.isLoding1 == true || this.hasMore1 == false) return;
 				this.SelfPost()
 			},
@@ -367,6 +371,7 @@
 		background: #FFFFFF;
 		font-size: 28rpx;
 		color: #666666;
+		border-bottom: 1px solid #CCCCCC;
 	}
 
 	.left {
@@ -394,10 +399,13 @@
 	}
 
 	.item {
+		position: relative;
+		top: 20rpx;
 		width: 690rpx;
 		padding: 30rpx;
-		border-bottom: 1rpx solid #BFBFBF;
 		color: #666666;
+		background: #FFFFFF;
+		margin-bottom: 30rpx;
 	}
 
 	.show {
@@ -409,10 +417,15 @@
 	}
 
 	.items {
-		width: 150rpx;
-		height: 170rpx;
-		margin-right: 20rpx;
+		width: 210rpx;
+		height: 210rpx;
+		margin-right: 30rpx;
 		margin-bottom: 10rpx;
+		border-radius: 10rpx;
+	}
+	
+	.onmargin{
+		margin-right: 0;
 	}
 
 	.comimg {
@@ -450,19 +463,21 @@
 		font-size: 26rpx;
 		margin-left: 30rpx;
 		margin-top: 20rpx;
-		background: rgba(204, 204, 204, 0.5);
 		padding: 10rpx;
 		width: 89%;
 	}
 
 	.btom {
-		height: 10rpx;
+		height: 40rpx;
 	}
 
 	.itemtext {
 		font-size: 24rpx;
 		padding: 44rpx;
-		border-bottom: 1rpx solid rgba(83, 83, 83, 0.3);
+		position: relative;
+		top: 20rpx;
+		margin-bottom: 20rpx;
+		background: #fff;
 	}
 
 	.name {
@@ -499,6 +514,7 @@
 
 	.lodbox {
 		font-size: 24rpx;
+		padding: 10rpx 0;
 	}
 
 	.showloding {
@@ -523,5 +539,12 @@
 
 	.nonoTet {
 		color: red;
+	}
+	
+	.Hline{
+		margin: 20rpx 0;
+		width: 100%;
+		height: 1px;
+		background: #CCCCCC;
 	}
 </style>

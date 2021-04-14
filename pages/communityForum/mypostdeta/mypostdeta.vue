@@ -14,8 +14,8 @@
 			</view>
 			<!-- 图片 -->
 			<view class="flex al-center imgbx">
-				<view class="" v-for="item in arr.album" :key='item.id'>
-					<image class="itemimg" :src="item.url" mode="aspectFill"></image>
+				<view class="" v-for="(item,index) in arr.album" :key='item.id'>
+					<image class="itemimg" :src="item.url" :class="(index+1)%3 == 0?'dv':''" mode="aspectFill"></image>
 				</view>
 			</view>
 			<view class="fz-12 m-t2 time">
@@ -227,9 +227,10 @@
 		},
 		mounted() {
 			this.$store.commit("isDel", '');
+			this.Data()
 		},
 		onShow() {
-			this.Data()
+			
 		},
 		// 下拉加载更多
 		onReachBottom() {
@@ -324,8 +325,8 @@
 	}
 
 	.woer {
-		width: 92%;
-		padding: 0 4%;
+		width: 690rpx;
+		padding: 0 30rpx;
 		color: #666666;
 	}
 
@@ -372,10 +373,15 @@
 	}
 
 	.itemimg {
-		width: 150rpx;
-		height: 170rpx;
-		margin-right: 20rpx;
+		width: 210rpx;
+		height: 210rpx;
+		margin-right: 30rpx;
 		margin-bottom: 10rpx;
+		border-radius: 10rpx;
+	}
+	
+	.dv{
+		margin-right: 0;
 	}
 
 	.move {

@@ -5,7 +5,7 @@
 			<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg pos-abs" mode=""></image>
 		</view>
 		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
-		<addList :locdata='locdata' :isLoding='isLoding' :text='text' :hasMore='hasMore'></addList>
+		<addList :locdata='locdata' :isLoding='isLoding'  :hasMore='hasMore'></addList>
 		<view v-show="showPullDownRefreshIcon == true" class="show  flex al-center ju-center">
 			<view class="showcentent flex al-center ju-between">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
@@ -47,7 +47,6 @@
 		props: {},
 		data() {
 			return { 
-				text: '', //没有更多了
 				locdata: [], //数据列表
 				page: 1,
 				ps: 15,
@@ -188,9 +187,8 @@
 		},
 		// 下拉加载更多
 		onReachBottom() {
-			this.text = '没有更多了~'
-			if (this.isLoding == true || this.hasMore == false) return;
-			this.loadPageData()
+			// if (this.isLoding == true || this.hasMore == false) return;
+			// this.loadPageData()
 		},
 		
 		filters: {

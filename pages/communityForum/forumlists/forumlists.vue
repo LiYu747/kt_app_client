@@ -51,7 +51,7 @@
 								<!-- 图片 -->
 								<view class="flex al-center m-t4">
 									<view v-for="(itemss,indexss) in item.album.slice(0,3)" :key='indexss'>
-										<image :src="itemss.url" class="items" mode="aspectFill"></image>
+										<image :src="itemss.url" class="items" :class="(indexss+1)%3 == 0?'onmargin':''" mode="aspectFill"></image>
 									</view>
 								</view>
 								
@@ -511,6 +511,9 @@
 		margin-bottom: 10rpx;
 		border-radius: 10rpx;
 	}
+	.onmargin{
+		margin-right: 0;
+	}
 
 	.comimg {
 		width: 25rpx;
@@ -563,7 +566,7 @@
 	}
 
 	.Hline {
-		margin-top: 10rpx;
+		margin: 10rpx 0;
 		width: 100%;
 		height: 1px;
 		background: #ccc;

@@ -116,7 +116,7 @@
 			<!-- 周边 -->
 			<periphery ref='peri'></periphery>
 
-			<button @click="gogo">点击</button>
+			<!-- <button @click="gogo">点击</button> -->
 		</view>
 		<!-- 视频播放 -->
 		<view v-if="paly == true" @touchmove.stop.prevent class=" pos-abs moive flex-d al-center ju-center">

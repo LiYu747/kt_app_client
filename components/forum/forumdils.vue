@@ -25,11 +25,11 @@
 			</view>
 			<!-- 图片 -->
 			<view class="flex al-center imgbx">
-				<view class="" v-for="item in arr.album" @click="look(item)" :key='item.id'>
-					<image class="itemimg" :src="item.url" mode="aspectFill"></image>
+				<view class="" v-for="(item,index) in arr.album" @click="look(item)" :key='item.id'>
+					<image class="itemimg" :src="item.url" :class="(index+1)%3 == 0?'dv':''" mode="aspectFill"></image>
 				</view>
 			</view>
-			<view class="layou">
+			<view class="layou pos-rel">
 				<view class=" move pos-abs">
 					<image @click="open" src="https://oss.kuaitongkeji.com/static/img/app/forum/pinlun.png" class="plimg" mode=""></image>
 				</view>
@@ -54,20 +54,18 @@
 					</view>
 				</view>
 			</view>
-			<view v-show="isLoding == true" class="m-t2 flex ju-center al-center lodbox">
+			<view v-show="isLoding == true" class=" flex ju-center al-center lodbox">
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex btom ju-center m-t3  fz-12" v-if="hasMore == false">
+			<view class="flex  ju-center lodbox  fz-12" v-if="hasMore == false">
 				{{text}}
 			</view>
 		</view>
 		<view class="nono flex al-center ju-center" v-if="comments.length==0&&isLoding==false">
-			还没有任何评论哦~
+			还没有任何评论哦
 		</view>
-		<view v-show="flag===true" class="btom">
 
-		</view>
 		<view v-show="flag===true" class="posbot flex al-center pos-rel">
 			<textarea autoHeight="true" placeholder='评论' v-model="context" class="ch flex al-center"></textarea>
 			<view @click="send" class="btn flex pos-abs al-center ju-center" :class="context != ''?'sendStyle':''">
@@ -111,7 +109,7 @@
 				src: '', //查看图片路径
 				see: false, //图片遮罩层
 				page: 1,
-				pageSize:15,
+				pageSize:4,
 				isLoding: false,
 				hasMore: true,
 				text: '',
@@ -250,15 +248,16 @@
 
 		},
 		mounted() {
-			
-		},
-		onShow(){
 			this.Data()
 			this.loadPageData()
 		},
+		
+		onShow(){
+			
+		},
 		// 下拉加载更多
 		onReachBottom() {
-			this.text = '没有更多了~'
+			this.text = '没有更多了'
 		   if (this.isLoding == true || this.hasMore == false) return;
 		    this.loadPageData()
 		},
@@ -266,7 +265,9 @@
 			// console.log('详情', val.id);
 			this.id = val.id
 		},
-
+         onPageScroll() {
+			 this.flag = false
+         },
 		filters: {
 
 		},
@@ -373,7 +374,7 @@
 
 	.layou {
 		width: 100%;
-		height: 100rpx;
+		height: 60rpx;
 	}
 
 	.title {
@@ -393,16 +394,20 @@
 	}
 
 	.itemimg {
-		width: 200rpx;
-		height: 200rpx;
+		width: 210rpx;
+		height: 210rpx;
 		margin-right: 30rpx;
 		border-radius: 10rpx;
 		margin-bottom: 10rpx;
 	}
+	
+	.dv{
+		margin-right: 0;
+	}
 
 	.move {
-		margin-top: 30rpx;
-		right: 40rpx;
+		right: 0rpx;
+		bottom: 0;
 	}
 
 	.plimg {
@@ -412,8 +417,8 @@
 	}
 
 	.line {
-		width: 100%;
-		padding: 30rpx 0;
+		width: 690rpx;
+		padding: 30rpx;
 		border-top: 1px solid #BFBFBF;
 	}
 
@@ -438,7 +443,7 @@
 
 	.texbox {
 		margin-top: 22rpx;
-		width: 470rpx;
+		width: 560rpx;
 		margin-left: 20rpx;
 		font-size: 24rpx;
 		// overflow: hidden;
@@ -450,14 +455,11 @@
 	}
 
 	.postime {
-		right: 30rpx;
-		bottom: 40rpx;
 		font-size: 24rpx;
 		color: #B3B3B3;
 		width: 100%;
 		display: flex;
 		justify-content: flex-end;
-		margin-left: 100rpx;
 	}
 
 	.ch {
@@ -530,6 +532,7 @@
 
 	.lodbox {
 		font-size: 24rpx;
+		padding: 30rpx 0;
 	}
 
 	.showloding {

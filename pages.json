@@ -783,7 +783,19 @@
 
 		}
 
-	],
+	    ,
+		//联系物业
+		{
+            "path" : "pages/address/addediting/tenement/tenement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
