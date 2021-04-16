@@ -59,9 +59,8 @@
 				<remarks :Gshow='Gshow' ref='marks'></remarks>
 			</view>
 			<!-- 提交 -->
-			<view class="pos-rel m-t4 bot flex al-center ju-center" @click="Submit">
-				<image class="Submit" src="https://oss.kuaitongkeji.com/static/img/app/login/ccuc.png" mode=""></image>
-				<view class="pos-abs subtext">
+			<view class="pos-rel m-t4 Submit flex al-center ju-center" @click="Submit">
+				<view class="subtext">
 					提交
 				</view>
 			</view>
@@ -617,8 +616,11 @@
 	}
 
 	.Submit {
-		width: 358rpx;
-		height: 68rpx;
+		width: 360rpx;
+		height: 70rpx;
+		margin-bottom: 80rpx;
+		background: linear-gradient(to right, #F5000A, #FF954F);
+		border-radius: 40rpx;
 	}
 
 	.subtext {
@@ -628,10 +630,6 @@
 
 	.posp {
 		position: fixed;
-	}
-
-	.bot {
-		margin-bottom: 80rpx;
 	}
 
 	.a {

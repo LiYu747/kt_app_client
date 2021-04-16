@@ -1,21 +1,22 @@
 <template>
 	<view class="">
-		<view class="conten">
-			<view class="flex al-center">
-				<view class="">
-					<image src="https://oss.kuaitongkeji.com/static/img/app/home/news.png" class="imgss" mode=""></image>
-				</view>
-				<view class="textss">
-					社区新闻
-				</view>
+		<view class="box">
+			<view class="text">
+				社区新闻
 			</view>
-			<!-- 新闻 -->
-			<view class="Notice flex al-center">
-					<u-notice-bar v-if="list.length>0" mode="vertical" font-size='24'  :is-circular='false' @click="godils" type="warning" class="notice"  :list="list"></u-notice-bar>
-					<view class="nonews" v-else>
-						暂无社区新闻...
+			<view v-if="news.length>0" class="cententBox pos-rel flex al-center">
+				<view class="conTxt">
+					<view class="" v-for=" item in news" :key="item.id">
+						{{item.title}}
 					</view>
+				</view>
 			</view>
+			<view  v-else class=" fz-12 nonews">
+				暂无社区新闻...
+			</view>
+		</view>
+		<view class="line">
+			
 		</view>
 	</view>
 </template>
@@ -31,7 +32,6 @@
 		data() {
 			return {
 				news: [],//资讯数据
-				list: []  //数据转化后的
 			}
 		},
 		methods: {
@@ -51,9 +51,6 @@
 						// console.log('新闻',res.data.data.data);
 						let data = res.data.data.data
 						this.news = data
-						data.map( item => {
-							this.list.push(item.title)
-						})
 						// console.log(this.list);  
 					}
 				})
@@ -112,54 +109,61 @@
 </script>
 
 <style scoped lang="scss">
-	.conten {
+
+	.box {
 		margin-top: 40rpx;
-		width: 690rpx;
-		font-size: 30rpx;
+		width: 650rpx;
+		padding: 0 20rpx;
+	}
+	
+	.text {
+		font-size: 20px;
 		color: #666666;
-	}
-
-	.Notice {
-		margin-top: 20rpx;
-		width: 690rpx;
-		height: 66rpx;
-		background: #FFFFFF;
-		padding: 5rpx 0;
-	}
-    
-	.notice{
-		width: 650rpx;  
+		font-weight: 700;
 	}
 	
-	.textss{
-		font-size: 36rpx;
+	.cententBox{
+		margin-top: 40rpx;
+		width: 100%;
 	}
 	
-	/deep/
-	.u-swiper-item{
-		color: #FFAD4C;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
+	.readBtn{
+		width: 85rpx;
+		height: 35rpx;
+		border:1px solid #999999 ;
+		border-radius: 20rpx;
+		right:  0;
+		font-size: 10px;
+		color:#999999;
 	}
-	.imgnb {
-		width: 23rpx;
-		height: 20rpx;
+	
+	.conTxt{
+		width: 100%;
+		font-size: 15px;
+		color: #666666;
+		   // 超出部分隐藏
+		  display: -webkit-box;
+		  overflow: hidden;
+		  /*超出部分隐藏*/
+		  text-overflow: ellipsis;
+		  /* 超出部分显示省略号 */
+		  white-space: normal;
+		  /*规定段落中的文本不进行换行 */
+		  word-wrap: break-word;
+		  -webkit-line-clamp: 2;
+		  -webkit-box-orient: vertical;
 	}
-
-
-
-	.imgss {
-		width: 28rpx;
-		height: 28rpx;
-		margin-right: 10rpx;
+	
+	.line{
+		margin-top: 70rpx;
+		width: 100%;
+		height: 1px;
+		background: #BFBFBF;
 	}
 	
 	.nonews{
+		padding: 10rpx;
 		font-size: 12px;
 		color: #999999;
-		margin-left: 20rpx;
 	}
 </style>

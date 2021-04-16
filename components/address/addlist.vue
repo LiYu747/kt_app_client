@@ -17,16 +17,15 @@
 					<view v-if="item.address" class="text" @click="look(item)">
 						{{item.address}}
 					</view>
+					<view class="line"></view>
 					<view  class="botto">
 						<view @click="callTenement(item)" class="Yueback m-r2 flex al-center ju-center">
-							<image src="../../image/Yueback.png" class="Yueback " mode=""></image>
-							 <view class="pos-abs fz-12 bai">
+							 <view class="fz-12 bai">
 							 	联系物业
 							 </view>
 						</view>
 						<view @click="order(item)" class="Yueback flex al-center ju-center">
-							<image src="../../image/Yueback.png" class="Yueback " mode=""></image>
-							 <view class="pos-abs fz-12 bai">
+							 <view class="fz-12 bai">
 							 	预约电梯
 							 </view>
 						</view>
@@ -244,6 +243,8 @@
 	.Yueback{
 		width: 140rpx;
 		height:50rpx;
+	    background: linear-gradient(to right, #F5000A, #FF954F);
+		border-radius: 10rpx;
 	}
 
 	.show {

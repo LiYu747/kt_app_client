@@ -73,7 +73,6 @@
 </template>
 
 <script>
-	import LbPicker from '@/components/lb-picker'
 	import subunit from '../../../components/sub-unit/subunit.vue'
 	import enclosure from '../../../components/checkIn/enclosure/enclosure.vue'
 	import remarks from '../../../components/checkIn/remarks/remarks.vue'
@@ -89,7 +88,6 @@
 			subunit,
 			enclosure,
 			remarks,
-			LbPicker
 		},
 		props: {},
 		data() {
@@ -150,32 +148,23 @@
 			},
 			// 选择小区
 			confirm(val) {
-				// console.log(val);
-				// 获取的id
-				this.id = val.value
 				// 获取的文本
-				let arr = ''
-				let index = []
-				// 获取的id
+				let text = ''
 				let id = []
+				let value = []
 				val.map(items => {
 					id.push(items.extra)
-					if (items.label != null) {
-						arr += items.label
+					if(items.value != null) {
+						text += items.label
 					}
 					if (items.value == null) {
 						items.value == 0
 					}
-					index.push(items.value)
+					value.push(items.value)
 				})
+				this.record[4].value = text
 				this.id = id
-				this.value = index
-				this.record.map((item, index) => {
-					if (index === 4) {
-						item.value = arr
-					}
-				})
-				// console.log(index);
+				this.value = value
 			},
 
 			// 上传文件
@@ -624,22 +613,13 @@
 		z-index: 99;
 	}
 
-	/deep/ .lb-picker-content {
-		height: 500rpx !important;
-	}
-
-	/deep/ .uni-picker-view-indicator {
-		height: 100rpx !important;
-	}
 
 	/deep/ .u-select__body__picker-view__item[data-v-a577ac80] {
 		font-size: 24rpx !important;
 		text-align: center !important;
 	}
 
-	/deep/ .uni-picker-view-indicator {
-		height: 88rpx !important;
-	}
+	
 
 	.uploadFiles {
 		margin-top: 40rpx;

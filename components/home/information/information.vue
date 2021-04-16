@@ -1,25 +1,25 @@
 <template>
 	<div>
 		<view class="box">
-			<view class="flex al-center">
-				<image class="imgss" src="https://oss.kuaitongkeji.com/static/img/app/home/sq(1)@2x.png" mode=""></image>
-				<view class="text">
-					社区资讯
-				</view>
+			<view class="text">
+				社区资讯
 			</view>
-			<view  class="overtxt flex al-center">
-				<view v-if="loctext.length > 0" class="context">
-					<view v-for="item in loctext" :key='item.id' class="ltst ">
+			<view v-if="loctext.length>0" class="cententBox pos-rel flex al-center">
+				<view class="conTxt">
+					<view class="" v-for=" item in loctext" :key="item.id">
 						{{item.title}}
 					</view>
 				</view>
-				<view class="onmsg" v-else>
-					暂无社区资讯...
-				</view>
-				<view v-if="loctext.length > 0" @click="lookup" class="btn flex al-center ju-center">
-					查看详情 >
+				<view class="readBtn pos-abs flex al-center ju-center">
+					阅读＞
 				</view>
 			</view>
+			<view  v-else class=" fz-12 nodata">
+				暂无社区资讯...
+			</view>
+ 		</view>
+		<view class="line">
+			
 		</view>
 	</div>
 </template>
@@ -55,8 +55,11 @@
 						// console.log(res.data.data);
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
-						let content = {title:res.data.data.title,content:res.data.data.content}
-						this.$store.commit("homeContent",content);
+						let content = {
+							title: res.data.data.title,
+							content: res.data.data.content
+						}
+						this.$store.commit("homeContent", content);
 						uni.navigateTo({
 							url: `/pages/InformationDetails/InformationDetails/InformationDetails`
 						})
@@ -68,7 +71,7 @@
 				home.infortion({
 					data: {
 						page: 1,
-						pageSize:1
+						pageSize: 1
 					},
 					fail: () => {
 						uni.showToast({
@@ -108,9 +111,9 @@
 
 <style scoped lang="scss">
 	.box {
-		margin-top: 20rpx;
-		width: 690rpx;
-		height: auto;
+		margin-top: 40rpx;
+		width: 650rpx;
+		padding: 0 20rpx;
 	}
 
 	.imgss {
@@ -120,46 +123,52 @@
 	}
 
 	.text {
-		font-size: 36rpx;
+		font-size: 20px;
 		color: #666666;
-	}
-
-	.overtxt {
-		margin-top: 20rpx;
-		width: 650rpx;
-		background: #FFFFFF;
-		box-shadow: 2rpx 4rpx 6rpx 0 #C0C4CC;
-		padding: 30rpx 20rpx;
-	}
-
-	.context {
-		width: 400rpx;
-		display: -webkit-box;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		word-wrap: break-word;
-		white-space: normal !important;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-	}
-
-	.ltst {
-		font-size: 24rpx;
-		color: #666666;
-	}
-
-	.btn {
-		width: 150rpx;
-		height: 48rpx;
-		background: #F79D46;
-		border-radius: 30rpx;
-		color: #FFFFFF;
-		font-size: 24rpx;
-		margin-left: 60rpx;
+		font-weight: 700;
 	}
 	
-	.onmsg{
-		font-size: 12px;
+	.cententBox{
+		margin-top: 40rpx;
+		width: 100%;
+	}
+	
+	.readBtn{
+		width: 85rpx;
+		height: 35rpx;
+		border:1px solid #999999 ;
+		border-radius: 20rpx;
+		right:  0;
+		font-size: 10px;
+		color:#999999;
+	}
+	
+	.conTxt{
+		width: 500rpx;
+		font-size: 15px;
+		color: #666666;
+		   // 超出部分隐藏
+		  display: -webkit-box;
+		  overflow: hidden;
+		  /*超出部分隐藏*/
+		  text-overflow: ellipsis;
+		  /* 超出部分显示省略号 */
+		  white-space: normal;
+		  /*规定段落中的文本不进行换行 */
+		  word-wrap: break-word;
+		  -webkit-line-clamp: 2;
+		  -webkit-box-orient: vertical;
+	}
+	
+	.line{
+		margin-top: 70rpx;
+		width: 100%;
+		height: 1px;
+		background: #BFBFBF;
+	}
+	
+	.nodata{
+		padding: 10rpx;
 		color: #999999;
 	}
 </style>

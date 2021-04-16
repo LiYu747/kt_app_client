@@ -795,6 +795,30 @@
             }
             
         }
+        ,
+		//报修记录
+		{
+            "path" : "pages/address/addediting/temtRecord/temtRecord",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,
+		//更多周边消息
+		{
+            "path" : "pages/index/peripheryMore/peripheryMore",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

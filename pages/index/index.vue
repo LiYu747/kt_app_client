@@ -491,11 +491,11 @@
 		padding: 40rpx;
 	}
 
-	.content {
+	page {
 		/* 	display: flex;
 		flex-direction: column;
 		align-items: center; */
-		background: rgb(245, 245, 245);
+		background: #FFFFFF;
 	}
 
 	.logo {
