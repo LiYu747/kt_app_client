@@ -492,10 +492,8 @@
 	}
 
 	page {
-		/* 	display: flex;
-		flex-direction: column;
-		align-items: center; */
-		background: #FFFFFF;
+	
+		background: #fff;
 	}
 
 	.logo {

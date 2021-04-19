@@ -1,11 +1,13 @@
 <template>
 	<!-- 个人中心 -->
-	<div class="whole">
+	<view class="whole">
 		<submit :retur='false' titel="个人中心"></submit>
 		<view class=" location" @click="nextT" :style="{height: this.$store.state.customBar + 'rpx'}" :class="Gshow==6&&idx==0?'zIndex':''" >
-			<image @click="install"  src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg pos-abs" mode=""></image>
-			<view v-if='idx==0&&Gshow==6' class="pos-abs flex staTex">
-				<view class="flex-d al-center m-l3 m-r2 m-t4 setTex">
+			<view class="imgLoca pos-abs">
+				<image @click="install"  src="https://oss.kuaitongkeji.com/static/img/app/user/Settings.png" class="setimg" mode=""></image>
+			</view>
+			<view v-if='idx==0&&Gshow==6' class="pos-abs flex staTex" :style="{top: this.$store.state.customBar + 'rpx'}">
+				<view class="flex-d al-center m-l3 m-r2 m-t6 setTex">
 					信息设置 
 					<view class="bai">
 						 修改密码以及退出登录等。
@@ -64,8 +66,8 @@
 			</view>
 			<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/user.png" class="addLogo" mode=""></image>
 		</view>
-	</div>
-</template>
+	</view>
+</template> 
 
 <script>
 	import actionBar from '../../../components/userCenter/actionBar.vue';
@@ -207,31 +209,17 @@
 	}
 </script>
 
-<style scoped lang="scss">
-	.whole {
-		background: rgb(245, 245, 245);
-		height: 100%;
+<style  >
+	page{
+		background: #fff; 
 	}
-
-	.nav {
-		width: 100%;
-		height: 148rpx;
-		background: #F07535;
-		position: fixed;
-		z-index: 99;
-	}
-
-	.topLine {
-		height: 148rpx;
-	}
-
+	
 	.btmLine {
-		height: 40rpx;
+		height: 20rpx;
 	}
 
 	.setimg {
-		right: 50rpx;
-		bottom: 24rpx;
+	
 		width: 40rpx;
 		height: 40rpx;
 	}
@@ -249,6 +237,18 @@
 		right: 0;
 		position: fixed;
 		z-index: 99;
+	}
+	
+	.imgLoca{
+		width: 70rpx;
+		height: 70rpx;
+		background: #F07535;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		right: 50rpx;
+		bottom: 10rpx;
 	}
 
 	.jximg {
@@ -344,27 +344,18 @@
 	}
 	
 	.zIndex{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 70rpx;
-		height: 70rpx;
-		border-radius: 50%;
-		background:#F07535;
 		z-index: 99999;
-		margin-top: -20rpx;
 	}
 	
 	.arrowsRU{
 		width: 120rpx;
 		height: 88rpx;
 		position: relative;
-		right: 40rpx;
+		right: 90rpx;
 	}
 	
 	.staTex{
 		right: 0rpx;
-		top: 80rpx;
 		width: 750rpx;
 		display: flex;
 		justify-content: flex-end;
@@ -398,7 +389,7 @@
 	
 	.aceZindex{
 		margin-top: -120rpx;
-		background: rgb(245, 245, 245);
+		background: #fff;
 		z-index: 99999;
 	}
 	

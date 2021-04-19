@@ -4,15 +4,16 @@
 			<view class="text">
 				社区资讯
 			</view>
-			<view v-if="loctext.length>0" class="cententBox pos-rel flex al-center">
-				<view class="conTxt">
-					<view class="" v-for=" item in loctext" :key="item.id">
-						{{item.title}}
+			<view v-if="loctext.length>0" class="cententBox flex al-center">
+					<view class=" pos-rel flex cenItem al-center"  v-for=" item in loctext" :key="item.id">
+						<view class="conTxt">
+							{{item.title}}
+						</view>
+						<view @click="lookup(item)" class="readBtn pos-abs flex al-center ju-center">
+							阅读＞
+						</view>
 					</view>
-				</view>
-				<view class="readBtn pos-abs flex al-center ju-center">
-					阅读＞
-				</view>
+			
 			</view>
 			<view  v-else class=" fz-12 nodata">
 				暂无社区资讯...
@@ -39,11 +40,11 @@
 		},
 		methods: {
 			// 查看详情
-			lookup() {
-
+			lookup(item) {
+				console.log(item);
 				home.infordils({
 					data: {
-						id: this.loctext[0].id
+						id: item.id
 					},
 					fail: () => {
 						uni.showToast({
@@ -143,9 +144,13 @@
 		color:#999999;
 	}
 	
+	.cenItem{
+		width: 100%;
+	}
+	
 	.conTxt{
 		width: 500rpx;
-		font-size: 15px;
+		font-size: 14px;
 		color: #666666;
 		   // 超出部分隐藏
 		  display: -webkit-box;
@@ -168,7 +173,7 @@
 	}
 	
 	.nodata{
-		padding: 10rpx;
+		padding: 20rpx 10rpx;
 		color: #999999;
 	}
 </style>

@@ -1,27 +1,40 @@
 <template>
 	<div>
 		<view class="boxss">
-			<view class="flex al-center  m-b1 pos-rel">
+			<view class="flex al-center  pos-rel">
 				<view class="text">
 					周边消息
 				</view>
-				
-				<view @click="lookmore" class="andMore pos-abs">
+				<view v-if="locdata.length>0" @click="lookmore" class="andMore pos-abs">
 					查看更多
 				</view>
 			</view>
-           <view class="itemBox" v-for="item in locdata" :key="item.id">
-			<view class="flex">
-				<view class="">
-					<view class="itemTil m-t2">
-						{{item.title}}代码啊来说可能的啦看到老师可能到了看到啦看拿到拉萨可能的
+			<view v-if="locdata.length>0" class="">
+				<view class="itemBox m-t1" @click="godils(item)" v-for="item in locdata" :key="item.id">
+					<view class="flex">
+						<view class="">
+							<view class="itemTil m-t2">
+								{{item.title}}
+							</view>
+						</view>
+						<image v-if="item.faceimg" :src="item.faceimg" class="itemImg" mode=""></image>
+						<image v-else src="https://oss.kuaitongkeji.com/upload/2020/12/15/AY0xTVMZBzNuJ0acHphXphi4gewrdyJeuBoypUCH.jpeg"
+						 class="itemImg" mode=""></image>
+					</view>
+					<view class="fz-12 timeBox flex ju-between m-t2">
+						{{item.created_at}}
+						<view class="">
+							155787人浏览
+						</view>
 					</view>
 				</view>
-				<image v-if="item.faceimg" :src="item.faceimg" class="itemImg" mode=""></image>
-				 <image v-else src="https://oss.kuaitongkeji.com/upload/2020/12/15/AY0xTVMZBzNuJ0acHphXphi4gewrdyJeuBoypUCH.jpeg" class="itemImg" mode=""></image>
 			</view>
-           </view>
 			
+			<view v-else class="fz-12 nonews">
+					<view class="m-l1">
+						还没有任何周边资讯哦~
+					</view>
+			</view>
 		</view>
 	</div>
 </template>
@@ -37,7 +50,7 @@
 		props: {},
 		data() {
 			return {
-				locdata: []  //数据
+				locdata: [] //数据
 			}
 		},
 		methods: {
@@ -57,8 +70,11 @@
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						// console.log(res.data.data);
-						let content = {title:res.data.data.title,content:res.data.data.desc}
-						this.$store.commit("homeContent",content);
+						let content = {
+							title: res.data.data.title,
+							content: res.data.data.desc
+						}
+						this.$store.commit("homeContent", content);
 						uni.navigateTo({
 							url: '/pages/InformationDetails/InformationDetails/InformationDetails'
 						})
@@ -66,9 +82,9 @@
 				})
 			},
 			//查看更多
-			lookmore(){
+			lookmore() {
 				uni.navigateTo({
-					url:"/pages/index/peripheryMore/peripheryMore"
+					url: "/pages/index/peripheryMore/peripheryMore"
 				})
 			},
 			// 数据
@@ -76,7 +92,7 @@
 				home.news({
 					data: {
 						page: 1,
-						pageSize:4
+						pageSize: 2
 					},
 					fail: () => {
 						uni.showToast({
@@ -89,6 +105,9 @@
 						if (res.data.code != 200) return
 						// console.log(res.data.data.data);
 						let data = res.data.data.data
+						data.map(item => {
+							item.created_at = item.created_at.slice(0, 10)
+						})
 						this.locdata = data
 					},
 				})
@@ -119,6 +138,7 @@
 	.boxss {
 		margin-top: 40rpx;
 		width: 690rpx;
+		margin-bottom: 40rpx;
 	}
 
 	.text {
@@ -128,28 +148,29 @@
 		font-weight: 700;
 	}
 
-	
-	.andMore{
+
+	.andMore {
 		right: 20rpx;
 		font-size: 24rpx;
-		color: rgb(247,157,70);
+		color: rgb(247, 157, 70);
 	}
-	
-	.itemBox{
+
+	.itemBox {
 		width: 650rpx;
 		padding: 20rpx;
+		border-bottom: 1px solid #E6E6E6;
 	}
-	
-    .itemImg{
+
+	.itemImg {
 		width: 200rpx;
 		height: 150rpx;
 		margin-left: 40rpx;
 	}
-	
-	.itemTil{
+
+	.itemTil {
 		width: 410rpx;
 		color: #666666;
-		font-size: 15px;
+		font-size: 14px;
 		// 超出部分隐藏
 		display: -webkit-box;
 		overflow: hidden;
@@ -162,8 +183,14 @@
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 	}
+
+	.timeBox {
+		color: #808080;
+	}
 	
-	.aa{
-		
+	.nonews{
+		padding: 20rpx;
+		font-size: 12px;
+		color: #999999;
 	}
 </style>

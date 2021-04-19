@@ -256,6 +256,20 @@
 			// 发布
 			Submit() {
 				if (this.isLoding == true) return;
+				if(this.title == ''){
+					uni.showToast({
+						title:"请填写标题",
+						icon:"none"
+					})
+					return;
+				}
+				if(this.content == ''){
+					uni.showToast({
+						title:"请填写内容",
+						icon:"none"
+					})
+					return;
+				}
 				uni.showLoading({
 					title: '提交中...'
 				})

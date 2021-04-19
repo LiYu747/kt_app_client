@@ -41,7 +41,7 @@
 				<image class="lodimg" src="https://oss.kuaitongkeji.com/static/img/app/address/loading.gif" mode=""></image>
 				加载中...
 			</view>
-			<view class="flex ju-center m-b2 fz-12" v-if="hasMore == false">
+			<view class="flex ju-center lodbox fz-12" v-if="hasMore == false">
 				{{text}}
 			</view>
 
@@ -142,7 +142,7 @@
 			this.value = val.value
 		},
 		onReachBottom() {
-			this.text = '没有更多了~'
+			this.text = '没有更多了'
 			if (this.isLoding == true || this.hasMore == false) return;
 			this.getData()
 
@@ -218,7 +218,6 @@
 
 	.item {
 		width: 629rpx;
-		height: 402rpx;
 		background: #FFFFFF;
 		border-radius: 20rpx;
 		margin-bottom: 20rpx;
@@ -274,11 +273,11 @@
 	}
 
 	.lodbox {
-		font-size: 24rpx;
+	   padding: 30rpx 0;
 	}
 
 	.showloding {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		height: 100vh;
 		top: 0;

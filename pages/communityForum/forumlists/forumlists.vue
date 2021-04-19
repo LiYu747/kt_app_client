@@ -25,8 +25,8 @@
 		<view v-if="flag == false" class="lines">
 
 		</view>
-		<view v-if="flag == false" class="release">
-			<swiper :current="swiperCurrent" @change="Onchange" style="height: calc(100vh - 320rpx);box-sizing: border-box;;"
+		<view v-if="flag == false" class="release"> 
+			<swiper :current="swiperCurrent" @change="Onchange"  :style="hig" style="box-sizing: border-box;"
 			 @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item" v-for="(items, index) in tagdata" :key="index">
 					<scroll-view scroll-y style="height:100%;width: 100%;" @scrolltolower="onreachBottom">
@@ -151,6 +151,7 @@
 		},
 		data() {
 			return {
+				hig:"",
 				id: '', //传的id
 				flag: false, //判断有没有搜索结果
 				tagdata: [],
@@ -231,6 +232,7 @@
 								item.hasMore = data.next_page_url ? true : false
 							}
 						})
+						
 
 					}
 
@@ -267,11 +269,13 @@
 			onreachBottom() {
 				let idx = this.idx
 				if (this.isLoding == true || this.Isnext == true) return;
+				if(this.tagdata[idx].text) return; 
 				if (this.tagdata[idx].hasMore == false) {
 					this.tagdata.map((item, index) => {
 						if (idx == index) {
 							item.text = '没有更多了'
-						}
+						} 
+						
 					})
 					return;
 				}
@@ -295,7 +299,7 @@
 						if (res.statusCode != 200) return;
 
 						if (res.data.code != 200) return;
-
+                           
 						let data = res.data.data;
 						data.data.map(item => {
 							item.created_at = item.created_at.slice(0, 16)
@@ -360,7 +364,7 @@
 						if (res.data.code != 200) return;
 						let data = res.data.data;
 						this.hasMore = data.next_page_url ? true : false;
-						this.page = data.current_page + 1
+						this.page = data.current_page + 1 
 						this.lists = this.lists.concat(data.data)
 					},
 				})
@@ -393,6 +397,8 @@
 		},
 		mounted() {
 			this.grtColumn()
+			let num = this.$store.state.customBar + 188 + 'rpx' 
+			this.hig = `height:calc(100vh - ${num})`
 		},
 		onLoad(val) {
 			if (!val.id) return;

@@ -15,7 +15,7 @@
 			</view>
 			<!-- 我发布的 -->
 			<view v-show='idx===0' class="release">
-				<scroll-view scroll-y style="height: calc(100vh - 310rpx);;width: 100%;" @scrolltolower="onreachBottom1">
+				<scroll-view scroll-y :style="hig" style="width: 100%;" @scrolltolower="onreachBottom1">
 					<view v-if="lists.length>0" class="">
 						<view class="item" @click="gotoD(item,index)" v-for="(item,index) in lists" :key='item.id'>
 							<view class="titel">
@@ -49,15 +49,15 @@
 					<view class="nono flex ju-center cl9 fz-14" v-if="lists.length == 0 && isLoding==false">
 						您还没有任何发布
 					</view>
-					<view class="btom">
+					<!-- <view class="btom">
 
-					</view>
+					</view> -->
 				</scroll-view>
 			</view>
 
 			<!-- 我参与的 -->
 			<view v-show="idx===1" class="release">
-				<scroll-view scroll-y style="height: calc(100vh - 310rpx);;width: 100%" @scrolltolower="onreachBottom2">
+				<scroll-view scroll-y :style="hig" style="width: 100%" @scrolltolower="onreachBottom2">
 					<view class="" v-if="data1.length>0">
 						<view class="itemtext" @click="reply(item)" v-for="(item,index) in data1" :key='index'>
 							<view class="flex color ju-between">
@@ -95,9 +95,9 @@
 					<view class="flex ju-center lodbox" v-if="hasMore1 == false">
 						{{text1}}
 					</view>
-					<view class="btom">
+					<!-- <view class="btom">
 
-					</view>
+					</view> -->
 				</scroll-view>
 			</view>
 
@@ -130,6 +130,7 @@
 		props: {},
 		data() {
 			return {
+				hig:'',
 				id: '', //传的id
 				til: [{
 					name: '我发布的',
@@ -313,6 +314,8 @@
 			this.SelfPost()
 			this.loadPageData()
 			this.Userdata()
+			let num = this.$store.state.customBar + 184 + 'rpx'
+			this.hig = `height:calc(100vh - ${num})`
 		},
 		// 下拉加载更多
 		onReachBottom() {
@@ -514,7 +517,8 @@
 
 	.lodbox {
 		font-size: 24rpx;
-		padding: 10rpx 0;
+		padding: 20rpx 0;
+		padding-bottom: 30rpx; 
 	}
 
 	.showloding {

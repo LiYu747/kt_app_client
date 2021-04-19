@@ -1,15 +1,15 @@
 <template>
 	<view class="boxss">
-		<view class="item flex al-center" v-for="(item,index) in locdata" @click="add(item,index)" :key='item.id' :class="{'dv':index<3,'top':index>3}">
+		<view class="item flex al-center pos-rel" v-for="(item,index) in locdata" @click="add(item,index)" :key='item.id' >
 			<image :src="item.image" class="itemimg" mode=""></image>
 			<view class="itemtext">
 				{{item.titel}}
 			</view>
+					<image class="reimg" src="../../image/goIn.png" mode=""></image>
 			<view v-if="index ==6" class="">
 				<view v-if="0<informmsg && user" class="munber flex al-center ju-center">
 					{{informmsg}}
 				</view>
-
 			</view>
 		</view>
 	</view>
@@ -111,7 +111,7 @@
 	}
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 	.boxss {
 		margin-top: 48rpx;
 		width: 690rpx;
@@ -130,18 +130,11 @@
 		width: 690rpx;
 		height: 90rpx;
 		background: #FFFFFF;
+		border-bottom: 1rpx solid rgb(231, 231, 231);
 	}
 
 	.itemtext {
 		font-size: 32rpx;
-	}
-
-	.dv {
-		border-bottom: 1rpx solid rgb(231, 231, 231);
-	}
-
-	.top {
-		margin-top: 20rpx;
 	}
 
 	.infosImg {
@@ -158,5 +151,12 @@
 		color: #FFFFFF;
 		z-index: 2;
 		margin-left: 20rpx;
+	}
+	
+	.reimg {
+		width: 20rpx;
+		height: 30rpx; 
+		position: absolute;
+		right:10rpx;
 	}
 </style>

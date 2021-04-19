@@ -1,8 +1,10 @@
 <template>
 	<view class=" pos-rel content">
 		<subunit  :retur='false' titel="入住信息" ></subunit>
-		<view class="location" :style="{height:  this.$store.state.customBar + 'rpx'}" :class="Gshow == 2?'locIndex':''">
-			<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg pos-abs" mode=""></image>
+		<view class="location" :class="Gshow == 2?'locIndex':''" :style="{height:  this.$store.state.customBar + 'rpx'}" >
+			<view class="imgLoca pos-abs"  >
+				<image src="https://oss.kuaitongkeji.com/static/img/app/address/plus.png" @click="push" class="setimg" mode=""></image>
+			</view>
 		</view>
 		<image src="https://oss.kuaitongkeji.com/static/img/app/home/jx.png" class="img" mode=""></image>
 		<addList :locdata='locdata' :isLoding='isLoding'  :hasMore='hasMore'></addList>
@@ -13,8 +15,8 @@
 			</view>
 		</view>
 		<view v-if="Gshow == 2" class="">
-			<view class="guideBox">
-				<view class="Gposr flex">
+			<view class="guideBox" @touchmove.stop.prevent>
+				<view class="Gposr flex" :style="{top:  this.$store.state.customBar + 'rpx'}">
 					<view class="bai Gtext">
 						填写地址详细信息
 					</view>
@@ -24,8 +26,7 @@
 		</view>
 		<view v-if="Gshow == 4" class="">
 			<view @click="gotohome"  @touchmove.stop.prevent class="guideBox2">
-				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/ele.png" mode="" class="ele"></image>
-
+				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/ele.png" :style="{top:  this.$store.state.customBar + 60 + 'rpx'}" mode="" class="ele pos-rel"></image>
 			</view>
 		</view>
 			<image v-show="flag == true" src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/addLogo.png" class="addLogo" mode=""></image> 
@@ -47,6 +48,7 @@
 		props: {},
 		data() {
 			return { 
+				updata:0,
 				locdata: [], //数据列表
 				page: 1,
 				ps: 15,
@@ -132,6 +134,7 @@
 
 								// console.log(data);
 								this.hasMore = data.next_page_url ? true : false;
+								this.page = data.current_page + 1
 								// console.log(res.data.data.data); 
 								// let data = res.data.data.data
 								data.data.map(item => {
@@ -140,7 +143,12 @@
 											.name + item.own_room.room_number
 									}
 								})
-								this.locdata = data.data
+								if(this.updata == 0){
+										this.locdata = data.data
+								}else{
+									this.locdata =this.locdata.concat(data.data) 
+								}
+							
 								// console.log(this.locdata);
 							}
 						})
@@ -176,6 +184,8 @@
 		onHide() {
           this.Gshow = 0
 		  this.flag = false
+		  this.page = 1
+		  this.updata = 0
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
@@ -187,8 +197,9 @@
 		},
 		// 下拉加载更多
 		onReachBottom() {
-			// if (this.isLoding == true || this.hasMore == false) return;
-			// this.loadPageData()
+			if (this.isLoding == true || this.hasMore == false) return;
+			this.updata = 1
+			this.loadPageData()
 		},
 		
 		filters: {
@@ -206,32 +217,21 @@
 	}
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss"> 
+	
 	.lodimg {
 		width: 50rpx;
 		height: 50rpx;
 	}
-
+	
+	page {
+		background: #FFFFFF;
+	}
+ 
 	.img {
 		width: 100%;
 		height: 156rpx;
 
-	}
-
-	.sj {
-		width: 0;
-		height: 0;
-		border-width: 0 20rpx 20rpx;
-		border-style: solid;
-		border-color: transparent transparent red;
-		left: 94rpx;
-	}
-
-	.shows {
-		position: fixed;
-		top: 128rpx;
-		right: 30rpx;
-		z-index: 999999;
 	}
 
 	.showimg {
@@ -259,13 +259,6 @@
 		// background: red;
 	}
 
-	.showloding {
-		position: absolute;
-		width: 100%;
-		height: 100vh;
-		top: 0;
-		color: #FFFFFF;
-	}
 
 	.loimg {
 		width: 50rpx;
@@ -294,7 +287,6 @@
 	}
 
 	.Gposr {
-		margin-top: 130rpx;
 		position: fixed;
 		right: 100rpx;
 	}
@@ -329,14 +321,23 @@
 	}
 
 	.ele {
-		margin-top: 200rpx;
 		width: 100%;
 		height: 470rpx;
 	}
+	
+	.imgLoca{
+		width: 70rpx;
+		height: 70rpx;
+		display:  flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		bottom: 10rpx;
+		right: 50rpx;
+		background: #F07535;
+	}
 
 	.setimg {
-		bottom: 28rpx;
-		right: 50rpx;
 		width: 40rpx;
 		height: 40rpx;
 	}
@@ -346,20 +347,11 @@
 		top: 0;
 		right: 0;
 		position: fixed;
-		z-index: 99;
+		z-index: 9999;
 	}
 
-
 	.locIndex {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 70rpx;
-		height: 70rpx;
-		border-radius: 50%;
-		background: #F07535;
 		z-index: 99999;
-		margin-top: -20rpx;
 	}
 
 

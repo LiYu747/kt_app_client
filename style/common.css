@@ -31,13 +31,6 @@
 	background: red;
 }
 
-.l-left5 {
-	margin-left: 10rpx;
-}
-
-.hover {
-	cursor: pointer;
-}
 
 .wrap {
 	flex-wrap: wrap;
@@ -60,19 +53,19 @@
 }
 
 .fz-14 {
-	font-size: 28rpx;
+	font-size: 14px;
 }
 
 .fz-12 {
-	font-size: 24rpx;
+	font-size: 12px;
 }
 
 .fz-16 {
-	font-size: 32rpx;
+	font-size: 16px;
 }
 
 .fz-18 {
-	font-size: 36rpx;
+	font-size: 18px;
 }
 
 .orange {
@@ -148,6 +141,9 @@
 	margin-top: 40rpx;
 }
 
+.m-t6{
+	margin-top: 60rpx;
+}
 .m-b2 {
 	margin-bottom: 20rpx;
 }

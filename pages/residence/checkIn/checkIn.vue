@@ -230,6 +230,20 @@
 			},
 			// 提交
 			Submit() {
+				if(cache.get('Gshow')){
+					let num = this.Gshow
+					cache.set('Gshow',{key:'步骤'+ num,value: num})
+					 
+				 const time = setTimeout(() => {
+					uni.switchTab({
+						url:'/pages/address/address/address'
+					})
+					this.Gshow = 0  
+					clearTimeout(time)
+				 }, 2000)
+				 return;
+				}
+				return;
 			  
 				// 获取备注
 				if (this.$refs.encl.isLoding == true) return;
@@ -290,19 +304,7 @@
 							title: res.data.msg,
 							duration: 2000
 						});
-					    if(cache.get('Gshow')){
-					    	let num = this.Gshow
-					    	cache.set('Gshow',{key:'步骤'+ num,value: num})
-					    	 
-					     const time = setTimeout(() => {
-					    	uni.switchTab({
-					    		url:'/pages/address/address/address'
-					    	})
-					    	this.Gshow = 0  
-					    	clearTimeout(time)
-					     }, 2000)
-					     return;
-					    }
+					
 						const time = setTimeout(() => {
 							uni.redirectTo({
 								url: '/pages/residence/checkRecord/checkRecord'

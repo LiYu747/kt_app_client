@@ -1,30 +1,26 @@
 <template>
 	<view class="">
 		<view v-if="locdata.length>0" class="listbox" ref='fied'>
-			<view class="content pos-rel" v-for="(item,index) in locdata" :key='item.id'>
-				<view class="location pos-abs" @click="Select(item,index)">
-					<image v-if="idx===index" class="zrimg" src="https://oss.kuaitongkeji.com/static/img/app/address/yes.png" mode=""></image>
-					<image v-else class="zrimg" src="https://oss.kuaitongkeji.com/static/img/app/address/zro.png" mode=""></image>
-				</view>
+			<view class="content pos-rel fz-16" v-for="(item,index) in locdata" :key='item.id'>
 				<view class="addres">
-					<view v-if="item.own_village" @click="Select(item,index)" class=" name flex al-center  ju-between">
+					<view v-if="item.own_village" @click="Select(item,index)" class="  name flex al-center  ju-between">
 						{{item.own_village.name}}
 						<view class="">
-							<image class="reimg" src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png" mode=""></image>
+							<image class="reimg" src="../../image/goIn.png" mode=""></image>
 						</view>
 					</view>
-					<view class="line"></view>
+					<view class="line m-t2"></view>
 					<view v-if="item.address" class="text" @click="look(item)">
 						{{item.address}}
 					</view>
 					<view class="line"></view>
 					<view  class="botto">
 						<view @click="callTenement(item)" class="Yueback m-r2 flex al-center ju-center">
-							 <view class="fz-12 bai">
+							 <view class="fz-12">
 							 	联系物业
 							 </view>
 						</view>
-						<view @click="order(item)" class="Yueback flex al-center ju-center">
+						<view @click="order(item)" class=" flex al-center ju-center elback">
 							 <view class="fz-12 bai">
 							 	预约电梯
 							 </view>
@@ -37,7 +33,7 @@
 		<view v-if="locdata.length==0 && isLoding==false" class="nono flex al-center ju-center">
 			暂无地址,快去添加吧
 		</view>
-		<view v-if='flag===true && msg' @mousewheel.prevent class="show pos-abs flex al-center ju-center">
+		<view v-if='flag===true && msg' @mousewheel.prevent @touchmove.stop.prevent class="show pos-abs flex al-center ju-center">
 			<view class="showbox flex-d al-center">
 				<view v-show="message==true" class="flex-d al-center">
 					<image src="https://oss.kuaitongkeji.com/static/img/app/address/scrcc.png" class="scrimg" mode=""></image>
@@ -84,7 +80,6 @@
 		},
 		data() {
 			return {
-				idx: 0,
 				flag: false,
 				message: true,
 				msg: ''
@@ -93,7 +88,6 @@
 		methods: {
 			// 进入论坛
 			Select(item, index) {
-				this.idx = index
 				uni.navigateTo({
 					url: `/pages/communityForum/introduction/introduction?id=${item.village_id}`
 				})
@@ -187,8 +181,8 @@
 		width: 600rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		margin-bottom: 20rpx;
-		box-shadow: 2rpx 2rpx 6rpx #d9d9d9;
+		margin-bottom: 30rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-left: 60rpx;
 		padding-right: 30rpx;
 		padding-top: 30rpx;
@@ -197,7 +191,6 @@
     
 	.name{
 		height: 50rpx;
-		font-size: 34rpx;
 	}
 	
 	.zrimg {
@@ -212,7 +205,6 @@
 
 	.addres {
 		width: 100%;
-		font-size: 30rpx;
 		color: #666666;
 	}
 
@@ -222,19 +214,18 @@
 	}
 
 	.line {
-		margin-top: 20rpx;
 		width: 100%;
 		height: 2rpx;
-		background: #CCCCCC;
+		background: #E6E6E6;
 	}
 
 	.text {
 		width: 480rpx;
-		margin-top: 30rpx;
+		padding: 40rpx 0;
 	}
 
 	.botto {
-		margin-top: 30rpx;
+		 margin-top: 30rpx;
 	     width: 100%;
 		 display: flex;
 		 justify-content: flex-end;
@@ -242,9 +233,17 @@
 	
 	.Yueback{
 		width: 140rpx;
-		height:50rpx;
-	    background: linear-gradient(to right, #F5000A, #FF954F);
+		height:46rpx;
+	    border: 1px solid #999999;
 		border-radius: 10rpx;
+		color: #999999;
+	}
+	
+	.elback{
+		width: 140rpx;
+		height:50rpx;
+			border-radius: 10rpx;
+		background: #F07535;
 	}
 
 	.show {
@@ -319,6 +318,8 @@
 	.nono {
 		width: 100%;
 		height: 300rpx;
+		font-size: 14px;
+		color: #333;
 	}
 
 	.lodimg {

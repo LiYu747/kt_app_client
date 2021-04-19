@@ -6,7 +6,7 @@
 			</view>
 			<view v-if="news.length>0" class="cententBox pos-rel flex al-center">
 				<view class="conTxt">
-					<view class="" v-for=" item in news" :key="item.id">
+					<view class="" @click="godils(item)" v-for=" item in news" :key="item.id">
 						{{item.title}}
 					</view>
 				</view>
@@ -36,9 +36,11 @@
 		},
 		methods: {
 			getData() {
-				this.list = []
 				home.CommunityNews({
-					data: {},
+					data: {
+						page:1,
+						pageSize:1
+					},
 					fail: () => {
 						uni.showToast({
 							title: '网络错误',
@@ -49,23 +51,15 @@
 						if (res.statusCode != 200) return
 						if (res.data.code != 200) return
 						// console.log('新闻',res.data.data.data);
-						let data = res.data.data.data
-						this.news = data
-						// console.log(this.list);  
+						this.news = res.data.data.data
 					}
 				})
 			},
 			// 查看详情
-			godils(idx) {
-				let id = ''
-				this.news.map( (item,index) => {
-					if(idx == index){
-						id = item.id
-					}
-				}) 
+			godils(item) {
 				home.NewsDils({
 					data: {
-						id: id
+						id: item.id
 					},
 					fail: (err) => {
 						uni.showToast({
@@ -139,7 +133,7 @@
 	
 	.conTxt{
 		width: 100%;
-		font-size: 15px;
+		font-size: 14px;
 		color: #666666;
 		   // 超出部分隐藏
 		  display: -webkit-box;
@@ -162,7 +156,7 @@
 	}
 	
 	.nonews{
-		padding: 10rpx;
+		padding: 20rpx 10rpx;
 		font-size: 12px;
 		color: #999999;
 	}
