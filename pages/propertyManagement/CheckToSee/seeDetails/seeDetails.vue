@@ -281,6 +281,7 @@
 		border-radius: 10rpx;
 		font-size: 12px;
 		color: rgb(165, 165, 165);
+			box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.textarea-placeholder {

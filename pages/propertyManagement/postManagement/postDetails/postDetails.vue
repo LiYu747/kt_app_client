@@ -237,6 +237,7 @@
 		padding: 10rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
+			box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 	
 	.btn{

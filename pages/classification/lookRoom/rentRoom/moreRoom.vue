@@ -196,6 +196,7 @@
 		padding: 0 50rpx;
 		font-size: 32rpx;
 		color: #666666;
+		border-bottom: 1px solid #CCCCCC;
 	}
 
 	.nextimg {
@@ -207,7 +208,7 @@
 	.contenBox {
 		width: 650rpx;
 		background: #FFFFFF;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		border-radius: 10px;
 		padding: 20rpx 30rpx;
 	}

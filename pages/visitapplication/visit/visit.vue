@@ -508,7 +508,7 @@
 		width: 644rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-left: 20rpx;
 		padding-right: 26rpx;
 	}
@@ -577,7 +577,7 @@
 		padding-bottom: 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-left: 20rpx;
 		padding-right: 26rpx;
 	}
@@ -602,7 +602,7 @@
 	}
 
 	.location {
-		font-size: 30rpx;
+		font-size: 15px;
 		color: #FFFFFF;
 		right: 50rpx;
 		bottom: 20rpx;
@@ -627,7 +627,7 @@
 		padding: 0 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+     	box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		color: #666666;
 	}
 

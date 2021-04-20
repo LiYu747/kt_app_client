@@ -794,6 +794,7 @@ data () {
 	padding: 20rpx 30rpx;
 	color: #333333;
 	font-size: 32rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 }
 .textBox{
 	width: 540rpx;
@@ -808,6 +809,7 @@ data () {
 	width: 690rpx;
 	padding: 0 30rpx;
 	background: #FFFFFF;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 }
 
 .itemBox{

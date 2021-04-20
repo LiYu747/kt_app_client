@@ -264,6 +264,7 @@
 		border-radius: 20rpx;
 		padding: 0rpx 20rpx;
 		padding-bottom: 20rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.titel {

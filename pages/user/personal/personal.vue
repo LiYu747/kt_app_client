@@ -330,6 +330,7 @@
 
 	.postop {
 		margin-top: 48rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.dv {

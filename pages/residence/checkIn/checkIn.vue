@@ -230,21 +230,6 @@
 			},
 			// 提交
 			Submit() {
-				if(cache.get('Gshow')){
-					let num = this.Gshow
-					cache.set('Gshow',{key:'步骤'+ num,value: num})
-					 
-				 const time = setTimeout(() => {
-					uni.switchTab({
-						url:'/pages/address/address/address'
-					})
-					this.Gshow = 0  
-					clearTimeout(time)
-				 }, 2000)
-				 return;
-				}
-				return;
-			  
 				// 获取备注
 				if (this.$refs.encl.isLoding == true) return;
 				if (this.household == '') {
@@ -304,6 +289,19 @@
 							title: res.data.msg,
 							duration: 2000
 						});
+						if(cache.get('Gshow')){
+							let num = this.Gshow
+							cache.set('Gshow',{key:'步骤'+ num,value: num})
+							 
+						 const time = setTimeout(() => {
+							uni.switchTab({
+								url:'/pages/address/address/address'
+							})
+							this.Gshow = 0  
+							clearTimeout(time)
+						 }, 2000)
+						 return;
+						}
 					
 						const time = setTimeout(() => {
 							uni.redirectTo({
@@ -542,7 +540,7 @@
 		padding-bottom: 40rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-left: 20rpx;
 		padding-right: 26rpx;
 	}
@@ -557,7 +555,7 @@
 		background: #FFFFFF;
 		border-radius: 10rpx;
 		border: 1px solid #EEEEEE;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		z-index: 9;
 	}
 

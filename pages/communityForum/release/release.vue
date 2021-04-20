@@ -389,7 +389,7 @@
 		background: #FFFFFF;
 		position: relative;
 		top: -125rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.top {
@@ -437,7 +437,7 @@
 		height: 80rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding: 0 20rpx;
 		color: #666666;
 	}
@@ -457,7 +457,7 @@
 		height: 80rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding: 0 20rpx;
 		color: #666666;
 	}
@@ -469,7 +469,7 @@
 		padding: 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.are {
@@ -518,7 +518,7 @@
 		width: 649rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.pushtagimg {

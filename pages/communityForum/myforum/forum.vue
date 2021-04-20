@@ -409,6 +409,7 @@
 		color: #666666;
 		background: #FFFFFF;
 		margin-bottom: 30rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.show {
@@ -481,6 +482,7 @@
 		top: 20rpx;
 		margin-bottom: 20rpx;
 		background: #fff;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.name {

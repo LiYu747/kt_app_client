@@ -177,6 +177,7 @@ data () {
 	width: 650rpx;
 	padding: 30rpx 20rpx;
 	background: #FFFFFF;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 }
 .item{
 	height: 100rpx;

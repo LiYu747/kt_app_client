@@ -322,7 +322,7 @@
 		padding: 20rpx;
 		padding-bottom: 40rpx;
 		color: #666;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+			box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.msgTil {
@@ -355,7 +355,7 @@
 		padding: 20rpx;
 		padding-bottom: 40rpx;
 		color: #666;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+			box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.accTitle {
@@ -418,7 +418,7 @@
 		border-radius: 10rpx;
 		padding: 20rpx;
 		color: #666;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.reTil {

@@ -1,8 +1,10 @@
 <template>
 	<view class="">
 		<subunit  titel="最新拜访信息" ></subunit>
-		<view @click="addTo" class="pos-abs move">
-			添加申请
+		<view class="navBox" :style="{height:  this.$store.state.customBar + 'rpx'}">
+			<view @click="addTo" class="pos-abs move">
+				添加申请
+			</view>
 		</view>
 		<view v-if="getmsg.info" class="cont">
 			<view class="nav flex al-center">
@@ -213,6 +215,13 @@
 </script>
 
 <style scoped lang="scss">
+	.navBox {
+		width: 30%;
+		top: 0;
+		right: 0;
+		position: fixed;
+		z-index: 99;
+	}
 	.fidex {
 		position: fixed;
 		z-index: 9;
@@ -280,6 +289,7 @@
 		background: #FFFFFF;
 		font-size: 26rpx;
 		color: rgb(165, 165, 165);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.btnr {
@@ -310,12 +320,10 @@
 	}
 
 	.move {
-		top: 84rpx;
-		right: 40rpx;
-		font-size: 14px;
+		font-size: 15px;
 		color: #FFFFFF;
-		position: fixed;
-		z-index: 11;
+		right: 50rpx;
+		bottom: 20rpx;
 	}
 
 	.apply {
@@ -354,10 +362,12 @@
 		background: #FFFFFF;
 		font-size: 26rpx;
 		color: rgb(165, 165, 165);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 	
 	.redImg{
-		width: 120rpx;
+		width: 130rpx;
 		height: 160rpx;
+		border-radius: 10rpx;
 	}
 </style>

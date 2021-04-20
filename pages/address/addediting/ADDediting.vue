@@ -276,7 +276,7 @@
 		padding: 10rpx 20rpx;
 		border-radius: 10rpx;
 		background: #FFFFFF;
-		box-shadow: 2rpx 2rpx 6rpx 1rpx #d9d9d9;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.fied {
@@ -321,7 +321,7 @@
 		border-radius: 10rpx;
 		padding: 20rpx;
 		background: #FFFFFF;
-		box-shadow: 2rpx 2rpx 6rpx 1rpx #d9d9d9;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		font-size: 15px;
 		color: #666666;
 		padding-bottom: 30rpx;

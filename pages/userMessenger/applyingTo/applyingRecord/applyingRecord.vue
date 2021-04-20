@@ -147,14 +147,6 @@
 </script>
 
 <style scoped lang="scss">
-	.fixed {
-		position: fixed;
-		z-index: 9;
-	}
-
-	.topLine {
-		height: 148rpx;
-	}
 
 	.contentBox {
 		padding: 0 20rpx;
@@ -199,6 +191,7 @@
 		background: #FFFFFF;
 		font-size: 14px;
 		color: rgb(165, 165, 165);
+			box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 	
 	.myMsg{

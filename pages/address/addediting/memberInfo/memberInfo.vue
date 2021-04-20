@@ -360,6 +360,7 @@
 		padding: 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 	
 	.reArea{
@@ -381,7 +382,7 @@
 		z-index: 9;
 		border-radius: 10rpx;
 		border: 1px solid #EEEEEE;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-bottom: 30rpx;
 		color: #666666;
 		font-size: 14px;
@@ -400,7 +401,7 @@
 		z-index: 9;
 		border-radius: 10rpx;
 		border: 1px solid #EEEEEE;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-bottom: 30rpx;
 		color: #666666;
 		font-size: 14px;
@@ -421,7 +422,7 @@
 		width: 358rpx;
 		height: 68rpx;
 		border-radius: 30rpx;
-		background: #FFFFFF;
-		color: red;
+		background: red;
+		color: #fff;
 	}
 </style>

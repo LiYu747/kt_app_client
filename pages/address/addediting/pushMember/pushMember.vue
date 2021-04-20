@@ -362,7 +362,6 @@
 
 		},
 		watch: {
-
 		},
 		directives: {
 
@@ -430,8 +429,9 @@
 	.resultTil {
 		width: 100%;
 		height: 60rpx;
-		background: rgb(247,247,247);
+		background: #FFFFFF; 
 		font-size: 12px;
+		border-top: 1px solid #eee;
 	}
 	
 	.listsBox{
@@ -439,7 +439,7 @@
 		padding: 0 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 	
 	.resultItem{
@@ -461,6 +461,7 @@
 		background: #FFFFFF;
 		font-size: 15px;
 		color: #666666;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 	
 	.zrimg {
@@ -512,7 +513,7 @@
 		z-index: 9;
 		border-radius: 10rpx;
 		border: 1px solid #EEEEEE;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-bottom: 20rpx;
 	}
 	.itemType{

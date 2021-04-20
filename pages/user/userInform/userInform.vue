@@ -244,6 +244,7 @@
 		font-size: 12px;
 		color: #666666;
 		border-radius: 10rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.itemTxt {

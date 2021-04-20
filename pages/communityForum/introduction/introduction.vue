@@ -231,7 +231,7 @@
 		width: 690rpx;
 		background: #FFFFFF;
 		border-radius: 20rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.tex1 {
@@ -306,7 +306,7 @@
 		border-radius: 20rpx;
 		margin-bottom: 140rpx;
 		padding: 20rpx 38rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		font-size: 24rpx;
 		color: #666666;
 		padding-bottom: 40rpx;

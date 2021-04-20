@@ -347,7 +347,7 @@
 		top: 0;
 		right: 0;
 		position: fixed;
-		z-index: 9999;
+		z-index: 99;
 	}
 
 	.locIndex {

@@ -220,11 +220,12 @@
 		width: 629rpx;
 		background: #FFFFFF;
 		border-radius: 20rpx;
-		margin-bottom: 20rpx;
+		margin-bottom: 30rpx;
 		padding-left: 29rpx;
 		padding-right: 32rpx;
 		padding-top: 30rpx;
 		padding-bottom: 53rpx;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.nameimg {

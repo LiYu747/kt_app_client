@@ -349,7 +349,7 @@
 		padding: 30rpx 20rpx;
 		background: #fff;
 		color: #666;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 
 	.itemStyle {
@@ -388,7 +388,7 @@
 		padding: 30rpx 20rpx;
 		background: #fff;
 		color: #666;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		flex-wrap: wrap;
 	}
 
@@ -448,7 +448,7 @@
 		width: 610rpx;
 		background: #fff;
 		z-index: 999;
-		box-shadow: 4px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding: 20rpx;
 		border: 1px solid #eee;
 		border-radius: 10rpx;

@@ -63,7 +63,7 @@
 		padding-bottom: 20rpx;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		padding-left: 20rpx;
 		padding-right: 26rpx;
 	}

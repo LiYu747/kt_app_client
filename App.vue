@@ -26,7 +26,7 @@
 <style lang="scss">
 	/*每个页面公共css */
 	page {
-	background-color: #f7f7f7;
+	background-color: #FFFFFF;
 	}
 	@import './style/common.css';
 	@import 'uview-ui/theme.scss'

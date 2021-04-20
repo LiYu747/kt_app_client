@@ -1,7 +1,7 @@
 <template>
     <view class="">
     	<subunit titel='快通信息'></subunit>
-		<view class="tabar flex al-center">
+		<view class="tabar  m-t4 flex al-center">
 			关于
 			<view class=" flex al-center pos-abs posrigth">
 				 <view class="">
@@ -10,7 +10,7 @@
 				<image src="https://oss.kuaitongkeji.com/static/img/app/address/retrue.png"  class="abimg" mode=""></image>
 			</view>
 		</view>
-		<view @click="guidance" class="tabar flex al-center">
+		<view @click="guidance" class="tabar m-t2 flex al-center">
 			 新手指导
 			<view class=" flex al-center pos-abs posrigth">
 				 <view class="">
@@ -91,12 +91,12 @@ data () {
 
 .tabar {
 	color: #666666;
-	margin-top: 40rpx;
     width: 690rpx;
 	height: 80rpx;
 	padding: 0 30rpx; 
 	border-bottom: 1rpx solid #eeeeee;
 	background: #ffffff;
+	box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 }
 
 .abimg{

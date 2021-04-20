@@ -35,21 +35,24 @@
 				</view>
 			</view>
 		</view>
+		<view class="topLine">
+			
+		</view>
 		<!-- 评论 -->
 		<view v-if="comments.length>0" class="">
 			<view class="line flex pos-rel" v-for="(item,index) in comments" :key='item.id'>
-				<view class="flex-d al-center marg">
+				<view class="marg">
 					<image v-if="item.own_user" class="img" :src="item.own_user.avatar" mode="aspectFill"></image>
+				</view>
+				<view class="rigBox">
 					<view v-if="item.own_user" class="nickname">
 						{{item.own_user.nickname}}
 					</view>
-				</view>
-				<view class="">
 					<view class="texbox">
 						{{item.content}}
 					</view>
 					<!-- 时间 -->
-					<view class="postime m-t1">
+					<view class="postime m-t1 m-b2">
 						{{item.created_at}}
 					</view>
 				</view>
@@ -67,7 +70,7 @@
 		</view>
 
 		<view v-show="flag===true" class="posbot flex al-center pos-rel">
-			<textarea autoHeight="true" placeholder='评论' v-model="context" class="ch flex al-center"></textarea>
+			<textarea :autoHeight="auto" @input="change" id="area" placeholder='评论' v-model="context" class="ch flex al-center"></textarea>
 			<view @click="send" class="btn flex pos-abs al-center ju-center" :class="context != ''?'sendStyle':''">
 				发送
 			</view>
@@ -100,6 +103,7 @@
 		props: {},
 		data() {
 			return {
+				auto:true,
 				id: "",
 				arr: {}, //数据
 				user: {},
@@ -109,7 +113,7 @@
 				src: '', //查看图片路径
 				see: false, //图片遮罩层
 				page: 1,
-				pageSize:4,
+				pageSize:15,
 				isLoding: false,
 				hasMore: true,
 				text: '',
@@ -197,6 +201,15 @@
 			off() {
 				this.see = false
 			},
+	
+			change(){
+			const query = uni.createSelectorQuery().in(this);
+			           query.select('#area').boundingClientRect(data => {
+						   if(data.height > 80){ 
+							   this.auto = false
+						   }
+			           }).exec();
+			},
 			// 发送评论
 			send() {
 				if(this.context == ''){
@@ -230,6 +243,8 @@
 							this.context = ''
 							this.comments = []
 							this.loadPageData()
+							this.flag = false
+							this.auto = true 
 							uni.showToast({
 								title: res.data.msg,
 								duration: 2000
@@ -275,7 +290,7 @@
 
 		},
 		watch: {
-
+   
 		},
 		directives: {
 
@@ -290,7 +305,10 @@
 	}
 
 	.topLine {
-		height: 160rpx;
+		height: 1px;
+		width: 100%;
+		background-color: #BFBFBF;
+		    
 	}
 
 	.actfixed {
@@ -337,13 +355,6 @@
 		height: 90rpx;
 	}
 
-	.tagTex {
-		display: flex;
-		align-items: center;
-		width: 100%;
-		height: 90rpx;
-		border-bottom: 1px solid #EEEEEE;
-	}
 
 	.woer {
 		width: 92%;
@@ -354,6 +365,11 @@
 	.nav {
 		width: 100%;
 		height: 60rpx;
+	}
+	
+	.rigBox{
+		width: 600rpx;
+		border-bottom: 1px solid #eee;
 	}
 
 	.img {
@@ -419,43 +435,26 @@
 	.line {
 		width: 690rpx;
 		padding: 30rpx;
-		border-top: 1px solid #BFBFBF;
+	
 	}
 
 	.nickname {
-		width: 100rpx;
-		// background: red;
-		margin-top: 10rpx;
-		text-align: center;
 		color: #F07535;
-		font-size: 24rpx;
-		word-break: break-all;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp:1;
+		font-size: 12px;
 	}
 
 	.marg {
-		width: 100rpx;
+		width: 90rpx;
 	}
 
 	.texbox {
-		margin-top: 22rpx;
+		margin: 10rpx 0;
 		width: 560rpx;
-		margin-left: 20rpx;
-		font-size: 24rpx;
-		// overflow: hidden;
-		// text-overflow: ellipsis;
-		// display: -webkit-box;
-		// -webkit-box-orient: vertical;
-		// -webkit-line-clamp:2;
-
+		font-size: 12px;
 	}
 
 	.postime {
-		font-size: 24rpx;
+		font-size: 12px;
 		color: #B3B3B3;
 		width: 100%;
 		display: flex;
@@ -468,14 +467,15 @@
 		padding: 10rpx;
 		width: 500rpx;
 		background: #FFFFFF;
-		height: 40rpx;
+		// height: 40rpx;
 		word-wrap: break-word;
+		font-size: 14px;
 	}
 
-	.ch:empty::before {
-		color: lightgrey;
-		content: attr(placeholder);
-	}
+	// .ch:empty::before {
+	// 	color: lightgrey;
+	// 	content: attr(placeholder);
+	// }
 
 	.posbot {
 		position: fixed;
@@ -496,6 +496,7 @@
 		color: #FFFFFF;
 		right: 90rpx;
 		bottom: 35rpx;
+	    border-radius: 10rpx;
 	}
 
 	.btom {
@@ -503,7 +504,6 @@
 	}
 
 	.nono {
-		border-top: 1px solid #B3B3B3;
 		width: 100%;
 		font-size: 28rpx;
 		color: #666666;

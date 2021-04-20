@@ -200,7 +200,7 @@
 		background: #FFFFFF;
 		color: #666666;
 		border-radius: 10rpx;
-		box-shadow: 1rpx 2rpx 10rpx 0 rgb(220, 220, 220);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9; 
 		font-size: 26rpx;
 	}
 
@@ -245,6 +245,8 @@
 	.nono {
 		width: 100%;
 		height: 300rpx;
+		font-size: 14px;
+		color: #666666;
 	}
 	
 	.notext{

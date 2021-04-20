@@ -139,7 +139,7 @@
 		padding: 20rpx 3%;
 		background: #FFFFFF;
 		border-radius: 10rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+			box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		font-size: 15px;
 		color: #666666;
 		padding-bottom: 50rpx;
@@ -157,7 +157,7 @@
 		background: #FFFFFF;
 		padding-bottom: 30rpx;
 		border-radius: 10rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}	
 		
 	.accessoryTxt{

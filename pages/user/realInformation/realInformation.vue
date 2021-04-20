@@ -213,7 +213,7 @@
 		padding: 20rpx;
 		color: #666666;
 		padding-bottom: 50rpx;
-		box-shadow: 0px 4px 4px 0px rgba(9, 9, 9, 0.1);
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 		font-size: 15px;
 	}
 
@@ -246,9 +246,9 @@
 		margin-top: 50rpx;
 		width: 358rpx;
 		height: 75rpx;
-		border-radius: 30rpx;
-		background: #FFFFFF;
-		color: red;
+		border-radius: 50rpx;
+		background:red;
+		color: #FFFFFF;
 	}
 
 	.enimg {
