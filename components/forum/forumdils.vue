@@ -357,8 +357,8 @@
 
 
 	.woer {
-		width: 92%;
-		padding: 4%;
+		width: 690rpx;
+		padding: 30rpx;
 		color: #666666;
 	}
 

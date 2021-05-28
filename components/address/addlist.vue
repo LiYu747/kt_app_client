@@ -172,9 +172,9 @@
 <style scoped lang="scss">
 	.listbox {
 		margin-top: -96rpx;
-		width: 700rpx;
+		width: 690rpx;
 		padding-left: 30rpx;
-		padding-right: 20rpx;
+		padding-right: 30rpx;
 	}
 
 	.content {

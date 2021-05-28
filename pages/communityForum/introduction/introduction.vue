@@ -111,7 +111,7 @@
 				            latitude: Number(this.arr.lat),
 				            longitude: Number(this.arr.lng),  
 				            success: function () {
-				                console.log('success');
+				                // console.log('success');
 				            }
 				        });
 			},

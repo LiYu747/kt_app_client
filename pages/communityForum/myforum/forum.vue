@@ -468,7 +468,6 @@
 		margin-left: 30rpx;
 		margin-top: 20rpx;
 		padding: 10rpx;
-		width: 89%;
 	}
 
 	.btom {

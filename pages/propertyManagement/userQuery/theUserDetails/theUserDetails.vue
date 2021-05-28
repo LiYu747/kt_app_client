@@ -21,7 +21,7 @@
 				</view>
 			</view>
 
-			<view class="accessoryBox flex-d al-center">
+			<view @click="A" class="accessoryBox flex-d al-center">
 				<view class="accTitle flex al-center ju-between">
 					<view class="">
 						附件信息
@@ -41,6 +41,7 @@
 
 <script>
 	import subunit from '../../../../components/sub-unit/subunit.vue'
+	import home from '../../../../vendor/home/home.js'
 	export default {
 		name: "",
 		components: {
@@ -69,13 +70,27 @@
 			}
 		},
 		methods: {
-
+			A(){
+				console.log(1);
+			},         
+           getData(){
+			   home.ResidentD({
+				   data:{},
+				   fail: () => {
+					   
+				   },
+				   success : (res) => {
+					   console.log(res);
+				   }
+			   })
+		   }
 		},
 		mounted() {
-
+			
 		},
-		onLoad() {
-
+		onLoad(val) {
+		},
+		onShow() {
 		},
 		filters: {
 

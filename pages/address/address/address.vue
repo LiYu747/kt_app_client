@@ -57,6 +57,7 @@
 				showPullDownRefreshIcon: false,
 				Gshow: 0,
 				flag:false,
+				Isuser:false
 			}
 		},
 		methods: {
@@ -94,8 +95,55 @@
 				}
 			},
 			// 用户所有地址
+			userAlladd(){
+				 this.isLoding = true
+				 
+				 address.alladd({
+				 	data: {
+				 		page: this.page,
+				 		pageSize: this.ps,
+				 	},
+				 	fail: (err) => {
+				 		this.isLoding = false;
+				 		this.stopRefreshIcon();
+				 		uni.showToast({
+				 			title: '网络错误',
+				 			icon: 'none'
+				 		})
+				 	},
+				 	success: (res) => {
+				             
+				 		this.stopRefreshIcon();
+				 
+				 		this.isLoding = false;
+				 
+				 		if (res.statusCode != 200) return;
+				 
+				 		if (res.data.code != 200) return;
+				 
+				 		let data = res.data.data;
+				 
+				 		// console.log(data);
+				 		this.hasMore = data.next_page_url ? true : false;
+				 		this.page = data.current_page + 1
+						this.Isuser = true
+				 		// console.log(res.data.data.data); 
+				 		// let data = res.data.data.data
+				 		data.data.map(item => {
+				 			if (item.own_village) {
+				 				item.address = item.own_village.name + item.own_building.name + item.own_apartment.name + item.own_floor
+				 					.name + item.own_room.room_number
+				 			}
+				 		})
+				 			this.locdata =this.locdata.concat(data.data) 
+				 		// console.log(this.locdata);
+				 	}
+				 })
+			},
 			loadPageData() {
-
+                   if(!cache.get('jwt')){
+                         this.Isuser = false
+                     }
 				jwt.doOnlyTokenValid({
 					showModal: true,
 					keepSuccess: false,
@@ -105,58 +153,14 @@
 						}else{
 							   uni.showTabBar()								
 						} 
-						this.isLoding = true
-
-						address.alladd({
-							data: {
-								page: this.page,
-								pageSize: this.ps,
-							},
-							fail: (err) => {
-								this.isLoding = false;
-								this.stopRefreshIcon();
-								uni.showToast({
-									title: '网络错误',
-									icon: 'none'
-								})
-							},
-							success: (res) => {
-                                    
-								this.stopRefreshIcon();
-
-								this.isLoding = false;
-
-								if (res.statusCode != 200) return;
-
-								if (res.data.code != 200) return;
-
-								let data = res.data.data;
-
-								// console.log(data);
-								this.hasMore = data.next_page_url ? true : false;
-								this.page = data.current_page + 1
-								// console.log(res.data.data.data); 
-								// let data = res.data.data.data
-								data.data.map(item => {
-									if (item.own_village) {
-										item.address = item.own_village.name + item.own_building.name + item.own_apartment.name + item.own_floor
-											.name + item.own_room.room_number
-									}
-								})
-								if(this.updata == 0){
-										this.locdata = data.data
-								}else{
-									this.locdata =this.locdata.concat(data.data) 
-								}
-							
-								// console.log(this.locdata);
-							}
-						})
+						if(this.Isuser == true) return;
+						        this.userAlladd()
 					},
 					fail: () => {
 						this.isLoding = false
 						this.stopRefreshIcon();
 						this.locdata = []
+						this.page = 1
 						if(cache.get('Gshow')){
 							cache.set('Gshow',{'key':'开启',value:0})
 						}
@@ -184,8 +188,6 @@
 		onHide() {
           this.Gshow = 0
 		  this.flag = false
-		  this.page = 1
-		  this.updata = 0
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
@@ -193,13 +195,12 @@
 			this.page = 1;
 			this.hasMore = true;
 			this.showPullDownRefreshIcon = true;
-			this.loadPageData();
+			this.userAlladd();
 		},
 		// 下拉加载更多
 		onReachBottom() {
 			if (this.isLoding == true || this.hasMore == false) return;
-			this.updata = 1
-			this.loadPageData()
+			this.userAlladd()
 		},
 		
 		filters: {

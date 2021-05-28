@@ -166,6 +166,10 @@
 				<image src="https://oss.kuaitongkeji.com/static/img/app/Newguidance/home.png" class="addLogo" mode=""></image>
 			</view>
 		</view>
+		
+		<view v-show="isShowType == true" @click="isShowType = false" class="showBox">
+			
+		</view>
 	</view>
 </template>
 
@@ -644,6 +648,7 @@
 
 	.userSelection {
 		left: 50rpx;
+		z-index: 999;
 	}
 
 	.sjxlIcon {
@@ -714,6 +719,14 @@
 		height: 100vh;
 		background: rgba(0, 0, 0, 0.75);
 		z-index: 999;
+	}
+	
+	.showBox{
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 100vh;
+		z-index: 9;
 	}
 
 	.btmbox {
@@ -837,5 +850,6 @@
 		background: #FFFFFF;
 		font-size: 14px;
 		color: #666666;
+		box-shadow: 2rpx 2rpx 12rpx #d9d9d9;
 	}
 </style>

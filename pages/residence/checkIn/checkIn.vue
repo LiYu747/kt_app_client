@@ -250,6 +250,7 @@
 					title: '提交中...'
 				})
 				let mrak = this.$refs.marks.value
+			
 				home.moveInApply({
 					data: {
 						type: this.household,

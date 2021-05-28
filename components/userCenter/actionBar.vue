@@ -130,7 +130,7 @@
 		width: 690rpx;
 		height: 90rpx;
 		background: #FFFFFF;
-		border-bottom: 1rpx solid rgb(231, 231, 231);
+		border-bottom: 1px solid rgb(231, 231, 231);
 	}
 
 	.itemtext {

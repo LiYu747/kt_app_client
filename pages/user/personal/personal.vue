@@ -163,7 +163,7 @@
 				// 预览证件照
 				if (index == 2) {
 					uni.navigateTo({
-						url: `/components/idPhoto/idPhoto/idPhoto?photo=${this.faceimg}`
+						url: `/components/idPhoto/idPhoto/idPhoto`
 					})
 				}
 			},
@@ -186,7 +186,6 @@
 					data: {
 						nickname: name,
 						avatar: this.image,
-						sex: this.sex
 					},
 					fail: (err) => {
 						uni.hideLoading()
@@ -271,11 +270,11 @@
 			}
 		},
 		mounted() {
-
+           this.UserData()
 		},
 		onLoad(val) {},
 		onShow() {
-			this.UserData()
+			
 		},
 		filters: {
 

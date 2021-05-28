@@ -294,6 +294,12 @@ class Home {
 		params.url = routes.propertyManagement.allResident
 		req.get(params)
 	}
+	
+	//小区内住户详情
+	ResidentD(params) {
+		params.url = routes.propertyManagement.ResidentD
+		req.get(params)
+	}
 
 	//查看申请记录的进度
 	applicationProgress(params) {
