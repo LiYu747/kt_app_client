@@ -28,13 +28,6 @@
 						<u-input class="ipt" :clearable='flag' v-model="form.name" placeholder="真实姓名" />
 					</view>
 				</u-form-item>
-				<!-- 身份证号 -->
-				<!-- <u-form-item label="" class="postop" prop="idcard">
-					<view class="uiput flex al-center pos-rel">
-						<image class="idcardimg pos-abs" src="https://oss.kuaitongkeji.com/static/img/app/register/card.png" mode=""></image>
-						<u-input class="ipt" :clearable='flag' v-model="form.idcard" placeholder="身份证号码" />
-					</view>
-				</u-form-item> -->
 				<!-- 上传证件照-->
 				<u-form-item label="" class="postop" prop="idphoto">
 					<view class="uiput flex al-center pos-rel">
